@@ -13,6 +13,7 @@
             getCourseNotices: getCourseNotices,
             getUpcomingDeadlines: getUpcomingDeadlines,
             getUpcomingLectures: getUpcomingLectures,
+            getRecentGrades: getRecentGrades,
             getEnroledCourses: getEnroledCourses
         };
 
@@ -44,6 +45,15 @@
                 { course: { name: 'COMP103' }, location: 'KIRK201', start_date: '10:05, Monday 13th of November' },
             ];
             return $q.when(upcomingLectures);
+        }
+
+        function getRecentGrades() {
+            var recentGrades = [
+                { courseName: 'COMP103', courseWorkName: 'Assignment 1', gradePercentage: 'A-' },
+                { courseName: 'COMP103', courseWorkName: 'Assignment 2', gradePercentage: 'B' },
+                { courseName: 'ENGL111', courseWorkName: 'Mock Exam', gradePercentage: '67%' },
+            ];
+            return $q.when(recentGrades);
         }
 
         function getEnroledCourses() {

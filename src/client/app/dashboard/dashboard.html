@@ -60,6 +60,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="widget wgreen">
+                        <div data-cc-widget-header title="Recent Grades"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <div data-ng-repeat="grade in vm.recentGrades">
+                                <div>
+                                    <h5>{{grade.courseName}} - {{grade.courseWorkName}}</h5>
+                                    <p>
+                                        {{grade.gradePercentage}} 
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
