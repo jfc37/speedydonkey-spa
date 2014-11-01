@@ -11,7 +11,8 @@
     function dataservice($q) {
         var service = {
             getPeople: getPeople,
-            getMessageCount: getMessageCount
+            getMessageCount: getMessageCount,
+            getEnroledCourses: getEnroledCourses
         };
 
         return service;
@@ -29,6 +30,16 @@
                 { firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming' }
             ];
             return $q.when(people);
+        }
+
+        function getEnroledCourses() {
+            var enroledCourses = [
+            { name: 'INFO101', description: 'Introduction to information studies'},
+            { name: 'COMP103', description: 'Introduction to computer science'},
+            { name: 'ENGL111', description: 'Learn to read'},
+            { name: 'MATH102', description: 'Introduction to discrete maths'},
+            ];
+            return $q.when(enroledCourses);
         }
     }
 })();

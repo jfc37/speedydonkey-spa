@@ -22,7 +22,9 @@
          */
         'app.admin',
         'app.dashboard',
-        'app.layout'
+        'app.course',
+        'app.layout',
+        'app.common.logon'
     ]);
 
 })();
