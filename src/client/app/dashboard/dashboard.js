@@ -12,34 +12,38 @@
         /*jshint validthis: true */
         var vm = this;
 
-        vm.news = {
-            title: 'Hot Towel Angular',
-            description: 'Hot Towel Angular is a SPA template for Angular developers.'
-        };
-        vm.messageCount = 0;
-        vm.people = [];
+        vm.courseNotices = [];
+        vm.upcomingDeadline = [];
+        vm.upcomingLectures = [];
         vm.title = 'Dashboard';
 
         activate();
 
         function activate() {
-            var promises = [getMessageCount(), getPeople()];
+            var promises = [getCourseNotices(), getUpcomingDeadlines(), getUpcomingLectures()];
             return $q.all(promises).then(function(){
                 logger.info('Activated Dashboard View');
             });
         }
 
-        function getMessageCount() {
-            return dataservice.getMessageCount().then(function (data) {
-                vm.messageCount = data;
-                return vm.messageCount;
+        function getCourseNotices() {
+            return dataservice.getCourseNotices().then(function (data) {
+                vm.courseNotices = data;
+                return vm.courseNotices;
             });
         }
 
-        function getPeople() {
-            return dataservice.getPeople().then(function (data) {
-                vm.people = data;
-                return vm.people;ß
+        function getUpcomingDeadlines() {
+            return dataservice.getUpcomingDeadlines().then(function (data) {
+                vm.upcomingDeadline = data;
+                return vm.upcomingDeadline;
+            });
+        }
+
+        function getUpcomingLectures() {
+            return dataservice.getUpcomingLectures().then(function (data) {
+                vm.upcomingLectures = data;
+                return vm.upcomingLectures;
             });
         }
     }

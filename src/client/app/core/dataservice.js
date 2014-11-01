@@ -10,26 +10,40 @@
     /* @ngInject */
     function dataservice($q) {
         var service = {
-            getPeople: getPeople,
-            getMessageCount: getMessageCount,
+            getCourseNotices: getCourseNotices,
+            getUpcomingDeadlines: getUpcomingDeadlines,
+            getUpcomingLectures: getUpcomingLectures,
             getEnroledCourses: getEnroledCourses
         };
 
         return service;
 
-        function getMessageCount() { return $q.when(72); }
-
-        function getPeople() {
-            var people = [
-                { firstName: 'John', lastName: 'Papa', age: 25, location: 'Florida' },
-                { firstName: 'Ward', lastName: 'Bell', age: 31, location: 'California' },
-                { firstName: 'Colleen', lastName: 'Jones', age: 21, location: 'New York' },
-                { firstName: 'Madelyn', lastName: 'Green', age: 18, location: 'North Dakota' },
-                { firstName: 'Ella', lastName: 'Jobs', age: 18, location: 'South Dakota' },
-                { firstName: 'Landon', lastName: 'Gates', age: 11, location: 'South Carolina' },
-                { firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming' }
+        function getCourseNotices() {
+            var courseNotices = [
+                { message: 'Mondays class is cancelled', course: { name: 'INFO101' } },
+                { message: 'Reminder that the first essay is due next week', course: { name: 'ENGL111' } }
             ];
-            return $q.when(people);
+            return $q.when(courseNotices);
+        }
+
+        function getUpcomingDeadlines() {
+            var upcomingDeadlines = [
+                { name: 'Assignment 1', course: { name: 'INFO101' }, type: 'assignment', end_date: '02/11/14', final_mark_percentage: 20 },
+                { name: 'Grammer History Essay', course: { name: 'ENGL111' }, type: 'assignment', end_date: '05/11/14', final_mark_percentage: 5 },
+                { name: 'Midterm Test', course: { name: 'COMP103' }, type: 'exam', start_time: '06/11/14', final_mark_percentage: 50 },
+                { name: 'Practice Essay', course: { name: 'ENGL111' }, type: 'assignment', end_date: '08/11/14', final_mark_percentage: 0 }
+            ];
+            return $q.when(upcomingDeadlines);
+        }
+
+        function getUpcomingLectures() {
+            var upcomingLectures = [
+                { course: { name: 'COMP103' }, location: 'KIRK201', start_date: '10:05, Monday 6th of November' },
+                { course: { name: 'INFO101' }, location: 'MURP303', start_date: '12:05, Tuesday 7th of November' },
+                { course: { name: 'ENGL111' }, location: 'GRIP433', start_date: '16:35, Thursday 9th of November' },
+                { course: { name: 'COMP103' }, location: 'KIRK201', start_date: '10:05, Monday 13th of November' },
+            ];
+            return $q.when(upcomingLectures);
         }
 
         function getEnroledCourses() {

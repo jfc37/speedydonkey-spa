@@ -2,51 +2,17 @@
     <section class="matter">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <ul class="today-datas">
-                        <li class="blightblue">
-                            <div class="pull-left"><i class="fa fa-plane"></i></div>
-                            <div class="datas-text pull-right">
-                                <span class="bold">May 18 - 19, 2015</span> Castle Resort, Neverland
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                        <li class="borange">
-                            <div class="pull-left"><i class="fa fa-envelope"></i></div>
-                            <div class="datas-text pull-right">
-                                <span class="bold">{{vm.messageCount}}</span> Messages
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6">
                     <div class="widget wviolet">
-                        <div data-cc-widget-header title="People"
+                        <div data-cc-widget-header title="Course Notices"
                              allow-collapse="true"></div>
                         <div class="widget-content text-center text-info">
-                            <table class="table table-condensed table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Age</th>
-                                        <th>Location</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr data-ng-repeat="p in vm.people">
-                                        <td>{{p.firstName}}</td>
-                                        <td>{{p.lastName}}</td>
-                                        <td>{{p.age}}</td>
-                                        <td>{{p.location}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div data-ng-repeat="notice in vm.courseNotices">
+                                <div>
+                                    <h5>{{notice.course.name}}</h5>
+                                    <p>{{notice.message}}</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="widget-foot">
                             <div class="clearfix"></div>
@@ -55,10 +21,39 @@
                 </div>
                 <div class="col-md-6">
                     <div class="widget wgreen">
-                        <div data-cc-widget-header title="{{vm.news.title}}"
+                        <div data-cc-widget-header title="Upcoming Deadlines"
                              allow-collapse="true"></div>
                         <div class="widget-content text-center text-info">
-                            <small>{{vm.news.description}}</small>
+                            <div data-ng-repeat="courseWork in vm.upcomingDeadline">
+                                <div>
+                                    <h5>{{courseWork.course.name}}</h5>
+                                    <p>
+                                        {{courseWork.name}} 
+                                        <span data-ng-if="courseWork.type === assignment"> is due {{courseWork.end_date}}</span>
+                                        <span data-ng-if="courseWork.type === exam"> is on {{courseWork.start_time}} </span>
+                                        <small data-ng-if="courseWork.final_mark_percentage > 0"> - worth {{courseWork.final_mark_percentage}}% </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wgreen">
+                        <div data-cc-widget-header title="Upcoming Lectures"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <div data-ng-repeat="lecture in vm.upcomingLectures">
+                                <div>
+                                    <h5>{{lecture.course.name}} - {{lecture.start_date}}</h5>
+                                    <p>
+                                        {{lecture.location}} 
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         <div class="widget-foot">
                             <div class="clearfix"></div>
