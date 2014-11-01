@@ -14,7 +14,7 @@
             getUpcomingDeadlines: getUpcomingDeadlines,
             getUpcomingLectures: getUpcomingLectures,
             getRecentGrades: getRecentGrades,
-            getEnroledCourses: getEnroledCourses
+            getCourses: getCourses
         };
 
         return service;
@@ -56,14 +56,14 @@
             return $q.when(recentGrades);
         }
 
-        function getEnroledCourses() {
-            var enroledCourses = [
+        function getCourses() {
+            var courses = [
             { name: 'INFO101', description: 'Introduction to information studies'},
             { name: 'COMP103', description: 'Introduction to computer science'},
             { name: 'ENGL111', description: 'Learn to read'},
             { name: 'MATH102', description: 'Introduction to discrete maths'},
             ];
-            return $q.when(enroledCourses);
+            return $q.when(courses);
         }
     }
 })();

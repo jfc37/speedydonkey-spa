@@ -25,7 +25,7 @@
         }
 
         function getCourses() {
-            return dataservice.getEnroledCourses().then(function (data) {
+            return dataservice.getCourses().then(function (data) {
                 vm.courses = data;
                 return vm.courses;
             });
