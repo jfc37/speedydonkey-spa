@@ -23,6 +23,7 @@
         'app.admin',
         'app.dashboard',
         'app.myCourses',
+        'app.myCourse',
         'app.courseEnrolment',
         'app.layout',
         'app.common.logon'
