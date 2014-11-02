@@ -5,15 +5,23 @@
         .module('app.courseEnrolment')
         .controller('CourseEnrolment', CourseEnrolment);
 
-    CourseEnrolment.$inject = ['$q', 'dataservice', 'logger'];
+    CourseEnrolment.$inject = ['$q', 'dataservice', 'dataUpdateService', 'logger'];
 
     /* @ngInject */
-    function CourseEnrolment($q, dataservice, logger) {
+    function CourseEnrolment($q, dataservice, dataUpdateService, logger) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.title = 'Course Enrolment';
         vm.courses = [];
+
+        vm.updateEnrolment = function(course){
+            if (course.isEnroled){
+                dataUpdateService.enrolInCourse(course);
+            } else {
+                dataUpdateService.unenrolInCourse(course);
+            }
+        }
 
         activate();
 
