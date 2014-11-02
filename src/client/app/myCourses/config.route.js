@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.course')
+        .module('app.myCourses')
         .run(appRun);
 
     appRun.$inject = ['routehelper'];
@@ -15,12 +15,12 @@
     function getRoutes() {
         return [
             {
-                url: '/courses',
+                url: '/myCourses',
                 config: {
-                    title: 'courses',
-                    controller: 'Course',
+                    title: 'myCourses',
+                    controller: 'MyCourses',
                     controllerAs: 'vm',
-                    templateUrl: 'app/course/courses.html',
+                    templateUrl: 'app/myCourses/myCourses.html',
                     settings: {
                         nav: 3,
                         content: '<i class="fa fa-calendar"></i> My Courses'

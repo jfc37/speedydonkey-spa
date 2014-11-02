@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('app.course')
-        .controller('Course', Course);
+        .module('app.myCourses')
+        .controller('MyCourses', MyCourses);
 
-    Course.$inject = ['$q', 'dataservice', 'logger'];
+    MyCourses.$inject = ['$q', 'dataservice', 'logger'];
 
     /* @ngInject */
-    function Course($q, dataservice, logger) {
+    function MyCourses($q, dataservice, logger) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -20,7 +20,7 @@
         function activate() {
             var promises = [getCourses()];
             return $q.all(promises).then(function(){
-                logger.info('Activated Course View');
+                logger.info('Activated My Courses View');
             });
         }
 

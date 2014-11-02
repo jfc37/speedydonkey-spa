@@ -22,7 +22,7 @@
          */
         'app.admin',
         'app.dashboard',
-        'app.course',
+        'app.myCourses',
         'app.courseEnrolment',
         'app.layout',
         'app.common.logon'
