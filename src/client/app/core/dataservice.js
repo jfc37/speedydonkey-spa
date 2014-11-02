@@ -15,7 +15,8 @@
             getUpcomingLectures: getUpcomingLectures,
             getRecentGrades: getRecentGrades,
             getCourses: getCourses,
-            getAllCourses: getAllCourses
+            getAllCourses: getAllCourses,
+            checkUserCredentials: checkUserCredentials
         };
 
         return service;
@@ -81,6 +82,20 @@
             { name: 'MATH201', description: 'Advanced calculus'},
             ];
             return $q.when(courses);
+        }
+
+        function checkUserCredentials(username, password){
+            var user = null;
+            if (username === 'jchapman' && password === 'password') {
+                user = {
+                    username: 'jchapman',
+                    firstname: 'Joe',
+                    surname: 'Chapman',
+                    role: 'student'
+                }
+            }
+
+            return $q.when(user);
         }
     }
 })();

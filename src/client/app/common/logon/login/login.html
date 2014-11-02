@@ -9,23 +9,23 @@
 <form class="form-horizontal" name="loginForm" novalidate>
 
         <div class="form-group"
-             ng-class="{'has-error':loginForm.email.$invalid && loginForm.email.$dirty}">
-            <label class="col-md-2 control-label" for="email">Email</label>
+             ng-class="{'has-error':loginForm.username.$invalid && loginForm.username.$dirty}">
+            <label class="col-md-2 control-label" for="username">Username</label>
 
             <div class="col-md-4">
                 <input class="form-control"
-                       id="email"
-                       name="email"
+                       id="username"
+                       name="username"
                        type="text"
-                       placeholder="Email Address (required)"
-                       ng-model="vm.emailAddress"
+                       placeholder="Username"
+                       ng-model="vm.username"
                        required
                        ng-minlength="4"
                        ng-maxlength="12"/>
             </div>
             <span class="help-block has-error">
-                <span ng-show="loginForm.email.$error.required">
-                    Email Address is required.
+                <span ng-show="loginForm.username.$error.required">
+                    Username is required.
                 </span>
             </span>
         </div>
@@ -54,7 +54,7 @@
                                 style="width:80px;margin-right:10px"
                                 ng-click="vm.submit(loginForm.$valid)"
                                 ng-disabled="loginForm.$invalid">
-                            Save
+                            Login
                         </button>
                     </span>
                     <span>
