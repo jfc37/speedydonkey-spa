@@ -12,13 +12,23 @@
         /*jshint validthis: true */
         var vm = this;
 
-        vm.courseName = $routeParams.courseName;
-        vm.title = vm.courseName;
+        vm.course = {};
+        vm.title = $routeParams.courseName;
 
         activate();
 
         function activate() {
-            logger.info('Activated ' + vm.courseName + ' View');
+            var promises = [getCourse()];
+            return $q.all(promises).then(function(){
+                logger.info('Activated ' + vm.courseName + ' View');
+            });
+        }
+
+        function getCourse() {
+            return dataservice.getCourse($routeParams.courseName).then(function (data) {
+                vm.course = data;
+                return vm.course;
+            });
         }
     }
 })();

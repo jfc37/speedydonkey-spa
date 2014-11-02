@@ -15,6 +15,7 @@
             getUpcomingLectures: getUpcomingLectures,
             getRecentGrades: getRecentGrades,
             getCourses: getCourses,
+            getCourse: getCourse,
             getAllCourses: getAllCourses,
             checkUserCredentials: checkUserCredentials
         };
@@ -66,6 +67,39 @@
             { name: 'MATH102', description: 'Introduction to discrete maths'},
             ];
             return $q.when(courses);
+        }
+
+        function getCourse(courseName) {
+            var course = { 
+                name: courseName, 
+                description: 'Introduction to information studies',
+                start_date: new Date(2014, 10, 1),
+                end_date: new Date(2015, 4, 1),
+                professors: [
+                    {
+                        first_name: 'John',
+                        surname: 'Stakehouse'
+                    }
+                ],
+                notices: [
+                    {
+                        message: 'Mondays class is cancelled'
+                    }
+                ],
+                lectures: [
+                    {
+                        name: 'Monday Class',
+                        location: 'KIRK201',
+                        start_time: new Date(2014, 10, 3, 10, 5)
+                    },
+                    {
+                        name: 'Thursday Class',
+                        location: 'KIRK201',
+                        start_time: new Date(2014, 10, 6, 14, 35)
+                    },
+                ]
+            };
+            return $q.when(course);
         }
 
         function getAllCourses() {
