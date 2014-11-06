@@ -1,12 +1,12 @@
 {
-  "name": "hottowel-ng",
-  "version": "3.0.0",
-  "description": "HotTowel Angular",
+  "name": "studybuddy-spa",
+  "version": "0.1.0",
+  "description": "Study Buddy SPA",
   "authors": [
-    "John Papa"
+    "jfc37"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/johnpapa/hottowel-ng",
+  "homepage": "https://github.com/jfc37/studybuddy-spa.git",
   "ignore": [
     "**/.*",
     "node_modules",
