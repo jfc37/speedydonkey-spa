@@ -15,11 +15,12 @@
         vm.title = 'Login';
 
         vm.submit = function(){
-            return dataservice.checkUserCredentials(vm.username, vm.password).then(function (data) {
+            authService.setCredentials(vm.username, vm.password);
+            return dataservice.getUserFromCredentials(vm.username, vm.password).then(function (data) {
                 if (data === null){
+                    authService.clearCredentials();
                     logger.warning("Login failed");
                 } else{
-                    authService.setCredentials(vm.username, vm.password);
                     logger.success("Login successful");
                 }
             });
