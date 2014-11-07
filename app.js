@@ -13,7 +13,7 @@ var logger       = require('morgan');
 var port         = process.env['PORT'] || 7300;
 var server;
 
-var appDir =  __dirname + '/'; // Our NG code is served from root
+var appDir =  __dirname + './src/'; // Our NG code is served from root
 var environment = process.env.NODE_ENV;
 var pkg = require('./package.json');
 
