@@ -75,6 +75,7 @@
                 description: 'Introduction to information studies',
                 start_date: new Date(2014, 10, 1),
                 end_date: new Date(2015, 4, 1),
+                grade_type: 'Letter Grade',
                 professors: [
                     {
                         first_name: 'John',

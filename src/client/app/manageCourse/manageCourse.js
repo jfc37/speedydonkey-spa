@@ -5,15 +5,25 @@
         .module('app.manageCourse')
         .controller('ManageCourse', ManageCourse);
 
-    ManageCourse.$inject = ['$q', '$routeParams', 'dataservice', 'logger'];
+    ManageCourse.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'logger'];
 
     /* @ngInject */
-    function ManageCourse($q, $routeParams, dataservice, logger) {
+    function ManageCourse($q, $routeParams, dataservice, dataUpdateService, logger) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.course = {};
         vm.title = $routeParams.courseName;
+
+        vm.updateCourseDetails = function(form) {
+            dataUpdateService.updateCourse(vm.course).then(function(data) {
+                if (data.is_valid){
+                    form.$setPristine();
+                } else {
+                    logger.error("Course details failed to update");
+                }
+            });
+        };
 
         activate();
 

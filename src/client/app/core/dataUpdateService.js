@@ -13,6 +13,7 @@
             enrolInCourse: enrolInCourse,
             unenrolInCourse: unenrolInCourse,
             createCourse: createCourse,
+            updateCourse: updateCourse
         };
 
         return service;
@@ -30,6 +31,13 @@
         function createCourse(course) {
             logger.info('Successfully created course ' + course.name);
             return $q.when(course);
+        }
+
+        function updateCourse(course) {
+            logger.info('Successfully updated course ' + course.name);
+            return $q.when({
+                is_valid: true
+            })
         }
     }
 })();
