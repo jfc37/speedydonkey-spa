@@ -5,15 +5,16 @@
         .module('app.manageCourse')
         .controller('ManageCourse', ManageCourse);
 
-    ManageCourse.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'logger'];
+    ManageCourse.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataCreateService', 'logger'];
 
     /* @ngInject */
-    function ManageCourse($q, $routeParams, dataservice, dataUpdateService, logger) {
+    function ManageCourse($q, $routeParams, dataservice, dataUpdateService, dataCreateService, logger) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.course = {};
         vm.assignments = [];
+        vm.new_assignment = {};
         vm.title = $routeParams.courseName;
 
         vm.updateCourseDetails = function(form) {
@@ -33,6 +34,20 @@
                     assignment.is_editing = false;
                 } else {
                     logger.error("Assignment failed to update");
+                }
+            });
+        };
+
+        vm.createAssignment = function(assignment, form) {
+            dataCreateService.createAssignment(assignment).then(function(data) {
+                if (data.is_valid){
+                    vm.new_assignment.is_editing = false;
+                    vm.assignments.push(data.action_result);
+
+                    assignment = {};
+                    form.$setPristine();
+                } else {
+                    logger.error("Assignment failed to create");
                 }
             });
         };
