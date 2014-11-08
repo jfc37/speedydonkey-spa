@@ -13,7 +13,8 @@
             enrolInCourse: enrolInCourse,
             unenrolInCourse: unenrolInCourse,
             createCourse: createCourse,
-            updateCourse: updateCourse
+            updateCourse: updateCourse,
+            updateAssignment: updateAssignment
         };
 
         return service;
@@ -35,6 +36,13 @@
 
         function updateCourse(course) {
             logger.info('Successfully updated course ' + course.name);
+            return $q.when({
+                is_valid: true
+            })
+        }
+
+        function updateAssignment(assignment) {
+            logger.info('Successfully updated assignment ' + assignment.name);
             return $q.when({
                 is_valid: true
             })

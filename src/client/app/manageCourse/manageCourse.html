@@ -43,18 +43,40 @@
                 <div class="widget worange">
                     <div data-cc-widget-header title="Assignments"></div>
                     <div class="widget-content user">
-                        <div class="padd" data-ng-repeat="assignment in vm.assignments">
+                        <div data-ng-repeat="assignment in vm.assignments">
                             <div class="user" data-ng-hide="assignment.is_editing">
                                 <h5>{{assignment.name}}</h5>
                                 <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Edit</a>
                             </div>
-                            <div  data-ng-show="assignment.is_editing">
-                                Editing
-                                <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Cancel</a>
+                            <div data-ng-show="assignment.is_editing" class="user">
+                                <ng-form role="form" name="assignmentForm">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Name" data-ng-model="assignment.name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <input type="text" class="form-control" id="description" placeholder="Description" data-ng-model="assignment.description">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="startDate">Start Date</label>
+                                        <input type="date" class="form-control" id="startDate" placeholder="Start Date" data-ng-model="assignment.start_date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="endDate">End Date</label>
+                                        <input type="date" class="form-control" id="endDate" placeholder="End Date" data-ng-model="assignment.end_date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gradeType">Grade Type</label>
+                                        <input type="text" class="form-control" id="gradeType" placeholder="Grade Type" data-ng-model="assignment.grade_type">
+                                    </div>
+                                    <a class="btn btn-default" data-ng-click="vm.updateAssignment(assignment, assignmentForm)">Update</a>
+                                    <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Cancel</a>
+                                </ng-form>
                             </div>
                         </div>
-                        <div>
-                            <a class="btn btn-default">New Assignment</a>
+                        <div class="user">
+                            <a class="btn btn-default" data-ng-click="">New Assignment</a>
                         </div>
                     </div>
                     <div class="widget-foot">

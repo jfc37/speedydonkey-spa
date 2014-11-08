@@ -26,6 +26,19 @@
             });
         };
 
+        vm.updateAssignment = function(assignment, form) {
+            dataUpdateService.updateAssignment(assignment).then(function(data) {
+                if (data.is_valid){
+                    form.$setPristine();
+                    assignment.is_editing = false;
+                } else {
+                    logger.error("Assignment failed to update");
+                }
+            });
+        };
+
+
+
         vm.toggleEdit = function(model){
             model.is_editing = !model.is_editing;
         }
