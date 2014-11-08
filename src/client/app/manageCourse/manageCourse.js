@@ -13,6 +13,7 @@
         var vm = this;
 
         vm.course = {};
+        vm.assignments = [];
         vm.title = $routeParams.courseName;
 
         vm.updateCourseDetails = function(form) {
@@ -24,6 +25,10 @@
                 }
             });
         };
+
+        vm.toggleEdit = function(model){
+            model.is_editing = !model.is_editing;
+        }
 
         activate();
 
@@ -38,6 +43,7 @@
             if ($routeParams.courseName !== undefined){
                 return dataservice.getCourse($routeParams.courseName).then(function (data) {
                     vm.course = data;
+                    vm.assignments = data.assignments;
                     return vm.course;
                 });
             }

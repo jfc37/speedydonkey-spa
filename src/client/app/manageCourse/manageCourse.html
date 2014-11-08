@@ -4,10 +4,11 @@
             <div class="row">
                 <h2>{{vm.title}}</h2>
 
+                <!--Course Details-->
                 <div class="widget worange">
                     <div data-cc-widget-header title="Course Details"></div>
                     <div class="widget-content user">
-                		<div class="user">
+                        <div class="user">
                             <form role="form" name="courseDetailsForm">
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -31,11 +32,35 @@
                                 </div>
                                 <button class="btn btn-default" data-ng-disabled="courseDetailsForm.$pristine" data-ng-click="vm.updateCourseDetails(courseDetailsForm)">Update</button>
                             </form>
-                		</div>
+                        </div>
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>
                     </div>
+                    <!--/Course Details-->
+
+                <!--Assignments-->
+                <div class="widget worange">
+                    <div data-cc-widget-header title="Assignments"></div>
+                    <div class="widget-content user">
+                        <div class="padd" data-ng-repeat="assignment in vm.assignments">
+                            <div class="user" data-ng-hide="assignment.is_editing">
+                                <h5>{{assignment.name}}</h5>
+                                <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Edit</a>
+                            </div>
+                            <div  data-ng-show="assignment.is_editing">
+                                Editing
+                                <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Cancel</a>
+                            </div>
+                        </div>
+                        <div>
+                            <a class="btn btn-default">New Assignment</a>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--/Assignments-->
                 </div>
             </div>
         </div>

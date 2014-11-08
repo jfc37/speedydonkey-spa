@@ -98,6 +98,26 @@
                         location: 'KIRK201',
                         start_time: new Date(2014, 10, 6, 14, 35)
                     },
+                ],
+                assignments: [
+                    {
+                        name: 'Essay 1',
+                        final_mark_percentage: 15,
+                        start_date: new Date(2014, 10, 3),
+                        end_date: new Date(2014, 10, 20),
+                    },
+                    {
+                        name: 'Essay 2',
+                        final_mark_percentage: 10,
+                        start_date: new Date(2014, 10, 25),
+                        end_date: new Date(2014, 11, 10),
+                    },
+                    {
+                        name: 'Readings',
+                        final_mark_percentage: 0,
+                        start_date: new Date(2014, 10, 4),
+                        end_date: new Date(2014, 11, 22),
+                    },
                 ]
             };
             return $q.when(course);
