@@ -37,7 +37,8 @@
         var service = {
             configureRoutes: configureRoutes,
             getRoutes: getRoutes,
-            routeCounts: routeCounts
+            routeCounts: routeCounts,
+            redirectToRoute: redirectToRoute
         };
 
         init();
@@ -101,6 +102,26 @@
                     $rootScope.title = title; // data bind to <title>
                 }
             );
+        }
+
+        function redirectToRoute(routeName, routeParameters){
+            var routes = getRoutes().filter(function(route){ 
+                return route.title === routeName
+            });
+
+            if (routes.length < 1){
+                logger.error("Failed to find matching route", routeName, "No matching route");
+            } else {
+                var route = routes[0];
+                var routePath = route.originalPath;
+                for (var prop in routeParameters) {
+                    if (routeParameters.hasOwnProperty(prop)) {
+                        routePath = routePath.replace(":" + prop, routeParameters[prop]);
+                    }
+                }
+
+                $location.path(routePath);
+            }
         }
     }
 })();

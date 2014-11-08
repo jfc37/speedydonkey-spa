@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.manageCourse')
+        .module('app.createCourse')
         .run(appRun);
 
     appRun.$inject = ['routehelper'];
@@ -15,12 +15,12 @@
     function getRoutes() {
         return [
             {
-                url: '/manageCourses/edit/:courseName',
+                url: '/manageCourses/new',
                 config: {
-                    title: 'manageCourse',
-                    controller: 'ManageCourse',
+                    title: 'createCourse',
+                    controller: 'CreateCourse',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageCourse/manageCourse.html'
+                    templateUrl: 'app/createCourse/createCourse.html'
                 }
             }
         ];

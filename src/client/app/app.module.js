@@ -29,6 +29,7 @@
         'app.common.logon',
         'app.manageCourses',
         'app.manageCourse',
+        'app.createCourse',
     ]);
 
 })();

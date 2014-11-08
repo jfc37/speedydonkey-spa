@@ -11,7 +11,8 @@
     function dataUpdateService($q, logger) {
         var service = {
             enrolInCourse: enrolInCourse,
-            unenrolInCourse: unenrolInCourse
+            unenrolInCourse: unenrolInCourse,
+            createCourse: createCourse,
         };
 
         return service;
@@ -24,6 +25,11 @@
         function unenrolInCourse(course) {
             logger.info('Successfully unenroled in ' + course.name);
             return true;
+        }
+
+        function createCourse(course) {
+            logger.info('Successfully created course ' + course.name);
+            return $q.when(course);
         }
     }
 })();
