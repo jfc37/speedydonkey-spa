@@ -26,7 +26,9 @@
         'app.myCourse',
         'app.courseEnrolment',
         'app.layout',
-        'app.common.logon'
+        'app.common.logon',
+        'app.manageCourses',
+        'app.manageCourse',
     ]);
 
 })();

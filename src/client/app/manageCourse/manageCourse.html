@@ -1,0 +1,40 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget worange">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content user">
+                		<div class="user">
+                			<h5>{{vm.course.name}}</h5>
+                			<div class="user-details">
+                				<small>{{vm.course.description}}</small>
+                                <div>
+                                    Run by: 
+                                    <span data-ng-repeat="professor in vm.course.professors">{{professor.first_name}} {{professor.surname}},</span>
+                                </div>
+                                <div>
+                                    <h6>Notices</h6>
+                                    <div data-ng-repeat="notice in vm.course.notices">
+                                        {{notice.message}}
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h6>Lectures</h6>
+                                    <div data-ng-repeat="lecture in vm.course.lectures">
+                                        {{lecture.name}} - {{lecture.location}} ({{lecture.start_time | date}})
+                                    </div>
+                                </div>
+
+                			</div>
+                		</div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
