@@ -47,15 +47,16 @@
                             <div class="user" data-ng-hide="assignment.is_editing">
                                 <h5>{{assignment.name}}</h5>
                                 <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Edit</a>
+                                <a class="btn btn-default" data-ng-click="vm.deleteAssignment(assignment)">Delete</a>
                             </div>
                             <div data-ng-show="assignment.is_editing" class="user">
-                                <div ng-include src="'manageAssignment.html'" onload="action_type = 'update'"></div>
+                                <div ng-include src="'app/manageCourse/manageAssignment.html'" onload="action_type = 'update'"></div>
                             </div>
                         </div>
                         <div class="user">
                             <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_assignment)">New Assignment</a>
                             <div data-ng-show="vm.new_assignment.is_editing" class="user">
-                                <div ng-include src="'manageAssignment.html'" onload="action_type = 'create'; assignment = vm.new_assignment"></div>
+                                <div ng-include src="'app/manageCourse/manageAssignment.html'" onload="action_type = 'create'; assignment = vm.new_assignment"></div>
                             </div>
                         </div>
                     </div>
@@ -67,37 +68,6 @@
             </div>
         </div>
     </section>
-</section>
+</section
 
-<script type="text/ng-template" id="manageAssignment.html">
-   <ng-form role="form" name="assignmentForm">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name" data-ng-model="assignment.name" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Description" data-ng-model="assignment.description">
-        </div>
-        <div class="form-group">
-            <label for="startDate">Start Date</label>
-            <input type="date" class="form-control" id="startDate" placeholder="Start Date" data-ng-model="assignment.start_date" required>
-        </div>
-        <div class="form-group">
-            <label for="endDate">End Date</label>
-            <input type="date" class="form-control" id="endDate" placeholder="End Date" data-ng-model="assignment.end_date" required>
-        </div>
-        <div class="form-group">
-            <label for="gradeType">Grade Type</label>
-            <input type="text" class="form-control" id="gradeType" placeholder="Grade Type" data-ng-model="assignment.grade_type" required>
-        </div>
-        <div data-ng-if="action_type === 'update'">
-            <a class="btn btn-default" data-ng-click="vm.updateAssignment(assignment, assignmentForm)" data-ng-disabled="assignmentForm.$invalid">Update</a>
-            <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Cancel</a>
-        </div>
-        <div data-ng-if="action_type === 'create'">
-            <a class="btn btn-default" data-ng-click="vm.createAssignment(assignment, assignmentForm)" data-ng-disabled="assignmentForm.$invalid">Create</a>
-            <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_assignment)">Cancel</a>
-        </div>
-    </ng-form>
-</script>
+

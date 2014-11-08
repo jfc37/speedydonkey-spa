@@ -5,10 +5,10 @@
         .module('app.manageCourse')
         .controller('ManageCourse', ManageCourse);
 
-    ManageCourse.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataCreateService', 'logger'];
+    ManageCourse.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger'];
 
     /* @ngInject */
-    function ManageCourse($q, $routeParams, dataservice, dataUpdateService, dataCreateService, logger) {
+    function ManageCourse($q, $routeParams, dataservice, dataUpdateService, dataCreateService, dataDeleteService, logger) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -48,6 +48,19 @@
                     form.$setPristine();
                 } else {
                     logger.error("Assignment failed to create");
+                }
+            });
+        };
+
+        vm.deleteAssignment = function(assignment) {
+            dataDeleteService.deleteAssignment(assignment).then(function(data) {
+                if (data.is_valid) {
+                    var index = vm.assignments.indexOf(assignment);
+                    if (index > -1) {
+                        vm.assignments.splice(index, 1);
+                    }
+                } else {
+                    logger.error("Assignment failed to delete");
                 }
             });
         };
