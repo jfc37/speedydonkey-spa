@@ -14,6 +14,7 @@
             createAssignment: createAssignment,
             createExam: createExam,
             createLecture: createLecture,
+            createNotice: createNotice,
         };
 
         return service;
@@ -65,6 +66,19 @@
                     end_date: lecture.end_date,
                     location: lecture.location,
                     occurence: lecture.occurence
+                }
+            });
+        }
+
+        function createNotice(notice) {
+            logger.info('Successfully created notice ' + notice.name);
+            notice.is_editing = null;
+            return $q.when({
+                is_valid: true,
+                action_result: {
+                    message: notice.message,
+                    start_date: notice.start_date,
+                    end_date: notice.end_date,
                 }
             });
         }

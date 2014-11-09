@@ -17,10 +17,12 @@
         vm.assignments = [];
         vm.exams = [];
         vm.lectures = [];
+        vm.notices = [];
 
         vm.new_assignment = {};
         vm.new_exam = {};
         vm.new_lecture = {};
+        vm.new_notice = {};
 
         vm.updateCourseDetails = function(form) {
             dataUpdateService.updateCourse(vm.course).then(function(data) {
@@ -149,6 +151,45 @@
         };
 
 
+        vm.updateNotice = function(notice, form) {
+            dataUpdateService.updateNotice(notice).then(function(data) {
+                if (data.is_valid){
+                    form.$setPristine();
+                    notice.is_editing = false;
+                } else {
+                    logger.error("Notice failed to update");
+                }
+            });
+        };
+
+        vm.createNotice = function(notice, form) {
+            dataCreateService.createNotice(notice).then(function(data) {
+                if (data.is_valid){
+                    vm.new_notice.is_editing = false;
+                    vm.notices.push(data.action_result);
+
+                    notice = {};
+                    form.$setPristine();
+                } else {
+                    logger.error("Notice failed to create");
+                }
+            });
+        };
+
+        vm.deleteNotice = function(notice) {
+            dataDeleteService.deleteNotice(notice).then(function(data) {
+                if (data.is_valid) {
+                    var index = vm.notices.indexOf(notice);
+                    if (index > -1) {
+                        vm.notices.splice(index, 1);
+                    }
+                } else {
+                    logger.error("Notice failed to delete");
+                }
+            });
+        };
+
+
 
         vm.toggleEdit = function(model){
             model.is_editing = !model.is_editing;
@@ -170,6 +211,7 @@
                     vm.assignments = data.assignments;
                     vm.exams = data.exams;
                     vm.lectures = data.lectures;
+                    vm.notices = data.notices;
                     return vm.course;
                 });
             }

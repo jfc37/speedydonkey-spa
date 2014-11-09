@@ -14,7 +14,7 @@
             unenrolInCourse: unenrolInCourse,
             updateCourse: updateCourse,
             updateExam: updateExam,
-            updateLecture: updateLecture,
+            updateNotice: updateNotice,
         };
 
         return service;
@@ -52,6 +52,13 @@
 
         function updateLecture(lecture) {
             logger.info('Successfully updated lecture ' + lecture.name);
+            return $q.when({
+                is_valid: true
+            })
+        }
+
+        function updateNotice(notice) {
+            logger.info('Successfully updated notice ' + notice.name);
             return $q.when({
                 is_valid: true
             })

@@ -120,6 +120,33 @@
                     </div>
                 </div>
                 <!--/Lectures-->
+
+                <!--Notices-->
+                <div class="widget worange">
+                    <div data-cc-widget-header title="Notices"></div>
+                    <div class="widget-content user">
+                        <div data-ng-repeat="notice in vm.notices">
+                            <div class="user" data-ng-hide="notice.is_editing">
+                                <h5>{{notice.message}}</h5>
+                                <a class="btn btn-default" data-ng-click="vm.toggleEdit(notice)">Edit</a>
+                                <a class="btn btn-default" data-ng-click="vm.deleteNotice(notice)">Delete</a>
+                            </div>
+                            <div data-ng-show="notice.is_editing" class="user">
+                                <div ng-include src="'app/manageCourse/manageNotices/manageNotice.html'" onload="action_type = 'update'"></div>
+                            </div>
+                        </div>
+                        <div class="user">
+                            <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_notice)">New Notice</a>
+                            <div data-ng-show="vm.new_notice.is_editing" class="user">
+                                <div ng-include src="'app/manageCourse/manageNotices/manageNotice.html'" onload="action_type = 'create'; notice = vm.new_notice"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!--/Notices-->
                 
             </div>
         </div>

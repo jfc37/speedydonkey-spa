@@ -1,0 +1,22 @@
+<ng-form role="form" name="noticeForm">
+    <div class="form-group">
+        <label for="message">Message</label>
+        <input type="text" class="form-control" id="message" placeholder="Message" data-ng-model="notice.message" required>
+    </div>
+    <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" class="form-control" id="startDate" placeholder="Start Date" data-ng-model="notice.start_date" required>
+    </div>
+    <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input type="date" class="form-control" id="endDate" placeholder="End Date" data-ng-model="notice.end_date" required>
+    </div>
+    <div data-ng-if="action_type === 'update'">
+        <a class="btn btn-default" data-ng-click="vm.updateNotice(notice, noticeForm)" data-ng-disabled="noticeForm.$invalid">Update</a>
+        <a class="btn btn-default" data-ng-click="vm.toggleEdit(notice)">Cancel</a>
+    </div>
+    <div data-ng-if="action_type === 'create'">
+        <a class="btn btn-default" data-ng-click="vm.createNotice(notice, noticeForm)" data-ng-disabled="noticeForm.$invalid">Create</a>
+        <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_notice)">Cancel</a>
+    </div>
+</ng-form>

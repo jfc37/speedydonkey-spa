@@ -84,7 +84,9 @@
                 ],
                 notices: [
                     {
-                        message: 'Mondays class is cancelled'
+                        message: 'Mondays class is cancelled',
+                        start_date: new Date(2014, 10, 3),
+                        end_date: new Date(2014, 10, 20),
                     }
                 ],
                 lectures: [
