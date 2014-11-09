@@ -50,13 +50,13 @@
                                 <a class="btn btn-default" data-ng-click="vm.deleteAssignment(assignment)">Delete</a>
                             </div>
                             <div data-ng-show="assignment.is_editing" class="user">
-                                <div ng-include src="'app/manageCourse/manageAssignment.html'" onload="action_type = 'update'"></div>
+                                <div ng-include src="'app/manageCourse/manageAssignments/manageAssignment.html'" onload="action_type = 'update'"></div>
                             </div>
                         </div>
                         <div class="user">
                             <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_assignment)">New Assignment</a>
                             <div data-ng-show="vm.new_assignment.is_editing" class="user">
-                                <div ng-include src="'app/manageCourse/manageAssignment.html'" onload="action_type = 'create'; assignment = vm.new_assignment"></div>
+                                <div ng-include src="'app/manageCourse/manageAssignments/manageAssignment.html'" onload="action_type = 'create'; assignment = vm.new_assignment"></div>
                             </div>
                         </div>
                     </div>
