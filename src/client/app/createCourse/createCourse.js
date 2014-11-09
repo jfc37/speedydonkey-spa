@@ -5,10 +5,10 @@
         .module('app.createCourse')
         .controller('CreateCourse', CreateCourse);
 
-    CreateCourse.$inject = ['$q', '$routeParams', 'dataUpdateService', 'logger', 'routehelper'];
+    CreateCourse.$inject = ['$q', '$routeParams', 'dataCreateService', 'logger', 'routehelper'];
 
     /* @ngInject */
-    function CreateCourse($q, $routeParams, dataUpdateService, logger, routehelper) {
+    function CreateCourse($q, $routeParams, dataCreateService, logger, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -18,7 +18,7 @@
         logger.info('Activated ' + vm.title + ' View');
 
         vm.createCourse = function(){
-            return dataUpdateService.createCourse(vm.course).then(function (data) {
+            return dataCreateService.createCourse(vm.course).then(function (data) {
                 routehelper.redirectToRoute('manageCourse', {courseName: data.name});
             });
         };

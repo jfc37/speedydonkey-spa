@@ -93,6 +93,33 @@
                     </div>
                 </div>
                 <!--/Exams-->
+
+                <!--Lectures-->
+                <div class="widget worange">
+                    <div data-cc-widget-header title="Lectures"></div>
+                    <div class="widget-content user">
+                        <div data-ng-repeat="lecture in vm.lectures">
+                            <div class="user" data-ng-hide="lecture.is_editing">
+                                <h5>{{lecture.name}}</h5>
+                                <a class="btn btn-default" data-ng-click="vm.toggleEdit(lecture)">Edit</a>
+                                <a class="btn btn-default" data-ng-click="vm.deleteLecture(lecture)">Delete</a>
+                            </div>
+                            <div data-ng-show="lecture.is_editing" class="user">
+                                <div ng-include src="'app/manageCourse/manageLectures/manageLecture.html'" onload="action_type = 'update'"></div>
+                            </div>
+                        </div>
+                        <div class="user">
+                            <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_lecture)">New Lecture</a>
+                            <div data-ng-show="vm.new_lecture.is_editing" class="user">
+                                <div ng-include src="'app/manageCourse/manageLectures/manageLecture.html'" onload="action_type = 'create'; lecture = vm.new_lecture"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!--/Lectures-->
                 
             </div>
         </div>

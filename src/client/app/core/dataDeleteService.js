@@ -12,6 +12,7 @@
         var service = {
             deleteAssignment: deleteAssignment,
             deleteExam: deleteExam,
+            deleteLecture: deleteLecture,
         };
 
         return service;
@@ -25,6 +26,13 @@
 
         function deleteExam(exam) {
             logger.info('Successfully deleted exam ' + exam.name);
+            return $q.when({
+                is_valid: true
+            });
+        }
+
+        function deleteLecture(lecture) {
+            logger.info('Successfully deleted lecture ' + lecture.name);
             return $q.when({
                 is_valid: true
             });

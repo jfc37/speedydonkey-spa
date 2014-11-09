@@ -10,11 +10,18 @@
     /* @ngInject */
     function dataCreateService($q, logger) {
         var service = {
+            createCourse: createCourse,
             createAssignment: createAssignment,
             createExam: createExam,
+            createLecture: createLecture,
         };
 
         return service;
+
+        function createCourse(course) {
+            logger.info('Successfully created course ' + course.name);
+            return $q.when(course);
+        }
 
         function createAssignment(assignment) {
             logger.info('Successfully created assignment ' + assignment.name);
@@ -42,6 +49,22 @@
                     start_time: exam.start_time,
                     location: exam.location,
                     grade_type: exam.grade_type
+                }
+            });
+        }
+
+        function createLecture(lecture) {
+            logger.info('Successfully created lecture ' + lecture.name);
+            lecture.is_editing = null;
+            return $q.when({
+                is_valid: true,
+                action_result: {
+                    name: lecture.name,
+                    description: lecture.description,
+                    start_date: lecture.start_date,
+                    end_date: lecture.end_date,
+                    location: lecture.location,
+                    occurence: lecture.occurence
                 }
             });
         }

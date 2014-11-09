@@ -91,12 +91,12 @@
                     {
                         name: 'Monday Class',
                         location: 'KIRK201',
-                        start_time: new Date(2014, 10, 3, 10, 5)
+                        start_date: new Date(2014, 10, 3, 10, 5)
                     },
                     {
                         name: 'Thursday Class',
                         location: 'KIRK201',
-                        start_time: new Date(2014, 10, 6, 14, 35)
+                        start_date: new Date(2014, 10, 6, 14, 35)
                     },
                 ],
                 assignments: [

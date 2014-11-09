@@ -1,0 +1,34 @@
+<ng-form role="form" name="lectureForm">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Name" data-ng-model="lecture.name" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" placeholder="Description" data-ng-model="lecture.description">
+    </div>
+    <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" class="form-control" id="startDate" placeholder="Start Date" data-ng-model="lecture.start_date" required>
+    </div>
+    <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input type="date" class="form-control" id="endDate" placeholder="End Date" data-ng-model="lecture.end_date" required>
+    </div>
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" id="location" placeholder="Location" data-ng-model="lecture.location">
+    </div>
+    <div class="form-group">
+        <label for="occurence">Occurence</label>
+        <input type="text" class="form-control" id="occurence" placeholder="Occurence" data-ng-model="lecture.occurence">
+    </div>
+    <div data-ng-if="action_type === 'update'">
+        <a class="btn btn-default" data-ng-click="vm.updateLecture(lecture, lectureForm)" data-ng-disabled="lectureForm.$invalid">Update</a>
+        <a class="btn btn-default" data-ng-click="vm.toggleEdit(lecture)">Cancel</a>
+    </div>
+    <div data-ng-if="action_type === 'create'">
+        <a class="btn btn-default" data-ng-click="vm.createLecture(lecture, lectureForm)" data-ng-disabled="lectureForm.$invalid">Create</a>
+        <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_lecture)">Cancel</a>
+    </div>
+</ng-form>

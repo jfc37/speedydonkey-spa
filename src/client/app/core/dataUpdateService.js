@@ -12,9 +12,9 @@
         var service = {
             enrolInCourse: enrolInCourse,
             unenrolInCourse: unenrolInCourse,
-            createCourse: createCourse,
             updateCourse: updateCourse,
             updateExam: updateExam,
+            updateLecture: updateLecture,
         };
 
         return service;
@@ -27,11 +27,6 @@
         function unenrolInCourse(course) {
             logger.info('Successfully unenroled in ' + course.name);
             return true;
-        }
-
-        function createCourse(course) {
-            logger.info('Successfully created course ' + course.name);
-            return $q.when(course);
         }
 
         function updateCourse(course) {
@@ -50,6 +45,13 @@
 
         function updateExam(exam) {
             logger.info('Successfully updated exam ' + exam.name);
+            return $q.when({
+                is_valid: true
+            })
+        }
+
+        function updateLecture(lecture) {
+            logger.info('Successfully updated lecture ' + lecture.name);
             return $q.when({
                 is_valid: true
             })

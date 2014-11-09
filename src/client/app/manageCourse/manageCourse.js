@@ -16,9 +16,11 @@
         vm.course = {};
         vm.assignments = [];
         vm.exams = [];
+        vm.lectures = [];
 
         vm.new_assignment = {};
         vm.new_exam = {};
+        vm.new_lecture = {};
 
         vm.updateCourseDetails = function(form) {
             dataUpdateService.updateCourse(vm.course).then(function(data) {
@@ -108,6 +110,45 @@
         };
 
 
+        vm.updateLecture = function(lecture, form) {
+            dataUpdateService.updateLecture(lecture).then(function(data) {
+                if (data.is_valid){
+                    form.$setPristine();
+                    lecture.is_editing = false;
+                } else {
+                    logger.error("Lecture failed to update");
+                }
+            });
+        };
+
+        vm.createLecture = function(lecture, form) {
+            dataCreateService.createLecture(lecture).then(function(data) {
+                if (data.is_valid){
+                    vm.new_lecture.is_editing = false;
+                    vm.lectures.push(data.action_result);
+
+                    lecture = {};
+                    form.$setPristine();
+                } else {
+                    logger.error("Lecture failed to create");
+                }
+            });
+        };
+
+        vm.deleteLecture = function(lecture) {
+            dataDeleteService.deleteLecture(lecture).then(function(data) {
+                if (data.is_valid) {
+                    var index = vm.lectures.indexOf(lecture);
+                    if (index > -1) {
+                        vm.lectures.splice(index, 1);
+                    }
+                } else {
+                    logger.error("Lecture failed to delete");
+                }
+            });
+        };
+
+
 
         vm.toggleEdit = function(model){
             model.is_editing = !model.is_editing;
@@ -128,6 +169,7 @@
                     vm.course = data;
                     vm.assignments = data.assignments;
                     vm.exams = data.exams;
+                    vm.lectures = data.lectures;
                     return vm.course;
                 });
             }
