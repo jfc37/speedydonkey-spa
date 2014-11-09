@@ -30,6 +30,7 @@
         'app.manageCourses',
         'app.manageCourse',
         'app.createCourse',
+        'app.meetingRoom',
     ]);
 
 })();

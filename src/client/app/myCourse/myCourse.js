@@ -5,15 +5,19 @@
         .module('app.myCourse')
         .controller('MyCourse', MyCourse);
 
-    MyCourse.$inject = ['$q', '$routeParams', 'dataservice', 'logger'];
+    MyCourse.$inject = ['$q', '$routeParams', 'dataservice', 'logger', 'routehelper'];
 
     /* @ngInject */
-    function MyCourse($q, $routeParams, dataservice, logger) {
+    function MyCourse($q, $routeParams, dataservice, logger, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.course = {};
         vm.title = $routeParams.courseName;
+
+        vm.goToMeetingRoom = function() {
+            routehelper.redirectToRoute('meetingRoom', {courseName: $routeParams.courseName})
+        }
 
         activate();
 

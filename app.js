@@ -11,6 +11,7 @@ var fileServer   = require('serve-static');
 var http         = require('http');
 var logger       = require('morgan');
 var port         = process.env['PORT'] || 7300;
+var updater      = require('./src/server/updater');
 var server;
 
 var appDir =  __dirname + './src/'; // Our NG code is served from root
@@ -53,3 +54,8 @@ server.listen(port, function(){
         '\n__dirname = ' + __dirname  +
         '\nprocess.cwd = ' + process.cwd() );
 });
+
+updater.init(server);
+
+
+

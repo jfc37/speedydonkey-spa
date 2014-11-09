@@ -16,16 +16,17 @@
     "start": "gulp serve-dev"
   },
   "dependencies": {
-    "method-override": "^1.0.0",
-    "compression": "^1.0.1",
     "body-parser": "^1.0.2",
+    "compression": "^1.0.1",
     "cors": "^2.2.0",
     "debug": "^0.8.0",
-    "serve-static": "^1.1.0",
-    "serve-favicon": "^2.0.1",
     "express": "^4.6.1",
     "http-proxy": "^1.1.6",
-    "morgan": "^1.1.1"
+    "method-override": "^1.0.0",
+    "morgan": "^1.1.1",
+    "serve-favicon": "^2.0.1",
+    "serve-static": "^1.1.0",
+    "socket.io": "^1.2.0"
   },
   "devDependencies": {
     "chalk": "^0.4.0",
