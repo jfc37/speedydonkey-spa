@@ -10,13 +10,21 @@
     /* @ngInject */
     function dataDeleteService($q, logger) {
         var service = {
-            deleteAssignment: deleteAssignment
+            deleteAssignment: deleteAssignment,
+            deleteExam: deleteExam,
         };
 
         return service;
 
         function deleteAssignment(assignment) {
             logger.info('Successfully deleted assignment ' + assignment.name);
+            return $q.when({
+                is_valid: true
+            });
+        }
+
+        function deleteExam(exam) {
+            logger.info('Successfully deleted exam ' + exam.name);
             return $q.when({
                 is_valid: true
             });

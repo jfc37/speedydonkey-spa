@@ -1,0 +1,30 @@
+<ng-form role="form" name="examForm">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Name" data-ng-model="exam.name" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" placeholder="Description" data-ng-model="exam.description">
+    </div>
+    <div class="form-group">
+        <label for="startDate">Start Time</label>
+        <input type="date" class="form-control" id="startTime" placeholder="Start Time" data-ng-model="exam.start_time" required>
+    </div>
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" id="location" placeholder="Location" data-ng-model="exam.location">
+    </div>
+    <div class="form-group">
+        <label for="gradeType">Grade Type</label>
+        <input type="text" class="form-control" id="gradeType" placeholder="Grade Type" data-ng-model="exam.grade_type" required>
+    </div>
+    <div data-ng-if="action_type === 'update'">
+        <a class="btn btn-default" data-ng-click="vm.updateExam(exam, examForm)" data-ng-disabled="examForm.$invalid">Update</a>
+        <a class="btn btn-default" data-ng-click="vm.toggleEdit(exam)">Cancel</a>
+    </div>
+    <div data-ng-if="action_type === 'create'">
+        <a class="btn btn-default" data-ng-click="vm.createExam(exam, examForm)" data-ng-disabled="examForm.$invalid">Create</a>
+        <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_exam)">Cancel</a>
+    </div>
+</ng-form>

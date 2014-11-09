@@ -10,7 +10,8 @@
     /* @ngInject */
     function dataCreateService($q, logger) {
         var service = {
-            createAssignment: createAssignment
+            createAssignment: createAssignment,
+            createExam: createExam,
         };
 
         return service;
@@ -26,6 +27,21 @@
                     start_date: assignment.start_date,
                     end_date: assignment.end_date,
                     grade_type: assignment.grade_type
+                }
+            });
+        }
+
+        function createExam(exam) {
+            logger.info('Successfully created exam ' + exam.name);
+            exam.is_editing = null;
+            return $q.when({
+                is_valid: true,
+                action_result: {
+                    name: exam.name,
+                    description: exam.description,
+                    start_time: exam.start_time,
+                    location: exam.location,
+                    grade_type: exam.grade_type
                 }
             });
         }

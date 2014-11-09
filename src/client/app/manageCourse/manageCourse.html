@@ -37,6 +37,7 @@
                     <div class="widget-foot">
                         <div class="clearfix"></div>
                     </div>
+                </div>
                     <!--/Course Details-->
 
                 <!--Assignments-->
@@ -63,8 +64,36 @@
                     <div class="widget-foot">
                         <div class="clearfix"></div>
                     </div>
-                    <!--/Assignments-->
                 </div>
+                <!--/Assignments-->
+
+                <!--Exams-->
+                <div class="widget worange">
+                    <div data-cc-widget-header title="Exams"></div>
+                    <div class="widget-content user">
+                        <div data-ng-repeat="exam in vm.exams">
+                            <div class="user" data-ng-hide="exam.is_editing">
+                                <h5>{{exam.name}}</h5>
+                                <a class="btn btn-default" data-ng-click="vm.toggleEdit(exam)">Edit</a>
+                                <a class="btn btn-default" data-ng-click="vm.deleteExam(exam)">Delete</a>
+                            </div>
+                            <div data-ng-show="exam.is_editing" class="user">
+                                <div ng-include src="'app/manageCourse/manageExams/manageExam.html'" onload="action_type = 'update'"></div>
+                            </div>
+                        </div>
+                        <div class="user">
+                            <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_exam)">New Exam</a>
+                            <div data-ng-show="vm.new_exam.is_editing" class="user">
+                                <div ng-include src="'app/manageCourse/manageExams/manageExam.html'" onload="action_type = 'create'; exam = vm.new_exam"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!--/Exams-->
+                
             </div>
         </div>
     </section>

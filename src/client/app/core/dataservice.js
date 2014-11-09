@@ -118,6 +118,20 @@
                         start_date: new Date(2014, 10, 4),
                         end_date: new Date(2014, 11, 22),
                     },
+                ],
+                exams: [
+                    {
+                        name: 'Midterm Test',
+                        final_mark_percentage: 30,
+                        start_time: new Date(2014, 10, 3, 10, 5),
+                        location: 'TBC',
+                    },
+                    {
+                        name: 'Final Exam',
+                        final_mark_percentage: 60,
+                        start_time: new Date(2015, 1, 2, 10, 5),
+                        location: 'TBC',
+                    },
                 ]
             };
             return $q.when(course);

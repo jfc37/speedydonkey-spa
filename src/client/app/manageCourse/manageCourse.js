@@ -11,11 +11,14 @@
     function ManageCourse($q, $routeParams, dataservice, dataUpdateService, dataCreateService, dataDeleteService, logger) {
         /*jshint validthis: true */
         var vm = this;
+        vm.title = $routeParams.courseName;
 
         vm.course = {};
         vm.assignments = [];
+        vm.exams = [];
+
         vm.new_assignment = {};
-        vm.title = $routeParams.courseName;
+        vm.new_exam = {};
 
         vm.updateCourseDetails = function(form) {
             dataUpdateService.updateCourse(vm.course).then(function(data) {
@@ -26,6 +29,7 @@
                 }
             });
         };
+
 
         vm.updateAssignment = function(assignment, form) {
             dataUpdateService.updateAssignment(assignment).then(function(data) {
@@ -41,10 +45,9 @@
         vm.createAssignment = function(assignment, form) {
             dataCreateService.createAssignment(assignment).then(function(data) {
                 if (data.is_valid){
-                    vm.new_assignment.is_editing = false;
                     vm.assignments.push(data.action_result);
-
                     assignment = {};
+                    vm.new_assignment = {};
                     form.$setPristine();
                 } else {
                     logger.error("Assignment failed to create");
@@ -61,6 +64,45 @@
                     }
                 } else {
                     logger.error("Assignment failed to delete");
+                }
+            });
+        };
+
+
+        vm.updateExam = function(exam, form) {
+            dataUpdateService.updateExam(exam).then(function(data) {
+                if (data.is_valid){
+                    form.$setPristine();
+                    exam.is_editing = false;
+                } else {
+                    logger.error("Exam failed to update");
+                }
+            });
+        };
+
+        vm.createExam = function(exam, form) {
+            dataCreateService.createExam(exam).then(function(data) {
+                if (data.is_valid){
+                    vm.new_exam.is_editing = false;
+                    vm.exams.push(data.action_result);
+
+                    exam = {};
+                    form.$setPristine();
+                } else {
+                    logger.error("Exam failed to create");
+                }
+            });
+        };
+
+        vm.deleteExam = function(exam) {
+            dataDeleteService.deleteExam(exam).then(function(data) {
+                if (data.is_valid) {
+                    var index = vm.exams.indexOf(exam);
+                    if (index > -1) {
+                        vm.exams.splice(index, 1);
+                    }
+                } else {
+                    logger.error("Exam failed to delete");
                 }
             });
         };
@@ -85,6 +127,7 @@
                 return dataservice.getCourse($routeParams.courseName).then(function (data) {
                     vm.course = data;
                     vm.assignments = data.assignments;
+                    vm.exams = data.exams;
                     return vm.course;
                 });
             }
