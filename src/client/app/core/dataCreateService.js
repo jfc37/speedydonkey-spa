@@ -15,6 +15,7 @@
             createExam: createExam,
             createLecture: createLecture,
             createNotice: createNotice,
+            createUser: createUser
         };
 
         return service;
@@ -80,6 +81,14 @@
                     start_date: notice.start_date,
                     end_date: notice.end_date,
                 }
+            });
+        }
+
+        function createUser(user) {
+            logger.info('Successfully created user ' + user.username);
+            return $q.when({
+                is_valid: true,
+                action_result: user
             });
         }
     }

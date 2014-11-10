@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.common.logon')
+        .module('app.logon')
         .run(appRun);
 
     appRun.$inject = ['routehelper'];
@@ -20,16 +20,7 @@
                     title: 'login',
                     controller: 'Login',
                     controllerAs: 'vm',
-                    templateUrl: 'app/common/logon/login/login.html'
-                }
-            },
-            {
-                url: '/register',
-                config: {
-                    title: 'register',
-                    controller: 'Register',
-                    controllerAs: 'vm',
-                    templateUrl: 'app/common/logon/register/register.html'
+                    templateUrl: 'app/login/login.html'
                 }
             }
         ];

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.common.logon')
+        .module('app.logon')
         .controller('Login', Login);
 
     Login.$inject = ['dataservice', 'logger', 'authService'];
