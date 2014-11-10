@@ -3,20 +3,20 @@
 
     angular
         .module('app.register')
-        .controller('Register', Register);
+        .controller('RegisterPerson', RegisterPerson);
 
-    Register.$inject = ['logger', 'dataCreateService'];
+    RegisterPerson.$inject = ['logger', 'dataCreateService'];
 
     /* @ngInject */
-    function Register(logger, dataCreateService) {
+    function RegisterPerson(logger, dataCreateService) {
         /*jshint validthis: true */
         var vm = this;
 
-        vm.title = 'Register';
-        vm.user = {};
+        vm.title = 'Register Person';
+        vm.person = {};
 
         vm.register = function() {
-            return dataCreateService.createUser(vm.user).then(function(response) {
+            return dataCreateService.createPerson(vm.person).then(function(response) {
                 if (response.is_valid){
 
                 } else{
@@ -28,7 +28,7 @@
         activate();
 
         function activate() {
-            logger.info('Activated Register View');
+            logger.info('Activated Register Person View');
         }
     }
 })();

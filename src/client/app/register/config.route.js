@@ -15,14 +15,23 @@
     function getRoutes() {
         return [
             {
-                url: '/register',
+                url: '/register/user',
                 config: {
-                    title: 'register',
-                    controller: 'Register',
+                    title: 'registerUser',
+                    controller: 'RegisterUser',
                     controllerAs: 'vm',
-                    templateUrl: 'app/register/register.html'
+                    templateUrl: 'app/register/registerUser.html'
                 }
-            }
+            },
+            {
+                url: '/register/person',
+                config: {
+                    title: 'registerPerson',
+                    controller: 'RegisterPerson',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/register/registerPerson.html'
+                }
+            },
         ];
     }
 })();

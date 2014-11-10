@@ -1,0 +1,73 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+
+                <div class="widget wviolet">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                      <form class="form-horizontal" name="registerForm" novalidate>
+
+                              <div class="form-group"
+                                   ng-class="{'has-error':registerForm.first_name.$invalid && registerForm.first_name.$dirty}">
+                                  <label class="col-md-2 control-label" for="first_name">First Name</label>
+
+                                  <div class="col-md-4">
+                                      <input class="form-control"
+                                             id="first_name"
+                                             name="first_name"
+                                             type="text"
+                                             placeholder="First Name (required)"
+                                             ng-model="vm.person.first_name"
+                                             required/>
+                                  </div>
+                                  <span class="help-block has-error">
+                                      <span ng-show="registerForm.first_name.$error.required">
+                                          First Name is required.
+                                      </span>
+                                  </span>
+                              </div>
+                              <div class="form-group"
+                                   ng-class="{'has-error':registerForm.surname.$invalid && registerForm.surname.$dirty}">
+                                  <label class="col-md-2 control-label" for="surname">Email</label>
+
+                      			 <div class="col-md-4">
+                                      <input class="form-control"
+                                             id="surname"
+                                             name="surname"
+                                             type="text"
+                                             placeholder="Surname (required)"
+                                             ng-model="vm.person.surname"
+                                             required/>
+                      			</div>
+                                
+                              </div>
+
+                              <div class="form-group">
+                                  <div class="col-md-4 col-md-offset-2">
+                                          <span>
+                                              <button class="btn btn-primary"
+                                                      style="width:80px;margin-right:10px"
+                                                      ng-click="vm.register()"
+                                                      ng-disabled="registerForm.$invalid">
+                                                  Register
+                                              </button>
+                                          </span>
+                                          <span>
+                                              <button class="btn btn-default"
+                                                      style="width:70px"
+                                                      ng-click="vm.cancel()">
+                                                  Cancel
+                                              </button>
+                                          </span>
+                                  </div>
+                              </div>
+
+                      </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>

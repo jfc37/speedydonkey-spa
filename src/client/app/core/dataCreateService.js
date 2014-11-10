@@ -15,7 +15,8 @@
             createExam: createExam,
             createLecture: createLecture,
             createNotice: createNotice,
-            createUser: createUser
+            createUser: createUser,
+            createPerson: createPerson
         };
 
         return service;
@@ -89,6 +90,14 @@
             return $q.when({
                 is_valid: true,
                 action_result: user
+            });
+        }
+
+        function createPerson(person) {
+            logger.info('Successfully created person ' + person.first_name + ' ' + person.surname);
+            return $q.when({
+                is_valid: true,
+                action_result: person
             });
         }
     }

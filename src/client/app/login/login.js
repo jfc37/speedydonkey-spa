@@ -15,7 +15,7 @@
         vm.title = 'Login';
 
         vm.submit = function(){
-            authService.setCredentials(vm.username, vm.password);
+            //authService.setCredentials(vm.username, vm.password);
             return dataservice.getUserFromCredentials(vm.username, vm.password).then(function (data) {
                 if (data === null){
                     authService.clearCredentials();

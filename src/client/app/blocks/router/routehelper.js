@@ -114,9 +114,11 @@
             } else {
                 var route = routes[0];
                 var routePath = route.originalPath;
-                for (var prop in routeParameters) {
-                    if (routeParameters.hasOwnProperty(prop)) {
-                        routePath = routePath.replace(":" + prop, routeParameters[prop]);
+                if (routeParameters !== undefined && routeParameters !== null) {
+                    for (var prop in routeParameters) {
+                        if (routeParameters.hasOwnProperty(prop)) {
+                            routePath = routePath.replace(":" + prop, routeParameters[prop]);
+                        }
                     }
                 }
 
