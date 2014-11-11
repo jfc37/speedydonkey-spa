@@ -18,7 +18,7 @@
         vm.register = function() {
             return dataCreateService.createUser(vm.user).then(function(response) {
                 if (response.is_valid){
-                    routehelper.redirectToRoute('registerPerson')
+                    routehelper.redirectToRoute('registerPerson', {username: response.action_result.username});
                 } else {
                     logger.warning("Register failed");
                 }

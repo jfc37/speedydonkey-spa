@@ -24,7 +24,7 @@
                 }
             },
             {
-                url: '/register/person',
+                url: '/register/:username/person',
                 config: {
                     title: 'registerPerson',
                     controller: 'RegisterPerson',
