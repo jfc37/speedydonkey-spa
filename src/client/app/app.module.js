@@ -20,7 +20,6 @@
         /*
          * Feature areas
          */
-        'app.admin',
         'app.dashboard',
         'app.myCourses',
         'app.myCourse',
