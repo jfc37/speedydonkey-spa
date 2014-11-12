@@ -16,6 +16,8 @@
         vm.isBusy = true;
         vm.showSplash = true;
         vm.getUserIdentity = authService.getUserIdentity;
+        vm.loginUrl = '#/login';
+        vm.registerUrl = '#/register/user';
         vm.logout = function() {
             authService.logout();
             routehelper.redirectToRoute('login');

@@ -11,12 +11,12 @@
         <div class="pull-right navbar-logo">
             <ul class="nav navbar-nav pull-right" ng-hide="vm.getUserIdentity().isLoggedIn">
                 <li>
-                    <a href="#/login">
+                    <a data-ng-href="{{vm.loginUrl}}">
                         Login
                     </a>
                 </li>
                 <li>
-                    <a href="#/register/user">
+                    <a data-ng-href="{{vm.registerUrl}}">
                         Register
                     </a>
                 </li>

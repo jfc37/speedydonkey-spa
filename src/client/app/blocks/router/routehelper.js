@@ -38,7 +38,8 @@
             configureRoutes: configureRoutes,
             getRoutes: getRoutes,
             routeCounts: routeCounts,
-            redirectToRoute: redirectToRoute
+            redirectToRoute: redirectToRoute,
+            getRouteFromName: getRouteFromName
         };
 
         init(authService.getUserIdentity);
@@ -127,12 +128,18 @@
         }
 
         function redirectToRoute(routeName, routeParameters){
+            var routePath = getRouteFromName(routeName, routeParameters);
+            $location.path(routePath);
+        }
+
+        function getRouteFromName(routeName, routeParameters){
             var routes = getRoutes().filter(function(route){ 
                 return route.title === routeName
             });
 
             if (routes.length < 1){
                 logger.error("Failed to find matching route", routeName, "No matching route");
+                return "";
             } else {
                 var route = routes[0];
                 var routePath = route.originalPath;
@@ -144,7 +151,7 @@
                     }
                 }
 
-                $location.path(routePath);
+                return routePath;
             }
         }
     }
