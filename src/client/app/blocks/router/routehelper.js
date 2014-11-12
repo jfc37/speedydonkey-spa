@@ -6,7 +6,7 @@
         .provider('routehelperConfig', routehelperConfig)
         .factory('routehelper', routehelper);
 
-    routehelper.$inject = ['$location', '$rootScope', '$route', 'logger', 'routehelperConfig'];
+    routehelper.$inject = ['$location', '$rootScope', '$route', 'logger', 'routehelperConfig', 'authService'];
 
     // Must configure via the routehelperConfigProvider
     function routehelperConfig () {
@@ -25,7 +25,7 @@
         };
     }
 
-    function routehelper($location, $rootScope, $route, logger, routehelperConfig) {
+    function routehelper($location, $rootScope, $route, logger, routehelperConfig, authService) {
         var handlingRouteChangeError = false;
         var routeCounts = {
             errors: 0,
@@ -52,7 +52,7 @@
                     angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
                 $routeProvider.when(route.url, route.config);
             });
-            $routeProvider.otherwise({ redirectTo: '/' });
+            $routeProvider.otherwise({ redirectTo: '/login' });
         }
 
         function handleRoutingErrors() {

@@ -20,7 +20,8 @@
                     title: 'registerUser',
                     controller: 'RegisterUser',
                     controllerAs: 'vm',
-                    templateUrl: 'app/register/registerUser.html'
+                    templateUrl: 'app/register/registerUser.html',
+                    allowAnonymous: true
                 }
             },
             {

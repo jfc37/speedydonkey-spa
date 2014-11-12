@@ -20,7 +20,8 @@
                     title: 'login',
                     controller: 'Login',
                     controllerAs: 'vm',
-                    templateUrl: 'app/login/login.html'
+                    templateUrl: 'app/login/login.html',
+                    allowAnonymous: true
                 }
             }
         ];

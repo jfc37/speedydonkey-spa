@@ -5,23 +5,25 @@
         .module('app.logon')
         .controller('Login', Login);
 
-    Login.$inject = ['dataservice', 'logger', 'authService'];
+    Login.$inject = ['dataservice', 'logger', 'authService', 'routehelper'];
 
     /* @ngInject */
-    function Login(dataservice, logger, authService) {
+    function Login(dataservice, logger, authService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.title = 'Login';
 
         vm.submit = function(){
-            //authService.setCredentials(vm.username, vm.password);
+            authService.login(vm.username, vm.password);
+            //Need to call api it ensure username and password were actually correct
             return dataservice.getUserFromCredentials(vm.username, vm.password).then(function (data) {
                 if (data === null){
-                    authService.clearCredentials();
+                    authService.logout();
                     logger.warning("Login failed");
                 } else{
                     logger.success("Login successful");
+                    routehelper.redirectToRoute('dashboard');
                 }
             });
         }

@@ -5,9 +5,9 @@
         .module('app.layout')
         .controller('Shell', Shell);
 
-    Shell.$inject = ['$timeout', 'config', 'logger'];
+    Shell.$inject = ['$timeout', 'config', 'logger', 'authService', 'routehelper'];
 
-    function Shell($timeout, config, logger) {
+    function Shell($timeout, config, logger, authService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -15,6 +15,11 @@
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
         vm.showSplash = true;
+        vm.getUserIdentity = authService.getUserIdentity;
+        vm.logout = function() {
+            authService.logout();
+            routehelper.redirectToRoute('login');
+        };
 
         activate();
 
