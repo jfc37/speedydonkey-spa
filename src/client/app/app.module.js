@@ -16,6 +16,7 @@
          */
         'app.core',
         'app.widgets',
+        'app.apiCaller',
 
         /*
          * Feature areas
