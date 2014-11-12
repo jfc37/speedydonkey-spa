@@ -21,7 +21,8 @@
                     controller: 'Login',
                     controllerAs: 'vm',
                     templateUrl: 'app/login/login.html',
-                    allowAnonymous: true
+                    allowAnonymous: true,
+                    denyAuthorised: true
                 }
             }
         ];

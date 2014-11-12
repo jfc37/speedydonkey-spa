@@ -21,7 +21,8 @@
                     controller: 'RegisterUser',
                     controllerAs: 'vm',
                     templateUrl: 'app/register/registerUser.html',
-                    allowAnonymous: true
+                    allowAnonymous: true,
+                    denyAuthorised: true
                 }
             },
             {

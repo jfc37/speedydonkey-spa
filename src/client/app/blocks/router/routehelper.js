@@ -41,7 +41,7 @@
             redirectToRoute: redirectToRoute
         };
 
-        init();
+        init(authService.getUserIdentity);
 
         return service;
         ///////////////
@@ -75,8 +75,30 @@
             );
         }
 
-        function init() {
+        function handleRoutingAuthorisation(getUserIdentity) {
+            $rootScope.$on('$routeChangeStart',
+                function (event, current, previous, rejection) {
+                     var userIdentity = getUserIdentity();
+
+                     if (!userIdentity.isLoggedIn) {
+                        if (!current.$$route.allowAnonymous){
+                            event.preventDefault();
+                            logger.warning('Authorisation required');
+                            redirectToRoute('login');
+                        }
+                     } else if (current.$$route.denyAuthorised){
+                            event.preventDefault();
+                            logger.warning('Tried to browse to anonymous only page');
+                            redirectToRoute('dashboard');
+                        }
+
+                }
+            );
+        }
+
+        function init(getUserIdentity) {
             handleRoutingErrors();
+            handleRoutingAuthorisation(getUserIdentity);
             updateDocTitle();
         }
 
