@@ -3,7 +3,10 @@
 
     angular
         .module('app.layout')
-        .controller('Sidebar', Sidebar);
+        .controller('Sidebar', Sidebar)
+        .filter('authorisedLink', function(authService) {
+            
+        });
 
     Sidebar.$inject = ['$route', 'routehelper'];
 

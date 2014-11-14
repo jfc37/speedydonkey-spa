@@ -33,6 +33,7 @@
         };
         var routes = [];
         var $routeProvider = routehelperConfig.config.$routeProvider;
+        var getUserIdentity = authService.getUserIdentity;
 
         var service = {
             configureRoutes: configureRoutes,
@@ -131,7 +132,28 @@
                 }
             }
 
-            return routes;
+            var userIdentity = getUserIdentity();
+            var isUnregisteredPerson = userIdentity.role === undefined;
+            var isStudent = userIdentity.role === 'student';
+            var isProfessor = userIdentity.role === 'professor';
+
+            return routes.filter(function (route) {
+                var isAuthorised = true;
+                if (!userIdentity.isLoggedIn) {
+                    if (!route.allowAnonymous){
+                        isAuthorised = false;
+                    }
+                 } else if (route.denyAuthorised){
+                        isAuthorised = false;
+                } else if (route.denyUnregisteredPerson && isUnregisteredPerson){
+                        isAuthorised = false;
+                } else if (route.denyRegisteredPerson && !isUnregisteredPerson){
+                        isAuthorised = false;
+                } else if (route.denyStudent && isStudent){
+                        isAuthorised = false;
+                }
+                return isAuthorised;
+            });
         }
 
         function updateDocTitle() {
