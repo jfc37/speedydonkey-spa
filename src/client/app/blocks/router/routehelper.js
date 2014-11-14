@@ -104,15 +104,18 @@
         }
 
         function getRoutes() {
-            for (var prop in $route.routes) {
-                if ($route.routes.hasOwnProperty(prop)) {
-                    var route = $route.routes[prop];
-                    var isRoute = !!route.title;
-                    if (isRoute) {
-                        routes.push(route);
+            if (routes.length < 1) {
+                for (var prop in $route.routes) {
+                    if ($route.routes.hasOwnProperty(prop)) {
+                        var route = $route.routes[prop];
+                        var isRoute = !!route.title;
+                        if (isRoute) {
+                            routes.push(route);
+                        }
                     }
                 }
             }
+
             return routes;
         }
 
