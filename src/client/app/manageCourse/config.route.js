@@ -20,7 +20,8 @@
                     title: 'manageCourse',
                     controller: 'ManageCourse',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageCourse/manageCourse.html'
+                    templateUrl: 'app/manageCourse/manageCourse.html',
+                    denyStudent: true
                 }
             }
         ];

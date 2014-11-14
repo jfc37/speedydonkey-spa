@@ -80,35 +80,16 @@
         function handleRoutingAuthorisation(getUserIdentity) {
             $rootScope.$on('$routeChangeStart',
                 function (event, current, previous, rejection) {
-                     var userIdentity = getUserIdentity();
-                     var isUnregisteredPerson = userIdentity.role === undefined;
-                     var isStudent = userIdentity.role === 'student';
-                     var isProfessor = userIdentity.role === 'professor';
-
-                     if (!userIdentity.isLoggedIn) {
-                        if (!current.$$route.allowAnonymous){
-                            event.preventDefault();
-                            logger.warning('Authorisation required');
-                            redirectToRoute('login');
-                        }
-                     } else if (current.$$route.denyAuthorised){
-                        event.preventDefault();
-                        logger.warning('Tried to browse to anonymous only page');
-                        redirectToRoute('dashboard');
-                    } else if (current.$$route.denyUnregisteredPerson && isUnregisteredPerson){
-                        event.preventDefault();
-                        logger.warning('Tried to browse to registered person page');
-                        redirectToRoute('registerPerson');
-                    } else if (current.$$route.denyRegisteredPerson && !isUnregisteredPerson){
-                        event.preventDefault();
-                        logger.warning('Tried to browse to unregistered person page');
-                        redirectToRoute('dashboard');
-                    } else if (current.$$route.denyStudent && isStudent){
-                        event.preventDefault();
-                        logger.warning('Tried to browse to non student page');
-                        redirectToRoute('dashboard');
+                    if (current.$$route === undefined) {
+                        logger.warning('Page not found');
+                        redirectToRoute(getDefaultRoute());
                     }
 
+                    if (!isAuthorisedForRoute(current.$$route)) {
+                        event.preventDefault();
+                        logger.warning('Unauthorised to visit page');
+                        redirectToRoute(getDefaultRoute());
+                    }
                 }
             );
         }
@@ -137,23 +118,7 @@
             var isStudent = userIdentity.role === 'student';
             var isProfessor = userIdentity.role === 'professor';
 
-            return routes.filter(function (route) {
-                var isAuthorised = true;
-                if (!userIdentity.isLoggedIn) {
-                    if (!route.allowAnonymous){
-                        isAuthorised = false;
-                    }
-                 } else if (route.denyAuthorised){
-                        isAuthorised = false;
-                } else if (route.denyUnregisteredPerson && isUnregisteredPerson){
-                        isAuthorised = false;
-                } else if (route.denyRegisteredPerson && !isUnregisteredPerson){
-                        isAuthorised = false;
-                } else if (route.denyStudent && isStudent){
-                        isAuthorised = false;
-                }
-                return isAuthorised;
-            });
+            return routes.filter(isAuthorisedForRoute);
         }
 
         function updateDocTitle() {
@@ -194,5 +159,45 @@
                 return routePath;
             }
         }
+
+        /*private*/
+        function isAuthorisedForRoute(route) {
+            var userIdentity = getUserIdentity();
+            var isUnregisteredPerson = userIdentity.role === undefined;
+            var isStudent = userIdentity.role === 'student';
+            var isProfessor = userIdentity.role === 'professor';
+
+            var isAuthorised = true;
+            if (!userIdentity.isLoggedIn) {
+                if (!route.allowAnonymous){
+                    isAuthorised = false;
+                }
+             } else if (route.denyAuthorised){
+                    isAuthorised = false;
+            } else if (!route.allowUnregisteredPerson && isUnregisteredPerson){
+                    isAuthorised = false;
+            } else if (route.denyRegisteredPerson && !isUnregisteredPerson){
+                    isAuthorised = false;
+            } else if (route.denyStudent && isStudent){
+                    isAuthorised = false;
+            }
+            return isAuthorised;
+        }
+
+        function getDefaultRoute() {
+            var userIdentity = getUserIdentity();
+            var isUnregisteredPerson = userIdentity.role === undefined;
+
+            var defaultRoute = 'dashboard';
+            if (!userIdentity.isLoggedIn) {
+                defaultRoute = 'login';
+            } else if (isUnregisteredPerson) {
+                defaultRoute = 'registerPerson';
+            }
+
+            return defaultRoute;
+        }
+
+        /*/private*/
     }
 })();

@@ -26,13 +26,14 @@
                 }
             },
             {
-                url: '/register/:username/person',
+                url: '/register/person',
                 config: {
                     title: 'registerPerson',
                     controller: 'RegisterPerson',
                     controllerAs: 'vm',
                     templateUrl: 'app/register/registerPerson.html',
                     denyRegisteredPerson: true,
+                    allowUnregisteredPerson: true
                 }
             },
         ];
