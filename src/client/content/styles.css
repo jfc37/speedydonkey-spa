@@ -76,8 +76,6 @@ textarea.form-control {
     /*width: 205px;*/
     display: inline;
     display: block;
-    width: 50%;
-    max-width: 30em;
 }
 
 .widget .padd {
@@ -101,11 +99,6 @@ textarea.form-control {
 
 .btn > i {
     margin-right: 8px;
-}
-
-.btn {
-    margin-right: 4px;
-    margin-left: 4px;
 }
 
     .btn.btn-notext > i {
@@ -559,3 +552,11 @@ a {
 }
 
 /*#endregion */
+
+/*general styles*/
+
+.push-down-64 {
+    margin-top: 32px;
+}
+
+/*end general styles*/

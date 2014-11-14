@@ -31,7 +31,9 @@
                     title: 'registerPerson',
                     controller: 'RegisterPerson',
                     controllerAs: 'vm',
-                    templateUrl: 'app/register/registerPerson.html'
+                    templateUrl: 'app/register/registerPerson.html',
+                    allowNonPerson: false,
+                    denyPerson: true,
                 }
             },
         ];
