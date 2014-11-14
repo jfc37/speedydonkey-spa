@@ -157,7 +157,10 @@
 
         function getUserFromCredentials(username, password){
             //return $http.get('http://studybuddyapi.azurewebsites.net/api/users/1');
-            return $q.when({});
+            
+            return $q.when({
+                role: username
+            });
         }
     }
 })();

@@ -18,10 +18,11 @@
             authService.login(vm.username, vm.password);
             //Need to call api it ensure username and password were actually correct
             return dataservice.getUserFromCredentials(vm.username, vm.password).then(function (data) {
-                if (data === null){
+                if (data === null) {
                     authService.logout();
                     logger.warning("Login failed");
-                } else{
+                } else {
+                    authService.setUserIdentityProperty('role', data.role);
                     logger.success("Login successful");
                     routehelper.redirectToRoute('dashboard');
                 }

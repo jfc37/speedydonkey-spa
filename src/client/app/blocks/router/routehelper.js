@@ -80,6 +80,9 @@
             $rootScope.$on('$routeChangeStart',
                 function (event, current, previous, rejection) {
                      var userIdentity = getUserIdentity();
+                     var isUnregisteredPerson = userIdentity.role === undefined;
+                     var isStudent = userIdentity.role === 'student';
+                     var isProfessor = userIdentity.role === 'professor';
 
                      if (!userIdentity.isLoggedIn) {
                         if (!current.$$route.allowAnonymous){
@@ -88,10 +91,22 @@
                             redirectToRoute('login');
                         }
                      } else if (current.$$route.denyAuthorised){
-                            event.preventDefault();
-                            logger.warning('Tried to browse to anonymous only page');
-                            redirectToRoute('dashboard');
-                        }
+                        event.preventDefault();
+                        logger.warning('Tried to browse to anonymous only page');
+                        redirectToRoute('dashboard');
+                    } else if (current.$$route.denyUnregisteredPerson && isUnregisteredPerson){
+                        event.preventDefault();
+                        logger.warning('Tried to browse to registered person page');
+                        redirectToRoute('registerPerson');
+                    } else if (current.$$route.denyRegisteredPerson && !isUnregisteredPerson){
+                        event.preventDefault();
+                        logger.warning('Tried to browse to unregistered person page');
+                        redirectToRoute('dashboard');
+                    } else if (current.$$route.denyStudent && isStudent){
+                        event.preventDefault();
+                        logger.warning('Tried to browse to non student page');
+                        redirectToRoute('dashboard');
+                    }
 
                 }
             );

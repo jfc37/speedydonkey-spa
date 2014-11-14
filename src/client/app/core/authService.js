@@ -17,7 +17,8 @@
         var service = {
             login: login,
             logout: logout,
-            getUserIdentity: getUserIdentity
+            getUserIdentity: getUserIdentity,
+            setUserIdentityProperty: setUserIdentityProperty
         };
         init();
         return service;
@@ -32,6 +33,11 @@
 
         function getUserIdentity() {
             return userIdentity;
+        }
+
+        function setUserIdentityProperty(propertyName, propertyValue) {
+            userIdentity[propertyName] = propertyValue;
+            $cookieStore.put('authuser', userIdentity);
         }
 
         function login(username, password) {

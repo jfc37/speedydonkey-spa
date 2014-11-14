@@ -24,7 +24,8 @@
                     settings: {
                         nav: 5,
                         content: '<i class="fa fa-university"></i> Manage Courses'
-                    }
+                    },
+                    denyStudent: true
                 }
             }
         ];

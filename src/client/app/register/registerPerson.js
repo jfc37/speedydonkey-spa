@@ -5,10 +5,10 @@
         .module('app.register')
         .controller('RegisterPerson', RegisterPerson);
 
-    RegisterPerson.$inject = ['logger', 'dataCreateService'];
+    RegisterPerson.$inject = ['logger', 'dataCreateService', 'routehelper', 'authService'];
 
     /* @ngInject */
-    function RegisterPerson(logger, dataCreateService) {
+    function RegisterPerson(logger, dataCreateService, routehelper, authService) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -18,7 +18,8 @@
         vm.register = function() {
             return dataCreateService.createPerson(vm.person).then(function(response) {
                 if (response.is_valid){
-
+                    authService.setUserIdentityProperty('role', vm.person.role);
+                    routehelper.redirectToRoute('dashboard');
                 } else{
                     logger.warning("Register failed");
                 }

@@ -30,7 +30,7 @@
                                    ng-class="{'has-error':registerForm.surname.$invalid && registerForm.surname.$dirty}">
                                   <label class="col-md-2 control-label" for="surname">Email</label>
 
-                      			 <div class="col-md-4">
+                             <div class="col-md-4">
                                       <input class="form-control"
                                              id="surname"
                                              name="surname"
@@ -38,7 +38,22 @@
                                              placeholder="Surname (required)"
                                              ng-model="vm.person.surname"
                                              required/>
-                      			</div>
+                            </div>
+                                
+                              </div>
+                              <div class="form-group"
+                                   ng-class="{'has-error':registerForm.role.$invalid && registerForm.role.$dirty}">
+                                  <label class="col-md-2 control-label" for="role">Role</label>
+
+                             <div class="col-md-4">
+                                      <input class="form-control"
+                                             id="role"
+                                             name="role"
+                                             type="text"
+                                             placeholder="Role (required)"
+                                             ng-model="vm.person.role"
+                                             required/>
+                            </div>
                                 
                               </div>
 
