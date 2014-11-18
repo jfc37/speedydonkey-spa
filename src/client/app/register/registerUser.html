@@ -7,7 +7,7 @@
                     <h3 class="text-center">New User</h2>
                       <form class="form-horizontal" name="registerForm" novalidate>
 
-                              <div class="form-group" ng-class="{'has-error':registerForm.name.$invalid && registerForm.name.$dirty}">
+                              <div class="form-group" ng-class="{'has-error':registerForm.name.$invalid && registerForm.name.$touched}">
                                   <div class="form-group">
                                     <div class="col-xs-12">
                                         <input class="form-control col-xs-12"
@@ -23,18 +23,18 @@
                                   </div>
 
                                   <div class="help-block has-error">
-                                      <span ng-show="registerForm.username.$error.required && registerForm.name.$dirty">
+                                      <span ng-show="registerForm.username.$error.required && registerForm.username.$touched">
                                           Username is required.
                                       </span>
-                                      <span ng-show="registerForm.username.$error.minlength && registerForm.name.$dirty">
+                                      <span ng-show="registerForm.username.$error.minlength && registerForm.username.$touched">
                                           Username must be at least 4 characters in length.
                                       </span>
-                                      <span ng-show="registerForm.username.$error.maxlength && registerForm.name.$dirty">
+                                      <span ng-show="registerForm.username.$error.maxlength && registerForm.username.$touched">
                                           Username cannot exceed 12 characters in length.
                                       </span>
-                                  </span>
+                                  </div>
                               </div>
-                              <div class="form-group" ng-class="{'has-error':registerForm.email.$invalid && registerForm.email.$dirty}">
+                              <div class="form-group" ng-class="{'has-error':registerForm.password.$invalid && registerForm.password.$touched}">
 
                       			     <div class="col-xs-12">
                                     <input class="form-control col-xs-12"
@@ -47,6 +47,13 @@
                                            ng-minlength="4"
                                            ng-maxlength="12"/>
                       			     </div>
+
+                                  <div class="help-block has-error">
+                                      <span ng-show="registerForm.password.$error.required && registerForm.password.$touched">
+                                          Password is required.
+                                      </span>
+                                  </div>
+                              </div>
                               </div>
                               <div>
                                 <button class="btn btn-primary col-xs-12"
