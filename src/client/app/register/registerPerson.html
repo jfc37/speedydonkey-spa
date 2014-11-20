@@ -43,9 +43,10 @@
 
                              <div class="col-xs-12">
                                 <select required class="col-xs-12"
-                                  ng-model="vm.person.role" ng-options="role.display for role in vm.roles track by role.value">
+                                  ng-model="vm.person.role" ng-options="role.display for role in vm.roles">
                                   <option value="">-- choose role --</option>
                                 </select>
+                                vm.person.role = {{vm.person.role}}
                             </div>
                                 
                               </div>

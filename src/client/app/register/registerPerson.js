@@ -26,20 +26,22 @@
         ];
 
         vm.register = function() {
-            return dataCreateService.createPerson(vm.person).then(function(response) {
-                if (response.is_valid){
-                    authService.setUserIdentityProperty('role', response.action_result.role);
-                    routehelper.redirectToRoute('dashboard');
-                } else{
-                    logger.warning("Register failed");
-                }
-            });
+            return dataCreateService.createPerson(vm.person, successfulRegistration, failedRegistration);
         };
 
         activate();
 
         function activate() {
             logger.info('Activated Register Person View');
+        }
+
+        function successfulRegistration(person) {
+            authService.setUserIdentityProperty('role', person.role);
+            routehelper.redirectToRoute('dashboard');
+        }
+
+        function failedRegistration() {
+            logger.warning("Register failed");
         }
     }
 })();

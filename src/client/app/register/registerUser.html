@@ -8,7 +8,7 @@
                       <form class="form-horizontal" name="registerForm" novalidate>
 
                               <div class="form-group" ng-class="{'has-error':registerForm.name.$invalid && registerForm.name.$touched}">
-                                  <div class="form-group">
+                                  
                                     <div class="col-xs-12">
                                         <input class="form-control col-xs-12"
                                                id="username"
@@ -20,7 +20,6 @@
                                                ng-minlength="4"
                                                ng-maxlength="12"/>
                                     </div>
-                                  </div>
 
                                   <div class="help-block has-error">
                                       <span ng-show="registerForm.username.$error.required && registerForm.username.$touched">
@@ -54,15 +53,11 @@
                                       </span>
                                   </div>
                               </div>
-                              </div>
-                              <div>
-                                <button class="btn btn-primary col-xs-12"
-                                        ng-click="vm.register()"
-                                        ng-disabled="registerForm.$invalid">
-                                    Register
-                                </button>
-
-                              </div>
+                              <button class="btn btn-primary col-xs-12"
+                                      ng-click="vm.register()"
+                                      ng-disabled="registerForm.$invalid">
+                                  Register
+                              </button>
 
                       </form>
 

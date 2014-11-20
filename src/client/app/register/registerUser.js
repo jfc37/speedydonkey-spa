@@ -16,20 +16,22 @@
         vm.user = {};
 
         vm.register = function() {
-            return dataCreateService.createUser(vm.user).then(function(response) {
-                if (response.is_valid) {
-                    authService.login(vm.user.username, vm.user.password);
-                    routehelper.redirectToRoute('registerPerson', {username: response.action_result.username});
-                } else {
-                    logger.warning("Register failed");
-                }
-            });
+            dataCreateService.createUser(vm.user, successfulRegister, failedRegister);
         };
 
         activate();
 
         function activate() {
             logger.info('Activated Register User View');
+        }
+
+        function successfulRegister(user) {
+            authService.login(vm.user.username, vm.user.password);
+            routehelper.redirectToRoute('registerPerson', {username: user.username});
+        }
+
+        function failedRegister() {
+            logger.warning("Register failed");
         }
     }
 })();
