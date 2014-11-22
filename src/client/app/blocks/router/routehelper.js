@@ -168,8 +168,8 @@
         function isAuthorisedForRoute(route) {
             var userIdentity = getUserIdentity();
             var isUnregisteredPerson = userIdentity.role === undefined;
-            var isStudent = userIdentity.role === 'student';
-            var isProfessor = userIdentity.role === 'professor';
+            var isStudent = !isUnregisteredPerson && userIdentity.role.toLowerCase() === 'student';
+            var isProfessor = !isUnregisteredPerson && userIdentity.role.toLowerCase() === 'professor';
 
             var isAuthorised = true;
             if (!userIdentity.isLoggedIn) {
