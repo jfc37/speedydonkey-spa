@@ -139,20 +139,8 @@
             return $q.when(course);
         }
 
-        function getAllCourses() {
-            var courses = [
-            { name: 'INFO101', description: 'Introduction to information studies'},
-            { name: 'INFO201', description: 'Advanced look into information studies'},
-            { name: 'INFO342', description: 'Super intense view at information studies'},
-            { name: 'COMP103', description: 'Introduction to computer science'},
-            { name: 'COMP206', description: 'Data structures'},
-            { name: 'COMP306', description: 'Networking'},
-            { name: 'ENGL111', description: 'Learn to read'},
-            { name: 'ENGL101', description: 'Basic writing'},
-            { name: 'MATH102', description: 'Introduction to discrete maths'},
-            { name: 'MATH201', description: 'Advanced calculus'},
-            ];
-            return $q.when(courses);
+        function getAllCourses(success, error) {
+            apiCaller.getCourse().success(success).error(error);
         }
 
         function searchForUser(searchParameters, success, error) {

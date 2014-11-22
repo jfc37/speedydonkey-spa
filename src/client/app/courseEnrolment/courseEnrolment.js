@@ -47,13 +47,15 @@
         }
 
         function getAllCourses() {
-            return dataservice.getAllCourses().then(function (data) {
+            return dataservice.getAllCourses(function(data) {
                 data.forEach(function(course){
                     course.isEnroled = false;
                 });
 
                 vm.courses = data;
                 return vm.courses;
+            }, function(data) {
+                logger.error('Problem getting all available courses');
             });
         }
     }

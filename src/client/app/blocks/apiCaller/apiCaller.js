@@ -12,7 +12,10 @@
         var service = {
             searchUser: searchUser,
             postUser : postUser,
+
             postPerson : postPerson,
+
+            getCourse : getCourse
         };
 
         var baseUrl = 'http://api-studybuddy.azurewebsites.net/api/';
@@ -33,6 +36,15 @@
         function postPerson(parameters, person) {
             var url = baseUrl + 'users/' + parameters.user_id + '/' + person.role + 's';
             return $http.post(url, person);
+        }
+
+        function getCourse(courseId) {
+            var url = baseUrl + 'courses';
+            if (courseId !== undefined && courseId !== null) {
+                url = url + '/' + courseId;
+            }
+
+            return $http.get(url);
         }
     }
 })();
