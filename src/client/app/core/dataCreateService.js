@@ -88,7 +88,7 @@
         function createUser(user, success, fail) {
             apiCaller.postUser(user).success(function(response, data) {
                 logger.info('Successfully created user ' + user.username);
-                success(response.actionResult);
+                success(response.action_result);
             }).error(function(response, data) {
                 fail();
             });
@@ -96,8 +96,8 @@
 
         function createPerson(person, success, fail) {
             apiCaller.postPerson({user_id: authService.getUserIdentity().username}, person).success(function(response, data) {
-                logger.info('Successfully created person ' + response.actionResult.firstName + ' ' + response.actionResult.surname);
-                success(response.actionResult);
+                logger.info('Successfully created person ' + response.action_result.firstName + ' ' + response.action_result.surname);
+                success(response.action_result);
             }).error(function(response, data) {
                 fail();
             });
