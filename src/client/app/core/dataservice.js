@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$q', '$http'];
+    dataservice.$inject = ['$q', '$http', 'apiCaller'];
 
     /* @ngInject */
-    function dataservice($q, $http) {
+    function dataservice($q, $http, apiCaller) {
         var service = {
             getCourseNotices: getCourseNotices,
             getUpcomingDeadlines: getUpcomingDeadlines,
@@ -17,7 +17,7 @@
             getCourses: getCourses,
             getCourse: getCourse,
             getAllCourses: getAllCourses,
-            getUserFromCredentials: getUserFromCredentials
+            searchForUser: searchForUser
         };
 
         return service;
@@ -155,12 +155,25 @@
             return $q.when(courses);
         }
 
-        function getUserFromCredentials(username, password){
-            return $http.get('http://api-studybuddy.azurewebsites.net/api/users/1');
-            
-            // return $q.when({
-            //     role: username
-            // });
+        function searchForUser(searchParameters, success, error) {
+
+            var q = '';
+            for (var prop in searchParameters) {
+                if (searchParameters.hasOwnProperty(prop)) {
+                    q = q + '&' + prop + '_=_' + searchParameters[prop];
+                }
+            }
+            q = q.slice(1);
+
+            apiCaller.searchUser(q)
+                .success(function(response, data){
+                    if (response.length > 0) {
+                        success(response);
+                    } else {
+                        error();
+                    }
+                })
+                .error(error);
         }
     }
 })();

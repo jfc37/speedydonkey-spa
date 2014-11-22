@@ -10,6 +10,7 @@
     /* @ngInject */
     function apiCaller($q, $http, logger) {
         var service = {
+            searchUser: searchUser,
             postUser : postUser,
             postPerson : postPerson,
         };
@@ -17,6 +18,12 @@
         var baseUrl = 'http://api-studybuddy.azurewebsites.net/api/';
 
         return service;
+
+        function searchUser(search) {
+            var url = baseUrl + 'users?q=' + search;
+
+            return $http.get(url);
+        }
 
         function postUser(user) {
             var url = baseUrl + 'users';
