@@ -36,6 +36,7 @@
         }
 
         function successfulRegistration(person) {
+            authService.setUserIdentityProperty('personId', person.id);
             authService.setUserIdentityProperty('role', person.role);
             routehelper.redirectToRoute('dashboard');
         }

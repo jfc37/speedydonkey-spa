@@ -27,6 +27,7 @@
 
         function successfulRegister(user) {
             authService.login(vm.user.username, vm.user.password);
+            authService.setUserIdentityProperty('userId', user.id);
             routehelper.redirectToRoute('registerPerson', {username: user.username});
         }
 

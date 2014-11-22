@@ -31,7 +31,7 @@
         }
 
         function postPerson(parameters, person) {
-            var url = baseUrl + 'users/' + parameters.user_id + '/' + person.role;
+            var url = baseUrl + 'users/' + parameters.user_id + '/' + person.role + 's';
             return $http.post(url, person);
         }
     }
