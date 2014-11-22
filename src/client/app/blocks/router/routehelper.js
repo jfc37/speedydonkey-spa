@@ -134,7 +134,11 @@
 
         function redirectToRoute(routeName, routeParameters){
             var routePath = getRouteFromName(routeName, routeParameters);
-            $location.path(routePath);
+            if (window.location.pathname.indexOf('#') < 0) {
+                window.location = '/#' + routePath;
+            } else {
+                $location.path(routePath);
+            }
         }
 
         function getRouteFromName(routeName, routeParameters){
