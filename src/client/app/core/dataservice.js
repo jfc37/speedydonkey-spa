@@ -17,7 +17,11 @@
             getCourses: getCourses,
             getCourse: getCourse,
             getAllCourses: getAllCourses,
-            searchForUser: searchForUser
+
+
+            searchForUser: searchForUser,
+
+            getStudent: getStudent,
         };
 
         return service;
@@ -161,6 +165,12 @@
                         error();
                     }
                 })
+                .error(error);
+        }
+
+        function getStudent(studentId, success, error) {
+            apiCaller.getPerson({role: 'student', personId: studentId})
+                .success(success)
                 .error(error);
         }
     }

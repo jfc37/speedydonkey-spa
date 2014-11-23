@@ -5,21 +5,29 @@
         .module('app.courseEnrolment')
         .controller('CourseEnrolment', CourseEnrolment);
 
-    CourseEnrolment.$inject = ['$q', 'dataservice', 'dataUpdateService', 'logger'];
+    CourseEnrolment.$inject = ['$q', 'dataservice', 'dataUpdateService', 'logger', 'authService'];
 
     /* @ngInject */
-    function CourseEnrolment($q, dataservice, dataUpdateService, logger) {
+    function CourseEnrolment($q, dataservice, dataUpdateService, logger, authService) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.title = 'Course Enrolment';
         vm.courses = [];
 
-        vm.updateEnrolment = function(course){
+        vm.updateEnrolment = function(course) {
             if (course.isEnroled){
-                dataUpdateService.enrolInCourse(course);
+                dataUpdateService.enrolInCourse({personId: authService.getUserIdentity().personId, courseId: course.id}, function () {
+                    logger.info('Successfully enroled in ' + course.name);
+                }, function () {
+                    logger.error('Problem enroling in ' + course.name);
+                });
             } else {
-                dataUpdateService.unenrolInCourse(course);
+                dataUpdateService.unenrolInCourse({personId: authService.getUserIdentity().personId, courseId: course.id}, function () {
+                    logger.info('Successfully unenroled in ' + course.name);
+                }, function () {
+                    logger.error('Problem unenroling in ' + course.name);
+                });
             }
         }
 
@@ -34,8 +42,8 @@
         }
 
         function getEnroledCourses() {
-            return dataservice.getCourses().then(function (data) {
-                var enroledCourseNames = data.map(function(course){
+            return dataservice.getStudent(authService.getUserIdentity().personId, function (student) {
+                var enroledCourseNames = student.enroled_courses.map(function(course){
                     return course.name;
                 });
                 vm.courses.forEach(function(course){
@@ -43,6 +51,8 @@
                         course.isEnroled = true;
                     }
                 });
+            }, function () {
+                logger.error('Problem getting enroled courses');
             });
         }
 

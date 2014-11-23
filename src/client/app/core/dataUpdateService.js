@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataUpdateService', dataUpdateService);
 
-    dataUpdateService.$inject = ['$q', 'logger'];
+    dataUpdateService.$inject = ['$q', 'logger', 'apiCaller'];
 
     /* @ngInject */
-    function dataUpdateService($q, logger) {
+    function dataUpdateService($q, logger, apiCaller) {
         var service = {
             enrolInCourse: enrolInCourse,
             unenrolInCourse: unenrolInCourse,
@@ -19,14 +19,24 @@
 
         return service;
 
-        function enrolInCourse(course) {
-            logger.info('Successfully enroled in ' + course.name);
-            return true;
+        function enrolInCourse(parameters, success, error) {
+            apiCaller.postCourseEnrolment(parameters)
+                .success(function (response) {
+                    if (response.validation_result.is_valid) {
+                        success();
+                    } else {
+                        error();
+                    }
+                })
+                .error(error);
         }
 
-        function unenrolInCourse(course) {
-            logger.info('Successfully unenroled in ' + course.name);
-            return true;
+        function unenrolInCourse(parameters, success, error) {
+            apiCaller.deleteCourseEnrolment(parameters)
+                .success(function (response) {
+                    success();
+                })
+                .error(error);
         }
 
         function updateCourse(course) {

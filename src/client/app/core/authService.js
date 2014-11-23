@@ -28,6 +28,10 @@
             if (userCookie !== undefined){
                 userIdentity = userCookie;
             }
+            var authDataCookie = $cookieStore.get('authdata');
+            if (authDataCookie !== undefined){
+                addBasicAuthorisation(authDataCookie);
+            }
 
         }
 
@@ -42,7 +46,7 @@
 
         function login(username, password) {
             var encoded = base64Service.encode(username + ':' + password);
-            $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+            addBasicAuthorisation(encoded);
 
             userIdentity.isLoggedIn = true;
             userIdentity.username = username;
@@ -50,6 +54,10 @@
             $cookieStore.put('authdata', encoded);
             $cookieStore.put('authuser', userIdentity);
         };
+
+        function addBasicAuthorisation(encoded) {
+            $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+        }
 
         function logout() {
             document.execCommand("ClearAuthenticationCache");

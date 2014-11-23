@@ -14,8 +14,12 @@
             postUser : postUser,
 
             postPerson : postPerson,
+            getPerson : getPerson,
 
-            getCourse : getCourse
+            getCourse : getCourse,
+
+            postCourseEnrolment: postCourseEnrolment,
+            deleteCourseEnrolment: deleteCourseEnrolment
         };
 
         var baseUrl = 'http://api-studybuddy.azurewebsites.net/api/';
@@ -38,6 +42,15 @@
             return $http.post(url, person);
         }
 
+        function getPerson(parameters) {
+            var url = baseUrl + parameters.role + 's';
+            if (parameters.personId !== undefined && parameters.personId !== null) {
+                url = url + '/' + parameters.personId;
+            }
+
+            return $http.get(url);
+        }
+
         function getCourse(courseId) {
             var url = baseUrl + 'courses';
             if (courseId !== undefined && courseId !== null) {
@@ -45,6 +58,16 @@
             }
 
             return $http.get(url);
+        }
+
+        function postCourseEnrolment(parameters) {
+            var url = baseUrl + 'students/' + parameters.personId + '/courses/' + parameters.courseId;
+            return $http.post(url);
+        }
+
+        function deleteCourseEnrolment(parameters) {
+            var url = baseUrl + 'students/' + parameters.personId + '/courses/' + parameters.courseId;
+            return $http.delete(url);
         }
     }
 })();
