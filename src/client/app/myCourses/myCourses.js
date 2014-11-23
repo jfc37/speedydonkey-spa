@@ -5,10 +5,10 @@
         .module('app.myCourses')
         .controller('MyCourses', MyCourses);
 
-    MyCourses.$inject = ['$q', 'dataservice', 'logger'];
+    MyCourses.$inject = ['$q', 'dataservice', 'logger', 'authService'];
 
     /* @ngInject */
-    function MyCourses($q, dataservice, logger) {
+    function MyCourses($q, dataservice, logger, authService) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -25,9 +25,11 @@
         }
 
         function getCourses() {
-            return dataservice.getCourses().then(function (data) {
-                vm.courses = data;
+            return dataservice.getStudent(authService.getUserIdentity().personId, function (student) {
+                vm.courses = student.enroled_courses;
                 return vm.courses;
+            }, function() {
+                logger.error('Problem getting enroled courses')
             });
         }
     }
