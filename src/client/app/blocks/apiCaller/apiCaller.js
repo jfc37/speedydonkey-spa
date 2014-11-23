@@ -17,6 +17,7 @@
             getPerson : getPerson,
 
             getCourse : getCourse,
+            searchCourse: searchCourse,
 
             postCourseEnrolment: postCourseEnrolment,
             deleteCourseEnrolment: deleteCourseEnrolment
@@ -57,6 +58,11 @@
                 url = url + '/' + courseId;
             }
 
+            return $http.get(url);
+        }
+
+        function searchCourse(search) {
+            var url = baseUrl + 'courses?q=' + search;
             return $http.get(url);
         }
 

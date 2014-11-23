@@ -22,6 +22,8 @@
             searchForUser: searchForUser,
 
             getStudent: getStudent,
+
+            searchForCourse: searchForCourse,
         };
 
         return service;
@@ -73,78 +75,35 @@
             return $q.when(courses);
         }
 
-        function getCourse(courseName) {
-            var course = { 
-                name: courseName, 
-                description: 'Introduction to information studies',
-                start_date: new Date(2014, 10, 1),
-                end_date: new Date(2015, 4, 1),
-                grade_type: 'Letter Grade',
-                professors: [
-                    {
-                        first_name: 'John',
-                        surname: 'Stakehouse'
-                    }
-                ],
-                notices: [
-                    {
-                        message: 'Mondays class is cancelled',
-                        start_date: new Date(2014, 10, 3),
-                        end_date: new Date(2014, 10, 20),
-                    }
-                ],
-                lectures: [
-                    {
-                        name: 'Monday Class',
-                        location: 'KIRK201',
-                        start_date: new Date(2014, 10, 3, 10, 5)
-                    },
-                    {
-                        name: 'Thursday Class',
-                        location: 'KIRK201',
-                        start_date: new Date(2014, 10, 6, 14, 35)
-                    },
-                ],
-                assignments: [
-                    {
-                        name: 'Essay 1',
-                        final_mark_percentage: 15,
-                        start_date: new Date(2014, 10, 3),
-                        end_date: new Date(2014, 10, 20),
-                    },
-                    {
-                        name: 'Essay 2',
-                        final_mark_percentage: 10,
-                        start_date: new Date(2014, 10, 25),
-                        end_date: new Date(2014, 11, 10),
-                    },
-                    {
-                        name: 'Readings',
-                        final_mark_percentage: 0,
-                        start_date: new Date(2014, 10, 4),
-                        end_date: new Date(2014, 11, 22),
-                    },
-                ],
-                exams: [
-                    {
-                        name: 'Midterm Test',
-                        final_mark_percentage: 30,
-                        start_time: new Date(2014, 10, 3, 10, 5),
-                        location: 'TBC',
-                    },
-                    {
-                        name: 'Final Exam',
-                        final_mark_percentage: 60,
-                        start_time: new Date(2015, 1, 2, 10, 5),
-                        location: 'TBC',
-                    },
-                ]
-            };
-            return $q.when(course);
+        function getCourse(courseId, success, error) {
+            apiCaller.getCourse(courseId)
+                .success(success)
+                .error(error);
         }
 
         function getAllCourses(success, error) {
             apiCaller.getCourse().success(success).error(error);
+        }
+
+        function searchForCourse(searchParameters, success, error) {
+
+            var q = '';
+            for (var prop in searchParameters) {
+                if (searchParameters.hasOwnProperty(prop)) {
+                    q = q + '&' + prop + '_=_' + searchParameters[prop];
+                }
+            }
+            q = q.slice(1);
+
+            apiCaller.searchCourse(q)
+                .success(function(response, data){
+                    if (response.length > 0) {
+                        success(response);
+                    } else {
+                        error();
+                    }
+                })
+                .error(error);
         }
 
         function searchForUser(searchParameters, success, error) {

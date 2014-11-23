@@ -29,9 +29,13 @@
         }
 
         function getCourse() {
-            return dataservice.getCourse($routeParams.courseName).then(function (data) {
-                vm.course = data;
-                return vm.course;
+            return dataservice.searchForCourse({name: $routeParams.courseName}, function (courses) {
+                if (courses.length === 1){
+                    dataservice.getCourse(courses[0].id, function (course) {
+                        vm.course = course;
+                        return vm.course;
+                    });
+                }
             });
         }
     }
