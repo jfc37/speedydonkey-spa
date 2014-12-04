@@ -5,10 +5,10 @@
         .module('app.courseEnrolment')
         .controller('CourseEnrolment', CourseEnrolment);
 
-    CourseEnrolment.$inject = ['courseEnrolmentService', '$q', 'dataservice', 'dataUpdateService', 'logger', 'authService'];
+    CourseEnrolment.$inject = ['courseEnrolmentService', '$q', 'logger'];
 
     /* @ngInject */
-    function CourseEnrolment(courseEnrolmentService, $q, dataservice, dataUpdateService, logger, authService) {
+    function CourseEnrolment(courseEnrolmentService, $q, logger) {
         /*jshint validthis: true */
         var vm = this;
 
