@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('authService', authService);
 
-    authService.$inject = ['$q', '$http', '$cookieStore', 'base64Service', 'logger'];
+    authService.$inject = ['$q', '$http', '$cookieStore', 'base64Service', 'logger', 'dataservice'];
 
     /* @ngInject */
-    function authService($q, $http, $cookieStore, base64Service, logger){
+    function authService($q, $http, $cookieStore, base64Service, logger, dataservice){
 
         var userIdentity = {
             isLoggedIn: false
@@ -48,11 +48,36 @@
             var encoded = base64Service.encode(username + ':' + password);
             addBasicAuthorisation(encoded);
 
-            userIdentity.isLoggedIn = true;
-            userIdentity.username = username;
+            return $q(function (resolve, reject) {
+                dataservice.searchForUser({username: username}).then(function (response) {
+                    if (response === null){
+                        authService.logout();
+                        logger.warning("Login failed");
+                    } else {
 
-            $cookieStore.put('authdata', encoded);
-            $cookieStore.put('authuser', userIdentity);
+                        userIdentity.isLoggedIn = true;
+                        userIdentity.username = username;
+                        var person = response.data[0].person;
+                        if (person !== undefined || person !== null) {
+                            userIdentity.role = person.role.toLowerCase();
+                        }
+
+                        $cookieStore.put('authdata', encoded);
+                        $cookieStore.put('authuser', userIdentity);
+
+                        logger.success("Login successful");
+                        resolve();
+                    }
+                }, function(response){
+                    if (response.status === 401){
+                        logger.warning("Incorrect login details");
+                    } else {
+                        logger.error("Login failed");
+                    }
+                    logout();
+                    reject();
+                });
+            })
         };
 
         function addBasicAuthorisation(encoded) {

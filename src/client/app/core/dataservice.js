@@ -106,7 +106,7 @@
                 .error(error);
         }
 
-        function searchForUser(searchParameters, success, error) {
+        function searchForUser(searchParameters) {
 
             var q = '';
             for (var prop in searchParameters) {
@@ -116,15 +116,7 @@
             }
             q = q.slice(1);
 
-            apiCaller.searchUser(q)
-                .success(function(response, data){
-                    if (response.length > 0) {
-                        success(response);
-                    } else {
-                        error();
-                    }
-                })
-                .error(error);
+            return apiCaller.searchUser(q);
         }
 
         function getStudent(studentId, success, error) {
