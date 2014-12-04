@@ -5,10 +5,10 @@
         .module('app.manageCourses')
         .controller('ManageCourses', ManageCourses);
 
-    ManageCourses.$inject = ['$q', 'dataservice', 'logger'];
+    ManageCourses.$inject = ['$q', 'manageCoursesService', 'logger'];
 
     /* @ngInject */
-    function ManageCourses($q, dataservice, logger) {
+    function ManageCourses($q, manageCoursesService, logger) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -25,8 +25,8 @@
         }
 
         function getCourses() {
-            return dataservice.getCourses().then(function (data) {
-                vm.courses = data;
+            return manageCoursesService.getCourses().then(function (courses) {
+                vm.courses = courses;
                 return vm.courses;
             });
         }

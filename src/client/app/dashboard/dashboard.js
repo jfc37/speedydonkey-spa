@@ -5,10 +5,10 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = ['$q', 'dataservice', 'logger'];
+    Dashboard.$inject = ['$q', 'dataservice', 'dashboardService', 'logger'];
 
     /* @ngInject */
-    function Dashboard($q, dataservice, logger) {
+    function Dashboard($q, dataservice, dashboardService, logger) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -21,9 +21,21 @@
         activate();
 
         function activate() {
-            var promises = [getCourseNotices(), getUpcomingDeadlines(), getUpcomingLectures(), getRecentGrades()];
+            var promises = [init(), getCourseNotices(), getUpcomingDeadlines(), getUpcomingLectures(), getRecentGrades()];
             return $q.all(promises).then(function(){
                 logger.info('Activated Dashboard View');
+            });
+        }
+
+        function init() {
+            dashboardService.loadEnroledCourses().then(function () {
+                dashboardService.getCourseNotices().then(function (notices) {
+                    vm.courseNotices = notices;
+                }, function () {
+                    logger.error("Problem loading notices");
+                });
+            }, function () {
+                logger.error("Problem loading courses");
             });
         }
 
