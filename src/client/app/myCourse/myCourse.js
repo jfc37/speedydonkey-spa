@@ -5,18 +5,17 @@
         .module('app.myCourse')
         .controller('MyCourse', MyCourse);
 
-    MyCourse.$inject = ['$q', '$routeParams', 'dataservice', 'logger', 'routehelper'];
+    MyCourse.$inject = ['$q', 'myCourseService', 'logger', 'routehelper'];
 
     /* @ngInject */
-    function MyCourse($q, $routeParams, dataservice, logger, routehelper) {
+    function MyCourse($q, myCourseService, logger, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.course = {};
-        vm.title = $routeParams.courseName;
 
         vm.goToMeetingRoom = function() {
-            routehelper.redirectToRoute('meetingRoom', {courseName: $routeParams.courseName})
+            routehelper.redirectToRoute('meetingRoom', {courseName: vm.title})
         }
 
         activate();
@@ -24,18 +23,16 @@
         function activate() {
             var promises = [getCourse()];
             return $q.all(promises).then(function(){
-                logger.info('Activated ' + vm.courseName + ' View');
+                logger.info('Activated ' + vm.title + ' View');
             });
         }
 
         function getCourse() {
-            return dataservice.searchForCourse({name: $routeParams.courseName}, function (courses) {
-                if (courses.length === 1){
-                    dataservice.getCourse(courses[0].id, function (course) {
-                        vm.course = course;
-                        return vm.course;
-                    });
-                }
+            myCourseService.getCourse().then(function (course) {
+                vm.course = course;
+                vm.title = course.name;
+            }, function () {
+                logger.error("Problem loading course");
             });
         }
     }

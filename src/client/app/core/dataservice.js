@@ -16,8 +16,8 @@
             getRecentGrades: getRecentGrades,
             getCourses: getCourses,
             getCourse: getCourse,
-            getAllCourses: getAllCourses,
 
+            getAllCourses: getAllCourses,
 
             searchForUser: searchForUser,
 
@@ -101,15 +101,11 @@
             }
             q = q.slice(1);
 
-            apiCaller.searchCourse(q)
-                .success(function(response, data){
-                    if (response.length > 0) {
-                        success(response);
-                    } else {
-                        error();
-                    }
-                })
-                .error(error);
+            return $q(function (resolve, revoke) {
+                apiCaller.searchCourse(q).then(function (response){
+                    resolve(response.data);
+                }, revoke);
+            });
         }
 
         function searchForUser(searchParameters) {
