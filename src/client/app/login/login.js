@@ -5,10 +5,10 @@
         .module('app.logon')
         .controller('Login', Login);
 
-    Login.$inject = ['dataservice', 'logger', 'authService', 'routehelper'];
+    Login.$inject = ['logger', 'authService', 'routehelper'];
 
     /* @ngInject */
-    function Login(dataservice, logger, authService, routehelper) {
+    function Login(logger, authService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -16,7 +16,7 @@
 
         vm.submit = function(){
             return authService.login(vm.username, vm.password).then(function() {
-                    routehelper.redirectToRoute('dashboard');
+                routehelper.redirectToRoute('dashboard');
             });
         }
 

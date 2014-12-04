@@ -85,13 +85,15 @@
             });
         }
 
-        function createUser(user, success, fail) {
-            apiCaller.postUser(user).success(function(response, data) {
-                logger.info('Successfully created user ' + user.username);
-                success(response.action_result);
-            }).error(function(response, data) {
-                fail();
-            });
+        function createUser(user) {
+            return $q(function (resolve, reject) {
+                apiCaller.postUser(user).success(function(response, data) {
+                    logger.info('Successfully created user ' + user.username);
+                    resolve(response.action_result);
+                }).error(function(response, data) {
+                    reject(response);
+                });
+            }); 
         }
 
         function createPerson(person, success, fail) {

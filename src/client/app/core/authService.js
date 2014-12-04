@@ -50,24 +50,18 @@
 
             return $q(function (resolve, reject) {
                 dataservice.searchForUser({username: username}).then(function (response) {
-                    if (response === null){
-                        authService.logout();
-                        logger.warning("Login failed");
-                    } else {
-
-                        userIdentity.isLoggedIn = true;
-                        userIdentity.username = username;
-                        var person = response.data[0].person;
-                        if (person !== undefined || person !== null) {
-                            userIdentity.role = person.role.toLowerCase();
-                        }
-
-                        $cookieStore.put('authdata', encoded);
-                        $cookieStore.put('authuser', userIdentity);
-
-                        logger.success("Login successful");
-                        resolve();
+                    userIdentity.isLoggedIn = true;
+                    userIdentity.username = username;
+                    var person = response.data[0].person;
+                    if (person !== undefined || person !== null) {
+                        userIdentity.role = person.role.toLowerCase();
                     }
+
+                    $cookieStore.put('authdata', encoded);
+                    $cookieStore.put('authuser', userIdentity);
+
+                    logger.success("Login successful");
+                    resolve();
                 }, function(response){
                     if (response.status === 401){
                         logger.warning("Incorrect login details");
