@@ -55,6 +55,7 @@
                     var person = response.data[0].person;
                     if (person !== undefined || person !== null) {
                         userIdentity.role = person.role.toLowerCase();
+                        userIdentity.personId = person.id;
                     }
 
                     $cookieStore.put('authdata', encoded);

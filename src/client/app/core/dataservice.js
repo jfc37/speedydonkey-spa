@@ -81,8 +81,14 @@
                 .error(error);
         }
 
-        function getAllCourses(success, error) {
-            apiCaller.getCourse().success(success).error(error);
+        function getAllCourses() {
+            return $q(function (resolve, reject) {
+                apiCaller.getCourse().then(function (response) {
+                    resolve(response.data);   
+                }, function (response) {
+                    reject(response);
+                });
+            })
         }
 
         function searchForCourse(searchParameters, success, error) {
@@ -119,10 +125,14 @@
             return apiCaller.searchUser(q);
         }
 
-        function getStudent(studentId, success, error) {
-            apiCaller.getPerson({role: 'student', personId: studentId})
-                .success(success)
-                .error(error);
+        function getStudent(studentId) {
+            return $q(function (resolve, reject) {
+                apiCaller.getPerson({role: 'student', personId: studentId}).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
         }
     }
 })();
