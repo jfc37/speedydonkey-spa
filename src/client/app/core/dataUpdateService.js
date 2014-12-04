@@ -19,24 +19,24 @@
 
         return service;
 
-        function enrolInCourse(parameters, success, error) {
-            apiCaller.postCourseEnrolment(parameters)
-                .success(function (response) {
-                    if (response.validation_result.is_valid) {
-                        success();
-                    } else {
-                        error();
-                    }
+        function enrolInCourse(parameters) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postCourseEnrolment(parameters).then(function(response) {
+                    resolve();
+                }, function () {
+                    revoke();
                 })
-                .error(error);
+            });
         }
 
-        function unenrolInCourse(parameters, success, error) {
-            apiCaller.deleteCourseEnrolment(parameters)
-                .success(function (response) {
-                    success();
+        function unenrolInCourse(parameters) {
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteCourseEnrolment(parameters).then(function(response) {
+                    resolve();
+                }, function () {
+                    revoke();
                 })
-                .error(error);
+            });
         }
 
         function updateCourse(course) {

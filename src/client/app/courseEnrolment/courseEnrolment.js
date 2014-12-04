@@ -16,19 +16,11 @@
         vm.courses = [];
 
         vm.updateEnrolment = function(course) {
-            if (course.isEnroled){
-                dataUpdateService.enrolInCourse({personId: authService.getUserIdentity().personId, courseId: course.id}, function () {
-                    logger.info('Successfully enroled in ' + course.name);
-                }, function () {
-                    logger.error('Problem enroling in ' + course.name);
-                });
-            } else {
-                dataUpdateService.unenrolInCourse({personId: authService.getUserIdentity().personId, courseId: course.id}, function () {
-                    logger.info('Successfully unenroled in ' + course.name);
-                }, function () {
-                    logger.error('Problem unenroling in ' + course.name);
-                });
-            }
+            courseEnrolmentService.updateEnrolment(course).then(function (){
+                logger.success("Updated enrolment")
+            }, function () {
+                logger.error("Problem with enrolment");
+            });
         }
 
         activate();
