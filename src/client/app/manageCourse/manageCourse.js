@@ -5,10 +5,10 @@
         .module('app.manageCourse')
         .controller('ManageCourse', ManageCourse);
 
-    ManageCourse.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger'];
+    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger'];
 
     /* @ngInject */
-    function ManageCourse($q, $routeParams, dataservice, dataUpdateService, dataCreateService, dataDeleteService, logger) {
+    function ManageCourse($q, $routeParams, manageCourseService, dataUpdateService, dataCreateService, dataDeleteService, logger) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = $routeParams.courseName;
@@ -206,13 +206,15 @@
 
         function getCourse() {
             if ($routeParams.courseName !== undefined){
-                return dataservice.getCourse($routeParams.courseName).then(function (data) {
-                    vm.course = data;
-                    vm.assignments = data.assignments;
-                    vm.exams = data.exams;
-                    vm.lectures = data.lectures;
-                    vm.notices = data.notices;
-                    return vm.course;
+                manageCourseService.getCourse($routeParams.courseName).then(function (course) {
+                    vm.course = course;
+                    vm.assignments = course.assignments;
+                    vm.exams = course.exams;
+                    vm.lectures = course.lectures;
+                    vm.notices = course.notices;
+                    logger.success("Loaded course");
+                }, function () {
+                    logger.error("Problem loading course");
                 });
             }
         }

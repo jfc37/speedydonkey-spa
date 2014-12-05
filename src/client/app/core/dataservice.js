@@ -91,12 +91,17 @@
             })
         }
 
-        function searchForCourse(searchParameters, success, error) {
+        function searchForCourse(searchParameters, includeParameters) {
 
             var q = '';
             for (var prop in searchParameters) {
                 if (searchParameters.hasOwnProperty(prop)) {
                     q = q + '&' + prop + '_=_' + searchParameters[prop];
+                }
+            }
+            for (var prop in includeParameters) {
+                if (includeParameters.hasOwnProperty(prop)) {
+                    q = q + ',include_' + prop;
                 }
             }
             q = q.slice(1);
