@@ -21,28 +21,23 @@
         activate();
 
         function activate() {
-            var promises = [init(), getCourseNotices(), getUpcomingDeadlines(), getUpcomingLectures(), getRecentGrades()];
+            var promises = [init()];
             return $q.all(promises).then(function(){
                 logger.info('Activated Dashboard View');
             });
         }
 
         function init() {
-            dashboardService.loadEnroledCourses().then(function () {
-                dashboardService.getCourseNotices().then(function (notices) {
-                    vm.courseNotices = notices;
-                }, function () {
-                    logger.error("Problem loading notices");
-                });
+            dashboardService.loadEnroledCourses().then(function (courses) {
+                getCourseNotices(courses);
             }, function () {
                 logger.error("Problem loading courses");
             });
         }
 
-        function getCourseNotices() {
-            return dataservice.getCourseNotices().then(function (data) {
-                vm.courseNotices = data;
-                return vm.courseNotices;
+        function getCourseNotices(courses) {
+            courses.forEach(function (course) {
+                Array.prototype.push.apply(vm.courseNotices, course.notices);
             });
         }
 

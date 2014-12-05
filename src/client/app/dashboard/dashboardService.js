@@ -16,14 +16,20 @@
             getCourseNotices: getCourseNotices
         };
 
-        var loadedCourses;
+        var loadedCourses = [];
 
         function loadEnroledCourses() {
             return $q(function (resolve, revoke) {
+                var promises = [];
                 myCoursesService.getCourses().then(function (courses) {
-                    //Do a search where course id in courses
-                    loadedCourses = courses;
-                    resolve();
+                    courses.forEach(function (course) {
+                        promises.push(dataservice.getCourse(course.id).then(function (course) {
+                            loadedCourses.push(course);
+                        }));
+                    });
+                    $q.all(promises).then(function () {
+                        resolve(loadedCourses);
+                    });
                 }, revoke);
             });
         }

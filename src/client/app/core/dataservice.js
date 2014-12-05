@@ -15,9 +15,9 @@
             getUpcomingLectures: getUpcomingLectures,
             getRecentGrades: getRecentGrades,
             getCourses: getCourses,
-            getCourse: getCourse,
 
             getAllCourses: getAllCourses,
+            getCourse: getCourse,
 
             searchForUser: searchForUser,
 
@@ -75,10 +75,13 @@
             return $q.when(courses);
         }
 
-        function getCourse(courseId, success, error) {
-            apiCaller.getCourse(courseId)
-                .success(success)
-                .error(error);
+        function getCourse(courseId) {
+            
+            return $q(function (resolve, revoke) {
+                apiCaller.getCourse(courseId).then(function (response) {
+                    resolve(response.data);
+                }, revoke);
+            });
         }
 
         function getAllCourses() {
