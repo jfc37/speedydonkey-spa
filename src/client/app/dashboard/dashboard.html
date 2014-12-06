@@ -9,7 +9,7 @@
                         <div class="widget-content text-center text-info">
                             <div data-ng-repeat="notice in vm.courseNotices">
                                 <div>
-                                    <h5>{{notice.course.name}}</h5>
+                                    <h5>{{notice.courseName}}</h5>
                                     <p>{{notice.message}}</p>
                                 </div>
                             </div>
@@ -24,9 +24,9 @@
                         <div data-cc-widget-header title="Upcoming Deadlines"
                              allow-collapse="true"></div>
                         <div class="widget-content text-center text-info">
-                            <div data-ng-repeat="courseWork in vm.upcomingDeadline">
+                            <div data-ng-repeat="courseWork in vm.upcomingDeadline | orderBy: due_date | limitTo: 5">
                                 <div>
-                                    <h5>{{courseWork.course.name}}</h5>
+                                    <h5>{{courseWork.courseName}}</h5>
                                     <p>
                                         {{courseWork.name}} 
                                         <span data-ng-if="courseWork.type === assignment"> is due {{courseWork.end_date}}</span>
@@ -46,30 +46,11 @@
                         <div data-cc-widget-header title="Upcoming Lectures"
                              allow-collapse="true"></div>
                         <div class="widget-content text-center text-info">
-                            <div data-ng-repeat="lecture in vm.upcomingLectures">
+                            <div data-ng-repeat="lecture in vm.upcomingLectures | orderBy: start_date | limitTo: 5">
                                 <div>
-                                    <h5>{{lecture.course.name}} - {{lecture.start_date}}</h5>
+                                    <h5>{{lecture.courseName}} - {{lecture.start_date}}</h5>
                                     <p>
                                         {{lecture.location}} 
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-foot">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="widget wgreen">
-                        <div data-cc-widget-header title="Recent Grades"
-                             allow-collapse="true"></div>
-                        <div class="widget-content text-center text-info">
-                            <div data-ng-repeat="grade in vm.recentGrades">
-                                <div>
-                                    <h5>{{grade.courseName}} - {{grade.courseWorkName}}</h5>
-                                    <p>
-                                        {{grade.gradePercentage}} 
                                     </p>
                                 </div>
                             </div>

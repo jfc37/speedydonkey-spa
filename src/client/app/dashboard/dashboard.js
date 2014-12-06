@@ -5,10 +5,10 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = ['$q', 'dataservice', 'dashboardService', 'logger'];
+    Dashboard.$inject = ['$q', 'dashboardService', 'logger'];
 
     /* @ngInject */
-    function Dashboard($q, dataservice, dashboardService, logger) {
+    function Dashboard($q, dashboardService, logger) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -29,36 +29,29 @@
 
         function init() {
             dashboardService.loadEnroledCourses().then(function (courses) {
-                getCourseNotices(courses);
+                getCourseNotices();
+                getUpcomingLectures();
+                getUpcomingDeadlines();
             }, function () {
                 logger.error("Problem loading courses");
             });
         }
 
-        function getCourseNotices(courses) {
-            courses.forEach(function (course) {
-                Array.prototype.push.apply(vm.courseNotices, course.notices);
+        function getCourseNotices() {
+            dashboardService.getCourseNotices().then(function (courseNotices) {
+                vm.courseNotices = courseNotices;
             });
         }
 
-        function getUpcomingDeadlines() {
-            return dataservice.getUpcomingDeadlines().then(function (data) {
-                vm.upcomingDeadline = data;
-                return vm.upcomingDeadline;
+        function getUpcomingDeadlines(courses) {
+            dashboardService.getUpcomingDeadlines().then(function (deadlines) {
+                vm.upcomingDeadline = deadlines;
             });
         }
 
         function getUpcomingLectures() {
-            return dataservice.getUpcomingLectures().then(function (data) {
-                vm.upcomingLectures = data;
-                return vm.upcomingLectures;
-            });
-        }
-
-        function getRecentGrades() {
-            return dataservice.getRecentGrades().then(function (data) {
-                vm.recentGrades = data;
-                return vm.recentGrades;
+            dashboardService.getCourseNotices().then(function (lectures) {
+                vm.upcomingLectures = lectures;
             });
         }
     }
