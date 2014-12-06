@@ -18,8 +18,13 @@
             return $q(function (resolve, revoke) {
                 dataservice.searchForCourse({name: $routeParams.courseName}).then(function (courses) {
                     if (courses.length === 1) {
-                        dataservice.getCourse(courses[0].id, function (course) {
-                            resolve(course);
+                        var loadedCourse;
+                        var promise = dataservice.getCourse(courses[0].id).then(function (course) {
+                            loadedCourse = course;
+                        });
+
+                        $q.when(promise).then(function () {
+                            resolve(loadedCourse);
                         });
                     }
                 });
