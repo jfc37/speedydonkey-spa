@@ -53,7 +53,7 @@
             loadedCourses.forEach(function (course) {
                 course.notices.forEach(function (notice) {
                     notice.courseName = course.name;
-                })
+                });
                 Array.prototype.push.apply(courseNotices, course.notices);
             });
             return $q.when(courseNotices);
@@ -64,8 +64,8 @@
             loadedCourses.forEach(function (course) {
                 course.lectures.forEach(function (lecture) {
                     lecture.courseName = course.name;
-                })
-                Array.prototype.push.apply(vm.upcomingLectures, lectures);
+                });
+                Array.prototype.push.apply(lectures, course.lectures);
             });
             return $q.when(lectures);
         }

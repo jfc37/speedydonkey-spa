@@ -15,8 +15,8 @@
         vm.course = {};
 
         vm.goToMeetingRoom = function() {
-            routehelper.redirectToRoute('meetingRoom', {courseName: vm.title})
-        }
+            routehelper.redirectToRoute('meetingRoom', {courseName: vm.title});
+        };
 
         activate();
 

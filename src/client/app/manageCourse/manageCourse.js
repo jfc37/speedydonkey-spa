@@ -193,7 +193,7 @@
 
         vm.toggleEdit = function(model){
             model.is_editing = !model.is_editing;
-        }
+        };
 
         activate();
 

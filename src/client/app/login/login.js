@@ -18,7 +18,7 @@
             return authService.login(vm.username, vm.password).then(function() {
                 routehelper.redirectToRoute('dashboard');
             });
-        }
+        };
 
         activate();
 

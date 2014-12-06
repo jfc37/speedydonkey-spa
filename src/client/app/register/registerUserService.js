@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('registerUserService', registerUserService);
 
-    registerUserService.$inject = ['$q', 'logger', 'dataCreateService'];
+    registerUserService.$inject = ['$q', 'logger', 'dataCreateService', 'authService'];
 
     /* @ngInject */
-    function registerUserService($q, logger, dataCreateService){
+    function registerUserService($q, logger, dataCreateService, authService){
 
         var service = {
             register: register
@@ -22,7 +22,7 @@
                     resolve();
                 }, function (response) {
                     reject();
-                })
+                });
             });
         }
 

@@ -25,7 +25,7 @@
                     resolve();
                 }, function () {
                     revoke();
-                })
+                });
             });
         }
 
@@ -35,7 +35,7 @@
                     resolve();
                 }, function () {
                     revoke();
-                })
+                });
             });
         }
 
@@ -43,35 +43,35 @@
             logger.info('Successfully updated course ' + course.name);
             return $q.when({
                 is_valid: true
-            })
+            });
         }
 
         function updateAssignment(assignment) {
             logger.info('Successfully updated assignment ' + assignment.name);
             return $q.when({
                 is_valid: true
-            })
+            });
         }
 
         function updateExam(exam) {
             logger.info('Successfully updated exam ' + exam.name);
             return $q.when({
                 is_valid: true
-            })
+            });
         }
 
         function updateLecture(lecture) {
             logger.info('Successfully updated lecture ' + lecture.name);
             return $q.when({
                 is_valid: true
-            })
+            });
         }
 
         function updateNotice(notice) {
             logger.info('Successfully updated notice ' + notice.name);
             return $q.when({
                 is_valid: true
-            })
+            });
         }
     }
 })();

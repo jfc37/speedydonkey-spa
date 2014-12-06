@@ -143,7 +143,7 @@
 
         function getRouteFromName(routeName, routeParameters){
             var routes = getRoutes().filter(function(route){ 
-                return route.title === routeName
+                return route.title === routeName;
             });
 
             if (routes.length < 1){

@@ -21,7 +21,7 @@
             socket.emit('new message', { room_name: vm.room_name, message: vm.message, from: 'user1' });
             vm.messages.push({from: 'me', message: vm.message});
             vm.message = '';
-        }
+        };
 
         activate();
 

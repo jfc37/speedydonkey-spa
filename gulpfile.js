@@ -16,7 +16,7 @@ gulp.task('jshint', function () {
     var sources = [].concat(pkg.paths.js, pkg.paths.nodejs);
     return gulp
         .src(sources)
-        .pipe(plug.jshint('./.jshintrc'))
+        .pipe(plug.jshint('node_modules/gulp-jshint/.jshintrc'))
         .pipe(plug.jshint.reporter('jshint-stylish'));
 });
 

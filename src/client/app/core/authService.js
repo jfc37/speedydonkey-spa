@@ -12,7 +12,7 @@
 
         var userIdentity = {
             isLoggedIn: false
-        }
+        };
 
         var service = {
             login: login,
@@ -72,8 +72,8 @@
                     logout();
                     reject();
                 });
-            })
-        };
+            });
+        }
 
         function addBasicAuthorisation(encoded) {
             $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
@@ -90,7 +90,7 @@
             };
 
             logger.success('Successfully logged out');
-        };
+        }
 
     }
 })();

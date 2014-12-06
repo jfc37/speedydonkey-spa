@@ -36,7 +36,7 @@
                         });
                     }, reject);
                 }).then(function () {
-                    resolve(allCourses)
+                    resolve(allCourses);
                 });
             });
         }

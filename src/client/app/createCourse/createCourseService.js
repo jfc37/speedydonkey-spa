@@ -20,7 +20,7 @@
                     resolve(c);
                 }, revoke);
             });
-        };
+        }
 
         return service;
     }

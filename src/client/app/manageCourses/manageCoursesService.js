@@ -12,7 +12,7 @@
         /*jshint validthis: true */
         var service = {
             getCourses: getCourses
-        }
+        };
 
         function getCourses() {
             return $q(function (resolve, revoke) {

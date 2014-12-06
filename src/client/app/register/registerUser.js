@@ -17,10 +17,10 @@
 
         vm.register = function() {
             registerUserService.register().then(function () {
-                routehelper.redirectToRoute('registerPerson', {username: user.username});
+                routehelper.redirectToRoute('registerPerson', {username: vm.user.username});
             }, function () {
                 logger.warning("Register failed");
-            })
+            });
         };
 
         activate();

@@ -25,7 +25,7 @@
         function createCourse(course) {
             return $q(function (resolve, revoke) {
                 apiCaller.postCourse(course).then(function (response) {
-                    resolve(reponse.data);
+                    resolve(response.data);
                 }, function (response) {
                     revoke(response);
                 });

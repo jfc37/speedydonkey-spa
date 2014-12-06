@@ -39,7 +39,7 @@
                 }, function (response) {
                     reject(response);
                 });
-            })
+            });
         }
 
         function searchForCourse(searchParameters, includeParameters) {
@@ -50,9 +50,9 @@
                     q = q + '&' + prop + '_=_' + searchParameters[prop];
                 }
             }
-            for (var prop in includeParameters) {
-                if (includeParameters.hasOwnProperty(prop)) {
-                    q = q + ',include_' + prop;
+            for (var includeProp in includeParameters) {
+                if (includeParameters.hasOwnProperty(includeProp)) {
+                    q = q + ',include_' + includeProp;
                 }
             }
             q = q.slice(1);

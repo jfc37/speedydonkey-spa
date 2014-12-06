@@ -17,11 +17,11 @@
 
         vm.updateEnrolment = function(course) {
             courseEnrolmentService.updateEnrolment(course).then(function (){
-                logger.success("Updated enrolment")
+                logger.success("Updated enrolment");
             }, function () {
                 logger.error("Problem with enrolment");
             });
-        }
+        };
 
         activate();
 
@@ -37,7 +37,7 @@
                 vm.courses = courses;
             }, function (){
                 logger.error("Issue getting courses...");
-            })
+            });
         }
     }
 })();
