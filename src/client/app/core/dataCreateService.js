@@ -11,6 +11,7 @@
     function dataCreateService($q, logger, apiCaller, authService) {
         var service = {
             createCourse: createCourse,
+
             createAssignment: createAssignment,
             createExam: createExam,
             createLecture: createLecture,
@@ -22,8 +23,13 @@
         return service;
 
         function createCourse(course) {
-            logger.info('Successfully created course ' + course.name);
-            return $q.when(course);
+            return $q(function (resolve, revoke) {
+                apiCaller.postCourse(course).then(function (response) {
+                    resolve(reponse.data);
+                }, function (response) {
+                    revoke(response);
+                });
+            });
         }
 
         function createAssignment(assignment) {

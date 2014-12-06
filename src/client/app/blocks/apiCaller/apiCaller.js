@@ -18,6 +18,7 @@
 
             getCourse : getCourse,
             searchCourse: searchCourse,
+            postCourse: postCourse,
 
             postCourseEnrolment: postCourseEnrolment,
             deleteCourseEnrolment: deleteCourseEnrolment
@@ -64,6 +65,11 @@
         function searchCourse(search) {
             var url = baseUrl + 'courses?q=' + search;
             return $http.get(url);
+        }
+
+        function postCourse(course) {
+            var url = baseUrl + 'courses';
+            return $http.post(url, course);
         }
 
         function postCourseEnrolment(parameters) {
