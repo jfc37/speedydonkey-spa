@@ -11,7 +11,8 @@
     function manageCourseService($q, $routeParams, dataservice, dataUpdateService, dataCreateService, dataDeleteService, logger) {
         /*jshint validthis: true */
         var service = {
-            getCourse: getCourse
+            getCourse: getCourse,
+            updateCourseDetails: updateCourseDetails
         };
 
         function getCourse(courseName) {
@@ -19,6 +20,12 @@
                 dataservice.searchForCourse({name: courseName}, {assignments: true, exams: true, lectures: true, notices: true}).then(function (courses) {
                     return resolve(courses[0]);
                 }, revoke);
+            });
+        }
+
+        function updateCourseDetails(course) {
+            return $q(function (resolve, revoke) {
+                dataUpdateService.updateCourse(course).then(resolve, revoke);
             });
         }
 

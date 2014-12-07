@@ -19,6 +19,7 @@
             getCourse : getCourse,
             searchCourse: searchCourse,
             postCourse: postCourse,
+            putCourse: putCourse,
 
             postCourseEnrolment: postCourseEnrolment,
             deleteCourseEnrolment: deleteCourseEnrolment
@@ -70,6 +71,11 @@
         function postCourse(course) {
             var url = baseUrl + 'courses';
             return $http.post(url, course);
+        }
+
+        function putCourse(course) {
+            var url = baseUrl + 'courses';
+            return $http.put(url, course);
         }
 
         function postCourseEnrolment(parameters) {

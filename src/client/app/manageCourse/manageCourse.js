@@ -25,15 +25,12 @@
         vm.new_notice = {};
 
         vm.updateCourseDetails = function(form) {
-            dataUpdateService.updateCourse(vm.course).then(function(data) {
-                if (data.is_valid){
-                    form.$setPristine();
-                } else {
-                    logger.error("Course details failed to update");
-                }
+            manageCourseService.updateCourseDetails().then(function() {
+                form.$setPristine();
+            }, function () {
+                logger.error("Problem updating course");
             });
         };
-
 
         vm.updateAssignment = function(assignment, form) {
             dataUpdateService.updateAssignment(assignment).then(function(data) {

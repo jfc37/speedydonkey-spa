@@ -22,7 +22,7 @@
 
         function activate() {
             var promises = [init()];
-            return $q.all(promises).then(function(){
+            return $q.when(promises).then(function(){
                 logger.info('Activated Dashboard View');
             });
         }

@@ -39,10 +39,13 @@
             });
         }
 
-        function updateCourse(course) {
-            logger.info('Successfully updated course ' + course.name);
-            return $q.when({
-                is_valid: true
+        function updateCourse(parameters) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putCourse(parameters).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    revoke(response);
+                });
             });
         }
 

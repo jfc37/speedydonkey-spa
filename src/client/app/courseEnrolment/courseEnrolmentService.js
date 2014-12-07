@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.core')
+        .module('app.courseEnrolment')
         .factory('courseEnrolmentService', courseEnrolmentService);
 
     courseEnrolmentService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'authService'];
