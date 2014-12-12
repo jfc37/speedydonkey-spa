@@ -7,7 +7,11 @@
                     <h3 class="text-center">Welcome to Study Buddy</h2>
 
                       <form class="form-horizontal" name="loginForm" novalidate>
-
+                        <div class="has-error" ng-repeat="error in loginForm.serverErrors">
+                            <span >
+                                {{error}}
+                            </span>
+                        </div>
                               <div class="form-group"
                                    ng-class="{'has-error':loginForm.username.$invalid && loginForm.username.$touched}">
                                   <div class="col-xs-12">
@@ -17,9 +21,7 @@
                                              type="text"
                                              placeholder="Username"
                                              ng-model="vm.username"
-                                             required
-                                             ng-minlength="4"
-                                             ng-maxlength="12"/>
+                                             required/>
                                   </div>
                                   <span class="help-block has-error">
                                       <div ng-show="loginForm.username.$error.required && loginForm.username.$touched">
@@ -45,7 +47,7 @@
                               </div>
 
                               <button class="btn btn-primary col-xs-12"
-                                      ng-click="vm.submit(loginForm.$valid)"
+                                      ng-click="vm.submit(loginForm)"
                                       ng-disabled="loginForm.$invalid">
                                   Login
                               </button>

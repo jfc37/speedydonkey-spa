@@ -64,13 +64,12 @@
                     logger.success("Login successful");
                     resolve();
                 }, function(response){
+                    logout();
                     if (response.status === 401){
-                        logger.warning("Incorrect login details");
+                        reject([{property_name: "global", error_message: "Invalid username or password"}])
                     } else {
                         logger.error("Login failed");
                     }
-                    logout();
-                    reject();
                 });
             });
         }

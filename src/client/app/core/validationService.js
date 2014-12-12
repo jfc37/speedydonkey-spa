@@ -15,13 +15,13 @@
         };
 
         function applyServerSideErrors(form, errors) {
-            form.unmatchedServerErrors = [];
+            form.serverErrors = [];
             errors.forEach(function (error) {
                 var relatedFormElement = form[error.property_name.toLowerCase()];
                 if (relatedFormElement){
                     form[error.property_name.toLowerCase()].serverError = error.error_message;
                 } else {
-                    form.unmatchedServerErrors.push(error.error_message);
+                    form.serverErrors.push(error.error_message);
                 }
             });
         }
