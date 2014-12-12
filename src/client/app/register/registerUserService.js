@@ -16,9 +16,9 @@
 
         function register(user) {
             return $q(function (resolve, reject) {
-                dataCreateService.createUser(user).then(function (response) {
+                dataCreateService.createUser(user).then(function (createdUser) {
                     authService.login(user.username, user.password);
-                    authService.setUserIdentityProperty('userId', response.data.id);
+                    authService.setUserIdentityProperty('userId', createdUser.id);
                     resolve();
                 }, function (response) {
                     if (response.validation_result !== undefined){

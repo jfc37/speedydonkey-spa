@@ -96,18 +96,20 @@
                 apiCaller.postUser(user).success(function(response, data) {
                     logger.info('Successfully created user ' + user.username);
                     resolve(response.action_result);
-                }).error(function(response, data) {
+                }).error(function(response) {
                     reject(response);
                 });
             }); 
         }
 
-        function createPerson(person, success, fail) {
-            apiCaller.postPerson({user_id: authService.getUserIdentity().userId}, person).success(function(response, data) {
-                logger.info('Successfully created person ' + response.action_result.first_name + ' ' + response.action_result.surname);
-                success(response.action_result);
-            }).error(function(response, data) {
-                fail();
+        function createPerson(person) {
+            return $q(function (resolve, reject) {
+                apiCaller.postPerson({user_id: authService.getUserIdentity().userId}, person).success(function(response, data) {
+                    logger.info('Successfully created person ' + response.action_result.first_name + ' ' + response.action_result.surname);
+                    resolve(response.action_result);
+                }).error(function(response) {
+                    reject(response);
+                });
             });
         }
     }

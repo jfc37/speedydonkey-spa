@@ -6,7 +6,11 @@
                 <div class="col-lg-3 col-lg-offset-4 well">
                     <h3 class="text-center">{{vm.title}}</h3>
                       <form class="form-horizontal" name="registerForm" novalidate>
-
+                          <div class="has-error" ng-repeat="error in registerForm.serverErrors">
+                            <span >
+                                {{error}}
+                            </span>
+                        </div>
                               <div class="form-group"
                                    ng-class="{'has-error':registerForm.first_name.$invalid && registerForm.first_name.$touched}">
                                   <div class="col-xs-12">
@@ -21,6 +25,9 @@
                                   <div class="help-block has-error">
                                       <span ng-show="registerForm.first_name.$error.required && registerForm.first_name.$touched">
                                           First Name is required.
+                                      </span>
+                                      <span ng-show="registerForm.first_name.serverError">
+                                          {{registerForm.first_name.serverError}}
                                       </span>
                                   </div>
                               </div>
@@ -43,16 +50,15 @@
 
                              <div class="col-xs-12">
                                 <select required class="col-xs-12"
-                                  ng-model="vm.person.role" ng-options="role.display as role.value for role in vm.roles">
+                                  ng-model="vm.person.role" ng-options="role.value as role.display for role in vm.roles">
                                   <option value="">-- choose role --</option>
                                 </select>
-                                vm.person.role = {{vm.person.role}}
                             </div>
                                 
                               </div>
                               <div>
                                 <button class="btn btn-primary col-xs-12"
-                                        ng-click="vm.register()"
+                                        ng-click="vm.register(registerForm)"
                                         ng-disabled="registerForm.$invalid">
                                     Register
                                 </button>

@@ -52,8 +52,10 @@
                 dataservice.searchForUser({username: username}).then(function (response) {
                     userIdentity.isLoggedIn = true;
                     userIdentity.username = username;
-                    var person = response.data[0].person;
-                    if (person !== undefined || person !== null) {
+                    var user = response.data[0];
+                    userIdentity.userId = user.id;
+                    var person = user.person;
+                    if (person !== undefined && person !== null) {
                         userIdentity.role = person.role.toLowerCase();
                         userIdentity.personId = person.id;
                     }
