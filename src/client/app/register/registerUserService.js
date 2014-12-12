@@ -21,7 +21,11 @@
                     authService.setUserIdentityProperty('userId', response.data.id);
                     resolve();
                 }, function (response) {
-                    reject();
+                    if (response.validation_result !== undefined){
+                        reject(response.validation_result.validation_errors);
+                    } else {
+                        reject();   
+                    }
                 });
             });
         }

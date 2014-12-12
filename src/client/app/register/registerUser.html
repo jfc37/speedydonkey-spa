@@ -16,20 +16,15 @@
                                                type="text"
                                                placeholder="Username (required)"
                                                ng-model="vm.user.username"
-                                               required
-                                               ng-minlength="4"
-                                               ng-maxlength="12"/>
+                                               required/>
                                     </div>
 
-                                  <div class="help-block has-error">
-                                      <span ng-show="registerForm.username.$error.required && registerForm.username.$touched">
+                                  <div class="has-error">
+                                      <span class="has-error" ng-show="registerForm.username.$error.required && registerForm.username.$touched">
                                           Username is required.
                                       </span>
-                                      <span ng-show="registerForm.username.$error.minlength && registerForm.username.$touched">
-                                          Username must be at least 4 characters in length.
-                                      </span>
-                                      <span ng-show="registerForm.username.$error.maxlength && registerForm.username.$touched">
-                                          Username cannot exceed 12 characters in length.
+                                      <span ng-show="registerForm.username.serverError">
+                                          {{registerForm.username.serverError}}
                                       </span>
                                   </div>
                               </div>
@@ -42,19 +37,20 @@
                                            type="password"
                                            placeholder="Password (required)"
                                            ng-model="vm.user.password"
-                                           required
-                                           ng-minlength="4"
-                                           ng-maxlength="12"/>
+                                           required/>
                       			     </div>
 
-                                  <div class="help-block has-error">
-                                      <span ng-show="registerForm.password.$error.required && registerForm.password.$touched">
+                                  <div class="has-error">
+                                      <span class="has-error" ng-show="registerForm.password.$error.required && registerForm.password.$touched">
                                           Password is required.
+                                      </span>
+                                      <span ng-show="registerForm.password.serverError">
+                                          {{registerForm.password.serverError}}
                                       </span>
                                   </div>
                               </div>
                               <button class="btn btn-primary col-xs-12"
-                                      ng-click="vm.register()"
+                                      ng-click="vm.register(registerForm)"
                                       ng-disabled="registerForm.$invalid">
                                   Register
                               </button>
