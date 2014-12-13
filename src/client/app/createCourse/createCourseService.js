@@ -16,9 +16,15 @@
 
         function createCourse(course){
             return $q(function (resolve, revoke) {
-                dataCreateService.createCourse(course).then(function (c) {
-                    resolve(c);
-                }, revoke);
+                dataCreateService.createCourse(course).then(function (createdCourse) {
+                    resolve(createdCourse);
+                }, function (response) {
+                    if (response.data.validation_result !== undefined){
+                        revoke(response.data.validation_result.validation_errors);
+                    } else {
+                        revoke();   
+                    }
+                });
             });
         }
 

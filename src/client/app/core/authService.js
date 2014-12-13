@@ -48,7 +48,7 @@
             var encoded = base64Service.encode(username + ':' + password);
             addBasicAuthorisation(encoded);
 
-            return $q(function (resolve, reject) {
+            return $q(function (resolve, revoke) {
                 dataservice.searchForUser({username: username}).then(function (response) {
                     userIdentity.isLoggedIn = true;
                     userIdentity.username = username;
@@ -68,7 +68,7 @@
                 }, function(response){
                     logout();
                     if (response.status === 401){
-                        reject([{property_name: "global", error_message: "Invalid username or password"}])
+                        revoke([{property_name: "global", error_message: "Invalid username or password"}]);
                     } else {
                         logger.error("Login failed");
                     }

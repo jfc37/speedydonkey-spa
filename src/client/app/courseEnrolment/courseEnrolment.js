@@ -26,7 +26,7 @@
         activate();
 
         function activate() {
-            return $q.all([getAllCourses()])
+            return $q(getAllCourses)
             .then(function(){
                 logger.info('Activated Course Enrolment View');
             });

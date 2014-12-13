@@ -11,26 +11,16 @@
     function dataCreateService($q, logger, apiCaller, authService) {
         var service = {
             createCourse: createCourse,
+            createUser: createUser,
+            createPerson: createPerson,
 
             createAssignment: createAssignment,
             createExam: createExam,
             createLecture: createLecture,
             createNotice: createNotice,
-            createUser: createUser,
-            createPerson: createPerson
         };
 
         return service;
-
-        function createCourse(course) {
-            return $q(function (resolve, revoke) {
-                apiCaller.postCourse(course).then(function (response) {
-                    resolve(response.data);
-                }, function (response) {
-                    revoke(response);
-                });
-            });
-        }
 
         function createAssignment(assignment) {
             logger.info('Successfully created assignment ' + assignment.name);
@@ -88,6 +78,19 @@
                     start_date: notice.start_date,
                     end_date: notice.end_date,
                 }
+            });
+        }
+
+
+
+
+        function createCourse(course) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postCourse(authService.getUserIdentity().personId, course).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    revoke(response);
+                });
             });
         }
 

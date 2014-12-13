@@ -68,8 +68,8 @@
             return $http.get(url);
         }
 
-        function postCourse(course) {
-            var url = baseUrl + 'courses';
+        function postCourse(personId, course) {
+            var url = baseUrl + 'professors/' + personId  + '/courses';
             return $http.post(url, course);
         }
 

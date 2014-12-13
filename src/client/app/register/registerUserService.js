@@ -15,16 +15,16 @@
         };
 
         function register(user) {
-            return $q(function (resolve, reject) {
+            return $q(function (resolve, revoke) {
                 dataCreateService.createUser(user).then(function (createdUser) {
                     authService.login(user.username, user.password);
                     authService.setUserIdentityProperty('userId', createdUser.id);
                     resolve();
                 }, function (response) {
                     if (response.validation_result !== undefined){
-                        reject(response.validation_result.validation_errors);
+                        revoke(response.validation_result.validation_errors);
                     } else {
-                        reject();   
+                        revoke();   
                     }
                 });
             });

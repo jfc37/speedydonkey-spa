@@ -16,7 +16,7 @@
         };
 
         function getCourses() {
-            return $q(function (resolve, reject) {
+            return $q(function (resolve, revoke) {
                 var allCourses;
                 dataservice.getAllCourses().then(function(courses) {
                     courses.forEach(function(course){
@@ -24,7 +24,7 @@
                     });
 
                     allCourses = courses;
-                }, reject).then(function () {
+                }, revoke).then(function () {
                     dataservice.getStudent(authService.getUserIdentity().personId).then(function (student) {
                         var enroledCourseNames = student.enroled_courses.map(function(course){
                             return course.name;
@@ -34,7 +34,7 @@
                                 course.isEnroled = true;
                             }
                         });
-                    }, reject);
+                    }, revoke);
                 }).then(function () {
                     resolve(allCourses);
                 });
@@ -42,18 +42,18 @@
         }
 
         function updateEnrolment(course) {
-            return $q(function (resolve, reject) {
+            return $q(function (resolve, revoke) {
                 if (course.isEnroled){
                     dataUpdateService.enrolInCourse({personId: authService.getUserIdentity().personId, courseId: course.id}).then(function () {
                         resolve();
                     }, function () {
-                        reject();
+                        revoke();
                     });
                 } else {
                     dataUpdateService.unenrolInCourse({personId: authService.getUserIdentity().personId, courseId: course.id}).then(function () {
                         resolve();
                     }, function () {
-                        reject();
+                        revoke();
                     });
                 }
             });
