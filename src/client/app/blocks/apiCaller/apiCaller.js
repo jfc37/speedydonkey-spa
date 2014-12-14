@@ -74,7 +74,7 @@
         }
 
         function putCourse(course) {
-            var url = baseUrl + 'courses';
+            var url = baseUrl + 'courses/' + course.id;
             return $http.put(url, course);
         }
 

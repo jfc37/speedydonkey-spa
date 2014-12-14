@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$q', '$http', 'apiCaller'];
+    dataservice.$inject = ['$q', '$http', 'apiCaller', 'dateService'];
 
     /* @ngInject */
-    function dataservice($q, $http, apiCaller) {
+    function dataservice($q, $http, apiCaller, dateService) {
         var service = {
 
             getAllCourses: getAllCourses,
@@ -58,7 +58,10 @@
             q = q.slice(1);
 
             return $q(function (resolve, revoke) {
-                apiCaller.searchCourse(q).then(function (response){
+                apiCaller.searchCourse(q).then(function (response) {
+                    response.data.forEach(function (course) {
+                        course = dateService.convertStringsToDates(course);
+                    });
                     resolve(response.data);
                 }, revoke);
             });

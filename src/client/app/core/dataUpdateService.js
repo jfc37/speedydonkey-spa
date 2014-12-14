@@ -39,11 +39,11 @@
             });
         }
 
-        function updateCourse(parameters) {
+        function updateCourse(course) {
             return $q(function (resolve, revoke) {
-                apiCaller.putCourse(parameters).then(function (response) {
+                apiCaller.putCourse(course).success(function (response) {
                     resolve(response.data);
-                }, function (response) {
+                }).error(function (response) {
                     revoke(response);
                 });
             });

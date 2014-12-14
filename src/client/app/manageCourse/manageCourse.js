@@ -5,13 +5,14 @@
         .module('app.manageCourse')
         .controller('ManageCourse', ManageCourse);
 
-    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger'];
+    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger', 'selectOptionService', 'validationService'];
 
     /* @ngInject */
-    function ManageCourse($q, $routeParams, manageCourseService, dataUpdateService, dataCreateService, dataDeleteService, logger) {
+    function ManageCourse($q, $routeParams, manageCourseService, dataUpdateService, dataCreateService, dataDeleteService, logger, selectOptionService, validationService) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = $routeParams.courseName;
+        vm.gradeTypes = selectOptionService.getGradeTypes();
 
         vm.course = {};
         vm.assignments = [];
@@ -25,9 +26,11 @@
         vm.new_notice = {};
 
         vm.updateCourseDetails = function(form) {
-            manageCourseService.updateCourseDetails().then(function() {
+            manageCourseService.updateCourseDetails(vm.course).then(function() {
                 form.$setPristine();
-            }, function () {
+                logger.success("Course updated")
+            }, function (errors) {
+                validationService.applyServerSideErrors(form, errors);
                 logger.error("Problem updating course");
             });
         };
@@ -202,7 +205,7 @@
         }
 
         function getCourse() {
-            if ($routeParams.courseName !== undefined){
+            if ($routeParams.courseName !== undefined) {
                 manageCourseService.getCourse($routeParams.courseName).then(function (course) {
                     vm.course = course;
                     vm.assignments = course.assignments;

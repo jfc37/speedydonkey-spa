@@ -25,7 +25,13 @@
 
         function updateCourseDetails(course) {
             return $q(function (resolve, revoke) {
-                dataUpdateService.updateCourse(course).then(resolve, revoke);
+                dataUpdateService.updateCourse(course).then(resolve, function (response) {
+                    if (response.validation_result !== undefined){
+                        revoke(response.validation_result.validation_errors);
+                    } else {
+                        revoke();   
+                    }
+                });
             });
         }
 
