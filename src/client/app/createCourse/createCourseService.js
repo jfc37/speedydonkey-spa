@@ -19,8 +19,8 @@
                 dataCreateService.createCourse(course).then(function (createdCourse) {
                     resolve(createdCourse);
                 }, function (response) {
-                    if (response.data.validation_result !== undefined){
-                        revoke(response.data.validation_result.validation_errors);
+                    if (response.validation_result !== undefined){
+                        revoke(response.validation_result.validation_errors);
                     } else {
                         revoke();   
                     }

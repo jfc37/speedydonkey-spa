@@ -86,9 +86,9 @@
 
         function createCourse(course) {
             return $q(function (resolve, revoke) {
-                apiCaller.postCourse(authService.getUserIdentity().personId, course).then(function (response) {
-                    resolve(response.data);
-                }, function (response) {
+                apiCaller.postCourse(authService.getUserIdentity().personId, course).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
                     revoke(response);
                 });
             });
@@ -96,7 +96,7 @@
 
         function createUser(user) {
             return $q(function (resolve, reject) {
-                apiCaller.postUser(user).success(function(response, data) {
+                apiCaller.postUser(user).success(function(response) {
                     logger.info('Successfully created user ' + user.username);
                     resolve(response.action_result);
                 }).error(function(response) {

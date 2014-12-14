@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <label for="startDate">Start Date</label>
                                     <input type="date" class="form-control" id="startDate" name="startdate" placeholder="Start Date" 
-                                    ng-model="vm.course.startDate" required>
+                                    ng-model="vm.course.start_date" required>
 
                                       <div class="has-error">
                                           <span ng-show="createCourseForm.startdate.serverError">
@@ -56,10 +56,10 @@
                                 <div class="form-group">
                                     <label for="endDate">End Date</label>
                                     <input type="date" class="form-control" id="endDate" name="enddate" placeholder="End Date" 
-                                    ng-model="vm.course.enddate" required>
+                                    ng-model="vm.course.end_date" required>
 
                                       <div class="has-error">
-                                          <span ng-show="createCourseForm.endDate.serverError">
+                                          <span ng-show="createCourseForm.enddate.serverError">
                                               {{createCourseForm.enddate.serverError}}
                                           </span>
                                       </div>
@@ -68,7 +68,7 @@
                                 <div class="form-group">
                                     <label for="gradeType">Grade Type</label>
                                     <select required id="gradetype" name="gradetype"
-                                      ng-model="vm.course.gradetype" ng-options="gradeType.value as gradeType.display for gradeType in vm.gradeTypes">
+                                      ng-model="vm.course.grade_type" ng-options="gradeType.value as gradeType.display for gradeType in vm.gradeTypes">
                                       <option value="">-- choose grade type --</option>
                                     </select>
                                       <div class="has-error">
