@@ -13,7 +13,6 @@
 
             getAllCourses: getAllCourses,
             getCourse: getCourse,
-
             searchForCourse: searchForCourse,
 
             searchForUser: searchForUser,

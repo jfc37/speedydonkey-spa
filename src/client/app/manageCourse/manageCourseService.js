@@ -5,14 +5,14 @@
         .module('app.manageCourse')
         .factory('manageCourseService', manageCourseService);
 
-    manageCourseService.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger'];
+    manageCourseService.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataDeleteService', 'logger'];
 
     /* @ngInject */
-    function manageCourseService($q, $routeParams, dataservice, dataUpdateService, dataCreateService, dataDeleteService, logger) {
+    function manageCourseService($q, $routeParams, dataservice, dataUpdateService, dataDeleteService, logger) {
         /*jshint validthis: true */
         var service = {
             getCourse: getCourse,
-            updateCourseDetails: updateCourseDetails
+            updateCourseDetails: updateCourseDetails,
         };
 
         function getCourse(courseName) {

@@ -5,37 +5,22 @@
         .module('app.core')
         .factory('dataCreateService', dataCreateService);
 
-    dataCreateService.$inject = ['$q', 'logger', 'apiCaller', 'authService'];
+    dataCreateService.$inject = ['$q', 'logger', 'apiCaller', 'authService', 'dateService'];
 
     /* @ngInject */
-    function dataCreateService($q, logger, apiCaller, authService) {
+    function dataCreateService($q, logger, apiCaller, authService, dateService) {
         var service = {
             createCourse: createCourse,
             createUser: createUser,
             createPerson: createPerson,
-
             createAssignment: createAssignment,
+
             createExam: createExam,
             createLecture: createLecture,
             createNotice: createNotice,
         };
 
         return service;
-
-        function createAssignment(assignment) {
-            logger.info('Successfully created assignment ' + assignment.name);
-            assignment.is_editing = null;
-            return $q.when({
-                is_valid: true,
-                action_result: {
-                    name: assignment.name,
-                    description: assignment.description,
-                    start_date: assignment.start_date,
-                    end_date: assignment.end_date,
-                    grade_type: assignment.grade_type
-                }
-            });
-        }
 
         function createExam(exam) {
             logger.info('Successfully created exam ' + exam.name);
@@ -87,6 +72,17 @@
         function createCourse(course) {
             return $q(function (resolve, revoke) {
                 apiCaller.postCourse(authService.getUserIdentity().personId, course).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
+            });
+        }
+
+        function createAssignment(courseId, assignment) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postAssignment(courseId, assignment).success(function (response) {
+                    dateService.convertStringsToDates(response.action_result);
                     resolve(response.action_result);
                 }).error(function (response) {
                     revoke(response);

@@ -5,10 +5,10 @@
         .module('app.manageCourse')
         .controller('ManageCourse', ManageCourse);
 
-    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger', 'selectOptionService', 'validationService'];
+    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'manageAssignmentService', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger', 'selectOptionService', 'validationService'];
 
     /* @ngInject */
-    function ManageCourse($q, $routeParams, manageCourseService, dataUpdateService, dataCreateService, dataDeleteService, logger, selectOptionService, validationService) {
+    function ManageCourse($q, $routeParams, manageCourseService, manageAssignmentService, dataUpdateService, dataCreateService, dataDeleteService, logger, selectOptionService, validationService) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = $routeParams.courseName;
@@ -35,6 +35,28 @@
             });
         };
 
+        vm.createAssignment = function(assignment, form) {
+            //vm.new_assignment = {};
+            //assignment = {};
+            assignment = null;
+            vm.new_assignment = null;
+            vm.new_assignment = {};
+            // manageAssignmentService.createAssignment(vm.course.id, assignment).then(function (createdAssignment) {
+            //     vm.assignments.push(createdAssignment);
+            //     vm.new_assignment = {};
+            //     assignment = {};
+            //     form.$setPristine();
+            //     logger.success("Assignment created");
+            // }, function (errors) {
+            //     validationService.applyServerSideErrors(form, errors);
+            //     logger.error("Assignment failed to create");
+            // });
+        };
+
+
+
+
+
         vm.updateAssignment = function(assignment, form) {
             dataUpdateService.updateAssignment(assignment).then(function(data) {
                 if (data.is_valid){
@@ -42,19 +64,6 @@
                     assignment.is_editing = false;
                 } else {
                     logger.error("Assignment failed to update");
-                }
-            });
-        };
-
-        vm.createAssignment = function(assignment, form) {
-            dataCreateService.createAssignment(assignment).then(function(data) {
-                if (data.is_valid){
-                    vm.assignments.push(data.action_result);
-                    assignment = {};
-                    vm.new_assignment = {};
-                    form.$setPristine();
-                } else {
-                    logger.error("Assignment failed to create");
                 }
             });
         };
