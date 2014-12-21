@@ -79,15 +79,14 @@
         };
 
         vm.deleteAssignment = function(assignment) {
-            dataDeleteService.deleteAssignment(assignment).then(function(data) {
-                if (data.is_valid) {
-                    var index = vm.assignments.indexOf(assignment);
-                    if (index > -1) {
-                        vm.assignments.splice(index, 1);
-                    }
-                } else {
-                    logger.error("Assignment failed to delete");
+            manageAssignmentService.deleteAssignment(vm.course.id, assignment).then(function (deletedAssignment) {
+                var index = vm.assignments.indexOf(assignment);
+                if (index > -1) {
+                    vm.assignments.splice(index, 1);
                 }
+                logger.success("Assignment deleted")
+            }, function () {
+                logger.error("Assignment failed to delete");
             });
         };
 

@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataDeleteService', dataDeleteService);
 
-    dataDeleteService.$inject = ['$q', 'logger'];
+    dataDeleteService.$inject = ['$q', 'logger', 'apiCaller'];
 
     /* @ngInject */
-    function dataDeleteService($q, logger) {
+    function dataDeleteService($q, logger, apiCaller) {
         var service = {
             deleteAssignment: deleteAssignment,
             deleteExam: deleteExam,
@@ -18,10 +18,13 @@
 
         return service;
 
-        function deleteAssignment(assignment) {
-            logger.info('Successfully deleted assignment ' + assignment.name);
-            return $q.when({
-                is_valid: true
+        function deleteAssignment(courseId, assignment) {
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteAssignment(courseId, assignment).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
             });
         }
 
