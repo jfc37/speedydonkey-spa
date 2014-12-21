@@ -70,12 +70,6 @@
               </span>
           </div>
     </div>
-    <div data-ng-if="action_type === 'update'">
-        <a class="btn btn-default" data-ng-click="vm.updateAssignment(assignment, assignmentForm)" data-ng-disabled="assignmentForm.$invalid">Update</a>
-        <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Cancel</a>
-    </div>
-    <div data-ng-if="action_type === 'create'">
-        <a class="btn btn-default" data-ng-click="vm.createAssignment(assignment, assignmentForm)" data-ng-disabled="assignmentForm.$invalid2">Create</a>
-        <a class="btn btn-default" data-ng-click="vm.toggleEdit(assignment)">Cancel</a>
-    </div>
+        <a class="btn btn-default" data-ng-click="vm.submitAssignment(assignment, assignmentForm)" data-ng-disabled="assignmentForm.$invalid || assignmentForm.$pristine">{{vm.getSubmitText(assignment)}}</a>
+        <a class="btn btn-default" data-ng-click="vm.cancel(assignment, vm.assignments)">Cancel</a>
 </ng-form>

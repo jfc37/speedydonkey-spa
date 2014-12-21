@@ -22,6 +22,7 @@
             putCourse: putCourse,
 
             postAssignment: postAssignment,
+            putAssignment: putAssignment,
 
             postCourseEnrolment: postCourseEnrolment,
             deleteCourseEnrolment: deleteCourseEnrolment
@@ -83,6 +84,11 @@
         function postAssignment(courseId, assignment) {
             var url = baseUrl + 'courses/' + courseId + '/assignments';
             return $http.post(url, assignment);
+        }
+
+        function putAssignment(courseId, assignment) {
+            var url = baseUrl + 'courses/' + courseId + '/assignments/' + assignment.id;
+            return $http.put(url, assignment);
         }
 
         function postCourseEnrolment(parameters) {

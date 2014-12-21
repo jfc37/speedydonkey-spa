@@ -13,6 +13,8 @@
             enrolInCourse: enrolInCourse,
             unenrolInCourse: unenrolInCourse,
             updateCourse: updateCourse,
+            updateAssignment: updateAssignment,
+
             updateExam: updateExam,
             updateNotice: updateNotice,
         };
@@ -49,10 +51,13 @@
             });
         }
 
-        function updateAssignment(assignment) {
-            logger.info('Successfully updated assignment ' + assignment.name);
-            return $q.when({
-                is_valid: true
+        function updateAssignment(courseId, assignment) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putAssignment(courseId, assignment).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
             });
         }
 

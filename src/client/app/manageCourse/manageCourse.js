@@ -35,36 +35,46 @@
             });
         };
 
-        vm.createAssignment = function(assignment, form) {
-            //vm.new_assignment = {};
-            //assignment = {};
-            assignment = null;
-            vm.new_assignment = null;
-            vm.new_assignment = {};
-            // manageAssignmentService.createAssignment(vm.course.id, assignment).then(function (createdAssignment) {
-            //     vm.assignments.push(createdAssignment);
-            //     vm.new_assignment = {};
-            //     assignment = {};
-            //     form.$setPristine();
-            //     logger.success("Assignment created");
-            // }, function (errors) {
-            //     validationService.applyServerSideErrors(form, errors);
-            //     logger.error("Assignment failed to create");
-            // });
+        vm.newAssignment = function() {
+            vm.assignments.push(vm.getNew());
         };
 
+        vm.getNew = function() {
+            return {
+                is_editing: true
+            }
+        };
 
+        vm.getSubmitText = function(object) {
+            if (object.id) {
+                return 'Update';
+            }
+            return 'Create';
+        };
 
+        vm.cancel = function(object, collection) {
+            if (object.id) {
+                vm.toggleEdit(object);
+            } else {
+                collection.pop();
+            }
+        };
 
-
-        vm.updateAssignment = function(assignment, form) {
-            dataUpdateService.updateAssignment(assignment).then(function(data) {
-                if (data.is_valid){
-                    form.$setPristine();
-                    assignment.is_editing = false;
-                } else {
-                    logger.error("Assignment failed to update");
-                }
+        vm.submitAssignment = function(assignment, form) {
+            var promise;
+            if (assignment.id) {
+                promise = manageAssignmentService.updateAssignment(vm.course.id, assignment);
+            } else {
+                promise = manageAssignmentService.createAssignment(vm.course.id, assignment);
+            }
+            promise.then(function (createdAssignment) {
+                assignment.id = createdAssignment.id;
+                vm.toggleEdit(assignment);
+                form.$setPristine();
+                logger.success("Assignment created/updated");
+            }, function (errors) {
+                validationService.applyServerSideErrors(form, errors);
+                logger.error("Assignment failed to create");
             });
         };
 
@@ -201,7 +211,11 @@
 
 
         vm.toggleEdit = function(model){
-            model.is_editing = !model.is_editing;
+            if (model.is_editing === undefined) {
+                model.is_editing = false;
+            } else {
+                model.is_editing = !model.is_editing;
+            }
         };
 
         activate();
