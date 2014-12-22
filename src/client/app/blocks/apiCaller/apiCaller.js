@@ -29,6 +29,14 @@
             putExam: putExam,
             deleteExam: deleteExam,
 
+            postNotice: postNotice,
+            putNotice: putNotice,
+            deleteNotice: deleteNotice,
+
+            postLecture: postLecture,
+            putLecture: putLecture,
+            deleteLecture: deleteLecture,
+
             postCourseEnrolment: postCourseEnrolment,
             deleteCourseEnrolment: deleteCourseEnrolment
         };
@@ -48,6 +56,8 @@
             return $http.post(url, user);
         }
 
+
+
         function postPerson(parameters, person) {
             var url = baseUrl + 'users/' + parameters.user_id + '/' + person.role + 's';
             return $http.post(url, person);
@@ -61,6 +71,8 @@
 
             return $http.get(url);
         }
+
+
 
         function getCourse(courseId) {
             var url = baseUrl + 'courses';
@@ -86,6 +98,8 @@
             return $http.put(url, course);
         }
 
+
+
         function postAssignment(courseId, assignment) {
             var url = baseUrl + 'courses/' + courseId + '/assignments';
             return $http.post(url, assignment);
@@ -101,6 +115,8 @@
             return $http.delete(url, assignment);
         }
 
+
+
         function postExam(courseId, exam) {
             var url = baseUrl + 'courses/' + courseId + '/exams';
             return $http.post(url, exam);
@@ -115,6 +131,42 @@
             var url = baseUrl + 'courses/' + courseId + '/exams/' + exam.id;
             return $http.delete(url, exam);
         }
+
+
+
+        function postNotice(courseId, notice) {
+            var url = baseUrl + 'courses/' + courseId + '/notices';
+            return $http.post(url, notice);
+        }
+
+        function putNotice(courseId, notice) {
+            var url = baseUrl + 'courses/' + courseId + '/notices/' + notice.id;
+            return $http.put(url, notice);
+        }
+
+        function deleteNotice(courseId, notice) {
+            var url = baseUrl + 'courses/' + courseId + '/notices/' + notice.id;
+            return $http.delete(url, notice);
+        }
+
+
+
+        function postLecture(courseId, lecture) {
+            var url = baseUrl + 'courses/' + courseId + '/lectures';
+            return $http.post(url, lecture);
+        }
+
+        function putLecture(courseId, lecture) {
+            var url = baseUrl + 'courses/' + courseId + '/lectures/' + lecture.id;
+            return $http.put(url, lecture);
+        }
+
+        function deleteLecture(courseId, lecture) {
+            var url = baseUrl + 'courses/' + courseId + '/lectures/' + lecture.id;
+            return $http.delete(url, lecture);
+        }
+
+        
 
         function postCourseEnrolment(parameters) {
             var url = baseUrl + 'students/' + parameters.personId + '/courses/' + parameters.courseId;

@@ -15,8 +15,8 @@
             updateCourse: updateCourse,
             updateAssignment: updateAssignment,
             updateExam: updateExam,
-
             updateNotice: updateNotice,
+            updateLecture: updateLecture,
         };
 
         return service;
@@ -71,17 +71,23 @@
             });
         }
 
-        function updateLecture(lecture) {
-            logger.info('Successfully updated lecture ' + lecture.name);
-            return $q.when({
-                is_valid: true
+        function updateNotice(courseId, notice) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putNotice(courseId, notice).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
             });
         }
 
-        function updateNotice(notice) {
-            logger.info('Successfully updated notice ' + notice.name);
-            return $q.when({
-                is_valid: true
+        function updateLecture(courseId, lecture) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putLecture(courseId, lecture).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
             });
         }
     }

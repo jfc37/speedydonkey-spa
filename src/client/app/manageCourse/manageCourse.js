@@ -5,14 +5,15 @@
         .module('app.manageCourse')
         .controller('ManageCourse', ManageCourse);
 
-    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'manageAssignmentService', 'manageExamService', 'logger', 'selectOptionService', 'validationService'];
+    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'manageAssignmentService', 'manageExamService', 'manageLectureService', 'manageNoticeService', 'logger', 'selectOptionService', 'validationService'];
 
     /* @ngInject */
-    function ManageCourse($q, $routeParams, manageCourseService, manageAssignmentService, manageExamService, logger, selectOptionService, validationService) {
+    function ManageCourse($q, $routeParams, manageCourseService, manageAssignmentService, manageExamService, manageLectureService, manageNoticeService, logger, selectOptionService, validationService) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = $routeParams.courseName;
         vm.gradeTypes = selectOptionService.getGradeTypes();
+        vm.occurences = selectOptionService.getOccurences();
 
         vm.course = {};
         vm.assignments = [];
@@ -23,7 +24,7 @@
         vm.updateCourseDetails = function(form) {
             manageCourseService.updateCourseDetails(vm.course).then(function() {
                 form.$setPristine();
-                logger.success("Course updated")
+                logger.success("Course updated");
             }, function (errors) {
                 validationService.applyServerSideErrors(form, errors);
                 logger.error("Problem updating course");
@@ -51,30 +52,6 @@
             }
         };
 
-        var afterSubmit = function (promise, object, form) {
-            promise.then(function (createdObject) {
-                object.id = createdObject.id;
-                vm.toggleEdit(object);
-                form.$setPristine();
-                logger.success("Created/Updated");
-            }, function (errors) {
-                validationService.applyServerSideErrors(form, errors);
-                logger.error("Failed to create/update");
-            });
-        };
-
-        var afterDelete = function (promise, object, collection) {
-            promise.then(function (deletedObject) {
-                var index = collection.indexOf(object);
-                if (index > -1) {
-                    collection.splice(index, 1);
-                }
-                logger.success("Deleted")
-            }, function () {
-                logger.error("Failed to delete");
-            });
-        };
-
         vm.submitAssignment = function(assignment, form) {
             var promise;
             if (assignment.id) {
@@ -86,7 +63,7 @@
         };
 
         vm.deleteAssignment = function(assignment) {
-            var promise = manageAssignmentService.deleteAssignment(vm.course.id, assignment)
+            var promise = manageAssignmentService.deleteAssignment(vm.course.id, assignment);
             afterDelete(promise, assignment, vm.assignments);
         };
 
@@ -101,92 +78,39 @@
         };
 
         vm.deleteExam = function(exam) {
-            var promise = manageExamService.deleteExam(vm.course.id, exam)
+            var promise = manageExamService.deleteExam(vm.course.id, exam);
             afterDelete(promise, exam, vm.exams);
         };
 
-
-
-
-
-        vm.updateLecture = function(lecture, form) {
-            dataUpdateService.updateLecture(lecture).then(function(data) {
-                if (data.is_valid){
-                    form.$setPristine();
-                    lecture.is_editing = false;
-                } else {
-                    logger.error("Lecture failed to update");
-                }
-            });
-        };
-
-        vm.createLecture = function(lecture, form) {
-            dataCreateService.createLecture(lecture).then(function(data) {
-                if (data.is_valid){
-                    vm.new_lecture.is_editing = false;
-                    vm.lectures.push(data.action_result);
-
-                    lecture = {};
-                    form.$setPristine();
-                } else {
-                    logger.error("Lecture failed to create");
-                }
-            });
+        vm.submitLecture = function(lecture, form) {
+            var promise;
+            if (lecture.id) {
+                promise = manageLectureService.updateLecture(vm.course.id, lecture);
+            } else {
+                promise = manageLectureService.createLecture(vm.course.id, lecture);
+            }
+            afterSubmit(promise, lecture, form);
         };
 
         vm.deleteLecture = function(lecture) {
-            dataDeleteService.deleteLecture(lecture).then(function(data) {
-                if (data.is_valid) {
-                    var index = vm.lectures.indexOf(lecture);
-                    if (index > -1) {
-                        vm.lectures.splice(index, 1);
-                    }
-                } else {
-                    logger.error("Lecture failed to delete");
-                }
-            });
+            var promise = manageLectureService.deleteLecture(vm.course.id, lecture);
+            afterDelete(promise, lecture, vm.lectures);
         };
 
-
-        vm.updateNotice = function(notice, form) {
-            dataUpdateService.updateNotice(notice).then(function(data) {
-                if (data.is_valid){
-                    form.$setPristine();
-                    notice.is_editing = false;
-                } else {
-                    logger.error("Notice failed to update");
-                }
-            });
-        };
-
-        vm.createNotice = function(notice, form) {
-            dataCreateService.createNotice(notice).then(function(data) {
-                if (data.is_valid){
-                    vm.new_notice.is_editing = false;
-                    vm.notices.push(data.action_result);
-
-                    notice = {};
-                    form.$setPristine();
-                } else {
-                    logger.error("Notice failed to create");
-                }
-            });
+        vm.submitNotice = function(notice, form) {
+            var promise;
+            if (notice.id) {
+                promise = manageNoticeService.updateNotice(vm.course.id, notice);
+            } else {
+                promise = manageNoticeService.createNotice(vm.course.id, notice);
+            }
+            afterSubmit(promise, notice, form);
         };
 
         vm.deleteNotice = function(notice) {
-            dataDeleteService.deleteNotice(notice).then(function(data) {
-                if (data.is_valid) {
-                    var index = vm.notices.indexOf(notice);
-                    if (index > -1) {
-                        vm.notices.splice(index, 1);
-                    }
-                } else {
-                    logger.error("Notice failed to delete");
-                }
-            });
+            var promise = manageNoticeService.deleteNotice(vm.course.id, notice);
+            afterDelete(promise, notice, vm.notices);
         };
-
-
 
         vm.toggleEdit = function(model){
             if (model.is_editing === undefined) {
@@ -218,6 +142,30 @@
                     logger.error("Problem loading course");
                 });
             }
+        }
+
+        function afterSubmit(promise, object, form) {
+            promise.then(function (createdObject) {
+                object.id = createdObject.id;
+                vm.toggleEdit(object);
+                form.$setPristine();
+                logger.success("Created/Updated");
+            }, function (errors) {
+                validationService.applyServerSideErrors(form, errors);
+                logger.error("Failed to create/update");
+            });
+        }
+
+        function afterDelete(promise, object, collection) {
+            promise.then(function (deletedObject) {
+                var index = collection.indexOf(object);
+                if (index > -1) {
+                    collection.splice(index, 1);
+                }
+                logger.success("Deleted");
+            }, function () {
+                logger.error("Failed to delete");
+            });
         }
     }
 })();

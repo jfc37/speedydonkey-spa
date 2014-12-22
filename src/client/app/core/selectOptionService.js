@@ -10,7 +10,8 @@
     /* @ngInject */
     function selectOptionService() {
         var service = {
-            getGradeTypes: getGradeTypes
+            getGradeTypes: getGradeTypes,
+            getOccurences: getOccurences
         };
 
         function getGradeTypes() {
@@ -22,6 +23,27 @@
                 {
                     display: 'Percentage',
                     value: 'Percentage'
+                },
+            ];
+        }
+
+        function getOccurences() {
+            return [
+                {
+                    display: 'Daily',
+                    value: 'Daily'
+                },
+                {
+                    display: 'Weekly',
+                    value: 'Weekly'
+                },
+                {
+                    display: 'Fortnightly',
+                    value: 'Fortnightly'
+                },
+                {
+                    display: 'Monthly',
+                    value: 'Monthly'
                 },
             ];
         }

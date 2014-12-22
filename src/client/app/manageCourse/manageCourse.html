@@ -145,15 +145,10 @@
                                 <a class="btn btn-default" data-ng-click="vm.deleteLecture(lecture)">Delete</a>
                             </div>
                             <div data-ng-show="lecture.is_editing" class="user">
-                                <div ng-include src="'app/manageCourse/manageLectures/manageLecture.html'" onload="action_type = 'update'"></div>
+                                <div ng-include src="'app/manageCourse/manageLectures/manageLecture.html'"></div>
                             </div>
                         </div>
-                        <div class="user">
-                            <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_lecture)">New Lecture</a>
-                            <div data-ng-show="vm.new_lecture.is_editing" class="user">
-                                <div ng-include src="'app/manageCourse/manageLectures/manageLecture.html'" onload="action_type = 'create'; lecture = vm.new_lecture"></div>
-                            </div>
-                        </div>
+                        <a class="btn btn-default" data-ng-click="vm.addNew(vm.lectures)">New</a>
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>
@@ -172,15 +167,10 @@
                                 <a class="btn btn-default" data-ng-click="vm.deleteNotice(notice)">Delete</a>
                             </div>
                             <div data-ng-show="notice.is_editing" class="user">
-                                <div ng-include src="'app/manageCourse/manageNotices/manageNotice.html'" onload="action_type = 'update'"></div>
+                                <div ng-include src="'app/manageCourse/manageNotices/manageNotice.html'"></div>
                             </div>
                         </div>
-                        <div class="user">
-                            <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_notice)">New Notice</a>
-                            <div data-ng-show="vm.new_notice.is_editing" class="user">
-                                <div ng-include src="'app/manageCourse/manageNotices/manageNotice.html'" onload="action_type = 'create'; notice = vm.new_notice"></div>
-                            </div>
-                        </div>
+                        <a class="btn btn-default" data-ng-click="vm.addNew(vm.notices)">New</a>
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>

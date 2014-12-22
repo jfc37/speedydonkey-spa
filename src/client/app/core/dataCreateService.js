@@ -15,44 +15,11 @@
             createPerson: createPerson,
             createAssignment: createAssignment,
             createExam: createExam,
-
             createLecture: createLecture,
             createNotice: createNotice,
         };
 
         return service;
-
-        function createLecture(lecture) {
-            logger.info('Successfully created lecture ' + lecture.name);
-            lecture.is_editing = null;
-            return $q.when({
-                is_valid: true,
-                action_result: {
-                    name: lecture.name,
-                    description: lecture.description,
-                    start_date: lecture.start_date,
-                    end_date: lecture.end_date,
-                    location: lecture.location,
-                    occurence: lecture.occurence
-                }
-            });
-        }
-
-        function createNotice(notice) {
-            logger.info('Successfully created notice ' + notice.name);
-            notice.is_editing = null;
-            return $q.when({
-                is_valid: true,
-                action_result: {
-                    message: notice.message,
-                    start_date: notice.start_date,
-                    end_date: notice.end_date,
-                }
-            });
-        }
-
-
-
 
         function createCourse(course) {
             return $q(function (resolve, revoke) {
@@ -78,6 +45,28 @@
         function createExam(courseId, exam) {
             return $q(function (resolve, revoke) {
                 apiCaller.postExam(courseId, exam).success(function (response) {
+                    dateService.convertStringsToDates(response.action_result);
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
+            });
+        }
+
+        function createLecture(courseId, lecture) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postLecture(courseId, lecture).success(function (response) {
+                    dateService.convertStringsToDates(response.action_result);
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
+            });
+        }
+
+        function createNotice(courseId, notice) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postNotice(courseId, notice).success(function (response) {
                     dateService.convertStringsToDates(response.action_result);
                     resolve(response.action_result);
                 }).error(function (response) {

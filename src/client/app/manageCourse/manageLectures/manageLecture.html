@@ -1,34 +1,87 @@
-<ng-form role="form" name="lectureForm">
+
+<ng-form role="form" name="lectureForm" novalidate>
+
+    <div class="has-error" ng-repeat="error in lectureForm.serverErrors">
+        <span >
+            {{error}}
+        </span>
+    </div>
+
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Name" data-ng-model="lecture.name" required>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name" 
+        ng-model="lecture.name" required>
+
+      <div class="has-error">
+          <span class="has-error" ng-show="lectureForm.name.$error.required && lectureForm.name.$touched">
+              Name is required.
+          </span>
+          <span ng-show="lectureForm.name.serverError">
+              {{lectureForm.name.serverError}}
+          </span>
+      </div>
     </div>
+
     <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" placeholder="Description" data-ng-model="lecture.description">
+        <input type="text" class="form-control" id="description" name="description" placeholder="Description" 
+        ng-model="lecture.description">
+
+          <div class="has-error">
+              <span ng-show="lectureForm.description.serverError">
+                  {{lectureForm.description.serverError}}
+              </span>
+          </div>
     </div>
+
     <div class="form-group">
         <label for="startDate">Start Date</label>
-        <input type="text" class="form-control" id="startDate" placeholder="Start Date" data-ng-model="lecture.start_date" required>
+        <input type="date" class="form-control" id="startDate" name="startdate" placeholder="Start Date" 
+        ng-model="lecture.start_date" required>
+
+          <div class="has-error">
+              <span ng-show="lectureForm.startdate.serverError">
+                  {{lectureForm.startdate.serverError}}
+              </span>
+          </div>
     </div>
+
     <div class="form-group">
         <label for="endDate">End Date</label>
-        <input type="text" class="form-control" id="endDate" placeholder="End Date" data-ng-model="lecture.end_date" required>
+        <input type="date" class="form-control" id="endDate" name="enddate" placeholder="End Date" 
+        ng-model="lecture.end_date" required>
+
+          <div class="has-error">
+              <span ng-show="lectureForm.enddate.serverError">
+                  {{lectureForm.enddate.serverError}}
+              </span>
+          </div>
     </div>
+
     <div class="form-group">
-        <label for="location">Location</label>
-        <input type="text" class="form-control" id="location" placeholder="Location" data-ng-model="lecture.location">
+        <label for="description">Location</label>
+        <input type="text" class="form-control" id="location" name="location" placeholder="Location" 
+        ng-model="lecture.location">
+
+          <div class="has-error">
+              <span ng-show="lectureForm.location.serverError">
+                  {{lectureForm.location.serverError}}
+              </span>
+          </div>
     </div>
+
     <div class="form-group">
         <label for="occurence">Occurence</label>
-        <input type="text" class="form-control" id="occurence" placeholder="Occurence" data-ng-model="lecture.occurence">
+        <select required id="occurence" name="occurence"
+          ng-model="lecture.occurence" ng-options="occurence.value as occurence.display for occurence in vm.occurences">
+          <option value="">-- choose occurence --</option>
+        </select>
+          <div class="has-error">
+              <span ng-show="lectureForm.occurence.serverError">
+                  {{lectureForm.occurence.serverError}}
+              </span>
+          </div>
     </div>
-    <div data-ng-if="action_type === 'update'">
-        <a class="btn btn-default" data-ng-click="vm.updateLecture(lecture, lectureForm)" data-ng-disabled="lectureForm.$invalid">Update</a>
-        <a class="btn btn-default" data-ng-click="vm.toggleEdit(lecture)">Cancel</a>
-    </div>
-    <div data-ng-if="action_type === 'create'">
-        <a class="btn btn-default" data-ng-click="vm.createLecture(lecture, lectureForm)" data-ng-disabled="lectureForm.$invalid">Create</a>
-        <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_lecture)">Cancel</a>
-    </div>
+    <a class="btn btn-default" data-ng-click="vm.submitLecture(lecture, lectureForm)" data-ng-disabled="lectureForm.$invalid || lectureForm.$pristine">{{vm.getSubmitText(lecture)}}</a>
+    <a class="btn btn-default" data-ng-click="vm.cancel(lecture, vm.lectures)">Cancel</a>
 </ng-form>

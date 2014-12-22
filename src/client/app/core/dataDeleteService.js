@@ -38,17 +38,23 @@
             });
         }
 
-        function deleteLecture(lecture) {
-            logger.info('Successfully deleted lecture ' + lecture.name);
-            return $q.when({
-                is_valid: true
+        function deleteLecture(courseId, lecture) {
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteLecture(courseId, lecture).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
             });
         }
 
-        function deleteNotice(notice) {
-            logger.info('Successfully deleted notice ' + notice.name);
-            return $q.when({
-                is_valid: true
+        function deleteNotice(courseId, notice) {
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteNotice(courseId, notice).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
             });
         }
     }
