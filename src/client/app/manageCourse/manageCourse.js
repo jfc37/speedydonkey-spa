@@ -19,8 +19,6 @@
         vm.exams = [];
         vm.lectures = [];
         vm.notices = [];
-
-        vm.new_assignment = {};
         vm.new_exam = {};
         vm.new_lecture = {};
         vm.new_notice = {};
@@ -35,14 +33,10 @@
             });
         };
 
-        vm.newAssignment = function() {
-            vm.assignments.push(vm.getNew());
-        };
-
-        vm.getNew = function() {
-            return {
+        vm.addNew = function(collection) {
+            collection.push({
                 is_editing: true
-            }
+            });
         };
 
         vm.getSubmitText = function(object) {
@@ -67,28 +61,37 @@
             } else {
                 promise = manageAssignmentService.createAssignment(vm.course.id, assignment);
             }
-            promise.then(function (createdAssignment) {
-                assignment.id = createdAssignment.id;
-                vm.toggleEdit(assignment);
-                form.$setPristine();
-                logger.success("Assignment created/updated");
-            }, function (errors) {
-                validationService.applyServerSideErrors(form, errors);
-                logger.error("Assignment failed to create");
-            });
+            afterSubmit(promise, assignment, form);
         };
 
-        vm.deleteAssignment = function(assignment) {
-            manageAssignmentService.deleteAssignment(vm.course.id, assignment).then(function (deletedAssignment) {
-                var index = vm.assignments.indexOf(assignment);
-                if (index > -1) {
-                    vm.assignments.splice(index, 1);
-                }
-                logger.success("Assignment deleted")
-            }, function () {
-                logger.error("Assignment failed to delete");
+        var afterSubmit = function (promise, object, form) {
+            promise.then(function (createdObject) {
+                object.id = createdObject.id;
+                vm.toggleEdit(object);
+                form.$setPristine();
+                logger.success("Created/Updated");
+            }, function (errors) {
+                validationService.applyServerSideErrors(form, errors);
+                logger.error("Failed to create/update");
             });
+        }
+
+        vm.deleteAssignment = function(assignment) {
+            var promise = manageAssignmentService.deleteAssignment(vm.course.id, assignment)
+            afterDelete(promise, assignment, vm.assignments);
         };
+
+        var afterDelete = function (promise, object, collection) {
+            promise.then(function (deletedObject) {
+                var index = collection.indexOf(object);
+                if (index > -1) {
+                    collection.splice(index, 1);
+                }
+                logger.success("Deleted")
+            }, function () {
+                logger.error("Failed to delete");
+            });
+        }
 
 
         vm.updateExam = function(exam, form) {
