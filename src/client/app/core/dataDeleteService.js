@@ -28,10 +28,13 @@
             });
         }
 
-        function deleteExam(exam) {
-            logger.info('Successfully deleted exam ' + exam.name);
-            return $q.when({
-                is_valid: true
+        function deleteExam(courseId, exam) {
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteExam(courseId, exam).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
             });
         }
 

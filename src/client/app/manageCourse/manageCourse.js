@@ -5,10 +5,10 @@
         .module('app.manageCourse')
         .controller('ManageCourse', ManageCourse);
 
-    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'manageAssignmentService', 'dataUpdateService', 'dataCreateService', 'dataDeleteService', 'logger', 'selectOptionService', 'validationService'];
+    ManageCourse.$inject = ['$q', '$routeParams', 'manageCourseService', 'manageAssignmentService', 'manageExamService', 'logger', 'selectOptionService', 'validationService'];
 
     /* @ngInject */
-    function ManageCourse($q, $routeParams, manageCourseService, manageAssignmentService, dataUpdateService, dataCreateService, dataDeleteService, logger, selectOptionService, validationService) {
+    function ManageCourse($q, $routeParams, manageCourseService, manageAssignmentService, manageExamService, logger, selectOptionService, validationService) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = $routeParams.courseName;
@@ -19,9 +19,6 @@
         vm.exams = [];
         vm.lectures = [];
         vm.notices = [];
-        vm.new_exam = {};
-        vm.new_lecture = {};
-        vm.new_notice = {};
 
         vm.updateCourseDetails = function(form) {
             manageCourseService.updateCourseDetails(vm.course).then(function() {
@@ -54,16 +51,6 @@
             }
         };
 
-        vm.submitAssignment = function(assignment, form) {
-            var promise;
-            if (assignment.id) {
-                promise = manageAssignmentService.updateAssignment(vm.course.id, assignment);
-            } else {
-                promise = manageAssignmentService.createAssignment(vm.course.id, assignment);
-            }
-            afterSubmit(promise, assignment, form);
-        };
-
         var afterSubmit = function (promise, object, form) {
             promise.then(function (createdObject) {
                 object.id = createdObject.id;
@@ -74,11 +61,6 @@
                 validationService.applyServerSideErrors(form, errors);
                 logger.error("Failed to create/update");
             });
-        }
-
-        vm.deleteAssignment = function(assignment) {
-            var promise = manageAssignmentService.deleteAssignment(vm.course.id, assignment)
-            afterDelete(promise, assignment, vm.assignments);
         };
 
         var afterDelete = function (promise, object, collection) {
@@ -91,46 +73,40 @@
             }, function () {
                 logger.error("Failed to delete");
             });
-        }
-
-
-        vm.updateExam = function(exam, form) {
-            dataUpdateService.updateExam(exam).then(function(data) {
-                if (data.is_valid){
-                    form.$setPristine();
-                    exam.is_editing = false;
-                } else {
-                    logger.error("Exam failed to update");
-                }
-            });
         };
 
-        vm.createExam = function(exam, form) {
-            dataCreateService.createExam(exam).then(function(data) {
-                if (data.is_valid){
-                    vm.new_exam.is_editing = false;
-                    vm.exams.push(data.action_result);
+        vm.submitAssignment = function(assignment, form) {
+            var promise;
+            if (assignment.id) {
+                promise = manageAssignmentService.updateAssignment(vm.course.id, assignment);
+            } else {
+                promise = manageAssignmentService.createAssignment(vm.course.id, assignment);
+            }
+            afterSubmit(promise, assignment, form);
+        };
 
-                    exam = {};
-                    form.$setPristine();
-                } else {
-                    logger.error("Exam failed to create");
-                }
-            });
+        vm.deleteAssignment = function(assignment) {
+            var promise = manageAssignmentService.deleteAssignment(vm.course.id, assignment)
+            afterDelete(promise, assignment, vm.assignments);
+        };
+
+        vm.submitExam = function(exam, form) {
+            var promise;
+            if (exam.id) {
+                promise = manageExamService.updateExam(vm.course.id, exam);
+            } else {
+                promise = manageExamService.createExam(vm.course.id, exam);
+            }
+            afterSubmit(promise, exam, form);
         };
 
         vm.deleteExam = function(exam) {
-            dataDeleteService.deleteExam(exam).then(function(data) {
-                if (data.is_valid) {
-                    var index = vm.exams.indexOf(exam);
-                    if (index > -1) {
-                        vm.exams.splice(index, 1);
-                    }
-                } else {
-                    logger.error("Exam failed to delete");
-                }
-            });
+            var promise = manageExamService.deleteExam(vm.course.id, exam)
+            afterDelete(promise, exam, vm.exams);
         };
+
+
+
 
 
         vm.updateLecture = function(lecture, form) {

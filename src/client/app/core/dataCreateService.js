@@ -14,28 +14,13 @@
             createUser: createUser,
             createPerson: createPerson,
             createAssignment: createAssignment,
-
             createExam: createExam,
+
             createLecture: createLecture,
             createNotice: createNotice,
         };
 
         return service;
-
-        function createExam(exam) {
-            logger.info('Successfully created exam ' + exam.name);
-            exam.is_editing = null;
-            return $q.when({
-                is_valid: true,
-                action_result: {
-                    name: exam.name,
-                    description: exam.description,
-                    start_time: exam.start_time,
-                    location: exam.location,
-                    grade_type: exam.grade_type
-                }
-            });
-        }
 
         function createLecture(lecture) {
             logger.info('Successfully created lecture ' + lecture.name);
@@ -82,6 +67,17 @@
         function createAssignment(courseId, assignment) {
             return $q(function (resolve, revoke) {
                 apiCaller.postAssignment(courseId, assignment).success(function (response) {
+                    dateService.convertStringsToDates(response.action_result);
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
+            });
+        }
+
+        function createExam(courseId, exam) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postExam(courseId, exam).success(function (response) {
                     dateService.convertStringsToDates(response.action_result);
                     resolve(response.action_result);
                 }).error(function (response) {

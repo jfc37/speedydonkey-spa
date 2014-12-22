@@ -25,6 +25,10 @@
             putAssignment: putAssignment,
             deleteAssignment: deleteAssignment,
 
+            postExam: postExam,
+            putExam: putExam,
+            deleteExam: deleteExam,
+
             postCourseEnrolment: postCourseEnrolment,
             deleteCourseEnrolment: deleteCourseEnrolment
         };
@@ -95,6 +99,21 @@
         function deleteAssignment(courseId, assignment) {
             var url = baseUrl + 'courses/' + courseId + '/assignments/' + assignment.id;
             return $http.delete(url, assignment);
+        }
+
+        function postExam(courseId, exam) {
+            var url = baseUrl + 'courses/' + courseId + '/exams';
+            return $http.post(url, exam);
+        }
+
+        function putExam(courseId, exam) {
+            var url = baseUrl + 'courses/' + courseId + '/exams/' + exam.id;
+            return $http.put(url, exam);
+        }
+
+        function deleteExam(courseId, exam) {
+            var url = baseUrl + 'courses/' + courseId + '/exams/' + exam.id;
+            return $http.delete(url, exam);
         }
 
         function postCourseEnrolment(parameters) {

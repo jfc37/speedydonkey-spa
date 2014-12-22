@@ -14,8 +14,8 @@
             unenrolInCourse: unenrolInCourse,
             updateCourse: updateCourse,
             updateAssignment: updateAssignment,
-
             updateExam: updateExam,
+
             updateNotice: updateNotice,
         };
 
@@ -61,10 +61,13 @@
             });
         }
 
-        function updateExam(exam) {
-            logger.info('Successfully updated exam ' + exam.name);
-            return $q.when({
-                is_valid: true
+        function updateExam(courseId, exam) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putExam(courseId, exam).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    revoke(response);
+                });
             });
         }
 

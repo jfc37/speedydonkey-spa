@@ -38,7 +38,7 @@
     }
 
     function isDateProperty(propertyName) {
-        return propertyName.toLowerCase().indexOf('date') > -1;
+        return propertyName.toLowerCase().indexOf('date') > -1 || propertyName.toLowerCase().indexOf('time') > -1;
     }
 
     function isArray(object) {

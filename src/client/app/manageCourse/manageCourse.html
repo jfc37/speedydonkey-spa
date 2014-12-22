@@ -123,15 +123,10 @@
                                 <a class="btn btn-default" data-ng-click="vm.deleteExam(exam)">Delete</a>
                             </div>
                             <div data-ng-show="exam.is_editing" class="user">
-                                <div ng-include src="'app/manageCourse/manageExams/manageExam.html'" onload="action_type = 'update'"></div>
+                                <div ng-include src="'app/manageCourse/manageExams/manageExam.html'"></div>
                             </div>
                         </div>
-                        <div class="user">
-                            <a class="btn btn-default" data-ng-click="vm.toggleEdit(vm.new_exam)">New Exam</a>
-                            <div data-ng-show="vm.new_exam.is_editing" class="user">
-                                <div ng-include src="'app/manageCourse/manageExams/manageExam.html'" onload="action_type = 'create'; exam = vm.new_exam"></div>
-                            </div>
-                        </div>
+                        <a class="btn btn-default" data-ng-click="vm.addNew(vm.exams)">New</a>
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>
