@@ -1,0 +1,27 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget worange">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content user">
+                		<div class="user">
+                			<h5>Calculated Grade - {{vm.calculatedGrade}}</h5>
+                			<div class="user-details">
+                                <div>
+                                    <h6>Gradable Course Work</h6>
+                                    <div data-ng-repeat="courseWork in vm.courseWorks">
+                                        {{courseWork.name}}
+                                    </div>
+                                </div>
+                			</div>
+                		</div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

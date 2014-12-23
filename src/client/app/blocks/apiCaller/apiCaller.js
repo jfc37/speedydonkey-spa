@@ -5,16 +5,18 @@
         .module('app.apiCaller')
         .factory('apiCaller', apiCaller);
 
-    apiCaller.$inject = ['$q', '$http', 'logger'];
+    apiCaller.$inject = ['$http'];
 
     /* @ngInject */
-    function apiCaller($q, $http, logger) {
+    function apiCaller($http) {
         var service = {
             searchUser: searchUser,
             postUser : postUser,
+            putUser : putUser,
 
-            postPerson : postPerson,
             getPerson : getPerson,
+            postPerson : postPerson,
+            putPerson : putPerson,
 
             getCourse : getCourse,
             searchCourse: searchCourse,
@@ -56,12 +58,12 @@
             return $http.post(url, user);
         }
 
-
-
-        function postPerson(parameters, person) {
-            var url = baseUrl + 'users/' + parameters.user_id + '/' + person.role + 's';
-            return $http.post(url, person);
+        function putUser(user) {
+            var url = baseUrl + 'users/' + user.id;
+            return $http.put(url, user);
         }
+
+
 
         function getPerson(parameters) {
             var url = baseUrl + parameters.role + 's';
@@ -70,6 +72,16 @@
             }
 
             return $http.get(url);
+        }
+
+        function postPerson(parameters, person) {
+            var url = baseUrl + 'users/' + parameters.user_id + '/' + person.role + 's';
+            return $http.post(url, person);
+        }
+
+        function putPerson(parameters, person) {
+            var url = baseUrl + 'users/' + parameters.user_id + '/' + person.role + 's/' + person.id;
+            return $http.put(url, person);
         }
 
 

@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataDeleteService', dataDeleteService);
 
-    dataDeleteService.$inject = ['$q', 'logger', 'apiCaller'];
+    dataDeleteService.$inject = ['$q', 'apiCaller'];
 
     /* @ngInject */
-    function dataDeleteService($q, logger, apiCaller) {
+    function dataDeleteService($q, apiCaller) {
         var service = {
             deleteAssignment: deleteAssignment,
             deleteExam: deleteExam,

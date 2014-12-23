@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$q', '$http', 'apiCaller', 'dateService'];
+    dataservice.$inject = ['$q', 'apiCaller', 'dateService'];
 
     /* @ngInject */
-    function dataservice($q, $http, apiCaller, dateService) {
+    function dataservice($q, apiCaller, dateService) {
         var service = {
 
             getAllCourses: getAllCourses,

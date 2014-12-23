@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('authService', authService);
 
-    authService.$inject = ['$q', '$http', '$cookieStore', 'base64Service', 'logger', 'dataservice'];
+    authService.$inject = ['$q', '$http', '$cookieStore', 'base64Service', 'dataservice'];
 
     /* @ngInject */
-    function authService($q, $http, $cookieStore, base64Service, logger, dataservice){
+    function authService($q, $http, $cookieStore, base64Service, dataservice){
 
         var userIdentity = {
             isLoggedIn: false
@@ -63,14 +63,11 @@
                     $cookieStore.put('authdata', encoded);
                     $cookieStore.put('authuser', userIdentity);
 
-                    logger.success("Login successful");
                     resolve();
                 }, function(response){
                     logout();
                     if (response.status === 401){
                         revoke([{property_name: "global", error_message: "Invalid username or password"}]);
-                    } else {
-                        logger.error("Login failed");
                     }
                 });
             });
@@ -89,8 +86,6 @@
             userIdentity = {
                 isLoggedIn: false
             };
-
-            logger.success('Successfully logged out');
         }
 
     }

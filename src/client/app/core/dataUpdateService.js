@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataUpdateService', dataUpdateService);
 
-    dataUpdateService.$inject = ['$q', 'logger', 'apiCaller'];
+    dataUpdateService.$inject = ['$q', 'apiCaller'];
 
     /* @ngInject */
-    function dataUpdateService($q, logger, apiCaller) {
+    function dataUpdateService($q, apiCaller) {
         var service = {
             enrolInCourse: enrolInCourse,
             unenrolInCourse: unenrolInCourse,

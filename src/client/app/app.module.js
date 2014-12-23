@@ -32,6 +32,7 @@
         'app.manageCourse',
         'app.createCourse',
         'app.meetingRoom',
+        'app.gradeCenter',
     ]);
 
 })();

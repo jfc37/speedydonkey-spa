@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataCreateService', dataCreateService);
 
-    dataCreateService.$inject = ['$q', 'logger', 'apiCaller', 'authService', 'dateService'];
+    dataCreateService.$inject = ['$q', 'apiCaller', 'authService', 'dateService'];
 
     /* @ngInject */
-    function dataCreateService($q, logger, apiCaller, authService, dateService) {
+    function dataCreateService($q, apiCaller, authService, dateService) {
         var service = {
             createCourse: createCourse,
             createUser: createUser,
@@ -78,7 +78,6 @@
         function createUser(user) {
             return $q(function (resolve, reject) {
                 apiCaller.postUser(user).success(function(response) {
-                    logger.info('Successfully created user ' + user.username);
                     resolve(response.action_result);
                 }).error(function(response) {
                     reject(response);
@@ -89,7 +88,6 @@
         function createPerson(person) {
             return $q(function (resolve, reject) {
                 apiCaller.postPerson({user_id: authService.getUserIdentity().userId}, person).success(function(response, data) {
-                    logger.info('Successfully created person ' + response.action_result.first_name + ' ' + response.action_result.surname);
                     resolve(response.action_result);
                 }).error(function(response) {
                     reject(response);
