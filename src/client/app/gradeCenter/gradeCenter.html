@@ -11,7 +11,11 @@
                                 <div>
                                     <h6>Gradable Course Work</h6>
                                     <div data-ng-repeat="courseWork in vm.courseWorks">
-                                        {{courseWork.name}}
+                                        <div>{{courseWork.name}} - {{courseWork.final_mark_percentage}}% of final mark</div>
+                                        <div class="clearfix">
+                                            <input type="text" ng-model="courseWork.grade" ng-change="vm.recalculateGrade()"></input>
+                                            <!-- <a class="btn btn-primary" ng-click="vm.saveGrade(courseWork)">Save Grade</a> -->
+                                        </div>
                                     </div>
                                 </div>
                 			</div>

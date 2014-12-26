@@ -1,6 +1,6 @@
 (function () {
     'use strict';
 
-    angular.module('app.gradeCenter', []);
+    angular.module('app.gradeCenter', ['ui.bootstrap-slider']);
 
 })();
