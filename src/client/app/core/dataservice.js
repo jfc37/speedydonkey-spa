@@ -18,6 +18,8 @@
             searchForUser: searchForUser,
 
             getStudent: getStudent,
+
+            getCourseGrade: getCourseGrade
         };
 
         return service;
@@ -88,5 +90,16 @@
                 });
             });
         }
+
+        function getCourseGrade(studentId, courseId) {
+            return $q(function (resolve, reject) {
+                apiCaller.getCourseGrade({studentId: studentId, courseId: courseId}).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
     }
 })();

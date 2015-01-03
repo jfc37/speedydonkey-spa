@@ -17,6 +17,7 @@
             createExam: createExam,
             createLecture: createLecture,
             createNotice: createNotice,
+            createGrade: createGrade
         };
 
         return service;
@@ -88,6 +89,20 @@
         function createPerson(person) {
             return $q(function (resolve, reject) {
                 apiCaller.postPerson({user_id: authService.getUserIdentity().userId}, person).success(function(response, data) {
+                    resolve(response.action_result);
+                }).error(function(response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function createGrade(courseId, courseWork) {
+            return $q(function (resolve, reject) {
+                apiCaller.postGrade({
+                    personId: authService.getUserIdentity().personId,
+                    courseId: courseId,
+                    courseWorkId: courseWork.id,
+                }, courseWork).success(function(response, data) {
                     resolve(response.action_result);
                 }).error(function(response) {
                     reject(response);

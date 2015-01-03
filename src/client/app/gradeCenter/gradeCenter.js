@@ -28,7 +28,7 @@
         };
 
         vm.saveGrade = function(courseWork) {
-            gradeCenterService.saveGrade(courseWork).then(function() {
+            gradeCenterService.saveGrade(vm.courseId, courseWork).then(function() {
                 logger.success("Grade saved");
             }, function() {
                 logger.error("Failed to save grade");
@@ -45,10 +45,14 @@
         }
 
         function getCourse() {
-            gradeCenterService.getCourse($routeParams.courseName).then(function (course) {
-                vm.courseWorks = course.exams.concat(course.assignments);
-                vm.gradeType = course.grade_type;
-                vm.title = course.name;
+            gradeCenterService.getCourseGrades($routeParams.courseName).then(function (courseGrade) {
+                vm.courseWorks = courseGrade.course.courseWorks;
+
+                vm.gradeType = courseGrade.course.grade_type;
+                vm.courseId = courseGrade.course.id;
+                vm.title = courseGrade.course.name;
+
+                vm.recalculateGrade();
             }, function () {
                 logger.error("Problem loading course");
             });

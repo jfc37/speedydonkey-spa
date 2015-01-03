@@ -40,7 +40,10 @@
             deleteLecture: deleteLecture,
 
             postCourseEnrolment: postCourseEnrolment,
-            deleteCourseEnrolment: deleteCourseEnrolment
+            deleteCourseEnrolment: deleteCourseEnrolment,
+
+            getCourseGrade: getCourseGrade,
+            postGrade: postGrade,
         };
 
         var baseUrl = 'http://api-studybuddy.azurewebsites.net/api/';
@@ -188,6 +191,17 @@
         function deleteCourseEnrolment(parameters) {
             var url = baseUrl + 'students/' + parameters.personId + '/courses/' + parameters.courseId;
             return $http.delete(url);
+        }
+
+
+        function postGrade(parameters, grade) {
+            var url = baseUrl + 'students/' + parameters.personId + '/grades/courses/' + parameters.courseId + '/course_work/' + parameters.courseWorkId;
+            return $http.post(url, grade);
+        }
+
+        function getCourseGrade(parameters) {
+            var url = baseUrl + 'students/' + parameters.studentId + '/grades/courses/' + parameters.courseId;
+            return $http.get(url);
         }
     }
 })();

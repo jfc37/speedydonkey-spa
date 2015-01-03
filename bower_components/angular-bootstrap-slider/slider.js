@@ -65,6 +65,13 @@ angular.module('ui.bootstrap-slider', [])
 					});
 				});
 
+				if (attrs.change) {
+					var functionToCall = "$scope.$parent." + attrs.change;
+                	slider.on(updateEvent, function() {
+						eval(functionToCall);
+                	});
+                }
+
 				$scope.$watch(attrs.ngModel, function(value) {
 					if(value || value === 0) {
 						slider.slider('setValue', value, false);

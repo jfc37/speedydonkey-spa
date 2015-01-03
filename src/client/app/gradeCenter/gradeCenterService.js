@@ -6,30 +6,44 @@
         .factory('gradeCenterService', gradeCenterService)
         .factory('gradeTypeHandlerFactory', gradeTypeHandlerFactory);
 
-    gradeCenterService.$inject = ['myCourseService', 'gradeTypeHandlerFactory'];
+    gradeCenterService.$inject = ['$q', 'myCourseService', 'gradeTypeHandlerFactory', 'dataCreateService', 'dataservice', 'authService'];
 
     /* @ngInject */
-    function gradeCenterService(myCourseService, gradeTypeHandlerFactory) {
+    function gradeCenterService($q, myCourseService, gradeTypeHandlerFactory, dataCreateService, dataservice, authService) {
         /*jshint validthis: true */
         var service = {
-            getCourse: getCourse,
+            getCourseGrades: getCourseGrades,
             calculateWeightedGrade: calculateWeightedGrade,
             saveGrade: saveGrade
         };
 
-        function getCourse(courseName) {
-            return myCourseService.getCourse(courseName);
+        function getCourseGrades(courseName) {
+            return $q(function (resolve, revoke) {
+                myCourseService.getCourse(courseName).then(function (course) {
+                    dataservice.getCourseGrade(authService.getUserIdentity().personId, course.id).then(function (courseGrade) {
+                        courseGrade.course.courseWorks = course.exams.concat(course.assignments);
+
+                        courseGrade.course_work_grades.forEach(function (grade) {
+                            courseGrade.course.courseWorks.filter(function (courseWork) {
+                                return courseWork.id === grade.course_work.id;
+                            })[0].grade_percentage = grade.grade_percentage;
+                        });
+
+                        resolve(courseGrade);
+                    }, revoke);
+                }, revoke);
+            });
         }
 
-        function saveGrade(courseWork) {
-            
+        function saveGrade(courseId, courseWork) {
+            return dataCreateService.createGrade(courseId, courseWork);
         }
 
         function calculateWeightedGrade(courseWorks, gradeType) {
             var weightedGrade = 0;
             courseWorks.forEach(function (courseWork) {
                 if (isRequiredForGradeWeightCalculation(courseWork)) {
-                    var courseWorkWeighting = courseWork.grade * (courseWork.final_mark_percentage / 100);
+                    var courseWorkWeighting = courseWork.grade_percentage * (courseWork.final_mark_percentage / 100);
                     weightedGrade = weightedGrade + courseWorkWeighting;
                 }
             });
@@ -39,8 +53,8 @@
         }
 
         function isRequiredForGradeWeightCalculation(courseWork) {
-            courseWork.grade = parseInt(courseWork.grade, 10);
-            return courseWork.final_mark_percentage > 0 && courseWork.grade > -1;
+            courseWork.grade_percentage = parseInt(courseWork.grade_percentage, 10);
+            return courseWork.final_mark_percentage > 0 && courseWork.grade_percentage > -1;
         }
 
         return service;
