@@ -15,12 +15,12 @@
     function getRoutes() {
         return [
             {
-                url: '/register/user',
+                url: '/register/account',
                 config: {
-                    title: 'registerUser',
-                    controller: 'RegisterUser',
+                    title: 'registerAccount',
+                    controller: 'RegisterAccount',
                     controllerAs: 'vm',
-                    templateUrl: 'app/register/registerUser.html',
+                    templateUrl: 'app/register/registerAccount.html',
                     allowAnonymous: true,
                     denyAuthorised: true
                 }

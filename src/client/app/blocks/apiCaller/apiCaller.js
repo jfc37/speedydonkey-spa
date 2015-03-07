@@ -11,7 +11,7 @@
     function apiCaller($http) {
         var service = {
             searchUser: searchUser,
-            postUser : postUser,
+            postAccount : postAccount,
             putUser : putUser,
 
             getPerson : getPerson,
@@ -51,18 +51,18 @@
         return service;
 
         function searchUser(search) {
-            var url = baseUrl + 'users?q=' + search;
+            var url = baseUrl + 'accounts?q=' + search;
 
             return $http.get(url);
         }
 
-        function postUser(user) {
-            var url = baseUrl + 'users';
-            return $http.post(url, user);
+        function postAccount(account) {
+            var url = baseUrl + 'accounts';
+            return $http.post(url, account);
         }
 
         function putUser(user) {
-            var url = baseUrl + 'users/' + user.id;
+            var url = baseUrl + 'accounts/' + user.id;
             return $http.put(url, user);
         }
 

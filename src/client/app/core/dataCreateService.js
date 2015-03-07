@@ -11,7 +11,7 @@
     function dataCreateService($q, apiCaller, authService, dateService) {
         var service = {
             createCourse: createCourse,
-            createUser: createUser,
+            createAccount: createAccount,
             createPerson: createPerson,
             createAssignment: createAssignment,
             createExam: createExam,
@@ -76,9 +76,9 @@
             });
         }
 
-        function createUser(user) {
+        function createAccount(account) {
             return $q(function (resolve, reject) {
-                apiCaller.postUser(user).success(function(response) {
+                apiCaller.postAccount(account).success(function(response) {
                     resolve(response.action_result);
                 }).error(function(response) {
                     reject(response);

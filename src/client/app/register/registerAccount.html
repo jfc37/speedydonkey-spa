@@ -7,24 +7,24 @@
                     <h3 class="text-center">New User</h2>
                       <form class="form-horizontal" name="registerForm" novalidate>
 
-                              <div class="form-group" ng-class="{'has-error':registerForm.name.$invalid && registerForm.name.$touched}">
+                              <div class="form-group" ng-class="{'has-error':registerForm.email.$invalid && registerForm.email.$touched}">
                                   
                                     <div class="col-xs-12">
                                         <input class="form-control col-xs-12"
-                                               id="username"
-                                               name="username"
+                                               id="email"
+                                               name="email"
                                                type="text"
-                                               placeholder="Username (required)"
-                                               ng-model="vm.user.username"
+                                               placeholder="Email (required)"
+                                               ng-model="vm.account.email"
                                                required/>
                                     </div>
 
                                   <div class="has-error">
-                                      <span class="has-error" ng-show="registerForm.username.$error.required && registerForm.username.$touched">
-                                          Username is required.
+                                      <span class="has-error" ng-show="registerForm.email.$error.required && registerForm.email.$touched">
+                                          Email is required.
                                       </span>
-                                      <span ng-show="registerForm.username.serverError">
-                                          {{registerForm.username.serverError}}
+                                      <span ng-show="registerForm.email.serverError">
+                                          {{registerForm.email.serverError}}
                                       </span>
                                   </div>
                               </div>
@@ -36,7 +36,7 @@
                                            name="password"
                                            type="password"
                                            placeholder="Password (required)"
-                                           ng-model="vm.user.password"
+                                           ng-model="vm.account.password"
                                            required/>
                       			     </div>
 
