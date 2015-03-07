@@ -33,6 +33,7 @@
         'app.createCourse',
         'app.meetingRoom',
         'app.gradeCenter',
+        'app.manageUser',
     ]);
 
 })();

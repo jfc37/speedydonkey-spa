@@ -46,7 +46,7 @@
             postGrade: postGrade,
         };
 
-        var baseUrl = 'http://api-studybuddy.azurewebsites.net/api/';
+        var baseUrl = 'http://api-speedydonkey.azurewebsites.net/api/';
 
         return service;
 

@@ -18,6 +18,7 @@
         vm.getUserIdentity = authService.getUserIdentity;
         vm.loginUrl = '#/login';
         vm.registerUrl = '#/register/user';
+        vm.manageUserUrl = '#/manageUser'
         vm.logout = function() {
             authService.logout();
             routehelper.redirectToRoute('login');
