@@ -2,64 +2,7 @@
     <section class="matter">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="widget wviolet">
-                        <div data-cc-widget-header title="Course Notices"
-                             allow-collapse="true"></div>
-                        <div class="widget-content text-center text-info">
-                            <div data-ng-repeat="notice in vm.courseNotices">
-                                <div>
-                                    <h5>{{notice.courseName}}</h5>
-                                    <p>{{notice.message}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-foot">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="widget wgreen">
-                        <div data-cc-widget-header title="Upcoming Deadlines"
-                             allow-collapse="true"></div>
-                        <div class="widget-content text-center text-info">
-                            <div data-ng-repeat="courseWork in vm.upcomingDeadline | orderBy: due_date | limitTo: 5">
-                                <div>
-                                    <h5>{{courseWork.courseName}}</h5>
-                                    <p>
-                                        {{courseWork.name}} 
-                                        <span data-ng-if="courseWork.type === assignment"> is due {{courseWork.end_date}}</span>
-                                        <span data-ng-if="courseWork.type === exam"> is on {{courseWork.start_time}} </span>
-                                        <small data-ng-if="courseWork.final_mark_percentage > 0"> - worth {{courseWork.final_mark_percentage}}% </small>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-foot">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="widget wgreen">
-                        <div data-cc-widget-header title="Upcoming Lectures"
-                             allow-collapse="true"></div>
-                        <div class="widget-content text-center text-info">
-                            <div data-ng-repeat="lecture in vm.upcomingLectures | orderBy: start_date | limitTo: 5">
-                                <div>
-                                    <h5>{{lecture.courseName}} - {{lecture.start_date}}</h5>
-                                    <p>
-                                        {{lecture.location}} 
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-foot">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
+                <h1>Welcome to Fully Swung y'all!</h1>
             </div>
         </div>
     </section>

@@ -15,16 +15,13 @@
             getUser: getUser,
             searchUser: searchUser,
 
+            getBlock : getBlock,
+            postBlockEnrolment: postBlockEnrolment,
             
 
 
             putUser : putUser,
 
-
-
-
-
-            getCourse : getCourse,
             searchCourse: searchCourse,
             postCourse: postCourse,
             putCourse: putCourse,
@@ -45,7 +42,6 @@
             putLecture: putLecture,
             deleteLecture: deleteLecture,
 
-            postCourseEnrolment: postCourseEnrolment,
             deleteCourseEnrolment: deleteCourseEnrolment,
 
             getCourseGrade: getCourseGrade,
@@ -71,6 +67,20 @@
             var url = baseUrl + 'users?q=' + search;
 
             return $http.get(url);
+        }
+
+        function getBlock(blockId) {
+            var url = baseUrl + 'blocks';
+            if (blockId !== undefined && blockId !== null) {
+                url = url + '/' + blockId;
+            }
+
+            return $http.get(url);
+        }
+        
+        function postBlockEnrolment(parameters) {
+            var url = baseUrl + 'users/' + parameters.userId + '/blocks/' + parameters.blockId;
+            return $http.post(url);
         }
 
 
@@ -103,17 +113,6 @@
         function putPerson(parameters, person) {
             var url = baseUrl + 'users/' + parameters.user_id + '/' + person.role + 's/' + person.id;
             return $http.put(url, person);
-        }
-
-
-
-        function getCourse(courseId) {
-            var url = baseUrl + 'courses';
-            if (courseId !== undefined && courseId !== null) {
-                url = url + '/' + courseId;
-            }
-
-            return $http.get(url);
         }
 
         function searchCourse(search) {
@@ -199,12 +198,6 @@
             return $http.delete(url, lecture);
         }
 
-        
-
-        function postCourseEnrolment(parameters) {
-            var url = baseUrl + 'students/' + parameters.personId + '/courses/' + parameters.courseId;
-            return $http.post(url);
-        }
 
         function deleteCourseEnrolment(parameters) {
             var url = baseUrl + 'students/' + parameters.personId + '/courses/' + parameters.courseId;

@@ -1,0 +1,33 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget worange">
+                    <div data-cc-widget-header title="Block Selection" subtitle="{{vm.blocks.length}}"></div>
+                    <div class="widget-content user">
+                        <form role="form">
+                            <h4>Available Blocks</h4>
+                            <div class="padd" data-ng-repeat="block in vm.blocks | filter: { isEnroled: false }">
+                                <div class="form-group">
+                                    {{block.level.name}}
+                                    <input type="checkbox" data-ng-model="block.enrolIn">
+                                </div>
+                            </div>
+                            <hr>
+                            <h4>Blocks already enroled in</h4>
+                            <div class="padd" data-ng-repeat="block in vm.blocks | filter: { isEnroled: true }">
+                                {{block.level.name}}
+                            </div>
+                        </form>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn btn-primary" ng-click="vm.submit()">Enrol</button>
+            </div>
+        </div>
+    </section>
+</section>

@@ -22,12 +22,16 @@
          * Feature areas
          */
         'app.dashboard',
-        'app.myCourses',
-        'app.myCourse',
-        'app.courseEnrolment',
+        'app.blockEnrolment',
         'app.layout',
         'app.logon',
         'app.register',
+
+
+
+        
+        'app.myCourses',
+        'app.myCourse',
         'app.manageCourses',
         'app.manageCourse',
         'app.createCourse',

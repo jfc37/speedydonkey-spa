@@ -10,7 +10,9 @@
     /* @ngInject */
     function dataUpdateService($q, apiCaller) {
         var service = {
-            enrolInCourse: enrolInCourse,
+            enrolInBlock: enrolInBlock,
+
+
             unenrolInCourse: unenrolInCourse,
             updateCourse: updateCourse,
             updateAssignment: updateAssignment,
@@ -21,9 +23,9 @@
 
         return service;
 
-        function enrolInCourse(parameters) {
+        function enrolInBlock(parameters) {
             return $q(function (resolve, revoke) {
-                apiCaller.postCourseEnrolment(parameters).then(function(response) {
+                apiCaller.postBlockEnrolment(parameters).then(function(response) {
                     resolve();
                 }, function () {
                     revoke();

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.courseEnrolment')
+        .module('app.blockEnrolment')
         .run(appRun);
 
     appRun.$inject = ['routehelper'];
@@ -15,15 +15,15 @@
     function getRoutes() {
         return [
             {
-                url: '/enrolment',
+                url: '/blockEnrolment',
                 config: {
-                    title: 'courseEnrolment',
-                    controller: 'CourseEnrolment',
+                    title: 'blockEnrolment',
+                    controller: 'BlockEnrolment',
                     controllerAs: 'vm',
-                    templateUrl: 'app/courseEnrolment/courseEnrolment.html',
+                    templateUrl: 'app/blockEnrolment/blockEnrolment.html',
                     settings: {
                         nav: 4,
-                        content: '<i class="fa fa-toggle-on"></i> Manage Enrolments'
+                        content: '<i class="fa fa-toggle-on"></i> Enrolment in Blocks'
                     }
                 }
             }

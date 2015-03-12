@@ -14,8 +14,9 @@
             getUser: getUser,
             searchForUser: searchForUser,
 
+            getAllBlocks: getAllBlocks,
 
-            getAllCourses: getAllCourses,
+            //UNUSED
             getCourse: getCourse,
             searchForCourse: searchForCourse,
 
@@ -48,6 +49,16 @@
             return apiCaller.searchUser(q);
         }
 
+        function getAllBlocks() {
+            return $q(function (resolve, reject) {
+                apiCaller.getBlock().then(function (response) {
+                    resolve(response.data);   
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
 
 
         
@@ -58,16 +69,6 @@
                 apiCaller.getCourse(courseId).then(function (response) {
                     resolve(response.data);
                 }, revoke);
-            });
-        }
-
-        function getAllCourses() {
-            return $q(function (resolve, reject) {
-                apiCaller.getCourse().then(function (response) {
-                    resolve(response.data);   
-                }, function (response) {
-                    reject(response);
-                });
             });
         }
 
