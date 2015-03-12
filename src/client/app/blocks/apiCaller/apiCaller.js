@@ -10,13 +10,18 @@
     /* @ngInject */
     function apiCaller($http) {
         var service = {
+
+            postUser : postUser,
+            getUser: getUser,
+
+
+
             searchUser: searchUser,
-            postAccount : postAccount,
             putUser : putUser,
 
-            getPerson : getPerson,
-            postPerson : postPerson,
-            putPerson : putPerson,
+
+
+
 
             getCourse : getCourse,
             searchCourse: searchCourse,
@@ -50,15 +55,24 @@
 
         return service;
 
+
+        function postUser(user) {
+            var url = baseUrl + 'users';
+            return $http.post(url, user);
+        }
+
+        function getUser(userId) {
+            var url = baseUrl + 'users/' + userId;
+            return $http.get(url);
+        }
+
+
+
+
         function searchUser(search) {
             var url = baseUrl + 'accounts?q=' + search;
 
             return $http.get(url);
-        }
-
-        function postAccount(account) {
-            var url = baseUrl + 'accounts';
-            return $http.post(url, account);
         }
 
         function putUser(user) {

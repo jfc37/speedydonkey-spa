@@ -17,7 +17,7 @@
         vm.showSplash = true;
         vm.getUserIdentity = authService.getUserIdentity;
         vm.loginUrl = '#/login';
-        vm.registerUrl = '#/register/account';
+        vm.registerUrl = '#/register/user';
         vm.manageUserUrl = '#/manageUser'
         vm.logout = function() {
             authService.logout();

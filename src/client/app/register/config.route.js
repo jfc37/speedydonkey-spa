@@ -15,27 +15,16 @@
     function getRoutes() {
         return [
             {
-                url: '/register/account',
+                url: '/register/user',
                 config: {
-                    title: 'registerAccount',
-                    controller: 'RegisterAccount',
+                    title: 'registerUser',
+                    controller: 'RegisterUser',
                     controllerAs: 'vm',
-                    templateUrl: 'app/register/registerAccount.html',
+                    templateUrl: 'app/register/registerUser.html',
                     allowAnonymous: true,
                     denyAuthorised: true
                 }
-            },
-            {
-                url: '/register/person',
-                config: {
-                    title: 'registerPerson',
-                    controller: 'RegisterPerson',
-                    controllerAs: 'vm',
-                    templateUrl: 'app/register/registerPerson.html',
-                    denyRegisteredPerson: true,
-                    allowUnregisteredPerson: true
-                }
-            },
+            }
         ];
     }
 })();

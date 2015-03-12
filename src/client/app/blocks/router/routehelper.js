@@ -166,37 +166,15 @@
 
         /*private*/
         function isAuthorisedForRoute(route) {
-            var userIdentity = getUserIdentity();
-            var isUnregisteredPerson = userIdentity.role === undefined;
-            var isStudent = !isUnregisteredPerson && userIdentity.role.toLowerCase() === 'student';
-            var isProfessor = !isUnregisteredPerson && userIdentity.role.toLowerCase() === 'professor';
-
-            var isAuthorised = true;
-            if (!userIdentity.isLoggedIn) {
-                if (!route.allowAnonymous){
-                    isAuthorised = false;
-                }
-             } else if (route.denyAuthorised){
-                    isAuthorised = false;
-            } else if (!route.allowUnregisteredPerson && isUnregisteredPerson){
-                    isAuthorised = false;
-            } else if (route.denyRegisteredPerson && !isUnregisteredPerson){
-                    isAuthorised = false;
-            } else if (route.denyStudent && isStudent){
-                    isAuthorised = false;
-            }
-            return isAuthorised;
+            return true;
         }
 
         function getDefaultRoute() {
             var userIdentity = getUserIdentity();
-            var isUnregisteredPerson = userIdentity.role === undefined;
 
             var defaultRoute = 'dashboard';
             if (!userIdentity.isLoggedIn) {
                 defaultRoute = 'login';
-            } else if (isUnregisteredPerson) {
-                defaultRoute = 'registerPerson';
             }
 
             return defaultRoute;

@@ -3,22 +3,21 @@
 
     angular
         .module('app.core')
-        .factory('registerAccountService', registerAccountService);
+        .factory('registerUserService', registerUserService);
 
-    registerAccountService.$inject = ['$q', 'logger', 'dataCreateService', 'authService'];
+    registerUserService.$inject = ['$q', 'logger', 'dataCreateService', 'authService'];
 
     /* @ngInject */
-    function registerAccountService($q, logger, dataCreateService, authService){
+    function registerUserService($q, logger, dataCreateService, authService){
 
         var service = {
             register: register
         };
 
-        function register(account) {
+        function register(user) {
             return $q(function (resolve, revoke) {
-                dataCreateService.createAccount(account).then(function (createdAccount) {
-                    authService.login(account.email, account.password);
-                    authService.setUserIdentityProperty('userId', createdAccount.id);
+                dataCreateService.createUser(user).then(function (createdUser) {
+                    authService.login(user.email, user.password, createdUser.id);
                     resolve();
                 }, function (response) {
                     if (response.validation_result !== undefined){

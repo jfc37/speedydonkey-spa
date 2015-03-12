@@ -10,9 +10,10 @@
     /* @ngInject */
     function dataCreateService($q, apiCaller, authService, dateService) {
         var service = {
+            createUser: createUser,
+
+
             createCourse: createCourse,
-            createAccount: createAccount,
-            createPerson: createPerson,
             createAssignment: createAssignment,
             createExam: createExam,
             createLecture: createLecture,
@@ -21,6 +22,19 @@
         };
 
         return service;
+
+
+
+        function createUser(user) {
+            return $q(function (resolve, reject) {
+                apiCaller.postUser(user).success(function(response) {
+                    resolve(response.action_result);
+                }).error(function(response) {
+                    reject(response);
+                });
+            }); 
+        }
+
 
         function createCourse(course) {
             return $q(function (resolve, revoke) {
@@ -72,26 +86,6 @@
                     resolve(response.action_result);
                 }).error(function (response) {
                     revoke(response);
-                });
-            });
-        }
-
-        function createAccount(account) {
-            return $q(function (resolve, reject) {
-                apiCaller.postAccount(account).success(function(response) {
-                    resolve(response.action_result);
-                }).error(function(response) {
-                    reject(response);
-                });
-            }); 
-        }
-
-        function createPerson(person) {
-            return $q(function (resolve, reject) {
-                apiCaller.postPerson({user_id: authService.getUserIdentity().userId}, person).success(function(response, data) {
-                    resolve(response.action_result);
-                }).error(function(response) {
-                    reject(response);
                 });
             });
         }

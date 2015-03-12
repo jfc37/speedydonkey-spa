@@ -11,6 +11,9 @@
     function dataservice($q, apiCaller, dateService) {
         var service = {
 
+            getUser: getUser,
+
+
             getAllCourses: getAllCourses,
             getCourse: getCourse,
             searchForCourse: searchForCourse,
@@ -23,6 +26,14 @@
         };
 
         return service;
+
+        function getUser(userId) {
+            return $q(function (resolve, revoke) {
+                apiCaller.getUser(userId).then(function (response) {
+                    resolve(response.data);
+                }, revoke);
+            });
+        }
 
         function getCourse(courseId) {
             

@@ -44,21 +44,16 @@
             $cookieStore.put('authuser', userIdentity);
         }
 
-        function login(username, password) {
-            var encoded = base64Service.encode(username + ':' + password);
+        function login(email, password, userId) {
+            var encoded = base64Service.encode(email + ':' + password);
             addBasicAuthorisation(encoded);
 
             return $q(function (resolve, revoke) {
-                dataservice.searchForUser({username: username}).then(function (response) {
+                dataservice.getUser(userId).then(function (user) {
                     userIdentity.isLoggedIn = true;
-                    userIdentity.username = username;
-                    var user = response.data[0];
+                    userIdentity.username = email;
                     userIdentity.userId = user.id;
-                    var person = user.person;
-                    if (person !== undefined && person !== null) {
-                        userIdentity.role = person.role.toLowerCase();
-                        userIdentity.personId = person.id;
-                    }
+                    userIdentity.name = user.first_name + ' ' + user.surname;
 
                     $cookieStore.put('authdata', encoded);
                     $cookieStore.put('authuser', userIdentity);
@@ -67,7 +62,7 @@
                 }, function(response){
                     logout();
                     if (response.status === 401){
-                        revoke([{property_name: "global", error_message: "Invalid username or password"}]);
+                        revoke([{property_name: "global", error_message: "Invalid email or password"}]);
                     }
                 });
             });

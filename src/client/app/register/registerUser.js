@@ -3,21 +3,21 @@
 
     angular
         .module('app.register')
-        .controller('RegisterAccount', RegisterAccount);
+        .controller('RegisterUser', RegisterUser);
 
-    RegisterAccount.$inject = ['registerAccountService', 'logger', 'routehelper', 'validationService'];
+    RegisterUser.$inject = ['registerUserService', 'logger', 'routehelper', 'validationService'];
 
     /* @ngInject */
-    function RegisterAccount(registerAccountService, logger, routehelper, validationService) {
+    function RegisterUser(registerUserService, logger, routehelper, validationService) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.title = 'Register Account';
-        vm.account = {};
+        vm.user = {};
 
         vm.register = function(form) {
-            registerAccountService.register(vm.account).then(function () {
-                routehelper.redirectToRoute('registerPerson');
+            registerUserService.register(vm.user).then(function () {
+                routehelper.redirectToRoute('dashboard');
             }, function (validation_errors) {
                 validationService.applyServerSideErrors(form, validation_errors);
                 logger.warning("Register failed");
