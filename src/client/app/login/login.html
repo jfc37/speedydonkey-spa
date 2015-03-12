@@ -13,19 +13,19 @@
                             </span>
                         </div>
                               <div class="form-group"
-                                   ng-class="{'has-error':loginForm.username.$invalid && loginForm.username.$touched}">
+                                   ng-class="{'has-error':loginForm.email.$invalid && loginForm.email.$touched}">
                                   <div class="col-xs-12">
                                       <input class="form-control col-xs-12"
-                                             id="username"
-                                             name="username"
+                                             id="email"
+                                             name="email"
                                              type="text"
-                                             placeholder="Username"
-                                             ng-model="vm.username"
+                                             placeholder="Email"
+                                             ng-model="vm.email"
                                              required/>
                                   </div>
                                   <span class="help-block has-error">
-                                      <div ng-show="loginForm.username.$error.required && loginForm.username.$touched">
-                                          Username is required.
+                                      <div ng-show="loginForm.email.$error.required && loginForm.email.$touched">
+                                          Email is required.
                                       </div>
                                   </span>
                               </div>

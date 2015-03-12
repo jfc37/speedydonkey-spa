@@ -49,9 +49,12 @@
             addBasicAuthorisation(encoded);
 
             return $q(function (resolve, revoke) {
-                dataservice.getUser(userId).then(function (user) {
+                dataservice.searchForUser({email: email}).then(function (response) {
                     userIdentity.isLoggedIn = true;
                     userIdentity.username = email;
+
+                    var user = response.data[0];
+
                     userIdentity.userId = user.id;
                     userIdentity.name = user.first_name + ' ' + user.surname;
 
@@ -61,7 +64,7 @@
                     resolve();
                 }, function(response){
                     logout();
-                    if (response.status === 401){
+                    if (response.status === 404){
                         revoke([{property_name: "global", error_message: "Invalid email or password"}]);
                     }
                 });

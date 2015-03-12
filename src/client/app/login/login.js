@@ -15,7 +15,7 @@
         vm.title = 'Login';
 
         vm.submit = function(form){
-            authService.login(vm.username, vm.password).then(function() {
+            authService.login(vm.email, vm.password).then(function() {
                 routehelper.redirectToRoute('dashboard');
             }, function(validation_errors) {
                 validationService.applyServerSideErrors(form, validation_errors);

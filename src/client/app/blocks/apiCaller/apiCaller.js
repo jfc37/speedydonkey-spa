@@ -13,10 +13,11 @@
 
             postUser : postUser,
             getUser: getUser,
-
-
-
             searchUser: searchUser,
+
+            
+
+
             putUser : putUser,
 
 
@@ -66,14 +67,17 @@
             return $http.get(url);
         }
 
-
-
-
         function searchUser(search) {
-            var url = baseUrl + 'accounts?q=' + search;
+            var url = baseUrl + 'users?q=' + search;
 
             return $http.get(url);
         }
+
+
+
+
+
+
 
         function putUser(user) {
             var url = baseUrl + 'accounts/' + user.id;

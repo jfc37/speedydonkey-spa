@@ -12,13 +12,13 @@
         var service = {
 
             getUser: getUser,
+            searchForUser: searchForUser,
 
 
             getAllCourses: getAllCourses,
             getCourse: getCourse,
             searchForCourse: searchForCourse,
 
-            searchForUser: searchForUser,
 
             getStudent: getStudent,
 
@@ -34,6 +34,23 @@
                 }, revoke);
             });
         }
+
+        function searchForUser(searchParameters) {
+
+            var q = '';
+            for (var prop in searchParameters) {
+                if (searchParameters.hasOwnProperty(prop)) {
+                    q = q + '&' + prop + '_=_' + searchParameters[prop];
+                }
+            }
+            q = q.slice(1);
+
+            return apiCaller.searchUser(q);
+        }
+
+
+
+        
 
         function getCourse(courseId) {
             
@@ -77,19 +94,6 @@
                     resolve(response.data);
                 }, revoke);
             });
-        }
-
-        function searchForUser(searchParameters) {
-
-            var q = '';
-            for (var prop in searchParameters) {
-                if (searchParameters.hasOwnProperty(prop)) {
-                    q = q + '&' + prop + '_=_' + searchParameters[prop];
-                }
-            }
-            q = q.slice(1);
-
-            return apiCaller.searchUser(q);
         }
 
         function getStudent(studentId) {
