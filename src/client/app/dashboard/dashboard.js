@@ -12,6 +12,7 @@
         /*jshint validthis: true */
         var vm = this;
         vm.upcomingSchedule = [];
+        vm.isScheduleLoading = true;
 
         activate();
 
@@ -25,11 +26,13 @@
         function getSchedule() {
             return dashboardService.getSchedule().then(function (schedule) {
                 vm.upcomingSchedule = schedule;
+                vm.isScheduleLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
                     error.displayMessage = "Issue getting schedule..."
                 }
                 logger.error(error.displayMessage);
+                vm.isScheduleLoading = false;
             });
         }
     }

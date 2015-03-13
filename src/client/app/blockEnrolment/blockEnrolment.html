@@ -1,35 +1,31 @@
 <section class="mainbar">
     <section class="matter">
-        <div class="container">
-            <div class="row">
-                <div class="widget worange">
-                    <div data-cc-widget-header title="Block Selection"></div>
-                    <div class="widget-content user">
-                        <form role="form">
-                            <h4>Available Blocks</h4>
-                            <div class="row well" data-ng-repeat="block in vm.blocks | filter: { isEnroled: false }">
-                                <h3><display-date format='long date' ng-model='block.start_date'></display-date> {{block.level.name}} - <display-date format='time' ng-model='block.start_date'></display-date></h3>
-                                <div class="form-group">
-                                    {{block.level.name}}
-                                    <input type="checkbox" data-ng-model="block.enrolIn">
-                                </div>
-                            </div>
-                            <div ng-show="(vm.blocks | filter: { isEnroled: false }).length === 0">
-                                There are no blocks available to be enrolled in
-                            </div>
+        <div ng-show="vm.isLoading">
+            Loading blocks...
+        </div>
 
-                            <div ng-show="(vm.blocks | filter: { isEnroled: true }).length > 0">
-                                <hr>
-                                <h4>Blocks already enroled in</h4>
-                                <div class="padd" data-ng-repeat="block in vm.blocks | filter: { isEnroled: true }">
-                                    {{block.level.name}}
-                                </div>
+        <div class="container" ng-hide="vm.isLoading">
+            <div class="row">
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Block Selection</h3>
+                  </div>
+                  <div class="panel-body">
+                    <p ng-show="(vm.blocks | filter: { isEnroled: false }).length > 0">Go ahead and select the blocks you want to enrol in</p>
+                    <p ng-show="(vm.blocks | filter: { isEnroled: false }).length === 0">
+                        There are no blocks available to be enrolled in
+                    </p>
+                  </div>
+                    <ul class="list-group" data-ng-repeat="block in vm.blocks | filter: { isEnroled: false }">
+                        <li class="list-group-item">
+                            
+                            <div class="form-group">
+                                <display-date format='long date' ng-model='block.start_date'></display-date> {{block.level.name}} - <display-date format='time' ng-model='block.start_date'></display-date>
+                                <input type="checkbox" data-ng-model="block.enrolIn">
                             </div>
-                        </form>
-                    </div>
-                    <div class="widget-foot">
-                        <div class="clearfix"></div>
-                    </div>
+                        </li>
+                      </ul>
                 </div>
             </div>
             <div class="row">

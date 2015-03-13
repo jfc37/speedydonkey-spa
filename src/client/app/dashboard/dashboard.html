@@ -8,14 +8,17 @@
 				<div class="panel-heading">
 				    <h3 class="panel-title">Upcoming Schedule</h3>
 				  </div>
-				  <div class="panel-body">
-				    <div ng-show="vm.upcomingSchedule.length === 0">
+                  <div class="panel-body" ng-show="vm.isScheduleLoading">
+                    <p>Loading schedule...</p>
+                  </div>
+                  <div class="panel-body" ng-hide="vm.isScheduleLoading">
+                    <div ng-show="vm.upcomingSchedule.length === 0">
                         Nothing scheduled.
                     </div>
                     <div ng-show="vm.upcomingSchedule.length > 0" ng-repeat="event in vm.upcomingSchedule">
-                        {{event.name}} - {{event.start_time}}
+                        {{event.name}} - <display-date format='from now' ng-model='event.start_time'></display-date>
                     </div>
-				  </div>
+                  </div>
             </div>
         </div>
     </section>

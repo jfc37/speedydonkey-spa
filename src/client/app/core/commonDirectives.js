@@ -14,6 +14,11 @@
               ngModel: '='
             },
             link: function(scope, element, attrs, ngModel){
+                if (attrs.format === 'from now') {
+                    scope.display = moment(scope.ngModel).fromNow();
+                    return;
+                } 
+
                 var format = '';
                 if (attrs.format === 'time') {
                     format = 'h:mmA';

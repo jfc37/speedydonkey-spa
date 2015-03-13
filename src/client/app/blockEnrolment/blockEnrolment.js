@@ -14,6 +14,7 @@
 
         vm.title = 'Block Enrolment';
         vm.blocks = [];
+        vm.isLoading = true;
 
         vm.submit = function() {
             var blocksToEnrolIn = vm.blocks.filter(function (block) {
@@ -39,11 +40,13 @@
         function getAllBlocks() {
             return blockEnrolmentService.getBlocks().then(function (blocks) {
                 vm.blocks = blocks;
+                vm.isLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
                     error.displayMessage = "Issue getting blocks..."
                 }
                 logger.error(error.displayMessage);
+                vm.isLoading = false;
             });
         }
     }
