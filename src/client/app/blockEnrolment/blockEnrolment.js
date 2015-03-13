@@ -15,6 +15,7 @@
         vm.title = 'Block Enrolment';
         vm.blocks = [];
         vm.passOptions = [];
+        vm.selectedPass = {};
         vm.areBlocksLoading = true;
         vm.arePassesLoading = true;
 
@@ -56,7 +57,8 @@
         function getPassOptions() {
             return blockEnrolmentService.getPassOptions().then(function (passOptions) {
                 vm.passOptions = passOptions;
-                vm.arePassesLoading = false;
+                vm.selectedPass = vm.passOptions[0]
+;                vm.arePassesLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
                     error.arePassesLoading = "Issue getting pass options..."

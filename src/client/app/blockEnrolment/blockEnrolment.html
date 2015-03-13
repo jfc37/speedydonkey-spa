@@ -34,20 +34,22 @@
                   </div>
                   <div ng-show="vm.arePassesLoading" class="panel-body">Loading passes...</div>
                   <div ng-hide="vm.arePassesLoading" class="panel-body">
-                    <p ng-show="vm.passOptions.length > 0">Go ahead and select the pass that works for you </p>
+                    <div ng-show="vm.passOptions.length > 0">
+                        <p>Go ahead and select the pass that works for you - {{selectedPass}}</p>
+
+                        <div data-ng-repeat="pass in vm.passOptions">
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="passOptions" data-ng-model="$parent.selectedPass" ng-value="pass">
+                                    {{pass.description}} - ${{pass.value}}.00
+                              </label>
+                            </div>
+                        </div>
+                    </div>
                     <p ng-show="vm.passOptions.length === 0">
                         There are no pass options available
                     </p>
                   </div>
-                    <ul ng-hide="vm.arePassesLoading" class="list-group" data-ng-repeat="pass in vm.passOptions">
-                        <li class="list-group-item">
-                            
-                            <div class="form-group">
-                                {{pass.name}} - ${{pass.value}}.00
-                                <input type="checkbox" data-ng-model="pass.selected">
-                            </div>
-                        </li>
-                      </ul>
                 </div>
             </div>
             <div class="row">

@@ -58,6 +58,7 @@
                     if (error.status === 404) {
                         error.displayMessage = 'No pass options found';
                     }
+                    revoke(error);
                 })
             })
         }
