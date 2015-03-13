@@ -14,6 +14,8 @@
             getUser: getUser,
             searchForUser: searchForUser,
 
+            getUserSchedule: getUserSchedule,
+
             getAllBlocks: getAllBlocks,
         };
 
@@ -38,6 +40,16 @@
             q = q.slice(1);
 
             return apiCaller.searchUser(q);
+        }
+
+        function getUserSchedule(userId) {
+            return $q(function (resolve, reject) {
+                apiCaller.getUserSchedule(userId).then(function (response) {
+                    resolve(response.data);   
+                }, function (response) {
+                    reject(response);
+                });
+            });
         }
 
         function getAllBlocks() {

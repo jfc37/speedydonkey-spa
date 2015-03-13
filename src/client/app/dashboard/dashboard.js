@@ -11,5 +11,26 @@
     function Dashboard($q, dashboardService, logger) {
         /*jshint validthis: true */
         var vm = this;
+        vm.upcomingSchedule = [];
+
+        activate();
+
+        function activate() {
+            return $q(getSchedule)
+            .then(function(){
+                logger.info('Activated Dashboard View');
+            });
+        }
+
+        function getSchedule() {
+            return dashboardService.getSchedule().then(function (schedule) {
+                vm.upcomingSchedule = schedule;
+            }, function (error){
+                if (!error.displayMessage) {
+                    error.displayMessage = "Issue getting schedule..."
+                }
+                logger.error(error.displayMessage);
+            });
+        }
     }
 })();
