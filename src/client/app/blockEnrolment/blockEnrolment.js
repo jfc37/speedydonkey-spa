@@ -14,7 +14,9 @@
 
         vm.title = 'Block Enrolment';
         vm.blocks = [];
-        vm.isLoading = true;
+        vm.passOptions = [];
+        vm.areBlocksLoading = true;
+        vm.arePassesLoading = true;
 
         vm.submit = function() {
             var blocksToEnrolIn = vm.blocks.filter(function (block) {
@@ -31,7 +33,8 @@
         activate();
 
         function activate() {
-            return $q(getAllBlocks)
+            var promises = [getAllBlocks(), getPassOptions()];
+            return $q.all(getAllBlocks)
             .then(function(){
                 logger.info('Activated Block Enrolment View');
             });
@@ -40,13 +43,26 @@
         function getAllBlocks() {
             return blockEnrolmentService.getBlocks().then(function (blocks) {
                 vm.blocks = blocks;
-                vm.isLoading = false;
+                vm.areBlocksLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
                     error.displayMessage = "Issue getting blocks..."
                 }
                 logger.error(error.displayMessage);
-                vm.isLoading = false;
+                vm.areBlocksLoading = false;
+            });
+        }
+
+        function getPassOptions() {
+            return blockEnrolmentService.getPassOptions().then(function (passOptions) {
+                vm.passOptions = passOptions;
+                vm.arePassesLoading = false;
+            }, function (error){
+                if (!error.displayMessage) {
+                    error.arePassesLoading = "Issue getting pass options..."
+                }
+                logger.error(error.displayMessage);
+                vm.arePassesLoading = false;
             });
         }
     }

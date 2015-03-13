@@ -19,6 +19,8 @@
 
             getBlock : getBlock,
             postBlockEnrolment: postBlockEnrolment,
+
+            searchReferenceData: searchReferenceData
         };
 
         var baseUrl = 'http://api-speedydonkey.azurewebsites.net/api/';
@@ -59,6 +61,12 @@
         function postBlockEnrolment(parameters) {
             var url = baseUrl + 'users/' + parameters.userId + '/blocks/' + parameters.blockId;
             return $http.post(url);
+        }
+
+        function searchReferenceData(search) {
+            var url = baseUrl + 'reference?q=' + search;
+
+            return $http.get(url);
         }
 
 

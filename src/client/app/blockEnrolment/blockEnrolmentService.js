@@ -12,6 +12,7 @@
 
         var service = {
             getBlocks : getBlocks,
+            getPassOptions : getPassOptions,
             enrol: enrol
         };
 
@@ -47,6 +48,18 @@
                     resolve(allBlocks);
                 });
             });
+        }
+
+        function getPassOptions() {
+            return $q(function (resolve, revoke) {
+                dataservice.getAllPassOptions().then(function (passOptions){
+                    resolve(passOptions)
+                }, function (error) {
+                    if (error.status === 404) {
+                        error.displayMessage = 'No pass options found';
+                    }
+                })
+            })
         }
 
         function enrol(blocks) {

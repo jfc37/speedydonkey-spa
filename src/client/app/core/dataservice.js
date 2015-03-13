@@ -17,6 +17,8 @@
             getUserSchedule: getUserSchedule,
 
             getAllBlocks: getAllBlocks,
+
+            getAllPassOptions: getAllPassOptions
         };
 
         return service;
@@ -55,6 +57,17 @@
         function getAllBlocks() {
             return $q(function (resolve, reject) {
                 apiCaller.getBlock().then(function (response) {
+                    resolve(response.data);   
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllPassOptions() {
+            return $q(function (resolve, reject) {
+                var query = 'type_=_PassOption'
+                apiCaller.searchReferenceData(query).then(function (response) {
                     resolve(response.data);   
                 }, function (response) {
                     reject(response);
