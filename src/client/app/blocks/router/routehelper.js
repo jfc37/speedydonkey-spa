@@ -112,12 +112,6 @@
                     }
                 }
             }
-
-            var userIdentity = getUserIdentity();
-            var isUnregisteredPerson = userIdentity.role === undefined;
-            var isStudent = userIdentity.role === 'student';
-            var isProfessor = userIdentity.role === 'professor';
-
             return routes.filter(isAuthorisedForRoute);
         }
 

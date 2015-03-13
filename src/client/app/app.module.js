@@ -26,18 +26,6 @@
         'app.layout',
         'app.logon',
         'app.register',
-
-
-
-        
-        'app.myCourses',
-        'app.myCourse',
-        'app.manageCourses',
-        'app.manageCourse',
-        'app.createCourse',
-        'app.meetingRoom',
-        'app.gradeCenter',
-        'app.manageUser',
     ]);
 
 })();

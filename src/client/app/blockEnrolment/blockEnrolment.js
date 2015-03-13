@@ -39,8 +39,11 @@
         function getAllBlocks() {
             return blockEnrolmentService.getBlocks().then(function (blocks) {
                 vm.blocks = blocks;
-            }, function (){
-                logger.error("Issue getting blocks...");
+            }, function (error){
+                if (!error.displayMessage) {
+                    error.displayMessage = "Issue getting blocks..."
+                }
+                logger.error(error.displayMessage);
             });
         }
     }

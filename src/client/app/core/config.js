@@ -12,8 +12,8 @@
     }
 
     var config = {
-        appErrorPrefix: '[StudyBuddy Error] ', //Configure the exceptionHandler decorator
-        appTitle: 'Study Buddy',
+        appErrorPrefix: '[SpeedyDonkey Error] ', //Configure the exceptionHandler decorator
+        appTitle: 'Speedy Donkey',
         version: '3.0.0'
     };
 
@@ -30,7 +30,7 @@
 
         // Configure the common route provider
         routehelperConfigProvider.config.$routeProvider = $routeProvider;
-        routehelperConfigProvider.config.docTitle = 'StudyBuddy: ';
+        routehelperConfigProvider.config.docTitle = 'SpeedyDonkey: ';
 
         // Configure the common exception handler
         exceptionConfigProvider.config.appErrorPrefix = config.appErrorPrefix;

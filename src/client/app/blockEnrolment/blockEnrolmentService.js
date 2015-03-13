@@ -17,14 +17,22 @@
 
         function getBlocks() {
             return $q(function (resolve, revoke) {
-                var allBlocks;
+                var allBlocks = [];
                 dataservice.getAllBlocks().then(function(blocks) {
                     blocks.forEach(function(block){
                         block.isEnroled = false;
                     });
 
                     allBlocks = blocks;
-                }, revoke).then(function () {
+                }, function(error) {
+                    if (error.status === 404){
+                        error.displayMessage = 'No blocks found';
+                    }
+                    revoke(error);
+                }).then(function () {
+                    if (allBlocks.length === 0){
+                        return;
+                    }
                     dataservice.getUser(authService.getUserIdentity().userId).then(function (user) {
                         var enroledBlockIds = user.enroled_blocks.map(function(block){
                             return block.id;

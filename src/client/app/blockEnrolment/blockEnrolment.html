@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="widget worange">
-                    <div data-cc-widget-header title="Block Selection" subtitle="{{vm.blocks.length}}"></div>
+                    <div data-cc-widget-header title="Block Selection"></div>
                     <div class="widget-content user">
                         <form role="form">
                             <h4>Available Blocks</h4>
@@ -13,10 +13,16 @@
                                     <input type="checkbox" data-ng-model="block.enrolIn">
                                 </div>
                             </div>
-                            <hr>
-                            <h4>Blocks already enroled in</h4>
-                            <div class="padd" data-ng-repeat="block in vm.blocks | filter: { isEnroled: true }">
-                                {{block.level.name}}
+                            <div ng-show="(vm.blocks | filter: { isEnroled: false }).length === 0">
+                                There are no blocks available to be enrolled in
+                            </div>
+
+                            <div ng-show="(vm.blocks | filter: { isEnroled: true }).length > 0">
+                                <hr>
+                                <h4>Blocks already enroled in</h4>
+                                <div class="padd" data-ng-repeat="block in vm.blocks | filter: { isEnroled: true }">
+                                    {{block.level.name}}
+                                </div>
                             </div>
                         </form>
                     </div>
