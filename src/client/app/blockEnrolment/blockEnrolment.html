@@ -7,7 +7,8 @@
                     <div class="widget-content user">
                         <form role="form">
                             <h4>Available Blocks</h4>
-                            <div class="padd" data-ng-repeat="block in vm.blocks | filter: { isEnroled: false }">
+                            <div class="row well" data-ng-repeat="block in vm.blocks | filter: { isEnroled: false }">
+                                <h3><display-date format='long date' ng-model='block.start_date'></display-date> {{block.level.name}} - <display-date format='time' ng-model='block.start_date'></display-date></h3>
                                 <div class="form-group">
                                     {{block.level.name}}
                                     <input type="checkbox" data-ng-model="block.enrolIn">
