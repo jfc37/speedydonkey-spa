@@ -23,7 +23,6 @@
             var blocksToEnrolIn = vm.blocks.filter(function (block) {
                 return block.enrolIn;
             });
-
             blockEnrolmentService.enrol(blocksToEnrolIn, vm.selectedPass).then(function (){
                 logger.success("Enroled in selected blocks");
             }, function () {

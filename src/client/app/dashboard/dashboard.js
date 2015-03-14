@@ -12,12 +12,15 @@
         /*jshint validthis: true */
         var vm = this;
         vm.upcomingSchedule = [];
+        vm.currentPasses = [];
         vm.isScheduleLoading = true;
+        vm.arePassesLoading = true;
 
         activate();
 
         function activate() {
-            return $q(getSchedule)
+            var promises = [getSchedule(), getCurrentPasses()];
+            return $q.all(promises)
             .then(function(){
                 logger.info('Activated Dashboard View');
             });
@@ -33,6 +36,19 @@
                 }
                 logger.error(error.displayMessage);
                 vm.isScheduleLoading = false;
+            });
+        }
+
+        function getCurrentPasses() {
+            return dashboardService.getCurrentPasses().then(function (passes) {
+                vm.currentPasses = passes;
+                vm.arePassesLoading = false;
+            }, function (error){
+                if (!error.displayMessage) {
+                    error.displayMessage = "Issue getting passes..."
+                }
+                logger.error(error.displayMessage);
+                vm.arePassesLoading = false;
             });
         }
     }

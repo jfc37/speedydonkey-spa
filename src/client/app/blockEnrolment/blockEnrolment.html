@@ -36,7 +36,7 @@
                   <div ng-hide="vm.arePassesLoading" class="panel-body">
                     <div ng-show="vm.passOptions.length > 0">
                         <p>Go ahead and select the pass that works for you</p>
-
+                        <p>{{selectedPass}}</p>
                         <div data-ng-repeat="pass in vm.passOptions">
                             <div class="radio">
                               <label>

@@ -12,7 +12,8 @@
         /*jshint validthis: true */
         
         var service = {
-            getSchedule: getSchedule
+            getSchedule: getSchedule,
+            getCurrentPasses: getCurrentPasses
         };
 
         function getSchedule() {
@@ -22,6 +23,19 @@
                 }, function (response) {
                     if (response.status === 404) {
                         response.displayMessage = 'Nothing scheduled yet...';
+                    }
+                    reject(response);
+                });
+            });
+        }
+
+        function getCurrentPasses() {
+            return $q(function (resolve, reject) {
+                dataservice.getUserCurrentPasses(authService.getUserIdentity().userId).then(function(passes) {
+                    resolve(passes);
+                }, function (response) {
+                    if (response.status === 404) {
+                        response.displayMessage = 'No current passes...';
                     }
                     reject(response);
                 });

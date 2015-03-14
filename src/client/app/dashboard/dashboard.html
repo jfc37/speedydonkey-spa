@@ -5,9 +5,9 @@
                 <h1>Welcome to Fully Swung y'all!</h1>
             </div>
             <div class="panel panel-default">
-				<div class="panel-heading">
-				    <h3 class="panel-title">Upcoming Schedule</h3>
-				  </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title">Upcoming Schedule</h3>
+                  </div>
                   <div class="panel-body" ng-show="vm.isScheduleLoading">
                     <p>Loading schedule...</p>
                   </div>
@@ -17,6 +17,23 @@
                     </div>
                     <div ng-show="vm.upcomingSchedule.length > 0" ng-repeat="event in vm.upcomingSchedule">
                         {{event.name}} - <display-date format='from now' ng-model='event.start_time'></display-date>
+                    </div>
+                  </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Current Passes</h3>
+                  </div>
+                  <div class="panel-body" ng-show="vm.arePassesLoading">
+                    <p>Loading passes...</p>
+                  </div>
+                  <div class="panel-body" ng-hide="vm.arePassesLoading">
+                    <div ng-show="vm.currentPasses.length === 0">
+                        You currently have no valid passes
+                    </div>
+                    <div ng-show="vm.currentPasses.length > 0" ng-repeat="pass in vm.currentPasses">
+                        <span ng-if="pass.pass_type === 'Clip'">You have {{pass.clips_remaining}} clips remaining</span>
+                        <span ng-if="pass.pass_type === 'Unlimited'">You have unlimited pass which expires <display-date format='from now' ng-model='pass.end_date'></display-date></span>
                     </div>
                   </div>
             </div>

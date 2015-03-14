@@ -15,6 +15,7 @@
             searchForUser: searchForUser,
 
             getUserSchedule: getUserSchedule,
+            getUserCurrentPasses: getUserCurrentPasses,
 
             getAllBlocks: getAllBlocks,
 
@@ -47,6 +48,16 @@
         function getUserSchedule(userId) {
             return $q(function (resolve, reject) {
                 apiCaller.getUserSchedule(userId).then(function (response) {
+                    resolve(response.data);   
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getUserCurrentPasses(userId) {
+            return $q(function (resolve, reject) {
+                apiCaller.getUserCurrentPasses(userId).then(function (response) {
                     resolve(response.data);   
                 }, function (response) {
                     reject(response);

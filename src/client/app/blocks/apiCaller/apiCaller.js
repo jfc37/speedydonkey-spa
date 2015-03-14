@@ -16,6 +16,7 @@
             searchUser: searchUser,
 
             getUserSchedule: getUserSchedule,
+            getUserCurrentPasses: getUserCurrentPasses,
 
             getBlock : getBlock,
             postBlockEnrolment: postBlockEnrolment,
@@ -46,6 +47,11 @@
 
         function getUserSchedule(userId) {
             var url = baseUrl + 'users/' + userId + '/schedules';
+            return $http.get(url);
+        }
+
+        function getUserCurrentPasses(userId) {
+            var url = baseUrl + 'users/' + userId + '/passes';
             return $http.get(url);
         }
 
