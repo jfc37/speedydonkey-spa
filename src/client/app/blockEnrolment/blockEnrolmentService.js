@@ -69,10 +69,12 @@
                     user_id: authService.getUserIdentity().userId,
                     block_ids: blocks.map(function (block) {
                         return block.id;
-                    }),
-                    pass_types: [
+                    })
+                };
+                if (pass) {
+                    enrolment.pass_types = [
                         pass.name
-                    ]
+                    ];
                 }
                 dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);
             });

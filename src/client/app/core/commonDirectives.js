@@ -24,6 +24,8 @@
                     format = 'h:mmA';
                 } else if (attrs.format === 'long date') {
                     format = 'dddd MMMM D'
+                } else if (attrs.format === 'short date') {
+                    format = 'DD/MM'
                 }
                 scope.display = moment(scope.ngModel).format(format);
             }

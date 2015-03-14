@@ -15,7 +15,6 @@
         vm.title = 'Block Enrolment';
         vm.blocks = [];
         vm.passOptions = [];
-        vm.selectedPass = {};
         vm.areBlocksLoading = true;
         vm.arePassesLoading = true;
 
@@ -23,6 +22,7 @@
             var blocksToEnrolIn = vm.blocks.filter(function (block) {
                 return block.enrolIn;
             });
+
             blockEnrolmentService.enrol(blocksToEnrolIn, vm.selectedPass).then(function (){
                 logger.success("Enroled in selected blocks");
             }, function () {
@@ -56,7 +56,6 @@
         function getPassOptions() {
             return blockEnrolmentService.getPassOptions().then(function (passOptions) {
                 vm.passOptions = passOptions;
-                vm.selectedPass = vm.passOptions[0]
 ;                vm.arePassesLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
