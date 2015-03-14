@@ -24,7 +24,7 @@
                 return block.enrolIn;
             });
 
-            blockEnrolmentService.enrol(blocksToEnrolIn).then(function (){
+            blockEnrolmentService.enrol(blocksToEnrolIn, vm.selectedPass).then(function (){
                 logger.success("Enroled in selected blocks");
             }, function () {
                 logger.error("Problem with enrolment");

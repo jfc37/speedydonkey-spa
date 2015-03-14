@@ -63,20 +63,18 @@
             })
         }
 
-        function enrol(blocks) {
+        function enrol(blocks, pass) {
             return $q(function (resolve, revoke) {
-                var promises = [];
-                blocks.forEach(function (block) {
-                    promises.push(dataUpdateService.enrolInBlock({userId: authService.getUserIdentity().userId, blockId: block.id}).then(function(){
-
-                    }, function (){
-                        revoke();
-                    }));
-
-                    $q.all(promises).then(function () {
-                        resolve();
-                    }, revoke)
-                });
+                var enrolment = {
+                    user_id: authService.getUserIdentity().userId,
+                    block_ids: blocks.map(function (block) {
+                        return block.id;
+                    }),
+                    pass_types: [
+                        pass.name
+                    ]
+                }
+                dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);
             });
         }
 

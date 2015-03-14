@@ -58,9 +58,9 @@
             return $http.get(url);
         }
         
-        function postBlockEnrolment(parameters) {
-            var url = baseUrl + 'users/' + parameters.userId + '/blocks/' + parameters.blockId;
-            return $http.post(url);
+        function postBlockEnrolment(enrolment) {
+            var url = baseUrl + 'users/' + enrolment.user_id + '/enrolment';
+            return $http.post(url, enrolment);
         }
 
         function searchReferenceData(search) {

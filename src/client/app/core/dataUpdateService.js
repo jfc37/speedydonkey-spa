@@ -15,9 +15,9 @@
 
         return service;
 
-        function enrolInBlock(parameters) {
+        function enrolInBlock(enrolment) {
             return $q(function (resolve, revoke) {
-                apiCaller.postBlockEnrolment(parameters).then(function(response) {
+                apiCaller.postBlockEnrolment(enrolment).then(function(response) {
                     resolve();
                 }, function () {
                     revoke();
