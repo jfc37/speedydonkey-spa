@@ -18,12 +18,25 @@
         vm.areBlocksLoading = true;
         vm.arePassesLoading = true;
 
-        vm.submit = function() {
-            var blocksToEnrolIn = vm.blocks.filter(function (block) {
+        vm.isAnythingToSubmit = function() {
+            return isAnyBlocksSelected() || isAnyPassesSelected();
+        }
+
+        function isAnyBlocksSelected() {
+            return getSelectedBlocks().length > 0;
+        }
+        function getSelectedBlocks() {
+            return vm.blocks.filter(function (block) {
                 return block.enrolIn;
             });
+        }
 
-            blockEnrolmentService.enrol(blocksToEnrolIn, vm.selectedPass).then(function (){
+        function isAnyPassesSelected() {
+            return vm.selectedPass;
+        }
+
+        vm.submit = function() {
+            blockEnrolmentService.enrol(getSelectedBlocks(), vm.selectedPass).then(function (){
                 logger.success("Enroled in selected blocks");
             }, function () {
                 logger.error("Problem with enrolment");

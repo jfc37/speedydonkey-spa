@@ -9,12 +9,12 @@
                   </div>
                   <div ng-show="vm.areBlocksLoading" class="panel-body">Loading blocks...</div>
                   <div ng-hide="vm.areBlocksLoading" class="panel-body">
-                    <p ng-show="(vm.blocks | filter: { isEnroled: false }).length > 0">Go ahead and select the blocks you want to enrol in</p>
-                    <p ng-show="(vm.blocks | filter: { isEnroled: false }).length === 0">
+                    <p ng-show="vm.blocks.length > 0">Go ahead and select the blocks you want to enrol in</p>
+                    <p ng-show="vm.blocks.length === 0">
                         There are no blocks available to be enrolled in
                     </p>
                   </div>
-                    <ul ng-hide="vm.areBlocksLoading" class="list-group" data-ng-repeat="block in vm.blocks | filter: { isEnroled: false }">
+                    <ul ng-hide="vm.areBlocksLoading" class="list-group" data-ng-repeat="block in vm.blocks">
                         <li class="list-group-item">
                             
                             <div class="form-group">
@@ -36,7 +36,6 @@
                   <div ng-hide="vm.arePassesLoading" class="panel-body">
                     <div ng-show="vm.passOptions.length > 0">
                         <p>Go ahead and select the pass that works for you</p>
-                        <p>{{vm.selectedPass}}</p>
                         <div class="radio">
                           <label>
                             <input type="radio" name="passOptions" data-ng-model="vm.selectedPass" value="">
@@ -57,7 +56,7 @@
                 </div>
             </div>
             <div class="row">
-                <button class="btn btn-primary" ng-click="vm.submit()">Enrol</button>
+                <button class="btn btn-primary" ng-disabled="!vm.isAnythingToSubmit()" ng-click="vm.submit()">Enrol</button>
             </div>
         </div>
     </section>

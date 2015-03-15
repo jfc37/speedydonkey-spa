@@ -45,7 +45,9 @@
                         });
                     }, revoke);
                 }).then(function () {
-                    resolve(allBlocks);
+                    resolve(allBlocks.filter(function (block) {
+                        return block.isEnroled === false;
+                    }));
                 });
             });
         }
