@@ -32,7 +32,7 @@
                 vm.isScheduleLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting schedule..."
+                    error.displayMessage = "Issue getting schedule...";
                 }
                 logger.error(error.displayMessage);
                 vm.isScheduleLoading = false;
@@ -45,7 +45,7 @@
                 vm.arePassesLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting passes..."
+                    error.displayMessage = "Issue getting passes...";
                 }
                 logger.error(error.displayMessage);
                 vm.arePassesLoading = false;

@@ -20,7 +20,7 @@
 
         vm.isAnythingToSubmit = function() {
             return isAnyBlocksSelected() || isAnyPassesSelected();
-        }
+        };
 
         function isAnyBlocksSelected() {
             return getSelectedBlocks().length > 0;
@@ -59,7 +59,7 @@
                 vm.areBlocksLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting blocks..."
+                    error.displayMessage = "Issue getting blocks...";
                 }
                 logger.error(error.displayMessage);
                 vm.areBlocksLoading = false;
@@ -69,10 +69,10 @@
         function getPassOptions() {
             return blockEnrolmentService.getPassOptions().then(function (passOptions) {
                 vm.passOptions = passOptions;
-;                vm.arePassesLoading = false;
+                vm.arePassesLoading = false;
             }, function (error){
                 if (!error.displayMessage) {
-                    error.arePassesLoading = "Issue getting pass options..."
+                    error.arePassesLoading = "Issue getting pass options...";
                 }
                 logger.error(error.displayMessage);
                 vm.arePassesLoading = false;

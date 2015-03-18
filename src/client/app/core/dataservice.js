@@ -16,6 +16,7 @@
 
             getUserSchedule: getUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
+            getUserEnroledBlocks: getUserEnroledBlocks,
 
             getAllBlocks: getAllBlocks,
 
@@ -65,6 +66,16 @@
             });
         }
 
+        function getUserEnroledBlocks(userId) {
+            return $q(function (resolve, reject) {
+                apiCaller.getUserEnroledBlocks(userId).then(function (response) {
+                    resolve(response.data);   
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
         function getAllBlocks() {
             return $q(function (resolve, reject) {
                 apiCaller.getBlock().then(function (response) {
@@ -77,7 +88,7 @@
 
         function getAllPassOptions() {
             return $q(function (resolve, reject) {
-                var query = 'type_=_PassOption'
+                var query = 'type_=_PassOption';
                 apiCaller.searchReferenceData(query).then(function (response) {
                     resolve(response.data);   
                 }, function (response) {

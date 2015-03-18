@@ -34,8 +34,8 @@
                     if (allBlocks.length === 0){
                         return;
                     }
-                    dataservice.getUser(authService.getUserIdentity().userId).then(function (user) {
-                        var enroledBlockIds = user.enroled_blocks.map(function(block){
+                    dataservice.getUserEnroledBlocks(authService.getUserIdentity().userId).then(function (blocks) {
+                        var enroledBlockIds = blocks.map(function(block){
                             return block.id;
                         });
                         allBlocks.forEach(function(block){
@@ -55,14 +55,14 @@
         function getPassOptions() {
             return $q(function (resolve, revoke) {
                 dataservice.getAllPassOptions().then(function (passOptions){
-                    resolve(passOptions)
+                    resolve(passOptions);
                 }, function (error) {
                     if (error.status === 404) {
                         error.displayMessage = 'No pass options found';
                     }
                     revoke(error);
-                })
-            })
+                });
+            });
         }
 
         function enrol(blocks, pass) {
