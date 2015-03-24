@@ -97,7 +97,7 @@
         }
 
         function getClassRegisteredStudents(id) {
-            var url = baseUrl + 'classes/' + id + '/registered_students';
+            var url = baseUrl + 'classes/' + id + '/roll';
             return $http.get(url);
         }
 

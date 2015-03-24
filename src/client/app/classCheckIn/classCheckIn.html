@@ -16,7 +16,10 @@
                             No students registered for this class.
                         </div>
                         <div ng-show="vm.registeredStudents.length > 0" ng-repeat="student in vm.registeredStudents">
-                          {{student.first_name}} {{student.surname}}
+                            <div class="form-group">
+                                <input type="checkbox" data-ng-model="student.attendedClass">
+                                {{student.first_name}} {{student.surname}}
+                            </div>
                         </div>
                       </div>
                 </div>
