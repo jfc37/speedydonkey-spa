@@ -19,7 +19,12 @@
 
         vm.searchUsers = function (name) {
             return classCheckInService.searchUsers(name);
-        }
+        };
+
+        vm.addWalkIn = function () {
+            vm.walkInStudents.push(vm.walkInStudentSelected);
+            vm.walkInStudentSelected = '';
+        };
 
         activate();
 

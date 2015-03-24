@@ -35,7 +35,11 @@
                         <div ng-show="vm.walkInStudents.length > 0" ng-repeat="student in vm.walkInStudents">
                             {{student.first_name}} {{student.surname}}
                         </div>
-                        <input type="text" placeholder="Student's Name" ng-model="vm.walkInStudentSelected" typeahead="student as student.first_name for student in vm.searchUsers($viewValue)">
+
+                        <div class="row">
+                        <input type="text" placeholder="Student's Name" ng-model="vm.walkInStudentSelected" typeahead="student as student.full_name for student in vm.searchUsers($viewValue)">
+                            <button class="btn btn-primary" ng-disabled="!vm.walkInStudentSelected" ng-click="vm.addWalkIn()">Add Walk In</button>
+                        </div>
                       </div>
                 </div>
             </div>

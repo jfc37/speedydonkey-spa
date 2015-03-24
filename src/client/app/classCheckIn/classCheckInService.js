@@ -32,8 +32,8 @@
 
         function getRegisteredStudents() {
             return $q(function (resolve, reject) {
-                dataservice.getClassRegisteredStudents($routeParams.id).then(function (response) {
-                    resolve(response.data);
+                dataservice.getClassRegisteredStudents($routeParams.id).then(function (students) {
+                    resolve(students);
                 }, function (response) {
                     if (response.status === 404) {
                         response.displayMessage = 'No students registered...';
@@ -48,14 +48,14 @@
 
                 var search = [
                     {
-                        field: 'firstname',
+                        field: 'fullname',
                         condition: 'cont',
                         value: name
                     }
                 ];
 
-                dataservice.searchForUserNew(search).then(function (students) {
-                    resolve(students);
+                dataservice.searchForUserNew(search).then(function (response) {
+                    resolve(response.data);
                 }, function (response) {
                     if (response.status === 404) {
                         response.displayMessage = 'No students registered...';
