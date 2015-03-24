@@ -13,6 +13,7 @@
 
             getUser: getUser,
             searchForUser: searchForUser,
+            searchForUserNew: searchForUserNew,
 
             getUserSchedule: getUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
@@ -46,6 +47,19 @@
                 }
             }
             q = q.slice(1);
+
+            return apiCaller.searchUser(q);
+        }
+
+        function searchForUserNew(searchParameters) {
+
+            var q = '';
+            searchParameters.forEach(function (search, index) {
+                if (index > 0){
+                    q = q + ',';
+                }
+                q = q + search.field + '_' + search.condition + '_' + search.value;
+            });
 
             return apiCaller.searchUser(q);
         }

@@ -13,7 +13,8 @@
         
         var service = {
             getClass: getClass,
-            getRegisteredStudents: getRegisteredStudents
+            getRegisteredStudents: getRegisteredStudents,
+            searchUsers: searchUsers
         };
 
         function getClass() {
@@ -31,8 +32,8 @@
 
         function getRegisteredStudents() {
             return $q(function (resolve, reject) {
-                dataservice.getClassRegisteredStudents($routeParams.id).then(function (students) {
-                    resolve(students);
+                dataservice.getClassRegisteredStudents($routeParams.id).then(function (response) {
+                    resolve(response.data);
                 }, function (response) {
                     if (response.status === 404) {
                         response.displayMessage = 'No students registered...';
@@ -41,6 +42,28 @@
                 });
             });
         }
+
+        function searchUsers(name) {
+            return $q(function (resolve, reject) {
+
+                var search = [
+                    {
+                        field: 'firstname',
+                        condition: 'cont',
+                        value: name
+                    }
+                ];
+
+                dataservice.searchForUserNew(search).then(function (students) {
+                    resolve(students);
+                }, function (response) {
+                    if (response.status === 404) {
+                        response.displayMessage = 'No students registered...';
+                    }
+                    reject(response);
+                });
+            });
+        };
 
         return service;
     }

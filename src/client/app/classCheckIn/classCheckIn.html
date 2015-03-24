@@ -23,6 +23,21 @@
                         </div>
                       </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Walk In Students</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div ng-show="vm.walkInStudents.length === 0">
+                            No walk in students.
+                        </div>
+                        <div ng-show="vm.walkInStudents.length > 0" ng-repeat="student in vm.walkInStudents">
+                            {{student.first_name}} {{student.surname}}
+                        </div>
+                        <input type="text" placeholder="Student's Name" ng-model="vm.walkInStudentSelected" typeahead="student as student.first_name for student in vm.searchUsers($viewValue)">
+                      </div>
+                </div>
             </div>
         </div>
     </section>

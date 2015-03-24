@@ -13,8 +13,13 @@
         var vm = this;
         vm.class = null;
         vm.registeredStudents = [];
+        vm.walkInStudents = [];
         vm.isClassLoading = true;
         vm.areRegisteredStudentsLoading = true;
+
+        vm.searchUsers = function (name) {
+            return classCheckInService.searchUsers(name);
+        }
 
         activate();
 
