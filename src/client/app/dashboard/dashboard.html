@@ -53,7 +53,9 @@
                         Nothing classes today.
                     </div>
                     <div ng-show="vm.todaysClasses.length > 0" ng-repeat="class in vm.todaysClasses">
+                      <a data-ng-href="#/class/{{class.id}}/check-in">
                         {{class.name}} - <display-date format='time' ng-model='class.start_time'></display-date>
+                      </a>
                     </div>
                   </div>
             </div>

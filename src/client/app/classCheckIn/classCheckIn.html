@@ -1,0 +1,26 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <h1>{{vm.class.name}} Class Check In</h1>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Registered Students</h3>
+                      </div>
+                      <div class="panel-body" ng-show="vm.areRegisteredStudentsLoading">
+                        <p>Loading students...</p>
+                      </div>
+                      <div class="panel-body" ng-hide="vm.areRegisteredStudentsLoading">
+                        <div ng-show="vm.registeredStudents.length === 0">
+                            No students registered for this class.
+                        </div>
+                        <div ng-show="vm.registeredStudents.length > 0" ng-repeat="student in vm.registeredStudents">
+                          {{student.first_name}} {{student.surname}}
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

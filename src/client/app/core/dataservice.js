@@ -22,7 +22,9 @@
 
             getAllPassOptions: getAllPassOptions,
 
-            searchForClasses: searchForClasses
+            getClass: getClass,
+            searchForClasses: searchForClasses,
+            getClassRegisteredStudents: getClassRegisteredStudents
         };
 
         return service;
@@ -51,7 +53,7 @@
         function getUserSchedule(userId) {
             return $q(function (resolve, reject) {
                 apiCaller.getUserSchedule(userId).then(function (response) {
-                    resolve(response.data);   
+                    resolve(response.data);
                 }, function (response) {
                     reject(response);
                 });
@@ -61,7 +63,7 @@
         function getUserCurrentPasses(userId) {
             return $q(function (resolve, reject) {
                 apiCaller.getUserCurrentPasses(userId).then(function (response) {
-                    resolve(response.data);   
+                    resolve(response.data);
                 }, function (response) {
                     reject(response);
                 });
@@ -99,6 +101,14 @@
             });
         }
 
+        function getClass(id) {
+            return $q(function (resolve, revoke) {
+                apiCaller.getClass(id).then(function (response) {
+                    resolve(response.data);
+                }, revoke);
+            });
+        }
+
         function searchForClasses(searchParameters) {
 
             var q = '';
@@ -110,6 +120,16 @@
             });
 
             return apiCaller.searchClass(q);
+        }
+
+        function getClassRegisteredStudents(id) {
+            return $q(function (resolve, reject) {
+                apiCaller.getClassRegisteredStudents(id).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
         }
     }
 })();

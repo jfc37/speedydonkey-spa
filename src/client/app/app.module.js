@@ -26,6 +26,7 @@
         'app.layout',
         'app.logon',
         'app.register',
+        'app.classCheckIn',
     ]);
 
 })();

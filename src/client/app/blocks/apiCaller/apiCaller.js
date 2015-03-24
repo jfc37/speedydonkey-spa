@@ -24,7 +24,9 @@
 
             searchReferenceData: searchReferenceData,
 
+            getClass: getClass,
             searchClass: searchClass,
+            getClassRegisteredStudents: getClassRegisteredStudents
         };
 
         var baseUrl = 'http://api-speedydonkey.azurewebsites.net/api/';
@@ -83,9 +85,19 @@
             return $http.get(url);
         }
 
+        function getClass(id) {
+            var url = baseUrl + 'classes/' + id;
+            return $http.get(url);
+        }
+
         function searchClass(search) {
             var url = baseUrl + 'classes?q=' + search;
 
+            return $http.get(url);
+        }
+
+        function getClassRegisteredStudents(id) {
+            var url = baseUrl + 'classes/' + id + '/registered_students';
             return $http.get(url);
         }
 
