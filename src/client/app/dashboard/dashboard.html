@@ -41,6 +41,22 @@
                     </div>
                   </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Class Check In</h3>
+                  </div>
+                  <div class="panel-body" ng-show="vm.areClassesLoading">
+                    <p>Loading today's classes...</p>
+                  </div>
+                  <div class="panel-body" ng-hide="vm.areClassesLoading">
+                    <div ng-show="vm.todaysClasses.length === 0">
+                        Nothing classes today.
+                    </div>
+                    <div ng-show="vm.todaysClasses.length > 0" ng-repeat="class in vm.todaysClasses">
+                        {{class.name}} - <display-date format='time' ng-model='class.start_time'></display-date>
+                    </div>
+                  </div>
+            </div>
         </div>
     </section>
 </section>

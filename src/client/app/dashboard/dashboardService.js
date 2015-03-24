@@ -13,7 +13,8 @@
         
         var service = {
             getSchedule: getSchedule,
-            getCurrentPasses: getCurrentPasses
+            getCurrentPasses: getCurrentPasses,
+            getClassesForCheckIn: getClassesForCheckIn
         };
 
         function getSchedule() {
@@ -36,6 +37,31 @@
                 }, function (response) {
                     if (response.status === 404) {
                         response.displayMessage = 'No current passes...';
+                    }
+                    reject(response);
+                });
+            });
+        }
+
+        function getClassesForCheckIn() {
+            return $q(function (resolve, reject) {
+                var search = [
+                    {
+                        field: 'starttime',
+                        condition: 'gt',
+                        value: moment().format('YYYY-MM-DD')
+                    },
+                    {
+                        field: 'starttime',
+                        condition: 'lt',
+                        value: moment().add(1, 'day').format('YYYY-MM-DD')
+                    }
+                ];
+                dataservice.searchForClasses(search).then(function(response) {
+                    resolve(response.data);
+                }, function (response) {
+                    if (response.status === 404) {
+                        response.displayMessage = 'No classes for today...';
                     }
                     reject(response);
                 });

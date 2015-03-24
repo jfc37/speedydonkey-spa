@@ -20,7 +20,9 @@
 
             getAllBlocks: getAllBlocks,
 
-            getAllPassOptions: getAllPassOptions
+            getAllPassOptions: getAllPassOptions,
+
+            searchForClasses: searchForClasses
         };
 
         return service;
@@ -69,7 +71,7 @@
         function getUserEnroledBlocks(userId) {
             return $q(function (resolve, reject) {
                 apiCaller.getUserEnroledBlocks(userId).then(function (response) {
-                    resolve(response.data);   
+                    resolve(response.data);
                 }, function (response) {
                     reject(response);
                 });
@@ -79,7 +81,7 @@
         function getAllBlocks() {
             return $q(function (resolve, reject) {
                 apiCaller.getBlock().then(function (response) {
-                    resolve(response.data);   
+                    resolve(response.data);
                 }, function (response) {
                     reject(response);
                 });
@@ -90,11 +92,24 @@
             return $q(function (resolve, reject) {
                 var query = 'type_=_PassOption';
                 apiCaller.searchReferenceData(query).then(function (response) {
-                    resolve(response.data);   
+                    resolve(response.data);
                 }, function (response) {
                     reject(response);
                 });
             });
+        }
+
+        function searchForClasses(searchParameters) {
+
+            var q = '';
+            searchParameters.forEach(function (search, index) {
+                if (index > 0){
+                    q = q + ',';
+                }
+                q = q + search.field + '_' + search.condition + '_' + search.value;
+            });
+
+            return apiCaller.searchClass(q);
         }
     }
 })();

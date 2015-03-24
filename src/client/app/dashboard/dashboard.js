@@ -13,13 +13,15 @@
         var vm = this;
         vm.upcomingSchedule = [];
         vm.currentPasses = [];
+        vm.todaysClasses = [];
         vm.isScheduleLoading = true;
         vm.arePassesLoading = true;
+        vm.areClassesLoading = true;
 
         activate();
 
         function activate() {
-            var promises = [getSchedule(), getCurrentPasses()];
+            var promises = [getSchedule(), getCurrentPasses(), getClassesForCheckIn()];
             return $q.all(promises)
             .then(function(){
                 logger.info('Activated Dashboard View');
@@ -49,6 +51,19 @@
                 }
                 logger.error(error.displayMessage);
                 vm.arePassesLoading = false;
+            });
+        }
+
+        function getClassesForCheckIn() {
+            return dashboardService.getClassesForCheckIn().then(function (classes) {
+                vm.todaysClasses = classes;
+                vm.areClassesLoading = false;
+            }, function (error){
+                if (!error.displayMessage) {
+                    error.displayMessage = "Issue getting classes for check in...";
+                }
+                logger.error(error.displayMessage);
+                vm.areClassesLoading = false;
             });
         }
     }

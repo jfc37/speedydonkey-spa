@@ -22,7 +22,9 @@
             getBlock : getBlock,
             postBlockEnrolment: postBlockEnrolment,
 
-            searchReferenceData: searchReferenceData
+            searchReferenceData: searchReferenceData,
+
+            searchClass: searchClass,
         };
 
         var baseUrl = 'http://api-speedydonkey.azurewebsites.net/api/';
@@ -77,6 +79,12 @@
 
         function searchReferenceData(search) {
             var url = baseUrl + 'reference?q=' + search;
+
+            return $http.get(url);
+        }
+
+        function searchClass(search) {
+            var url = baseUrl + 'classes?q=' + search;
 
             return $http.get(url);
         }
