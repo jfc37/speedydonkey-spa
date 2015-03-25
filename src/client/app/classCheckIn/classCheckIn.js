@@ -12,8 +12,7 @@
         /*jshint validthis: true */
         var vm = this;
         vm.class = null;
-        vm.registeredStudents = [];
-        vm.walkInStudents = [];
+        vm.students = [];
         vm.isClassLoading = true;
         vm.areRegisteredStudentsLoading = true;
 
@@ -36,7 +35,7 @@
             }, function(message) {
                 logger.error(message);
             });
-            vm.walkInStudents.push(vm.walkInStudentSelected);
+            vm.students.push(vm.walkInStudentSelected);
             vm.walkInStudentSelected = '';
         };
 
@@ -64,8 +63,8 @@
         }
 
         function getStudents() {
-            return classCheckInService.getStudents().then(function (registeredStudents, unregisteredStudents) {
-                vm.registeredStudents = registeredStudents;
+            return classCheckInService.getStudents().then(function (students) {
+                vm.students = students;
                 vm.areRegisteredStudentsLoading = false;
             }, function (error){
                 if (!error.displayMessage) {

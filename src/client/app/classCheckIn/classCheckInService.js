@@ -46,15 +46,19 @@
                 });
 
                 $q.all([registeredStudentsPromise.catch(noop), attendingStudentsPromise.catch(noop)]).then(function () {
+                    attendingStudents.forEach(function (student) {
+                        student.attendedClass = true;
+                    });
+
                     registeredStudents.forEach(function (registeredStudent) {
                         if (attendingStudents.filter(function (attendingStudent) {
                             return attendingStudent.id === registeredStudent.id;
-                        }).length > 0){
-                            registeredStudent.attendedClass = true;
+                        }).length === 0){
+                            attendingStudents.push(registeredStudent);
                         }
                     });
 
-                    resolve(registeredStudents, attendingStudents);
+                    resolve(attendingStudents);
                 });
             });
         }
