@@ -5,16 +5,17 @@
         .module('app.classCheckIn')
         .factory('classCheckInService', classCheckInService);
 
-    classCheckInService.$inject = ['$q', '$routeParams', 'dataservice', 'logger'];
+    classCheckInService.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataDeleteService', 'logger'];
 
     /* @ngInject */
-    function classCheckInService($q, $routeParams, dataservice, logger) {
+    function classCheckInService($q, $routeParams, dataservice, dataUpdateService, dataDeleteService, logger) {
         /*jshint validthis: true */
         
         var service = {
             getClass: getClass,
-            getRegisteredStudents: getRegisteredStudents,
-            searchUsers: searchUsers
+            getStudents: getStudents,
+            searchUsers: searchUsers,
+            attendenceStatusChanged: attendenceStatusChanged
         };
 
         function getClass() {
@@ -30,15 +31,30 @@
             });
         }
 
-        function getRegisteredStudents() {
+        function noop() {}
+
+        function getStudents() {
             return $q(function (resolve, reject) {
-                dataservice.getClassRegisteredStudents($routeParams.id).then(function (students) {
-                    resolve(students);
-                }, function (response) {
-                    if (response.status === 404) {
-                        response.displayMessage = 'No students registered...';
-                    }
-                    reject(response);
+                var registeredStudents = [];
+                var attendingStudents = [];
+
+                var registeredStudentsPromise = dataservice.getClassRegisteredStudents($routeParams.id).then(function (students) {
+                    registeredStudents = students;
+                });
+                var attendingStudentsPromise = dataservice.getClassAttendance($routeParams.id).then(function(students) {
+                    attendingStudents = students;
+                });
+
+                $q.all([registeredStudentsPromise.catch(noop), attendingStudentsPromise.catch(noop)]).then(function () {
+                    registeredStudents.forEach(function (registeredStudent) {
+                        if (attendingStudents.filter(function (attendingStudent) {
+                            return attendingStudent.id === registeredStudent.id;
+                        }).length > 0){
+                            registeredStudent.attendedClass = true;
+                        }
+                    });
+
+                    resolve(registeredStudents, attendingStudents);
                 });
             });
         }
@@ -63,7 +79,34 @@
                     reject(response);
                 });
             });
-        };
+        }
+
+        function attendenceStatusChanged(student) {
+            return $q(function(resolve, reject) {
+                var promise;
+                var message;
+                if (student.attendedClass) {
+                    message = {
+                        success: "Recorded student's attendance",
+                        error: "Issue recording student's attendance..."
+                    };
+                    promise = dataUpdateService.studentAttendedClass($routeParams.id, student.id);
+                } else {
+                    message = {
+                        success: "Reomved student's attendance",
+                        error: "Issue removing student's attendance..."
+                    };
+                    promise = dataDeleteService.studentUnattendedClass($routeParams.id, student.id);
+                }
+
+                promise.then(function(){
+                    resolve(message.success);
+                }, function() {
+                    reject(message.error);
+                });
+
+            });
+        }
 
         return service;
     }

@@ -17,11 +17,25 @@
         vm.isClassLoading = true;
         vm.areRegisteredStudentsLoading = true;
 
+        vm.attendenceStatusChanged = function(student) {
+            classCheckInService.attendenceStatusChanged(student).then(function(message) {
+                logger.success(message);
+            }, function(message) {
+                logger.error(message);
+            });
+        };
+
         vm.searchUsers = function (name) {
             return classCheckInService.searchUsers(name);
         };
 
         vm.addWalkIn = function () {
+            vm.walkInStudentSelected.attendedClass = true;
+            classCheckInService.attendenceStatusChanged(vm.walkInStudentSelected).then(function(message) {
+                logger.success(message);
+            }, function(message) {
+                logger.error(message);
+            });
             vm.walkInStudents.push(vm.walkInStudentSelected);
             vm.walkInStudentSelected = '';
         };
@@ -29,7 +43,7 @@
         activate();
 
         function activate() {
-            var promises = [getClass(), getRegisteredStudents()];
+            var promises = [getClass(), getStudents()];
             return $q.all(promises)
             .then(function(){
                 logger.info('Activated Class Check In View');
@@ -49,9 +63,9 @@
             });
         }
 
-        function getRegisteredStudents() {
-            return classCheckInService.getRegisteredStudents().then(function (students) {
-                vm.registeredStudents = students;
+        function getStudents() {
+            return classCheckInService.getStudents().then(function (registeredStudents, unregisteredStudents) {
+                vm.registeredStudents = registeredStudents;
                 vm.areRegisteredStudentsLoading = false;
             }, function (error){
                 if (!error.displayMessage) {

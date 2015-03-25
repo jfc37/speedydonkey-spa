@@ -26,7 +26,10 @@
 
             getClass: getClass,
             searchClass: searchClass,
-            getClassRegisteredStudents: getClassRegisteredStudents
+            getClassRegisteredStudents: getClassRegisteredStudents,
+            getClassAttendance: getClassAttendance,
+            postClassAttendance: postClassAttendance,
+            deleteClassAttendance: deleteClassAttendance
         };
 
         var baseUrl = 'http://api-speedydonkey.azurewebsites.net/api/';
@@ -99,6 +102,21 @@
         function getClassRegisteredStudents(id) {
             var url = baseUrl + 'classes/' + id + '/roll';
             return $http.get(url);
+        }
+
+        function getClassAttendance(id) {
+            var url = baseUrl + 'classes/' + id + '/attendance';
+            return $http.get(url);
+        }
+        
+        function postClassAttendance(classId, studentId) {
+            var url = baseUrl + 'classes/' + classId + '/attendance/' + studentId;
+            return $http.post(url);
+        }
+        
+        function deleteClassAttendance(classId, studentId) {
+            var url = baseUrl + 'classes/' + classId + '/attendance/' + studentId;
+            return $http.delete(url);
         }
 
 

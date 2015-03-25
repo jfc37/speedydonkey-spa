@@ -10,7 +10,8 @@
     /* @ngInject */
     function dataUpdateService($q, apiCaller) {
         var service = {
-            enrolInBlock: enrolInBlock
+            enrolInBlock: enrolInBlock,
+            studentAttendedClass: studentAttendedClass
         };
 
         return service;
@@ -22,6 +23,12 @@
                 }, function () {
                     revoke();
                 });
+            });
+        }
+
+        function studentAttendedClass(classId, studentId) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postClassAttendance(classId, studentId).then(resolve, revoke);
             });
         }
     }

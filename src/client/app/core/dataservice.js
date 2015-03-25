@@ -25,7 +25,8 @@
 
             getClass: getClass,
             searchForClasses: searchForClasses,
-            getClassRegisteredStudents: getClassRegisteredStudents
+            getClassRegisteredStudents: getClassRegisteredStudents,
+            getClassAttendance: getClassAttendance
         };
 
         return service;
@@ -139,6 +140,16 @@
         function getClassRegisteredStudents(id) {
             return $q(function (resolve, reject) {
                 apiCaller.getClassRegisteredStudents(id).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getClassAttendance(id) {
+            return $q(function (resolve, reject) {
+                apiCaller.getClassAttendance(id).then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
