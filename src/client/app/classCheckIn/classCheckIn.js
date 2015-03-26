@@ -32,13 +32,15 @@
 
         vm.addWalkIn = function () {
             vm.walkInStudentSelected.attendedClass = true;
-            classCheckInService.attendenceStatusChanged(vm.walkInStudentSelected).then(function(message) {
-                logger.success(message);
-            }, function(message) {
-                logger.error(message);
+                classCheckInService.getPassesForStudent(vm.walkInStudentSelected).then(function (){
+                    classCheckInService.attendenceStatusChanged(vm.walkInStudentSelected).then(function(message) {
+                    logger.success(message);
+                }, function(message) {
+                    logger.error(message);
+                });
+                vm.students.push(vm.walkInStudentSelected);
+                vm.walkInStudentSelected = '';
             });
-            vm.students.push(vm.walkInStudentSelected);
-            vm.walkInStudentSelected = '';
         };
 
         vm.enrolWalkIn = function () {

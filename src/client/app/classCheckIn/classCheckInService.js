@@ -16,7 +16,8 @@
             getStudents: getStudents,
             searchUsers: searchUsers,
             attendenceStatusChanged: attendenceStatusChanged,
-            enrolStudent: enrolStudent
+            enrolStudent: enrolStudent,
+            getPassesForStudent: getPassesForStudent
         };
 
         function getClass() {
@@ -124,6 +125,18 @@
                     block_ids: [blockId]
                 };
                 dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);
+            });
+        }
+
+        function getPassesForStudent(student) {
+            return $q(function (resolve, revoke) {
+                dataservice.getUserCurrentPasses(student.id).then(function (passes) {
+                    student.passes = passes;
+                    resolve();
+                }, function () {
+                    student.passes = [];
+                    resolve();
+                });
             });
         }
 
