@@ -14,10 +14,14 @@
             register: register
         };
 
-        function register(user) {
+        function register(user, ignoreLogin) {
             return $q(function (resolve, revoke) {
                 dataCreateService.createUser(user).then(function (createdUser) {
-                    authService.login(user.email, user.password, createdUser.id).then(resolve);
+                    if (ignoreLogin) {
+                        resolve(createdUser);
+                    } else {
+                        authService.login(user.email, user.password, createdUser.id).then(resolve);
+                    }
                 }, function (response) {
                     if (response.validation_result !== undefined){
                         revoke(response.validation_result.validation_errors);

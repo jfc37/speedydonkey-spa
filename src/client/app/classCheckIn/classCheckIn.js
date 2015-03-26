@@ -5,16 +5,18 @@
         .module('app.classCheckIn')
         .controller('ClassCheckIn', ClassCheckIn);
 
-    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'logger'];
+    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'logger'];
 
     /* @ngInject */
-    function ClassCheckIn($q, classCheckInService, logger) {
+    function ClassCheckIn($q, classCheckInService, registerUserService, logger) {
         /*jshint validthis: true */
         var vm = this;
         vm.class = null;
         vm.students = [];
         vm.isClassLoading = true;
         vm.areRegisteredStudentsLoading = true;
+        vm.creatingNewAccount = false;
+        vm.newUser = {};
 
         vm.attendenceStatusChanged = function(student) {
             classCheckInService.attendenceStatusChanged(student).then(function(message) {
@@ -45,6 +47,38 @@
             }, function(message) {
                 logger.error('Problem enroling ' + vm.walkInStudentSelected.full_name + ' in the block...');
             }).then(vm.addWalkIn);
+        };
+
+        vm.isSelectedStudentValid = function () {
+            return vm.walkInStudentSelected && vm.walkInStudentSelected.id;
+        };
+
+        vm.createAccount = function () {
+            vm.newUser = {};
+            var splitName = vm.walkInStudentSelected.split(' ');
+            if (splitName.length > 0) {
+                vm.newUser.first_name = splitName[0];
+            }
+            if (splitName.length > 1) {
+                vm.newUser.surname = splitName[1];
+            }
+            vm.creatingNewAccount = true;
+        };
+
+        vm.registerNewUser = function(form) {
+            registerUserService.register(vm.newUser, true).then(function (user) {
+                vm.creatingNewAccount = false;
+                vm.walkInStudentSelected = user;
+            }, function (validation_errors) {
+                validationService.applyServerSideErrors(form, validation_errors);
+                logger.warning("Register failed");
+
+            });
+        };
+
+        vm.cancelNewAccount = function() {
+            vm.creatingNewAccount = false;
+            vm.newUser = {};
         };
 
         activate();

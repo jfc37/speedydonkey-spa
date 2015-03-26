@@ -31,8 +31,122 @@
                       <div class="panel-body">
                         <div class="row">
                         <input type="text" placeholder="Student's Name" ng-model="vm.walkInStudentSelected" typeahead="student as student.full_name for student in vm.searchUsers($viewValue)">
-                            <button class="btn btn-primary" ng-disabled="!vm.walkInStudentSelected" ng-click="vm.addWalkIn()">Add Walk In</button>
-                            <button class="btn btn-primary" ng-disabled="!vm.walkInStudentSelected" ng-click="vm.enrolWalkIn()">Enrol In Block</button>
+                            <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.addWalkIn()">Add Walk In</button>
+                            <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.enrolWalkIn()">Enrol In Block</button>
+                            <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid()" ng-click="vm.createAccount()">Create New Account</button>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="panel panel-default" ng-show="vm.creatingNewAccount">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">New Account</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="row">
+                          <form class="form-horizontal" name="registerForm" novalidate>
+
+                              <!--first name-->
+                              <div class="form-group" ng-class="{'has-error':registerForm.first_name.$invalid && registerForm.first_name.$touched}">
+                                  
+                                    <div class="col-xs-4">
+                                        <input class="form-control"
+                                               id="first_name"
+                                               name="first_name"
+                                               type="text"
+                                               placeholder="First Name (required)"
+                                               ng-model="vm.newUser.first_name"
+                                               required/>
+                                    </div>
+
+                                  <div class="has-error">
+                                      <span class="has-error" ng-show="registerForm.first_name.$error.required && registerForm.first_name.$touched">
+                                          Email is required.
+                                      </span>
+                                      <span ng-show="registerForm.first_name.serverError">
+                                          {{registerForm.first_name.serverError}}
+                                      </span>
+                                  </div>
+                              </div>
+
+                              <!--surname-->
+                              <div class="form-group" ng-class="{'has-error':registerForm.surname.$invalid && registerForm.surname.$touched}">
+                                  
+                                    <div class="col-xs-4">
+                                        <input class="form-control"
+                                               id="surname"
+                                               name="surname"
+                                               type="text"
+                                               placeholder="Surname (required)"
+                                               ng-model="vm.newUser.surname"
+                                               required/>
+                                    </div>
+
+                                  <div class="has-error">
+                                      <span class="has-error" ng-show="registerForm.surname.$error.required && registerForm.surname.$touched">
+                                          Surname is required.
+                                      </span>
+                                      <span ng-show="registerForm.surname.serverError">
+                                          {{registerForm.surname.serverError}}
+                                      </span>
+                                  </div>
+                              </div>
+
+                              <!--email-->
+                              <div class="form-group" ng-class="{'has-error':registerForm.email.$invalid && registerForm.email.$touched}">
+                                  
+                                    <div class="col-sm-4">
+                                        <input class="form-control"
+                                               id="email"
+                                               name="email"
+                                               type="text"
+                                               placeholder="Email (required)"
+                                               ng-model="vm.newUser.email"
+                                               required/>
+                                    </div>
+
+                                  <div class="has-error">
+                                      <span class="has-error" ng-show="registerForm.email.$error.required && registerForm.email.$touched">
+                                          Email is required.
+                                      </span>
+                                      <span ng-show="registerForm.email.serverError">
+                                          {{registerForm.email.serverError}}
+                                      </span>
+                                  </div>
+                              </div>
+
+                              <!--password-->
+                              <div class="form-group" ng-class="{'has-error':registerForm.password.$invalid && registerForm.password.$touched}">
+
+                                 <div class="col-xs-4">
+                                    <input class="form-control"
+                                           id="password"
+                                           name="password"
+                                           type="password"
+                                           placeholder="Password (required)"
+                                           ng-model="vm.newUser.password"
+                                           required/>
+                                 </div>
+
+                                  <div class="has-error">
+                                      <span class="has-error" ng-show="registerForm.password.$error.required && registerForm.password.$touched">
+                                          Password is required.
+                                      </span>
+                                      <span ng-show="registerForm.password.serverError">
+                                          {{registerForm.password.serverError}}
+                                      </span>
+                                  </div>
+                              </div>
+                              <button class="btn btn-primary col-xs-4"
+                                      ng-click="vm.cancelNewAccount()">
+                                  Cancel
+                              </button>
+                              <button class="btn btn-primary col-xs-4"
+                                      ng-click="vm.registerNewUser(registerForm)"
+                                      ng-disabled="registerForm.$invalid">
+                                  Register
+                              </button>
+                          </form>
                         </div>
                       </div>
                 </div>
