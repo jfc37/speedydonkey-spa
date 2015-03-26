@@ -86,6 +86,10 @@
             vm.newUser = {};
         };
 
+        vm.purchaseNewPass = function(student, passType){
+            
+        };
+
         activate();
 
         function activate() {
