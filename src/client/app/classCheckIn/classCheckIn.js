@@ -57,13 +57,16 @@
 
         vm.createAccount = function () {
             vm.newUser = {};
-            var splitName = vm.walkInStudentSelected.split(' ');
-            if (splitName.length > 0) {
-                vm.newUser.first_name = splitName[0];
+            if (vm.walkInStudentSelected){
+                var splitName = vm.walkInStudentSelected.split(' ');
+                if (splitName.length > 0) {
+                    vm.newUser.first_name = splitName[0];
+                }
+                if (splitName.length > 1) {
+                    vm.newUser.surname = splitName[1];
+                }
             }
-            if (splitName.length > 1) {
-                vm.newUser.surname = splitName[1];
-            }
+            
             vm.creatingNewAccount = true;
         };
 

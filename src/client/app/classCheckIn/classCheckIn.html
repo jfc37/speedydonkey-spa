@@ -18,8 +18,21 @@
                         <div ng-show="vm.students.length > 0" ng-repeat="student in vm.students">
                             <div class="form-group">
                                 <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)">
-                                {{student.first_name}} {{student.surname}} <pass-status ng-model='student.passes'></pass-status>
+                                {{student.first_name}} {{student.surname}} 
+                                <pass-status ng-model='student.passes' ng-click="openPassSelection = !openPassSelection"></pass-status>
                             </div>
+
+                            <div class="panel panel-default" ng-show="openPassSelection">
+                              <div class="panel-heading">
+                                  <h3 class="panel-title">Passes for {{student.full_name}}</h3>
+                                </div>
+                                <div class="panel-body">
+                                  <div ng-repeat="pass in student.passes">
+                                    {{pass.pass_type}} - {{pass.payment_status}}
+                                  </div>
+                                </div>
+                          </div>
+
                         </div>
                       </div>
                 </div>
@@ -29,7 +42,7 @@
                         <h3 class="panel-title">Walk In Students</h3>
                       </div>
                       <div class="panel-body">
-                        <div class="row">
+                        <div>
                         <input type="text" placeholder="Student's Name" ng-model="vm.walkInStudentSelected" typeahead="student as student.full_name for student in vm.searchUsers($viewValue)">
                             <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.addWalkIn()">Add Walk In</button>
                             <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.enrolWalkIn()">Enrol In Block</button>
