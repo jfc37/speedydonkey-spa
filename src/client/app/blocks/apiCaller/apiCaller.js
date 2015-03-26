@@ -19,6 +19,8 @@
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
 
+            postPassAssignment: postPassAssignment,
+
             getBlock : getBlock,
             postBlockEnrolment: postBlockEnrolment,
 
@@ -66,6 +68,11 @@
         function getUserEnroledBlocks(userId) {
             var url = baseUrl + 'users/' + userId + '/blocks';
             return $http.get(url);
+        }
+
+        function postPassAssignment(userId, pass) {
+            var url = baseUrl + 'users/' + userId + '/passes';
+            return $http.post(url, [pass]);
         }
 
         function getBlock(blockId) {

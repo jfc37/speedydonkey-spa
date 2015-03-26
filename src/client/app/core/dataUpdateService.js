@@ -11,7 +11,8 @@
     function dataUpdateService($q, apiCaller) {
         var service = {
             enrolInBlock: enrolInBlock,
-            studentAttendedClass: studentAttendedClass
+            studentAttendedClass: studentAttendedClass,
+            assignPassToStudent: assignPassToStudent
         };
 
         return service;
@@ -29,6 +30,12 @@
         function studentAttendedClass(classId, studentId) {
             return $q(function (resolve, revoke) {
                 apiCaller.postClassAttendance(classId, studentId).then(resolve, revoke);
+            });
+        }
+
+        function assignPassToStudent(studentId, pass) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postPassAssignment(studentId, pass).then(resolve, revoke);
             });
         }
     }

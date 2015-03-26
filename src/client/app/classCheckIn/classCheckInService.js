@@ -17,7 +17,8 @@
             searchUsers: searchUsers,
             attendenceStatusChanged: attendenceStatusChanged,
             enrolStudent: enrolStudent,
-            getPassesForStudent: getPassesForStudent
+            getPassesForStudent: getPassesForStudent,
+            purchaseNewPass: purchaseNewPass
         };
 
         function getClass() {
@@ -137,6 +138,16 @@
                     student.passes = [];
                     resolve();
                 });
+            });
+        }
+
+        function purchaseNewPass(student, passType) {
+            return $q(function (resolve, revoke) {
+                var pass = {
+                    pass_type: passType.name,
+                    payment_status: 'paid'
+                };
+                dataUpdateService.assignPassToStudent(student.id, pass).then(resolve, revoke);
             });
         }
 

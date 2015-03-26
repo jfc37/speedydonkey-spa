@@ -87,7 +87,11 @@
         };
 
         vm.purchaseNewPass = function(student, passType){
-            
+            classCheckInService.purchaseNewPass(student, passType).then(function() {
+                logger.success(student.full_name + ' purchased a new pass!');
+            },function() {
+                logger.error('Problem purchasing pass...');
+            });
         };
 
         activate();
