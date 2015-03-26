@@ -18,7 +18,7 @@
                         <div ng-show="vm.students.length > 0" ng-repeat="student in vm.students">
                             <div class="form-group">
                                 <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)">
-                                {{student.first_name}} {{student.surname}}
+                                {{student.first_name}} {{student.surname}} <pass-status ng-model='student.passes'></pass-status>
                             </div>
                         </div>
                       </div>
