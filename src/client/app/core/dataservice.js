@@ -59,7 +59,10 @@
                 if (index > 0){
                     q = q + ',';
                 }
-                q = q + search.field + '_' + search.condition + '_' + search.value;
+                q = q + search.field + '_' + search.condition;
+                if (search.value) {
+                    q = q +  '_' + search.value;
+                }
             });
 
             return apiCaller.searchUser(q);

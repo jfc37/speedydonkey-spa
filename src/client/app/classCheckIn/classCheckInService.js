@@ -71,6 +71,10 @@
                         field: 'fullname',
                         condition: 'cont',
                         value: name
+                    },
+                    {
+                        field: 'orderby',
+                        condition: 'fullname'
                     }
                 ];
 
