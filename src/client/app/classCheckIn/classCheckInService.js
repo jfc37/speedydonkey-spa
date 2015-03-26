@@ -15,7 +15,8 @@
             getClass: getClass,
             getStudents: getStudents,
             searchUsers: searchUsers,
-            attendenceStatusChanged: attendenceStatusChanged
+            attendenceStatusChanged: attendenceStatusChanged,
+            enrolStudent: enrolStudent
         };
 
         function getClass() {
@@ -101,7 +102,7 @@
                     promise = dataUpdateService.studentAttendedClass($routeParams.id, student.id);
                 } else {
                     message = {
-                        success: "Reomved student's attendance",
+                        success: "Removed student's attendance",
                         error: "Issue removing student's attendance..."
                     };
                     promise = dataDeleteService.studentUnattendedClass($routeParams.id, student.id);
@@ -113,6 +114,16 @@
                     reject(message.error);
                 });
 
+            });
+        }
+
+        function enrolStudent(studentId, blockId) {
+            return $q(function (resolve, revoke) {
+                var enrolment = {
+                    user_id: studentId,
+                    block_ids: [blockId]
+                };
+                dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);
             });
         }
 

@@ -39,6 +39,14 @@
             vm.walkInStudentSelected = '';
         };
 
+        vm.enrolWalkIn = function () {
+            classCheckInService.enrolStudent(vm.walkInStudentSelected.id, vm.class.block.id).then(function() {
+                logger.success('Enroled ' + vm.walkInStudentSelected.full_name + ' in the block');
+            }, function(message) {
+                logger.error('Problem enroling ' + vm.walkInStudentSelected.full_name + ' in the block...');
+            }).then(vm.addWalkIn);
+        };
+
         activate();
 
         function activate() {
