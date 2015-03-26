@@ -5,10 +5,10 @@
         .module('app.classCheckIn')
         .controller('ClassCheckIn', ClassCheckIn);
 
-    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'logger'];
+    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger'];
 
     /* @ngInject */
-    function ClassCheckIn($q, classCheckInService, registerUserService, logger) {
+    function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger) {
         /*jshint validthis: true */
         var vm = this;
         vm.class = null;
@@ -89,7 +89,7 @@
         activate();
 
         function activate() {
-            var promises = [getClass(), getStudents()];
+            var promises = [getClass(), getStudents(), getPassOptions()];
             return $q.all(promises)
             .then(function(){
                 logger.info('Activated Class Check In View');
@@ -119,6 +119,19 @@
                 }
                 logger.error(error.displayMessage);
                 vm.areRegisteredStudentsLoading = false;
+            });
+        }
+
+        function getPassOptions() {
+            return blockEnrolmentService.getPassOptions().then(function (passOptions) {
+                vm.passOptions = passOptions;
+                vm.arePassesLoading = false;
+            }, function (error){
+                if (!error.displayMessage) {
+                    error.arePassesLoading = "Issue getting pass options...";
+                }
+                logger.error(error.displayMessage);
+                vm.arePassesLoading = false;
             });
         }
     }
