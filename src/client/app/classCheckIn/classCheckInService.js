@@ -18,7 +18,8 @@
             attendenceStatusChanged: attendenceStatusChanged,
             enrolStudent: enrolStudent,
             getPassesForStudent: getPassesForStudent,
-            purchaseNewPass: purchaseNewPass
+            purchaseNewPass: purchaseNewPass,
+            passPaidFor: passPaidFor
         };
 
         function getClass() {
@@ -155,6 +156,16 @@
                 dataUpdateService.assignPassToStudent(student.id, pass).then(function (){
                     getPassesForStudent(student).then(resolve, resolve);
                 }, revoke);
+            });
+        }
+
+        function passPaidFor(pass) {
+            return $q(function (resolve, revoke) {
+                pass.payment_status = 'paid';
+                dataUpdateService.updatePass(pass).then(resolve, function () {
+                    pass.payment_status = 'pending';
+                    revoke();
+                });
             });
         }
 

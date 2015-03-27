@@ -64,7 +64,7 @@
                         scope.labelClass = 'success';
                         }
                     }
-                });
+                }, true);
             }
         };
         return directive;

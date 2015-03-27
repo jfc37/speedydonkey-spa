@@ -29,7 +29,7 @@
                                 <div class="panel-body">
                                   <div ng-repeat="pass in student.passes | filter:{payment_status: 'Pending'}">
                                     <pass-summary ng-model="pass"></pass-summary>
-                                    <button class="btn btn-primary" ng-click="vm.passPaidFor(pass)">Paid</button>
+                                    <button class="btn btn-primary" ng-click="vm.passPaidFor(pass, student)">Paid</button>
                                   </div>
                                   <div ng-repeat="pass in student.passes | filter:{payment_status: 'Paid'}">
                                     <pass-summary ng-model="pass"></pass-summary>

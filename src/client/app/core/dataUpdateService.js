@@ -12,7 +12,9 @@
         var service = {
             enrolInBlock: enrolInBlock,
             studentAttendedClass: studentAttendedClass,
-            assignPassToStudent: assignPassToStudent
+            assignPassToStudent: assignPassToStudent,
+
+            updatePass: updatePass
         };
 
         return service;
@@ -36,6 +38,12 @@
         function assignPassToStudent(studentId, pass) {
             return $q(function (resolve, revoke) {
                 apiCaller.postPassAssignment(studentId, pass).then(resolve, revoke);
+            });
+        }
+
+        function updatePass(pass) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putPass(pass).then(resolve, revoke);
             });
         }
     }

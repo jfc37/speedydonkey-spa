@@ -94,6 +94,14 @@
             });
         };
 
+        vm.passPaidFor = function(pass, student){
+            classCheckInService.passPaidFor(pass).then(function() {
+                logger.success('Pass paid for');
+            },function() {
+                logger.error('Problem paying for pass...');
+            });
+        };
+
         activate();
 
         function activate() {

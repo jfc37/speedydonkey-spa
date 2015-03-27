@@ -31,7 +31,9 @@
             getClassRegisteredStudents: getClassRegisteredStudents,
             getClassAttendance: getClassAttendance,
             postClassAttendance: postClassAttendance,
-            deleteClassAttendance: deleteClassAttendance
+            deleteClassAttendance: deleteClassAttendance,
+
+            putPass: putPass
         };
 
         var baseUrl = 'http://api-speedydonkey.azurewebsites.net/api/';
@@ -125,7 +127,10 @@
             var url = baseUrl + 'classes/' + classId + '/attendance/' + studentId;
             return $http.delete(url);
         }
-
-
+        
+        function putPass(pass) {
+            var url = baseUrl + 'passes/' + pass.id;
+            return $http.put(url, pass);
+        }
     }
 })();
