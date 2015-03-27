@@ -28,10 +28,11 @@
                                 </div>
                                 <div class="panel-body">
                                   <div ng-repeat="pass in student.passes | filter:{payment_status: 'Pending'}">
-                                    {{pass.pass_type}} - {{pass.payment_status}} <button class="btn btn-primary" ng-click="vm.passPaidFor(pass)">Paid</button>
+                                    <pass-summary ng-model="pass"></pass-summary>
+                                    <button class="btn btn-primary" ng-click="vm.passPaidFor(pass)">Paid</button>
                                   </div>
                                   <div ng-repeat="pass in student.passes | filter:{payment_status: 'Paid'}">
-                                    {{pass.pass_type}} - {{pass.payment_status}}
+                                    <pass-summary ng-model="pass"></pass-summary>
                                   </div>
 
                                   <hr ng-show="student.passes.length > 0"/>

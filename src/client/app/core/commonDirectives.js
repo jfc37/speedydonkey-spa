@@ -6,6 +6,7 @@
         .module('app.core')
         .directive('displayDate', displayDate)
         .directive('passStatus', passStatus)
+        .directive('passSummary', passSummary)
         ;
 
     /* @ngInject */
@@ -68,4 +69,52 @@
         };
         return directive;
     }
+
+    function passSummary() {
+        var directive = {
+            template: '{{passTypeText}} - {{validnessText}}',
+            require: 'ngModel',
+            scope: {
+              ngModel: '='
+            },
+            link: function(scope, element, attrs){
+                scope.passType = scope.ngModel.pass_type;
+                scope.paymentStatus = scope.ngModel.payment_status;
+                scope.validness = scope.ngModel.valid;
+
+                scope.passTypeText = getPassTypeText(scope.ngModel.pass_type);
+                scope.validnessText = getValidnessText(scope.ngModel);
+
+            }
+        };
+        return directive;
+    }
+
+    function getPassTypeText(passType) {
+        var passTypeLowerCase = passType.toLowerCase();
+        if (passTypeLowerCase === 'clip') {
+            return 'Clip pass';
+        }
+        if (passTypeLowerCase === 'single') {
+            return 'Single pass';
+        }
+        if (passTypeLowerCase === 'unlimited') {
+            return 'Unlimited pass';
+        }
+    }
+
+    function getValidnessText(pass) {
+        var text = '';
+        if (pass.pass_type.toLowerCase() !== 'unlimited') {
+            text = pass.clips_remaining + ' clip';
+            if (pass.clips_remaining > 1) {
+                text = text + 's';
+            }
+            text = text + ' remaining, and ';
+        }
+
+        text = text + 'expires on the ' + moment(pass.end_date).format('dddd MMMM D');
+        return text;
+    }
+
 })();
