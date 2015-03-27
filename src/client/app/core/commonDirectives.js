@@ -35,7 +35,7 @@
         return directive;
     }
 
-    function passStatus () {
+    function passStatus (commonFunctions) {
         var directive = {
             template: '<span class="label label-{{labelClass}}">{{message}}</span>',
             require: 'ngModel',
@@ -48,7 +48,7 @@
                         return pass.valid;
                     }).length > 0;
 
-                    if (!anyValidPasses){
+                    if (!scope.ngModel.some(commonFunctions.isValidPass)){
                         scope.message = 'no valid passes';
                         scope.labelClass = 'danger';
                     } else{

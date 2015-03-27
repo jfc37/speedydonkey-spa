@@ -32,8 +32,8 @@
 
         vm.addWalkIn = function () {
             vm.walkInStudentSelected.attendedClass = true;
-                classCheckInService.getPassesForStudent(vm.walkInStudentSelected).then(function (){
-                    classCheckInService.attendenceStatusChanged(vm.walkInStudentSelected).then(function(message) {
+            classCheckInService.getPassesForStudent(vm.walkInStudentSelected).then(function (){
+                classCheckInService.attendenceStatusChanged(vm.walkInStudentSelected).then(function(message) {
                     logger.success(message);
                 }, function(message) {
                     logger.error(message);

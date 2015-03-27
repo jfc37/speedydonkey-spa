@@ -5,10 +5,10 @@
         .module('app.classCheckIn')
         .factory('classCheckInService', classCheckInService);
 
-    classCheckInService.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataDeleteService', 'logger'];
+    classCheckInService.$inject = ['$q', '$routeParams', 'dataservice', 'dataUpdateService', 'dataDeleteService', 'logger', 'commonFunctions'];
 
     /* @ngInject */
-    function classCheckInService($q, $routeParams, dataservice, dataUpdateService, dataDeleteService, logger) {
+    function classCheckInService($q, $routeParams, dataservice, dataUpdateService, dataDeleteService, logger, commonFunctions) {
         /*jshint validthis: true */
         
         var service = {
@@ -97,6 +97,11 @@
                 var promise;
                 var message;
                 if (student.attendedClass) {
+                    if (!student.passes.some(commonFunctions.isValidPass)) {
+                        reject(student.full_name + ' needs to buy a pass before attending class');
+                        student.attendedClass = false;
+                        return;
+                    }
                     message = {
                         success: "Recorded student's attendance",
                         error: "Issue recording student's attendance..."
