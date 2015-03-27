@@ -38,29 +38,32 @@
     function passStatus () {
         var directive = {
             template: '<span class="label label-{{labelClass}}">{{message}}</span>',
+            require: 'ngModel',
             scope: {
               ngModel: '='
             },
             link: function(scope, element, attrs){
-                var anyValidPasses = scope.ngModel.filter(function (pass) {
-                    return pass.valid;
-                }).length > 0;
-
-                if (!anyValidPasses){
-                    scope.message = 'no valid passes';
-                    scope.labelClass = 'danger';
-                } else{
-                    var anyPaymentPendingPasses = scope.ngModel.filter(function (pass) {
-                        return pass.payment_status.toLowerCase() === 'pending';
+                scope.$watch('ngModel', function (change){
+                    var anyValidPasses = scope.ngModel.filter(function (pass) {
+                        return pass.valid;
                     }).length > 0;
-                    if (anyPaymentPendingPasses) {
-                        scope.message = 'pass needs payment';
-                    scope.labelClass = 'warning';
-                    } else {
-                        scope.message = 'all good';
-                    scope.labelClass = 'success';
+
+                    if (!anyValidPasses){
+                        scope.message = 'no valid passes';
+                        scope.labelClass = 'danger';
+                    } else{
+                        var anyPaymentPendingPasses = scope.ngModel.filter(function (pass) {
+                            return pass.payment_status.toLowerCase() === 'pending';
+                        }).length > 0;
+                        if (anyPaymentPendingPasses) {
+                            scope.message = 'pass needs payment';
+                        scope.labelClass = 'warning';
+                        } else {
+                            scope.message = 'all good';
+                        scope.labelClass = 'success';
+                        }
                     }
-                }
+                });
             }
         };
         return directive;

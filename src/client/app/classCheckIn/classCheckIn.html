@@ -18,7 +18,7 @@
                         <div ng-show="vm.students.length > 0" ng-repeat="student in vm.students">
                             <div class="form-group">
                                 <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)">
-                                {{student.first_name}} {{student.surname}} 
+                                {{student.full_name}} - {{student.passes}}
                                 <pass-status ng-model='student.passes' ng-click="openPassSelection = !openPassSelection"></pass-status>
                             </div>
 
@@ -29,6 +29,9 @@
                                 <div class="panel-body">
                                   <div ng-repeat="pass in student.passes | filter:{payment_status: 'Pending'}">
                                     {{pass.pass_type}} - {{pass.payment_status}} <button class="btn btn-primary" ng-click="vm.passPaidFor(pass)">Paid</button>
+                                  </div>
+                                  <div ng-repeat="pass in student.passes | filter:{payment_status: 'Paid'}">
+                                    {{pass.pass_type}} - {{pass.payment_status}}
                                   </div>
 
                                   <hr ng-show="student.passes.length > 0"/>

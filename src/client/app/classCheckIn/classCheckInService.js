@@ -147,7 +147,9 @@
                     pass_type: passType.name,
                     payment_status: 'paid'
                 };
-                dataUpdateService.assignPassToStudent(student.id, pass).then(resolve, revoke);
+                dataUpdateService.assignPassToStudent(student.id, pass).then(function (){
+                    getPassesForStudent(student).then(resolve, resolve);
+                }, revoke);
             });
         }
 
