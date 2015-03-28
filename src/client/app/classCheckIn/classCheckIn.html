@@ -15,11 +15,11 @@
                         <div ng-show="vm.registeredStudents.length === 0">
                             No students registered for this class.
                         </div>
-                        <div ng-repeat="student in vm.students | filter: {attendedClass: undefined}">
+                        <div ng-repeat="student in vm.students track by $index">
                             <div class="form-group">
                                 <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)">
                                 {{student.full_name}}
-                                  <pass-status ng-hide="student.attendedClass" ng-model='student.passes' ng-click="openPassSelection = !openPassSelection"></pass-status>
+                                  <pass-status ng-model='student' ng-click="openPassSelection = !openPassSelection"></pass-status>
                             </div>
 
                             <div class="panel panel-default" ng-show="openPassSelection">
@@ -61,6 +61,7 @@
                             <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.addWalkIn()">Add Walk In</button>
                             <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.enrolWalkIn()">Enrol In Block</button>
                             <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid()" ng-click="vm.createAccount()">Create New Account</button>
+                            <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid()" ng-click="vm.addVisitor()">Create Add Visitor</button>
                         </div>
                       </div>
                 </div>

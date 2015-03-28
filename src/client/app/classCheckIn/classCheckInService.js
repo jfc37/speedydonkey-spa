@@ -19,7 +19,8 @@
             enrolStudent: enrolStudent,
             getPassesForStudent: getPassesForStudent,
             purchaseNewPass: purchaseNewPass,
-            passPaidFor: passPaidFor
+            passPaidFor: passPaidFor,
+            getVisitor: getVisitor
         };
 
         function getClass() {
@@ -168,6 +169,19 @@
                     pass.payment_status = 'pending';
                     revoke();
                 });
+            });
+        }
+
+        function getVisitor() {
+            return $q(function (resolve, revoke) {
+                var search = {
+                    field: 'fullname',
+                    condition: '=',
+                    value: 'Full Swing Visitor'
+                };
+                dataservice.searchForUserNew([search]).then(function (response) {
+                    resolve(response.data[0]);
+                }, revoke);
             });
         }
 

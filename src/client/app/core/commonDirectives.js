@@ -45,25 +45,28 @@
             },
             link: function(scope, element, attrs){
                 scope.$watch('ngModel', function (change){
-                    var anyValidPasses = scope.ngModel.filter(function (pass) {
-                        return pass.valid;
-                    }).length > 0;
-
-                    if (!scope.ngModel.some(commonFunctions.isValidPass)){
-                        scope.message = 'no valid passes';
-                        scope.labelClass = 'danger';
-                    } else{
-                        var anyPaymentPendingPasses = scope.ngModel.filter(function (pass) {
-                            return pass.payment_status.toLowerCase() === 'pending';
-                        }).length > 0;
-                        if (anyPaymentPendingPasses) {
-                            scope.message = 'pass needs payment';
-                        scope.labelClass = 'warning';
-                        } else {
+                    var student = scope.ngModel;
+                    if (student.attendedClass) {
                             scope.message = 'all good';
                         scope.labelClass = 'success';
+                    } else {
+                        if (!student.passes.some(commonFunctions.isValidPass)){
+                            scope.message = 'no valid passes';
+                            scope.labelClass = 'danger';
+                        } else{
+                            var anyPaymentPendingPasses = student.passes.filter(function (pass) {
+                                return pass.payment_status.toLowerCase() === 'pending';
+                            }).length > 0;
+                            if (anyPaymentPendingPasses) {
+                                scope.message = 'pass needs payment';
+                            scope.labelClass = 'warning';
+                            } else {
+                                scope.message = 'all good';
+                            scope.labelClass = 'success';
+                            }
                         }
                     }
+
                 }, true);
             }
         };
