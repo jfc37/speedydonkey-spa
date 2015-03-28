@@ -15,11 +15,11 @@
                         <div ng-show="vm.registeredStudents.length === 0">
                             No students registered for this class.
                         </div>
-                        <div ng-show="vm.students.length > 0" ng-repeat="student in vm.students">
+                        <div ng-repeat="student in vm.students | filter: {attendedClass: undefined}">
                             <div class="form-group">
                                 <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)">
                                 {{student.full_name}}
-                                <pass-status ng-model='student.passes' ng-click="openPassSelection = !openPassSelection"></pass-status>
+                                  <pass-status ng-hide="student.attendedClass" ng-model='student.passes' ng-click="openPassSelection = !openPassSelection"></pass-status>
                             </div>
 
                             <div class="panel panel-default" ng-show="openPassSelection">

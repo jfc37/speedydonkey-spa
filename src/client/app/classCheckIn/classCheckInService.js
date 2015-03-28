@@ -116,7 +116,9 @@
                     promise = dataDeleteService.studentUnattendedClass($routeParams.id, student.id);
                 }
 
-                promise.then(function(){
+                promise.then(function () {
+                    getPassesForStudent(student);
+                }).then(function(){
                     resolve(message.success);
                 }, function() {
                     reject(message.error);
