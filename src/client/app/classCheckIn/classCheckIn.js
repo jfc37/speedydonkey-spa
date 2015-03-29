@@ -3,7 +3,19 @@
 
     angular
         .module('app.classCheckIn')
+        .filter('availablePassOptions', availablePassOptionsFilter)
         .controller('ClassCheckIn', ClassCheckIn);
+
+    function availablePassOptionsFilter(){
+        return function (passes, student){
+            if (student.full_name !== 'Full Swing Visitor') {
+                return passes;
+            }
+            return passes.filter(function (pass) {
+                return pass.name === 'Single';
+            });
+        };
+    }
 
     ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger'];
 
