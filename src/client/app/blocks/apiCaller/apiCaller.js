@@ -18,6 +18,7 @@
             getUserSchedule: getUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
+            getUserClaims: getUserClaims,
 
             postPassAssignment: postPassAssignment,
 
@@ -69,6 +70,11 @@
 
         function getUserEnroledBlocks(userId) {
             var url = baseUrl + 'users/' + userId + '/blocks';
+            return $http.get(url);
+        }
+
+        function getUserClaims(userId) {
+            var url = baseUrl + 'users/' + userId + '/claims';
             return $http.get(url);
         }
 

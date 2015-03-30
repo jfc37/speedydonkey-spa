@@ -18,7 +18,8 @@
             login: login,
             logout: logout,
             getUserIdentity: getUserIdentity,
-            setUserIdentityProperty: setUserIdentityProperty
+            setUserIdentityProperty: setUserIdentityProperty,
+            hasClaim: hasClaim
         };
         init();
         return service;
@@ -33,6 +34,16 @@
                 addBasicAuthorisation(authDataCookie);
             }
 
+        }
+
+        function hasClaim(claim) {
+            if (!userIdentity.claims) {
+                return false;
+            }
+
+            return userIdentity.claims.filter(function (userClaim) {
+                return userClaim === claim;
+            }).length > 0;
         }
 
         function getUserIdentity() {
@@ -56,12 +67,19 @@
                     var user = response.data[0];
 
                     userIdentity.userId = user.id;
-                    userIdentity.name = user.first_name + ' ' + user.surname;
+                    userIdentity.name = user.full_name;
 
-                    $cookieStore.put('authdata', encoded);
-                    $cookieStore.put('authuser', userIdentity);
+                    dataservice.getUserClaims(user.id).then(function (claims) {
+                        userIdentity.claims = claims;
 
-                    resolve();
+                        $cookieStore.put('authdata', encoded);
+                        $cookieStore.put('authuser', userIdentity);
+
+                        resolve();
+                    }, function () {
+                        userIdentity.claims = [];
+                        resolve();
+                    });
                 }, function(response){
                     logout();
                     if (response.status === 404){

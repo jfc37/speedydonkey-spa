@@ -167,6 +167,9 @@
                 if (route.denyAuthorised && getUserIdentity().isLoggedIn) {
                     return false;
                 }
+                if (route.claim && !authService.hasClaim(route.claim)){
+                    return false;
+                }
             }
             return true;
         }

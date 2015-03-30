@@ -18,6 +18,7 @@
             getUserSchedule: getUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
+            getUserClaims: getUserClaims,
 
             getAllBlocks: getAllBlocks,
 
@@ -91,6 +92,16 @@
         function getUserEnroledBlocks(userId) {
             return $q(function (resolve, reject) {
                 apiCaller.getUserEnroledBlocks(userId).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getUserClaims(userId) {
+            return $q(function (resolve, reject) {
+                apiCaller.getUserClaims(userId).then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

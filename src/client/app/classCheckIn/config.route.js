@@ -20,7 +20,8 @@
                     templateUrl: 'app/classCheckIn/classCheckIn.html',
                     controller: 'ClassCheckIn',
                     controllerAs: 'vm',
-                    title: 'classCheckIn'
+                    title: 'classCheckIn',
+                    claim: 'CheckStudentIntoClass'
                 }
             }
         ];
