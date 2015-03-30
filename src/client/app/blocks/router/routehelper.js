@@ -136,7 +136,7 @@
         }
 
         function getRouteFromName(routeName, routeParameters){
-            var routes = getRoutes().filter(function(route){ 
+            var routes = getRoutes().filter(function(route){
                 return route.title === routeName;
             });
 
@@ -160,6 +160,14 @@
 
         /*private*/
         function isAuthorisedForRoute(route) {
+            if (route) {
+                if (!route.allowAnonymous && !getUserIdentity().isLoggedIn){
+                    return false;
+                }
+                if (route.denyAuthorised && getUserIdentity().isLoggedIn) {
+                    return false;
+                }
+            }
             return true;
         }
 
