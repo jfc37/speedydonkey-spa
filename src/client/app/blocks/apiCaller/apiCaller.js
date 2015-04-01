@@ -37,7 +37,7 @@
             putPass: putPass
         };
 
-        var baseUrl = 'http://api-speedydonkey.azurewebsites.net/api/';
+        var baseUrl = 'https://api-speedydonkey.azurewebsites.net/api/';
 
         return service;
 
