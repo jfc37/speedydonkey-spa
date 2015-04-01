@@ -67,7 +67,7 @@
                     userIdentity.userId = user.id;
                     userIdentity.name = user.full_name;
 
-                    dataservice.getUserClaims(user.id).then(function (claims) {
+                    dataservice.getCurrentUserClaims().then(function (claims) {
                         userIdentity.claims = claims;
 
                         $cookieStore.put('authdata', encoded);

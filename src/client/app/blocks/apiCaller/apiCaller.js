@@ -16,10 +16,10 @@
             searchUser: searchUser,
             getCurrentUser: getCurrentUser,
 
-            getUserSchedule: getUserSchedule,
+            getCurrentUserSchedule: getCurrentUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
-            getUserClaims: getUserClaims,
+            getCurrentUserClaims: getCurrentUserClaims,
 
             postPassAssignment: postPassAssignment,
 
@@ -64,8 +64,8 @@
             return $http.get(url);
         }
 
-        function getUserSchedule(userId) {
-            var url = baseUrl + 'users/' + userId + '/schedules';
+        function getCurrentUserSchedule() {
+            var url = baseUrl + 'users/current/schedules';
             return $http.get(url);
         }
 
@@ -79,8 +79,8 @@
             return $http.get(url);
         }
 
-        function getUserClaims(userId) {
-            var url = baseUrl + 'users/' + userId + '/claims';
+        function getCurrentUserClaims() {
+            var url = baseUrl + 'users/current/claims';
             return $http.get(url);
         }
 

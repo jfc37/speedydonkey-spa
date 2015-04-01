@@ -19,7 +19,7 @@
 
         function getSchedule() {
             return $q(function (resolve, reject) {
-                dataservice.getUserSchedule(authService.getUserIdentity().userId).then(function(schedule) {
+                dataservice.getCurrentUserSchedule().then(function(schedule) {
                     resolve(schedule);
                 }, function (response) {
                     if (response.status === 404) {
@@ -32,7 +32,7 @@
 
         function getCurrentPasses() {
             return $q(function (resolve, reject) {
-                dataservice.getUserCurrentPasses(authService.getUserIdentity().userId).then(function(passes) {
+                dataservice.getCurrentUserCurrentPasses().then(function(passes) {
                     resolve(passes);
                 }, function (response) {
                     if (response.status === 404) {

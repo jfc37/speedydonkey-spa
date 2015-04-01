@@ -16,10 +16,11 @@
             searchForUserNew: searchForUserNew,
             getCurrentUser: getCurrentUser,
 
-            getUserSchedule: getUserSchedule,
+            getCurrentUserSchedule: getCurrentUserSchedule,
+            getCurrentUserCurrentPasses: getCurrentUserCurrentPasses,
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
-            getUserClaims: getUserClaims,
+            getCurrentUserClaims: getCurrentUserClaims,
 
             getAllBlocks: getAllBlocks,
 
@@ -78,14 +79,18 @@
             });
         }
 
-        function getUserSchedule(userId) {
+        function getCurrentUserSchedule() {
             return $q(function (resolve, reject) {
-                apiCaller.getUserSchedule(userId).then(function (response) {
+                apiCaller.getCurrentUserSchedule().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
                 });
             });
+        }
+
+        function getCurrentUserCurrentPasses() {
+            return getUserCurrentPasses('current');
         }
 
         function getUserCurrentPasses(userId) {
@@ -108,9 +113,9 @@
             });
         }
 
-        function getUserClaims(userId) {
+        function getCurrentUserClaims() {
             return $q(function (resolve, reject) {
-                apiCaller.getUserClaims(userId).then(function (response) {
+                apiCaller.getCurrentUserClaims().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
