@@ -60,11 +60,9 @@
             addBasicAuthorisation(encoded);
 
             return $q(function (resolve, revoke) {
-                dataservice.searchForUser({email: email}).then(function (response) {
+                dataservice.getCurrentUser().then(function (user) {
                     userIdentity.isLoggedIn = true;
                     userIdentity.username = email;
-
-                    var user = response.data[0];
 
                     userIdentity.userId = user.id;
                     userIdentity.name = user.full_name;

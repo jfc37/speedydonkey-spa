@@ -14,6 +14,7 @@
             postUser : postUser,
             getUser: getUser,
             searchUser: searchUser,
+            getCurrentUser: getCurrentUser,
 
             getUserSchedule: getUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
@@ -55,6 +56,11 @@
         function searchUser(search) {
             var url = baseUrl + 'users?q=' + search;
 
+            return $http.get(url);
+        }
+
+        function getCurrentUser() {
+            var url = baseUrl + 'users/current';
             return $http.get(url);
         }
 

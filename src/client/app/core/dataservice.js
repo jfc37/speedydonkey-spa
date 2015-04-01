@@ -14,6 +14,7 @@
             getUser: getUser,
             searchForUser: searchForUser,
             searchForUserNew: searchForUserNew,
+            getCurrentUser: getCurrentUser,
 
             getUserSchedule: getUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
@@ -67,6 +68,14 @@
             });
 
             return apiCaller.searchUser(q);
+        }
+
+        function getCurrentUser() {
+            return $q(function (resolve, revoke) {
+                apiCaller.getCurrentUser().then(function (response) {
+                    resolve(response.data);
+                }, revoke);
+            });
         }
 
         function getUserSchedule(userId) {
