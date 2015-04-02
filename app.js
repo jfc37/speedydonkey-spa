@@ -19,15 +19,15 @@ var appDir =  __dirname + './src/'; // Our NG code is served from root
 var environment = process.env.NODE_ENV;
 var pkg = require('./package.json');
 
-var forceSsl = function (req, res, next) {
+// var forceSsl = function (req, res, next) {
 
-    res.send('req.protocol: ' + util.inspect(req));
+//     res.send('req.protocol: ' + util.inspect(req));
 
-    // if (req.protocol !== 'https') {
-    //     return res.redirect(['https://', req.get('Host'), req.url].join(''));
-    // }
-    // return next();
-};
+//     // if (req.protocol !== 'https') {
+//     //     return res.redirect(['https://', req.get('Host'), req.url].join(''));
+//     // }
+//     // return next();
+// };
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -42,7 +42,7 @@ app.use(cors());                // enable ALL CORS requests
 console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
 
-app.get('*', forceSsl);
+//app.get('*', forceSsl);
 if(environment === 'stage') {
     console.log('** STAGE **');
     app.use('/', express.static('./build/stage/'));
