@@ -103,9 +103,9 @@
             });
         }
 
-        function getUserEnroledBlocks(userId) {
+        function getUserEnroledBlocks() {
             return $q(function (resolve, reject) {
-                apiCaller.getUserEnroledBlocks(userId).then(function (response) {
+                apiCaller.getUserEnroledBlocks().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

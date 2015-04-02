@@ -34,7 +34,7 @@
                     if (allBlocks.length === 0){
                         return;
                     }
-                    dataservice.getUserEnroledBlocks(authService.getUserIdentity().userId).then(function (blocks) {
+                    dataservice.getUserEnroledBlocks().then(function (blocks) {
                         var enroledBlockIds = blocks.map(function(block){
                             return block.id;
                         });

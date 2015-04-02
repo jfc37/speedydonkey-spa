@@ -18,7 +18,8 @@
                             
                             <div class="form-group">
                                 <display-date format='long date' ng-model='block.start_date'></display-date> {{block.name}} - <display-date format='time' ng-model='block.start_date'></display-date>
-                                <input type="checkbox" data-ng-model="block.enrolIn">
+                                <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
+                                <span ng-show="block.isEnroled">Already enroled</span>
                             </div>
                         </li>
                       </ul>

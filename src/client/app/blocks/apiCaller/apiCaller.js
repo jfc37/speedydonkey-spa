@@ -75,7 +75,7 @@
         }
 
         function getUserEnroledBlocks(userId) {
-            var url = baseUrl + 'users/' + userId + '/blocks';
+            var url = baseUrl + 'users/current/blocks';
             return $http.get(url);
         }
 
