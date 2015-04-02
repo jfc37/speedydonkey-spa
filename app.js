@@ -19,7 +19,7 @@ var environment = process.env.NODE_ENV;
 var pkg = require('./package.json');
 
 var forceSsl = function (req, res, next) {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
+    if (req.protocol !== 'https') {
         return res.redirect(['https://', req.get('Host'), req.url].join(''));
     }
     return next();
