@@ -3,7 +3,17 @@
 
     angular
         .module('app.blockEnrolment')
+        .filter('matchingBlockGrouping', matchingBlockGroupingFilter)
         .controller('BlockEnrolment', BlockEnrolment);
+
+
+    function matchingBlockGroupingFilter(){
+        return function (blocks, group){
+            return blocks.filter(function (block) {
+                return moment(block.start_date).format("dddd MMMM D") === group;
+            });
+        };
+    }
 
     BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger'];
 
@@ -17,6 +27,7 @@
         vm.passOptions = [];
         vm.areBlocksLoading = true;
         vm.arePassesLoading = true;
+        vm.blockGrouping = [];
 
         vm.isAnythingToSubmit = function() {
             return isAnyBlocksSelected() || isAnyPassesSelected();
@@ -56,6 +67,27 @@
         function getAllBlocks() {
             return blockEnrolmentService.getBlocks().then(function (blocks) {
                 vm.blocks = blocks;
+
+                // var flags = [], l = blocks.length, i;
+                // for( i=0; i<l; i++) {
+                //     var date = new Date(blocks[i].start_date);
+                //     date.setHours(0,0,0,0);
+                //     if(flags[date]) {
+                //         continue;
+                //     }
+                //     flags[date] = true;
+                //     vm.blockGrouping.push(date);
+                // }
+                var flags = [], l = blocks.length, i;
+                for( i=0; i<l; i++) {
+                    var displayDate = moment(blocks[i].start_date).format("dddd MMMM D");
+                    if(flags[displayDate]) {
+                        continue;
+                    }
+                    flags[displayDate] = true;
+                    vm.blockGrouping.push(displayDate);
+                }
+
                 vm.areBlocksLoading = false;
             }, function (error){
                 if (!error.displayMessage) {

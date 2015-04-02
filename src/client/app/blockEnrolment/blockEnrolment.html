@@ -9,20 +9,20 @@
                   <div ng-show="vm.areBlocksLoading" class="panel-body">Loading blocks...</div>
                   <div ng-hide="vm.areBlocksLoading" class="panel-body">
                     <p ng-show="vm.blocks.length > 0">Go ahead and select the blocks you want to enrol in</p>
+                    <div class="col-md-3" ng-repeat="group in vm.blockGrouping">
+                      <h5>{{group}}</h5>
+                      <div ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'start_date'">
+                            <div class="form-group">
+                                <display-date format='time' ng-model='block.start_date'></display-date> {{block.name}}
+                                <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
+                                <span ng-show="block.isEnroled">Already enroled</span>
+                            </div>
+                      </div>
+                    </div>
                     <p ng-show="vm.blocks.length === 0">
                         There are no blocks available to be enrolled in
                     </p>
                   </div>
-                    <ul ng-hide="vm.areBlocksLoading" class="list-group" data-ng-repeat="block in vm.blocks">
-                        <li class="list-group-item">
-                            
-                            <div class="form-group">
-                                <display-date format='long date' ng-model='block.start_date'></display-date> {{block.name}} - <display-date format='time' ng-model='block.start_date'></display-date>
-                                <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
-                                <span ng-show="block.isEnroled">Already enroled</span>
-                            </div>
-                        </li>
-                      </ul>
                 </div>
             </div>
 
