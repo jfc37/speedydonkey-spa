@@ -12,6 +12,7 @@ var http         = require('http');
 var logger       = require('morgan');
 var port         = process.env['PORT'] || 7300;
 var updater      = require('./src/server/updater');
+var util = require('util');
 var server;
 
 var appDir =  __dirname + './src/'; // Our NG code is served from root
@@ -20,7 +21,7 @@ var pkg = require('./package.json');
 
 var forceSsl = function (req, res, next) {
 
-    res.send('req.protocol: ' + req.protocol);
+    res.send('req.protocol: ' + util.inspect(req));
 
     // if (req.protocol !== 'https') {
     //     return res.redirect(['https://', req.get('Host'), req.url].join(''));
