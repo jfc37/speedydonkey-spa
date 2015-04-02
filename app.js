@@ -43,7 +43,7 @@ console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
 
 if(environment === 'dev') {
-    app.get('*', forceSsl);
+    //app.get('*', forceSsl);
     console.log('** DEV **');
 //    app.use('/', express.static(appDir));
     app.use('/', express.static(pkg.paths.client));
