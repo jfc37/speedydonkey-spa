@@ -54,7 +54,7 @@ if(environment === 'dev') {
         res.send('pong');
     });
 } else {
-    console.log('** STAGE **');
+    console.log('** ' + environment + ' **');
     app.use('/', express.static('./build/stage/'));
 }
 
