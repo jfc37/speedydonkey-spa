@@ -9,14 +9,19 @@
                   <div ng-show="vm.areBlocksLoading" class="panel-body">Loading blocks...</div>
                   <div ng-hide="vm.areBlocksLoading" class="panel-body">
                     <p ng-show="vm.blocks.length > 0">Go ahead and select the blocks you want to enrol in</p>
-                    <div class="col-md-3" ng-repeat="group in vm.blockGrouping">
-                      <h5>{{group}}</h5>
-                      <div ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'start_date'">
-                            <div class="form-group">
-                                <display-date format='time' ng-model='block.start_date'></display-date> {{block.name}}
-                                <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
-                                <span ng-show="block.isEnroled">Already enroled</span>
-                            </div>
+                    <div class="block-grouping clearfix col-md-3" ng-repeat="group in vm.blockGrouping">
+                      <h4 class="text-center">{{group}}</h4>
+                      <div class="col-sm-4 col-md-12"  ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'start_date'">
+                        <div class="block-item" ng-class="vm.getClassType(block)">
+                          <strong>{{block.name}}</strong>
+                          <p>
+                            <display-date format='time' ng-model='block.start_date'></display-date> - <display-date format='time' ng-model='block.end_date'></display-date>
+                          </p>
+                          <div class="form-group" ng-hide="block.isEnroled">
+                            Enrol - <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
+                          </div>
+                          <div class="form-group" ng-show="block.isEnroled">Already enroled</div>
+                        </div>
                       </div>
                     </div>
                     <p ng-show="vm.blocks.length === 0">

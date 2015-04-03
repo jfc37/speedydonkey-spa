@@ -559,3 +559,53 @@ a {
 }
 
 /*end general styles*/
+
+/* Block Selection */
+
+.block-grouping {
+    margin-bottom: 25px;
+}
+
+.block-item {
+    text-align: center; 
+    border: dashed 2px; 
+    border-radius: 10px;
+    margin: 5px;
+    /*height: 65px;*/
+    vertical-align: middle;
+    padding: 10px 2px 0 2px;
+}
+
+.block-item.charleston {
+    border-color: #66B762;
+    background-color: #DCEEDB;
+}
+
+.block-item.lindy {
+    border-color: #C75C54;
+    background-color: #F7E7E6;
+}
+
+.block-item.tap {
+    border-color: #666666;
+    background-color: #E6E6E6;
+}
+
+.block-item.blues {
+    border-color: #9CC7D0;
+    background-color: #E8F2F4;
+}
+
+.block-item.balboa {
+    border-color: #FF7E40;
+    background-color: #FFEBE1;
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+/* END Block Selection */

@@ -10,7 +10,7 @@
     function matchingBlockGroupingFilter(){
         return function (blocks, group){
             return blocks.filter(function (block) {
-                return moment(block.start_date).format("dddd MMMM D") === group;
+                return moment(block.start_date).format("ddd MMMM D") === group;
             });
         };
     }
@@ -28,6 +28,26 @@
         vm.areBlocksLoading = true;
         vm.arePassesLoading = true;
         vm.blockGrouping = [];
+
+        vm.getClassType = function(block) {
+            var blockName = block.name.toLowerCase();
+            if (blockName.indexOf('charleston') > -1) {
+                return 'charleston';
+            }
+            if (blockName.indexOf('lindy') > -1) {
+                return 'lindy';
+            }
+            if (blockName.indexOf('tap') > -1) {
+                return 'tap';
+            }
+            if (blockName.indexOf('blues') > -1) {
+                return 'blues';
+            }
+            if (blockName.indexOf('balboa') > -1) {
+                return 'balboa';
+            }
+            return '';
+        };
 
         vm.isAnythingToSubmit = function() {
             return isAnyBlocksSelected() || isAnyPassesSelected();
@@ -80,7 +100,7 @@
                 // }
                 var flags = [], l = blocks.length, i;
                 for( i=0; i<l; i++) {
-                    var displayDate = moment(blocks[i].start_date).format("dddd MMMM D");
+                    var displayDate = moment(blocks[i].start_date).format("ddd MMMM D");
                     if(flags[displayDate]) {
                         continue;
                     }
