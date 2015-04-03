@@ -23,7 +23,7 @@
                     templateUrl: 'app/blockEnrolment/blockEnrolment.html',
                     settings: {
                         nav: 4,
-                        content: '<i class="fa fa-toggle-on"></i> Enrolment in Blocks'
+                        content: '<i class="fa fa-toggle-on"></i> Block Enrolment'
                     }
                 }
             }

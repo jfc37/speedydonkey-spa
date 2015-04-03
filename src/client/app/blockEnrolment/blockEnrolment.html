@@ -2,63 +2,54 @@
     <section class="matter">
         <div class="container">
             <div class="row">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Block Selection</h3>
-                  </div>
-                  <div ng-show="vm.areBlocksLoading" class="panel-body">Loading blocks...</div>
-                  <div ng-hide="vm.areBlocksLoading" class="panel-body">
-                    <p ng-show="vm.blocks.length > 0">Go ahead and select the blocks you want to enrol in</p>
-                    <div class="block-grouping clearfix col-md-3" ng-repeat="group in vm.blockGrouping">
-                      <h4 class="text-center">{{group}}</h4>
-                      <div class="col-sm-4 col-md-12"  ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'start_date'">
-                        <div class="block-item" ng-class="vm.getClassType(block)">
-                          <strong>{{block.name}}</strong>
-                          <p>
-                            <display-date format='time' ng-model='block.start_date'></display-date> - <display-date format='time' ng-model='block.end_date'></display-date>
-                          </p>
-                          <div class="form-group" ng-hide="block.isEnroled">
-                            Enrol - <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
-                          </div>
-                          <div class="form-group" ng-show="block.isEnroled">Already enroled</div>
-                        </div>
+              <h1>Block Selection</h1>
+              <p ng-show="vm.areBlocksLoading">Loading blocks...</p>
+              <div ng-hide="vm.areBlocksLoading">
+                <p class="lead" ng-show="vm.blocks.length > 0">Select the blocks you want to enrol in</p>
+                <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping">
+                  <h4 class="text-center">{{group}}</h4>
+                  <div class="col-sm-4 col-lg-12"  ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'start_date'">
+                    <div class="block-item" ng-class="vm.getClassType(block)">
+                      <strong>{{block.name}}</strong>
+                      <p>
+                        <display-date format='time' ng-model='block.start_date'></display-date> - <display-date format='time' ng-model='block.end_date'></display-date>
+                      </p>
+                      <div class="form-group" ng-hide="block.isEnroled">
+                        <b>Enrol</b> <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
                       </div>
+                      <div class="form-group" ng-show="block.isEnroled"><b>Already enroled</b></div>
                     </div>
-                    <p ng-show="vm.blocks.length === 0">
-                        There are no blocks available to be enrolled in
-                    </p>
                   </div>
                 </div>
+                <p ng-show="vm.blocks.length === 0">
+                    There are no blocks available to be enrolled in
+                </p>
+              </div>
             </div>
-
+            <hr/>
             <div class="row">
-
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Pass Selection</h3>
-                  </div>
-                  <div ng-show="vm.arePassesLoading" class="panel-body">Loading passes...</div>
-                  <div ng-hide="vm.arePassesLoading" class="panel-body">
-                    <div ng-show="vm.passOptions.length > 0">
-                        <p>Go ahead and select the pass that works for you</p>
-                        <div class="radio">
-                          <label>
-                            <input type="radio" name="passOptions" data-ng-model="vm.selectedPass" value="">
-                                Sort out in class
-                          </label>
-                        </div>
-                        <div class="radio" data-ng-repeat="pass in vm.passOptions">
-                          <label>
-                            <input type="radio" name="passOptions" data-ng-model="$parent.vm.selectedPass" ng-value="pass">
-                                {{pass.description}} - ${{pass.value}}.00
-                          </label>
-                        </div>
+              <h1>Pass Selection</h1>
+              <p ng-show="vm.arePassesLoading">Loading passes...</p>
+              <div ng-hide="vm.arePassesLoading">
+                <div ng-show="vm.passOptions.length > 0">
+                    <p  class="lead">Select the pass that works for you</p>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="passOptions" data-ng-model="vm.selectedPass" value="">
+                            Sort out in class
+                      </label>
                     </div>
-                    <p ng-show="vm.passOptions.length === 0">
-                        There are no pass options available
-                    </p>
-                  </div>
+                    <div class="radio" data-ng-repeat="pass in vm.passOptions">
+                      <label>
+                        <input type="radio" name="passOptions" data-ng-model="$parent.vm.selectedPass" ng-value="pass">
+                            {{pass.description}} - ${{pass.value}}.00
+                      </label>
+                    </div>
                 </div>
+                <p ng-show="vm.passOptions.length === 0">
+                    There are no pass options available
+                </p>
+              </div>
             </div>
             <div class="row">
                 <button class="btn btn-primary" ng-disabled="!vm.isAnythingToSubmit()" ng-click="vm.submit()">Enrol</button>
