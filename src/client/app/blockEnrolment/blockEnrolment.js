@@ -6,11 +6,15 @@
         .filter('matchingBlockGrouping', matchingBlockGroupingFilter)
         .controller('BlockEnrolment', BlockEnrolment);
 
+        function getGroupDate(date) {
+            return moment(date).format("dddd D/M");
+        }
+
 
     function matchingBlockGroupingFilter(){
         return function (blocks, group){
             return blocks.filter(function (block) {
-                return moment(block.start_date).format("ddd MMMM D") === group;
+                return getGroupDate(block.start_date) === group;
             });
         };
     }
@@ -100,7 +104,7 @@
                 // }
                 var flags = [], l = blocks.length, i;
                 for( i=0; i<l; i++) {
-                    var displayDate = moment(blocks[i].start_date).format("ddd MMMM D");
+                    var displayDate = getGroupDate(blocks[i].start_date);
                     if(flags[displayDate]) {
                         continue;
                     }
