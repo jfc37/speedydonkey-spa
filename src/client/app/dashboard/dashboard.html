@@ -50,7 +50,7 @@
                   </div>
                   <div class="panel-body" ng-hide="vm.areClassesLoading">
                     <div ng-show="vm.todaysClasses.length === 0">
-                        Nothing classes today.
+                        No classes today.
                     </div>
                     <div ng-show="vm.todaysClasses.length > 0" ng-repeat="class in vm.todaysClasses">
                       <a data-ng-href="#/class/{{class.id}}/check-in">

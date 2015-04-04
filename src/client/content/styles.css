@@ -601,11 +601,4 @@ a {
     background-color: #FFEBE1;
 }
 
-.row-eq-height {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display:         flex;
-}
-
 /* END Block Selection */
