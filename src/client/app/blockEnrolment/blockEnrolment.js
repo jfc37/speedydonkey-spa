@@ -19,10 +19,10 @@
         };
     }
 
-    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger'];
+    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger', 'routehelper'];
 
     /* @ngInject */
-    function BlockEnrolment(blockEnrolmentService, $q, logger) {
+    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -72,6 +72,7 @@
 
         vm.submit = function() {
             blockEnrolmentService.enrol(getSelectedBlocks(), vm.selectedPass).then(function (){
+                routehelper.redirectToRoute('dashboard');
                 logger.success("Enroled in selected blocks");
             }, function () {
                 logger.error("Problem with enrolment");
@@ -91,17 +92,6 @@
         function getAllBlocks() {
             return blockEnrolmentService.getBlocks().then(function (blocks) {
                 vm.blocks = blocks;
-
-                // var flags = [], l = blocks.length, i;
-                // for( i=0; i<l; i++) {
-                //     var date = new Date(blocks[i].start_date);
-                //     date.setHours(0,0,0,0);
-                //     if(flags[date]) {
-                //         continue;
-                //     }
-                //     flags[date] = true;
-                //     vm.blockGrouping.push(date);
-                // }
                 var flags = [], l = blocks.length, i;
                 for( i=0; i<l; i++) {
                     var displayDate = getGroupDate(blocks[i].start_date);
