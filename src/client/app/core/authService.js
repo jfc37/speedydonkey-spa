@@ -80,7 +80,7 @@
                     });
                 }, function(response){
                     logout();
-                    if (response.status === 404){
+                    if (response.status === 401){
                         revoke([{property_name: "global", error_message: "Invalid email or password"}]);
                     }
                 });
