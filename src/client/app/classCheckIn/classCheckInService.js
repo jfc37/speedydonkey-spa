@@ -104,6 +104,11 @@
                         student.attendedClass = false;
                         return;
                     }
+                    if (!student.passes.some(commonFunctions.isPaidPass)) {
+                        reject(student.full_name + ' needs to pay for a pass before attending class');
+                        student.attendedClass = false;
+                        return;
+                    }
                     message = {
                         success: "Recorded student's attendance",
                         error: "Issue recording student's attendance..."
@@ -122,6 +127,7 @@
                 }).then(function(){
                     resolve(message.success);
                 }, function() {
+                    student.attendedClass = false;
                     reject(message.error);
                 });
 
