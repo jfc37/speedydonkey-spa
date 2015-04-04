@@ -15,7 +15,7 @@
     function getRoutes() {
         return [
             {
-                url: '/account/1/activate',
+                url: '/account/:key/activate',
                 config: {
                     title: 'userActivation',
                     controller: 'UserActivation',
