@@ -558,6 +558,10 @@ a {
     margin-top: 32px;
 }
 
+.cursor {
+    cursor: pointer;
+}
+
 /*end general styles*/
 
 /* Block Selection */

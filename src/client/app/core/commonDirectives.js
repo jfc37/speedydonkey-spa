@@ -38,7 +38,7 @@
 
     function passStatus (commonFunctions) {
         var directive = {
-            template: '<span class="label label-{{labelClass}}">{{message}}</span>',
+            template: '<span class="label label-{{labelClass}} cursor">{{message}}</span>',
             require: 'ngModel',
             scope: {
               ngModel: '='
