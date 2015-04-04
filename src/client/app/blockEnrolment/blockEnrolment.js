@@ -32,6 +32,7 @@
         vm.areBlocksLoading = true;
         vm.arePassesLoading = true;
         vm.blockGrouping = [];
+        vm.selectedPass = "";
 
         vm.getClassType = function(block) {
             var blockName = block.name.toLowerCase();
