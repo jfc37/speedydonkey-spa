@@ -17,10 +17,10 @@
         };
     }
 
-    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger'];
+    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger', 'validationService'];
 
     /* @ngInject */
-    function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger) {
+    function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger, validationService) {
         /*jshint validthis: true */
         var vm = this;
         vm.class = null;
