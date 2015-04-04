@@ -23,7 +23,6 @@
             userActivationService.activate().then(function () {
                 vm.activationSuccessful = true;
                 vm.loaded = true;
-                routehelper.redirectToRoute('login');
             }, function (validation_errors) {
                 logger.warning("Activation Failed");
                 vm.activationSuccessful = false;
