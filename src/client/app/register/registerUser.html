@@ -5,7 +5,7 @@
 
                 <div class="col-lg-3 col-lg-offset-4 well">
                     <h3 class="text-center">New User</h2>
-                      <form class="form-horizontal" name="registerForm" novalidate>
+                      <form ng-hide="vm.registrationSuccessful" class="form-horizontal" name="registerForm" novalidate>
                               <!--email-->
                               <div class="form-group" ng-class="{'has-error':registerForm.email.$invalid && registerForm.email.$touched}">
                                   
@@ -104,7 +104,10 @@
                               </button>
 
                       </form>
-
+        
+                      <div ng-show=vm.registrationSuccessful>
+                        Thank you, you'll receive an email to activate your account shortly.
+                      </div>
                     </div>
                 </div>
 

@@ -13,20 +13,21 @@
         var vm = this;
 
         vm.title = 'User Activation';
-        vm.activationMessage = 'Activating User...';
-
+        vm.loginUrl = '#/login';
+        vm.loaded = false;
 
         activate();
 
         function activate() {
             logger.info('Activated User Activation View');
-
             userActivationService.activate().then(function () {
-                vm.activationMessage = 'Your account has been activated';
+                vm.activationSuccessful = true;
+                vm.loaded = true;
                 routehelper.redirectToRoute('login');
             }, function (validation_errors) {
                 logger.warning("Activation Failed");
-                vm.activationMessage = 'Issue activating your account';
+                vm.activationSuccessful = false;
+                vm.loaded = true;
             });
         }
     }

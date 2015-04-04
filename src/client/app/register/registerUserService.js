@@ -17,11 +17,7 @@
         function register(user, ignoreLogin) {
             return $q(function (resolve, revoke) {
                 dataCreateService.createUser(user).then(function (createdUser) {
-                    if (ignoreLogin) {
-                        resolve(createdUser);
-                    } else {
-                        authService.login(user.email, user.password, createdUser.id).then(resolve);
-                    }
+                    resolve(createdUser);
                 }, function (response) {
                     if (response.validation_result !== undefined){
                         revoke(response.validation_result.validation_errors);
