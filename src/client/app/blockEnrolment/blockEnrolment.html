@@ -6,19 +6,21 @@
               <p ng-show="vm.areBlocksLoading">Loading blocks...</p>
               <div ng-hide="vm.areBlocksLoading">
                 <p class="lead" ng-show="vm.blocks.length > 0">Select the blocks you want to enrol in</p>
-                <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping">
-                  <h4 class="text-center">{{group}}</h4>
-                  <div class="col-sm-4 col-lg-12"  ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'start_date'">
-                    <div class="block-item" ng-class="vm.getClassType(block)">
-                      <strong>{{block.name}}</strong>
-                      <p>
-                        <display-date format='time' ng-model='block.start_date'></display-date> - <display-date format='time' ng-model='block.end_date'></display-date>
-                      </p>
-                      <div class="form-group" ng-hide="block.isEnroled">
-                        <b>Enrol</b> <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
-                      </div>
-                      <div class="form-group" ng-show="block.isEnroled"><b>Already enroled</b></div>
-                    </div>
+                
+                <div class="row">
+                  
+                  <h3 class="col-xs-12">Current Blocks</h3>
+                  <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | currentBlocks">
+                    <div ng-include src="'setOfBlocks.html'"></div>
+                  </div>
+
+                </div>
+                
+                <div class="row">
+                  
+                  <h3 class="col-xs-12">Next Blocks</h3>
+                  <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | futureBlocks">
+                    <div ng-include src="'setOfBlocks.html'"></div>
                   </div>
                 </div>
                 <p ng-show="vm.blocks.length === 0">
@@ -57,3 +59,20 @@
         </div>
     </section>
 </section>
+
+
+<script type="text/ng-template" id="setOfBlocks.html">
+  <h4 class="text-center">{{group}}</h4>
+  <div class="col-sm-4 col-lg-12"  ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'start_date'">
+    <div class="block-item" ng-class="vm.getClassType(block)">
+      <strong>{{block.name}}</strong>
+      <p>
+        <display-date format='time' ng-model='block.start_date'></display-date> - <display-date format='time' ng-model='block.end_date'></display-date>
+      </p>
+      <div class="form-group" ng-hide="block.isEnroled">
+        <b>Enrol</b> <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
+      </div>
+      <div class="form-group" ng-show="block.isEnroled"><b>Already enroled</b></div>
+    </div>
+  </div>
+</script>

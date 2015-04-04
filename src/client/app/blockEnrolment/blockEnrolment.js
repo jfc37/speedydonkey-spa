@@ -4,17 +4,39 @@
     angular
         .module('app.blockEnrolment')
         .filter('matchingBlockGrouping', matchingBlockGroupingFilter)
+        .filter('currentBlocks', currentBlocksFilter)
+        .filter('futureBlocks', futureBlocksFilter)
         .controller('BlockEnrolment', BlockEnrolment);
 
-        function getGroupDate(date) {
+        function getGroupDateDisplay(date) {
             return moment(date).format("dddd D/M");
+        }
+
+        function getGroupDate(display) {
+            return moment(display, "dddd D/M");
         }
 
 
     function matchingBlockGroupingFilter(){
         return function (blocks, group){
             return blocks.filter(function (block) {
-                return getGroupDate(block.start_date) === group;
+                return getGroupDateDisplay(block.start_date) === group;
+            });
+        };
+    }
+
+    function currentBlocksFilter(){
+        return function (blockGroups){
+            return blockGroups.filter(function (blockGroup) {
+                return getGroupDate(blockGroup).startOf('week') < new Date();
+            });
+        };
+    }
+
+    function futureBlocksFilter(){
+        return function (blockGroups){
+            return blockGroups.filter(function (blockGroup) {
+                return getGroupDate(blockGroup).startOf('week') > new Date();
             });
         };
     }
@@ -95,7 +117,7 @@
                 vm.blocks = blocks;
                 var flags = [], l = blocks.length, i;
                 for( i=0; i<l; i++) {
-                    var displayDate = getGroupDate(blocks[i].start_date);
+                    var displayDate = getGroupDateDisplay(blocks[i].start_date);
                     if(flags[displayDate]) {
                         continue;
                     }
