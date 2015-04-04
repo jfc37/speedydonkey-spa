@@ -11,6 +11,8 @@
     function apiCaller($http) {
         var service = {
 
+            postUserActivation: postUserActivation,
+
             postUser : postUser,
             getUser: getUser,
             searchUser: searchUser,
@@ -42,6 +44,11 @@
 
         return service;
 
+
+        function postUserActivation(key) {
+            var url = baseUrl + 'users/activation/' + key;
+            return $http.post(url);
+        }
 
         function postUser(user) {
             var url = baseUrl + 'users';

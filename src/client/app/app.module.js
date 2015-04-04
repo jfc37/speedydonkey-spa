@@ -27,6 +27,7 @@
         'app.logon',
         'app.register',
         'app.classCheckIn',
+        'app.userActivation',
     ]);
 
 })();

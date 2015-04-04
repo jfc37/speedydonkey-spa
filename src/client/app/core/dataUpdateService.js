@@ -10,6 +10,8 @@
     /* @ngInject */
     function dataUpdateService($q, apiCaller) {
         var service = {
+            activateUser: activateUser,
+
             enrolInBlock: enrolInBlock,
             studentAttendedClass: studentAttendedClass,
             assignPassToStudent: assignPassToStudent,
@@ -18,6 +20,16 @@
         };
 
         return service;
+
+        function activateUser(key) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postUserActivation(key).then(function(response) {
+                    resolve();
+                }, function () {
+                    revoke();
+                });
+            });
+        }
 
         function enrolInBlock(enrolment) {
             return $q(function (resolve, revoke) {

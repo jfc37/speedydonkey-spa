@@ -22,7 +22,7 @@
                 }).error(function(response) {
                     reject(response);
                 });
-            }); 
+            });
         }
     }
 })();
