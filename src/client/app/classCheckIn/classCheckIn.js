@@ -68,6 +68,12 @@
             return vm.walkInStudentSelected && vm.walkInStudentSelected.id;
         };
 
+        vm.isVistorAttendancePending = function() {
+            return vm.students.filter(function (student) {
+                return student.id === vm.visitor.id && !student.attendedClass;
+            }).length > 0;
+        };
+
         vm.createAccount = function () {
             vm.newUser = {};
             if (vm.walkInStudentSelected){
