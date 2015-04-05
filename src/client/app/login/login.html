@@ -3,54 +3,56 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-3 col-lg-offset-4 well">
+                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 well">
                     <h3 class="text-center">Welcome to Speedy Donkey</h2>
 
-                      <form class="form-horizontal" name="loginForm" novalidate>
-                        <div class="has-error" ng-repeat="error in loginForm.serverErrors">
-                            <span class="help-block">
-                                {{error}}
+                      <form name="loginForm" novalidate>
+                        <div class="row">
+                          <div class="has-error col-xs-12">
+                            <span class="help-block has-error" ng-repeat="error in loginForm.serverErrors">
+                                <div>
+                                    {{error}}
+                                </div>
                             </span>
-                        </div>
-                              <div class="form-group"
-                                   ng-class="{'has-error':loginForm.email.$invalid && loginForm.email.$touched}">
-                                  <div class="col-xs-12">
-                                      <input class="form-control col-xs-12"
-                                             id="email"
-                                             name="email"
-                                             type="text"
-                                             placeholder="Email"
-                                             ng-model="vm.email"
-                                             required/>
+                          </div>
+                          <div class="form-group col-xs-12" ng-class="{'has-error':loginForm.email.$invalid && loginForm.email.$touched}">
+                                <input class="form-control"
+                                       id="email"
+                                       name="email"
+                                       type="text"
+                                       placeholder="Email"
+                                       ng-model="vm.email"
+                                       required/>
+                              <span class="help-block has-error">
+                                  <div ng-show="loginForm.email.$error.required && loginForm.email.$touched">
+                                      Email is required.
                                   </div>
-                                  <span class="help-block has-error">
-                                      <div ng-show="loginForm.email.$error.required && loginForm.email.$touched">
-                                          Email is required.
-                                      </div>
-                                  </span>
+                              </span>
+                          </div>
+                          <div class="form-group col-xs-12" ng-class="{'has-error':loginForm.password.$invalid && loginForm.password.$touched}">
+                            <input class="form-control"
+                                   type="password"
+                                   id="password"
+                                   name="password"
+                                   placeholder="Password"
+                                   ng-model="vm.password"
+                                   required>
+                              <div class="help-block has-error" ng-show="loginForm.password.$invalid && loginForm.password.$touched">
+                                      Password is required
                               </div>
-                              <div class="form-group"
-                                   ng-class="{'has-error':loginForm.password.$invalid && loginForm.password.$touched}">
-                                  <div class="col-xs-12">
-                                      <input class="form-control col-xs-12"
-                                             type="password"
-                                             id="password"
-                                             name="password"
-                                             placeholder="Password"
-                                             ng-model="vm.password"
-                                             required>
-                                  </div>
-                                  <div class="help-block has-error"
-                                        ng-show="loginForm.password.$invalid && loginForm.password.$touched">
-                                          Password is required
-                                  </div>
-                              </div>
+                          </div>
 
-                              <button class="btn btn-primary col-xs-12"
-                                      ng-click="vm.submit(loginForm)"
-                                      ng-disabled="loginForm.$invalid">
-                                  Login
-                              </button>
+                          <div class="form-group col-xs-12">
+                            <button class="btn btn-primary"
+                                    ng-click="vm.submit(loginForm)"
+                                    ng-disabled="loginForm.$invalid">
+                                Login
+                            </button>
+                          </div>
+
+
+                        </div>
+                        
 
                       </form>
 
