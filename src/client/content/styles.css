@@ -490,6 +490,7 @@ a {
 
     .sidebar .sidebar-inner {
         height: inherit;
+        padding-left: 20px;
     }
 }
 
