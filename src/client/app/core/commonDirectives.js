@@ -8,6 +8,7 @@
         .directive('passStatus', passStatus)
         .directive('passSummary', passSummary)
         .directive('validationError', validationError)
+        .directive('serverError', serverError)
         ;
 
     /* @ngInject */
@@ -104,6 +105,20 @@
             link: function(scope, element, attrs){
                 scope.message = attrs.message;
                 scope.error = attrs.error;
+
+            }
+        };
+        return directive;
+    }
+
+    function serverError() {
+        var directive = {
+            template: '<span class="help-block has-error"  ng-show="ngModel.serverError && ngModel.$touched"><div>{{ngModel.serverError}}</div></span>',
+            require: 'ngModel',
+            scope: {
+              ngModel: '='
+            },
+            link: function(scope, element, attrs){
 
             }
         };
