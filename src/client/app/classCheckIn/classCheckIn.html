@@ -37,7 +37,7 @@
 
                                   <hr ng-show="student.passes.length > 0"/>
                                   <h3>Pass Selection</h3>
-                                  <div class="radio" data-ng-repeat="pass in vm.passOptions | availablePassOptions:student">
+                                  <div class="radio" data-ng-repeat="pass in vm.passOptions">
                                     <label>
                                       <input type="radio" name="passOptions" data-ng-model="$parent.selectedPass" ng-value="pass">
                                           {{pass.description}} - ${{pass.value}}.00
@@ -61,7 +61,6 @@
                             <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.addWalkIn()">Add Walk In</button>
                             <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.enrolWalkIn()">Enrol In Block</button>
                             <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid()" ng-click="vm.createAccount()">Create New Account</button>
-                            <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid() || vm.isVistorAttendancePending()" ng-click="vm.addVisitor()">Add Visitor</button>
                         </div>
                       </div>
                 </div>

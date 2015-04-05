@@ -3,19 +3,7 @@
 
     angular
         .module('app.classCheckIn')
-        .filter('availablePassOptions', availablePassOptionsFilter)
         .controller('ClassCheckIn', ClassCheckIn);
-
-    function availablePassOptionsFilter(){
-        return function (passes, student){
-            if (student.full_name !== 'Full Swing Visitor') {
-                return passes;
-            }
-            return passes.filter(function (pass) {
-                return pass.name === 'Single';
-            });
-        };
-    }
 
     ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger', 'validationService'];
 
@@ -29,7 +17,6 @@
         vm.areRegisteredStudentsLoading = true;
         vm.creatingNewAccount = false;
         vm.newUser = {};
-        vm.visitor = {};
 
         vm.attendenceStatusChanged = function(student) {
             classCheckInService.attendenceStatusChanged(student).then(function(message) {
@@ -68,12 +55,6 @@
             return vm.walkInStudentSelected && vm.walkInStudentSelected.id;
         };
 
-        vm.isVistorAttendancePending = function() {
-            return vm.students.filter(function (student) {
-                return student.id === vm.visitor.id && !student.attendedClass;
-            }).length > 0;
-        };
-
         vm.createAccount = function () {
             vm.newUser = {};
             if (vm.walkInStudentSelected){
@@ -105,12 +86,6 @@
             vm.newUser = {};
         };
 
-        vm.addVisitor = function() {
-            var newVisitor = angular.copy(vm.visitor);
-            vm.walkInStudentSelected = newVisitor;
-            vm.addWalkIn();
-        };
-
         vm.purchaseNewPass = function(student, passType){
             classCheckInService.purchaseNewPass(student, passType).then(function() {
                 logger.success(student.full_name + ' purchased a new pass!');
@@ -130,7 +105,7 @@
         activate();
 
         function activate() {
-            var promises = [getClass(), getStudents(), getPassOptions(), getVisitor()];
+            var promises = [getClass(), getStudents(), getPassOptions()];
             return $q.all(promises)
             .then(function(){
                 logger.info('Activated Class Check In View');
@@ -173,17 +148,6 @@
                 }
                 logger.error(error.displayMessage);
                 vm.arePassesLoading = false;
-            });
-        }
-
-        function getVisitor() {
-            return classCheckInService.getVisitor().then(function (visitor) {
-                vm.visitor = visitor;
-            }, function (error){
-                if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting visitor...";
-                }
-                logger.error(error.displayMessage);
             });
         }
     }
