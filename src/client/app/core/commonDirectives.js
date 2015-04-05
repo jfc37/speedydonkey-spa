@@ -7,6 +7,7 @@
         .directive('displayDate', displayDate)
         .directive('passStatus', passStatus)
         .directive('passSummary', passSummary)
+        .directive('validationError', validationError)
         ;
 
     /* @ngInject */
@@ -87,6 +88,22 @@
 
                 scope.passTypeText = getPassTypeText(scope.ngModel.pass_type);
                 scope.validnessText = getValidnessText(scope.ngModel);
+
+            }
+        };
+        return directive;
+    }
+
+    function validationError() {
+        var directive = {
+            template: '<span class="help-block has-error"><div ng-show="ngModel.$error[error] && ngModel.$touched">{{message}}</div></span>',
+            require: 'ngModel',
+            scope: {
+              ngModel: '='
+            },
+            link: function(scope, element, attrs){
+                scope.message = attrs.message;
+                scope.error = attrs.error;
 
             }
         };

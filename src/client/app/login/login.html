@@ -16,18 +16,14 @@
                             </span>
                           </div>
                           <div class="form-group col-xs-12" ng-class="{'has-error':loginForm.email.$invalid && loginForm.email.$touched}">
-                                <input class="form-control"
-                                       id="email"
-                                       name="email"
-                                       type="text"
-                                       placeholder="Email"
-                                       ng-model="vm.email"
-                                       required/>
-                              <span class="help-block has-error">
-                                  <div ng-show="loginForm.email.$error.required && loginForm.email.$touched">
-                                      Email is required.
-                                  </div>
-                              </span>
+                            <input class="form-control"
+                                   id="email"
+                                   name="email"
+                                   type="text"
+                                   placeholder="Email"
+                                   ng-model="vm.email"
+                                   required/>
+                            <validation-error ng-model="loginForm.email" error="required" message="Email is required."></validation-error>
                           </div>
                           <div class="form-group col-xs-12" ng-class="{'has-error':loginForm.password.$invalid && loginForm.password.$touched}">
                             <input class="form-control"
@@ -37,9 +33,7 @@
                                    placeholder="Password"
                                    ng-model="vm.password"
                                    required>
-                              <div class="help-block has-error" ng-show="loginForm.password.$invalid && loginForm.password.$touched">
-                                      Password is required
-                              </div>
+                            <validation-error ng-model="loginForm.password" error="required" message="Password is required."></validation-error>
                           </div>
 
                           <div class="form-group col-xs-12">
