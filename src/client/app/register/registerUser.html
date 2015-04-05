@@ -5,72 +5,7 @@
 
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 well">
                 <h3 class="text-center">New User</h2>
-                    
-                <form ng-hide="vm.registrationSuccessful" name="registerForm" novalidate>
-                  <div class="row">
-                    
-                    <!--email-->
-                    <div class="form-group col-xs-12" ng-class="{'has-error':(registerForm.email.$invalid && registerForm.email.$touched) || registerForm.email.serverError}">
-                      <input class="form-control"
-                             id="email"
-                             name="email"
-                             type="text"
-                             placeholder="Email (required)"
-                             ng-model="vm.user.email"
-                             required/>
-                      <validation-error ng-model="registerForm.email" error="required" message="Email is required."></validation-error>
-                      <server-error ng-model="registerForm.email"></server-error>
-                    </div>
-
-                    <!--password-->
-                    <div class="form-group col-xs-12" ng-class="{'has-error':(registerForm.password.$invalid && registerForm.password.$touched) || registerForm.email.serverError}">
-                      <input class="form-control"
-                             id="password"
-                             name="password"
-                             type="password"
-                             placeholder="Password (required)"
-                             ng-model="vm.user.password"
-                             required/>
-                      <validation-error ng-model="registerForm.password" error="required" message="Password is required."></validation-error>
-                      <server-error ng-model="registerForm.password"></server-error>
-                    </div>
-
-                    <!--first name-->
-                    <div class="form-group col-xs-12" ng-class="{'has-error':(registerForm.first_name.$invalid && registerForm.first_name.$touched) || registerForm.first_name.serverError}">
-                      <input class="form-control"
-                         id="first_name"
-                         name="first_name"
-                         type="text"
-                         placeholder="First Name (required)"
-                         ng-model="vm.user.first_name"
-                         required/>
-                      <validation-error ng-model="registerForm.first_name" error="required" message="First name is required."></validation-error>
-                      <server-error ng-model="registerForm.first_name"></server-error>
-                    </div>
-
-                    <!--surname-->
-                    <div class="form-group col-xs-12" ng-class="{'has-error':(registerForm.surname.$invalid && registerForm.surname.$touched) || registerForm.surname.serverError}">
-                      <input class="form-control"
-                       id="surname"
-                       name="surname"
-                       type="text"
-                       placeholder="Surname (required)"
-                       ng-model="vm.user.surname"
-                       required/>
-                      <validation-error ng-model="registerForm.surname" error="required" message="Surname is required."></validation-error>
-                      <server-error ng-model="registerForm.surname"></server-error>
-                    </div>
-
-
-                    <div class="form-group col-xs-12">
-                      <button class="btn btn-primary"
-                                ng-click="vm.register(registerForm)"
-                                ng-disabled="registerForm.$invalid">
-                          Register
-                      </button>
-                    </div>
-                  </div>
-                </form>
+                <div ng-include src="'newUser.html'"></div>
       
                 <div ng-show=vm.registrationSuccessful>
                   Thank you, you'll receive an email to activate your account shortly.

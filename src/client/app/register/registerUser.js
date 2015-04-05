@@ -13,11 +13,11 @@
         var vm = this;
 
         vm.title = 'Register Account';
-        vm.user = {};
+        vm.newUser = {};
         vm.registrationSuccessful = false;
 
-        vm.register = function(form) {
-            registerUserService.register(vm.user).then(function () {
+        vm.registerNewUser = function(form) {
+            registerUserService.register(vm.newUser).then(function () {
                 vm.registrationSuccessful = true;
             }, function (validation_errors) {
                 validationService.applyServerSideErrors(form, validation_errors);
