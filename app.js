@@ -19,28 +19,19 @@ var appDir =  __dirname + './src/'; // Our NG code is served from root
 var environment = process.env.NODE_ENV;
 var pkg = require('./package.json');
 
-// var forceSsl = function (req, res, next) {
-
-//     res.send('req.protocol: ' + util.inspect(req));
-
-//     // if (req.protocol !== 'https') {
-//     //     return res.redirect(['https://', req.get('Host'), req.url].join(''));
-//     // }
-//     // return next();
-// };
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
 app.use(compress());            // Compress response data with gzip
-app.use(logger('dev'));
+//app.use(logger('dev'));
 //app.use(favicon(__dirname + 'src/server/favicon.ico'));
 app.use(fileServer(appDir));    // Support static file content
 app.use(cors());                // enable ALL CORS requests
 
 console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
+console.log('process=' + process);
 
 //app.get('*', forceSsl);
 if(environment === 'stage') {
@@ -51,12 +42,17 @@ if(environment === 'stage') {
 //    app.use('/', express.static(appDir));
     app.use('/', express.static(pkg.paths.client));
     app.use('/', express.static('./'));
-
-    app.get('/ping', function(req, res, next) {
-        console.log(req.body);
-        res.send('pong');
-    });
 }
+
+
+
+console.log('SETTING UP API URL');
+var apiUrl = process.env.ApiUrl || 'nothing';
+
+app.get('/apiUrl', function(req, res, next) {
+    console.log('GETTING THE API URL FOR YOU');
+    res.send(apiUrl);
+});
 
 server = http.createServer(app);
 
