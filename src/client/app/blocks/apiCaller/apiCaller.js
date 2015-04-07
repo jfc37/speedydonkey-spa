@@ -41,8 +41,15 @@
 
             putPass: putPass
         };
+        var baseUrl;
 
-        var baseUrl = 'https://api-speedydonkey.azurewebsites.net/api/';
+        function getBaseUrl() {
+            $http.get('/apiUrl').then(function(response) {
+                baseUrl = response.data + '/api/';
+            });
+        }
+
+        getBaseUrl();
 
         return service;
 
