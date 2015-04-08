@@ -45,7 +45,7 @@
 
         function getBaseUrl() {
             $http.get('/apiUrl').then(function(response) {
-                baseUrl = response.data + '/api/';
+                baseUrl = 'https://' + response.data + '/api/';
             });
         }
 
