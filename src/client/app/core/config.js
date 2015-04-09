@@ -2,7 +2,6 @@
     'use strict';
 
     var core = angular.module('app.core');
-
     core.config(toastrConfig);
 
     /* @ngInject */
@@ -12,8 +11,9 @@
     }
 
     var config = {
-        appErrorPrefix: '[SpeedyDonkey Error] ', //Configure the exceptionHandler decorator
-        appTitle: 'Speedy Donkey',
+        appErrorPrefix: '[Speedy Donkey LOCAL Error] ', //Configure the exceptionHandler decorator
+        appTitle: 'Speedy Donkey LOCAL',
+        apiUrl: 'api-speedydonkey.azurewebsites.net',
         version: '3.0.0'
     };
 
@@ -30,7 +30,7 @@
 
         // Configure the common route provider
         routehelperConfigProvider.config.$routeProvider = $routeProvider;
-        routehelperConfigProvider.config.docTitle = 'SpeedyDonkey: ';
+        routehelperConfigProvider.config.docTitle = 'Speedy Donkey LOCAL: ';
 
         // Configure the common exception handler
         exceptionConfigProvider.config.appErrorPrefix = config.appErrorPrefix;
