@@ -127,6 +127,18 @@ if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
   cd - > /dev/null
 fi
 
+#5. Run gulp
+# The path doesn't seem to get set OK.  Use this hack to run gulp.
+GULP="node_modules/gulp/bin/gulp.js"
+
+echo "Running gulp..."
+eval gulp environmnet-setup
+#"$GULP" production
+exitWithMessageOnError "Could not run 'gulp'.  Did 'npm install' run OK?"
+echo "Finished gulp."
+
+
+
 ##################################################################################################################################
 
 # Post deployment stub
