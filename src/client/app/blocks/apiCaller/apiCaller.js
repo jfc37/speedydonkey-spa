@@ -16,6 +16,7 @@
             putUserPasswordReset: putUserPasswordReset,
 
             postUser : postUser,
+            putCurrentUser: putCurrentUser,
             getUser: getUser,
             searchUser: searchUser,
             getCurrentUser: getCurrentUser,
@@ -72,6 +73,11 @@
         function postUser(user) {
             var url = baseUrl + 'users';
             return $http.post(url, user);
+        }
+
+        function putCurrentUser(user) {
+            var url = baseUrl + 'users/current';
+            return $http.put(url, user);
         }
 
         function getUser(userId) {

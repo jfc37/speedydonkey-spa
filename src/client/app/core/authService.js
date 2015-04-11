@@ -55,7 +55,7 @@
             $cookieStore.put('authuser', userIdentity);
         }
 
-        function login(email, password, userId) {
+        function login(email, password) {
             var encoded = base64Service.encode(email + ':' + password);
             addBasicAuthorisation(encoded);
 
