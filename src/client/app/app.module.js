@@ -30,6 +30,7 @@
         'app.userActivation',
         'app.forgottenPassword',
         'app.resetPassword',
+        'app.manageUser',
     ]);
 
 })();

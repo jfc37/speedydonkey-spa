@@ -14,6 +14,8 @@
             forgottenPassword: forgottenPassword,
             resetPassword: resetPassword,
 
+            updateUser: updateUser,
+
             enrolInBlock: enrolInBlock,
             studentAttendedClass: studentAttendedClass,
             assignPassToStudent: assignPassToStudent,
@@ -52,6 +54,18 @@
                 });
             });
         }
+
+        function updateUser(user) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putCurrentUser(user).then(function(response) {
+                    resolve();
+                }, function (response) {
+                    revoke(response.data.validation_errors);
+                });
+            });
+        }
+
+
 
         function enrolInBlock(enrolment) {
             return $q(function (resolve, revoke) {

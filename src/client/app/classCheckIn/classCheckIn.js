@@ -139,7 +139,7 @@
         }
 
         function getPassOptions() {
-            return blockEnrolmentService.getPassOptions().then(function (passOptions) {
+            return blockEnrolmentService.getPassOptions(true).then(function (passOptions) {
                 vm.passOptions = passOptions;
                 vm.arePassesLoading = false;
             }, function (error){
