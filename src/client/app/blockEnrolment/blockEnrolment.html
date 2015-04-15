@@ -9,19 +9,10 @@
                 
                 <div class="row">
                   
-                  <h3 class="col-xs-12">Current Blocks</h3>
-                  <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | currentBlocks">
+                  <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | viewableBlocks">
                     <div ng-include src="'setOfBlocks.html'"></div>
                   </div>
 
-                </div>
-                
-                <div class="row">
-                  
-                  <h3 class="col-xs-12">Next Blocks</h3>
-                  <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | futureBlocks">
-                    <div ng-include src="'setOfBlocks.html'"></div>
-                  </div>
                 </div>
                 <p ng-show="vm.blocks.length === 0">
                     There are no blocks available to be enrolled in

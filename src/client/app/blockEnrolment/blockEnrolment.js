@@ -4,8 +4,7 @@
     angular
         .module('app.blockEnrolment')
         .filter('matchingBlockGrouping', matchingBlockGroupingFilter)
-        .filter('currentBlocks', currentBlocksFilter)
-        .filter('futureBlocks', futureBlocksFilter)
+        .filter('viewableBlocks', viewableBlocksFilter)
         .controller('BlockEnrolment', BlockEnrolment);
 
         function getGroupDateDisplay(date) {
@@ -25,18 +24,21 @@
         };
     }
 
-    function currentBlocksFilter(){
+    function viewableBlocksFilter(){
         return function (blockGroups){
-            return blockGroups.filter(function (blockGroup) {
-                return getGroupDate(blockGroup).startOf('week') < new Date();
-            });
-        };
-    }
 
-    function futureBlocksFilter(){
-        return function (blockGroups){
+            var today = new Date();
+            var setOfBlocksInFirstWeek = blockGroups.filter(function (blockGroup) {
+                var startOfBlockSet = getGroupDate(blockGroup).startOf('week');
+                return startOfBlockSet.startOf('week') <= today && startOfBlockSet.endOf('week') >= today;
+            });
+
+            if (setOfBlocksInFirstWeek && setOfBlocksInFirstWeek.any()) {
+                return setOfBlocksInFirstWeek;
+            }
+
             return blockGroups.filter(function (blockGroup) {
-                return getGroupDate(blockGroup).startOf('week') > new Date();
+                return getGroupDate(blockGroup).endOf('week') > new Date();
             });
         };
     }
