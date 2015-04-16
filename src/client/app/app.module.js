@@ -32,6 +32,7 @@
         'app.resetPassword',
         'app.manageUser',
         'app.adminDashboard',
+        'app.managePassOptions',
     ]);
 
 })();

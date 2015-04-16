@@ -11,6 +11,6 @@
     function AdminDashboard() {
         /*jshint validthis: true */
         var vm = this;
-        vm.passOptionsUrl = '';
+        vm.passOptionsUrl = '#/admin/manage/PassOptions';
     }
 })();
