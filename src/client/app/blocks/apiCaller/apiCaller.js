@@ -12,6 +12,8 @@
         var service = {
 
             postUserActivation: postUserActivation,
+            postUserPasswordReset: postUserPasswordReset,
+            putUserPasswordReset: putUserPasswordReset,
 
             postUser : postUser,
             getUser: getUser,
@@ -48,6 +50,16 @@
         function postUserActivation(key) {
             var url = baseUrl + 'users/activation/' + key;
             return $http.post(url);
+        }
+
+        function postUserPasswordReset(email) {
+            var url = baseUrl + 'users/password/reset';
+            return $http.post(url, {email: email});
+        }
+
+        function putUserPasswordReset(key, password) {
+            var url = baseUrl + 'users/password/reset/' + key;
+            return $http.put(url, {password: password});
         }
 
         function postUser(user) {

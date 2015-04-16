@@ -28,6 +28,8 @@
         'app.register',
         'app.classCheckIn',
         'app.userActivation',
+        'app.forgottenPassword',
+        'app.resetPassword',
     ]);
 
 })();

@@ -13,6 +13,7 @@
         var vm = this;
 
         vm.title = 'Login';
+        vm.forgottenPasswordUrl = '#/forgottenPassword';
 
         vm.submit = function(form){
             authService.login(vm.email, vm.password).then(function() {

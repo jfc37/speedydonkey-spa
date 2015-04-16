@@ -11,6 +11,8 @@
     function dataUpdateService($q, apiCaller) {
         var service = {
             activateUser: activateUser,
+            forgottenPassword: forgottenPassword,
+            resetPassword: resetPassword,
 
             enrolInBlock: enrolInBlock,
             studentAttendedClass: studentAttendedClass,
@@ -27,6 +29,26 @@
                     resolve();
                 }, function () {
                     revoke();
+                });
+            });
+        }
+
+        function forgottenPassword(email) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postUserPasswordReset(email).then(function(response) {
+                    resolve();
+                }, function () {
+                    revoke();
+                });
+            });
+        }
+
+        function resetPassword(key, password) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putUserPasswordReset(key, password).then(function(response) {
+                    resolve();
+                }, function (response) {
+                    revoke(response);
                 });
             });
         }
