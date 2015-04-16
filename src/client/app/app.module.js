@@ -31,6 +31,7 @@
         'app.forgottenPassword',
         'app.resetPassword',
         'app.manageUser',
+        'app.adminDashboard',
     ]);
 
 })();
