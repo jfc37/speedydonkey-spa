@@ -48,7 +48,7 @@
                 apiCaller.putUserPasswordReset(key, password).then(function(response) {
                     resolve();
                 }, function (response) {
-                    revoke(response);
+                    revoke(response.data.validation_errors);
                 });
             });
         }

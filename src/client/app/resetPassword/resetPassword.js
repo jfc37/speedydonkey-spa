@@ -14,6 +14,7 @@
 
         vm.title = 'Reset Password';
         vm.isSubmitted = false;
+        vm.loginUrl = '#/login';
 
         vm.submit = function(form){
             dataUpdateService.resetPassword($routeParams.id, vm.password).then(function() {
