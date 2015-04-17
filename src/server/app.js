@@ -11,6 +11,7 @@ var fileServer   = require('serve-static');
 var http         = require('http');
 var logger       = require('morgan');
 var port         = process.env['PORT'] || 7300;
+var azure        = require('azure');
 var server;
 
 var appDir =  __dirname + '../../'; // Our NG code is served from root
@@ -22,7 +23,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(compress());            // Compress response data with gzip
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(fileServer(appDir));    // Support static file content
 app.use(cors());                // enable ALL CORS requests
@@ -39,11 +40,23 @@ if(environment === 'stage') {
     app.use('/', express.static(pkg.paths.client));
     app.use('/', express.static('./'));
 
-    app.get('/ping', function(req, res, next) {
-        console.log(req.body);
-        res.send('pong');
-    });
 }
+
+console.log('SETTING UP API URL');
+var apiUrl = 'hello';
+
+azure.RoleEnvironment.getConfigurationSettings(function(error, settings) {
+    console.log('INSIDE AZURE');
+  if (!error) {
+    apiUrl = settings['ApiUrl'];
+    console.log('NO ERROR, API IS' + apiUrl);
+  }
+});
+
+app.get('/apiUrl', function(req, res, next) {
+    console.log('GETTING THE API URL FOR YOU');
+    res.send(apiUrl);
+});
 
 server = http.createServer(app);
 
