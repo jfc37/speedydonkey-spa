@@ -12,23 +12,12 @@ var http         = require('http');
 var logger       = require('morgan');
 var port         = process.env['PORT'] || 7300;
 var updater      = require('./src/server/updater');
-var azure        = require('azure');
 var util = require('util');
 var server;
 
 var appDir =  __dirname + './src/'; // Our NG code is served from root
 var environment = process.env.NODE_ENV;
 var pkg = require('./package.json');
-
-// var forceSsl = function (req, res, next) {
-
-//     res.send('req.protocol: ' + util.inspect(req));
-
-//     // if (req.protocol !== 'https') {
-//     //     return res.redirect(['https://', req.get('Host'), req.url].join(''));
-//     // }
-//     // return next();
-// };
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -42,6 +31,7 @@ app.use(cors());                // enable ALL CORS requests
 
 console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
+console.log('process=' + process);
 
 //app.get('*', forceSsl);
 if(environment === 'stage') {
@@ -57,16 +47,7 @@ if(environment === 'stage') {
 
 
 console.log('SETTING UP API URL');
-var apiUrl = 'api-speedydonkey.azurewebsites.net';
-
-azure.RoleEnvironment.getConfigurationSettings(function(error, settings) {
-    console.log('INSIDE AZURE');
-  if (!error) {
-    apiUrl = settings['ApiUrl'];
-    console.log('NO ERROR, API IS' + apiUrl);
-  }
-  apiUrl = 'https://' + apiUrl;
-});
+var apiUrl = process.env.ApiUrl || 'nothing';
 
 app.get('/apiUrl', function(req, res, next) {
     console.log('GETTING THE API URL FOR YOU');
