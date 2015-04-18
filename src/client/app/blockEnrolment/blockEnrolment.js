@@ -96,7 +96,8 @@
         }
 
         vm.submit = function() {
-            blockEnrolmentService.enrol(getSelectedBlocks(), vm.selectedPass).then(function (){
+            var promises = [blockEnrolmentService.enrol(getSelectedBlocks()), blockEnrolmentService.purchasePass(vm.selectedPass)];
+            $q.all(promises).then(function (){
                 routehelper.redirectToRoute('dashboard');
                 logger.success("Enroled in selected blocks");
             }, function () {
@@ -108,7 +109,7 @@
 
         function activate() {
             var promises = [getAllBlocks(), getPassOptions()];
-            return $q.all(getAllBlocks)
+            return $q.all(promises)
             .then(function(){
                 logger.info('Activated Block Enrolment View');
             });

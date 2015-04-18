@@ -27,6 +27,7 @@
             getCurrentUserClaims: getCurrentUserClaims,
 
             postPassAssignment: postPassAssignment,
+            postCurrentUserPassAssignment: postCurrentUserPassAssignment,
 
             getBlock : getBlock,
             postBlockEnrolment: postBlockEnrolment,
@@ -120,9 +121,14 @@
             return $http.get(url);
         }
 
-        function postPassAssignment(userId, pass) {
-            var url = baseUrl + 'users/' + userId + '/passes';
-            return $http.post(url, [pass]);
+        function postPassAssignment(userId, passOptionId, pass) {
+            var url = baseUrl + 'users/' + userId + '/passtemplates/' + passOptionId;
+            return $http.post(url, pass);
+        }
+
+        function postCurrentUserPassAssignment(passOptionId, pass) {
+            var url = baseUrl + 'users/current/passtemplates/' + passOptionId;
+            return $http.post(url, pass);
         }
 
         function getBlock(blockId) {

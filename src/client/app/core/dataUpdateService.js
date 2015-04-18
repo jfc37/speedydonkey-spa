@@ -19,6 +19,7 @@
             enrolInBlock: enrolInBlock,
             studentAttendedClass: studentAttendedClass,
             assignPassToStudent: assignPassToStudent,
+            assignPassToCurrentUser: assignPassToCurrentUser,
 
             updatePass: updatePass,
 
@@ -85,9 +86,15 @@
             });
         }
 
-        function assignPassToStudent(studentId, pass) {
+        function assignPassToStudent(studentId, passOptionId, pass) {
             return $q(function (resolve, revoke) {
-                apiCaller.postPassAssignment(studentId, pass).then(resolve, revoke);
+                apiCaller.postPassAssignment(studentId, passOptionId, pass).then(resolve, revoke);
+            });
+        }
+
+        function assignPassToCurrentUser(passOptionId, pass) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postCurrentUserPassAssignment(passOptionId, pass).then(resolve, revoke);
             });
         }
 

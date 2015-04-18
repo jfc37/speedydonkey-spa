@@ -13,7 +13,8 @@
         var service = {
             getBlocks : getBlocks,
             getPassOptions : getPassOptions,
-            enrol: enrol
+            enrol: enrol,
+            purchasePass: purchasePass
         };
 
         function getBlocks() {
@@ -71,20 +72,32 @@
             });
         }
 
-        function enrol(blocks, pass) {
+        function enrol(blocks) {
             return $q(function (resolve, revoke) {
-                var enrolment = {
-                    user_id: authService.getUserIdentity().userId,
-                    block_ids: blocks.map(function (block) {
-                        return block.id;
-                    })
-                };
-                if (pass) {
-                    enrolment.pass_types = [
-                        pass.pass_type
-                    ];
+                if (!blocks.any()) {
+                    resolve();
+                } else {
+                    var enrolment = {
+                        user_id: authService.getUserIdentity().userId,
+                        block_ids: blocks.map(function (block) {
+                            return block.id;
+                        })
+                    };
+                    dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);
                 }
-                dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);
+            });
+        }
+
+        function purchasePass(passOption) {
+            return $q(function (resolve, revoke) {
+                if (!passOption) {
+                    resolve();
+                } else {
+                    var pass = {
+                        payment_status: 'pending'
+                    };
+                    dataUpdateService.assignPassToCurrentUser(passOption.id, pass).then(resolve, revoke);
+                }
             });
         }
 

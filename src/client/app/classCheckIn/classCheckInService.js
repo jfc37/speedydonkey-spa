@@ -155,14 +155,12 @@
             });
         }
 
-        function purchaseNewPass(student, passType) {
+        function purchaseNewPass(student, passOption) {
             return $q(function (resolve, revoke) {
                 var pass = {
-                    pass_type: passType.pass_type,
-                    payment_status: 'paid',
-                    cost: passType.cost
+                    payment_status: 'paid'
                 };
-                dataUpdateService.assignPassToStudent(student.id, pass).then(function (){
+                dataUpdateService.assignPassToStudent(student.id, passOption.id, pass).then(function (){
                     getPassesForStudent(student).then(resolve, resolve);
                 }, revoke);
             });
