@@ -57,7 +57,7 @@
                 dataservice.getAllPassOptions().then(function (passOptions){
                     if (!showAllPasses){
                         passOptions = passOptions.filter(function(pass) {
-                            return pass.value > 0;
+                            return pass.available_for_purchase;
                         });
                     }
 
@@ -81,7 +81,7 @@
                 };
                 if (pass) {
                     enrolment.pass_types = [
-                        pass.name
+                        pass.pass_type
                     ];
                 }
                 dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);

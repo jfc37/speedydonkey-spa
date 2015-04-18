@@ -40,7 +40,7 @@
                                   <div class="radio" data-ng-repeat="pass in vm.passOptions">
                                     <label>
                                       <input type="radio" name="passOptions" data-ng-model="$parent.selectedPass" ng-value="pass">
-                                          {{pass.description}} - ${{pass.value}}.00
+                                          {{pass.description}} - ${{pass.cost}}
                                     </label>
                                   </div>
                                   <button class="btn btn-primary" ng-click="vm.purchaseNewPass(student, selectedPass)">Purchase</button>

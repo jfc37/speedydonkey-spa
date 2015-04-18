@@ -158,9 +158,9 @@
         function purchaseNewPass(student, passType) {
             return $q(function (resolve, revoke) {
                 var pass = {
-                    pass_type: passType.name,
+                    pass_type: passType.pass_type,
                     payment_status: 'paid',
-                    cost: passType.value
+                    cost: passType.cost
                 };
                 dataUpdateService.assignPassToStudent(student.id, pass).then(function (){
                     getPassesForStudent(student).then(resolve, resolve);
