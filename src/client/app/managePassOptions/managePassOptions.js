@@ -3,36 +3,18 @@
 
     angular
         .module('app.managePassOptions')
-        .controller('ManagePassOptions', ManagePassOptions);
+        .controller('ManagePassOptions', ManagePassOptions)
+        .controller('NewPassOptions', NewPassOptions)
+        .controller('UpdatePassOptions', UpdatePassOptions);
 
-    ManagePassOptions.$inject = ['$q', 'logger', 'selectOptionService', 'managePassOptionsService', 'validationService'];
+    ManagePassOptions.$inject = ['$q', 'logger', 'selectOptionService', 'managePassOptionsService'];
 
     /* @ngInject */
-    function ManagePassOptions($q, logger, selectOptionService, managePassOptionsService, validationService) {
+    function ManagePassOptions($q, logger, selectOptionService, managePassOptionsService) {
         /*jshint validthis: true */
         var vm = this;
         vm.passTypes = [];
         vm.passOptions = [];
-
-        vm.create = function(form) {
-            managePassOptionsService.create(vm.newPassOption).then(function (createPassOption){
-                logger.success('New pass option created');
-                vm.passOptions.push(createPassOption);
-                vm.addingNew = false;
-                vm.newPassOption = {};
-            }, function(errors) {
-                validationService.applyServerSideErrors(form, errors);
-            });
-        };
-
-        vm.delete = function(passOption) {
-            managePassOptionsService.deletePassOption(passOption.id).then(function (){
-                logger.success('Pass option deleted');
-                vm.passOptions.remove(passOption);
-            }, function(errors) {
-                logger.error("Failed to delete pass option");
-            });
-        };
 
         activate();
 
@@ -58,5 +40,70 @@
                 logger.error('Failed to get pass options');
             });
         }
+    }
+
+    NewPassOptions.$inject = ['$scope', 'managePassOptionsService', 'validationService', 'logger'];
+
+    function NewPassOptions($scope, managePassOptionsService, validationService, logger) {
+        $scope.vm = {};
+        $scope.vm.passTypes = $scope.$parent.vm.passTypes;
+        $scope.vm.submitText = 'Add';
+        $scope.vm.cancelText = 'Cancel';
+
+        $scope.vm.submit = function(form) {
+            managePassOptionsService.create($scope.vm.passOption).then(function (createPassOption){
+                logger.success('New pass option created');
+                $scope.$parent.vm.passOptions.push(createPassOption);
+                $scope.vm.addingNew = false;
+                $scope.vm.passOption = {};
+                $scope.form.$setUntouched();
+            }, function(errors) {
+                validationService.applyServerSideErrors(form, errors);
+            });
+        };
+
+        $scope.vm.cancel = function() {
+            $scope.vm.addingNew = false;
+            $scope.vm.passOption = {};
+            $scope.form.$setUntouched();
+        };
+    }
+
+    UpdatePassOptions.$inject = ['$scope', 'managePassOptionsService', 'validationService', 'logger'];
+
+    function UpdatePassOptions($scope, managePassOptionsService, validationService, logger) {
+        $scope.vm.passTypes = $scope.$parent.vm.passTypes;
+        $scope.vm.submitText = 'Update';
+        $scope.vm.cancelText = 'Cancel';
+        var copy = {};
+
+        $scope.vm.startUpdating = function() {
+            copy = angular.copy($scope.vm.passOption);
+            $scope.vm.updating = true;
+        };
+
+        $scope.vm.submit = function(form) {
+            managePassOptionsService.update($scope.vm.passOption).then(function (createPassOption){
+                logger.success('Pass option updated');
+                $scope.vm.updating = false;
+            }, function(errors) {
+                validationService.applyServerSideErrors(form, errors);
+            });
+        };
+
+        $scope.vm.delete = function() {
+            managePassOptionsService.deletePassOption($scope.vm.passOption.id).then(function (){
+                logger.success('Pass option deleted');
+                $scope.$parent.vm.passOptions.remove($scope.vm.passOption);
+            }, function(errors) {
+                logger.error("Failed to delete pass option");
+            });
+        };
+
+        $scope.vm.cancel = function() {
+            $scope.vm.passOption = copy;
+            $scope.vm.updating = false;
+            $scope.form.$setUntouched();
+        };
     }
 })();

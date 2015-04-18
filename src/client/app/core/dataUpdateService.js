@@ -20,7 +20,9 @@
             studentAttendedClass: studentAttendedClass,
             assignPassToStudent: assignPassToStudent,
 
-            updatePass: updatePass
+            updatePass: updatePass,
+
+            updatePassOption: updatePassOption
         };
 
         return service;
@@ -92,6 +94,12 @@
         function updatePass(pass) {
             return $q(function (resolve, revoke) {
                 apiCaller.putPass(pass).then(resolve, revoke);
+            });
+        }
+
+        function updatePassOption(passOption) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putPassOption(passOption).then(resolve, revoke);
             });
         }
     }

@@ -44,7 +44,8 @@
 
             postPassOption: postPassOption,
             getPassOption: getPassOption,
-            deletePassOption: deletePassOption
+            deletePassOption: deletePassOption,
+            putPassOption: putPassOption
         };
         var baseUrl;
 
@@ -193,6 +194,11 @@
         function deletePassOption(id) {
             var url = baseUrl + 'passtemplate/' + id;
             return $http.delete(url);
+        }
+
+        function putPassOption(passOption) {
+            var url = baseUrl + 'passtemplate/' + passOption.id;
+            return $http.put(url, passOption);
         }
     }
 })();
