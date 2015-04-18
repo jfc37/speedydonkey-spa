@@ -7,6 +7,15 @@
             };
         }
 
+        if (!Array.prototype.remove) {
+            Array.prototype.remove = function(item) {
+               var index = this.indexOf(item);
+               if (index > -1) {
+                this.splice(index, 1);
+               }
+            };
+        }
+
     angular
         .module('app.core')
         .factory('commonFunctions', commonFunctions);

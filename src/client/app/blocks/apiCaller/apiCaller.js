@@ -40,7 +40,11 @@
             postClassAttendance: postClassAttendance,
             deleteClassAttendance: deleteClassAttendance,
 
-            putPass: putPass
+            putPass: putPass,
+
+            postPassOption: postPassOption,
+            getPassOption: getPassOption,
+            deletePassOption: deletePassOption
         };
         var baseUrl;
 
@@ -53,7 +57,6 @@
         getBaseUrl();
 
         return service;
-
 
         function postUserActivation(key) {
             var url = baseUrl + 'users/activation/' + key;
@@ -175,6 +178,21 @@
         function putPass(pass) {
             var url = baseUrl + 'passes/' + pass.id;
             return $http.put(url, pass);
+        }
+
+        function postPassOption(passOption) {
+            var url = baseUrl + 'passtemplate';
+            return $http.post(url, passOption);
+        }
+
+        function getPassOption() {
+            var url = baseUrl + 'passtemplate';
+            return $http.get(url);
+        }
+
+        function deletePassOption(id) {
+            var url = baseUrl + 'passtemplate/' + id;
+            return $http.delete(url);
         }
     }
 })();

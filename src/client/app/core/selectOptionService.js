@@ -10,40 +10,18 @@
     /* @ngInject */
     function selectOptionService() {
         var service = {
-            getGradeTypes: getGradeTypes,
-            getOccurences: getOccurences
+            getPassTypes: getPassTypes
         };
 
-        function getGradeTypes() {
+        function getPassTypes() {
             return [
                 {
-                    display: 'Letter',
-                    value: 'Letter'
+                    display: 'Clip',
+                    value: 'clip'
                 },
                 {
-                    display: 'Percentage',
-                    value: 'Percentage'
-                },
-            ];
-        }
-
-        function getOccurences() {
-            return [
-                {
-                    display: 'Daily',
-                    value: 'Daily'
-                },
-                {
-                    display: 'Weekly',
-                    value: 'Weekly'
-                },
-                {
-                    display: 'Fortnightly',
-                    value: 'Fortnightly'
-                },
-                {
-                    display: 'Monthly',
-                    value: 'Monthly'
+                    display: 'Unlimited',
+                    value: 'unlimited'
                 },
             ];
         }
