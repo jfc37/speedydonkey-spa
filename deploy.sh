@@ -132,6 +132,8 @@ echo About to run gulp stuff
 if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
   eval $NPM_CMD install gulp
   exitWithMessageOnError "installing gulp failed"
+  cd "$DEPLOYMENT_TARGET"
+  echo 'DEPLOYMENT_TARGET is ' + $DEPLOYMENT_TARGET
   ./node_modules/.bin/gulp --no-color
   exitWithMessageOnError "gulp failed"
 fi
