@@ -33,6 +33,7 @@
         'app.manageUser',
         'app.adminDashboard',
         'app.managePassOptions',
+        'app.manageLevels',
     ]);
 
 })();

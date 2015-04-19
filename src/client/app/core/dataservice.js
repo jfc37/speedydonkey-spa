@@ -29,7 +29,9 @@
             getClassRegisteredStudents: getClassRegisteredStudents,
             getClassAttendance: getClassAttendance,
 
-            getAllPassOptions: getAllPassOptions
+            getAllPassOptions: getAllPassOptions,
+
+            getAllLevels: getAllLevels
         };
 
         return service;
@@ -177,6 +179,16 @@
         function getAllPassOptions() {
             return $q(function (resolve, reject) {
                 apiCaller.getPassOption().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllLevels() {
+            return $q(function (resolve, reject) {
+                apiCaller.getLevel().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

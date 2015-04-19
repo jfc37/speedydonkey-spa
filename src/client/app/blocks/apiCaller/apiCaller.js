@@ -46,7 +46,10 @@
             postPassOption: postPassOption,
             getPassOption: getPassOption,
             deletePassOption: deletePassOption,
-            putPassOption: putPassOption
+            putPassOption: putPassOption,
+
+            postLevel: postLevel,
+            getLevel: getLevel
         };
         var baseUrl;
 
@@ -205,6 +208,16 @@
         function putPassOption(passOption) {
             var url = baseUrl + 'passtemplate/' + passOption.id;
             return $http.put(url, passOption);
+        }
+
+        function postLevel(level) {
+            var url = baseUrl + 'levels';
+            return $http.post(url, level);
+        }
+
+        function getLevel() {
+            var url = baseUrl + 'levels';
+            return $http.get(url);
         }
     }
 })();
