@@ -128,7 +128,8 @@ if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
 fi
 
 #5. Run gulp
-if [ -e "DEPLOYMENT_TARGET/gulpfile.js" ]; then
+echo About to run gulp stuff
+if [ -e "$DEPLOYMENT_TARGET/gulpfile.js" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo Installing Gulp dependencies: Starting
   eval npm install gulp
@@ -136,8 +137,11 @@ if [ -e "DEPLOYMENT_TARGET/gulpfile.js" ]; then
   exitWithMessageOnError "installing gulp failed"
   echo Running Gulp deployment: Starting
   eval gulp environmnet-setup
+  exitWithMessageOnError "running gulp failed"
   echo Running Gulp deployment: Finished
+  cd - > /dev/null
 fi
+echo Finished running gulp stuff
 
 
 
