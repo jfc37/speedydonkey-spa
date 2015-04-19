@@ -17,8 +17,8 @@ gulp.task('help', plug.taskListing);
 
 gulp.task('environmnet-setup', function() {
 
-    var dotenv = require('dotenv');
-    dotenv.load();
+    //var dotenv = require('dotenv');
+    //dotenv.load();
     log('Setting up environment');
 
     gulp.src(['config.js'])
