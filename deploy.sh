@@ -129,18 +129,25 @@ fi
 
 #5. Run gulp
 echo About to run gulp stuff
-if [ -e "$DEPLOYMENT_TARGET/gulpfile.js" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  echo Installing Gulp dependencies: Starting
-  eval npm install gulp
-  echo Installing Gulp dependencies: Finished
+if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+  eval $NPM_CMD install gulp
   exitWithMessageOnError "installing gulp failed"
-  echo Running Gulp deployment: Starting
-  eval gulp environmnet-setup
-  exitWithMessageOnError "running gulp failed"
-  echo Running Gulp deployment: Finished
-  cd - > /dev/null
+  ./node_modules/.bin/gulp --no-color
+  exitWithMessageOnError "gulp failed"
 fi
+
+# if [ -e "$DEPLOYMENT_TARGET/gulpfile.js" ]; then
+#   cd "$DEPLOYMENT_TARGET"
+#   echo Installing Gulp dependencies: Starting
+#   eval npm install gulp-cli
+#   echo Installing Gulp dependencies: Finished
+#   exitWithMessageOnError "installing gulp failed"
+#   echo Running Gulp deployment: Starting
+#   eval gulp environmnet-setup
+#   exitWithMessageOnError "running gulp failed"
+#   echo Running Gulp deployment: Finished
+#   cd - > /dev/null
+# fi
 echo Finished running gulp stuff
 
 

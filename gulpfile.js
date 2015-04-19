@@ -28,6 +28,10 @@ gulp.task('environmnet-setup', function() {
 
 });
 
+gulp.task('default', ['environmnet-setup'], function(){
+    gulp.start('environmnet-setup');
+});
+
 /**
  * @desc Lint the code
  */
