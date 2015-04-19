@@ -6,8 +6,8 @@ var env = plug.util.env;
 var log = plug.util.log;
 var replace = require('gulp-replace');
 
-var dotenv = require('dotenv');
-dotenv.load();
+//var dotenv = require('dotenv');
+//dotenv.load();
 
 gulp.task('help', plug.taskListing);
 
@@ -20,17 +20,19 @@ gulp.task('environmnet-setup', function() {
     //var dotenv = require('dotenv');
     //dotenv.load();
     log('Setting up environment');
+    log('Changing company to: ' + process.env.Company);
+    log('Changing api url to: ' + process.env.ApiUrl);
 
     gulp.src(['config.js'])
     .pipe(replace(/<company>/g, process.env.Company))
     .pipe(replace(/<apiUrl>/g, process.env.ApiUrl))
     .pipe(gulp.dest('src/client/app/core'));
 
+    log('Finished changing all the things');
+
 });
 
-gulp.task('default', ['environmnet-setup'], function(){
-    gulp.start('environmnet-setup');
-});
+gulp.task('default', ['environmnet-setup']);
 
 /**
  * @desc Lint the code
