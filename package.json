@@ -36,6 +36,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "gulp": "^3.8.7",
     "gulp-env": "^0.2.0",
+    "gulp-expect-file": "0.0.7",
     "gulp-jshint": "^1.7.1",
     "gulp-livereload": "^2.1.0",
     "gulp-load-plugins": "^0.5.3",

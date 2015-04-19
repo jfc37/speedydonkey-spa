@@ -5,6 +5,7 @@ var plug = require('gulp-load-plugins')();
 var env = plug.util.env;
 var log = plug.util.log;
 var replace = require('gulp-replace');
+var expect = require('gulp-expect-file');
 
 //var dotenv = require('dotenv');
 //dotenv.load();
@@ -24,9 +25,11 @@ gulp.task('environmnet-setup', function() {
     log('Changing api url to: ' + process.env.ApiUrl);
 
     gulp.src(['config.js'])
+    .pipe(expect('config.js'))
     .pipe(replace(/<company>/g, process.env.Company))
     .pipe(replace(/<apiUrl>/g, process.env.ApiUrl))
-    .pipe(gulp.dest('src/client/app/core'));
+    .pipe(gulp.dest('src/client/app/core'))
+    .pipe(expect('src/client/app/core/config.js'));
 
     log('Finished changing all the things');
 
