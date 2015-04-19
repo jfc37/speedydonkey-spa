@@ -23,7 +23,9 @@
 
             updatePass: updatePass,
 
-            updatePassOption: updatePassOption
+            updatePassOption: updatePassOption,
+
+            updateLevel: updateLevel
         };
 
         return service;
@@ -107,6 +109,12 @@
         function updatePassOption(passOption) {
             return $q(function (resolve, revoke) {
                 apiCaller.putPassOption(passOption).then(resolve, revoke);
+            });
+        }
+
+        function updateLevel(level) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putLevel(level).then(resolve, revoke);
             });
         }
     }

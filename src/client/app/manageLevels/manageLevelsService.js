@@ -12,7 +12,9 @@
 
         var service = {
             create: create,
-            getLevels: getLevels
+            update: update,
+            getLevels: getLevels,
+            generateBlock: generateBlock
         };
 
         function create(level) {
@@ -29,11 +31,31 @@
             });
         }
 
+        function update(level) {
+            return $q(function (resolve, revoke) {
+                dataUpdateService.updateLevel(level).then(function (updatedLevel) {
+                    resolve(updatedLevel);
+                }, function(response) {
+                    if (response.validation_result !== undefined){
+                        revoke(response.validation_result.validation_errors);
+                    } else {
+                        revoke();
+                    }
+                });
+            });
+        }
+
         function getLevels() {
             return $q(function (resolve, revoke) {
                 dataservice.getAllLevels().then(function (passOptions) {
                     resolve(passOptions);
                 }, revoke);
+            });
+        }
+
+        function generateBlock(id) {
+            return $q(function (resolve, revoke) {
+                dataCreateService.createBlock(id).then(resolve, revoke);
             });
         }
 

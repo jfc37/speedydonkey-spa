@@ -168,7 +168,6 @@
     function commonDateTimeInput() {
         var directive = {
             template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">\
-                        {{getFormElement()}}\
                         <div class="dropdown">\
                           <a class="dropdown-toggle" id="{{name}}" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);">\
                             <div class="input-group">\

@@ -3,9 +3,17 @@
     <div class="container">
      <div class="row">
        <h1>Manage Levels</h1>
-       <div ng-repeat="level in vm.levels">
+       <div ng-repeat="level in vm.levels" ng-controller="ManageLevel" ng-init="vm.level = level">
           <div>
-            {{level.name}}
+            {{vm.level.name}} 
+            <a ng-hide="vm.updating" ng-click="vm.startUpdating()" class="btn btn-default">Manage</a>
+            <a ng-click="vm.generateBlock()" class="btn btn-default">Generate Block</a>
+          </div>
+          <div ng-show="vm.updating">
+            <form novalidate name="form">
+              <div ng-include src="'level.html'">
+              </div>
+            </form>
           </div>
       </div>
     </div>

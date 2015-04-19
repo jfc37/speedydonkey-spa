@@ -49,7 +49,10 @@
             putPassOption: putPassOption,
 
             postLevel: postLevel,
-            getLevel: getLevel
+            putLevel: putLevel,
+            getLevel: getLevel,
+
+            postBlock: postBlock
         };
         var baseUrl;
 
@@ -215,9 +218,19 @@
             return $http.post(url, level);
         }
 
+        function putLevel(level) {
+            var url = baseUrl + 'levels/' + level.id;
+            return $http.put(url, level);
+        }
+
         function getLevel() {
             var url = baseUrl + 'levels';
             return $http.get(url);
+        }
+
+        function postBlock(levelId) {
+            var url = baseUrl + 'levels/' + levelId + '/blocks';
+            return $http.post(url);
         }
     }
 })();
