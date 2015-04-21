@@ -15,10 +15,6 @@
         var vm = this;
         vm.levels = [];
 
-        vm.getLevelUrl = function(level) {
-            return '#/admin/manage/levels/' + level.id;
-        };
-
         vm.generateForAllLevels = function() {
             manageLevelsService.generateAllBlocks().then(function () {
                 logger.success('All blocks generated');

@@ -25,7 +25,9 @@
 
             updatePassOption: updatePassOption,
 
-            updateLevel: updateLevel
+            updateLevel: updateLevel,
+
+            updateBlock: updateBlock
         };
 
         return service;
@@ -115,6 +117,12 @@
         function updateLevel(level) {
             return $q(function (resolve, revoke) {
                 apiCaller.putLevel(level).then(resolve, revoke);
+            });
+        }
+
+        function updateBlock(block) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putBlock(block).then(resolve, revoke);
             });
         }
     }
