@@ -14,7 +14,9 @@
             create: create,
             update: update,
             getLevels: getLevels,
-            generateBlock: generateBlock
+            generateBlock: generateBlock,
+            generateAllBlocks: generateAllBlocks,
+            deleteLevel: deleteLevel
         };
 
         function create(level) {
@@ -56,6 +58,16 @@
         function generateBlock(id) {
             return $q(function (resolve, revoke) {
                 dataCreateService.createBlock(id).then(resolve, revoke);
+            });
+        }
+
+        function generateAllBlocks() {
+            return generateBlock('all');
+        }
+
+        function deleteLevel(id) {
+            return $q(function (resolve, revoke) {
+                dataDeleteService.deleteLevel(id).then(resolve, revoke);
             });
         }
 

@@ -51,6 +51,7 @@
             postLevel: postLevel,
             putLevel: putLevel,
             getLevel: getLevel,
+            deleteLevel: deleteLevel,
 
             postBlock: postBlock
         };
@@ -226,6 +227,11 @@
         function getLevel() {
             var url = baseUrl + 'levels';
             return $http.get(url);
+        }
+
+        function deleteLevel(id) {
+            var url = baseUrl + 'levels/' + id;
+            return $http.delete(url);
         }
 
         function postBlock(levelId) {

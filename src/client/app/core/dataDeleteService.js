@@ -11,7 +11,8 @@
     function dataDeleteService($q, apiCaller) {
         var service = {
             studentUnattendedClass: studentUnattendedClass,
-            deletePassOption: deletePassOption
+            deletePassOption: deletePassOption,
+            deleteLevel: deleteLevel
         };
 
         function studentUnattendedClass(classId, studentId){
@@ -24,6 +25,12 @@
         function deletePassOption(id){
             return $q(function (resolve, revoke) {
                 apiCaller.deletePassOption(id).then(resolve, revoke);
+            });
+        }
+
+        function deleteLevel(id){
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteLevel(id).then(resolve, revoke);
             });
         }
 

@@ -19,6 +19,14 @@
             return '#/admin/manage/levels/' + level.id;
         };
 
+        vm.generateForAllLevels = function() {
+            manageLevelsService.generateAllBlocks().then(function () {
+                logger.success('All blocks generated');
+            }, function() {
+                logger.error('Problem generating blocks');
+            });
+        };
+
         activate();
 
         function activate() {
@@ -67,7 +75,8 @@
     ManageLevel.$inject = ['$scope', 'manageLevelsService', 'validationService', 'logger'];
 
     function ManageLevel($scope, manageLevelsService, validationService, logger) {
-        $scope.vm.levels = $scope.$parent.vm.levels;
+        //$scope.vm.levels = $scope.$parent.vm.levels;
+        var vm = {};
         $scope.vm.submitText = 'Update';
         $scope.vm.cancelText = 'Close';
         var copy = {};
