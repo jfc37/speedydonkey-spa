@@ -1,0 +1,105 @@
+<section class="mainbar">
+  <section class="matter">
+    <div class="container">
+     <div class="row">
+       <h1>Manage Pass Options</h1>
+       <div ng-repeat="pass in vm.passOptions" ng-controller="UpdatePassOptions" ng-init="vm.passOption = pass">
+        <div>
+          <div>
+            {{vm.passOption.description}} - ${{vm.passOption.cost}} <a ng-hide="vm.updating" ng-click="vm.startUpdating()" class="btn default">Update</a> <a ng-click="vm.delete()" class="btn default">Delete</a>
+          </div>
+          <form ng-show="vm.updating" novalidate name="form">
+            <div ng-include src="'passOption.html'">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div ng-controller="NewPassOptions" class="row">
+      <form ng-show="vm.addingNew" novalidate name="form">
+        <div ng-include src="'passOption.html'">
+        </div>
+      </form>
+      <a class="btn btn-default" ng-hide="vm.addingNew" ng-click="vm.addingNew = true;">Add New Pass Option</a>
+    </div>
+  </div>
+</section>
+</section>
+
+<script type="text/ng-template" id="passOption.html">
+	<div class="form-group col-xs-12" ng-class="{'has-error':(form.description.$invalid && form.description.$touched) || form.description.serverError}">
+    <input class="form-control"
+    id="description"
+    name="description"
+    type="text"
+    placeholder="Description (required)"
+    ng-model="vm.passOption.description"
+    required/>
+    <validation-error ng-model="form.description" error="required" message="Description is required."></validation-error>
+    <server-error ng-model="form.description"></server-error>
+  </div>
+  <div class="form-group col-xs-12" ng-class="{'has-error':(form.cost.$invalid && form.cost.$touched) || form.cost.serverError}">
+    <input class="form-control"
+    id="cost"
+    name="cost"
+    type="number"
+    placeholder="Price (required)"
+    ng-model="vm.passOption.cost"
+    required/>
+    <validation-error ng-model="form.cost" error="required" message="Price is required."></validation-error>
+    <validation-error ng-model="form.cost" error="number" message="Price must be a number."></validation-error>
+    <server-error ng-model="form.cost"></server-error>
+  </div>
+  <div class="form-group col-xs-12" ng-class="{'has-error':(form.pass_type.$invalid && form.pass_type.$touched) || form.pass_type.serverError}">
+    <div>
+     <label>Pass Type</label>
+   </div>
+   <div class="radio" data-ng-repeat="passType in vm.passTypes">
+    <label>
+      <input type="radio" name="pass_type" data-ng-model="$parent.vm.passOption.pass_type" ng-value="passType.value" required>
+      {{passType.display}}
+    </label>
+  </div>
+  <validation-error ng-model="form.pass_type" error="required" message="Pass Type is required."></validation-error>
+  <server-error ng-model="form.pass_type"></server-error>
+</div>
+<div class="form-group col-xs-12" ng-class="{'has-error':(form.weeks_valid_for.$invalid && form.weeks_valid_for.$touched) || form.weeks_valid_for.serverError}">
+  <input class="form-control"
+  id="weeks_valid_for"
+  name="weeks_valid_for"
+  type="number"
+  placeholder="Weeks Valid For (required)"
+  ng-model="vm.passOption.weeks_valid_for"
+  required/>
+  <validation-error ng-model="form.weeks_valid_for" error="required" message="Weeks valid for is required."></validation-error>
+  <validation-error ng-model="form.weeks_valid_for" error="number" message="Weeks valid for must be a number."></validation-error>
+  <server-error ng-model="form.weeks_valid_for"></server-error>
+</div>
+<div class="form-group col-xs-12" ng-class="{'has-error':(form.classes_valid_for.$invalid && form.classes_valid_for.$touched) || form.classes_valid_for.serverError}">
+  <input class="form-control"
+  id="classes_valid_for"
+  name="classes_valid_for"
+  type="number"
+  placeholder="Classes Valid For (required)"
+  ng-model="vm.passOption.classes_valid_for"
+  required/>
+  <validation-error ng-model="form.classes_valid_for" error="required" message="Classes valid for is required."></validation-error>
+  <validation-error ng-model="form.classes_valid_for" error="number" message="Classes valid for must be number."></validation-error>
+  <server-error ng-model="form.classes_valid_for"></server-error>
+</div>
+<div class="form-group col-xs-12" ng-class="{'has-error':(form.available_for_purchase.$invalid && form.available_for_purchase.$touched) || form.available_for_purchase.serverError}">
+  <div>
+   <input id="available_for_purchase"
+   name="available_for_purchase"
+   type="checkbox"
+   ng-model="vm.passOption.available_for_purchase"/>
+   Available for purchase
+ </div>
+ <server-error ng-model="form.available_for_purchase"></server-error>
+</div>
+<div>
+ <a class="btn btn-default"ng-click="vm.cancel(form)">{{vm.cancelText}}</a>
+ <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="vm.submit(form)">{{vm.submitText}}</a>
+</div>
+</script>

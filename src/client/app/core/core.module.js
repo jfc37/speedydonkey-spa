@@ -13,7 +13,7 @@
         /*
          * 3rd Party modules
          */
-        'ngplus'
+        'ngplus', 'ui.bootstrap.datetimepicker'
     ]);
 
     $(document).on('click','.navbar-collapse.in',function(e) {

@@ -31,6 +31,10 @@
         'app.forgottenPassword',
         'app.resetPassword',
         'app.manageUser',
+        'app.adminDashboard',
+        'app.managePassOptions',
+        'app.manageLevels',
+        'app.manageBlocks',
     ]);
 
 })();

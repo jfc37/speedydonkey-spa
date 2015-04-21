@@ -27,6 +27,7 @@
             getCurrentUserClaims: getCurrentUserClaims,
 
             postPassAssignment: postPassAssignment,
+            postCurrentUserPassAssignment: postCurrentUserPassAssignment,
 
             getBlock : getBlock,
             postBlockEnrolment: postBlockEnrolment,
@@ -40,7 +41,21 @@
             postClassAttendance: postClassAttendance,
             deleteClassAttendance: deleteClassAttendance,
 
-            putPass: putPass
+            putPass: putPass,
+
+            postPassOption: postPassOption,
+            getPassOption: getPassOption,
+            deletePassOption: deletePassOption,
+            putPassOption: putPassOption,
+
+            postLevel: postLevel,
+            putLevel: putLevel,
+            getLevel: getLevel,
+            deleteLevel: deleteLevel,
+
+            postBlock: postBlock,
+            putBlock: putBlock,
+            deleteBlock: deleteBlock,
         };
         var baseUrl;
 
@@ -53,7 +68,6 @@
         getBaseUrl();
 
         return service;
-
 
         function postUserActivation(key) {
             var url = baseUrl + 'users/activation/' + key;
@@ -116,9 +130,14 @@
             return $http.get(url);
         }
 
-        function postPassAssignment(userId, pass) {
-            var url = baseUrl + 'users/' + userId + '/passes';
-            return $http.post(url, [pass]);
+        function postPassAssignment(userId, passOptionId, pass) {
+            var url = baseUrl + 'users/' + userId + '/passtemplates/' + passOptionId;
+            return $http.post(url, pass);
+        }
+
+        function postCurrentUserPassAssignment(passOptionId, pass) {
+            var url = baseUrl + 'users/current/passtemplates/' + passOptionId;
+            return $http.post(url, pass);
         }
 
         function getBlock(blockId) {
@@ -175,6 +194,61 @@
         function putPass(pass) {
             var url = baseUrl + 'passes/' + pass.id;
             return $http.put(url, pass);
+        }
+
+        function postPassOption(passOption) {
+            var url = baseUrl + 'passtemplate';
+            return $http.post(url, passOption);
+        }
+
+        function getPassOption() {
+            var url = baseUrl + 'passtemplate';
+            return $http.get(url);
+        }
+
+        function deletePassOption(id) {
+            var url = baseUrl + 'passtemplate/' + id;
+            return $http.delete(url);
+        }
+
+        function putPassOption(passOption) {
+            var url = baseUrl + 'passtemplate/' + passOption.id;
+            return $http.put(url, passOption);
+        }
+
+        function postLevel(level) {
+            var url = baseUrl + 'levels';
+            return $http.post(url, level);
+        }
+
+        function putLevel(level) {
+            var url = baseUrl + 'levels/' + level.id;
+            return $http.put(url, level);
+        }
+
+        function getLevel() {
+            var url = baseUrl + 'levels';
+            return $http.get(url);
+        }
+
+        function deleteLevel(id) {
+            var url = baseUrl + 'levels/' + id;
+            return $http.delete(url);
+        }
+
+        function postBlock(levelId) {
+            var url = baseUrl + 'levels/' + levelId + '/blocks';
+            return $http.post(url);
+        }
+
+        function putBlock(block) {
+            var url = baseUrl + 'blocks/' + block.id;
+            return $http.put(url, block);
+        }
+
+        function deleteBlock(id) {
+            var url = baseUrl + 'blocks/' + id;
+            return $http.delete(url);
         }
     }
 })();

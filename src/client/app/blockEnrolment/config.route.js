@@ -22,7 +22,7 @@
                     controllerAs: 'vm',
                     templateUrl: 'app/blockEnrolment/blockEnrolment.html',
                     settings: {
-                        nav: 4,
+                        nav: 2,
                         content: '<i class="fa fa-toggle-on"></i> Block Enrolment'
                     }
                 }

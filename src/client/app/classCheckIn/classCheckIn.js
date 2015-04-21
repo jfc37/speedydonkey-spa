@@ -86,8 +86,8 @@
             vm.newUser = {};
         };
 
-        vm.purchaseNewPass = function(student, passType){
-            classCheckInService.purchaseNewPass(student, passType).then(function() {
+        vm.purchaseNewPass = function(student, passOption){
+            classCheckInService.purchaseNewPass(student, passOption).then(function() {
                 logger.success(student.full_name + ' purchased a new pass!');
             },function() {
                 logger.error('Problem purchasing pass...');

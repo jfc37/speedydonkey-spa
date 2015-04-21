@@ -10,13 +10,34 @@
     /* @ngInject */
     function dataDeleteService($q, apiCaller) {
         var service = {
-            studentUnattendedClass: studentUnattendedClass
+            studentUnattendedClass: studentUnattendedClass,
+            deletePassOption: deletePassOption,
+            deleteLevel: deleteLevel,
+            deleteBlock: deleteBlock
         };
 
         function studentUnattendedClass(classId, studentId){
 
             return $q(function (resolve, revoke) {
                 apiCaller.deleteClassAttendance(classId, studentId).then(resolve, revoke);
+            });
+        }
+
+        function deletePassOption(id){
+            return $q(function (resolve, revoke) {
+                apiCaller.deletePassOption(id).then(resolve, revoke);
+            });
+        }
+
+        function deleteLevel(id){
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteLevel(id).then(resolve, revoke);
+            });
+        }
+
+        function deleteBlock(id){
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteBlock(id).then(resolve, revoke);
             });
         }
 

@@ -24,12 +24,14 @@
 
             getAllBlocks: getAllBlocks,
 
-            getAllPassOptions: getAllPassOptions,
-
             getClass: getClass,
             searchForClasses: searchForClasses,
             getClassRegisteredStudents: getClassRegisteredStudents,
-            getClassAttendance: getClassAttendance
+            getClassAttendance: getClassAttendance,
+
+            getAllPassOptions: getAllPassOptions,
+
+            getAllLevels: getAllLevels
         };
 
         return service;
@@ -133,17 +135,6 @@
             });
         }
 
-        function getAllPassOptions() {
-            return $q(function (resolve, reject) {
-                var query = 'type_=_PassOption';
-                apiCaller.searchReferenceData(query).then(function (response) {
-                    resolve(response.data);
-                }, function (response) {
-                    reject(response);
-                });
-            });
-        }
-
         function getClass(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.getClass(id).then(function (response) {
@@ -178,6 +169,26 @@
         function getClassAttendance(id) {
             return $q(function (resolve, reject) {
                 apiCaller.getClassAttendance(id).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllPassOptions() {
+            return $q(function (resolve, reject) {
+                apiCaller.getPassOption().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllLevels() {
+            return $q(function (resolve, reject) {
+                apiCaller.getLevel().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
