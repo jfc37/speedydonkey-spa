@@ -15,6 +15,10 @@
         };
 
         function applyServerSideErrors(form, errors) {
+            if (!errors) {
+                return;
+            }
+
             form.serverErrors = [];
             errors.forEach(function (error) {
                 var relatedFormElement = form[error.property_name.toLowerCase()];
