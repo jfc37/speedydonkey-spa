@@ -52,9 +52,15 @@
             });
         }
 
-        function getPassOptions() {
+        function getPassOptions(showAllPasses) {
             return $q(function (resolve, revoke) {
                 dataservice.getAllPassOptions().then(function (passOptions){
+                    if (!showAllPasses){
+                        passOptions = passOptions.filter(function(pass) {
+                            return pass.value > 0;
+                        });
+                    }
+
                     resolve(passOptions);
                 }, function (error) {
                     if (error.status === 404) {
