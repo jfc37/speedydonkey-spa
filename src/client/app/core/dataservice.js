@@ -23,6 +23,7 @@
             getCurrentUserClaims: getCurrentUserClaims,
 
             getAllBlocks: getAllBlocks,
+            getAllActiveBlocks: getAllActiveBlocks,
 
             getClass: getClass,
             searchForClasses: searchForClasses,
@@ -128,6 +129,17 @@
         function getAllBlocks() {
             return $q(function (resolve, reject) {
                 apiCaller.getBlock().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllActiveBlocks() {
+            return $q(function (resolve, reject) {
+                var today = moment().format('YYYY-MM-DD');
+                apiCaller.searchBlock('endDate_gt_' + today).then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

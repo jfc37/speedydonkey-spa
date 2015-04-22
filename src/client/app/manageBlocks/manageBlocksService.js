@@ -32,7 +32,7 @@
 
         function getBlocks() {
             return $q(function (resolve, revoke) {
-                dataservice.getAllBlocks().then(function (blocks) {
+                dataservice.getAllActiveBlocks().then(function (blocks) {
                     resolve(blocks);
                 }, revoke);
             });

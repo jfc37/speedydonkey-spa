@@ -30,6 +30,7 @@
             postCurrentUserPassAssignment: postCurrentUserPassAssignment,
 
             getBlock : getBlock,
+            searchBlock: searchBlock,
             postBlockEnrolment: postBlockEnrolment,
 
             searchReferenceData: searchReferenceData,
@@ -145,6 +146,12 @@
             if (blockId !== undefined && blockId !== null) {
                 url = url + '/' + blockId;
             }
+
+            return $http.get(url);
+        }
+
+        function searchBlock(search) {
+            var url = baseUrl + 'blocks?q=' + search;
 
             return $http.get(url);
         }
