@@ -213,7 +213,7 @@
         function getAllActiveClasses() {
             return $q(function (resolve, reject) {
                 var yesterday = moment().add('day', -1).format('YYYY-MM-DD');
-                apiCaller.searchClass('endTime_gt_' + yesterday).then(function (response) {
+                apiCaller.searchClass('endTime_gt_' + yesterday + ',take_10').then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

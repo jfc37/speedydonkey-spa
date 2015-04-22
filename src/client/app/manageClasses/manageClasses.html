@@ -23,6 +23,8 @@
 
 <script type="text/ng-template" id="class.html">
   <common-input ng-model="vm.class.name" name="name" display-name="Name" type="text" required="true"></common-input>
+  <common-date-time-input ng-model="vm.class.start_time" name="start_time" display-name="Start Time" required="true"></common-date-time-input>
+  <common-date-time-input ng-model="vm.class.end_time" name="end_time" display-name="End Time" required="true"></common-date-time-input>
   <a class="btn btn-default"ng-click="vm.cancel(form)">{{vm.cancelText}}</a>
   <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="vm.submit(form)">{{vm.submitText}}</a>
 </div>
