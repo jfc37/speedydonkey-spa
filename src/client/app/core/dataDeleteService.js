@@ -13,7 +13,8 @@
             studentUnattendedClass: studentUnattendedClass,
             deletePassOption: deletePassOption,
             deleteLevel: deleteLevel,
-            deleteBlock: deleteBlock
+            deleteBlock: deleteBlock,
+            deleteClass: deleteClass
         };
 
         function studentUnattendedClass(classId, studentId){
@@ -38,6 +39,12 @@
         function deleteBlock(id){
             return $q(function (resolve, revoke) {
                 apiCaller.deleteBlock(id).then(resolve, revoke);
+            });
+        }
+
+        function deleteClass(id){
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteClass(id).then(resolve, revoke);
             });
         }
 

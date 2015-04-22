@@ -35,6 +35,7 @@
         'app.managePassOptions',
         'app.manageLevels',
         'app.manageBlocks',
+        'app.manageClasses',
     ]);
 
 })();

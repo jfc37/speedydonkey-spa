@@ -35,8 +35,6 @@
 
             searchReferenceData: searchReferenceData,
 
-            getClass: getClass,
-            searchClass: searchClass,
             getClassRegisteredStudents: getClassRegisteredStudents,
             getClassAttendance: getClassAttendance,
             postClassAttendance: postClassAttendance,
@@ -57,6 +55,11 @@
             postBlock: postBlock,
             putBlock: putBlock,
             deleteBlock: deleteBlock,
+
+            getClass: getClass,
+            searchClass: searchClass,
+            putClass: putClass,
+            deleteClass: deleteClass,
         };
         var baseUrl;
 
@@ -255,6 +258,16 @@
 
         function deleteBlock(id) {
             var url = baseUrl + 'blocks/' + id;
+            return $http.delete(url);
+        }
+
+        function putClass(theClass) {
+            var url = baseUrl + 'classes/' + theClass.id;
+            return $http.put(url, theClass);
+        }
+
+        function deleteClass(id) {
+            var url = baseUrl + 'classes/' + id;
             return $http.delete(url);
         }
     }

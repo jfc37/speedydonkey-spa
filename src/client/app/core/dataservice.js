@@ -32,7 +32,9 @@
 
             getAllPassOptions: getAllPassOptions,
 
-            getAllLevels: getAllLevels
+            getAllLevels: getAllLevels,
+
+            getAllActiveClasses: getAllActiveClasses
         };
 
         return service;
@@ -201,6 +203,17 @@
         function getAllLevels() {
             return $q(function (resolve, reject) {
                 apiCaller.getLevel().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllActiveClasses() {
+            return $q(function (resolve, reject) {
+                var yesterday = moment().add('day', -1).format('YYYY-MM-DD');
+                apiCaller.searchClass('endTime_gt_' + yesterday).then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
