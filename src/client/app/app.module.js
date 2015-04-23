@@ -36,6 +36,7 @@
         'app.manageLevels',
         'app.manageBlocks',
         'app.manageClasses',
+        'app.manageTeachers',
     ]);
 
 })();

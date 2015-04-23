@@ -60,6 +60,10 @@
             searchClass: searchClass,
             putClass: putClass,
             deleteClass: deleteClass,
+
+            postTeacher: postTeacher,
+            getTeacher: getTeacher,
+            deleteTeacher: deleteTeacher
         };
         var baseUrl;
 
@@ -268,6 +272,21 @@
 
         function deleteClass(id) {
             var url = baseUrl + 'classes/' + id;
+            return $http.delete(url);
+        }
+
+        function postTeacher(userId) {
+            var url = baseUrl + 'teachers/' + userId;
+            return $http.post(url);
+        }
+
+        function getTeacher() {
+            var url = baseUrl + 'teachers';
+            return $http.get(url);
+        }
+
+        function deleteTeacher(userId) {
+            var url = baseUrl + 'teachers/' + userId;
             return $http.delete(url);
         }
     }
