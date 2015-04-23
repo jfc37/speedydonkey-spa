@@ -23,6 +23,7 @@
             getCurrentUserClaims: getCurrentUserClaims,
 
             getAllBlocks: getAllBlocks,
+            getAllActiveBlocks: getAllActiveBlocks,
 
             getClass: getClass,
             searchForClasses: searchForClasses,
@@ -31,7 +32,11 @@
 
             getAllPassOptions: getAllPassOptions,
 
-            getAllLevels: getAllLevels
+            getAllLevels: getAllLevels,
+
+            getAllActiveClasses: getAllActiveClasses,
+
+            getAllTeachers: getAllTeachers
         };
 
         return service;
@@ -135,6 +140,17 @@
             });
         }
 
+        function getAllActiveBlocks() {
+            return $q(function (resolve, reject) {
+                var today = moment().format('YYYY-MM-DD');
+                apiCaller.searchBlock('endDate_gt_' + today).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
         function getClass(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.getClass(id).then(function (response) {
@@ -189,6 +205,27 @@
         function getAllLevels() {
             return $q(function (resolve, reject) {
                 apiCaller.getLevel().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllActiveClasses() {
+            return $q(function (resolve, reject) {
+                var yesterday = moment().add('day', -1).format('YYYY-MM-DD');
+                apiCaller.searchClass('endTime_gt_' + yesterday + ',take_10').then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllTeachers() {
+            return $q(function (resolve, reject) {
+                apiCaller.getTeacher().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

@@ -27,7 +27,9 @@
 
             updateLevel: updateLevel,
 
-            updateBlock: updateBlock
+            updateBlock: updateBlock,
+
+            updateClass: updateClass
         };
 
         return service;
@@ -123,6 +125,12 @@
         function updateBlock(block) {
             return $q(function (resolve, revoke) {
                 apiCaller.putBlock(block).then(resolve, revoke);
+            });
+        }
+
+        function updateClass(theClass) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putClass(theClass).then(resolve, revoke);
             });
         }
     }

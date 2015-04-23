@@ -14,5 +14,7 @@
         vm.passOptionsUrl = '#/admin/manage/PassOptions';
         vm.levelsUrl = '#/admin/manage/levels';
         vm.blocksUrl = '#/admin/manage/blocks';
+        vm.classesUrl = '#/admin/manage/classes';
+        vm.teachersUrl = '#/admin/manage/teachers';
     }
 })();

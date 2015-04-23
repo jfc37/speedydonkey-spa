@@ -30,12 +30,11 @@
             postCurrentUserPassAssignment: postCurrentUserPassAssignment,
 
             getBlock : getBlock,
+            searchBlock: searchBlock,
             postBlockEnrolment: postBlockEnrolment,
 
             searchReferenceData: searchReferenceData,
 
-            getClass: getClass,
-            searchClass: searchClass,
             getClassRegisteredStudents: getClassRegisteredStudents,
             getClassAttendance: getClassAttendance,
             postClassAttendance: postClassAttendance,
@@ -56,6 +55,15 @@
             postBlock: postBlock,
             putBlock: putBlock,
             deleteBlock: deleteBlock,
+
+            getClass: getClass,
+            searchClass: searchClass,
+            putClass: putClass,
+            deleteClass: deleteClass,
+
+            postTeacher: postTeacher,
+            getTeacher: getTeacher,
+            deleteTeacher: deleteTeacher
         };
         var baseUrl;
 
@@ -145,6 +153,12 @@
             if (blockId !== undefined && blockId !== null) {
                 url = url + '/' + blockId;
             }
+
+            return $http.get(url);
+        }
+
+        function searchBlock(search) {
+            var url = baseUrl + 'blocks?q=' + search;
 
             return $http.get(url);
         }
@@ -248,6 +262,31 @@
 
         function deleteBlock(id) {
             var url = baseUrl + 'blocks/' + id;
+            return $http.delete(url);
+        }
+
+        function putClass(theClass) {
+            var url = baseUrl + 'classes/' + theClass.id;
+            return $http.put(url, theClass);
+        }
+
+        function deleteClass(id) {
+            var url = baseUrl + 'classes/' + id;
+            return $http.delete(url);
+        }
+
+        function postTeacher(userId) {
+            var url = baseUrl + 'teachers/' + userId;
+            return $http.post(url);
+        }
+
+        function getTeacher() {
+            var url = baseUrl + 'teachers';
+            return $http.get(url);
+        }
+
+        function deleteTeacher(userId) {
+            var url = baseUrl + 'teachers/' + userId;
             return $http.delete(url);
         }
     }
