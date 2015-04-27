@@ -50,6 +50,11 @@
         $scope.vm.cancelText = 'Cancel';
 
         $scope.vm.submit = function(form) {
+            $scope.vm.level.teachers = [];
+            $scope.vm.level.teachers.push({id: $scope.vm.firstTeacher});
+            if ($scope.vm.secondTeacher){
+                $scope.vm.level.teachers.push({id : $scope.vm.secondTeacher});
+            }
             manageLevelsService.create($scope.vm.level).then(function (createdLevel){
                 logger.success('New level created');
                 $scope.$parent.vm.levels.push(createdLevel);

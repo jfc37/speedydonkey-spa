@@ -12,6 +12,7 @@
         .directive('commonInput', commonInput)
         .directive('commonDateTimeInput', commonDateTimeInput)
         .directive('userSearch', userSearch)
+        .directive('teacherDropdown', teacherDropdown)
         ;
 
     /* @ngInject */
@@ -246,6 +247,23 @@
                         });
                     });
                 };
+            }
+        };
+        return directive;
+    }
+
+    function teacherDropdown(dataservice) {
+        var directive = {
+            template: '<select ng-options="teacher.id as teacher.full_name for teacher in teachers" ng-model="ngModel">',
+            require: ['ngModel'],
+            scope: {
+              ngModel: '='
+            },
+            link: function(scope, element, attrs){
+                scope.teachers = [];
+                dataservice.getAllTeachers().then(function (teachers) {
+                    scope.teachers = teachers;
+                });
             }
         };
         return directive;
