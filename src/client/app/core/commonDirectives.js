@@ -12,6 +12,7 @@
         .directive('commonInput', commonInput)
         .directive('commonDateTimeInput', commonDateTimeInput)
         .directive('userSearch', userSearch)
+        .directive('teacherDropdown', teacherDropdown)
         ;
 
     /* @ngInject */
@@ -246,6 +247,35 @@
                         });
                     });
                 };
+            }
+        };
+        return directive;
+    }
+
+    function teacherDropdown(dataservice) {
+        var directive = {
+            template: '<div class="form-group col-xs-12">\
+                        <select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[0]">\
+                            <option value="">Please select the primary teacher</option>\
+                        </select>\
+                        </div>\
+                        <div class="form-group col-xs-12">\
+                        <select ng-options="teacher as teacher.full_name for teacher in teachers" ng-model="ngModel[1]">\
+                            <option value="">Please select the secondary teacher (optional)</option>\
+                        </select>\
+                        </div>',
+            require: ['ngModel'],
+            scope: {
+              ngModel: '='
+            },
+            link: function(scope, element, attrs){
+                scope.teachers = [];
+                dataservice.getAllTeachers().then(function (teachers) {
+                    scope.teachers = teachers;
+                });
+                if (!scope.ngModel){
+                    scope.ngModel = [];
+                }
             }
         };
         return directive;
