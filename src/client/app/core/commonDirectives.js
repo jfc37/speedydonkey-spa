@@ -254,7 +254,16 @@
 
     function teacherDropdown(dataservice) {
         var directive = {
-            template: '<select ng-options="teacher.id as teacher.full_name for teacher in teachers" ng-model="ngModel">',
+            template: '<div class="form-group col-xs-12">\
+                        <select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[0]">\
+                            <option value="">Please select the primary teacher</option>\
+                        </select>\
+                        </div>\
+                        <div class="form-group col-xs-12">\
+                        <select ng-options="teacher as teacher.full_name for teacher in teachers" ng-model="ngModel[1]">\
+                            <option value="">Please select the secondary teacher (optional)</option>\
+                        </select>\
+                        </div>',
             require: ['ngModel'],
             scope: {
               ngModel: '='
@@ -264,6 +273,9 @@
                 dataservice.getAllTeachers().then(function (teachers) {
                     scope.teachers = teachers;
                 });
+                if (!scope.ngModel){
+                    scope.ngModel = [];
+                }
             }
         };
         return directive;
