@@ -4,8 +4,8 @@
             <div class="row">
               <h1>Teacher Hours</h1>
               <form>
-                <common-input ng-model="vm.starting" type="date" name="starting" label="From"></common-input>
-                <common-input ng-model="vm.ending" type="date" name="ending" label="To"></common-input>
+                <common-input ng-model="vm.starting" type="date" name="starting" display-name="From"></common-input>
+                <common-input ng-model="vm.ending" type="date" name="ending" display-name="To"></common-input>
                 <a ng-click="vm.getHours()" class="btn btn-primary">Update Date Range</a>
               </form>
               <div ng-repeat="teacherHour in vm.teacherHours">
