@@ -4,38 +4,8 @@ var pkg = require('./package.json');
 var plug = require('gulp-load-plugins')();
 var env = plug.util.env;
 var log = plug.util.log;
-var replace = require('gulp-replace');
-var expect = require('gulp-expect-file');
-
-var dotenv = require('dotenv');
-dotenv.load();
 
 gulp.task('help', plug.taskListing);
-
-//get angular config file
-//get environment values
-//find and replace file
-
-// gulp.task('environmnet-setup', function() {
-
-//     //var dotenv = require('dotenv');
-//     //dotenv.load();
-//     log('Setting up environment');
-//     log('Changing company to: ' + process.env.Company);
-//     log('Changing api url to: ' + process.env.ApiUrl);
-
-//     gulp.src(['config.js'])
-//     .pipe(expect('config.js'))
-//     .pipe(replace(/<company>/g, process.env.Company))
-//     .pipe(replace(/<apiUrl>/g, process.env.ApiUrl))
-//     .pipe(gulp.dest('src/client/app/core'))
-//     .pipe(expect('src/client/app/core/config.js'));
-
-//     log('Finished changing all the things');
-
-// });
-
-//gulp.task('default', ['environmnet-setup']);
 
 /**
  * @desc Lint the code
@@ -93,14 +63,14 @@ function serve(args) {
         delayTime: 1,
         ext: 'html js',
         env: {'NODE_ENV': args.env},
-         watch: ['gulpfile.js',
-                  //'package.json',
-                  //pkg.paths.server,
-                  //pkg.paths.client
-                 ]
+        watch: ['gulpfile.js',
+                'package.json',
+                pkg.paths.server,
+                pkg.paths.client]
     };
 
     return plug.nodemon(options)
+        //.on('change', tasks)
         .on('restart', function () {
             log('restarted!');
         });
