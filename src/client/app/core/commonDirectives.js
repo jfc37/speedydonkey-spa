@@ -260,7 +260,7 @@
                         </select>\
                         </div>\
                         <div class="form-group col-xs-12">\
-                        <select ng-options="teacher as teacher.full_name for teacher in teachers" ng-model="ngModel[1]">\
+                        <select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[1]">\
                             <option value="">Please select the secondary teacher (optional)</option>\
                         </select>\
                         </div>',
