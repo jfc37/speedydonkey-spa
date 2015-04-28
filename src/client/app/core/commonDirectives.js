@@ -132,6 +132,7 @@
     function commonInput() {
         var directive = {
             template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">\
+                            <label ng-show="label">{{label}}</label>\
                             <input class="form-control"\
                             id="{{name}}"\
                             name="{{name}}"\
@@ -149,6 +150,7 @@
             },
             link: function(scope, element, attrs, ctrls){
                 scope.name = attrs.name;
+                scope.label = attrs.label;
                 scope.displayName = attrs.displayName;
                 scope.type = attrs.type;
                 scope.required = attrs.required;
