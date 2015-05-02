@@ -6,6 +6,16 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                        <h3 class="panel-title">Teachers</h3>
+                      </div>
+                      <div class="panel-body">
+                        <teacher-dropdown ng-model="vm.class.teachers"></teacher-dropdown>
+                        <button class="btn btn-primary" ng-click="vm.updateTeachers()">Update teachers</button>
+                      </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         <h3 class="panel-title">Students</h3>
                       </div>
                       <div class="panel-body" ng-show="vm.areRegisteredStudentsLoading">
@@ -40,7 +50,7 @@
                                   <div class="radio" data-ng-repeat="pass in vm.passOptions">
                                     <label>
                                       <input type="radio" name="passOptions" data-ng-model="$parent.selectedPass" ng-value="pass">
-                                          {{pass.description}} - ${{pass.value}}.00
+                                          {{pass.description}} - ${{pass.cost}}
                                     </label>
                                   </div>
                                   <button class="btn btn-primary" ng-click="vm.purchaseNewPass(student, selectedPass)">Purchase</button>

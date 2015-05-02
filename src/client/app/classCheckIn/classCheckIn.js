@@ -5,10 +5,10 @@
         .module('app.classCheckIn')
         .controller('ClassCheckIn', ClassCheckIn);
 
-    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger', 'validationService'];
+    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger', 'validationService', 'manageClassesService'];
 
     /* @ngInject */
-    function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger, validationService) {
+    function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger, validationService, manageClassesService) {
         /*jshint validthis: true */
         var vm = this;
         vm.class = null;
@@ -17,6 +17,21 @@
         vm.areRegisteredStudentsLoading = true;
         vm.creatingNewAccount = false;
         vm.newUser = {};
+
+        vm.updateTeachers = function() {
+            var sanitisedClass = {
+                id: vm.class.id,
+                teachers: vm.class.teachers,
+                start_time: vm.class.start_time,
+                end_time: vm.class.end_time,
+                name: vm.class.name,
+            };
+            manageClassesService.update(sanitisedClass).then(function (){
+                logger.success('Teachers updated');
+            }, function(errors) {
+                logger.error('Problem updating teachers');
+            });
+        };
 
         vm.attendenceStatusChanged = function(student) {
             classCheckInService.attendenceStatusChanged(student).then(function(message) {
@@ -86,8 +101,8 @@
             vm.newUser = {};
         };
 
-        vm.purchaseNewPass = function(student, passType){
-            classCheckInService.purchaseNewPass(student, passType).then(function() {
+        vm.purchaseNewPass = function(student, passOption){
+            classCheckInService.purchaseNewPass(student, passOption).then(function() {
                 logger.success(student.full_name + ' purchased a new pass!');
             },function() {
                 logger.error('Problem purchasing pass...');

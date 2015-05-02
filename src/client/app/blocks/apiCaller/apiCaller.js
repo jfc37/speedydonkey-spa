@@ -5,10 +5,10 @@
         .module('app.apiCaller')
         .factory('apiCaller', apiCaller);
 
-    apiCaller.$inject = ['$http'];
+    apiCaller.$inject = ['$http', 'config'];
 
     /* @ngInject */
-    function apiCaller($http) {
+    function apiCaller($http, config) {
         var service = {
 
             postUserActivation: postUserActivation,
@@ -27,33 +27,47 @@
             getCurrentUserClaims: getCurrentUserClaims,
 
             postPassAssignment: postPassAssignment,
+            postCurrentUserPassAssignment: postCurrentUserPassAssignment,
 
             getBlock : getBlock,
+            searchBlock: searchBlock,
             postBlockEnrolment: postBlockEnrolment,
 
             searchReferenceData: searchReferenceData,
 
-            getClass: getClass,
-            searchClass: searchClass,
             getClassRegisteredStudents: getClassRegisteredStudents,
             getClassAttendance: getClassAttendance,
             postClassAttendance: postClassAttendance,
             deleteClassAttendance: deleteClassAttendance,
 
-            putPass: putPass
+            putPass: putPass,
+
+            postPassOption: postPassOption,
+            getPassOption: getPassOption,
+            deletePassOption: deletePassOption,
+            putPassOption: putPassOption,
+
+            postLevel: postLevel,
+            putLevel: putLevel,
+            getLevel: getLevel,
+            deleteLevel: deleteLevel,
+
+            postBlock: postBlock,
+            putBlock: putBlock,
+            deleteBlock: deleteBlock,
+
+            getClass: getClass,
+            searchClass: searchClass,
+            putClass: putClass,
+            deleteClass: deleteClass,
+
+            postTeacher: postTeacher,
+            getTeacher: getTeacher,
+            deleteTeacher: deleteTeacher
         };
-        var baseUrl;
-
-        function getBaseUrl() {
-            $http.get('/apiUrl').then(function(response) {
-                baseUrl = 'https://' + response.data + '/api/';
-            });
-        }
-
-        getBaseUrl();
+        var baseUrl = 'https://' + config.apiUrl + '/api/';
 
         return service;
-
 
         function postUserActivation(key) {
             var url = baseUrl + 'users/activation/' + key;
@@ -116,9 +130,14 @@
             return $http.get(url);
         }
 
-        function postPassAssignment(userId, pass) {
-            var url = baseUrl + 'users/' + userId + '/passes';
-            return $http.post(url, [pass]);
+        function postPassAssignment(userId, passOptionId, pass) {
+            var url = baseUrl + 'users/' + userId + '/passtemplates/' + passOptionId;
+            return $http.post(url, pass);
+        }
+
+        function postCurrentUserPassAssignment(passOptionId, pass) {
+            var url = baseUrl + 'users/current/passtemplates/' + passOptionId;
+            return $http.post(url, pass);
         }
 
         function getBlock(blockId) {
@@ -126,6 +145,12 @@
             if (blockId !== undefined && blockId !== null) {
                 url = url + '/' + blockId;
             }
+
+            return $http.get(url);
+        }
+
+        function searchBlock(search) {
+            var url = baseUrl + 'blocks?q=' + search;
 
             return $http.get(url);
         }
@@ -175,6 +200,86 @@
         function putPass(pass) {
             var url = baseUrl + 'passes/' + pass.id;
             return $http.put(url, pass);
+        }
+
+        function postPassOption(passOption) {
+            var url = baseUrl + 'passtemplate';
+            return $http.post(url, passOption);
+        }
+
+        function getPassOption() {
+            var url = baseUrl + 'passtemplate';
+            return $http.get(url);
+        }
+
+        function deletePassOption(id) {
+            var url = baseUrl + 'passtemplate/' + id;
+            return $http.delete(url);
+        }
+
+        function putPassOption(passOption) {
+            var url = baseUrl + 'passtemplate/' + passOption.id;
+            return $http.put(url, passOption);
+        }
+
+        function postLevel(level) {
+            var url = baseUrl + 'levels';
+            return $http.post(url, level);
+        }
+
+        function putLevel(level) {
+            var url = baseUrl + 'levels/' + level.id;
+            return $http.put(url, level);
+        }
+
+        function getLevel() {
+            var url = baseUrl + 'levels';
+            return $http.get(url);
+        }
+
+        function deleteLevel(id) {
+            var url = baseUrl + 'levels/' + id;
+            return $http.delete(url);
+        }
+
+        function postBlock(levelId) {
+            var url = baseUrl + 'levels/' + levelId + '/blocks';
+            return $http.post(url);
+        }
+
+        function putBlock(block) {
+            var url = baseUrl + 'blocks/' + block.id;
+            return $http.put(url, block);
+        }
+
+        function deleteBlock(id) {
+            var url = baseUrl + 'blocks/' + id;
+            return $http.delete(url);
+        }
+
+        function putClass(theClass) {
+            var url = baseUrl + 'classes/' + theClass.id;
+            return $http.put(url, theClass);
+        }
+
+        function deleteClass(id) {
+            var url = baseUrl + 'classes/' + id;
+            return $http.delete(url);
+        }
+
+        function postTeacher(userId) {
+            var url = baseUrl + 'teachers/' + userId;
+            return $http.post(url);
+        }
+
+        function getTeacher() {
+            var url = baseUrl + 'teachers';
+            return $http.get(url);
+        }
+
+        function deleteTeacher(userId) {
+            var url = baseUrl + 'teachers/' + userId;
+            return $http.delete(url);
         }
     }
 })();

@@ -1,0 +1,17 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+              <h1>Teacher Hours</h1>
+              <form>
+                <common-input ng-model="vm.starting" type="date" name="starting" display-name="From"></common-input>
+                <common-input ng-model="vm.ending" type="date" name="ending" display-name="To"></common-input>
+                <a ng-click="vm.getHours()" class="btn btn-primary">Update Date Range</a>
+              </form>
+              <div ng-repeat="teacherHour in vm.teacherHours">
+                {{teacherHour.full_name}} - {{teacherHour.soloClasses.length}} solo classes - {{teacherHour.partnerClasses.length}} partnered classes
+              </div>
+          </div>
+        </div>
+    </section>
+</section>

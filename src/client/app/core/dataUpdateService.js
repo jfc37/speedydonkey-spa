@@ -19,8 +19,17 @@
             enrolInBlock: enrolInBlock,
             studentAttendedClass: studentAttendedClass,
             assignPassToStudent: assignPassToStudent,
+            assignPassToCurrentUser: assignPassToCurrentUser,
 
-            updatePass: updatePass
+            updatePass: updatePass,
+
+            updatePassOption: updatePassOption,
+
+            updateLevel: updateLevel,
+
+            updateBlock: updateBlock,
+
+            updateClass: updateClass
         };
 
         return service;
@@ -83,15 +92,45 @@
             });
         }
 
-        function assignPassToStudent(studentId, pass) {
+        function assignPassToStudent(studentId, passOptionId, pass) {
             return $q(function (resolve, revoke) {
-                apiCaller.postPassAssignment(studentId, pass).then(resolve, revoke);
+                apiCaller.postPassAssignment(studentId, passOptionId, pass).then(resolve, revoke);
+            });
+        }
+
+        function assignPassToCurrentUser(passOptionId, pass) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postCurrentUserPassAssignment(passOptionId, pass).then(resolve, revoke);
             });
         }
 
         function updatePass(pass) {
             return $q(function (resolve, revoke) {
                 apiCaller.putPass(pass).then(resolve, revoke);
+            });
+        }
+
+        function updatePassOption(passOption) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putPassOption(passOption).then(resolve, revoke);
+            });
+        }
+
+        function updateLevel(level) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putLevel(level).then(resolve, revoke);
+            });
+        }
+
+        function updateBlock(block) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putBlock(block).then(resolve, revoke);
+            });
+        }
+
+        function updateClass(theClass) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putClass(theClass).then(resolve, revoke);
             });
         }
     }

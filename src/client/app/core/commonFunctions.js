@@ -7,6 +7,24 @@
             };
         }
 
+        if (!Array.prototype.remove) {
+            Array.prototype.remove = function(item) {
+               var index = this.indexOf(item);
+               if (index > -1) {
+                this.splice(index, 1);
+               }
+            };
+        }
+
+        if (!Array.prototype.getFirstOrDefault) {
+            Array.prototype.getFirstOrDefault = function(prop, value) {
+                var matchingItem = this.filter(function(item) {
+                    return item[prop] === value;
+                })[0];
+                return matchingItem;
+            };
+        }
+
     angular
         .module('app.core')
         .factory('commonFunctions', commonFunctions);

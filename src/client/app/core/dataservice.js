@@ -23,13 +23,20 @@
             getCurrentUserClaims: getCurrentUserClaims,
 
             getAllBlocks: getAllBlocks,
-
-            getAllPassOptions: getAllPassOptions,
+            getAllActiveBlocks: getAllActiveBlocks,
 
             getClass: getClass,
             searchForClasses: searchForClasses,
             getClassRegisteredStudents: getClassRegisteredStudents,
-            getClassAttendance: getClassAttendance
+            getClassAttendance: getClassAttendance,
+
+            getAllPassOptions: getAllPassOptions,
+
+            getAllLevels: getAllLevels,
+
+            getAllActiveClasses: getAllActiveClasses,
+
+            getAllTeachers: getAllTeachers
         };
 
         return service;
@@ -133,10 +140,10 @@
             });
         }
 
-        function getAllPassOptions() {
+        function getAllActiveBlocks() {
             return $q(function (resolve, reject) {
-                var query = 'type_=_PassOption';
-                apiCaller.searchReferenceData(query).then(function (response) {
+                var today = moment().format('YYYY-MM-DD');
+                apiCaller.searchBlock('endDate_gt_' + today).then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
@@ -178,6 +185,47 @@
         function getClassAttendance(id) {
             return $q(function (resolve, reject) {
                 apiCaller.getClassAttendance(id).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllPassOptions() {
+            return $q(function (resolve, reject) {
+                apiCaller.getPassOption().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllLevels() {
+            return $q(function (resolve, reject) {
+                apiCaller.getLevel().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllActiveClasses() {
+            return $q(function (resolve, reject) {
+                var yesterday = moment().add('day', -1).format('YYYY-MM-DD');
+                apiCaller.searchClass('endTime_gt_' + yesterday + ',take_10').then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAllTeachers() {
+            return $q(function (resolve, reject) {
+                apiCaller.getTeacher().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

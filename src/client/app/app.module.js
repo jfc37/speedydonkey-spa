@@ -31,6 +31,14 @@
         'app.forgottenPassword',
         'app.resetPassword',
         'app.manageUser',
+        'app.adminDashboard',
+        'app.managePassOptions',
+        'app.manageLevels',
+        'app.manageBlocks',
+        'app.manageClasses',
+        'app.manageTeachers',
+        'app.adminReports',
+        'app.reportTeacherHours',
     ]);
 
 })();
