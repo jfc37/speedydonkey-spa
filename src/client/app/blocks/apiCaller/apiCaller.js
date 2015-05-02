@@ -5,10 +5,10 @@
         .module('app.apiCaller')
         .factory('apiCaller', apiCaller);
 
-    apiCaller.$inject = ['$http'];
+    apiCaller.$inject = ['$http', 'config'];
 
     /* @ngInject */
-    function apiCaller($http) {
+    function apiCaller($http, config) {
         var service = {
 
             postUserActivation: postUserActivation,
@@ -65,15 +65,7 @@
             getTeacher: getTeacher,
             deleteTeacher: deleteTeacher
         };
-        var baseUrl;
-
-        function getBaseUrl() {
-            $http.get('/apiUrl').then(function(response) {
-                baseUrl = 'https://' + response.data + '/api/';
-            });
-        }
-
-        getBaseUrl();
+        var baseUrl = 'https://' + config.apiUrl + '/api/';
 
         return service;
 
