@@ -5,7 +5,7 @@
       <h1>Manage Classes</h1>
        <div ng-repeat="class in vm.classes" ng-controller="ManageClass as vm" ng-init="vm.class = class">
         <div>
-          {{vm.class.name}}  starting <display-date format="short date" ng-model="vm.class.start_date"></display-date>
+          {{vm.class.name}}  starting <display-date format="short date" ng-model="vm.class.start_time"></display-date>
           <a ng-hide="vm.updating" ng-click="vm.startUpdating()" class="btn btn-default">Manage</a>
           <a ng-click="vm.delete()" class="btn default">Delete</a>
         </div>
