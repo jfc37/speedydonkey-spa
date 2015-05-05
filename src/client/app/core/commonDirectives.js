@@ -24,7 +24,7 @@
             },
             link: function(scope, element, attrs, ngModel){
                 if (attrs.format === 'from now') {
-                    scope.display = moment(scope.ngModel).fromNow();
+                    scope.display = moment(scope.ngModel).utc().fromNow();
                     return;
                 }
 
@@ -36,7 +36,7 @@
                 } else if (attrs.format === 'short date') {
                     format = 'DD/MM';
                 }
-                scope.display = moment(scope.ngModel).format(format);
+                scope.display = moment(scope.ngModel).utc().format(format);
             }
         };
         return directive;
@@ -173,21 +173,7 @@
         var directive = {
             template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">\
                         <label ng-show="displayName">{{displayName}}</label>\
-                        <div class="dropdown">\
-                          <a class="dropdown-toggle" id="{{name}}" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);">\
-                            <div class="input-group">\
-                                <input type="text"\
-                                    class="form-control"\
-                                    data-ng-model="ngModel"\
-                                    required="{{required}}"\
-                                    placeholder="{{displayName}}">\
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>\
-                            </div>\
-                          </a>\
-                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">\
-                            <datetimepicker data-ng-model="ngModel" data-datetimepicker-config="{ dropdownSelector: &apos;#{{name}}&apos; }"/>\
-                          </ul>\
-                        </div>\
+                        <datetimepicker show-weeks="true" hour-step="1" minute-step="15" ng-model="ngModel" show-meridian="true" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>\
                         <span class="help-block has-error">\
                             <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>\
                         </span>\
@@ -276,7 +262,7 @@
                 dataservice.getAllTeachers().then(function (teachers) {
                     scope.teachers = teachers;
                 });
-                if (!scope.ngModel){
+                if (!scope.ngModel || !(scope.ngModel instanceof Array)){
                     scope.ngModel = [];
                 }
             }
