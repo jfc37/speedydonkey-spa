@@ -48,13 +48,18 @@
         $scope.vm = {};
         $scope.vm.submitText = 'Add';
         $scope.vm.cancelText = 'Cancel';
+        $scope.vm.level = {
+            teachers: []
+        };
 
         $scope.vm.submit = function(form) {
             manageLevelsService.create($scope.vm.level).then(function (createdLevel){
                 logger.success('New level created');
                 $scope.$parent.vm.levels.push(createdLevel);
                 $scope.vm.addingNew = false;
-                $scope.vm.level = {};
+                $scope.vm.level = {
+                    teachers: []
+                };
                 $scope.form.$setUntouched();
             }, function(errors) {
                 validationService.applyServerSideErrors(form, errors);

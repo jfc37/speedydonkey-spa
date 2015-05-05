@@ -177,7 +177,6 @@
                         <span class="help-block has-error">\
                             <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>\
                         </span>\
-                        <div>model={{ngModel}}</div>\
                         </div>',
             require: ['^form','ngModel'],
             scope: {
@@ -263,7 +262,7 @@
                 dataservice.getAllTeachers().then(function (teachers) {
                     scope.teachers = teachers;
                 });
-                if (!scope.ngModel){
+                if (!scope.ngModel || !(scope.ngModel instanceof Array)){
                     scope.ngModel = [];
                 }
             }
