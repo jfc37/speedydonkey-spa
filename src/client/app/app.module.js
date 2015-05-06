@@ -37,6 +37,7 @@
         'app.manageBlocks',
         'app.manageClasses',
         'app.manageTeachers',
+        'app.manageStudents',
         'app.adminReports',
         'app.reportTeacherHours',
     ]);
