@@ -18,8 +18,10 @@
             postUser : postUser,
             putCurrentUser: putCurrentUser,
             getUser: getUser,
+            getUsers: getUsers,
             searchUser: searchUser,
             getCurrentUser: getCurrentUser,
+            deleteUser: deleteUser,
 
             getCurrentUserSchedule: getCurrentUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
@@ -99,6 +101,11 @@
             return $http.get(url);
         }
 
+        function getUsers() {
+            var url = baseUrl + 'users';
+            return $http.get(url);
+        }
+
         function searchUser(search) {
             var url = baseUrl + 'users?q=' + search;
 
@@ -108,6 +115,11 @@
         function getCurrentUser() {
             var url = baseUrl + 'users/current';
             return $http.get(url);
+        }
+
+        function deleteUser(userId) {
+            var url = baseUrl + 'users/' + userId;
+            return $http.delete(url);
         }
 
         function getCurrentUserSchedule() {
