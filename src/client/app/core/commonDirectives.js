@@ -173,7 +173,7 @@
         var directive = {
             template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">\
                         <label ng-show="displayName">{{displayName}}</label>\
-                        <datetimepicker show-weeks="true" hour-step="1" minute-step="15" ng-model="ngModel" show-meridian="true" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>\
+                        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="ngModel" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>\
                         <span class="help-block has-error">\
                             <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>\
                         </span>\
