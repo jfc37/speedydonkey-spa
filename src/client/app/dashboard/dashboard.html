@@ -16,7 +16,7 @@
                     </div>
                     <div class="panel-body" ng-hide="vm.isScheduleLoading">
                       <div ng-show="vm.upcomingSchedule.length === 0">
-                          Nothing scheduled.
+                          Nothing scheduled for this week.
                       </div>
                       <div ng-show="vm.upcomingSchedule.length > 0" ng-repeat="event in vm.upcomingSchedule">
                           {{event.name}} - <display-date format='short date' ng-model='event.start_time'></display-date>

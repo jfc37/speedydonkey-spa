@@ -61,13 +61,13 @@
 
             return $q(function (resolve, revoke) {
                 dataservice.getCurrentUser().then(function (user) {
-                    userIdentity.isLoggedIn = true;
-                    userIdentity.username = email;
-
-                    userIdentity.userId = user.id;
-                    userIdentity.name = user.full_name;
 
                     dataservice.getCurrentUserClaims().then(function (claims) {
+                        userIdentity.isLoggedIn = true;
+                        userIdentity.username = email;
+
+                        userIdentity.userId = user.id;
+                        userIdentity.name = user.full_name;
                         userIdentity.claims = claims;
 
                         $cookieStore.put('authdata', encoded);
@@ -75,6 +75,11 @@
 
                         resolve();
                     }, function () {
+                        userIdentity.isLoggedIn = true;
+                        userIdentity.username = email;
+
+                        userIdentity.userId = user.id;
+                        userIdentity.name = user.full_name;
                         userIdentity.claims = [];
                         resolve();
                     });
