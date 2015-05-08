@@ -15,7 +15,8 @@
             deleteLevel: deleteLevel,
             deleteBlock: deleteBlock,
             deleteClass: deleteClass,
-            deleteTeacher: deleteTeacher
+            deleteTeacher: deleteTeacher,
+            deleteUser: deleteUser
         };
 
         function studentUnattendedClass(classId, studentId){
@@ -52,6 +53,12 @@
         function deleteTeacher(id){
             return $q(function (resolve, revoke) {
                 apiCaller.deleteTeacher(id).then(resolve, revoke);
+            });
+        }
+
+        function deleteUser(id){
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteUser(id).then(resolve, revoke);
             });
         }
 

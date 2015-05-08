@@ -15,6 +15,7 @@
             searchForUser: searchForUser,
             searchForUserNew: searchForUserNew,
             getCurrentUser: getCurrentUser,
+            getAllUsers: getAllUsers,
 
             getCurrentUserSchedule: getCurrentUserSchedule,
             getCurrentUserCurrentPasses: getCurrentUserCurrentPasses,
@@ -81,6 +82,14 @@
         function getCurrentUser() {
             return $q(function (resolve, revoke) {
                 apiCaller.getCurrentUser().then(function (response) {
+                    resolve(response.data);
+                }, revoke);
+            });
+        }
+
+        function getAllUsers() {
+            return $q(function (resolve, revoke) {
+                apiCaller.getUsers().then(function (response) {
                     resolve(response.data);
                 }, revoke);
             });
