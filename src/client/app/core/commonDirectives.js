@@ -81,7 +81,7 @@
 
     function passSummary() {
         var directive = {
-            template: '{{passTypeText}} - {{validnessText}}',
+            template: '{{passTypeText}} - {{passNumber}} - {{validnessText}}',
             require: 'ngModel',
             scope: {
               ngModel: '='
@@ -90,6 +90,7 @@
                 scope.passType = scope.ngModel.pass_type;
                 scope.paymentStatus = scope.ngModel.payment_status;
                 scope.validness = scope.ngModel.valid;
+                scope.passNumber = scope.ngModel.pass_number;
 
                 scope.passTypeText = getPassTypeText(scope.ngModel.pass_type);
                 scope.validnessText = getValidnessText(scope.ngModel);
