@@ -5,10 +5,10 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = ['$q', 'dashboardService', 'logger', 'authService'];
+    Dashboard.$inject = ['$q', 'dashboardService', 'logger', 'authService', 'config'];
 
     /* @ngInject */
-    function Dashboard($q, dashboardService, logger, authService) {
+    function Dashboard($q, dashboardService, logger, authService, config) {
         /*jshint validthis: true */
         var vm = this;
         vm.upcomingSchedule = [];
@@ -18,6 +18,7 @@
         vm.arePassesLoading = true;
         vm.areClassesLoading = true;
         vm.canPerformClassCheckIn = authService.hasClaim('CheckStudentIntoClass');
+        vm.companyName = config.appTitle;
 
         activate();
 
