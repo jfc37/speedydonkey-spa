@@ -40,6 +40,7 @@
         'app.manageStudents',
         'app.adminReports',
         'app.reportTeacherHours',
+        'app.reportProfit',
     ]);
 
 })();
