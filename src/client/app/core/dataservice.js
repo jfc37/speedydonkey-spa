@@ -37,7 +37,9 @@
 
             getAllActiveClasses: getAllActiveClasses,
 
-            getAllTeachers: getAllTeachers
+            getAllTeachers: getAllTeachers,
+
+            getProfitReport: getProfitReport
         };
 
         return service;
@@ -235,6 +237,16 @@
         function getAllTeachers() {
             return $q(function (resolve, reject) {
                 apiCaller.getTeacher().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getProfitReport(starting, ending) {
+            return $q(function (resolve, reject) {
+                apiCaller.getProfitReport(starting, ending).then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
