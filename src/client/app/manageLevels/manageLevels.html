@@ -3,20 +3,33 @@
     <div class="container">
      <div class="row">
       <h1>Manage Levels <a ng-click="vm.generateForAllLevels()" class="btn btn-default">Generate Blocks For All</a></h1>
-       <div ng-repeat="level in vm.levels" ng-controller="ManageLevel as vm" ng-init="vm.level = level">
-        <div>
-          {{vm.level.name}} 
-          <a ng-hide="vm.updating" ng-click="vm.startUpdating()" class="btn btn-default">Manage</a>
-          <a ng-click="vm.generateBlock()" class="btn btn-default">Generate Block</a>
-          <a ng-click="vm.delete()" class="btn default">Delete</a>
-        </div>
-        <div ng-show="vm.updating">
-          <form novalidate name="form">
-            <div ng-include src="'level.html'">
-            </div>
-          </form>
-        </div>
-      </div>
+      
+      <table class="table table-hover">
+        <thead>
+          <th>Name</th>
+          <th></th>
+        </thead>
+        <tbody ng-repeat="level in vm.levels" ng-controller="ManageLevel as vm" ng-init="vm.level = level">
+          <tr>
+            <td>{{vm.level.name}}</td>
+            <td>
+              <div ng-hide="vm.updating">
+                <a ng-click="vm.startUpdating()" class="btn btn-link">Manage</a>
+                <a ng-click="vm.generateBlock()" class="btn btn-link">Generate Block</a>
+                <a ng-click="vm.delete()" class="btn btn-link">Delete</a>
+              </div>
+            </td>
+          </tr>
+          <tr ng-show="vm.updating">
+            <td colspan="2">
+              <form novalidate name="form">
+                <div ng-include src="'level.html'">
+                </div>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div ng-controller="NewLevel" class="row">
