@@ -14,6 +14,7 @@
 
         vm.title = 'Login';
         vm.forgottenPasswordUrl = '#/forgottenPassword';
+        vm.registerUrl = '#/register/user';
         vm.company = config.appTitle;
         vm.submit = function(form){
             authService.login(vm.email, vm.password).then(function() {
