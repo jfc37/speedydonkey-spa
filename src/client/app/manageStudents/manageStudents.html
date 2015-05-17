@@ -3,9 +3,18 @@
     <div class="container">
      <div class="row">
        <h1>Manage Students</h1>
-       <div ng-repeat="student in vm.students">
-        {{student.full_name}} - {{student.email}} <a ng-hide="true" class="btn btn-link" ng-click="vm.remove(student.id)" class="btn default">Remove as student</a>
-      </div>
+       <table class="table table-hover">
+       	<thead>
+       		<th>Name</th>
+       		<th>Email</th>
+       	</thead>
+       	<tbody>
+       		<tr ng-repeat="student in vm.students">
+       			<td>{{student.full_name}}</td>
+       			<td>{{student.email}}</td>
+       		</tr>
+       	</tbody>
+       </table>
     </div>
   </div>
 </section>

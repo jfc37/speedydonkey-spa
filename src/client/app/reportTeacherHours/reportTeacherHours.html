@@ -8,9 +8,20 @@
                 <common-input ng-model="vm.ending" type="date" name="ending" display-name="To"></common-input>
                 <a ng-click="vm.getHours()" class="btn btn-primary">Update Date Range</a>
               </form>
-              <div ng-repeat="teacherHour in vm.teacherHours">
-                {{teacherHour.full_name}} - {{teacherHour.soloClasses.length}} solo classes - {{teacherHour.partnerClasses.length}} partnered classes
-              </div>
+              <table class="table table-hover">
+                <thead>
+                  <th>Name</th>
+                  <th>Solo Classes</th>
+                  <th>Partnered Classes</th>
+                </thead>
+                <tbody ng-repeat="teacherHour in vm.teacherHours">
+                  <tr>
+                    <td>{{teacherHour.full_name}}</td>
+                    <td>{{teacherHour.soloClasses.length}}</td>
+                    <td>{{teacherHour.partnerClasses.length}}</td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
         </div>
     </section>

@@ -65,7 +65,9 @@
 
             postTeacher: postTeacher,
             getTeacher: getTeacher,
-            deleteTeacher: deleteTeacher
+            deleteTeacher: deleteTeacher,
+
+            getProfitReport: getProfitReport
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -292,6 +294,11 @@
         function deleteTeacher(userId) {
             var url = baseUrl + 'teachers/' + userId;
             return $http.delete(url);
+        }
+
+        function getProfitReport(starting, ending) {
+            var url = baseUrl + 'report/profit?from=' + starting + '&to=' + ending;
+            return $http.get(url);
         }
     }
 })();

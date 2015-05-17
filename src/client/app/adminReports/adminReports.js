@@ -12,5 +12,6 @@
         /*jshint validthis: true */
         var vm = this;
         vm.teacherClassHoursUrl = '#/admin/reports/teacher_hours';
+        vm.profitReportUrl = '#/admin/reports/profit';
     }
 })();
