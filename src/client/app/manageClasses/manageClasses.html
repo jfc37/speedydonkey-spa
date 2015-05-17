@@ -3,19 +3,33 @@
     <div class="container">
      <div class="row">
       <h1>Manage Classes</h1>
-       <div ng-repeat="class in vm.classes" ng-controller="ManageClass as vm" ng-init="vm.class = class">
-        <div>
-          {{vm.class.name}}  starting <display-date format="short date" ng-model="vm.class.start_time"></display-date>
-          <a ng-hide="vm.updating" ng-click="vm.startUpdating()" class="btn btn-default">Manage</a>
-          <a ng-click="vm.delete()" class="btn default">Delete</a>
-        </div>
-        <div ng-show="vm.updating">
-          <form novalidate name="form">
-            <div ng-include src="'class.html'">
-            </div>
-          </form>
-        </div>
-      </div>
+      <table class="table table-hover">
+        <thead>
+          <th>Name</th>
+          <th>Starting</th>
+          <th></th>
+        </thead>
+        <tbody ng-repeat="class in vm.classes" ng-controller="ManageClass as vm" ng-init="vm.class = class">
+          <tr>
+            <td>{{vm.class.name}}</td>
+            <td><display-date format="short date" ng-model="vm.class.start_time"></display-date></td>
+            <td>
+              <div ng-hide="vm.updating">
+                <a ng-click="vm.startUpdating()" class="btn btn-default">Manage</a>
+                <a ng-click="vm.delete()" class="btn default">Delete</a>
+              </div>
+            </td>
+          </tr>
+          <tr ng-show="vm.updating">
+            <td colspan="3">
+              <form novalidate name="form">
+                <div ng-include src="'class.html'">
+                </div>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
