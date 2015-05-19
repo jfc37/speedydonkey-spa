@@ -20,7 +20,8 @@
                     title: 'manageLevels',
                     controller: 'ManageLevels',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageLevels/manageLevels.html'
+                    templateUrl: 'app/manageLevels/manageLevels.html',
+                    claim: 'Admin'
                 }
             }
         ];

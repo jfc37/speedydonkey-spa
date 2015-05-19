@@ -20,7 +20,8 @@
                     title: 'managePassOptions',
                     controller: 'ManagePassOptions',
                     controllerAs: 'vm',
-                    templateUrl: 'app/managePassOptions/managePassOptions.html'
+                    templateUrl: 'app/managePassOptions/managePassOptions.html',
+                    claim: 'Admin'
                 }
             }
         ];

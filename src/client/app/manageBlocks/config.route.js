@@ -20,7 +20,8 @@
                     title: 'manageBlocks',
                     controller: 'ManageBlocks',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageBlocks/manageBlocks.html'
+                    templateUrl: 'app/manageBlocks/manageBlocks.html',
+                    claim: 'Admin'
                 }
             }
         ];

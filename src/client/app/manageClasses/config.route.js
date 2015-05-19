@@ -20,7 +20,8 @@
                     title: 'manageClasses',
                     controller: 'ManageClasses',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageClasses/manageClasses.html'
+                    templateUrl: 'app/manageClasses/manageClasses.html',
+                    claim: 'Admin'
                 }
             }
         ];
