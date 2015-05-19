@@ -35,6 +35,8 @@
                     format = 'dddd MMMM D';
                 } else if (attrs.format === 'short date') {
                     format = 'DD/MM';
+                } else if (attrs.format === 'time and day') {
+                    format = 'dddd h:mmA';
                 }
                 scope.display = moment(scope.ngModel).utc().format(format);
             }
@@ -132,19 +134,19 @@
 
     function commonInput() {
         var directive = {
-            template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">\
-                            <label ng-show="displayName">{{displayName}}</label>\
-                            <input class="form-control"\
-                            id="{{name}}"\
-                            name="{{name}}"\
-                            type="{{type}}"\
-                            placeholder="{{displayName}}"\
-                            ng-model="ngModel"\
-                            required="{{required}}"/>\
-                            <span class="help-block has-error">\
-                                <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>\
-                            </span>\
-                        </div>',
+            template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">'+
+                            '<label ng-show="displayName">{{displayName}}</label>'+
+                            '<input class="form-control"'+
+                            'id="{{name}}"'+
+                            'name="{{name}}"'+
+                            'type="{{type}}"'+
+                            'placeholder="{{displayName}}"'+
+                            'ng-model="ngModel"'+
+                            'required="{{required}}"/>'+
+                            '<span class="help-block has-error">'+
+                            '    <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>'+
+                            '</span>'+
+                        '</div>',
             require: ['^form','ngModel'],
             scope: {
               ngModel: '='
@@ -172,13 +174,13 @@
 
     function commonDateTimeInput() {
         var directive = {
-            template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">\
-                        <label ng-show="displayName">{{displayName}}</label>\
-                        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="ngModel" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>\
-                        <span class="help-block has-error">\
-                            <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>\
-                        </span>\
-                        </div>',
+            template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">'+
+                        '<label ng-show="displayName">{{displayName}}</label>'+
+                        '<datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="ngModel" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>'+
+                        '<span class="help-block has-error">'+
+                        '    <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>'+
+                        '</span>'+
+                        '</div>',
             require: ['^form','ngModel'],
             scope: {
               ngModel: '='
@@ -244,16 +246,16 @@
 
     function teacherDropdown(dataservice) {
         var directive = {
-            template: '<div class="form-group col-xs-12">\
-                        <select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[0]">\
-                            <option value="">Please select the primary teacher</option>\
-                        </select>\
-                        </div>\
-                        <div class="form-group col-xs-12">\
-                        <select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[1]">\
-                            <option value="">Please select the secondary teacher (optional)</option>\
-                        </select>\
-                        </div>',
+            template: '<div class="form-group col-xs-12">'+
+                        '<select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[0]">'+
+                        '    <option value="">Please select the primary teacher</option>'+
+                        '</select>'+
+                        '</div>'+
+                        '<div class="form-group col-xs-12">'+
+                        '<select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[1]">'+
+                        '    <option value="">Please select the secondary teacher (optional)</option>'+
+                        '</select>'+
+                        '</div>',
             require: ['ngModel'],
             scope: {
               ngModel: '='
