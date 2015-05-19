@@ -17,7 +17,7 @@
         vm.isScheduleLoading = true;
         vm.arePassesLoading = true;
         vm.areClassesLoading = true;
-        vm.canPerformClassCheckIn = authService.hasClaim('CheckStudentIntoClass');
+        vm.canPerformClassCheckIn = authService.hasClaim('Teacher');
         vm.companyName = config.appTitle;
 
         activate();

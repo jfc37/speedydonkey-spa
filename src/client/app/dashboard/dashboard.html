@@ -19,7 +19,7 @@
                           Nothing scheduled for this week.
                       </div>
                       <div ng-show="vm.upcomingSchedule.length > 0" ng-repeat="event in vm.upcomingSchedule">
-                          {{event.name}} - <display-date format='short date' ng-model='event.start_time'></display-date>
+                          {{event.name}} | <display-date format='time and day' ng-model='event.start_time'></display-date>
                       </div>
                     </div>
                 </div>

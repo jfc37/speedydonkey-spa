@@ -35,6 +35,8 @@
                     format = 'dddd MMMM D';
                 } else if (attrs.format === 'short date') {
                     format = 'DD/MM';
+                } else if (attrs.format === 'time and day') {
+                    format = 'dddd h:mmA';
                 }
                 scope.display = moment(scope.ngModel).utc().format(format);
             }

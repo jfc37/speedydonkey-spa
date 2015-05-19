@@ -897,6 +897,8 @@
                     format = 'dddd MMMM D';
                 } else if (attrs.format === 'short date') {
                     format = 'DD/MM';
+                } else if (attrs.format === 'time and day') {
+                    format = 'dddd h:mmA';
                 }
                 scope.display = moment(scope.ngModel).utc().format(format);
             }
@@ -1930,7 +1932,7 @@
         vm.isScheduleLoading = true;
         vm.arePassesLoading = true;
         vm.areClassesLoading = true;
-        vm.canPerformClassCheckIn = authService.hasClaim('CheckStudentIntoClass');
+        vm.canPerformClassCheckIn = authService.hasClaim('Teacher');
         vm.companyName = config.appTitle;
 
         activate();

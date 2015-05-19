@@ -21,7 +21,7 @@
                     controller: 'ClassCheckIn',
                     controllerAs: 'vm',
                     title: 'classCheckIn',
-                    claim: 'CheckStudentIntoClass'
+                    claim: 'Teacher'
                 }
             }
         ];

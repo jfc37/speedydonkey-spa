@@ -1172,7 +1172,7 @@
                     controller: 'ClassCheckIn',
                     controllerAs: 'vm',
                     title: 'classCheckIn',
-                    claim: 'CheckStudentIntoClass'
+                    claim: 'Teacher'
                 }
             }
         ];
@@ -1424,6 +1424,8 @@
                     format = 'dddd MMMM D';
                 } else if (attrs.format === 'short date') {
                     format = 'DD/MM';
+                } else if (attrs.format === 'time and day') {
+                    format = 'dddd h:mmA';
                 }
                 scope.display = moment(scope.ngModel).utc().format(format);
             }
@@ -2514,7 +2516,7 @@
         vm.isScheduleLoading = true;
         vm.arePassesLoading = true;
         vm.areClassesLoading = true;
-        vm.canPerformClassCheckIn = authService.hasClaim('CheckStudentIntoClass');
+        vm.canPerformClassCheckIn = authService.hasClaim('Teacher');
         vm.companyName = config.appTitle;
 
         activate();
@@ -2897,7 +2899,8 @@
                     title: 'manageBlocks',
                     controller: 'ManageBlocks',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageBlocks/manageBlocks.html'
+                    templateUrl: 'app/manageBlocks/manageBlocks.html',
+                    claim: 'Admin'
                 }
             }
         ];
@@ -3054,7 +3057,8 @@
                     title: 'manageClasses',
                     controller: 'ManageClasses',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageClasses/manageClasses.html'
+                    templateUrl: 'app/manageClasses/manageClasses.html',
+                    claim: 'Admin'
                 }
             }
         ];
@@ -3211,7 +3215,8 @@
                     title: 'manageLevels',
                     controller: 'ManageLevels',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageLevels/manageLevels.html'
+                    templateUrl: 'app/manageLevels/manageLevels.html',
+                    claim: 'Admin'
                 }
             }
         ];
@@ -3444,7 +3449,8 @@
                     title: 'managePassOptions',
                     controller: 'ManagePassOptions',
                     controllerAs: 'vm',
-                    templateUrl: 'app/managePassOptions/managePassOptions.html'
+                    templateUrl: 'app/managePassOptions/managePassOptions.html',
+                    claim: 'Admin'
                 }
             }
         ];
@@ -3915,7 +3921,8 @@
                     title: 'manageUser',
                     controller: 'ManageUser',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageUser/manageUser.html'
+                    templateUrl: 'app/manageUser/manageUser.html',
+                    claim: 'Admin'
                 }
             }
         ];
@@ -4248,7 +4255,8 @@
                     title: 'reportTeacherHours',
                     controller: 'ReportTeacherHours',
                     controllerAs: 'vm',
-                    templateUrl: 'app/reportTeacherHours/reportTeacherHours.html'
+                    templateUrl: 'app/reportTeacherHours/reportTeacherHours.html',
+                    claim: 'Admin'
                 }
             }
         ];
