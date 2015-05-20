@@ -24,7 +24,8 @@
             },
             link: function(scope, element, attrs, ngModel){
                 if (attrs.format === 'from now') {
-                    scope.display = moment(scope.ngModel).utc().fromNow();
+                    var localDate = moment.utc(scope.ngModel).toDate();
+                    scope.display = moment(localDate).fromNow();
                     return;
                 }
 
@@ -38,7 +39,8 @@
                 } else if (attrs.format === 'time and day') {
                     format = 'dddd h:mmA';
                 }
-                scope.display = moment(scope.ngModel).utc().format(format);
+                var local = moment.utc(scope.ngModel).toDate();
+                scope.display = moment(local).format(format);
             }
         };
         return directive;

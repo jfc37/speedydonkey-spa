@@ -1413,7 +1413,8 @@
             },
             link: function(scope, element, attrs, ngModel){
                 if (attrs.format === 'from now') {
-                    scope.display = moment(scope.ngModel).utc().fromNow();
+                    var localDate = moment.utc(scope.ngModel).toDate();
+                    scope.display = moment(localDate).fromNow();
                     return;
                 }
 
@@ -1424,8 +1425,11 @@
                     format = 'dddd MMMM D';
                 } else if (attrs.format === 'short date') {
                     format = 'DD/MM';
+                } else if (attrs.format === 'time and day') {
+                    format = 'dddd h:mmA';
                 }
-                scope.display = moment(scope.ngModel).utc().format(format);
+                var local = moment.utc(scope.ngModel).toDate();
+                scope.display = moment(local).format(format);
             }
         };
         return directive;
@@ -1903,7 +1907,8 @@
             deleteBlock: deleteBlock,
             deleteClass: deleteClass,
             deleteTeacher: deleteTeacher,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            deletePass: deletePass
         };
 
         function studentUnattendedClass(classId, studentId){
@@ -1946,6 +1951,12 @@
         function deleteUser(id){
             return $q(function (resolve, revoke) {
                 apiCaller.deleteUser(id).then(resolve, revoke);
+            });
+        }
+
+        function deletePass(id){
+            return $q(function (resolve, revoke) {
+                apiCaller.deletePass(id).then(resolve, revoke);
             });
         }
 
@@ -2316,8 +2327,9 @@
 
         function getAllActiveClasses() {
             return $q(function (resolve, reject) {
-                var yesterday = moment().add('day', -1).format('YYYY-MM-DD');
-                apiCaller.searchClass('endTime_gt_' + yesterday + ',take_10').then(function (response) {
+                var today = moment().format('YYYY-MM-DD');
+                var nextWeek = moment().add('days', 7).format('YYYY-MM-DD');
+                apiCaller.searchClass('endTime_gt_' + today + ',endTime_lt_' + nextWeek + ',orderby_starttime').then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
@@ -2514,7 +2526,7 @@
         vm.isScheduleLoading = true;
         vm.arePassesLoading = true;
         vm.areClassesLoading = true;
-        vm.canPerformClassCheckIn = authService.hasClaim('CheckStudentIntoClass');
+        vm.canPerformClassCheckIn = authService.hasClaim('Teacher');
         vm.companyName = config.appTitle;
 
         activate();
@@ -3174,6 +3186,9 @@
         function getClasses() {
             return $q(function (resolve, revoke) {
                 dataservice.getAllActiveClasses().then(function (classes) {
+                    classes.forEach(function (theClass) {
+                        theClass.block = undefined;
+                    });
                     resolve(classes);
                 }, revoke);
             });
@@ -3686,6 +3701,24 @@
             });
         };
 
+        vm.getStudentInfo = function(student) {
+            if (student.studentInfo === undefined) {
+                manageStudentsService.getStudentInfo(student.id).then(function(studentInfo){
+                    student.studentInfo = studentInfo;
+                });
+            }
+            student.show = !student.show;
+        };
+
+        vm.deletePass = function(student, pass) {
+            manageStudentsService.deletePass(pass.id).then(function(){
+                student.studentInfo.passes.remove(pass);
+                logger.success('Pass deleted');
+            }, function (){
+                logger.error('Problem deleting pass');
+            });
+        };
+
         activate();
 
         function activate() {
@@ -3728,7 +3761,9 @@
 
         var service = {
             deleteStudent: deleteStudent,
-            getStudents: getStudents
+            getStudents: getStudents,
+            getStudentInfo: getStudentInfo,
+            deletePass: deletePass
         };
 
         function deleteStudent(id) {
@@ -3742,6 +3777,22 @@
                 dataservice.getAllUsers().then(function (students) {
                     resolve(students);
                 }, revoke);
+            });
+        }
+
+        function getStudentInfo(id) {
+            return $q(function (resolve, revoke) {
+                dataservice.getUserCurrentPasses(id).then(function (passes) {
+                    resolve({passes: passes});
+                }, function () {
+                    resolve({passes: []});
+                });
+            });
+        }
+
+        function deletePass(id) {
+            return $q(function (resolve, revoke) {
+                dataDeleteService.deletePass(id).then(resolve, revoke);
             });
         }
 
@@ -4618,6 +4669,7 @@
             deleteClassAttendance: deleteClassAttendance,
 
             putPass: putPass,
+            deletePass: deletePass,
 
             postPassOption: postPassOption,
             getPassOption: getPassOption,
@@ -4789,6 +4841,11 @@
         function putPass(pass) {
             var url = baseUrl + 'passes/' + pass.id;
             return $http.put(url, pass);
+        }
+        
+        function deletePass(id) {
+            var url = baseUrl + 'passes/' + id;
+            return $http.delete(url);
         }
 
         function postPassOption(passOption) {
