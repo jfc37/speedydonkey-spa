@@ -35,6 +35,8 @@
 
 <script type="text/ng-template" id="block.html">
   <common-input ng-model="vm.block.name" name="name" display-name="Name" type="text" required="true"></common-input>
+  <common-date-time-input ng-model="vm.block.start_date" name="start_date" display-name="Start Date" required="true"></common-date-time-input>
+  <common-date-time-input ng-model="vm.block.end_date" name="end_date" display-name="End Date" required="true"></common-date-time-input>
   <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
   <a class="btn btn-default"ng-click="vm.cancel(form)">{{vm.cancelText}}</a>
   <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="vm.submit(form)">{{vm.submitText}}</a>

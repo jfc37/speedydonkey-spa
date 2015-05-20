@@ -43,6 +43,7 @@
             deleteClassAttendance: deleteClassAttendance,
 
             putPass: putPass,
+            deletePass: deletePass,
 
             postPassOption: postPassOption,
             getPassOption: getPassOption,
@@ -214,6 +215,11 @@
         function putPass(pass) {
             var url = baseUrl + 'passes/' + pass.id;
             return $http.put(url, pass);
+        }
+        
+        function deletePass(id) {
+            var url = baseUrl + 'passes/' + id;
+            return $http.delete(url);
         }
 
         function postPassOption(passOption) {
