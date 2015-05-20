@@ -33,6 +33,9 @@
         function getClasses() {
             return $q(function (resolve, revoke) {
                 dataservice.getAllActiveClasses().then(function (classes) {
+                    classes.forEach(function (theClass) {
+                        theClass.block = undefined;
+                    });
                     resolve(classes);
                 }, revoke);
             });

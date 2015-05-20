@@ -6,13 +6,38 @@
        <table class="table table-hover">
        	<thead>
        		<th>Name</th>
-       		<th>Email</th>
+          <th>Email</th>
+       		<th></th>
        	</thead>
-       	<tbody>
-       		<tr ng-repeat="student in vm.students">
+       	<tbody ng-repeat="student in vm.students">
+       		<tr ng-click="vm.getStudentInfo(student)">
        			<td>{{student.full_name}}</td>
        			<td>{{student.email}}</td>
+            <td><a ng-click="vm.remove(student.id)" class="btn btn-link">Delete</a></td>
        		</tr>
+          <tr ng-show="student.show">
+            <td colspan="3">
+              <div>
+                <h3>Passes</h3>
+                <table class="table table-hover">
+                  <thead>
+                    <th>Pass Number</th>
+                    <th>Name</th>
+                    <th>Payment Status</th>
+                    <th></th>
+                  </thead>
+                  <tbody ng-repeat="pass in student.studentInfo.passes">
+                    <tr>
+                      <td>{{pass.pass_number}}</td>
+                      <td>{{pass.description}}</td>
+                      <td>{{pass.payment_status}}</td>
+                      <td><a ng-click="vm.deletePass(student, pass)" class="btn btn-link">Delete</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
        	</tbody>
        </table>
     </div>

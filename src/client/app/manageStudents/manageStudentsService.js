@@ -12,7 +12,9 @@
 
         var service = {
             deleteStudent: deleteStudent,
-            getStudents: getStudents
+            getStudents: getStudents,
+            getStudentInfo: getStudentInfo,
+            deletePass: deletePass
         };
 
         function deleteStudent(id) {
@@ -26,6 +28,22 @@
                 dataservice.getAllUsers().then(function (students) {
                     resolve(students);
                 }, revoke);
+            });
+        }
+
+        function getStudentInfo(id) {
+            return $q(function (resolve, revoke) {
+                dataservice.getUserCurrentPasses(id).then(function (passes) {
+                    resolve({passes: passes});
+                }, function () {
+                    resolve({passes: []});
+                });
+            });
+        }
+
+        function deletePass(id) {
+            return $q(function (resolve, revoke) {
+                dataDeleteService.deletePass(id).then(resolve, revoke);
             });
         }
 
