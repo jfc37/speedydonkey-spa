@@ -20,7 +20,8 @@
                     title: 'reportTeacherHours',
                     controller: 'ReportTeacherHours',
                     controllerAs: 'vm',
-                    templateUrl: 'app/reportTeacherHours/reportTeacherHours.html'
+                    templateUrl: 'app/reportTeacherHours/reportTeacherHours.html',
+                    claim: 'Admin'
                 }
             }
         ];

@@ -20,7 +20,8 @@
                     title: 'manageUser',
                     controller: 'ManageUser',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageUser/manageUser.html'
+                    templateUrl: 'app/manageUser/manageUser.html',
+                    claim: 'Admin'
                 }
             }
         ];
