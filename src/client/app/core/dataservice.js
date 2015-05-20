@@ -225,8 +225,9 @@
 
         function getAllActiveClasses() {
             return $q(function (resolve, reject) {
-                var yesterday = moment().add('day', -1).format('YYYY-MM-DD');
-                apiCaller.searchClass('endTime_gt_' + yesterday + ',take_10').then(function (response) {
+                var today = moment().format('YYYY-MM-DD');
+                var nextWeek = moment().add('days', 7).format('YYYY-MM-DD');
+                apiCaller.searchClass('endTime_gt_' + today + ',endTime_lt_' + nextWeek + ',orderby_starttime').then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);
