@@ -99,7 +99,7 @@
             var promises = [blockEnrolmentService.enrol(getSelectedBlocks()), blockEnrolmentService.purchasePass(vm.selectedPass)];
             $q.all(promises).then(function (){
                 routehelper.redirectToRoute('dashboard');
-                logger.success("Enroled in selected blocks");
+                logger.success("Enrolled in selected blocks");
             }, function () {
                 logger.error("Problem with enrolment");
             });
