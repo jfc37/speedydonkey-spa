@@ -169,6 +169,10 @@
                 scope.hasError = function(error) {
                     return scope.getFormElement().$error[error];
                 };
+
+                if (scope.type === 'date') {
+                    scope.ngModel = moment(scope.ngModel).startOf('day').format('YYYY-MM-DD');
+                }
             }
         };
         return directive;

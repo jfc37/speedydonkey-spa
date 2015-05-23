@@ -3,7 +3,8 @@
 
     angular
         .module('app.manageStudents')
-        .factory('manageStudentsService', manageStudentsService);
+        .factory('manageStudentsService', manageStudentsService)
+        .factory('managePassesService', managePassesService);
 
     manageStudentsService.$inject = ['$q', 'logger', 'dataservice', 'dataCreateService', 'dataDeleteService'];
 
@@ -44,6 +45,32 @@
         function deletePass(id) {
             return $q(function (resolve, revoke) {
                 dataDeleteService.deletePass(id).then(resolve, revoke);
+            });
+        }
+
+        return service;
+
+    }
+
+    managePassesService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataDeleteService'];
+
+    /* @ngInject */
+    function managePassesService($q, logger, dataservice, dataUpdateService, dataDeleteService){
+
+        var service = {
+            deletePass: deletePass,
+            updatePass: updatePass
+        };
+
+        function deletePass(id) {
+            return $q(function (resolve, revoke) {
+                dataDeleteService.deletePass(id).then(resolve, revoke);
+            });
+        }
+
+        function updatePass(pass) {
+            return $q(function (resolve, revoke) {
+                dataUpdateService.updatePass(pass).then(resolve, revoke);
             });
         }
 

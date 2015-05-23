@@ -29,10 +29,10 @@
                             <div class="form-group">
                                 <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)">
                                 {{student.full_name}}
-                                  <pass-status ng-model='student' ng-click="openPassSelection = !openPassSelection"></pass-status>
+                                  <pass-status ng-model='student' ng-click="student.openPassSelection = !student.openPassSelection"></pass-status>
                             </div>
 
-                            <div class="panel panel-default" ng-show="openPassSelection">
+                            <div class="panel panel-default" ng-show="student.openPassSelection">
                               <div class="panel-heading">
                                   <h3 class="panel-title">Passes for {{student.full_name}}</h3>
                                 </div>
@@ -53,7 +53,7 @@
                                           {{pass.description}} - ${{pass.cost}}
                                     </label>
                                   </div>
-                                  <button class="btn btn-primary" ng-click="vm.purchaseNewPass(student, selectedPass)">Purchase</button>
+                                  <button ng-disabled="vm.disablePassPurchase" class="btn btn-primary" ng-click="vm.purchaseNewPass(student, selectedPass)">Purchase</button>
                                 </div>
                           </div>
 

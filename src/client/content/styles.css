@@ -196,13 +196,7 @@ small {
     margin: auto;
 }
 
-.navbar .navbar-brand {
-    background: url(../content/images/icon.png) no-repeat left top !important;
-    margin: 0 1em;
-}
-
 .navbar .brand-title {
-    margin-left: 2em;
     color: #FFFFFF;
 }
 
