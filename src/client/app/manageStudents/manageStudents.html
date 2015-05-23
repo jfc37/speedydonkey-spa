@@ -40,7 +40,7 @@
                     <tr ng-show="passUpdating">
                       <td colspan="4">
                         <form novalidate name="form">
-                          <common-input ng-if="pass.pass_type === 'Clip'" ng-model="pass.clips_remaining" name="clips_remaining" display-name="Clips Remaining" type="text" required="true"></common-input>
+                          <common-input ng-if="pass.pass_type === 'Clip'" ng-model="pass.clips_remaining" name="clips_remaining" display-name="Clips Remaining" type="number" required="true"></common-input>
                           <common-input ng-model="pass.start_date" name="start_date" display-name="Start Date" type="date" required="true"></common-input>
                           <common-input ng-model="pass.end_date" name="end_date" display-name="End Date" type="date" required="true"></common-input>
                           </div>
