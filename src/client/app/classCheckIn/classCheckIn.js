@@ -46,23 +46,25 @@
         };
 
         vm.addWalkIn = function () {
-            vm.walkInStudentSelected.attendedClass = true;
-            classCheckInService.getPassesForStudent(vm.walkInStudentSelected).then(function (){
-                classCheckInService.attendenceStatusChanged(vm.walkInStudentSelected).then(function(message) {
+            var addedStudent = vm.walkInStudentSelected;
+            addedStudent.attendedClass = true;
+            classCheckInService.getPassesForStudent(addedStudent).then(function (){
+                classCheckInService.attendenceStatusChanged(addedStudent).then(function(message) {
                     logger.success(message);
                 }, function(message) {
                     logger.error(message);
+                    addedStudent.openPassSelection = true;
                 });
-                vm.students.push(vm.walkInStudentSelected);
+                vm.students.push(addedStudent);
                 vm.walkInStudentSelected = '';
             });
         };
 
         vm.enrolWalkIn = function () {
             classCheckInService.enrolStudent(vm.walkInStudentSelected.id, vm.class.block.id).then(function() {
-                logger.success('Enroled ' + vm.walkInStudentSelected.full_name + ' in the block');
+                logger.success('Enrolled ' + vm.walkInStudentSelected.full_name + ' in the block');
             }, function(message) {
-                logger.error('Problem enroling ' + vm.walkInStudentSelected.full_name + ' in the block...');
+                logger.error('Problem enrolling ' + vm.walkInStudentSelected.full_name + ' in the block...');
             }).then(vm.addWalkIn);
         };
 
@@ -102,10 +104,13 @@
         };
 
         vm.purchaseNewPass = function(student, passOption){
+            vm.disablePassPurchase = true;
             classCheckInService.purchaseNewPass(student, passOption).then(function() {
                 logger.success(student.full_name + ' purchased a new pass!');
+                vm.disablePassPurchase = false;
             },function() {
                 logger.error('Problem purchasing pass...');
+                vm.disablePassPurchase = false;
             });
         };
 
