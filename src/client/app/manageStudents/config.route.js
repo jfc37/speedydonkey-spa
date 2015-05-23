@@ -21,7 +21,7 @@
                     controller: 'ManageStudents',
                     controllerAs: 'vm',
                     templateUrl: 'app/manageStudents/manageStudents.html',
-                    claim: 'Admin'
+                    claim: 'Teacher'
                 }
             }
         ];

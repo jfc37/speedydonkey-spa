@@ -25,7 +25,7 @@
                         nav: 3,
                         content: '<i class="fa fa-cogs"></i> Admin Dashboard'
                     },
-                    claim: 'Admin'
+                    claim: 'Teacher'
                 }
             }
         ];
