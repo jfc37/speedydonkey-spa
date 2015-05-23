@@ -5,12 +5,15 @@
         .module('app.adminDashboard')
         .controller('AdminDashboard', AdminDashboard);
 
-    AdminDashboard.$inject = [];
+    AdminDashboard.$inject = ['authService'];
 
     /* @ngInject */
-    function AdminDashboard() {
+    function AdminDashboard(authService) {
         /*jshint validthis: true */
         var vm = this;
+
+        vm.isAdmin = authService.hasClaim('Admin');
+
         vm.passOptionsUrl = '#/admin/manage/PassOptions';
         vm.levelsUrl = '#/admin/manage/levels';
         vm.blocksUrl = '#/admin/manage/blocks';
