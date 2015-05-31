@@ -135,12 +135,9 @@ echo About to run gulp stuff
 if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
   cd "$DEPLOYMENT_TARGET"
 
-  echo Cleaning NPM cache
-  eval $NPM_CMD cache clean
-
-  echo Installing packages
-  eval $NPM_CMD install
-  exitWithMessageOnError "installing packages failed"
+#  echo Installing packages
+#  eval $NPM_CMD install
+#  exitWithMessageOnError "installing packages failed"
 
   echo Building all the files
   eval $NPM_CMD gulp build
