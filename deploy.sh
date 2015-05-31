@@ -106,9 +106,11 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
+echo Selecting node version
 # 2. Select node version
 selectNodeVersion
 
+echo Installing npm packages
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
@@ -117,6 +119,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd - > /dev/null
 fi
 
+echo Installing bower packages
 # 4. Install bower packages
 if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
   cd "$DEPLOYMENT_TARGET"
@@ -131,10 +134,18 @@ fi
 echo About to run gulp stuff
 if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
   cd "$DEPLOYMENT_TARGET"
+
+  echo Cleaning NPM cache
+  eval $NPM_CMD cache clean
+
+  echo Installing gulp packages
   eval $NPM_CMD install gulp
   exitWithMessageOnError "installing gulp failed"
   ./node_modules/.bin/gulp build
   exitWithMessageOnError "gulp failed"
+
+  echo Building all the files
+  eval $NPM_CMD gulp build
   cd - > /dev/null
 fi
 

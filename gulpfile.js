@@ -9,6 +9,7 @@ var del = require('del');
 var gulp = require('gulp');
 var path = require('path');
 var port = process.env.PORT || config.defaultPort;
+var env = process.env.NODE_ENV || 'dev';
 
 ///////////////////
 
@@ -196,11 +197,11 @@ gulp.task('optimize', ['inject'], function () {
         .src(config.index)
         .pipe($.plumber())
 
-    .pipe($.ga({
+        .pipe($.if(env, $.ga({
             url: 'fullswing.azurewebsites.net',
             uid: 'UA-36895453-2',
             tag: 'body'
-        }))
+        })))
         .pipe($.inject(gulp.src(templateCache, {
             read: false
         }), {
@@ -215,13 +216,13 @@ gulp.task('optimize', ['inject'], function () {
 
     //3rd party js
     .pipe(jsLibFilter)
-        .pipe($.uglify())
+        .pipe($.if(env, $.uglify()))
         .pipe(jsLibFilter.restore())
 
     //app js
     .pipe(jsAppFilter)
         .pipe($.ngAnnotate())
-        .pipe($.uglify())
+        .pipe($.if(env, $.uglify()))
         .pipe(jsAppFilter.restore())
 
     .pipe($.rev())
@@ -246,7 +247,7 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function () {
         subtitle: 'Deployed to the build folder',
         messsage: 'Running gulp serve-build'
     };
-    //del(config.temp);
+    del(config.temp);
     log(msg);
     notify(msg);
 });
