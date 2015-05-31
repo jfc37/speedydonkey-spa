@@ -119,6 +119,17 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd - > /dev/null
 fi
 
+#5. Run gulp
+echo About to run gulp stuff
+if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+cd "$DEPLOYMENT_TARGET"
+
+echo Building all the files from $DEPLOYMENT_TARGET
+eval gulp build
+exitWithMessageOnError "running the build task failed"
+cd - > /dev/null
+fi
+
 echo Installing bower packages
 # 4. Install bower packages
 if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
@@ -130,20 +141,6 @@ if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
   cd - > /dev/null
 fi
 
-#5. Run gulp
-echo About to run gulp stuff
-if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-  cd "$DEPLOYMENT_TARGET"
-
-#  echo Installing packages
-#  eval $NPM_CMD install
-#  exitWithMessageOnError "installing packages failed"
-
-  echo Building all the files
-  eval $NPM_CMD gulp build
-  exitWithMessageOnError "running the build task failed"
-  cd - > /dev/null
-fi
 
 echo Finished running gulp stuff
 
