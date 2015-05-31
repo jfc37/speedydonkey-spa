@@ -1,0 +1,16 @@
+<h4 class="text-center">{{group}}</h4>
+<div class="col-sm-4 col-lg-12" ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'start_date'">
+    <div class="block-item" ng-class="vm.getClassType(block)">
+        <strong>{{block.name}}</strong>
+        <p>
+            <display-date format='time' ng-model='block.start_date'></display-date> -
+            <display-date format='time' ng-model='block.end_date'></display-date>
+        </p>
+        <div class="form-group" ng-hide="block.isEnroled">
+            <b>Enrol</b>
+            <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
+        </div>
+        <div class="form-group" ng-show="block.isEnroled"><b>Already enrolled</b>
+        </div>
+    </div>
+</div>

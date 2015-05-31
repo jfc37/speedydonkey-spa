@@ -77,7 +77,7 @@ selectNodeVersion () {
       NODE_EXE=`cat "$DEPLOYMENT_TEMP/__nodeVersion.tmp"`
       exitWithMessageOnError "getting node version failed"
     fi
-    
+
     if [[ -e "$DEPLOYMENT_TEMP/.tmp" ]]; then
       NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
       exitWithMessageOnError "getting npm version failed"
@@ -133,7 +133,7 @@ if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
   cd "$DEPLOYMENT_TARGET"
   eval $NPM_CMD install gulp
   exitWithMessageOnError "installing gulp failed"
-  ./node_modules/.bin/gulp --no-color
+  ./node_modules/.bin/gulp build
   exitWithMessageOnError "gulp failed"
   cd - > /dev/null
 fi
