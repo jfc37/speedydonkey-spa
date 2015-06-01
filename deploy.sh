@@ -109,9 +109,10 @@ fi
 echo Selecting node version
 # 2. Select node version
 
+echo blah:  NPM_CMD
+echo blah:  $NPM_CMD
 echo npm version:
 eval npm -v
-eval npm update npm -g
 
 selectNodeVersion
 
@@ -120,18 +121,23 @@ selectNodeVersion
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
 
-    eval npm -v
     eval npm update npm -g
     eval npm update npm
-    eval npm -v
+
+
+echo blah:  NPM_CMD
+echo blah:  $NPM_CMD
+echo npm version:
+eval npm -v
 
   echo Cleaning NPM cache
   eval npm cache clean
 
   echo Installing npm packages
-#  eval $NPM_CMD install
 eval npm config set strict-ssl false
-  eval npm install
+#  eval npm install
+eval $NPM_CMD install
+
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
