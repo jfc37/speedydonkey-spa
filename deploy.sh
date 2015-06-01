@@ -122,6 +122,18 @@ eval $NPM_CMD -v
   cd - > /dev/null
 fi
 
+echo Installing bower packages
+# 4. Install bower packages
+if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
+cd "$DEPLOYMENT_TARGET"
+eval $NPM_CMD install bower -g
+eval $NPM_CMD install bower
+exitWithMessageOnError "installing bower failed"
+./node_modules/.bin/bower install
+exitWithMessageOnError "bower failed"
+cd - > /dev/null
+fi
+
 #5. Run gulp
 echo About to run gulp stuff
 if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
@@ -131,8 +143,11 @@ eval $NPM_CMD install gulp
 exitWithMessageOnError "installing gulp failed"
 
 echo gonna run test
+echo one
 eval gulp -v
+echo two
 eval ./node_modules/.bin/gulp -v
+echo finished
 ./node_modules/.bin/gulp test
 #./node_modules/.bin/gulp test
 exitWithMessageOnError "gulp failed"
@@ -140,17 +155,6 @@ cd - > /dev/null
 fi
 echo Finished running gulp stuff
 
-echo Installing bower packages
-# 4. Install bower packages
-if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install bower -g
-  eval $NPM_CMD install bower
-  exitWithMessageOnError "installing bower failed"
-  ./node_modules/.bin/bower install
-  exitWithMessageOnError "bower failed"
-  cd - > /dev/null
-fi
 
 
 
