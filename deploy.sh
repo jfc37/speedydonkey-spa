@@ -119,6 +119,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #
 #  echo Installing npm packages
 #  eval $NPM_CMD install
+  eval $NPM_CMD install gulp
 #  exitWithMessageOnError "npm failed"
 #  cd - > /dev/null
 fi
