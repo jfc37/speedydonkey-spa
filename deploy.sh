@@ -134,9 +134,10 @@ echo About to run gulp stuff
 if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
 cd "$DEPLOYMENT_TARGET"
 
-echo Building all the files from $DEPLOYMENT_TARGET
-eval gulp test
-exitWithMessageOnError "running the build task failed"
+eval $NPM_CMD install gulp
+exitWithMessageOnError "installing gulp failed"
+./node_modules/.bin/gulp build
+exitWithMessageOnError "gulp failed"
 cd - > /dev/null
 fi
 echo Finished running gulp stuff
