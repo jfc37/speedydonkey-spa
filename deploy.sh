@@ -129,6 +129,7 @@ echo blah:  NPM_CMD
 echo blah:  $NPM_CMD
 echo npm version:
 eval npm -v
+eval node -v
 
 #  echo Cleaning NPM cache
 #  eval npm cache clean
