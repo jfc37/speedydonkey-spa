@@ -136,7 +136,10 @@ cd "$DEPLOYMENT_TARGET"
 
 eval $NPM_CMD install gulp
 exitWithMessageOnError "installing gulp failed"
-./node_modules/.bin/gulp build
+
+echo gonna run test
+eval gulp test
+#./node_modules/.bin/gulp test
 exitWithMessageOnError "gulp failed"
 cd - > /dev/null
 fi
