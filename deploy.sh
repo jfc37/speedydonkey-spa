@@ -143,7 +143,10 @@ eval $NPM_CMD install gulp
 exitWithMessageOnError "installing gulp failed"
 
 echo gonna run build
-./node_modules/.bin/gulp build
+#./node_modules/.bin/gulp build
+./node_modules/.bin/gulp images
+./node_modules/.bin/gulp fonts
+./node_modules/.bin/gulp optimize
 exitWithMessageOnError "gulp failed"
 cd - > /dev/null
 fi
