@@ -108,7 +108,7 @@ fi
 
 echo Selecting node version
 # 2. Select node version
-#selectNodeVersion
+selectNodeVersion
 
 
 # 3. Install npm packages
