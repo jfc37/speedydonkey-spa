@@ -128,7 +128,7 @@ node -v
 #
 #  exitWithMessageOnError "npm failed"
 #  cd - > /dev/null
-#fi
+fi
 ##
 ##5. Run gulp
 #echo About to run gulp stuff
