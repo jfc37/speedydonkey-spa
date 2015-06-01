@@ -123,7 +123,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #eval npm install
 echo first
 eval NPM_CMD -v
-eval echo second
+echo second
 eval $NPM_CMD -v
 echo all finished
 
