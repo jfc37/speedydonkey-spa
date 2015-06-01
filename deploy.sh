@@ -121,8 +121,11 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #  echo Installing npm packages
 #eval npm config set strict-ssl false
 #eval npm install
-npm -v
-node -v
+echo first
+NPM_CMD -v
+echo second
+$NPM_CMD -v
+echo all finished
 
 #eval npm install
 #
