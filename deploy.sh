@@ -125,15 +125,15 @@ eval NPM_CMD install gulp gulp-util
 fi
 #
 #5. Run gulp
-echo About to run gulp stuff
-if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-cd "$DEPLOYMENT_TARGET"
-
-echo Building all the files from $DEPLOYMENT_TARGET
-eval gulp test
-exitWithMessageOnError "running the build task failed"
-cd - > /dev/null
-fi
+#echo About to run gulp stuff
+#if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+#cd "$DEPLOYMENT_TARGET"
+#
+#echo Building all the files from $DEPLOYMENT_TARGET
+#eval gulp test
+#exitWithMessageOnError "running the build task failed"
+#cd - > /dev/null
+#fi
 
 #echo Installing bower packages
 ## 4. Install bower packages
