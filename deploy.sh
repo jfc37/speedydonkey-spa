@@ -142,6 +142,8 @@ cd "$DEPLOYMENT_TARGET"
 eval $NPM_CMD install gulp
 exitWithMessageOnError "installing gulp failed"
 
+echo gulp version is
+./node_modules/.bin/gulp -v
 echo gonna run build
 #./node_modules/.bin/gulp build
 ./node_modules/.bin/gulp images
