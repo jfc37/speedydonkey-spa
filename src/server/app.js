@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-.use(compress());
+app.use(compress());
 app.use(logger('dev'));
 app.use(cors());
 //app.use(errorHandler.init);
