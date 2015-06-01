@@ -117,9 +117,9 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo Cleaning NPM cache
   eval $NPM_CMD cache clean
 #
-#  echo Installing npm packages
-#  eval $NPM_CMD install
-#  exitWithMessageOnError "npm failed"
+  echo Installing npm packages
+  eval $NPM_CMD install
+  exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
 #
