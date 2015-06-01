@@ -110,18 +110,18 @@ echo Selecting node version
 # 2. Select node version
 selectNodeVersion
 #
-## 3. Install npm packages
-#if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-#  cd "$DEPLOYMENT_TARGET"
+# 3. Install npm packages
+if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
 #
-#  echo Cleaning NPM cache
-#  eval $NPM_CMD cache clean
+  echo Cleaning NPM cache
+  eval $NPM_CMD cache clean
 #
 #  echo Installing npm packages
 #  eval $NPM_CMD install
 #  exitWithMessageOnError "npm failed"
-#  cd - > /dev/null
-#fi
+  cd - > /dev/null
+fi
 #
 ##5. Run gulp
 #echo About to run gulp stuff
