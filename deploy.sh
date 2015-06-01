@@ -110,10 +110,14 @@ echo Selecting node version
 # 2. Select node version
 selectNodeVersion
 
-echo Installing npm packages
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
+
+  echo Cleaning NPM cache
+  eval $NPM_CMD cache clean
+
+  echo Installing npm packages
   eval $NPM_CMD install
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
