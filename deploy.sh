@@ -121,41 +121,37 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #  echo Installing npm packages
 #eval npm config set strict-ssl false
 #eval npm install
-echo first
-eval NPM_CMD -v
-echo second
 eval $NPM_CMD -v
-echo all finished
 
-#eval npm install
+eval $NPM_CMD install
 #
-#  exitWithMessageOnError "npm failed"
-#  cd - > /dev/null
+  exitWithMessageOnError "npm failed"
+  cd - > /dev/null
 fi
-##
-##5. Run gulp
-#echo About to run gulp stuff
-#if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-#cd "$DEPLOYMENT_TARGET"
-#
-#echo Building all the files from $DEPLOYMENT_TARGET
-#eval gulp test
-#exitWithMessageOnError "running the build task failed"
-#cd - > /dev/null
-#fi
-#echo Finished running gulp stuff
-#
-#echo Installing bower packages
-## 4. Install bower packages
-#if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
-#  cd "$DEPLOYMENT_TARGET"
-#  eval npm install bower -g
-#  eval npm install bower
-#  exitWithMessageOnError "installing bower failed"
-#  ./node_modules/.bin/bower install
-#  exitWithMessageOnError "bower failed"
-#  cd - > /dev/null
-#fi
+
+#5. Run gulp
+echo About to run gulp stuff
+if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+cd "$DEPLOYMENT_TARGET"
+
+echo Building all the files from $DEPLOYMENT_TARGET
+eval gulp test
+exitWithMessageOnError "running the build task failed"
+cd - > /dev/null
+fi
+echo Finished running gulp stuff
+
+echo Installing bower packages
+# 4. Install bower packages
+if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
+  eval $NPM_CMD install bower -g
+  eval $NPM_CMD install bower
+  exitWithMessageOnError "installing bower failed"
+  ./node_modules/.bin/bower install
+  exitWithMessageOnError "bower failed"
+  cd - > /dev/null
+fi
 
 
 
