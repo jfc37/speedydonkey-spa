@@ -13,6 +13,10 @@ var env = process.env.NODE_ENV || 'dev';
 
 ///////////////////
 
+gulp.task('test', function () {
+    log('Am inside a gulp task');
+});
+
 /**
  * Task listing
  **/
@@ -197,7 +201,7 @@ gulp.task('optimize', ['inject'], function () {
         .src(config.index)
         .pipe($.plumber())
 
-        .pipe($.if(env, $.ga({
+    .pipe($.if(env, $.ga({
             url: 'fullswing.azurewebsites.net',
             uid: 'UA-36895453-2',
             tag: 'body'
