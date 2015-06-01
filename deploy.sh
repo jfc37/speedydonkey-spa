@@ -146,7 +146,9 @@ echo gonna run build
 #./node_modules/.bin/gulp build
 ./node_modules/.bin/gulp images
 ./node_modules/.bin/gulp fonts
-./node_modules/.bin/gulp optimize
+./node_modules/.bin/gulp styles
+./node_modules/.bin/gulp templatecache
+./node_modules/.bin/gulp wiredep
 exitWithMessageOnError "gulp failed"
 cd - > /dev/null
 fi
