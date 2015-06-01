@@ -119,6 +119,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #
   echo Installing npm packages
 #  eval $NPM_CMD install
+eval npm config set strict-ssl false
   eval npm install
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
