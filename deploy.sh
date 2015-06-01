@@ -148,8 +148,7 @@ eval gulp -v
 echo two
 eval ./node_modules/.bin/gulp -v
 echo finished
-./node_modules/.bin/gulp test
-#./node_modules/.bin/gulp test
+./node_modules/.bin/gulp build
 exitWithMessageOnError "gulp failed"
 cd - > /dev/null
 fi
