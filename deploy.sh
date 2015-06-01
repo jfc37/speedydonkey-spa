@@ -108,14 +108,21 @@ fi
 
 echo Selecting node version
 # 2. Select node version
-selectNodeVersion
 
 echo npm version:
 eval npm -v
+eval npm update npm -g
+
+selectNodeVersion
+
 
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
+
+    eval npm -v
+    eval npm update npm -g
+    eval npm -v
 
   echo Cleaning NPM cache
   eval npm cache clean
