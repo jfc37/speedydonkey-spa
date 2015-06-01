@@ -68,30 +68,30 @@ fi
 # ------------
 
 selectNodeVersion () {
-#  if [[ -n "$KUDU_SELECT_NODE_VERSION_CMD" ]]; then
-#    SELECT_NODE_VERSION="$KUDU_SELECT_NODE_VERSION_CMD \"$DEPLOYMENT_SOURCE\" \"$DEPLOYMENT_TARGET\" \"$DEPLOYMENT_TEMP\""
-#    eval $SELECT_NODE_VERSION
-#    exitWithMessageOnError "select node version failed"
-#
-#    if [[ -e "$DEPLOYMENT_TEMP/__nodeVersion.tmp" ]]; then
-#      NODE_EXE=`cat "$DEPLOYMENT_TEMP/__nodeVersion.tmp"`
-#      exitWithMessageOnError "getting node version failed"
-#    fi
-#
-#    if [[ -e "$DEPLOYMENT_TEMP/.tmp" ]]; then
-#      NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
-#      exitWithMessageOnError "getting npm version failed"
-#    fi
-#
-#    if [[ ! -n "$NODE_EXE" ]]; then
-#      NODE_EXE=node
-#    fi
-#
-#    NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
-#  else
+  if [[ -n "$KUDU_SELECT_NODE_VERSION_CMD" ]]; then
+    SELECT_NODE_VERSION="$KUDU_SELECT_NODE_VERSION_CMD \"$DEPLOYMENT_SOURCE\" \"$DEPLOYMENT_TARGET\" \"$DEPLOYMENT_TEMP\""
+    eval $SELECT_NODE_VERSION
+    exitWithMessageOnError "select node version failed"
+
+    if [[ -e "$DEPLOYMENT_TEMP/__nodeVersion.tmp" ]]; then
+      NODE_EXE=`cat "$DEPLOYMENT_TEMP/__nodeVersion.tmp"`
+      exitWithMessageOnError "getting node version failed"
+    fi
+
+    if [[ -e "$DEPLOYMENT_TEMP/.tmp" ]]; then
+      NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
+      exitWithMessageOnError "getting npm version failed"
+    fi
+
+    if [[ ! -n "$NODE_EXE" ]]; then
+      NODE_EXE=node
+    fi
+
+    NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
+  else
     NPM_CMD=npm
     NODE_EXE=node
-#  fi
+  fi
 }
 
 ##################################################################################################################################
@@ -113,6 +113,7 @@ echo blah:  NPM_CMD
 echo blah:  $NPM_CMD
 echo npm version:
 eval npm -v
+eval $NPM_CMD -v
 
 #selectNodeVersion
 
