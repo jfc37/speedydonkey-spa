@@ -115,16 +115,9 @@ selectNodeVersion
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
 
-#  echo Cleaning NPM cache
-#  eval npm cache clean
-#
-#  echo Installing npm packages
-#eval npm config set strict-ssl false
-#eval npm install
 eval $NPM_CMD -v
+#eval $NPM_CMD install
 
-eval $NPM_CMD install
-#
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
@@ -138,7 +131,9 @@ eval $NPM_CMD install gulp
 exitWithMessageOnError "installing gulp failed"
 
 echo gonna run test
-eval gulp test
+eval gulp -v
+eval ./node_modules/.bin/gulp -v
+./node_modules/.bin/gulp test
 #./node_modules/.bin/gulp test
 exitWithMessageOnError "gulp failed"
 cd - > /dev/null

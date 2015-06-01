@@ -14,7 +14,7 @@ var env = process.env.NODE_ENV || 'dev';
 ///////////////////
 
 gulp.task('test', function () {
-    //log('Am inside a gulp task');
+    log('Am inside a gulp task');
 });
 
 /**
