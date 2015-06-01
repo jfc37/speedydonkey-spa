@@ -117,23 +117,23 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo Cleaning NPM cache
   eval $NPM_CMD cache clean
 #
-  echo Installing npm packages
-  eval $NPM_CMD install
-  exitWithMessageOnError "npm failed"
-  cd - > /dev/null
+#  echo Installing npm packages
+#  eval $NPM_CMD install
+#  exitWithMessageOnError "npm failed"
+#  cd - > /dev/null
 fi
 #
-##5. Run gulp
-#echo About to run gulp stuff
-#if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-#cd "$DEPLOYMENT_TARGET"
-#
-#echo Building all the files from $DEPLOYMENT_TARGET
-#eval gulp test
-#exitWithMessageOnError "running the build task failed"
-#cd - > /dev/null
-#fi
-#
+#5. Run gulp
+echo About to run gulp stuff
+if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+cd "$DEPLOYMENT_TARGET"
+
+echo Building all the files from $DEPLOYMENT_TARGET
+eval gulp test
+exitWithMessageOnError "running the build task failed"
+cd - > /dev/null
+fi
+
 #echo Installing bower packages
 ## 4. Install bower packages
 #if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
