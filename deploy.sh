@@ -121,7 +121,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #  echo Installing npm packages
 #eval npm config set strict-ssl false
 #eval npm install
-echo $NPM_CMD -v
+$NPM_CMD -v
 eval $NPM_CMD install
 
   exitWithMessageOnError "npm failed"
@@ -134,7 +134,7 @@ if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
 cd "$DEPLOYMENT_TARGET"
 
 echo Building all the files from $DEPLOYMENT_TARGET
-eval gulp build
+eval gulp test
 exitWithMessageOnError "running the build task failed"
 cd - > /dev/null
 fi
