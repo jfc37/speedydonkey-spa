@@ -108,7 +108,7 @@ fi
 
 echo Selecting node version
 # 2. Select node version
-#selectNodeVersion
+selectNodeVersion
 
 
 # 3. Install npm packages
@@ -120,8 +120,9 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #
 #  echo Installing npm packages
 #eval npm config set strict-ssl false
-eval npm install
-#eval $NPM_CMD install
+#eval npm install
+echo $NPM_CMD -v
+eval $NPM_CMD install
 
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
