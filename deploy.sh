@@ -108,13 +108,6 @@ fi
 
 echo Selecting node version
 # 2. Select node version
-
-echo blah:  NPM_CMD
-echo blah:  $NPM_CMD
-echo npm version:
-eval npm -v
-eval $NPM_CMD -v
-
 #selectNodeVersion
 
 
@@ -122,52 +115,42 @@ eval $NPM_CMD -v
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
 
-    eval npm update npm -g
-    eval npm update npm
-
-
-echo blah:  NPM_CMD
-echo blah:  $NPM_CMD
-echo npm version:
-eval npm -v
-eval node -v
-
 #  echo Cleaning NPM cache
 #  eval npm cache clean
 #
 #  echo Installing npm packages
 #eval npm config set strict-ssl false
-##  eval npm install
+eval npm install
 #eval $NPM_CMD install
-#
-#  exitWithMessageOnError "npm failed"
-#  cd - > /dev/null
+
+  exitWithMessageOnError "npm failed"
+  cd - > /dev/null
 fi
 #
 #5. Run gulp
-#echo About to run gulp stuff
-#if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-#cd "$DEPLOYMENT_TARGET"
-#
-#echo Building all the files from $DEPLOYMENT_TARGET
-#eval gulp test
-#exitWithMessageOnError "running the build task failed"
-#cd - > /dev/null
-#fi
+echo About to run gulp stuff
+if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+cd "$DEPLOYMENT_TARGET"
 
-#echo Installing bower packages
-## 4. Install bower packages
-#if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
-#  cd "$DEPLOYMENT_TARGET"
-#  eval $NPM_CMD install bower
-#  exitWithMessageOnError "installing bower failed"
-#  ./node_modules/.bin/bower install
-#  exitWithMessageOnError "bower failed"
-#  cd - > /dev/null
-#fi
-#
-#
-#echo Finished running gulp stuff
+echo Building all the files from $DEPLOYMENT_TARGET
+eval gulp build
+exitWithMessageOnError "running the build task failed"
+cd - > /dev/null
+fi
+echo Finished running gulp stuff
+
+echo Installing bower packages
+# 4. Install bower packages
+if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
+  eval $NPM_CMD install bower
+  exitWithMessageOnError "installing bower failed"
+  ./node_modules/.bin/bower install
+  exitWithMessageOnError "bower failed"
+  cd - > /dev/null
+fi
+
+
 
 
 
