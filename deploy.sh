@@ -116,7 +116,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 
   echo Cleaning NPM cache
   eval npm cache clean
-#
+
   echo Installing npm packages
 #  eval $NPM_CMD install
 eval npm config set strict-ssl false
