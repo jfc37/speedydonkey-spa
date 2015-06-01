@@ -108,7 +108,7 @@ fi
 
 echo Selecting node version
 # 2. Select node version
-selectNodeVersion
+#selectNodeVersion
 
 
 # 3. Install npm packages
@@ -121,8 +121,8 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #  echo Installing npm packages
 #eval npm config set strict-ssl false
 #eval npm install
-$NPM_CMD -v
-eval $NPM_CMD install
+npm -v
+eval npm install
 
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
@@ -144,7 +144,8 @@ echo Installing bower packages
 # 4. Install bower packages
 if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install bower
+  eval npm install bower -g
+  eval npm install bower
   exitWithMessageOnError "installing bower failed"
   ./node_modules/.bin/bower install
   exitWithMessageOnError "bower failed"
