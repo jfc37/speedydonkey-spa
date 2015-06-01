@@ -122,6 +122,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 
     eval npm -v
     eval npm update npm -g
+    eval npm update npm
     eval npm -v
 
   echo Cleaning NPM cache
