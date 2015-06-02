@@ -9,13 +9,8 @@ var del = require('del');
 var gulp = require('gulp');
 var path = require('path');
 var port = process.env.PORT || config.defaultPort;
-var env = process.env.NODE_ENV || 'dev';
 
 ///////////////////
-
-gulp.task('test', function () {
-    log('Am inside a gulp task');
-});
 
 /**
  * Task listing
@@ -133,6 +128,18 @@ gulp.task('templatecache', ['clean-code'], function () {
         .pipe(gulp.dest(config.temp));
 });
 
+gulp.task('environment-setup', function () {
+    log('Setting up environment config');
+
+    process.env.Company = process.env.Company || 'Speedy Donkey LOCAL';
+    process.env.ApiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
+
+    return gulp.src('config.js')
+        .pipe($.replace(/<company>/g, process.env.Company))
+        .pipe($.replace(/<apiUrl>/g, process.env.ApiUrl))
+        .pipe(gulp.dest(config.appConfigFolder));
+});
+
 /**
  * Watches
  **/
@@ -159,7 +166,7 @@ gulp.task('vet', function () {
 /**
  * File injection
  **/
-gulp.task('wiredep', function () {
+gulp.task('wiredep', ['environment-setup'], function () {
 
     log('Wire up the bower css js and our app js into the html');
 
@@ -201,7 +208,7 @@ gulp.task('optimize', ['inject'], function () {
         .src(config.index)
         .pipe($.plumber())
 
-    .pipe($.if(env, $.ga({
+    .pipe($.if(includeGoogleAnalytics(), $.ga({
             url: 'fullswing.azurewebsites.net',
             uid: 'UA-36895453-2',
             tag: 'body'
@@ -220,13 +227,13 @@ gulp.task('optimize', ['inject'], function () {
 
     //3rd party js
     .pipe(jsLibFilter)
-        .pipe($.if(env, $.uglify()))
+        .pipe($.if(shouldUglify(), $.uglify()))
         .pipe(jsLibFilter.restore())
 
     //app js
     .pipe(jsAppFilter)
         .pipe($.ngAnnotate())
-        .pipe($.if(env, $.uglify()))
+        .pipe($.if(shouldUglify(), $.uglify()))
         .pipe(jsAppFilter.restore())
 
     .pipe($.rev())
@@ -274,6 +281,14 @@ function changeEvent(event) {
 function clean(path, done) {
     log('Cleaning: ' + $.util.colors.blue(path));
     del(path, done);
+}
+
+function includeGoogleAnalytics() {
+    return process.env.NODE_ENV === 'prod';
+}
+
+function shouldUglify() {
+    return process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'test';
 }
 
 function log(msg) {

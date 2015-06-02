@@ -37,6 +37,7 @@ module.exports = function () {
         root: root,
         server: server,
         temp: temp,
+        appConfigFolder: clientApp + 'core/',
 
         /**
          * Optimized files
