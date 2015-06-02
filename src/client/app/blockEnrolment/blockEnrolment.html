@@ -6,11 +6,11 @@
               <p ng-show="vm.areBlocksLoading">Loading blocks...</p>
               <div ng-hide="vm.areBlocksLoading">
                 <p class="lead" ng-show="vm.blocks.length > 0">Select the blocks you want to enrol in</p>
-                
+
                 <div class="row">
-                  
+
                   <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | viewableBlocks">
-                    <div ng-include src="'setOfBlocks.html'"></div>
+                    <div ng-include src="'app/blockEnrolment/setOfBlocks.html'"></div>
                   </div>
 
                 </div>

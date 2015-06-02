@@ -77,7 +77,7 @@ selectNodeVersion () {
       NODE_EXE=`cat "$DEPLOYMENT_TEMP/__nodeVersion.tmp"`
       exitWithMessageOnError "getting node version failed"
     fi
-    
+
     if [[ -e "$DEPLOYMENT_TEMP/.tmp" ]]; then
       NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
       exitWithMessageOnError "getting npm version failed"
@@ -106,39 +106,59 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
+echo Selecting node version
 # 2. Select node version
 selectNodeVersion
+
 
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install --production
+
+eval $NPM_CMD -v
+#eval $NPM_CMD install
+
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
 
+echo Installing bower packages
 # 4. Install bower packages
 if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install bower
-  exitWithMessageOnError "installing bower failed"
-  ./node_modules/.bin/bower install
-  exitWithMessageOnError "bower failed"
-  cd - > /dev/null
+cd "$DEPLOYMENT_TARGET"
+eval $NPM_CMD install bower -g
+eval $NPM_CMD install bower
+exitWithMessageOnError "installing bower failed"
+./node_modules/.bin/bower install
+exitWithMessageOnError "bower failed"
+cd - > /dev/null
 fi
 
 #5. Run gulp
 echo About to run gulp stuff
 if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install gulp
-  exitWithMessageOnError "installing gulp failed"
-  ./node_modules/.bin/gulp --no-color
-  exitWithMessageOnError "gulp failed"
-  cd - > /dev/null
-fi
+cd "$DEPLOYMENT_TARGET"
 
+eval $NPM_CMD install
+eval $NPM_CMD install gulp
+exitWithMessageOnError "installing gulp failed"
+
+echo gulp version is
+./node_modules/.bin/gulp -v
+echo gonna run build
+./node_modules/.bin/gulp build
+#./node_modules/.bin/gulp images
+#./node_modules/.bin/gulp fonts
+#./node_modules/.bin/gulp styles
+#./node_modules/.bin/gulp templatecache
+#./node_modules/.bin/gulp wiredep
+exitWithMessageOnError "gulp failed"
+cd - > /dev/null
+fi
 echo Finished running gulp stuff
+
+
+
 
 
 

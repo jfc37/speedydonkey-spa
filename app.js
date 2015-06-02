@@ -1,56 +1,47 @@
 /*jshint node:true*/
 'use strict';
 
-var express      = require('express');
-var app          = express();
-var bodyParser   = require('body-parser');
-var compress     = require('compression');
-var cors         = require('cors');
-var favicon      = require('serve-favicon');
-var fileServer   = require('serve-static');
-var http         = require('http');
-var logger       = require('morgan');
-var port         = process.env['PORT'] || 7300;
-var updater      = require('./src/server/updater');
-// var dotenv = require('dotenv');
-// dotenv.load();
-var util = require('util');
-var server;
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var compress = require('compression');
+var cors = require('cors');
+//var errorHandler = require('./routes/utils/errorHandler')();
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var port = process.env.PORT || 7300;
+//var routes;
 
-var appDir =  __dirname + './src/'; // Our NG code is served from root
 var environment = process.env.NODE_ENV;
-var pkg = require('./package.json');
 
+app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-app.use(compress());            // Compress response data with gzip
-app.use(fileServer(appDir));    // Support static file content
-app.use(cors());                // enable ALL CORS requests
+app.use(compress());
+app.use(logger('dev'));
+app.use(cors());
+//app.use(errorHandler.init);
 
-app.use('/', express.static(pkg.paths.client));
-app.use('/', express.static('./'));
+//routes = require('./routes/index')(app);
 
+console.log('About to crank up node');
+console.log('PORT=' + port);
+console.log('NODE_ENV=' + environment);
 
-
-app.get('/apiUrl', function(req, res, next) {
-	var apiUrl = process.env.ApiUrl;
-    res.send(apiUrl);
+app.get('/ping', function (req, res, next) {
+    console.log(req.body);
+    res.send('pong');
 });
 
-app.get('/getConfig', function(req, res, next) {
-	var config = {
-		company: process.env.Company
-	};
-    res.send(config);
+console.log('** ' + environment + ' **');
+app.use(express.static('./build/'));
+app.use('/*', express.static('./build/index.html'));
+
+app.listen(port, function () {
+    console.log('Express server listening on port ' + port);
+    console.log('env = ' + app.get('env') +
+                '\n__dirname = ' + __dirname +
+                '\nprocess.cwd = ' + process.cwd());
 });
-
-server = http.createServer(app);
-
-server.listen(port);
-
-updater.init(server);
-
-
-
