@@ -139,6 +139,7 @@ echo About to run gulp stuff
 if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
 cd "$DEPLOYMENT_TARGET"
 
+eval $NPM_CMD install
 eval $NPM_CMD install gulp
 exitWithMessageOnError "installing gulp failed"
 
