@@ -23,7 +23,7 @@
                                    placeholder="Email"
                                    ng-model="vm.email"
                                    required/>
-                              
+
                           </div>
                           <div class="form-group col-xs-12" ng-class="{'has-error':loginForm.password.$invalid && loginForm.password.$touched}">
                             <input class="form-control"
@@ -36,15 +36,15 @@
                             <validation-error ng-model="loginForm.password" error="required" message="Password is required."></validation-error>
                           </div>
                           <div class="col-xs-12 text-right form-group" style="margin-top: -15px;">
-                            <a ng-href="{{vm.forgottenPasswordUrl}}">Forgot your password? </a>
+                            <a class="btn btn-link" ng-href="{{vm.forgottenPasswordUrl}}">Forgot your password? </a>
                           </div>
 
                           <div class="form-group col-xs-12">
-                            
+
                             <a class="btn btn-primary pull-left" ng-click="vm.submit(loginForm)" href="{{vm.registerUrl}}">
                                 Create Account
                             </a>
-                            
+
                             <button class="btn btn-success pull-right"
                                     ng-click="vm.submit(loginForm)"
                                     ng-disabled="loginForm.$invalid">
@@ -54,7 +54,7 @@
 
 
                         </div>
-                        
+
 
                       </form>
 
