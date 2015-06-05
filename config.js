@@ -3,11 +3,20 @@
 
     var core = angular.module('app.core');
     core.config(toastrConfig);
+    core.config(blockUiConfig);
 
     /* @ngInject */
     function toastrConfig(toastr) {
         toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
+    }
+
+    /* @ngInject */
+    function blockUiConfig(blockUIConfig) {
+        blockUIConfig.delay = 0;
+        blockUIConfig.resetOnException = true;
+        blockUIConfig.autoBlock = false;
+        //blockUIConfig.autoInjectBodyBlock = false;
     }
 
     var config = {

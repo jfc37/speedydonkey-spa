@@ -317,7 +317,7 @@ function notify(options) {
 function serve(isDev, specRunner) {
     var nodeOptions = {
         script: config.nodeServer,
-        delayTime: 1,
+        delayTime: 1000,
         env: {
             'PORT': port,
             'NODE_ENV': isDev ? 'dev' : 'build'
