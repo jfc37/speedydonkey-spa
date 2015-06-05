@@ -12,17 +12,16 @@
         .directive('commonInput', commonInput)
         .directive('commonDateTimeInput', commonDateTimeInput)
         .directive('userSearch', userSearch)
-        .directive('teacherDropdown', teacherDropdown)
-        ;
+        .directive('teacherDropdown', teacherDropdown);
 
     /* @ngInject */
-    function displayDate () {
+    function displayDate() {
         var directive = {
-            template: '{{display}}',
+            template: '&nbsp;{{display}}',
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs, ngModel){
+            link: function (scope, element, attrs, ngModel) {
                 if (attrs.format === 'from now') {
                     var localDate = moment.utc(scope.ngModel).toDate();
                     scope.display = moment(localDate).fromNow();
@@ -46,33 +45,33 @@
         return directive;
     }
 
-    function passStatus (commonFunctions) {
+    function passStatus(commonFunctions) {
         var directive = {
             template: '<span class="label label-{{labelClass}} cursor">{{message}}</span>',
             require: 'ngModel',
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs){
-                scope.$watch('ngModel', function (change){
+            link: function (scope, element, attrs) {
+                scope.$watch('ngModel', function (change) {
                     var student = scope.ngModel;
                     if (student.attendedClass) {
-                            scope.message = 'all good';
+                        scope.message = 'all good';
                         scope.labelClass = 'success';
                     } else {
-                        if (!student.passes.some(commonFunctions.isValidPass)){
+                        if (!student.passes.some(commonFunctions.isValidPass)) {
                             scope.message = 'no valid passes';
                             scope.labelClass = 'danger';
-                        } else{
+                        } else {
                             var anyPaymentPendingPasses = student.passes.filter(function (pass) {
                                 return pass.payment_status.toLowerCase() === 'pending';
                             }).length > 0;
                             if (anyPaymentPendingPasses) {
                                 scope.message = 'pass needs payment';
-                            scope.labelClass = 'warning';
+                                scope.labelClass = 'warning';
                             } else {
                                 scope.message = 'all good';
-                            scope.labelClass = 'success';
+                                scope.labelClass = 'success';
                             }
                         }
                     }
@@ -88,9 +87,9 @@
             template: '{{passTypeText}} - {{passNumber}} - {{validnessText}}',
             require: 'ngModel',
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs){
+            link: function (scope, element, attrs) {
                 scope.passType = scope.ngModel.pass_type;
                 scope.paymentStatus = scope.ngModel.payment_status;
                 scope.validness = scope.ngModel.valid;
@@ -109,9 +108,9 @@
             template: '<span class="help-block has-error"><div ng-show="ngModel.$error[error] && ngModel.$touched">{{message}}</div></span>',
             require: 'ngModel',
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs){
+            link: function (scope, element, attrs) {
                 scope.message = attrs.message;
                 scope.error = attrs.error;
 
@@ -125,9 +124,9 @@
             template: '<span class="help-block has-error"  ng-show="ngModel.serverError && ngModel.$touched"><div>{{ngModel.serverError}}</div></span>',
             require: 'ngModel',
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs){
+            link: function (scope, element, attrs) {
 
             }
         };
@@ -136,24 +135,24 @@
 
     function commonInput() {
         var directive = {
-            template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">'+
-                            '<label ng-show="displayName">{{displayName}}</label>'+
-                            '<input class="form-control"'+
-                            'id="{{name}}"'+
-                            'name="{{name}}"'+
-                            'type="{{type}}"'+
-                            'placeholder="{{displayName}}"'+
-                            'ng-model="ngModel"'+
-                            'required="{{required}}"/>'+
-                            '<span class="help-block has-error">'+
-                            '    <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>'+
-                            '</span>'+
-                        '</div>',
-            require: ['^form','ngModel'],
+            template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">' +
+                '<label ng-show="displayName">{{displayName}}</label>' +
+                '<input class="form-control"' +
+                'id="{{name}}"' +
+                'name="{{name}}"' +
+                'type="{{type}}"' +
+                'placeholder="{{displayName}}"' +
+                'ng-model="ngModel"' +
+                'required="{{required}}"/>' +
+                '<span class="help-block has-error">' +
+                '    <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>' +
+                '</span>' +
+                '</div>',
+            require: ['^form', 'ngModel'],
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs, ctrls){
+            link: function (scope, element, attrs, ctrls) {
                 scope.name = attrs.name;
                 scope.label = attrs.label;
                 scope.displayName = attrs.displayName;
@@ -162,11 +161,11 @@
                 scope.form = ctrls[0];
                 scope.formElement = ctrls[0][attrs.name];
 
-                scope.getFormElement = function() {
+                scope.getFormElement = function () {
                     return ctrls[0][attrs.name];
                 };
 
-                scope.hasError = function(error) {
+                scope.hasError = function (error) {
                     return scope.getFormElement().$error[error];
                 };
 
@@ -180,18 +179,18 @@
 
     function commonDateTimeInput() {
         var directive = {
-            template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">'+
-                        '<label ng-show="displayName">{{displayName}}</label>'+
-                        '<datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="ngModel" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>'+
-                        '<span class="help-block has-error">'+
-                        '    <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>'+
-                        '</span>'+
-                        '</div>',
-            require: ['^form','ngModel'],
+            template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">' +
+                '<label ng-show="displayName">{{displayName}}</label>' +
+                '<datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="ngModel" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>' +
+                '<span class="help-block has-error">' +
+                '    <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>' +
+                '</span>' +
+                '</div>',
+            require: ['^form', 'ngModel'],
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs, ctrls){
+            link: function (scope, element, attrs, ctrls) {
                 scope.name = attrs.name;
                 scope.displayName = attrs.displayName;
                 scope.type = attrs.type;
@@ -199,11 +198,11 @@
                 scope.form = ctrls[0];
                 scope.formElement = ctrls[0][attrs.name];
 
-                scope.getFormElement = function() {
+                scope.getFormElement = function () {
                     return ctrls[0][attrs.name];
                 };
 
-                scope.hasError = function(error) {
+                scope.hasError = function (error) {
                     return scope.getFormElement().$error[error];
                 };
             }
@@ -216,12 +215,12 @@
             template: '<input type="text" placeholder="{{placeholder}}" ng-model="ngModel" typeahead="student as student.full_name for student in searchUsers($viewValue)">',
             require: ['ngModel'],
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs){
+            link: function (scope, element, attrs) {
                 scope.placeholder = attrs.placeholder;
 
-                scope.searchUsers = function(name) {
+                scope.searchUsers = function (name) {
                     return $q(function (resolve, reject) {
                         var search = [
                             {
@@ -252,26 +251,26 @@
 
     function teacherDropdown(dataservice) {
         var directive = {
-            template: '<div class="form-group col-xs-12">'+
-                        '<select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[0]">'+
-                        '    <option value="">Please select the primary teacher</option>'+
-                        '</select>'+
-                        '</div>'+
-                        '<div class="form-group col-xs-12">'+
-                        '<select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[1]">'+
-                        '    <option value="">Please select the secondary teacher (optional)</option>'+
-                        '</select>'+
-                        '</div>',
+            template: '<div class="form-group col-xs-12">' +
+                '<select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[0]">' +
+                '    <option value="">Please select the primary teacher</option>' +
+                '</select>' +
+                '</div>' +
+                '<div class="form-group col-xs-12">' +
+                '<select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[1]">' +
+                '    <option value="">Please select the secondary teacher (optional)</option>' +
+                '</select>' +
+                '</div>',
             require: ['ngModel'],
             scope: {
-              ngModel: '='
+                ngModel: '='
             },
-            link: function(scope, element, attrs){
+            link: function (scope, element, attrs) {
                 scope.teachers = [];
                 dataservice.getAllTeachers().then(function (teachers) {
                     scope.teachers = teachers;
                 });
-                if (!scope.ngModel || !(scope.ngModel instanceof Array)){
+                if (!scope.ngModel || !(scope.ngModel instanceof Array)) {
                     scope.ngModel = [];
                 }
             }
