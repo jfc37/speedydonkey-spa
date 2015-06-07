@@ -5,17 +5,18 @@
         .module('app.manageClasses')
         .controller('ManageClass', ManageClass);
 
-    ManageClass.$inject = ['$scope', 'manageClassesService', 'validationService', 'logger'];
+    ManageClass.$inject = ['$scope', 'manageClassesService', 'validationService', 'logger', 'authService'];
 
-    function ManageClass($scope, manageClassesService, validationService, logger) {
-        var vm = {};
+    function ManageClass($scope, manageClassesService, validationService, logger, authService) {
+        var vm = this;
         $scope.vm.submitText = 'Update';
         $scope.vm.cancelText = 'Close';
+        $scope.vm.isAdmin = authService.hasClaim('Admin');
         var copy = {};
 
         $scope.vm.classCheckInUrl = function (theClass) {
             return '#/class/' + theClass.id + '/check-in';
-        }
+        };
 
         $scope.vm.startUpdating = function () {
             copy = angular.copy($scope.vm.class);
@@ -36,7 +37,7 @@
                 logger.success('Class deleted');
                 $scope.$parent.vm.classes.remove($scope.vm.class);
             }, function (errors) {
-                logger.error("Failed to delete class");
+                logger.error('Failed to delete class');
             });
         };
 

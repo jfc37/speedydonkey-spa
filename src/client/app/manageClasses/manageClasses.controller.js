@@ -13,15 +13,22 @@
         var vm = this;
         vm.classes = [];
 
+        vm.filterClasses = function () {
+            var filter = [
+                vm.filter.startTimeAfter,
+                vm.filter.startTimeBefore,
+                vm.filter.name
+            ];
+            manageClassesService.filterClasses(filter).then(function (filteredClasses) {
+                vm.classes = filteredClasses;
+            });
+        };
+
         activate();
 
         function activate() {
             setupFilter();
-            var promises = [getClasses()];
-            return $q.all(promises)
-                .then(function () {
-                    logger.info('Activated Manage Classes');
-                });
+            vm.filterClasses();
         }
 
         function getClasses() {
@@ -33,14 +40,23 @@
         }
 
         function setupFilter() {
-            vm.filterOptions = {
-                fields: [
-                    {
-                        name: 'Name',
-                        type: 'text'
-                    }
-                ]
-            }
+            vm.filter = {
+                startTimeAfter: {
+                    field: 'starttime',
+                    condition: 'gt',
+                    value: moment().add(-7, 'day').format('YYYY-MM-DD')
+                },
+                startTimeBefore: {
+                    field: 'starttime',
+                    condition: 'lt',
+                    value: moment().add(0, 'day').format('YYYY-MM-DD')
+                },
+                name: {
+                    field: 'name',
+                    condition: 'cont',
+                    value: ''
+                },
+            };
         }
     }
 })();

@@ -8,7 +8,7 @@
     appRun.$inject = ['routehelper'];
 
     /* @ngInject */
-    function appRun (routehelper){
+    function appRun(routehelper) {
         routehelper.configureRoutes(getRoutes());
     }
 
@@ -21,7 +21,7 @@
                     controller: 'ManageClasses',
                     controllerAs: 'vm',
                     templateUrl: 'app/manageClasses/manageClasses.html',
-                    claim: 'Admin'
+                    claim: 'Teacher'
                 }
             }
         ];

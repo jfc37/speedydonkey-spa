@@ -1,30 +1,28 @@
 <section id="dashboard-view" class="mainbar">
     <section class="matter">
-      <div class="container">
-        <div class="row">
-            <h1>Admin Dashboard</h1>
+        <div class="container">
+            <div class="row">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <div class="row" ng-show="vm.isAdmin">
+                <a ng-href="{{vm.passOptionsUrl}}" class="btn btn-link">Manage Pass Options</a>
+            </div>
+            <div class="row" ng-show="vm.isAdmin">
+                <a ng-href="{{vm.levelsUrl}}" class="btn btn-link">Manage Levels</a>
+            </div>
+            <div class="row" ng-show="vm.isAdmin">
+                <a ng-href="{{vm.blocksUrl}}" class="btn btn-link">Manage Blocks</a>
+            </div>
+            <div class="row">
+                <a ng-href="{{vm.classesUrl}}" class="btn btn-link">Manage Classes</a>
+            </div>
+            <div class="row" ng-show="vm.isAdmin">
+                <a ng-href="{{vm.teachersUrl}}" class="btn btn-link">Manage Teachers</a>
+            </div>
+
+            <div class="row">
+                <a ng-href="{{vm.studentsUrl}}" class="btn btn-link">Manage Students</a>
+            </div>
         </div>
-        <div ng-show="vm.isAdmin">
-          <div class="row">
-            <a ng-href="{{vm.passOptionsUrl}}" class="btn btn-link">Manage Pass Options</a>
-          </div>
-          <div class="row">
-            <a ng-href="{{vm.levelsUrl}}" class="btn btn-link">Manage Levels</a>
-          </div>
-          <div class="row">
-            <a ng-href="{{vm.blocksUrl}}" class="btn btn-link">Manage Blocks</a>
-          </div>
-          <div class="row">
-            <a ng-href="{{vm.classesUrl}}" class="btn btn-link">Manage Classes</a>
-          </div>
-          <div class="row">
-            <a ng-href="{{vm.teachersUrl}}" class="btn btn-link">Manage Teachers</a>
-          </div>
-        </div>
-        
-        <div class="row">
-          <a ng-href="{{vm.studentsUrl}}" class="btn btn-link">Manage Students</a>
-        </div>
-      </div>
     </section>
 </section>

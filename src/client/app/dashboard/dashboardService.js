@@ -10,7 +10,7 @@
     /* @ngInject */
     function dashboardService($q, dataservice, logger, authService) {
         /*jshint validthis: true */
-        
+
         var service = {
             getSchedule: getSchedule,
             getCurrentPasses: getCurrentPasses,
@@ -19,7 +19,7 @@
 
         function getSchedule() {
             return $q(function (resolve, reject) {
-                dataservice.getCurrentUserSchedule().then(function(schedule) {
+                dataservice.getCurrentUserSchedule().then(function (schedule) {
                     resolve(schedule);
                 }, function (response) {
                     if (response.status === 404) {
@@ -32,7 +32,7 @@
 
         function getCurrentPasses() {
             return $q(function (resolve, reject) {
-                dataservice.getCurrentUserCurrentPasses().then(function(passes) {
+                dataservice.getCurrentUserCurrentPasses().then(function (passes) {
                     resolve(passes);
                 }, function (response) {
                     if (response.status === 404) {
@@ -57,7 +57,7 @@
                         value: moment().add(1, 'day').format('YYYY-MM-DD')
                     }
                 ];
-                dataservice.searchForClasses(search).then(function(response) {
+                dataservice.searchForClasses(search).then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     if (response.status === 404) {
