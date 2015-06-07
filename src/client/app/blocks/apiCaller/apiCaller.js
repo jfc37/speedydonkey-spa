@@ -15,7 +15,7 @@
             postUserPasswordReset: postUserPasswordReset,
             putUserPasswordReset: putUserPasswordReset,
 
-            postUser : postUser,
+            postUser: postUser,
             putCurrentUser: putCurrentUser,
             getUser: getUser,
             getUsers: getUsers,
@@ -31,7 +31,7 @@
             postPassAssignment: postPassAssignment,
             postCurrentUserPassAssignment: postCurrentUserPassAssignment,
 
-            getBlock : getBlock,
+            getBlock: getBlock,
             searchBlock: searchBlock,
             postBlockEnrolment: postBlockEnrolment,
 
@@ -81,12 +81,16 @@
 
         function postUserPasswordReset(email) {
             var url = baseUrl + 'users/password/reset';
-            return $http.post(url, {email: email});
+            return $http.post(url, {
+                email: email
+            });
         }
 
         function putUserPasswordReset(key, password) {
             var url = baseUrl + 'users/password/reset/' + key;
-            return $http.put(url, {password: password});
+            return $http.put(url, {
+                password: password
+            });
         }
 
         function postUser(user) {
@@ -169,7 +173,7 @@
 
             return $http.get(url);
         }
-        
+
         function postBlockEnrolment(enrolment) {
             var url = baseUrl + 'users/' + enrolment.user_id + '/enrolment';
             return $http.post(url, enrolment);
@@ -201,22 +205,22 @@
             var url = baseUrl + 'classes/' + id + '/attendance';
             return $http.get(url);
         }
-        
+
         function postClassAttendance(classId, studentId) {
             var url = baseUrl + 'classes/' + classId + '/attendance/' + studentId;
             return $http.post(url);
         }
-        
+
         function deleteClassAttendance(classId, studentId) {
             var url = baseUrl + 'classes/' + classId + '/attendance/' + studentId;
             return $http.delete(url);
         }
-        
+
         function putPass(pass) {
             var url = baseUrl + 'passes/' + pass.id;
             return $http.put(url, pass);
         }
-        
+
         function deletePass(id) {
             var url = baseUrl + 'passes/' + id;
             return $http.delete(url);
@@ -294,7 +298,9 @@
 
         function getTeacher() {
             var url = baseUrl + 'teachers';
-            return $http.get(url);
+            return $http.get(url, {
+                cache: true
+            });
         }
 
         function deleteTeacher(userId) {
