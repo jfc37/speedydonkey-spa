@@ -43,10 +43,10 @@
         };
     }
 
-    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger', 'routehelper'];
+    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger', 'routehelper', 'blockUI'];
 
     /* @ngInject */
-    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper) {
+    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, blockUI) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -97,11 +97,14 @@
         }
 
         vm.submit = function () {
+            blockUI.start();
             var promises = [blockEnrolmentService.enrol(getSelectedBlocks()), blockEnrolmentService.purchasePass(vm.selectedPass)];
             $q.all(promises).then(function () {
+                blockUI.stop();
                 routehelper.redirectToRoute('dashboard');
                 logger.success("Enrolled in selected blocks");
             }, function () {
+                blockUI.stop();
                 logger.error("Problem with enrolment");
             });
         };
@@ -110,8 +113,10 @@
 
         function activate() {
             var promises = [getAllBlocks(), getPassOptions()];
+            blockUI.start();
             return $q.all(promises)
                 .then(function () {
+                    blockUI.stop();
                     logger.info('Activated Block Enrolment View');
                 });
         }

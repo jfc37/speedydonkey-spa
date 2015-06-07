@@ -30,11 +30,11 @@
         </div>
 
         <div class="form-group col-xs-12">
-            <button class="btn btn-primary" ng-click="vm.cancelNewAccount()" ng-show="vm.cancelNewAccount">
-                Cancel
-            </button>
             <button class="btn btn-primary pull-right" ng-click="vm.registerNewUser(registerForm)" ng-disabled="registerForm.$invalid">
                 Register
+            </button>
+            <button class="btn btn-primary" ng-click="vm.cancelNewAccount()" ng-show="vm.cancelNewAccount">
+                Cancel
             </button>
         </div>
     </div>

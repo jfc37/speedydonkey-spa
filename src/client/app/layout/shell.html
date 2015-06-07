@@ -15,12 +15,6 @@
             <div data-ng-if="vm.getUserIdentity().isLoggedIn" data-ng-include="'app/layout/sidebar.html'"></div>
 
             <div data-ng-view autoscroll="true" class="shuffle-animation"></div>
-
-            <div ngplus-overlay ngplus-overlay-delay-in="50" ngplus-overlay-delay-out="700" ngplus-overlay-animation="dissolve-animation">
-                <img src="/images/busy.gif" />
-
-                <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>
-            </div>
         </section>
     </div>
 </div>
