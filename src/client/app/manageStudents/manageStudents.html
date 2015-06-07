@@ -9,6 +9,9 @@
                     <div>
                         <common-input ng-model="vm.filter.search" name="filter_search" display-name="Name or Email" type="text"></common-input>
                     </div>
+                    <div>
+                        Showing: {{vm.filteredStudents.length}} students
+                    </div>
                 </div>
 
                 <table class="table table-hover">
@@ -17,7 +20,7 @@
                         <th>Email</th>
                         <th></th>
                     </thead>
-                    <tbody ng-controller="ManageStudent" ng-init="student = outerStudent" ng-repeat="outerStudent in vm.students | filter:vm.filter.search | orderBy: 'full_name'">
+                    <tbody ng-controller="ManageStudent" ng-init="student = outerStudent" ng-repeat="outerStudent in vm.filteredStudents = (vm.students | filter:vm.filter.search | orderBy: 'full_name')">
                         <tr ng-click="getStudentInfo()">
                             <td>{{student.full_name}}</td>
                             <td>{{student.email}}</td>
