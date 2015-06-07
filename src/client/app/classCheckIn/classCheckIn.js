@@ -5,10 +5,10 @@
         .module('app.classCheckIn')
         .controller('ClassCheckIn', ClassCheckIn);
 
-    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger', 'validationService', 'manageClassesService'];
+    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger', 'validationService', 'manageClassesService', 'blockUI'];
 
     /* @ngInject */
-    function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger, validationService, manageClassesService) {
+    function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger, validationService, manageClassesService, blockUI) {
         /*jshint validthis: true */
         var vm = this;
         vm.class = null;
@@ -18,7 +18,7 @@
         vm.creatingNewAccount = false;
         vm.newUser = {};
 
-        vm.updateTeachers = function() {
+        vm.updateTeachers = function () {
             var sanitisedClass = {
                 id: vm.class.id,
                 teachers: vm.class.teachers,
@@ -26,17 +26,17 @@
                 end_time: vm.class.end_time,
                 name: vm.class.name,
             };
-            manageClassesService.update(sanitisedClass).then(function (){
+            manageClassesService.update(sanitisedClass).then(function () {
                 logger.success('Teachers updated');
-            }, function(errors) {
+            }, function (errors) {
                 logger.error('Problem updating teachers');
             });
         };
 
-        vm.attendenceStatusChanged = function(student) {
-            classCheckInService.attendenceStatusChanged(student).then(function(message) {
+        vm.attendenceStatusChanged = function (student) {
+            classCheckInService.attendenceStatusChanged(student).then(function (message) {
                 logger.success(message);
-            }, function(message) {
+            }, function (message) {
                 logger.error(message);
             });
         };
@@ -48,10 +48,10 @@
         vm.addWalkIn = function () {
             var addedStudent = vm.walkInStudentSelected;
             addedStudent.attendedClass = true;
-            classCheckInService.getPassesForStudent(addedStudent).then(function (){
-                classCheckInService.attendenceStatusChanged(addedStudent).then(function(message) {
+            classCheckInService.getPassesForStudent(addedStudent).then(function () {
+                classCheckInService.attendenceStatusChanged(addedStudent).then(function (message) {
                     logger.success(message);
-                }, function(message) {
+                }, function (message) {
                     logger.error(message);
                     addedStudent.openPassSelection = true;
                 });
@@ -61,9 +61,9 @@
         };
 
         vm.enrolWalkIn = function () {
-            classCheckInService.enrolStudent(vm.walkInStudentSelected.id, vm.class.block.id).then(function() {
+            classCheckInService.enrolStudent(vm.walkInStudentSelected.id, vm.class.block.id).then(function () {
                 logger.success('Enrolled ' + vm.walkInStudentSelected.full_name + ' in the block');
-            }, function(message) {
+            }, function (message) {
                 logger.error('Problem enrolling ' + vm.walkInStudentSelected.full_name + ' in the block...');
             }).then(vm.addWalkIn);
         };
@@ -74,7 +74,7 @@
 
         vm.createAccount = function () {
             vm.newUser = {};
-            if (vm.walkInStudentSelected){
+            if (vm.walkInStudentSelected) {
                 var splitName = vm.walkInStudentSelected.split(' ');
                 if (splitName.length > 0) {
                     vm.newUser.first_name = splitName[0];
@@ -83,11 +83,11 @@
                     vm.newUser.surname = splitName[1];
                 }
             }
-            
+
             vm.creatingNewAccount = true;
         };
 
-        vm.registerNewUser = function(form) {
+        vm.registerNewUser = function (form) {
             registerUserService.register(vm.newUser, true).then(function (user) {
                 vm.creatingNewAccount = false;
                 vm.walkInStudentSelected = user;
@@ -98,26 +98,29 @@
             });
         };
 
-        vm.cancelNewAccount = function() {
+        vm.cancelNewAccount = function () {
             vm.creatingNewAccount = false;
             vm.newUser = {};
         };
 
-        vm.purchaseNewPass = function(student, passOption){
+        vm.purchaseNewPass = function (student, passOption) {
+            blockUI.start();
             vm.disablePassPurchase = true;
-            classCheckInService.purchaseNewPass(student, passOption).then(function() {
+            classCheckInService.purchaseNewPass(student, passOption).then(function () {
+                blockUI.stop();
                 logger.success(student.full_name + ' purchased a new pass!');
                 vm.disablePassPurchase = false;
-            },function() {
+            }, function () {
+                blockUI.stop();
                 logger.error('Problem purchasing pass...');
                 vm.disablePassPurchase = false;
             });
         };
 
-        vm.passPaidFor = function(pass, student){
-            classCheckInService.passPaidFor(pass).then(function() {
+        vm.passPaidFor = function (pass, student) {
+            classCheckInService.passPaidFor(pass).then(function () {
                 logger.success('Pass paid for');
-            },function() {
+            }, function () {
                 logger.error('Problem paying for pass...');
             });
         };
@@ -125,18 +128,20 @@
         activate();
 
         function activate() {
+            blockUI.start();
             var promises = [getClass(), getStudents(), getPassOptions()];
             return $q.all(promises)
-            .then(function(){
-                logger.info('Activated Class Check In View');
-            });
+                .then(function () {
+                    blockUI.stop();
+                    logger.info('Activated Class Check In View');
+                });
         }
 
         function getClass() {
             return classCheckInService.getClass().then(function (theClass) {
                 vm.class = theClass;
                 vm.isClassLoading = false;
-            }, function (error){
+            }, function (error) {
                 if (!error.displayMessage) {
                     error.displayMessage = "Issue getting class...";
                 }
@@ -149,7 +154,7 @@
             return classCheckInService.getStudents().then(function (students) {
                 vm.students = students;
                 vm.areRegisteredStudentsLoading = false;
-            }, function (error){
+            }, function (error) {
                 if (!error.displayMessage) {
                     error.displayMessage = "Issue getting registered students...";
                 }
@@ -162,7 +167,7 @@
             return blockEnrolmentService.getPassOptions(true).then(function (passOptions) {
                 vm.passOptions = passOptions;
                 vm.arePassesLoading = false;
-            }, function (error){
+            }, function (error) {
                 if (!error.displayMessage) {
                     error.arePassesLoading = "Issue getting pass options...";
                 }

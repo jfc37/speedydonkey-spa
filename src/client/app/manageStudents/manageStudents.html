@@ -1,63 +1,75 @@
 <section class="mainbar">
-  <section class="matter">
-    <div class="container">
-     <div class="row">
-       <h1>Manage Students</h1>
-       <table class="table table-hover">
-       	<thead>
-       		<th>Name</th>
-          <th>Email</th>
-       		<th></th>
-       	</thead>
-       	<tbody ng-controller="ManageStudent" ng-init="student = outerStudent" ng-repeat="outerStudent in vm.students">
-       		<tr ng-click="getStudentInfo()">
-       			<td>{{student.full_name}}</td>
-       			<td>{{student.email}}</td>
-            <td><a ng-click="delete()" class="btn btn-link">Delete</a></td>
-       		</tr>
-          <tr ng-show="showStudent">
-            <td colspan="3">
-              <div>
-                <h3>Passes</h3>
-                <p ng-show="!student.studentInfo.passes || !student.studentInfo.passes.any()">No passes</p>
-                <table class="table table-hover" ng-hide="!student.studentInfo.passes || !student.studentInfo.passes.any()">
-                  <thead>
-                    <th>Pass Number</th>
-                    <th>Name</th>
-                    <th>Payment Status</th>
-                    <th></th>
-                  </thead>
-                  <tbody ng-controller="ManagePass" ng-init="pass = outerpass" ng-repeat="outerpass in student.studentInfo.passes">
-                    <tr>
-                      <td>{{pass.pass_number}}</td>
-                      <td>{{pass.description}}</td>
-                      <td>{{pass.payment_status}}</td>
-                      <td>
-                        <a ng-click="startUpdating()" class="btn btn-link">Update</a>
-                        <a ng-click="delete()" class="btn btn-link">Delete</a>
-                      </td>
-                    </tr>
-                    <tr ng-show="passUpdating">
-                      <td colspan="4">
-                        <form novalidate name="form">
-                          <common-input ng-if="pass.pass_type === 'Clip'" ng-model="pass.clips_remaining" name="clips_remaining" display-name="Clips Remaining" type="number" required="true"></common-input>
-                          <common-input ng-model="pass.start_date" name="start_date" display-name="Start Date" type="date" required="true"></common-input>
-                          <common-input ng-model="pass.end_date" name="end_date" display-name="End Date" type="date" required="true"></common-input>
-                          </div>
-                        </form>
-                        <a class="btn btn-link" ng-click="cancel()">Cancel</a>
-                        <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="submit(form)">Update</a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a ng-click="getStudentInfo()" class="btn btn-link">Close</a>
-              </div>
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <h1>Manage Students</h1>
+
+                <div ng-form="filterForm">
+                    <h3>Filter</h3>
+                    <div>
+                        <common-input ng-model="vm.filter.search" name="filter_search" display-name="Name or Email" type="text"></common-input>
+                    </div>
+                    <div>
+                        Showing: {{vm.filteredStudents.length}} students
+                    </div>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th></th>
+                    </thead>
+                    <tbody ng-controller="ManageStudent" ng-init="student = outerStudent" ng-repeat="outerStudent in vm.filteredStudents = (vm.students | filter:vm.filter.search | orderBy: 'full_name')">
+                        <tr ng-click="getStudentInfo()">
+                            <td>{{student.full_name}}</td>
+                            <td>{{student.email}}</td>
+                            <td><a ng-click="delete()" class="btn btn-link">Delete</a>
+                            </td>
+                        </tr>
+                        <tr ng-show="showStudent">
+                            <td colspan="3">
+                                <div>
+                                    <h3>Passes</h3>
+                                    <p ng-show="!student.studentInfo.passes || !student.studentInfo.passes.any()">No passes</p>
+                                    <table class="table table-hover" ng-hide="!student.studentInfo.passes || !student.studentInfo.passes.any()">
+                                        <thead>
+                                            <th>Pass Number</th>
+                                            <th>Name</th>
+                                            <th>Payment Status</th>
+                                            <th></th>
+                                        </thead>
+                                        <tbody ng-controller="ManagePass" ng-init="pass = outerpass" ng-repeat="outerpass in student.studentInfo.passes">
+                                            <tr>
+                                                <td>{{pass.pass_number}}</td>
+                                                <td>{{pass.description}}</td>
+                                                <td>{{pass.payment_status}}</td>
+                                                <td>
+                                                    <a ng-click="startUpdating()" class="btn btn-link">Update</a>
+                                                    <a ng-click="delete()" class="btn btn-link">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="passUpdating">
+                                                <td colspan="4">
+                                                    <form novalidate name="form">
+                                                        <common-input ng-if="pass.pass_type === 'Clip'" ng-model="pass.clips_remaining" name="clips_remaining" display-name="Clips Remaining" type="number" required="true"></common-input>
+                                                        <common-input ng-model="pass.start_date" name="start_date" display-name="Start Date" type="date" required="true"></common-input>
+                                                        <common-input ng-model="pass.end_date" name="end_date" display-name="End Date" type="date" required="true"></common-input>
+                                </div>
+                                </form>
+                                <a class="btn btn-link" ng-click="cancel()">Cancel</a>
+                                <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="submit(form)">Update</a>
+                                </td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                <a ng-click="getStudentInfo()" class="btn btn-link">Close</a>
+            </div>
             </td>
-          </tr>
-       	</tbody>
-       </table>
-    </div>
-  </div>
-</section>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+        </div>
+    </section>
 </section>
