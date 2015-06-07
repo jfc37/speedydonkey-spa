@@ -44,7 +44,6 @@
         $scope.vm.cancel = function () {
             $scope.vm.class = copy;
             $scope.vm.updating = false;
-            $scope.form.$setUntouched();
         };
     }
 })();
