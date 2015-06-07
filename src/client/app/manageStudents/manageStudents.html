@@ -55,21 +55,20 @@
                                                         <common-input ng-if="pass.pass_type === 'Clip'" ng-model="pass.clips_remaining" name="clips_remaining" display-name="Clips Remaining" type="number" required="true"></common-input>
                                                         <common-input ng-model="pass.start_date" name="start_date" display-name="Start Date" type="date" required="true"></common-input>
                                                         <common-input ng-model="pass.end_date" name="end_date" display-name="End Date" type="date" required="true"></common-input>
+                                                    </form>
+                                                    <a class="btn btn-link" ng-click="cancel()">Cancel</a>
+                                                    <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="submit(form)">Update</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a ng-click="getStudentInfo()" class="btn btn-link">Close</a>
                                 </div>
-                                </form>
-                                <a class="btn btn-link" ng-click="cancel()">Cancel</a>
-                                <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="submit(form)">Update</a>
-                                </td>
-                                </tr>
-                                </tbody>
-                                </table>
-                                <a ng-click="getStudentInfo()" class="btn btn-link">Close</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            </td>
-            </tr>
-            </tbody>
-            </table>
-        </div>
         </div>
     </section>
 </section>
