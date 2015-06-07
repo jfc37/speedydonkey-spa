@@ -1,0 +1,7 @@
+<div>
+    <h3>Filter</h3>
+    <div ng-repeat="filter in options.fields" ng-form="filterForm">
+        <common-input ng-model="filter.value" name="{{filter.name}}" display-name="{{filter.name}}" type="text" required="false"></common-input>
+        {{filter}}
+    </div>
+</div>

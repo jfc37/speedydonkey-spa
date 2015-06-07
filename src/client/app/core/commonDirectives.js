@@ -143,7 +143,7 @@
                 'type="{{type}}"' +
                 'placeholder="{{displayName}}"' +
                 'ng-model="ngModel"' +
-                'required="{{required}}"/>' +
+                'ng-required="required"/>' +
                 '<span class="help-block has-error">' +
                 '    <span ng-show="hasError(&apos;required&apos;) && getFormElement().$touched">{{displayName}} is required.</span>' +
                 '</span>' +
