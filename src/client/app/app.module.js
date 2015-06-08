@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular.module('app', [
@@ -17,6 +17,7 @@
         'app.core',
         'app.widgets',
         'app.apiCaller',
+        'app.paypal',
 
         /*
          * Feature areas
@@ -41,6 +42,7 @@
         'app.adminReports',
         'app.reportTeacherHours',
         'app.reportProfit',
+        'app.purchasePass'
     ]);
 
 })();

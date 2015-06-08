@@ -21,9 +21,9 @@
 
         function createUser(user) {
             return $q(function (resolve, reject) {
-                apiCaller.postUser(user).success(function(response) {
+                apiCaller.postUser(user).success(function (response) {
                     resolve(response.action_result);
-                }).error(function(response) {
+                }).error(function (response) {
                     reject(response);
                 });
             });
@@ -31,9 +31,9 @@
 
         function createPassOption(passOption) {
             return $q(function (resolve, reject) {
-                apiCaller.postPassOption(passOption).success(function(response) {
+                apiCaller.postPassOption(passOption).success(function (response) {
                     resolve(response.action_result);
-                }).error(function(response) {
+                }).error(function (response) {
                     reject(response);
                 });
             });
@@ -41,9 +41,9 @@
 
         function createLevel(level) {
             return $q(function (resolve, reject) {
-                apiCaller.postLevel(level).success(function(response) {
+                apiCaller.postLevel(level).success(function (response) {
                     resolve(response.action_result);
-                }).error(function(response) {
+                }).error(function (response) {
                     reject(response);
                 });
             });
@@ -51,9 +51,9 @@
 
         function createBlock(levelId) {
             return $q(function (resolve, reject) {
-                apiCaller.postBlock(levelId).success(function(response) {
+                apiCaller.postBlock(levelId).success(function (response) {
                     resolve(response.action_result);
-                }).error(function(response) {
+                }).error(function (response) {
                     reject(response);
                 });
             });
@@ -61,9 +61,9 @@
 
         function createTeacher(userId) {
             return $q(function (resolve, reject) {
-                apiCaller.postTeacher(userId).success(function(response) {
+                apiCaller.postTeacher(userId).success(function (response) {
                     resolve(response.action_result);
-                }).error(function(response) {
+                }).error(function (response) {
                     reject(response);
                 });
             });

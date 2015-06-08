@@ -20,6 +20,7 @@
             studentAttendedClass: studentAttendedClass,
             assignPassToStudent: assignPassToStudent,
             assignPassToCurrentUser: assignPassToCurrentUser,
+            assignPurchasePassToCurrentUser: assignPurchasePassToCurrentUser,
 
             updatePass: updatePass,
 
@@ -36,7 +37,7 @@
 
         function activateUser(key) {
             return $q(function (resolve, revoke) {
-                apiCaller.postUserActivation(key).then(function(response) {
+                apiCaller.postUserActivation(key).then(function (response) {
                     resolve();
                 }, function () {
                     revoke();
@@ -46,7 +47,7 @@
 
         function forgottenPassword(email) {
             return $q(function (resolve, revoke) {
-                apiCaller.postUserPasswordReset(email).then(function(response) {
+                apiCaller.postUserPasswordReset(email).then(function (response) {
                     resolve();
                 }, function () {
                     revoke();
@@ -56,7 +57,7 @@
 
         function resetPassword(key, password) {
             return $q(function (resolve, revoke) {
-                apiCaller.putUserPasswordReset(key, password).then(function(response) {
+                apiCaller.putUserPasswordReset(key, password).then(function (response) {
                     resolve();
                 }, function (response) {
                     revoke(response.data.validation_errors);
@@ -66,7 +67,7 @@
 
         function updateUser(user) {
             return $q(function (resolve, revoke) {
-                apiCaller.putCurrentUser(user).then(function(response) {
+                apiCaller.putCurrentUser(user).then(function (response) {
                     resolve();
                 }, function (response) {
                     revoke(response.data.validation_errors);
@@ -78,7 +79,7 @@
 
         function enrolInBlock(enrolment) {
             return $q(function (resolve, revoke) {
-                apiCaller.postBlockEnrolment(enrolment).then(function(response) {
+                apiCaller.postBlockEnrolment(enrolment).then(function (response) {
                     resolve();
                 }, function () {
                     revoke();
@@ -101,6 +102,12 @@
         function assignPassToCurrentUser(passOptionId, pass) {
             return $q(function (resolve, revoke) {
                 apiCaller.postCurrentUserPassAssignment(passOptionId, pass).then(resolve, revoke);
+            });
+        }
+
+        function assignPurchasePassToCurrentUser(passOptionId, pass) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postCurrentUserPrepurchasePass(passOptionId, pass).then(resolve, revoke);
             });
         }
 

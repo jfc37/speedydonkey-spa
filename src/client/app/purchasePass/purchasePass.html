@@ -1,0 +1,40 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+
+            <div ng-show="vm.step === vm.steps[0]">
+                <div class="row">
+                    <h1>Pass Selection</h1>
+                    <div ng-hide="vm.arePassesLoading">
+                        <div ng-show="vm.passOptions.length > 0">
+                            <p class="lead">Select the pass that works for you</p>
+                            <div class="radio" data-ng-repeat="pass in vm.passOptions">
+                                <label>
+                                    <input type="radio" name="passOptions" data-ng-model="$parent.vm.selectedPass" ng-value="pass"> {{pass.description}} - ${{pass.cost}}
+                                </label>
+                            </div>
+                        </div>
+                        <p ng-show="vm.passOptions.length === 0">
+                            There are no pass options available
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary" ng-disabled="!vm.selectedPass" ng-click="vm.prepurchase()">Payment Options</button>
+
+                </div>
+            </div>
+
+            <div ng-show="vm.step === vm.steps[1]">
+                <div class="row">
+                    <h1>Payment</h1>
+                    <div>
+                        <p class="lead">Select how you want to pay for</p>
+
+                        <paypal-button business="{{vm.paypalConfig.merchantId}}" language-code="en_US" currency-code="NZD" item-name="{{vm.selectedPass.description}}" amount="{{vm.selectedPass.cost}}" pass-id={{vm.prepurchasedPassId}}></paypal-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

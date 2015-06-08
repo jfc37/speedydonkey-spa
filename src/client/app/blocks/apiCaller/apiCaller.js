@@ -5,10 +5,10 @@
         .module('app.apiCaller')
         .factory('apiCaller', apiCaller);
 
-    apiCaller.$inject = ['$http', 'config'];
+    apiCaller.$inject = ['$http', '$q', 'config'];
 
     /* @ngInject */
-    function apiCaller($http, config) {
+    function apiCaller($http, $q, config) {
         var service = {
 
             postUserActivation: postUserActivation,
@@ -30,6 +30,8 @@
 
             postPassAssignment: postPassAssignment,
             postCurrentUserPassAssignment: postCurrentUserPassAssignment,
+
+            postCurrentUserPrepurchasePass: postCurrentUserPrepurchasePass,
 
             getBlock: getBlock,
             searchBlock: searchBlock,
@@ -157,6 +159,14 @@
         function postCurrentUserPassAssignment(passOptionId, pass) {
             var url = baseUrl + 'users/current/passtemplates/' + passOptionId;
             return $http.post(url, pass);
+        }
+
+        function postCurrentUserPrepurchasePass(passOptionId, pass) {
+            return $q.when({
+                id: 1
+            });
+            //            var url = baseUrl + 'users/current/passtemplates/' + passOptionId + '/prepurchase';
+            //            return $http.post(url, pass);
         }
 
         function getBlock(blockId) {

@@ -43,10 +43,10 @@
         };
     }
 
-    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger', 'routehelper', 'blockUI'];
+    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger', 'routehelper', 'blockUI', 'config'];
 
     /* @ngInject */
-    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, blockUI) {
+    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, blockUI, config) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -57,6 +57,8 @@
         vm.arePassesLoading = true;
         vm.blockGrouping = [];
         vm.selectedPass = "";
+
+        vm.paypalConfig = config.paypal;
 
         vm.getClassType = function (block) {
             var blockName = block.name.toLowerCase();

@@ -23,6 +23,10 @@
         appErrorPrefix: '[<company> Error] ', //Configure the exceptionHandler decorator
         appTitle: '<company>',
         apiUrl: '<apiUrl>',
+        paypal: {
+            merchantId: '<paypal_merchantId>',
+            notifyRoute: '/paypal/confirmation/'
+        },
         version: '3.0.0'
     };
 
