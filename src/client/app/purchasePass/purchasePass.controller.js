@@ -20,7 +20,12 @@
 
         vm.paypalConfig = config.paypal;
 
-        vm.prepurchase = function () {
+        vm.shouldFadePass = function (pass) {
+            return vm.selectedPass && vm.selectedPass !== pass;
+        }
+
+        vm.prepurchase = function (pass) {
+            vm.selectedPass = pass;
             blockUI.start();
             purchasePassService.prepurchasePass(vm.selectedPass).then(function (prepurchasedPass) {
                 blockUI.stop();
