@@ -56,7 +56,15 @@
                     var pass = {
                         payment_status: 'prepurchase'
                     };
-                    dataUpdateService.assignPurchasePassToCurrentUser(passOption.id, pass).then(resolve, revoke);
+                    dataUpdateService.assignPrepurchasePassToCurrentUser(passOption.id, pass).then(function (response) {
+                        if (!response || !response.data) {
+                            revoke();
+                        } else if (!response.data.validation_result.is_valid) {
+                            revoke(response.data.validation_result);
+                        } else {
+                            resolve(response.data.action_result);
+                        }
+                    });
                 }
             });
         }

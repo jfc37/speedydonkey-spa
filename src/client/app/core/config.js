@@ -25,7 +25,7 @@
         apiUrl: 'api-speedydonkey.azurewebsites.net',
         paypal: {
             merchantId: 'placid.joe@gmail.com',
-            notifyRoute: '/paypal/confirmation/'
+            notifyRoute: '/api/paypal/confirmation/'
         },
         version: '3.0.0'
     };

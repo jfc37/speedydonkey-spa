@@ -25,7 +25,7 @@
         apiUrl: '<apiUrl>',
         paypal: {
             merchantId: '<paypal_merchantId>',
-            notifyRoute: '/paypal/confirmation/'
+            notifyRoute: '/api/paypal/confirmation/'
         },
         version: '3.0.0'
     };

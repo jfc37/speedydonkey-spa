@@ -20,7 +20,7 @@
             studentAttendedClass: studentAttendedClass,
             assignPassToStudent: assignPassToStudent,
             assignPassToCurrentUser: assignPassToCurrentUser,
-            assignPurchasePassToCurrentUser: assignPurchasePassToCurrentUser,
+            assignPrepurchasePassToCurrentUser: assignPrepurchasePassToCurrentUser,
 
             updatePass: updatePass,
 
@@ -105,7 +105,7 @@
             });
         }
 
-        function assignPurchasePassToCurrentUser(passOptionId, pass) {
+        function assignPrepurchasePassToCurrentUser(passOptionId, pass) {
             return $q(function (resolve, revoke) {
                 apiCaller.postCurrentUserPrepurchasePass(passOptionId, pass).then(resolve, revoke);
             });
