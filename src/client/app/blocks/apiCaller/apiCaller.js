@@ -71,7 +71,8 @@
             getProfitReport: getProfitReport,
 
             getAnnouncements: getAnnouncements,
-            postAnnouncement: postAnnouncement
+            postAnnouncement: postAnnouncement,
+            deleteAnnouncement: deleteAnnouncement
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -326,6 +327,11 @@
         function postAnnouncement(announcement) {
             var url = baseUrl + 'announcements';
             return $http.post(url, announcement);
+        }
+
+        function deleteAnnouncement(id) {
+            var url = baseUrl + 'announcements/' + id;
+            return $http.delete(url);
         }
     }
 })();

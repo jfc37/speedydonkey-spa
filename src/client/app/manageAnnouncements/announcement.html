@@ -7,7 +7,7 @@
     </div>
     <div>
         <div class="checkbox">
-            <input type="checkbox" ng-model="ngModel.notifyAll"> Everyone
+            <input type="checkbox" ng-model="ngModel.notify_all"> Everyone
         </div>
         <div class="checkbox" ng-repeat="block in vm.blocks | orderBy: 'name'" ng-if="!ngModel.notifyAll">
             <input type="checkbox" name="ngModel.receivers[]" value="{{block.name}}" ng-checked="ngModel.receivers.indexOf(block) > -1" ng-click="vm.toggleReceiver(block)"> {{block.name}} - starting
@@ -16,13 +16,13 @@
 
         <div ng-if="ngModel.type === 'banner'">
 
-            <common-date-time-input ng-model="ngModel.start_date" name="start_date" display-name="Start Date" required="true"></common-date-time-input>
-            <common-date-time-input ng-model="ngModel.end_date" name="end_date" display-name="End Date" required="true"></common-date-time-input>
+            <common-date-time-input ng-model="ngModel.show_from" name="show_from" display-name="Show From" required="true"></common-date-time-input>
+            <common-date-time-input ng-model="ngModel.show_until" name="show_until" display-name="Show Until" required="true"></common-date-time-input>
         </div>
 
         <common-input ng-model="ngModel.message" name="message" display-name="Message" type="text" required="true">
         </common-input>
-        <a class="btn btn-default" ng-click="options.cancel(form, ngModel)">{{options.cancelText}}</a>
+        <a class="btn btn-default" ng-click="options.cancel(ngModel)">{{options.cancelText}}</a>
         <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="options.submit(ngModel)">{{options.submitText}}</a>
 
     </div>

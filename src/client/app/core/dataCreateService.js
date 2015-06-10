@@ -69,9 +69,10 @@
                 });
             });
         }
+
         function createAnnouncement(announcement) {
             return $q(function (resolve, reject) {
-                apiCaller.postAnnouncement(annoucement).success(function (response) {
+                apiCaller.postAnnouncement(announcement).success(function (response) {
                     resolve(response.action_result);
                 }).error(function (response) {
                     reject(response);

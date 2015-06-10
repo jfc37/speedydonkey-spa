@@ -19,16 +19,15 @@
 
         function create(announcement) {
             return $q(function (resolve, revoke) {
-                resolve(announcement);
-                //                dataCreateService.createAnnouncement(announcement).then(function (createdAnnouncement) {
-                //                    resolve(createdAnnouncement);
-                //                }, function(response) {
-                //                    if (response.validation_result !== undefined){
-                //                        revoke(response.validation_result.validation_errors);
-                //                    } else {
-                //                        revoke();
-                //                    }
-                //                });
+                dataCreateService.createAnnouncement(announcement).then(function (createdAnnouncement) {
+                    resolve(createdAnnouncement);
+                }, function (response) {
+                    if (response.validation_result !== undefined) {
+                        revoke(response.validation_result.validation_errors);
+                    } else {
+                        revoke();
+                    }
+                });
             });
         }
 

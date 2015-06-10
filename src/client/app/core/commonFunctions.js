@@ -32,6 +32,14 @@
         };
     }
 
+    if (!Array.prototype.select) {
+        Array.prototype.select = function (prop) {
+            return this.map(function (item) {
+                return item[prop];
+            });
+        };
+    }
+
     angular
         .module('app.core')
         .factory('commonFunctions', commonFunctions);

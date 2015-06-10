@@ -5,15 +5,24 @@
         .module('app.manageAnnouncements')
         .controller('ManageAnnouncements', ManageAnnouncements);
 
-    ManageAnnouncements.$inject = ['$q', 'logger', 'manageAnnouncementsService', 'blockUI'];
+    ManageAnnouncements.$inject = ['$q', 'logger', 'manageAnnouncementsService', 'blockUI', 'selectOptionService'];
 
     /* @ngInject */
-    function ManageAnnouncements($q, logger, manageAnnouncementsService, blockUI) {
+    function ManageAnnouncements($q, logger, manageAnnouncementsService, blockUI, selectOptionService) {
         /*jshint validthis: true */
         var vm = this;
         vm.announcements = [];
 
-        vm.addingNew = false;
+        vm.showReceivers = function (announcement) {
+            if (announcement.notify_all) {
+                return 'Everyone';
+            }
+            return announcement.receivers.select('name').join(', ');
+        };
+
+        vm.showType = function (type) {
+            return selectOptionService.getAnnouncementTypes().getFirstOrDefault('value', type).display;
+        };
 
         vm.addNew = function () {
             vm.newAnnouncement = {};
@@ -68,15 +77,19 @@
         };
 
         vm.delete = function (announcement) {
-            vm.announcements.remove(announcement);
+            manageAnnouncementsService.deleteAnnouncement(announcement.id).then(function () {
+                vm.announcements.remove(announcement);
+                logger.success('Deleted announcement');
+            }, function () {
+                logger.error('Issue deleting announcement');
+            });
         };
 
         activate();
 
         function activate() {
             blockUI.start();
-            var promises = [getAnnouncements()];
-            return $q.all(promises)
+            return getAnnouncements()
                 .then(function () {
                     blockUI.stop();
                     logger.info('Activated Manage Announcements');
@@ -84,7 +97,7 @@
         }
 
         function getAnnouncements() {
-            manageAnnouncementsService.getAnnouncements().then(function (announcements) {
+            return manageAnnouncementsService.getAnnouncements().then(function (announcements) {
                 vm.announcements = announcements;
             }, function () {
                 logger.error('Failed to get announcements');
