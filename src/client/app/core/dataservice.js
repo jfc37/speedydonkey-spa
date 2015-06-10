@@ -39,7 +39,9 @@
 
             getAllTeachers: getAllTeachers,
 
-            getProfitReport: getProfitReport
+            getProfitReport: getProfitReport,
+
+            getAnnouncements: getAnnouncements
         };
 
         return service;
@@ -69,12 +71,12 @@
 
             var q = '';
             searchParameters.forEach(function (search, index) {
-                if (index > 0){
+                if (index > 0) {
                     q = q + ',';
                 }
                 q = q + search.field + '_' + search.condition;
                 if (search.value) {
-                    q = q +  '_' + search.value;
+                    q = q + '_' + search.value;
                 }
             });
 
@@ -174,7 +176,7 @@
 
             var q = '';
             searchParameters.forEach(function (search, index) {
-                if (index > 0){
+                if (index > 0) {
                     q = q + ',';
                 }
                 q = q + search.field + '_' + search.condition + '_' + search.value;
@@ -248,6 +250,16 @@
         function getProfitReport(starting, ending) {
             return $q(function (resolve, reject) {
                 apiCaller.getProfitReport(starting, ending).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getAnnouncements() {
+            return $q(function (resolve, reject) {
+                apiCaller.getAnnouncements().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

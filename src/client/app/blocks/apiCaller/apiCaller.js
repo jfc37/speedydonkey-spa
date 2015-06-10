@@ -68,7 +68,10 @@
             getTeacher: getTeacher,
             deleteTeacher: deleteTeacher,
 
-            getProfitReport: getProfitReport
+            getProfitReport: getProfitReport,
+
+            getAnnouncements: getAnnouncements,
+            postAnnouncement: postAnnouncement
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -171,7 +174,9 @@
         function searchBlock(search) {
             var url = baseUrl + 'blocks?q=' + search;
 
-            return $http.get(url);
+            return $http.get(url, {
+                cache: true
+            });
         }
 
         function postBlockEnrolment(enrolment) {
@@ -311,6 +316,16 @@
         function getProfitReport(starting, ending) {
             var url = baseUrl + 'report/profit?from=' + starting + '&to=' + ending;
             return $http.get(url);
+        }
+
+        function getAnnouncements() {
+            var url = baseUrl + 'announcements';
+            return $http.get(url);
+        }
+
+        function postAnnouncement(announcement) {
+            var url = baseUrl + 'announcements';
+            return $http.post(url, announcement);
         }
     }
 })();
