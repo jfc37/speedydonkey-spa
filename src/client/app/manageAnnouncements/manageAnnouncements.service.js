@@ -45,12 +45,11 @@
             });
         }
 
-        function getAnnouncements() {
-            return $q(function (resolve, revoke) {
-                dataservice.getAnnouncements().then(function (announcements) {
-                    resolve(announcements);
-                }, revoke);
-            });
+        function getAnnouncements() {return $q(function (resolve, revoke) {
+    dataservice.getAnnouncements().then(function (announcements) {
+        resolve(announcements);
+    }, revoke);
+});
         }
 
         function deleteAnnouncement(id) {
