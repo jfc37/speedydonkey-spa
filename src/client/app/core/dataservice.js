@@ -22,6 +22,7 @@
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
             getCurrentUserClaims: getCurrentUserClaims,
+            getCurrentUserAnnouncements: getCurrentUserAnnouncements,
 
             getAllBlocks: getAllBlocks,
             getAllActiveBlocks: getAllActiveBlocks,
@@ -136,6 +137,16 @@
         function getCurrentUserClaims() {
             return $q(function (resolve, reject) {
                 apiCaller.getCurrentUserClaims().then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function getCurrentUserAnnouncements() {
+            return $q(function (resolve, reject) {
+                apiCaller.getCurrentUserAnnouncements().then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

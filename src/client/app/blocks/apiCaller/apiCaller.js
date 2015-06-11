@@ -27,6 +27,7 @@
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
             getCurrentUserClaims: getCurrentUserClaims,
+            getCurrentUserAnnouncements: getCurrentUserAnnouncements,
 
             postPassAssignment: postPassAssignment,
             postCurrentUserPassAssignment: postCurrentUserPassAssignment,
@@ -150,6 +151,11 @@
 
         function getCurrentUserClaims() {
             var url = baseUrl + 'users/current/claims';
+            return $http.get(url);
+        }
+
+        function getCurrentUserAnnouncements() {
+            var url = baseUrl + 'users/current/announcements';
             return $http.get(url);
         }
 
