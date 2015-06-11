@@ -21,9 +21,9 @@
                                 </div>
                             </td>
                             <td>{{vm.showReceivers(announcement)}}</td>
-                            <td>{{announcement.message | limitTo:20}}</td>
+                            <td>{{announcement.message}}</td>
                             <td ng-hide="vm.updating">
-                                <a ng-click="vm.startUpdating(announcement)" class="btn btn-link">Manage</a>
+<!--                                <a ng-click="vm.startUpdating(announcement)" class="btn btn-link">Manage</a>-->
                                 <a ng-click="vm.delete(announcement)" class="btn link">Delete</a>
                             </td>
                         </tr>

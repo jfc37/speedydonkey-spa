@@ -1,7 +1,7 @@
-<div ng-form="announcementForm">
+<div ng-form="form">
 
     <div>
-        <select ng-options="type.value as type.display for type in vm.announcementTypes" ng-model="ngModel.type">
+        <select ng-required ng-options="type.value as type.display for type in vm.announcementTypes" ng-model="ngModel.type">
             <option value="">Please select a type</option>
         </select>
     </div>
