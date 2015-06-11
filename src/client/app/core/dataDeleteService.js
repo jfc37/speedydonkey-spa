@@ -17,55 +17,62 @@
             deleteClass: deleteClass,
             deleteTeacher: deleteTeacher,
             deleteUser: deleteUser,
-            deletePass: deletePass
+            deletePass: deletePass,
+            deleteAnnouncement: deleteAnnouncement
         };
 
-        function studentUnattendedClass(classId, studentId){
+        function studentUnattendedClass(classId, studentId) {
 
             return $q(function (resolve, revoke) {
                 apiCaller.deleteClassAttendance(classId, studentId).then(resolve, revoke);
             });
         }
 
-        function deletePassOption(id){
+        function deletePassOption(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.deletePassOption(id).then(resolve, revoke);
             });
         }
 
-        function deleteLevel(id){
+        function deleteLevel(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.deleteLevel(id).then(resolve, revoke);
             });
         }
 
-        function deleteBlock(id){
+        function deleteBlock(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.deleteBlock(id).then(resolve, revoke);
             });
         }
 
-        function deleteClass(id){
+        function deleteClass(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.deleteClass(id).then(resolve, revoke);
             });
         }
 
-        function deleteTeacher(id){
+        function deleteTeacher(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.deleteTeacher(id).then(resolve, revoke);
             });
         }
 
-        function deleteUser(id){
+        function deleteUser(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.deleteUser(id).then(resolve, revoke);
             });
         }
 
-        function deletePass(id){
+        function deletePass(id) {
             return $q(function (resolve, revoke) {
                 apiCaller.deletePass(id).then(resolve, revoke);
+            });
+        }
+
+        function deleteAnnouncement(id) {
+            return $q(function (resolve, revoke) {
+                apiCaller.deleteAnnouncement(id).then(resolve, revoke);
             });
         }
 
