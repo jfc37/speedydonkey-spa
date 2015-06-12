@@ -14,7 +14,8 @@
         var service = {
             getSchedule: getSchedule,
             getCurrentPasses: getCurrentPasses,
-            getClassesForCheckIn: getClassesForCheckIn
+            getClassesForCheckIn: getClassesForCheckIn,
+            getAnnouncements: getAnnouncements
         };
 
         function getSchedule() {
@@ -65,6 +66,14 @@
                     }
                     reject(response);
                 });
+            });
+        }
+
+        function getAnnouncements() {
+            return $q(function (resolve, revoke) {
+                dataservice.getAnnouncements().then(function (announcements) {
+                    resolve(announcements);
+                }, revoke);
             });
         }
 
