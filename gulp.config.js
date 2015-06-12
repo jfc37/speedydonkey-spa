@@ -22,7 +22,7 @@ module.exports = function () {
         build: './build/',
         client: client,
         css: temp + 'styles.css',
-        fonts: './bower_components/font-awesome/fonts/**/*.*',
+        fonts: ['./bower_components/bootstrap/fonts/**/*.*', './bower_components/font-awesome/fonts/**/*.*'],
         html: clientApp + '**/*.html',
         htmltemplates: clientApp + '**/*.html',
         images: client + 'images/**/*.*',
@@ -62,7 +62,7 @@ module.exports = function () {
         /**
          * Browser Sync
          **/
-        browerReloadDelay: 1000,
+        browerReloadDelay: 7000,
 
         /**
          * Bower and NPM locations

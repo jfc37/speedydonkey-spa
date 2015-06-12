@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
     <link rel="stylesheet" href="/bower_components/angular-block-ui/dist/angular-block-ui.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.min.css" />
     <!-- endbower -->
 
     <!-- endbuild -->
@@ -86,6 +88,7 @@
     <script src="/src/client/app/forgottenPassword/forgottenPassword.module.js"></script>
     <script src="/src/client/app/layout/layout.module.js"></script>
     <script src="/src/client/app/login/logon.module.js"></script>
+    <script src="/src/client/app/manageAnnouncements/manageAnnouncements.module.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlocks.module.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.module.js"></script>
     <script src="/src/client/app/manageLevels/manageLevels.module.js"></script>
@@ -99,10 +102,10 @@
     <script src="/src/client/app/resetPassword/resetPassword.module.js"></script>
     <script src="/src/client/app/userActivation/userActivation.module.js"></script>
     <script src="/src/client/app/widgets/widgets.module.js"></script>
-    <script src="/src/client/app/blocks/apiCaller/apiCaller.module.js"></script>
     <script src="/src/client/app/blocks/exception/exception.module.js"></script>
     <script src="/src/client/app/blocks/logger/logger.module.js"></script>
     <script src="/src/client/app/blocks/router/router.module.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/apiCaller.module.js"></script>
     <script src="/src/client/app/adminDashboard/adminDashboard.controller.js"></script>
     <script src="/src/client/app/adminDashboard/config.route.js"></script>
     <script src="/src/client/app/adminReports/adminReports.controller.js"></script>
@@ -135,6 +138,10 @@
     <script src="/src/client/app/layout/sidebar.js"></script>
     <script src="/src/client/app/login/config.route.js"></script>
     <script src="/src/client/app/login/login.js"></script>
+    <script src="/src/client/app/manageAnnouncements/config.route.js"></script>
+    <script src="/src/client/app/manageAnnouncements/manageAnnouncement.directive.js"></script>
+    <script src="/src/client/app/manageAnnouncements/manageAnnouncements.controller.js"></script>
+    <script src="/src/client/app/manageAnnouncements/manageAnnouncements.service.js"></script>
     <script src="/src/client/app/manageBlocks/config.route.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlock.controller.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlocks.controller.js"></script>
@@ -177,12 +184,13 @@
     <script src="/src/client/app/userActivation/userActivation.js"></script>
     <script src="/src/client/app/userActivation/userActivationService.js"></script>
     <script src="/src/client/app/widgets/ccSidebar.js"></script>
-    <script src="/src/client/app/blocks/apiCaller/apiCaller.js"></script>
     <script src="/src/client/app/blocks/exception/exception-handler.js"></script>
     <script src="/src/client/app/blocks/exception/exception.js"></script>
     <script src="/src/client/app/blocks/logger/logger.js"></script>
     <script src="/src/client/app/blocks/router/routehelper.js"></script>
     <script src="/src/client/app/core/directives/filterDirective.js"></script>
+    <script src="/src/client/app/core/directives/note.directive.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/apiCaller.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->

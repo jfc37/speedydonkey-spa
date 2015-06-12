@@ -31,14 +31,6 @@
             vm.filterClasses();
         }
 
-        function getClasses() {
-            manageClassesService.getClasses().then(function (classes) {
-                vm.classes = classes;
-            }, function () {
-                logger.error('Failed to get classes');
-            });
-        }
-
         function setupFilter() {
             vm.filter = {
                 startTimeAfter: {

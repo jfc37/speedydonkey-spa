@@ -15,7 +15,7 @@
             postUserPasswordReset: postUserPasswordReset,
             putUserPasswordReset: putUserPasswordReset,
 
-            postUser : postUser,
+            postUser: postUser,
             putCurrentUser: putCurrentUser,
             getUser: getUser,
             getUsers: getUsers,
@@ -27,11 +27,12 @@
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
             getCurrentUserClaims: getCurrentUserClaims,
+            getCurrentUserAnnouncements: getCurrentUserAnnouncements,
 
             postPassAssignment: postPassAssignment,
             postCurrentUserPassAssignment: postCurrentUserPassAssignment,
 
-            getBlock : getBlock,
+            getBlock: getBlock,
             searchBlock: searchBlock,
             postBlockEnrolment: postBlockEnrolment,
 
@@ -68,7 +69,13 @@
             getTeacher: getTeacher,
             deleteTeacher: deleteTeacher,
 
-            getProfitReport: getProfitReport
+            getProfitReport: getProfitReport,
+
+            getAnnouncements: getAnnouncements,
+            postAnnouncement: postAnnouncement,
+            deleteAnnouncement: deleteAnnouncement,
+
+            putNote: putNote
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -81,12 +88,16 @@
 
         function postUserPasswordReset(email) {
             var url = baseUrl + 'users/password/reset';
-            return $http.post(url, {email: email});
+            return $http.post(url, {
+                email: email
+            });
         }
 
         function putUserPasswordReset(key, password) {
             var url = baseUrl + 'users/password/reset/' + key;
-            return $http.put(url, {password: password});
+            return $http.put(url, {
+                password: password
+            });
         }
 
         function postUser(user) {
@@ -145,6 +156,11 @@
             return $http.get(url);
         }
 
+        function getCurrentUserAnnouncements() {
+            var url = baseUrl + 'users/current/announcements';
+            return $http.get(url);
+        }
+
         function postPassAssignment(userId, passOptionId, pass) {
             var url = baseUrl + 'users/' + userId + '/passtemplates/' + passOptionId;
             return $http.post(url, pass);
@@ -167,9 +183,11 @@
         function searchBlock(search) {
             var url = baseUrl + 'blocks?q=' + search;
 
-            return $http.get(url);
+            return $http.get(url, {
+                cache: true
+            });
         }
-        
+
         function postBlockEnrolment(enrolment) {
             var url = baseUrl + 'users/' + enrolment.user_id + '/enrolment';
             return $http.post(url, enrolment);
@@ -201,22 +219,22 @@
             var url = baseUrl + 'classes/' + id + '/attendance';
             return $http.get(url);
         }
-        
+
         function postClassAttendance(classId, studentId) {
             var url = baseUrl + 'classes/' + classId + '/attendance/' + studentId;
             return $http.post(url);
         }
-        
+
         function deleteClassAttendance(classId, studentId) {
             var url = baseUrl + 'classes/' + classId + '/attendance/' + studentId;
             return $http.delete(url);
         }
-        
+
         function putPass(pass) {
             var url = baseUrl + 'passes/' + pass.id;
             return $http.put(url, pass);
         }
-        
+
         function deletePass(id) {
             var url = baseUrl + 'passes/' + id;
             return $http.delete(url);
@@ -294,7 +312,9 @@
 
         function getTeacher() {
             var url = baseUrl + 'teachers';
-            return $http.get(url);
+            return $http.get(url, {
+                cache: true
+            });
         }
 
         function deleteTeacher(userId) {
@@ -305,6 +325,26 @@
         function getProfitReport(starting, ending) {
             var url = baseUrl + 'report/profit?from=' + starting + '&to=' + ending;
             return $http.get(url);
+        }
+
+        function getAnnouncements() {
+            var url = baseUrl + 'announcements';
+            return $http.get(url);
+        }
+
+        function postAnnouncement(announcement) {
+            var url = baseUrl + 'announcements';
+            return $http.post(url, announcement);
+        }
+
+        function deleteAnnouncement(id) {
+            var url = baseUrl + 'announcements/' + id;
+            return $http.delete(url);
+        }
+
+        function putNote(options) {
+            var url = baseUrl + options.type + '/' + options.id + '/notes';
+            return $http.put(url, '\'' + options.note + '\'');
         }
     }
 })();

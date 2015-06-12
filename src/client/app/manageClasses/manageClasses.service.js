@@ -12,7 +12,6 @@
 
         var service = {
             update: update,
-            getClasses: getClasses,
             deleteClass: deleteClass,
             filterClasses: filterClasses
         };
@@ -31,17 +30,6 @@
             });
         }
 
-        function getClasses() {
-            return $q(function (resolve, revoke) {
-                dataservice.getAllActiveClasses().then(function (classes) {
-                    classes.forEach(function (theClass) {
-                        theClass.block = undefined;
-                    });
-                    resolve(classes);
-                }, revoke);
-            });
-        }
-
         function deleteClass(id) {
             return $q(function (resolve, revoke) {
                 dataDeleteService.deleteClass(id).then(resolve, revoke);
@@ -51,6 +39,9 @@
         function filterClasses(filter) {
             return $q(function (resolve, revoke) {
                 dataservice.searchForClasses(filter).then(function (response) {
+                    response.data.forEach(function (theClass) {
+                        theClass.block = undefined;
+                    })
                     resolve(response.data);
                 }, function (response) {
                     if (response.status === 404) {

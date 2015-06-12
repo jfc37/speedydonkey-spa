@@ -1,56 +1,56 @@
 <section class="mainbar">
-  <section class="matter">
-    <div class="container">
-     <div class="row">
-      <h1>Manage Levels <a ng-click="vm.generateForAllLevels()" class="btn btn-default">Generate Blocks For All</a></h1>
-      
-      <table class="table table-hover">
-        <thead>
-          <th>Name</th>
-          <th></th>
-        </thead>
-        <tbody ng-repeat="level in vm.levels" ng-controller="ManageLevel as vm" ng-init="vm.level = level">
-          <tr>
-            <td>{{vm.level.name}}</td>
-            <td>
-              <div ng-hide="vm.updating">
-                <a ng-click="vm.startUpdating()" class="btn btn-link">Manage</a>
-                <a ng-click="vm.generateBlock()" class="btn btn-link">Generate Block</a>
-                <a ng-click="vm.delete()" class="btn btn-link">Delete</a>
-              </div>
-            </td>
-          </tr>
-          <tr ng-show="vm.updating">
-            <td colspan="2">
-              <form novalidate name="form">
-                <div ng-include src="'level.html'">
-                </div>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <h1>Manage Levels <a ng-click="vm.generateForAllLevels()" class="btn btn-default">Generate Blocks For All</a></h1>
 
-    <div ng-controller="NewLevel" class="row">
-      <form ng-show="vm.addingNew" novalidate name="form">
-        <div ng-include src="'level.html'">
+                <table class="table table-hover">
+                    <thead>
+                        <th>Name</th>
+                        <th></th>
+                    </thead>
+                    <tbody ng-repeat="level in vm.levels" ng-controller="ManageLevel as vm" ng-init="vm.level = level">
+                        <tr>
+                            <td>{{vm.level.name}}</td>
+                            <td>
+                                <div ng-hide="vm.updating">
+                                    <a ng-click="vm.startUpdating()" class="btn btn-link">Manage</a>
+                                    <a ng-click="vm.generateBlock()" class="btn btn-link">Generate Block</a>
+                                    <a ng-click="vm.delete()" class="btn btn-link">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-if="vm.updating">
+                            <td colspan="2">
+                                <form novalidate name="form">
+                                    <div ng-include src="'level.html'">
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div ng-controller="NewLevel" class="row">
+                <form ng-show="vm.addingNew" novalidate name="form">
+                    <div ng-include src="'level.html'">
+                    </div>
+                </form>
+                <a class="btn btn-default" ng-hide="vm.addingNew" ng-click="vm.addingNew = true;">Add New Level</a>
+            </div>
         </div>
-      </form>
-      <a class="btn btn-default" ng-hide="vm.addingNew" ng-click="vm.addingNew = true;">Add New Level</a>
-    </div>
-  </div>
-</section>
+    </section>
 </section>
 
 <script type="text/ng-template" id="level.html">
-  <common-input ng-model="vm.level.name" name="name" display-name="Name" type="text" required="true"></common-input>
-  <common-date-time-input ng-model="vm.level.start_time" name="start_time" display-name="Start Time" type="date" required="true"></common-date-time-input>
-  <common-date-time-input ng-model="vm.level.end_time" name="end_time" display-name="End Time" type="datetime-local" required="true"></common-date-time-input>
-  <common-input ng-model="vm.level.classes_in_block" name="classes_in_block" display-name="Number of classes in block" type="number" required="true"></common-input>
-  <common-input ng-model="vm.level.class_minutes" name="class_minutes" display-name="Minutes per class" type="number" required="true"></common-input>
-  <teacher-dropdown ng-model="vm.level.teachers"></teacher-dropdown>
-  <a class="btn btn-default"ng-click="vm.cancel(form)">{{vm.cancelText}}</a>
-  <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="vm.submit(form)">{{vm.submitText}}</a>
-</div>
+    <common-input ng-model="vm.level.name" name="name" display-name="Name" type="text" required="true"></common-input>
+    <common-date-time-input ng-model="vm.level.start_time" name="start_time" display-name="Start Time" type="date" required="true"></common-date-time-input>
+    <common-date-time-input ng-model="vm.level.end_time" name="end_time" display-name="End Time" type="datetime-local" required="true"></common-date-time-input>
+    <common-input ng-model="vm.level.classes_in_block" name="classes_in_block" display-name="Number of classes in block" type="number" required="true"></common-input>
+    <common-input ng-model="vm.level.class_minutes" name="class_minutes" display-name="Minutes per class" type="number" required="true"></common-input>
+    <teacher-dropdown ng-model="vm.level.teachers"></teacher-dropdown>
+    <a class="btn btn-default" ng-click="vm.cancel(form)">{{vm.cancelText}}</a>
+    <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="vm.submit(form)">{{vm.submitText}}</a>
+    </div>
 </script>
