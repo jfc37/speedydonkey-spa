@@ -344,7 +344,7 @@
 
         function putNote(options) {
             var url = baseUrl + options.type + '/' + options.id + '/notes';
-            return $http.put(url, options.note);
+            return $http.put(url, '\'' + options.note + '\'');
         }
     }
 })();

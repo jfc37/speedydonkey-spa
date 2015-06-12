@@ -1,6 +1,6 @@
-<a class="btn btn-link" popover-template="'myPopoverTemplate.html'" popover-append-to-body popover-title="{{vm.title}}">
-    <i class="fa fa-comment"></i>
-</a>
+<span class="cursor" popover-template="'myPopoverTemplate.html'" popover-append-to-body popover-title="{{vm.title}}">
+    <i class="fa" ng-class="{'fa-comment-o': !ngModel.note, 'fa-comment': ngModel.note }"></i>
+</span>
 
 
 <script type="text/ng-template" id="myPopoverTemplate.html">
