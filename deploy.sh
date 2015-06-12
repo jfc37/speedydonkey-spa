@@ -116,7 +116,6 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
 
 eval $NPM_CMD -v
-#eval $NPM_CMD install
 
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
@@ -129,6 +128,7 @@ cd "$DEPLOYMENT_TARGET"
 eval $NPM_CMD install bower -g
 eval $NPM_CMD install bower
 exitWithMessageOnError "installing bower failed"
+./node_modules/.bin/bower cache clean
 ./node_modules/.bin/bower install
 exitWithMessageOnError "bower failed"
 cd - > /dev/null
@@ -147,11 +147,6 @@ echo gulp version is
 ./node_modules/.bin/gulp -v
 echo gonna run build
 ./node_modules/.bin/gulp build
-#./node_modules/.bin/gulp images
-#./node_modules/.bin/gulp fonts
-#./node_modules/.bin/gulp styles
-#./node_modules/.bin/gulp templatecache
-#./node_modules/.bin/gulp wiredep
 exitWithMessageOnError "gulp failed"
 cd - > /dev/null
 fi
