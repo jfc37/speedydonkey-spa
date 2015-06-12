@@ -1,39 +1,39 @@
 {
-  "name": "SpeedyDonkey-Spa",
-  "version": "0.1.1",
-  "description": "Speedy Donkey SPA",
-  "authors": [
+    "name": "SpeedyDonkey-Spa",
+    "version": "0.1.1",
+    "description": "Speedy Donkey SPA",
+    "authors": [
     "jfc37"
   ],
-  "license": "MIT",
-  "homepage": "https://github.com/jfc37/studybuddy-spa.git",
-  "ignore": [
+    "license": "MIT",
+    "homepage": "https://github.com/jfc37/studybuddy-spa.git",
+    "ignore": [
     "**/.*",
     "node_modules",
     "bower_components"
   ],
-  "devDependencies": {
-    "angular-mocks": "^1.2.23"
-  },
-  "dependencies": {
-    "angular": "^1.2.23",
-    "toastr": "^2.0.1",
-    "bootstrap": "^3.1.1",
-    "moment": "^2.6.0",
-    "jquery": "^2.1.0",
-    "angular-route": "^1.2.23",
-    "angular-animate": "^1.2.23",
-    "angular-sanitize": "^1.2.23",
-    "font-awesome": "^4.0.3",
-    "extras.angular.plus": "^0.9.0",
-    "angular-ui-bootstrap-datetimepicker": "~0.11.2",
-    "angular-cookies": "1.3.15",
-    "angular-block-ui": "~0.2.0",
-    "angular-bootstrap": "~0.13.0",
-    "font-awesome-animation": "~0.0.6"
-  },
-  "resolutions": {
-    "angular": "1.3.15",
-    "angular-bootstrap": "~0.13.0"
-  }
+    "devDependencies": {
+        "angular-mocks": "^1.2.23"
+    },
+    "dependencies": {
+        "angular": "^1.2.23",
+        "toastr": "^2.0.1",
+        "bootstrap": "^3.1.1",
+        "moment": "^2.6.0",
+        "jquery": "^2.1.0",
+        "angular-route": "^1.2.23",
+        "angular-animate": "^1.2.23",
+        "angular-sanitize": "^1.2.23",
+        "font-awesome": "^4.0.3",
+        "extras.angular.plus": "^0.9.0",
+        "angular-ui-bootstrap-datetimepicker": "~0.11.2",
+        "angular-cookies": "1.3.15",
+        "angular-block-ui": "~0.2.0",
+        "angular-bootstrap": "^0.13.0",
+        "font-awesome-animation": "~0.0.6"
+    },
+    "resolutions": {
+        "angular": "1.3.15",
+        "angular-bootstrap": "^0.13.0"
+    }
 }
