@@ -28,8 +28,8 @@
                         <div ng-repeat="student in vm.students track by $index">
                             <div class="form-group">
                                 <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)"> {{student.full_name}}
-                                <pass-status ng-model='student' ng-click="student.openPassSelection = !student.openPassSelection"></pass-status>
                                 <note ng-model="student" type="user"></note>
+                                <pass-status ng-model='student' ng-click="student.openPassSelection = !student.openPassSelection"></pass-status>
                             </div>
 
                             <div class="panel panel-default" ng-show="student.openPassSelection">
