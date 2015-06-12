@@ -17,7 +17,7 @@
     /* @ngInject */
     function displayDate() {
         var directive = {
-            template: '&nbsp;{{display}}&nbsp;',
+            template: '&nbsp;{{display}}',
             scope: {
                 ngModel: '='
             },

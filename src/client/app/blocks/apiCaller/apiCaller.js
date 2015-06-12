@@ -73,7 +73,9 @@
 
             getAnnouncements: getAnnouncements,
             postAnnouncement: postAnnouncement,
-            deleteAnnouncement: deleteAnnouncement
+            deleteAnnouncement: deleteAnnouncement,
+
+            putNote: putNote
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -338,6 +340,11 @@
         function deleteAnnouncement(id) {
             var url = baseUrl + 'announcements/' + id;
             return $http.delete(url);
+        }
+
+        function putNote(options) {
+            var url = baseUrl + options.type + '/' + options.id + '/notes';
+            return $http.put(url, '\'' + options.note + '\'');
         }
     }
 })();
