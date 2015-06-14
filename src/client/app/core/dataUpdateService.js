@@ -30,7 +30,9 @@
 
             updateBlock: updateBlock,
 
-            updateClass: updateClass
+            updateClass: updateClass,
+
+            updateNote: updateNote
         };
 
         return service;
@@ -138,6 +140,12 @@
         function updateClass(theClass) {
             return $q(function (resolve, revoke) {
                 apiCaller.putClass(theClass).then(resolve, revoke);
+            });
+        }
+
+        function updateNote(options) {
+            return $q(function (resolve, revoke) {
+                apiCaller.putNote(options).then(resolve, revoke);
             });
         }
     }

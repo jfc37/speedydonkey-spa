@@ -10,7 +10,8 @@
     /* @ngInject */
     function selectOptionService() {
         var service = {
-            getPassTypes: getPassTypes
+            getPassTypes: getPassTypes,
+            getAnnouncementTypes: getAnnouncementTypes
         };
 
         function getPassTypes() {
@@ -23,6 +24,19 @@
                     display: 'Unlimited',
                     value: 'unlimited'
                 },
+            ];
+        }
+
+        function getAnnouncementTypes() {
+            return [
+                {
+                    display: 'Dashboard Banner',
+                    value: 'banner'
+                },
+                {
+                    display: 'Email',
+                    value: 'email'
+                }
             ];
         }
 

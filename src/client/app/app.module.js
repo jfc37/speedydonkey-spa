@@ -35,6 +35,7 @@
         'app.adminDashboard',
         'app.managePassOptions',
         'app.manageLevels',
+        'app.manageAnnouncements',
         'app.manageBlocks',
         'app.manageClasses',
         'app.manageTeachers',

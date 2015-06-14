@@ -1,0 +1,33 @@
+<span class="note-icon" popover-trigger="click" popover-template="'myPopoverTemplate.html'" popover-append-to-body popover-title="{{vm.title}}">
+    <i class="fa fa-comment-o" ng-class="{'faa-pulse animated ': ngModel.note }"></i>
+</span>
+
+
+<script type="text/ng-template" id="myPopoverTemplate.html">
+    <div>
+        <div ng-hide="vm.editing">
+            <div class="row">
+                <div class="col-xs-12">
+                    {{vm.displayNote()}}
+                </div>
+            </div>
+            <hr>
+            <div>
+                <a ng-show="ngModel.note" ng-click="vm.remove()" class="btn btn-default">Delete</a>
+                <a ng-click="vm.edit()" class="btn btn-default pull-right">Edit</a>
+            </div>
+        </div>
+        <div ng-show="vm.editing">
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <input type="text" ng-model="ngModel.note" class="form-control">
+                </div>
+            </div>
+            <hr>
+            <div>
+                <a class="btn btn-default" ng-click="vm.cancel()">Cancel</a>
+                <a class="btn btn-default pull-right" ng-click="vm.save()">Save</a>
+            </div>
+        </div>
+    </div>
+</script>

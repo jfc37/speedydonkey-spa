@@ -14,7 +14,8 @@
             createPassOption: createPassOption,
             createLevel: createLevel,
             createBlock: createBlock,
-            createTeacher: createTeacher
+            createTeacher: createTeacher,
+            createAnnouncement: createAnnouncement
         };
 
         return service;
@@ -62,6 +63,16 @@
         function createTeacher(userId) {
             return $q(function (resolve, reject) {
                 apiCaller.postTeacher(userId).success(function (response) {
+                    resolve(response.action_result);
+                }).error(function (response) {
+                    reject(response);
+                });
+            });
+        }
+
+        function createAnnouncement(announcement) {
+            return $q(function (resolve, reject) {
+                apiCaller.postAnnouncement(announcement).success(function (response) {
                     resolve(response.action_result);
                 }).error(function (response) {
                     reject(response);
