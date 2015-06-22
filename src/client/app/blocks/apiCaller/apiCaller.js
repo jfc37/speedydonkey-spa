@@ -77,7 +77,9 @@
 
             putNote: putNote,
 
-            beginExpressCheckout: beginExpressCheckout
+            beginExpressCheckout: beginExpressCheckout,
+            confirmExpressCheckout: confirmExpressCheckout,
+            completeExpressCheckout: completeExpressCheckout
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -352,6 +354,16 @@
         function beginExpressCheckout(options) {
             var url = baseUrl + 'paypal/begin';
             return $http.post(url, options);
+        }
+
+        function confirmExpressCheckout(token) {
+            var url = baseUrl + 'paypal/confirm';
+            return $http.post(url, token);
+        }
+
+        function completeExpressCheckout(token) {
+            var url = baseUrl + 'paypal/complete';
+            return $http.post(url, token);
         }
     }
 })();

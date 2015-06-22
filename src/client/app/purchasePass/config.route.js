@@ -26,6 +26,15 @@
                         content: '<i class="fa fa-credit-card"></i> Purchase Pass'
                     }
                 }
+            },
+            {
+                url: '/purchasePass/confirm',
+                config: {
+                    title: 'confirmPurcahse',
+                    controller: 'ConfirmPurchase',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/purchasePass/confirm.html'
+                }
             }
         ];
     }

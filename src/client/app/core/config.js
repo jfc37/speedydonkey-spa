@@ -23,11 +23,11 @@
         appErrorPrefix: '[Speedy Donkey LOCAL Error] ', //Configure the exceptionHandler decorator
         appTitle: 'Speedy Donkey LOCAL',
         apiUrl: 'api-speedydonkey.azurewebsites.net',
-        spaUrl: 'spa-speedydonkey.azurewebsites.net',
+        spaUrl: 'localhost:3000',
         paypal: {
             merchantId: 'placid.joe@gmail.com',
-            returnUrl: '/',
-            cancelUrl: '/',
+            returnUrl: '/#/purchasePass/confirm',
+            cancelUrl: '/#',
             paymentUrl: 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=',
 
         },
