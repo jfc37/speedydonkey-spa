@@ -22,12 +22,12 @@
 
         vm.shouldFadePass = function (pass) {
             return vm.selectedPass && vm.selectedPass !== pass;
-        }
+        };
 
-        vm.prepurchase = function (pass) {
+        vm.beginPurchase = function (pass) {
             vm.selectedPass = pass;
             blockUI.start();
-            purchasePassService.prepurchasePass(vm.selectedPass).then(function (prepurchasedPass) {
+            purchasePassService.beginPurchase(vm.selectedPass).then(function (prepurchasedPass) {
                 blockUI.stop();
                 vm.step = vm.steps[1];
                 vm.prepurchasedPassId = prepurchasedPass.id;

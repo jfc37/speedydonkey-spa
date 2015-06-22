@@ -32,8 +32,6 @@
             postPassAssignment: postPassAssignment,
             postCurrentUserPassAssignment: postCurrentUserPassAssignment,
 
-            postCurrentUserPrepurchasePass: postCurrentUserPrepurchasePass,
-
             getBlock: getBlock,
             searchBlock: searchBlock,
             postBlockEnrolment: postBlockEnrolment,
@@ -77,7 +75,9 @@
             postAnnouncement: postAnnouncement,
             deleteAnnouncement: deleteAnnouncement,
 
-            putNote: putNote
+            putNote: putNote,
+
+            beginExpressCheckout: beginExpressCheckout
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -170,11 +170,6 @@
 
         function postCurrentUserPassAssignment(passOptionId, pass) {
             var url = baseUrl + 'users/current/passtemplates/' + passOptionId;
-            return $http.post(url, pass);
-        }
-
-        function postCurrentUserPrepurchasePass(passOptionId, pass) {
-            var url = baseUrl + 'users/current/passtemplates/' + passOptionId + '/prepurchase';
             return $http.post(url, pass);
         }
 
@@ -352,6 +347,11 @@
         function putNote(options) {
             var url = baseUrl + options.type + '/' + options.id + '/notes';
             return $http.put(url, '\'' + options.note + '\'');
+        }
+
+        function beginExpressCheckout(options) {
+            var url = baseUrl + 'paypal/begin';
+            return $http.post(url, options);
         }
     }
 })();

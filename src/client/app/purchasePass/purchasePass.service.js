@@ -5,15 +5,15 @@
         .module('app.purchasePass')
         .factory('purchasePassService', purchasePassService);
 
-    purchasePassService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'authService'];
+    purchasePassService.$inject = ['$q', 'paypalExpressCheckout', 'dataservice', 'dataUpdateService', 'config'];
 
     /* @ngInject */
-    function purchasePassService($q, logger, dataservice, dataUpdateService, authService) {
+    function purchasePassService($q, paypalExpressCheckout, dataservice, dataUpdateService, config) {
 
         var service = {
             getPassOptions: getPassOptions,
             purchasePass: purchasePass,
-            prepurchasePass: prepurchasePass
+            beginPurchase: beginPurchase
         };
 
         function getPassOptions(showAllPasses) {
@@ -48,24 +48,11 @@
             });
         }
 
-        function prepurchasePass(passOption) {
+        function beginPurchase(passOption) {
             return $q(function (resolve, revoke) {
-                if (!passOption) {
-                    resolve();
-                } else {
-                    var pass = {
-                        payment_status: 'prepurchase'
-                    };
-                    dataUpdateService.assignPrepurchasePassToCurrentUser(passOption.id, pass).then(function (response) {
-                        if (!response || !response.data) {
-                            revoke();
-                        } else if (!response.data.validation_result.is_valid) {
-                            revoke(response.data.validation_result);
-                        } else {
-                            resolve(response.data.action_result);
-                        }
-                    });
-                }
+                paypalExpressCheckout.begin(passOption).then(function (response) {
+                    window.location = config.paypal.paymentUrl + response.data.action_result.token;
+                });
             });
         }
 

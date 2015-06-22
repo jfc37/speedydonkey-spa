@@ -17,7 +17,7 @@
         'app.core',
         'app.widgets',
         'app.apiCaller',
-        'app.paypal',
+        'app.paypalExpressCheckout',
 
         /*
          * Feature areas

@@ -23,9 +23,13 @@
         appErrorPrefix: '[<company> Error] ', //Configure the exceptionHandler decorator
         appTitle: '<company>',
         apiUrl: '<apiUrl>',
+        spaUrl: '<spaUrl>',
         paypal: {
             merchantId: '<paypal_merchantId>',
-            notifyRoute: '/api/paypal/confirmation/'
+            returnUrl: '/',
+            cancelUrl: '/',
+            paymentUrl: 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=',
+
         },
         version: '3.0.0'
     };
