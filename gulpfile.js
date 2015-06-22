@@ -134,13 +134,11 @@ gulp.task('environment-setup', function () {
     process.env.Company = process.env.Company || 'Speedy Donkey LOCAL';
     process.env.ApiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
     process.env.SpaUrl = process.env.SpaUrl || 'localhost:3000';
-    process.env.PayPalMerchantId = process.env.PayPalMerchantId || 'placid.joe@gmail.com';
 
     return gulp.src('config.js')
         .pipe($.replace(/<company>/g, process.env.Company))
         .pipe($.replace(/<apiUrl>/g, process.env.ApiUrl))
         .pipe($.replace(/<spaUrl>/g, process.env.SpaUrl))
-        .pipe($.replace(/<paypal_merchantId>/g, process.env.PayPalMerchantId))
         .pipe(gulp.dest(config.appConfigFolder));
 });
 
