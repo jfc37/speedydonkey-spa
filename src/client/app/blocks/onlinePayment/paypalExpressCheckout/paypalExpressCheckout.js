@@ -5,10 +5,10 @@
         .module('app.paypalExpressCheckout')
         .factory('paypalExpressCheckout', paypalExpressCheckout);
 
-    paypalExpressCheckout.$inject = ['apiCaller', 'config'];
+    paypalExpressCheckout.$inject = ['$q', 'apiCaller', 'config'];
 
     /* @ngInject */
-    function paypalExpressCheckout(apiCaller, config) {
+    function paypalExpressCheckout($q, apiCaller, config) {
         var service = {
             begin: begin,
             confirm: confirm,
@@ -27,8 +27,20 @@
         }
 
         function confirm(token) {
-            return apiCaller.confirmExpressCheckout({
-                token: token
+            return $q(function (resolve, revoke) {
+                apiCaller.confirmExpressCheckout({
+                    token: token
+                }).then(function (response) {
+                    if (response.data && response.data.validation_result) {
+                        if (response.data.validation_result.is_valid) {
+                            resolve(response.data.action_result);
+                        } else {
+                            revoke(response.data.validation_result);
+                        }
+                    } else {
+                        revoke();
+                    }
+                }, revoke);
             });
         }
 

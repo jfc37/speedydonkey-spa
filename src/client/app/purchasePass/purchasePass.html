@@ -17,27 +17,11 @@
                             <button class="btn btn-primary" ng-click="vm.beginPurchase(pass)" ng-disabled="vm.selectedPass">Select</button>
                         </div>
                     </div>
-
                 </div>
-
-                <div ng-show="vm.step === vm.steps[1]">
-                    <div class="row">
-                        <h1>Payment</h1>
-                        <div>
-                            <p class="lead">Select how you want to pay</p>
-
-
-                            <div class="plans">
-                                <div class="plan col-sm-4">
-                                    <h2 class="plan-title">
-                                        PayPal
-                                    </h2>
-                                    <paypal-button business="{{vm.paypalConfig.merchantId}}" language-code="en_US" currency-code="NZD" item-name="{{vm.selectedPass.description}}" amount="{{vm.selectedPass.cost}}" pass-id={{vm.prepurchasedPassId}}></paypal-button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                <div class="row">
+                    <p>
+                        Online payments incur an additional charge of 3.45% of the total + $0.45
+                    </p>
                 </div>
             </div>
         </div>

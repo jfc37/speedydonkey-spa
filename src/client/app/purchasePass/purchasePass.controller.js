@@ -11,31 +11,14 @@
     function PurchasePass(purchasePassService, $q, logger, routehelper, blockUI, config) {
         /*jshint validthis: true */
         var vm = this;
-        vm.steps = ['pass selection', 'payment option'];
-        vm.step = vm.steps[0];
 
         vm.title = 'Purchase Pass';
         vm.passOptions = [];
-        vm.selectedPass = '';
-
-        vm.paypalConfig = config.paypal;
-
-        vm.shouldFadePass = function (pass) {
-            return vm.selectedPass && vm.selectedPass !== pass;
-        };
 
         vm.beginPurchase = function (pass) {
             vm.selectedPass = pass;
             blockUI.start();
-            purchasePassService.beginPurchase(vm.selectedPass).then(function (prepurchasedPass) {
-                blockUI.stop();
-                vm.step = vm.steps[1];
-                vm.prepurchasedPassId = prepurchasedPass.id;
-                logger.success('Prepurchased pass');
-            }, function () {
-                blockUI.stop();
-                logger.error('Problem prepurchasing pass');
-            });
+            purchasePassService.beginPurchase(vm.selectedPass);
         };
 
         activate();
@@ -46,7 +29,7 @@
             return $q.all(promises)
                 .then(function () {
                     blockUI.stop();
-                    logger.info('Activated Block Enrolment View');
+                    logger.info('Activated Pass Purchase');
                 });
         }
 

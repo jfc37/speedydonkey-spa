@@ -25,9 +25,8 @@
         apiUrl: 'api-speedydonkey.azurewebsites.net',
         spaUrl: 'localhost:3000',
         paypal: {
-            merchantId: 'placid.joe@gmail.com',
-            returnUrl: '/#/purchasePass/confirm',
-            cancelUrl: '/#',
+            returnUrl: '#/purchasePass/confirm',
+            cancelUrl: '#/purchasePass',
             paymentUrl: 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=',
 
         },

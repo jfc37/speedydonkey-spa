@@ -25,8 +25,8 @@
         apiUrl: '<apiUrl>',
         spaUrl: '<spaUrl>',
         paypal: {
-            returnUrl: '/#/purchasePass/confirm',
-            cancelUrl: '/#',
+            returnUrl: '#/purchasePass/confirm',
+            cancelUrl: '#/purchasePass',
             paymentUrl: 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=',
 
         },

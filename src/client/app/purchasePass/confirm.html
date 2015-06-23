@@ -4,8 +4,19 @@
 
             <div>
                 <div class="row">
-                    <h1>Pass Selection</h1>
-                    <a ng-click="vm.complete()" class="btn btn-primary">Complete</a>
+                    <h1>Pass Purchase Confirmation</h1>
+
+                    <div class="plans">
+                        <div class="plan col-sm-4">
+                            <h2 class="plan-title">
+                                {{vm.pendingPurchase.description}}
+                            </h2>
+                            <div class="plan-price">
+                                ${{vm.pendingPurchase.cost}}
+                            </div>
+                        </div>
+                    </div>
+                    <a ng-click="vm.complete()" class="btn btn-primary">Complete Purchase</a>
                 </div>
             </div>
         </div>

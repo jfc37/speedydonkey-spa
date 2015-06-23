@@ -16,7 +16,8 @@
 
         function activate() {
             blockUI.start();
-            paypalExpressCheckout.confirm($routeParams.token).then(function () {
+            paypalExpressCheckout.confirm($routeParams.token).then(function (pendingPurchase) {
+                vm.pendingPurchase = pendingPurchase;
                 blockUI.stop();
             });
         }
