@@ -20,7 +20,7 @@
             <common-date-time-input ng-model="ngModel.show_until" name="show_until" display-name="Show Until" required="true"></common-date-time-input>
         </div>
 
-        <common-input ng-model="ngModel.message" name="message" display-name="Message" type="text" required="true">
+        <common-input ng-model="ngModel.message" name="message" display-name="Message" type="textbox" required="true">
         </common-input>
         <a class="btn btn-default" ng-click="options.cancel(ngModel)">{{options.cancelText}}</a>
         <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="options.submit(ngModel)">{{options.submitText}}</a>

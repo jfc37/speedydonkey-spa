@@ -79,6 +79,7 @@
     <!-- build:js js/app.js -->
     <!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
+    <script src="/src/client/app/adminDashboard/adminDashboard.module.js"></script>
     <script src="/src/client/app/adminReports/adminReports.module.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.module.js"></script>
     <script src="/src/client/app/classCheckIn/classCheckIn.module.js"></script>
@@ -87,12 +88,11 @@
     <script src="/src/client/app/forgottenPassword/forgottenPassword.module.js"></script>
     <script src="/src/client/app/layout/layout.module.js"></script>
     <script src="/src/client/app/login/logon.module.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlocks.module.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.module.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlocks.module.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.module.js"></script>
-    <script src="/src/client/app/adminDashboard/adminDashboard.module.js"></script>
-    <script src="/src/client/app/managePassOptions/managePassOptions.module.js"></script>
     <script src="/src/client/app/manageLevels/manageLevels.module.js"></script>
+    <script src="/src/client/app/managePassOptions/managePassOptions.module.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.module.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.module.js"></script>
     <script src="/src/client/app/manageUser/manageUser.module.js"></script>
@@ -109,6 +109,8 @@
     <script src="/src/client/app/blocks/router/router.module.js"></script>
     <script src="/src/client/app/onlinePayments/paypal/paypal.module.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.module.js"></script>
+    <script src="/src/client/app/adminDashboard/adminDashboard.controller.js"></script>
+    <script src="/src/client/app/adminDashboard/config.route.js"></script>
     <script src="/src/client/app/adminReports/adminReports.controller.js"></script>
     <script src="/src/client/app/adminReports/config.route.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.controller.js"></script>
@@ -139,28 +141,26 @@
     <script src="/src/client/app/layout/sidebar.js"></script>
     <script src="/src/client/app/login/config.route.js"></script>
     <script src="/src/client/app/login/login.js"></script>
-    <script src="/src/client/app/manageBlocks/config.route.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlock.controller.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlocks.controller.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlocks.service.js"></script>
     <script src="/src/client/app/manageAnnouncements/config.route.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncement.directive.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.controller.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.service.js"></script>
+    <script src="/src/client/app/manageBlocks/config.route.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock.controller.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlocks.controller.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlocks.service.js"></script>
     <script src="/src/client/app/manageClasses/config.route.js"></script>
     <script src="/src/client/app/manageClasses/manageClass.controller.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.controller.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.service.js"></script>
-    <script src="/src/client/app/adminDashboard/adminDashboard.controller.js"></script>
-    <script src="/src/client/app/adminDashboard/config.route.js"></script>
-    <script src="/src/client/app/managePassOptions/config.route.js"></script>
-    <script src="/src/client/app/managePassOptions/managePassOptions.controller.js"></script>
-    <script src="/src/client/app/managePassOptions/managePassOptions.service.js"></script>
     <script src="/src/client/app/manageLevels/config.route.js"></script>
     <script src="/src/client/app/manageLevels/manageLevel.controller.js"></script>
     <script src="/src/client/app/manageLevels/manageLevels.controller.js"></script>
     <script src="/src/client/app/manageLevels/manageLevelsService.js"></script>
     <script src="/src/client/app/manageLevels/newLevel.controller.js"></script>
+    <script src="/src/client/app/managePassOptions/config.route.js"></script>
+    <script src="/src/client/app/managePassOptions/managePassOptions.controller.js"></script>
+    <script src="/src/client/app/managePassOptions/managePassOptions.service.js"></script>
     <script src="/src/client/app/manageStudents/config.route.js"></script>
     <script src="/src/client/app/manageStudents/managePass.controller.js"></script>
     <script src="/src/client/app/manageStudents/manageStudent.controller.js"></script>
@@ -191,13 +191,13 @@
     <script src="/src/client/app/userActivation/userActivation.js"></script>
     <script src="/src/client/app/userActivation/userActivationService.js"></script>
     <script src="/src/client/app/widgets/ccSidebar.js"></script>
-    <script src="/src/client/app/core/directives/filterDirective.js"></script>
-    <script src="/src/client/app/core/directives/note.directive.js"></script>
     <script src="/src/client/app/blocks/apiCaller/apiCaller.js"></script>
     <script src="/src/client/app/blocks/exception/exception-handler.js"></script>
     <script src="/src/client/app/blocks/exception/exception.js"></script>
     <script src="/src/client/app/blocks/logger/logger.js"></script>
     <script src="/src/client/app/blocks/router/routehelper.js"></script>
+    <script src="/src/client/app/core/directives/filterDirective.js"></script>
+    <script src="/src/client/app/core/directives/note.directive.js"></script>
     <script src="/src/client/app/onlinePayments/paypal/paypalButton.directive.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.js"></script>
     <!-- endinject -->
