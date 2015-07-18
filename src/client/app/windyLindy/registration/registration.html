@@ -1,0 +1,169 @@
+<section class="push-down-64">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+
+                <div class="jumbotron">
+                    <h1>Windy Lindy Registration!</h1>
+                    <p>Are you ready to sign up for an event?!</p>
+                </div>
+
+                <div class="panel panel-default" ng-form="registrantDetailsForm">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Registrant Details</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <!--First Name-->
+                        <input-block name="firstName" label="First Name">
+                            <input name="firstName" type="text" class="form-control" ng-model="vm.person.first_name" required/>
+                            <validation error="required" name="firstName">Please enter a first name</validation>
+                        </input-block>
+
+
+                        <!--Surname-->
+                        <input-block name="surname" label="Surname">
+                            <input name="surname" type="text" class="form-control" ng-model="vm.person.surname" required/>
+                            <validation error="required" name="surname">Please enter a surname</validation>
+                        </input-block>
+
+
+                        <!--Dance Role-->
+                        <input-block name="danceRole" label="Lead or Follow">
+                            <select name="danceRole" class="form-control" ng-model="vm.person.danceRole" ng-options="type.value as type.display for type in vm.danceRoles" required>
+                                <option value="">Please select a type</option>
+                            </select>
+                            <validation error="required" name="danceRole">Please select a dance role</validation>
+                        </input-block>
+
+
+                        <!--Lindy Level-->
+                        <input-block name="lindyLevel" label="Dance Level: Lindy">
+                            <select name="lindyLevel" class="form-control" ng-model="vm.person.lindy_level" ng-options="type.value as type.display for type in vm.danceLevels" required>
+                                <option value="">Please select a dance level</option>
+                            </select>
+                            <validation error="required" name="lindyLevel">Please select a dance level</validation>
+                        </input-block>
+
+
+                        <!--Blues Level-->
+                        <input-block name="bluesLevel" label="Dance Level: Blues">
+                            <select name="bluesLevel" class="form-control" ng-model="vm.person.blues_level" ng-options="type.value as type.display for type in vm.danceLevels" required>
+                                <option value="">Please select a dance level</option>
+                            </select>
+                            <validation error="required" name="bluesLevel">Please select a dance level</validation>
+                        </input-block>
+
+
+                        <!--Balboa Level-->
+                        <input-block name="balboaLevel" label="Dance Level: Balboa">
+                            <select name="balboaLevel" class="form-control" ng-model="vm.person.balboa_level" ng-options="type.value as type.display for type in vm.danceLevels" required>
+                                <option value="">Please select a dance level</option>
+                            </select>
+                            <validation error="required" name="balboaLevel">Please select a dance level</validation>
+                        </input-block>
+
+
+                        <!--Email-->
+                        <input-block name="email" label="Email">
+                            <input name="email" type="email" class="form-control" ng-model="vm.person.email" required/>
+                            <validation error="required" name="email">Please enter an email</validation>
+                            <validation error="email" name="email">Please enter a valid email</validation>
+                        </input-block>
+
+
+                        <!--Contact Number-->
+                        <input-block name="phoneNumber" label="Phone Number">
+                            <input name="phoneNumber" type="tel" class="form-control" ng-model="vm.person.phone_number" required/>
+                            <validation error="required" name="phoneNumber">Please enter a contact number</validation>
+                        </input-block>
+
+
+                        <!--Comments/Questions-->
+                        <input-block name="comments" label="Comments/Questions">
+                            <textarea name="comments" rows="4" class="form-control" ng-model="vm.person.comments"></textarea>
+                        </input-block>
+                    </div>
+                </div>
+
+                <div class="panel panel-default" ng-form="competitionForm">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Competitions</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <!--Novice-->
+                        <input-block name="novice" label="Novice" checkbox>
+                            <input name="novice" type="checkbox" ng-model="vm.competition.novice" />
+                        </input-block>
+
+                        <!--Novice Partner-->
+                        <input-block name="novicePartner" label="Novice Partner" ng-if="vm.competition.novice">
+                            <input name="novicePartner" type="text" class="form-control" ng-model="vm.competition.novice_partner" ng-required="vm.competition.novice" />
+                            <validation error="required" name="novicePartner">Please enter a your partner's name</validation>
+                        </input-block>
+
+
+                        <!--Balboa-->
+                        <input-block name="balboa" label="Balboa" checkbox>
+                            <input name="balboa" type="checkbox" ng-model="vm.competition.balboa" />
+                        </input-block>
+
+                        <!--Balboa Partner-->
+                        <input-block name="balboaPartner" label="Balboa Partner" ng-if="vm.competition.balboa">
+                            <input name="balboaPartner" type="text" class="form-control" ng-model="vm.competition.balboa_partner" ng-required="vm.competition.balboa" />
+                            <validation error="required" name="balboaPartner">Please enter a your partner's name</validation>
+                        </input-block>
+
+
+                        <!--Showcase-->
+                        <input-block name="showcase" label="Showcase" checkbox>
+                            <input name="showcase" type="checkbox" ng-model="vm.competition.showcase" />
+                        </input-block>
+
+                        <!--Showcase Partner-->
+                        <input-block name="showcasePartner" label="Showcase Partner or Group" ng-if="vm.competition.showcase">
+                            <input name="showcasePartner" type="text" class="form-control" ng-model="vm.competition.showcase_partner" ng-required="vm.competition.showcase" />
+                            <validation error="required" name="showcasePartner">Please enter a your partner's or groups name</validation>
+                        </input-block>
+
+                        <!--Strictly Lindy-->
+                        <input-block name="strictlyLindy" label="Strictly Lindy" checkbox>
+                            <input name="strictlyLindy" type="checkbox" ng-model="vm.competition.strictly_lindy" />
+                        </input-block>
+
+                        <!--Strictly Lindy Partner-->
+                        <input-block name="strictlyLindyPartner" label="Strictly Lindy Partner" ng-if="vm.competition.strictly_lindy">
+                            <input name="strictlyLindyPartner" type="text" class="form-control" ng-model="vm.competition.strictly_lindy_partner" ng-required="vm.competition.strictly_lindy" />
+                            <validation error="required" name="strictlyLindyPartner">Please enter a your partner's name</validation>
+                        </input-block>
+
+                        <!--Jake and Jill-->
+                        <input-block name="jakeAndJill" label="Jake and Jill" checkbox>
+                            <input name="jakeAndJill" type="checkbox" ng-model="vm.competition.jake_and_jill" />
+                        </input-block>
+
+                        <!--Solo Charleston-->
+                        <input-block name="soloCharleston" label="Solo Charleston" checkbox>
+                            <input name="soloCharleston" type="checkbox" ng-model="vm.competition.solo_charleston" />
+                        </input-block>
+                    </div>
+                </div>
+
+                <div class="panel panel-default" ng-form="termsAndConditionsForm">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Terms & Conditions</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet magna in metus egestas iaculis. Quisque molestie quis nisl sed sagittis. Pellentesque pretium egestas justo. Nam luctus fermentum purus eu dictum. In eget fringilla ligula. Nunc ac dapibus erat. Ut sit amet nulla orci. Quisque tincidunt malesuada augue eget faucibus. Donec consectetur posuere aliquet. Sed et accumsan urna, efficitur placerat odio. Cras nulla velit, efficitur nec rhoncus placerat, suscipit commodo risus. Integer ac lorem nec diam lacinia mollis. Nunc sem felis, sagittis non augue eu, molestie mattis massa. Etiam eu eleifend turpis. Aenean venenatis diam ut sem efficitur sodales.</p>
+                        <input-block name="termsAndConditions" label="I agree to the terms & conditions" checkbox>
+                            <input name="termsAndConditions" type="checkbox" ng-model="vm.termsAndConditions" required/>
+                            <validation error="required" name="termsAndConditions">Please agree to the terms and conditions</validation>
+                        </input-block>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>

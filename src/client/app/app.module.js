@@ -43,7 +43,8 @@
         'app.adminReports',
         'app.reportTeacherHours',
         'app.reportProfit',
-        'app.purchasePass'
+        'app.purchasePass',
+        'app.windyLindy.registration'
     ]);
 
 })();
