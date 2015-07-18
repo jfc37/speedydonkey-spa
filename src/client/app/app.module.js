@@ -17,6 +17,7 @@
         'app.core',
         'app.widgets',
         'app.apiCaller',
+        'app.paypalExpressCheckout',
 
         /*
          * Feature areas
@@ -42,6 +43,7 @@
         'app.adminReports',
         'app.reportTeacherHours',
         'app.reportProfit',
+        'app.purchasePass'
     ]);
 
 })();

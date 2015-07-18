@@ -20,6 +20,7 @@
             studentAttendedClass: studentAttendedClass,
             assignPassToStudent: assignPassToStudent,
             assignPassToCurrentUser: assignPassToCurrentUser,
+            assignPrepurchasePassToCurrentUser: assignPrepurchasePassToCurrentUser,
 
             updatePass: updatePass,
 
@@ -103,6 +104,12 @@
         function assignPassToCurrentUser(passOptionId, pass) {
             return $q(function (resolve, revoke) {
                 apiCaller.postCurrentUserPassAssignment(passOptionId, pass).then(resolve, revoke);
+            });
+        }
+
+        function assignPrepurchasePassToCurrentUser(passOptionId, pass) {
+            return $q(function (resolve, revoke) {
+                apiCaller.postCurrentUserPrepurchasePass(passOptionId, pass).then(resolve, revoke);
             });
         }
 

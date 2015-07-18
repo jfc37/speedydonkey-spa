@@ -3,9 +3,8 @@
 
     angular
         .module('app.blockEnrolment')
-        .filter('matchingBlockGrouping', matchingBlockGroupingFilter)
-        .filter('viewableBlocks', viewableBlocksFilter)
         .controller('BlockEnrolment', BlockEnrolment);
+
 
     function getGroupDateDisplay(date) {
         return moment(date).format("dddd D/M");
@@ -15,48 +14,19 @@
         return moment(display, "dddd D/M");
     }
 
-
-    function matchingBlockGroupingFilter() {
-        return function (blocks, group) {
-            return blocks.filter(function (block) {
-                return getGroupDateDisplay(block.start_date) === group;
-            });
-        };
-    }
-
-    function viewableBlocksFilter() {
-        return function (blockGroups) {
-
-            var today = new Date();
-            var setOfBlocksInFirstWeek = blockGroups.filter(function (blockGroup) {
-                var startOfBlockSet = getGroupDate(blockGroup).startOf('week');
-                return startOfBlockSet.startOf('week') <= today && startOfBlockSet.endOf('week') >= today;
-            });
-
-            if (setOfBlocksInFirstWeek && setOfBlocksInFirstWeek.any()) {
-                return setOfBlocksInFirstWeek;
-            }
-
-            return blockGroups.filter(function (blockGroup) {
-                return getGroupDate(blockGroup).endOf('week') > new Date();
-            });
-        };
-    }
-
-    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger', 'routehelper', 'blockUI'];
+    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger', 'routehelper', 'blockUI', 'config'];
 
     /* @ngInject */
-    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, blockUI) {
+    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, blockUI, config) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.title = 'Block Enrolment';
         vm.blocks = [];
-        vm.passOptions = [];
         vm.areBlocksLoading = true;
-        vm.arePassesLoading = true;
         vm.blockGrouping = [];
-        vm.selectedPass = "";
+
+        vm.paypalConfig = config.paypal;
 
         vm.getClassType = function (block) {
             var blockName = block.name.toLowerCase();
@@ -79,7 +49,7 @@
         };
 
         vm.isAnythingToSubmit = function () {
-            return isAnyBlocksSelected() || isAnyPassesSelected();
+            return isAnyBlocksSelected();
         };
 
         function isAnyBlocksSelected() {
@@ -92,14 +62,9 @@
             });
         }
 
-        function isAnyPassesSelected() {
-            return vm.selectedPass;
-        }
-
         vm.submit = function () {
             blockUI.start();
-            var promises = [blockEnrolmentService.enrol(getSelectedBlocks()), blockEnrolmentService.purchasePass(vm.selectedPass)];
-            $q.all(promises).then(function () {
+            blockEnrolmentService.enrol(getSelectedBlocks()).then(function () {
                 blockUI.stop();
                 routehelper.redirectToRoute('dashboard');
                 logger.success("Enrolled in selected blocks");
@@ -112,9 +77,8 @@
         activate();
 
         function activate() {
-            var promises = [getAllBlocks(), getPassOptions()];
             blockUI.start();
-            return $q.all(promises)
+            return getAllBlocks()
                 .then(function () {
                     blockUI.stop();
                     logger.info('Activated Block Enrolment View');
@@ -143,19 +107,6 @@
                 }
                 logger.error(error.displayMessage);
                 vm.areBlocksLoading = false;
-            });
-        }
-
-        function getPassOptions() {
-            return blockEnrolmentService.getPassOptions().then(function (passOptions) {
-                vm.passOptions = passOptions;
-                vm.arePassesLoading = false;
-            }, function (error) {
-                if (!error.displayMessage) {
-                    error.arePassesLoading = "Issue getting pass options...";
-                }
-                logger.error(error.displayMessage);
-                vm.arePassesLoading = false;
             });
         }
     }

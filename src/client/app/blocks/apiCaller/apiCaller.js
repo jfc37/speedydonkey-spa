@@ -75,7 +75,11 @@
             postAnnouncement: postAnnouncement,
             deleteAnnouncement: deleteAnnouncement,
 
-            putNote: putNote
+            putNote: putNote,
+
+            beginExpressCheckout: beginExpressCheckout,
+            confirmExpressCheckout: confirmExpressCheckout,
+            completeExpressCheckout: completeExpressCheckout
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -345,6 +349,21 @@
         function putNote(options) {
             var url = baseUrl + options.type + '/' + options.id + '/notes';
             return $http.put(url, '\'' + options.note + '\'');
+        }
+
+        function beginExpressCheckout(options) {
+            var url = baseUrl + 'paypal/begin';
+            return $http.post(url, options);
+        }
+
+        function confirmExpressCheckout(token) {
+            var url = baseUrl + 'paypal/confirm';
+            return $http.post(url, token);
+        }
+
+        function completeExpressCheckout(token) {
+            var url = baseUrl + 'paypal/complete';
+            return $http.post(url, token);
         }
     }
 })();
