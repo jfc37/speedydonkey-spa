@@ -18,7 +18,9 @@
         vm.submit = function (form) {
             if (validationService.passesValidationCheck(form)) {
                 windyLindyService.submitRegistration(vm.registration).then(function (id) {
-                    routehelper.redirectToRoute('login');
+                    routehelper.redirectToRoute('windy-lindy-payment', {
+                        id: id
+                    });
                 });
             }
         }

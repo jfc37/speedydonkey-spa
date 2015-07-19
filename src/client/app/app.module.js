@@ -45,7 +45,8 @@
         'app.reportProfit',
         'app.purchasePass',
         'app.windyLindy',
-        'app.windyLindy.registration'
+        'app.windyLindy.registration',
+        'app.windyLindy.payment'
     ]);
 
 })();

@@ -5,17 +5,31 @@
         .module('app.paypalExpressCheckout')
         .factory('paypalExpressCheckout', paypalExpressCheckout);
 
-    paypalExpressCheckout.$inject = ['$q', 'apiCaller', 'config'];
+    paypalExpressCheckout.$inject = ['$q', 'apiCaller', 'config', 'simpleApiCaller'];
 
     /* @ngInject */
-    function paypalExpressCheckout($q, apiCaller, config) {
+    function paypalExpressCheckout($q, apiCaller, config, simpleApiCaller) {
         var service = {
             begin: begin,
+            beginGeneric: beginGeneric,
             confirm: confirm,
             complete: complete
         };
 
         return service;
+
+        function beginGeneric(payment) {
+            payment.return_url = 'http://' + config.spaUrl + '/' + config.paypal.returnUrl;
+            payment.cancel_url = 'http://' + config.spaUrl + '/' + config.paypal.cancelUrl;
+
+            var options = {
+                resource: 'online-payments/paypal'
+            };
+
+            return simpleApiCaller.post(payment, options).then(function (response) {
+                window.location = config.paypal.paymentUrl + response.data.action_result.token;
+            });
+        }
 
         function begin(pass) {
             var options = {

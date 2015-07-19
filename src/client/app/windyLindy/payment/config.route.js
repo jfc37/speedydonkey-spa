@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.logon')
+        .module('app.windyLindy.payment')
         .run(appRun);
 
     appRun.$inject = ['routehelper'];
@@ -15,14 +15,13 @@
     function getRoutes() {
         return [
             {
-                url: '/login',
+                url: '/windy-lindy/payment/:id',
                 config: {
-                    title: 'login',
-                    controller: 'Login',
+                    title: 'windy-lindy-payment',
+                    controller: 'Payment',
                     controllerAs: 'vm',
-                    templateUrl: 'app/login/login.html',
-                    allowAnonymous: true,
-                    denyAuthorised: true
+                    templateUrl: 'app/windyLindy/payment/payment.html',
+                    allowAnonymous: true
                 }
             }
         ];
