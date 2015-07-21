@@ -18,6 +18,7 @@
         'app.widgets',
         'app.apiCaller',
         'app.paypalExpressCheckout',
+        'app.bankDepositPayment',
 
         /*
          * Feature areas
@@ -46,7 +47,8 @@
         'app.purchasePass',
         'app.windyLindy',
         'app.windyLindy.registration',
-        'app.windyLindy.payment'
+        'app.windyLindy.payment',
+        'app.windyLindy.complete'
     ]);
 
 })();

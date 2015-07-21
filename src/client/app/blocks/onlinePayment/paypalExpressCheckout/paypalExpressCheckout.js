@@ -19,9 +19,6 @@
         return service;
 
         function beginGeneric(payment) {
-            payment.return_url = 'http://' + config.spaUrl + '/' + config.paypal.returnUrl;
-            payment.cancel_url = 'http://' + config.spaUrl + '/' + config.paypal.cancelUrl;
-
             var options = {
                 resource: 'online-payments/paypal'
             };

@@ -19,11 +19,10 @@
 
             return $q(function (resolve, revoke) {
                 var options = {
-                    resource: 'windy-lindy'
+                    resource: 'windy-lindy/registration'
                 };
                 simpleApiCaller.post(registration, options).then(function (response) {
-                    resolve('123-123-123');
-                    //resolve(reponse.action_result.id);
+                    resolve(response.data.action_result.registation_id);
                 });
             });
 
@@ -34,20 +33,12 @@
             return $q(function (resolve, revoke) {
 
                 var options = {
-                    resource: 'windy-lindy',
+                    resource: 'windy-lindy/registration',
                     id: id,
                     block: true
                 };
-                var dummy = {
-                    type: 'Full Pass',
-                    amount: 199.99,
-                    id: 1
-                };
                 simpleApiCaller.get(options).then(function (response) {
-                    resolve(dummy);
-                    //resolve(response);
-                }, function () {
-                    resolve(dummy);
+                    resolve(response.data);
                 });
 
             });

@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('app.windyLindy.payment')
-        .controller('Payment', Payment);
+        .module('app.windyLindy.complete')
+        .controller('Complete', Complete);
 
-    Payment.$inject = ['$routeParams', 'windyLindyService', 'routehelper'];
+    Complete.$inject = ['$routeParams', 'windyLindyService', 'routehelper'];
 
     /* @ngInject */
-    function Payment($routeParams, windyLindyService, routehelper) {
+    function Complete($routeParams, windyLindyService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -18,7 +18,7 @@
                 cancelUrl: '/windy-lindy/payment/' + $routeParams.id,
                 returnUrl: '/windy-lindy/payment/' + $routeParams.id + 'paypal/confirm'
             },
-            completeUrl: '#/windy-lindy/payment/' + $routeParams.id + '/complete',
+            completeUrl: '/windy-lindy/payment/' + $routeParams.id + '/complete',
         };
 
         activate();
