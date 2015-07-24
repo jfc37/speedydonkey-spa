@@ -21,20 +21,26 @@
         return service;
 
         function beginGeneric(payment) {
-            var options = {
-                resource: 'online-payment/paypal/begin'
-            };
 
-            var paypalRequest = {
-                return_url: 'http://' + config.spaUrl + payment.paypal.returnUrl,
-                cancel_url: 'http://' + config.spaUrl + payment.paypal.cancelUrl,
-                buyer_email: 'placid.joe@gmail.com',
-                item_type: payment.type,
-                item_id: payment.type_id
-            };
+            return $q(function(resolve, revoke) {
 
-            return simpleApiCaller.post(paypalRequest, options).then(function (response) {
-                window.location = config.paypal.paymentUrl + response.data.token;
+                var options = {
+                    resource: 'online-payment/paypal/begin'
+                };
+
+                var paypalRequest = {
+                    return_url: 'http://' + config.spaUrl + payment.paypal.returnUrl,
+                    cancel_url: 'http://' + config.spaUrl + payment.paypal.cancelUrl,
+                    buyer_email: 'placid.joe@gmail.com',
+                    item_type: payment.type,
+                    item_id: payment.type_id
+                };
+
+                simpleApiCaller.post(paypalRequest, options).then(function (response) {
+                    var paypalUrl = config.paypal.paymentUrl + response.data.token;
+                    resolve(paypalUrl);
+                }, revoke);
+
             });
         }
 
