@@ -45,10 +45,7 @@
         'app.reportTeacherHours',
         'app.reportProfit',
         'app.purchasePass',
-        'app.windyLindy',
-        'app.windyLindy.registration',
-        'app.windyLindy.payment',
-        'app.windyLindy.complete'
+        'app.windyLindy'
     ]);
 
 })();

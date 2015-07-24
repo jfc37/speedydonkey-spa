@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.windyLindy.payment')
+        .module('app.windyLindy')
         .run(appRun);
 
     appRun.$inject = ['routehelper'];
@@ -21,6 +21,16 @@
                     controller: 'Payment',
                     controllerAs: 'vm',
                     templateUrl: 'app/windyLindy/payment/payment.html',
+                    allowAnonymous: true
+                }
+            },
+            {
+                url: '/windy-lindy/payment/:id/paypal/confirm',
+                config: {
+                    title: 'windy-lindy-payment-paypal-confirm',
+                    controller: 'PaypalConfirm',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/windyLindy/payment/paypalConfirm.html',
                     allowAnonymous: true
                 }
             }

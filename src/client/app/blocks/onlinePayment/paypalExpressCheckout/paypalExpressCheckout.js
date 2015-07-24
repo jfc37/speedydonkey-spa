@@ -13,18 +13,28 @@
             begin: begin,
             beginGeneric: beginGeneric,
             confirm: confirm,
-            complete: complete
+            confirmGeneric: confirmGeneric,
+            complete: complete,
+            completeGeneric: completeGeneric
         };
 
         return service;
 
         function beginGeneric(payment) {
             var options = {
-                resource: 'online-payments/paypal'
+                resource: 'online-payment/paypal/begin'
             };
 
-            return simpleApiCaller.post(payment, options).then(function (response) {
-                window.location = config.paypal.paymentUrl + response.data.action_result.token;
+            var paypalRequest = {
+                return_url: 'http://' + config.spaUrl + payment.paypal.returnUrl,
+                cancel_url: 'http://' + config.spaUrl + payment.paypal.cancelUrl,
+                buyer_email: 'placid.joe@gmail.com',
+                item_type: payment.type,
+                item_id: payment.type_id
+            };
+
+            return simpleApiCaller.post(paypalRequest, options).then(function (response) {
+                window.location = config.paypal.paymentUrl + response.data.token;
             });
         }
 
@@ -35,6 +45,25 @@
                 template_id: pass.id
             };
             return apiCaller.beginExpressCheckout(options);
+        }
+
+        function confirmGeneric(token) {
+            return $q(function (resolve, revoke) {
+
+                var options = {
+                    resource: 'online-payment/paypal/confirm'
+                };
+
+                simpleApiCaller.post({
+                    token: token
+                }, options).then(function (response) {
+                    if (response.data.errors.any()) {
+                        revoke(response.data);
+                    } else {
+                        resolve(response.data);
+                    }
+                }, revoke);
+            });
         }
 
         function confirm(token) {
@@ -58,6 +87,14 @@
         function complete(token) {
             return apiCaller.completeExpressCheckout({
                 token: token
+            });
+        }
+
+        function completeGeneric(completionOptions) {
+            return simpleApiCaller.post({
+                token: completionOptions.token
+            }, {
+                resource: 'online-payment/paypal/complete'
             });
         }
     }

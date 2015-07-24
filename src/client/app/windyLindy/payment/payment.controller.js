@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.windyLindy.payment')
+        .module('app.windyLindy')
         .controller('Payment', Payment);
 
     Payment.$inject = ['$routeParams', 'windyLindyService', 'routehelper'];
@@ -13,10 +13,10 @@
         var vm = this;
 
         vm.paymentConfig = {
-            type: 'WindyLindyRegistration',
+            type: 'WindyLindy',
             paypal: {
-                cancelUrl: '/windy-lindy/payment/' + $routeParams.id,
-                returnUrl: '/windy-lindy/payment/' + $routeParams.id + 'paypal/confirm'
+                cancelUrl: '/#/windy-lindy/payment/' + $routeParams.id,
+                returnUrl: '/#/windy-lindy/payment/' + $routeParams.id + '/paypal/confirm'
             },
             completeUrl: '#/windy-lindy/payment/' + $routeParams.id + '/complete',
         };
@@ -28,7 +28,7 @@
             windyLindyService.getRegistration(id).then(function (registration) {
                 vm.registration = registration;
 
-                vm.paymentConfig.type_id = registration.id;
+                vm.paymentConfig.type_id = registration.registation_id;
             });
         }
     }

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.windyLindy.complete')
+        .module('app.windyLindy')
         .controller('Complete', Complete);
 
     Complete.$inject = ['$routeParams', 'windyLindyService', 'routehelper'];

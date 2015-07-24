@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.windyLindy.registration')
+        .module('app.windyLindy')
         .controller('Registration', Registration);
 
     Registration.$inject = ['selectOptionService', 'validationService', 'windyLindyService', 'routehelper'];
