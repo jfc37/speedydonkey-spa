@@ -18,6 +18,10 @@
                 cancelUrl: '/#/windy-lindy/payment/' + $routeParams.id,
                 returnUrl: '/#/windy-lindy/payment/' + $routeParams.id + '/paypal/confirm'
             },
+            poli: {
+                cancelUrl: '/#/windy-lindy/payment/' + $routeParams.id,
+                returnUrl: '/#/windy-lindy/payment/' + $routeParams.id + '/poli/confirm'
+            },
             completeUrl: '#/windy-lindy/payment/' + $routeParams.id + '/complete',
         };
 

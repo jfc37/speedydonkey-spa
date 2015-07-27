@@ -33,6 +33,16 @@
                     templateUrl: 'app/windyLindy/payment/paypalConfirm.html',
                     allowAnonymous: true
                 }
+            },
+            {
+                url: '/windy-lindy/payment/:id/poli/confirm',
+                config: {
+                    title: 'windy-lindy-payment-poli-confirm',
+                    controller: 'PaypalConfirm',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/windyLindy/payment/poliConfirm.html',
+                    allowAnonymous: true
+                }
             }
         ];
     }

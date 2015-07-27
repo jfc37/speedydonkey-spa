@@ -18,7 +18,7 @@
         'app.widgets',
         'app.apiCaller',
         'app.paypalExpressCheckout',
-        'app.bankDepositPayment',
+        'app.poliPayment',
 
         /*
          * Feature areas

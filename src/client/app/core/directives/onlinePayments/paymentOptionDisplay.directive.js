@@ -5,7 +5,7 @@
         .module('app.core')
         .directive('paymentOptionDisplay', paymentOptionDisplay);
 
-    function paymentOptionDisplay(paypalExpressCheckout, bankDepositPayment, logger) {
+    function paymentOptionDisplay(paypalExpressCheckout, poliPayment, logger) {
         var directive = {
             templateUrl: 'app/core/directives/onlinePayments/paymentOptionDisplay.html',
             require: ['ngModel'],
@@ -22,11 +22,11 @@
                     });
                 };
 
-                scope.beginBankDeposit = function () {
-                    bankDepositPayment.begin(scope.paymentConfig).then(function () {
-                        window.location = scope.paymentConfig.completeUrl;
+                scope.beginPoliPayment = function () {
+                    poliPayment.begin(scope.paymentConfig).then(function (poliUrl) {
+                        window.location = poliUrl;
                     }, function () {
-                        paymentMethodError('Bank Deposit');
+                        paymentMethodError('Poli');
                     });
                 };
 
