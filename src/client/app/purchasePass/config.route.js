@@ -15,7 +15,7 @@
     function getRoutes() {
         return [
             {
-                url: '/purchasePass',
+                url: '/purchase-pass',
                 config: {
                     title: 'purchasePass',
                     controller: 'PurchasePass',
@@ -28,12 +28,30 @@
                 }
             },
             {
-                url: '/purchasePass/confirm',
+                url: '/purchase-pass/:id/payment',
                 config: {
-                    title: 'confirmPurcahse',
-                    controller: 'ConfirmPurchase',
+                    title: 'passPayment',
+                    controller: 'PassPayment',
                     controllerAs: 'vm',
-                    templateUrl: 'app/purchasePass/confirm.html'
+                    templateUrl: 'app/purchasePass/payment.html'
+                }
+            },
+            {
+                url: '/purchase-pass/payment/:registrationNumber/paypal/confirm',
+                config: {
+                    title: 'passPaymentPaypalConfirm',
+                    controller: 'PassPaymentPaypalConfirm',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/purchasePass/paypalConfirm.html'
+                }
+            },
+            {
+                url: '/purchase-pass/payment/:registrationNumber/complete',
+                config: {
+                    title: 'passPurchaseComplete',
+                    controller: 'PassPurchaseComplete',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/purchasePass/complete.html'
                 }
             }
         ];

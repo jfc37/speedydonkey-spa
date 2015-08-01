@@ -11,7 +11,6 @@
     function Payment($routeParams, windyLindyService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
-
         vm.paymentConfig = {
             type: 'WindyLindy',
             paypal: {

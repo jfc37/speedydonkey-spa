@@ -95,9 +95,9 @@
                     resolve(response.data);
                 }, revoke)
 
-//                apiCaller.getCurrentUser().then(function (response) {
-//                    resolve(response.data);
-//                }, revoke);
+                //                apiCaller.getCurrentUser().then(function (response) {
+                //                    resolve(response.data);
+                //                }, revoke);
             });
         }
 
@@ -227,7 +227,12 @@
 
         function getAllPassOptions() {
             return $q(function (resolve, reject) {
-                apiCaller.getPassOption().then(function (response) {
+                var options = {
+                    block: true,
+                    resource: 'passtemplate'
+                };
+
+                simpleApiCaller.get(options).then(function (response) {
                     resolve(response.data);
                 }, function (response) {
                     reject(response);

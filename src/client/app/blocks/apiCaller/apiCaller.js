@@ -131,7 +131,7 @@
         }
 
         function getCurrentUser() {
-            var url = baseUrl + 'users/current';
+            var url = baseUrl + 'users / current';
             return $http.get(url);
         }
 

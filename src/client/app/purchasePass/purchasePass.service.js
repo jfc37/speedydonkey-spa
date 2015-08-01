@@ -5,13 +5,14 @@
         .module('app.purchasePass')
         .factory('purchasePassService', purchasePassService);
 
-    purchasePassService.$inject = ['$q', 'paypalExpressCheckout', 'dataservice', 'config'];
+    purchasePassService.$inject = ['$q', 'paypalExpressCheckout', 'dataservice', 'config', 'simpleApiCaller'];
 
     /* @ngInject */
-    function purchasePassService($q, paypalExpressCheckout, dataservice, config) {
+    function purchasePassService($q, paypalExpressCheckout, dataservice, config, simpleApiCaller) {
 
         var service = {
             getPassOptions: getPassOptions,
+            getPassOption: getPassOption,
             beginPurchase: beginPurchase
         };
 
@@ -30,6 +31,24 @@
                         error.displayMessage = 'No pass options found';
                     }
                     revoke(error);
+                });
+            });
+        }
+
+        function getPassOption(id) {
+            return $q(function (resolve, revoke) {
+
+
+                var options = {
+                    block: true,
+                    resource: 'passtemplate',
+                    id: id
+                };
+
+                simpleApiCaller.get(options).then(function (response) {
+                    resolve(response.data);
+                }, function (response) {
+                    revoke(response);
                 });
             });
         }
