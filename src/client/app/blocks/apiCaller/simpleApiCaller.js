@@ -16,7 +16,11 @@
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
         function get(options) {
-            var url = baseUrl + options.resource + '/' + options.id;
+            var url = baseUrl + options.resource;
+
+            if (options.id) {
+                url = url + '/' + options.id
+            }
 
             var request = $http.get(url);
 

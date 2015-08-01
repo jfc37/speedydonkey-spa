@@ -5,10 +5,10 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$q', 'apiCaller', 'dateService'];
+    dataservice.$inject = ['$q', 'apiCaller', 'dateService', 'simpleApiCaller'];
 
     /* @ngInject */
-    function dataservice($q, apiCaller, dateService) {
+    function dataservice($q, apiCaller, dateService, simpleApiCaller) {
         var service = {
 
             getUser: getUser,
@@ -86,9 +86,18 @@
 
         function getCurrentUser() {
             return $q(function (resolve, revoke) {
-                apiCaller.getCurrentUser().then(function (response) {
+                var options = {
+                    resource: 'users/current',
+                    block: true
+                };
+
+                simpleApiCaller.get(options).then(function (response) {
                     resolve(response.data);
-                }, revoke);
+                }, revoke)
+
+//                apiCaller.getCurrentUser().then(function (response) {
+//                    resolve(response.data);
+//                }, revoke);
             });
         }
 
