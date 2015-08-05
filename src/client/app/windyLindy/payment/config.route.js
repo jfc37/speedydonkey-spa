@@ -38,7 +38,7 @@
                 url: '/windy-lindy/payment/:id/poli/confirm',
                 config: {
                     title: 'windy-lindy-payment-poli-confirm',
-                    controller: 'PaypalConfirm',
+                    controller: 'PoliConfirm',
                     controllerAs: 'vm',
                     templateUrl: 'app/windyLindy/payment/poliConfirm.html',
                     allowAnonymous: true

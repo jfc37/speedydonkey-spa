@@ -46,6 +46,15 @@
                 }
             },
             {
+                url: '/purchase-pass/payment/:registrationNumber/poli/confirm',
+                config: {
+                    title: 'passPaymentPoliConfirm',
+                    controller: 'PassPaymentPoliConfirm',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/purchasePass/poliConfirm.html'
+                }
+            },
+            {
                 url: '/purchase-pass/payment/:registrationNumber/complete',
                 config: {
                     title: 'passPurchaseComplete',

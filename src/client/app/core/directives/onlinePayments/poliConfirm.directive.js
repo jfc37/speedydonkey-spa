@@ -15,7 +15,7 @@
             controller: function ($scope, routehelper) {
                 var vm = $scope;
 
-                poliConfirm.complete(vm.config.token).then(function () {
+                poliPayment.complete(vm.config.token).then(function () {
                     routehelper.redirectToRoute(vm.config.completeRoute, vm.config.completeRouteParameters);
                 }, function () {
                     routehelper.redirectToRoute(vm.config.cancelRoute, vm.config.cancelRouteParameters);

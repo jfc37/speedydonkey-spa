@@ -11,6 +11,8 @@
     function PoliConfirm($routeParams) {
         /*jshint validthis: true */
 
+        var vm = this;
+
         vm.poliConfig = {
             token: $routeParams.token,
             completeRoute: 'windy-lindy-complete',

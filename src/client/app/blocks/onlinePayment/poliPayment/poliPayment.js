@@ -47,7 +47,7 @@
             return $q(function (resolve, revoke) {
 
                 var options = {
-                    resource: 'online-payment/poli/confirm'
+                    resource: 'online-payment/poli/complete'
                 };
 
                 var poliRequest = {
