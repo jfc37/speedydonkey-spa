@@ -1,28 +1,22 @@
-<section class="mainbar">
-    <section class="matter">
-        <div class="container">
-            <div class="row">
-              <h1>Teacher Hours</h1>
-              <form>
-                <common-input ng-model="vm.starting" type="date" name="starting" display-name="From"></common-input>
-                <common-input ng-model="vm.ending" type="date" name="ending" display-name="To"></common-input>
-                <a ng-click="vm.getHours()" class="btn btn-primary">Update Date Range</a>
-              </form>
-              <table class="table table-hover">
-                <thead>
-                  <th>Name</th>
-                  <th>Solo Classes</th>
-                  <th>Partnered Classes</th>
-                </thead>
-                <tbody ng-repeat="teacherHour in vm.teacherHours">
-                  <tr>
-                    <td>{{teacherHour.full_name}}</td>
-                    <td>{{teacherHour.soloClasses.length}}</td>
-                    <td>{{teacherHour.partnerClasses.length}}</td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
-        </div>
-    </section>
-</section>
+<div class="row">
+    <h1>Teacher Hours</h1>
+    <form>
+        <common-input ng-model="vm.starting" type="date" name="starting" display-name="From"></common-input>
+        <common-input ng-model="vm.ending" type="date" name="ending" display-name="To"></common-input>
+        <a ng-click="vm.getHours()" class="btn btn-primary">Update Date Range</a>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <th>Name</th>
+            <th>Solo Classes</th>
+            <th>Partnered Classes</th>
+        </thead>
+        <tbody ng-repeat="teacherHour in vm.teacherHours">
+            <tr>
+                <td>{{teacherHour.full_name}}</td>
+                <td>{{teacherHour.soloClasses.length}}</td>
+                <td>{{teacherHour.partnerClasses.length}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

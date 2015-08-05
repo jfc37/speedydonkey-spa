@@ -1,61 +1,53 @@
-<section class="push-down-64">
-    <section class="matter">
-        <div class="container">
+<div class="row">
+
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 well">
+        <h3 class="text-center">Welcome to {{vm.company}}</h3>
+
+        <form name="loginForm" novalidate>
             <div class="row">
-
-                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 well">
-                    <h3 class="text-center">Welcome to {{vm.company}}</h3>
-
-                    <form name="loginForm" novalidate>
-                        <div class="row">
-                            <div class="has-error col-xs-12">
-                                <span class="help-block has-error" ng-repeat="error in loginForm.serverErrors">
+                <div class="has-error col-xs-12">
+                    <span class="help-block has-error" ng-repeat="error in loginForm.serverErrors">
                                 <div>
                                     {{error}}
                                 </div>
                             </span>
-                            </div>
+                </div>
 
-                            <div class="col-xs-12">
-                                <input-block name="email">
-                                    <input class="form-control" id="email" name="email" type="email" placeholder="Email" ng-model="vm.email" required/>
-                                    <validation error="required" name="email">Please enter your email</validation>
-                                    <validation error="email" name="email">Please enter a valid email</validation>
-                                </input-block>
-                            </div>
+                <div class="col-xs-12">
+                    <input-block name="email">
+                        <input class="form-control" id="email" name="email" type="email" placeholder="Email" ng-model="vm.email" required/>
+                        <validation error="required" name="email">Please enter your email</validation>
+                        <validation error="email" name="email">Please enter a valid email</validation>
+                    </input-block>
+                </div>
 
-                            <div class="col-xs-12">
-                                <input-block name="password">
-                                    <input class="form-control" type="password" id="password" name="password" placeholder="Password" ng-model="vm.password" required>
-                                    <validation error="required" name="password">Please enter your password</validation>
-                                </input-block>
-                            </div>
+                <div class="col-xs-12">
+                    <input-block name="password">
+                        <input class="form-control" type="password" id="password" name="password" placeholder="Password" ng-model="vm.password" required>
+                        <validation error="required" name="password">Please enter your password</validation>
+                    </input-block>
+                </div>
 
-                            <div class="col-xs-12 text-right form-group" style="margin-top: -15px;">
-                                <a class="btn btn-link" ng-href="{{vm.forgottenPasswordUrl}}">Forgot your password? </a>
-                            </div>
+                <div class="col-xs-12 text-right form-group" style="margin-top: -15px;">
+                    <a class="btn btn-link" ng-href="{{vm.forgottenPasswordUrl}}">Forgot your password? </a>
+                </div>
 
-                            <div class="form-group col-xs-12">
+                <div class="form-group col-xs-12">
 
-                                <a class="btn btn-primary pull-left" ng-click="vm.submit(loginForm)" href="{{vm.registerUrl}}">
+                    <a class="btn btn-primary pull-left" ng-click="vm.submit(loginForm)" href="{{vm.registerUrl}}">
                                 Create Account
                             </a>
 
-                                <button class="btn btn-success pull-right" ng-click="vm.submit(loginForm)" ng-disabled="loginForm.$invalid">
-                                    Login
-                                </button>
-                            </div>
-
-
-                        </div>
-
-
-                    </form>
-
+                    <button class="btn btn-success pull-right" ng-click="vm.submit(loginForm)" ng-disabled="loginForm.$invalid">
+                        Login
+                    </button>
                 </div>
+
+
             </div>
 
-        </div>
-        </div>
-    </section>
-</section>
+
+        </form>
+
+    </div>
+</div>
