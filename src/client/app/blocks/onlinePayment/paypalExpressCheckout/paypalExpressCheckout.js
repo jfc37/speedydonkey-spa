@@ -22,7 +22,7 @@
 
         function beginGeneric(payment) {
 
-            return $q(function(resolve, revoke) {
+            return $q(function (resolve, revoke) {
 
                 var options = {
                     resource: 'online-payment/paypal/begin'
@@ -31,7 +31,6 @@
                 var paypalRequest = {
                     return_url: 'http://' + config.spaUrl + payment.paypal.returnUrl,
                     cancel_url: 'http://' + config.spaUrl + payment.paypal.cancelUrl,
-                    buyer_email: 'placid.joe@gmail.com',
                     item_type: payment.type,
                     item_id: payment.type_id
                 };
