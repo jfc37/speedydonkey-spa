@@ -1,0 +1,25 @@
+<accordion close-others="true">
+    <accordion-group>
+        <accordion-heading>
+            <span>
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                Internet Banking (No service fee)
+            </span>
+            <div class="pull-right poli-logo"></div>
+        </accordion-heading>
+        <h4>Pay With POLi</h4>
+        <p>You will be redirected to your bank website to complete the payment</p>
+        <a class="btn poli-learn-more" target="_blank" href="http://www.polipayments.com/consumer"></a>
+        <button class="btn btn-primary btn-lg" ng-click="beginPoliPayment()">Proceed with Payment</button>
+    </accordion-group>
+    <accordion-group>
+        <accordion-heading>
+            Credit Card (Service fee applies) <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+        </accordion-heading>
+        <p>
+            Please note, payments made through PayPal incur a 3.45% + $0.45 fee
+
+            <button class="btn btn-primary" ng-click="beginPaypalPayment()">Pay With PayPal</button>
+        </p>
+    </accordion-group>
+</accordion>

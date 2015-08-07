@@ -5,22 +5,7 @@
     </div>
 
     <item-summary description="vm.registration.type" amount="vm.registration.amount"></item-summary>
-    <div class="panel panel-default" ng-form="paymentOptionsForm">
-        <div class="panel-heading">
-            <h3 class="panel-title">Payment Options</h3>
-        </div>
-        <div class="panel-body">
-            <payment-option-selection ng-model="vm.paymentOption"></payment-option-selection>
-        </div>
-    </div>
 
-    <div class="panel panel-default" ng-if="vm.paymentOption">
-        <div class="panel-heading">
-            <h3 class="panel-title">Next Steps</h3>
-        </div>
-        <div class="panel-body">
-            <payment-option-display ng-model="vm.paymentOption" payment-config="vm.paymentConfig"></payment-option-display>
-        </div>
-    </div>
+    <payment-options ng-model="vm.paymentOption" payment-config="vm.paymentConfig"></payment-options>
 
 </div>
