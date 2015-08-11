@@ -30,6 +30,7 @@
             var id = $routeParams.id;
             windyLindyService.getRegistration(id).then(function (registration) {
                 vm.registration = registration;
+                vm.registration.type = vm.registration.full_pass ? 'Full Windy Lindy Pass' : 'Partial Windy Lindy Pass';
 
                 vm.paymentConfig.type_id = registration.registation_id;
             });

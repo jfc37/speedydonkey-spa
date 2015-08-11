@@ -26,7 +26,7 @@
 
             <!--Dance Role-->
             <input-block name="danceRole" label="Lead or Follow">
-                <select name="danceRole" class="form-control" ng-model="vm.registration.danceRole" ng-options="type.value as type.display for type in vm.danceRoles" required>
+                <select name="danceRole" class="form-control" ng-model="vm.registration.dance_role" ng-options="type.value as type.display for type in vm.danceRoles" required>
                     <option value="">Please select a type</option>
                 </select>
                 <validation error="required" name="danceRole">Please select a dance role</validation>
@@ -110,12 +110,6 @@
                 </div>
                 <validation error="required" name="over18">Please let us know if you are over 18</validation>
             </input-block>
-
-
-            <!--Comments/Questions-->
-            <input-block name="comments" label="Comments/Questions">
-                <textarea name="comments" rows="4" class="form-control" ng-model="vm.registration.comments"></textarea>
-            </input-block>
         </div>
     </div>
 
@@ -129,17 +123,17 @@
             <input-block name="fullPass" label="Full Pass">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="fullPass" ng-value="true" required ng-model="vm.registration.fullPass"> Yes
+                        <input type="radio" name="fullPass" ng-value="true" required ng-model="vm.registration.full_pass"> Yes
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="fullPass" ng-value="false" required ng-model="vm.registration.fullPass"> No
+                        <input type="radio" name="fullPass" ng-value="false" required ng-model="vm.registration.full_pass"> No
                     </label>
                 </div>
                 <validation error="required" name="fullPass">Do you want a full pass?</validation>
             </input-block>
-            <div ng-if="vm.registration.fullPass !== undefined && !!!vm.registration.fullPass">
+            <div ng-if="vm.registration.full_pass !== undefined && !!!vm.registration.full_pass">
                 <h3>Classes</h3>
                 <div ng-repeat="class in vm.classes">
                     <input type="checkbox" name="vm.registration.classes[]" value="{{class}}" ng-checked="vm.registration.classes.indexOf(class) > -1" ng-click="vm.toggleSelection(vm.registration.classes, class)"> {{class}}
@@ -191,8 +185,8 @@
             </input-block>
 
             <!--Jake and Jill-->
-            <input-block name="jakeAndJill" label="Jake and Jill" checkbox>
-                <input name="jakeAndJill" type="checkbox" ng-model="vm.registration.jake_and_jill" />
+            <input-block name="jackAndJill" label="Jack and Jill" checkbox>
+                <input name="jackAndJill" type="checkbox" ng-model="vm.registration.jack_and_jill" />
             </input-block>
 
             <!--Hellzapoppin-->
@@ -225,7 +219,7 @@
 
             <!--Showcase Team Name-->
             <input-block name="showcaseTeamName" label="Showcase Group Name" ng-if="vm.registration.showcase_team">
-                <input name="showcaseTeamName" type="text" class="form-control" ng-model="vm.registration.showcase_team_name" ng-required="vm.registration.showcase_team" />
+                <input name="showcaseTeamName" type="text" class="form-control" ng-model="vm.registration.showcase_team_partner" ng-required="vm.registration.showcase_team" />
                 <validation error="required" name="showcaseTeamName">Please enter a your group's name</validation>
             </input-block>
 
@@ -253,7 +247,7 @@
 
             <!--Grammy Awards-->
             <input-block name="grammy" label="I'd like to perform at the Grammy Awards" checkbox>
-                <input name="grammy" type="checkbox" ng-model="vm.registration.grammy" />
+                <input name="grammy" type="checkbox" ng-model="vm.registration.perform_at_grammy" />
             </input-block>
 
             <!--Aerials Workshops-->
