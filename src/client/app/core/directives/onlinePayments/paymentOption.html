@@ -7,19 +7,25 @@
             </span>
             <div class="pull-right poli-logo"></div>
         </accordion-heading>
-        <h4>Pay With POLi</h4>
+        <h4>Pay with POLi</h4>
         <p>You will be redirected to your bank website to complete the payment</p>
         <a class="btn poli-learn-more" target="_blank" href="http://www.polipayments.com/consumer"></a>
         <button class="btn btn-primary btn-lg" ng-click="beginPoliPayment()">Proceed with Payment</button>
     </accordion-group>
     <accordion-group>
         <accordion-heading>
-            Credit Card (Service fee applies) <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            <span>
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                Credit Card (Service fee applies)
+            </span>
+            <div class="pull-right paypal-logo"></div>
         </accordion-heading>
-        <p>
-            Please note, payments made through PayPal incur a 3.45% + $0.45 fee
 
-            <button class="btn btn-primary" ng-click="beginPaypalPayment()">Pay With PayPal</button>
-        </p>
+        <h4>Pay with PayPal</h4>
+        <p>You will be redirected to PayPal to complete the payment</p>
+        <p>Note, a service fee of 3.45% of the total + $0.45 will be added</p>
+        <div class="paypal-cc-logos"></div>
+        <button class="btn btn-primary btn-lg" ng-click="beginPaypalPayment()">Proceed with Payment</button>
+
     </accordion-group>
 </accordion>
