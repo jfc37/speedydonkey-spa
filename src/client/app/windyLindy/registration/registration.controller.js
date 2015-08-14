@@ -29,15 +29,35 @@
         ];
         vm.socialEvents = [
             {
-                name: 'Special Event',
+                name: 'The Heats',
                 price: 10.99
             },
             {
-                name: 'Love Making',
+                name: 'The Grammy Awards',
                 price: 1.99
             },
             {
-                name: 'The Michael Special',
+                name: 'Rock Stars Ball',
+                price: 0.99
+            },
+            {
+                name: 'Groupies Private Party',
+                price: 0.99
+            },
+            {
+                name: 'The Hard Rock Bus Tour',
+                price: 0.99
+            },
+            {
+                name: 'The Back Stage Party',
+                price: 0.99
+            },
+            {
+                name: 'Sunday Night After Party',
+                price: 0.99
+            },
+            {
+                name: 'Groupies Goodbye Jam',
                 price: 0.99
             }
         ];

@@ -17,14 +17,14 @@
         return service;
 
         function convertStringsToDates(object) {
-            if (isArray(object)){
+            if (isArray(object)) {
                 object.forEach(function (item) {
                     convertStringsToDates(item);
                 });
             } else {
                 for (var prop in object) {
                     if (object.hasOwnProperty(prop)) {
-                        if (isDateProperty(prop)){
+                        if (isDateProperty(prop)) {
                             var stringValue = object[prop];
                             var dateValue = new Date(stringValue);
                             object[prop] = dateValue;

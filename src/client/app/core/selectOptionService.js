@@ -70,8 +70,8 @@
                     value: 'advanced'
                 },
                 {
-                    display: 'Level 4: God/Michael Level',
-                    value: 'michael'
+                    display: 'Level 4: Advanced Plus',
+                    value: 'advancedPlus'
                 }
             ];
         }
