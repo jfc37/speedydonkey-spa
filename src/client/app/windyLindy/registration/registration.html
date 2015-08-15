@@ -146,7 +146,7 @@
 
                 <h3>Social Events</h3>
                 <div ng-repeat="event in vm.socialEvents">
-                    <input type="checkbox" name="vm.registration.events[]" value="{{event.name}}" ng-checked="vm.registration.events.indexOf(event.name) > -1" ng-click="vm.toggleSelection(vm.registration.events, event.name)"> {{event.name}} - {{event.price | currency}}
+                    <input type="checkbox" name="vm.registration.events[]" value="{{event.id}}" ng-checked="vm.registration.events.indexOf(event.id) > -1" ng-click="vm.toggleSelection(vm.registration.events, event.id)"> {{event.name}} - {{event.price | currency}}
                 </div>
 
             </div>

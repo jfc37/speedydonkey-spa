@@ -30,35 +30,43 @@
         vm.socialEvents = [
             {
                 name: 'The Heats',
-                price: 10.00
+                price: 10.00,
+                id: 'Heats'
             },
             {
                 name: 'The Grammy Awards',
-                price: 20.00
+                price: 20.00,
+                id: 'GrammyAwards'
             },
             {
                 name: 'Rock Stars Ball',
-                price: 60.00
+                price: 60.00,
+                id: 'RockStarsBall'
             },
             {
                 name: 'Groupies Private Party',
-                price: 25.00
+                price: 25.00,
+                id: 'GroupiesPrivateParty'
             },
             {
                 name: 'The Hard Rock Bus Tour',
-                price: 30.00
+                price: 30.00,
+                id: 'HardRockBusTour'
             },
             {
                 name: 'The Back Stage Party',
-                price: 60.00
+                price: 60.00,
+                id: 'BackStageParty'
             },
             {
                 name: 'Sunday Night After Party',
-                price: 10.00
+                price: 10.00,
+                id: 'SundayNightAfterParty'
             },
             {
                 name: 'Groupies Goodbye Jam',
-                price: 25.00
+                price: 25.00,
+                id: 'GroupiesGoodbyeJam'
             }
         ];
         vm.registration = {
