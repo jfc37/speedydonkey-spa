@@ -82,6 +82,13 @@
             </input-block>
 
 
+            <!--City-->
+            <input-block name="city" label="City">
+                <input name="city" type="text" class="form-control" ng-model="vm.registration.city" required/>
+                <validation error="required" name="city">Please enter a city</validation>
+            </input-block>
+
+
             <!--Emergency Contact Name-->
             <input-block name="emergencyContactPerson" label="Emergency Contact Person">
                 <input name="emergencyContactPerson" type="text" class="form-control" ng-model="vm.registration.emergency_contact_person" required/>
@@ -108,33 +115,31 @@
                         <input type="radio" name="over18" value="false" required ng-model="vm.registration.over18"> No
                     </label>
                 </div>
-                <validation error="required" name="over18">Please let us know if you are over 18</validation>
             </input-block>
         </div>
     </div>
 
     <div class="panel panel-default" ng-form="activitynForm">
         <div class="panel-heading">
-            <h3 class="panel-title">Activities</h3>
+            <h3 class="panel-title">Registration</h3>
         </div>
         <div class="panel-body">
 
             <!--Full Pass-->
-            <input-block name="fullPass" label="Full Pass">
+            <input-block name="fullPass" label="Pass Type">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="fullPass" ng-value="true" required ng-model="vm.registration.full_pass"> Yes
+                        <input type="radio" name="fullPass" ng-value="true" required ng-model="vm.registration.full_pass"> Full Pass - {{390 | currency}}
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="fullPass" ng-value="false" required ng-model="vm.registration.full_pass"> No
+                        <input type="radio" name="fullPass" ng-value="false" required ng-model="vm.registration.full_pass"> Individual Events
                     </label>
                 </div>
-                <validation error="required" name="fullPass">Do you want a full pass?</validation>
             </input-block>
             <div ng-if="vm.registration.full_pass !== undefined && !!!vm.registration.full_pass">
-                <h3>Classes</h3>
+                <h3>Classes <small>$40 each</small></h3>
                 <div ng-repeat="class in vm.classes">
                     <input type="checkbox" name="vm.registration.classes[]" value="{{class}}" ng-checked="vm.registration.classes.indexOf(class) > -1" ng-click="vm.toggleSelection(vm.registration.classes, class)"> {{class}}
                 </div>
@@ -153,6 +158,10 @@
             <h3 class="panel-title">Competitions</h3>
         </div>
         <div class="panel-body">
+
+            <p class="lead">
+                Choose categories you wish to compete in. Changes to competition entries can be made by emailing dance@fullswing.co.nz until the 9th of September. <strong>There will be no entries on the night.</strong>
+            </p>
 
             <!--Novice-->
             <input-block name="novice" label="Novice" checkbox>
