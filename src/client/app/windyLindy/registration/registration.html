@@ -258,6 +258,9 @@
             <input-block name="grammy" label="I'd like to perform at the Grammy Awards" checkbox>
                 <input name="grammy" type="checkbox" ng-model="vm.registration.perform_at_grammy" />
             </input-block>
+            <p ng-if="vm.registration.perform_at_grammy">
+                We will contact you by email with further details.
+            </p>
 
             <!--Aerials Workshops-->
             <input-block name="aerials" label="I'd like to participate in the Aerials workshops" checkbox>
@@ -268,6 +271,12 @@
             <input-block name="aerialsPartner" label="Aerials Partner" ng-if="vm.registration.aerials">
                 <input name="aerialsPartner" type="text" class="form-control" ng-model="vm.registration.aerials_partner" ng-required="vm.registration.aerials" />
                 <validation error="required" name="aerialsPartner">Please enter a your partner's name</validation>
+            </input-block>
+
+            <!--Aerials Teachers-->
+            <input-block name="aerialsTeachers" label="Who are your regular class teachers?" ng-if="vm.registration.aerials">
+                <input name="aerialsTeachers" type="text" class="form-control" ng-model="vm.registration.aerials_teachers" ng-required="vm.registration.aerials" />
+                <validation error="required" name="aerialsTeachers">Please enter the names of your regular class teachers</validation>
             </input-block>
 
         </div>
