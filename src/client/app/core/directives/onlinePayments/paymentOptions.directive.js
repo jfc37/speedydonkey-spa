@@ -4,6 +4,7 @@
     angular
         .module('app.core')
         .directive('paymentOptions', paymentOptions);
+paymentOptions.$inject = ['paypalExpressCheckout', 'poliPayment', 'logger', 'blockUI'];
 
     function paymentOptions(paypalExpressCheckout, poliPayment, logger, blockUI) {
         var directive = {

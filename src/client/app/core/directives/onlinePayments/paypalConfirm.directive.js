@@ -5,6 +5,8 @@
         .module('app.core')
         .directive('paypalConfirm', paypalConfirm);
 
+    paypalConfirm.$inject = ['paypalExpressCheckout', 'routehelper'];
+
     function paypalConfirm(paypalExpressCheckout, routehelper) {
         var directive = {
             templateUrl: 'app/core/directives/onlinePayments/paypalConfirm.html',
