@@ -292,6 +292,7 @@ function includeGoogleAnalytics() {
 }
 
 function shouldUglify() {
+    return false;
     return process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'test';
 }
 
