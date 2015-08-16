@@ -27,7 +27,7 @@
         paypal: {
             returnUrl: '#/purchasePass/confirm',
             cancelUrl: '#/purchasePass',
-            paymentUrl: 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=',
+            paymentUrl: 'https://www.<paypalDomain>/cgi-bin/webscr?cmd=_express-checkout&token=',
 
         },
         version: '3.0.0'
