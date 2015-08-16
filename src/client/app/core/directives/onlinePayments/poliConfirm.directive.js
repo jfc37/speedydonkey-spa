@@ -5,6 +5,8 @@
         .module('app.core')
         .directive('poliConfirm', poliConfirm);
 
+    poliConfirm.$inject = ['poliPayment', 'routehelper'];
+
     function poliConfirm(poliPayment, routehelper) {
         var directive = {
             templateUrl: 'app/core/directives/onlinePayments/poliConfirm.html',

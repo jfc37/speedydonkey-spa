@@ -6,6 +6,8 @@
         .module('app.core')
         .directive('note', note);
 
+    note.$inject = ['dataUpdateService', 'logger'];
+
     function note(dataUpdateService, logger) {
         var directive = {
             templateUrl: 'app/core/directives/note.html',
