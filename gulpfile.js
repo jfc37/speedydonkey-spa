@@ -360,7 +360,7 @@ function startBrowserSync(isDev, specRunner) {
 
     log('Starting browser-sync on port ' + port);
 
-    if (false) {
+    if (isDev) {
         gulp.watch([config.less], ['styles'])
             .on('change', function (event) {
                 changeEvent(event);
