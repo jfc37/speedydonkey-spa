@@ -1,64 +1,58 @@
-<section class="mainbar">
-    <section class="matter">
-        <div class="container">
-            <div class="row">
-              <h1>Profit/Loss Report</h1>
-              <form>
-                <common-input ng-model="vm.starting" type="date" name="starting" display-name="From"></common-input>
-                <common-input ng-model="vm.ending" type="date" name="ending" display-name="To"></common-input>
-                <a ng-click="vm.updateDateRanage()" class="btn btn-primary">Update Date Range</a>
-              </form>
-              <div>
-                <h3>Pass Sales</h3>
-                <table class="table table-striped">
-                  <thead>
-                    <th>Pass</th>
-                    <th>Sold</th>
-                    <th>Revenue</th>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="pass in vm.profitReport.pass_profit_reports">
-                      <td>{{pass.pass_description}}</td>
-                      <td>{{pass.total_sold}}</td>
-                      <td>{{pass.total_revenue | currency}}</td>
-                    </tr>
-                    <tr>
-                      <td>Total</td>
-                      <td>{{vm.profitReport.total_passes_sold}}</td>
-                      <td>{{vm.profitReport.total_pass_revenue | currency}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+<div class="row">
+    <h1>Profit/Loss Report</h1>
+    <form>
+        <common-input ng-model="vm.starting" type="date" name="starting" display-name="From"></common-input>
+        <common-input ng-model="vm.ending" type="date" name="ending" display-name="To"></common-input>
+        <a ng-click="vm.updateDateRanage()" class="btn btn-primary">Update Date Range</a>
+    </form>
+    <div>
+        <h3>Pass Sales</h3>
+        <table class="table table-striped">
+            <thead>
+                <th>Pass</th>
+                <th>Sold</th>
+                <th>Revenue</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pass in vm.profitReport.pass_profit_reports">
+                    <td>{{pass.pass_description}}</td>
+                    <td>{{pass.total_sold}}</td>
+                    <td>{{pass.total_revenue | currency}}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>{{vm.profitReport.total_passes_sold}}</td>
+                    <td>{{vm.profitReport.total_pass_revenue | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-              <div>
-                <h3>Block Revenue</h3>
-                <table class="table table-striped">
-                  <thead>
-                    <th>Block</th>
-                    <th>Attendance</th>
-                    <th>Revenue</th>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat-start="block in vm.profitReport.block_profit_reports" ng-click="block.open = !block.open">
-                      <td>{{block.name}}</td>
-                      <td>{{block.total_attendance}}</td>
-                      <td>{{block.total_revenue | currency}}</td>
-                    </tr>
-                    <tr ng-repeat-end ng-repeat="class in block.class_profit_reports" ng-show="block.open">
-                      <td>{{class.name}}</td>
-                      <td>{{class.total_attendance}}</td>
-                      <td>{{class.revenue | currency}}</td>
-                    </tr>
-                    <tr>
-                      <td>Total</td>
-                      <td>{{vm.profitReport.total_block_attendance}}</td>
-                      <td>{{vm.profitReport.total_block_revenue | currency}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-          </div>
-        </div>
-    </section>
-</section>
+    <div>
+        <h3>Block Revenue</h3>
+        <table class="table table-striped">
+            <thead>
+                <th>Block</th>
+                <th>Attendance</th>
+                <th>Revenue</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat-start="block in vm.profitReport.block_profit_reports" ng-click="block.open = !block.open">
+                    <td>{{block.name}}</td>
+                    <td>{{block.total_attendance}}</td>
+                    <td>{{block.total_revenue | currency}}</td>
+                </tr>
+                <tr ng-repeat-end ng-repeat="class in block.class_profit_reports" ng-show="block.open">
+                    <td>{{class.name}}</td>
+                    <td>{{class.total_attendance}}</td>
+                    <td>{{class.revenue | currency}}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>{{vm.profitReport.total_block_attendance}}</td>
+                    <td>{{vm.profitReport.total_block_revenue | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

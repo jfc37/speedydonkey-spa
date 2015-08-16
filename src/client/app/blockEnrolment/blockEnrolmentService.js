@@ -8,11 +8,11 @@
     blockEnrolmentService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'authService'];
 
     /* @ngInject */
-    function blockEnrolmentService($q, logger, dataservice, dataUpdateService, authService){
+    function blockEnrolmentService($q, logger, dataservice, dataUpdateService, authService) {
 
         var service = {
-            getBlocks : getBlocks,
-            getPassOptions : getPassOptions,
+            getBlocks: getBlocks,
+            getPassOptions: getPassOptions,
             enrol: enrol,
             purchasePass: purchasePass
         };
@@ -20,26 +20,26 @@
         function getBlocks() {
             return $q(function (resolve, revoke) {
                 var allBlocks = [];
-                dataservice.getAllBlocks().then(function(blocks) {
-                    blocks.forEach(function(block){
+                dataservice.getAllBlocks().then(function (blocks) {
+                    blocks.forEach(function (block) {
                         block.isEnroled = false;
                     });
 
                     allBlocks = blocks;
-                }, function(error) {
-                    if (error.status === 404){
+                }, function (error) {
+                    if (error.status === 404) {
                         error.displayMessage = 'No blocks found';
                     }
                     revoke(error);
                 }).then(function () {
-                    if (allBlocks.length === 0){
+                    if (allBlocks.length === 0) {
                         return;
                     }
                     dataservice.getUserEnroledBlocks().then(function (blocks) {
-                        var enroledBlockIds = blocks.map(function(block){
+                        var enroledBlockIds = blocks.map(function (block) {
                             return block.id;
                         });
-                        allBlocks.forEach(function(block){
+                        allBlocks.forEach(function (block) {
                             if (enroledBlockIds.indexOf(block.id) > -1) {
                                 block.isEnroled = true;
                             }
@@ -55,9 +55,9 @@
 
         function getPassOptions(showAllPasses) {
             return $q(function (resolve, revoke) {
-                dataservice.getAllPassOptions().then(function (passOptions){
-                    if (!showAllPasses){
-                        passOptions = passOptions.filter(function(pass) {
+                dataservice.getAllPassOptions().then(function (passOptions) {
+                    if (!showAllPasses) {
+                        passOptions = passOptions.filter(function (pass) {
                             return pass.available_for_purchase;
                         });
                     }

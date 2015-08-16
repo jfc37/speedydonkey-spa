@@ -1,25 +1,20 @@
-<section class="mainbar">
-  <section class="matter">
-    <div class="container">
-     <div class="row">
-       <h1>Manage Teachers</h1>
-       <table class="table table-hover">
-         <thead>
-           <th>Name</th>
-           <th></th>
-         </thead>
-         <tbody ng-repeat="teacher in vm.teachers">
-           <tr>
-             <td>{{teacher.full_name}}</td>
-             <td><a class="btn btn-link" ng-click="vm.remove(teacher.id)" class="btn default">Remove as teacher</a></td>
-           </tr>
-         </tbody>
-       </table>
-    </div>
-    <div class="row">
-      <user-search ng-model="vm.selectedUser" placeholder="Enter new teacher's name"></user-search>
-      <button class="btn btn-primary" ng-disabled="!vm.selectedUser" ng-click="vm.addTeacher()">Add as teacher</button>
-    </div>
-  </div>
-</section>
-</section>
+<div class="row">
+    <h1>Manage Teachers</h1>
+    <table class="table table-hover">
+        <thead>
+            <th>Name</th>
+            <th></th>
+        </thead>
+        <tbody ng-repeat="teacher in vm.teachers">
+            <tr>
+                <td>{{teacher.full_name}}</td>
+                <td><a class="btn btn-link" ng-click="vm.remove(teacher.id)" class="btn default">Remove as teacher</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <user-search ng-model="vm.selectedUser" placeholder="Enter new teacher's name"></user-search>
+    <button class="btn btn-primary" ng-disabled="!vm.selectedUser" ng-click="vm.addTeacher()">Add as teacher</button>
+</div>

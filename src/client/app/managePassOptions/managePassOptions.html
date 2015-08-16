@@ -1,51 +1,45 @@
-<section class="mainbar">
-    <section class="matter">
-        <div class="container">
-            <div class="row">
-                <h1>Manage Pass Options</h1>
-                <table class="table table-hover">
-                    <thead>
-                        <th>Name</th>
-                        <th>Cost</th>
-                        <th></th>
-                    </thead>
-                    <tbody ng-repeat="pass in vm.passOptions" ng-controller="UpdatePassOptions as vm" ng-init="vm.passOption = pass">
-                        <tr>
-                            <td>
-                                {{vm.passOption.description}}
-                            </td>
-                            <td>
-                                {{vm.passOption.cost | currency}}
-                            </td>
-                            <td>
-                                <div ng-hide="vm.updating">
-                                    <a ng-click="vm.startUpdating()" class="btn default">Update</a>
-                                    <a ng-click="vm.delete()" class="btn default">Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr ng-if="vm.updating">
-                            <td colspan="3">
-                                <form novalidate name="form">
-                                    <div ng-include src="'passOption.html'">
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div ng-controller="NewPassOptions" class="row">
-                <form ng-show="vm.addingNew" novalidate name="form">
-                    <div ng-include src="'passOption.html'">
+<div class="row">
+    <h1>Manage Pass Options</h1>
+    <table class="table table-hover">
+        <thead>
+            <th>Name</th>
+            <th>Cost</th>
+            <th></th>
+        </thead>
+        <tbody ng-repeat="pass in vm.passOptions" ng-controller="UpdatePassOptions as vm" ng-init="vm.passOption = pass">
+            <tr>
+                <td>
+                    {{vm.passOption.description}}
+                </td>
+                <td>
+                    {{vm.passOption.cost | currency}}
+                </td>
+                <td>
+                    <div ng-hide="vm.updating">
+                        <a ng-click="vm.startUpdating()" class="btn default">Update</a>
+                        <a ng-click="vm.delete()" class="btn default">Delete</a>
                     </div>
-                </form>
-                <a class="btn btn-default" ng-hide="vm.addingNew" ng-click="vm.addingNew = true;">Add New Pass Option</a>
-            </div>
+                </td>
+            </tr>
+            <tr ng-if="vm.updating">
+                <td colspan="3">
+                    <form novalidate name="form">
+                        <div ng-include src="'passOption.html'">
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-controller="NewPassOptions" class="row">
+    <form ng-show="vm.addingNew" novalidate name="form">
+        <div ng-include src="'passOption.html'">
         </div>
-    </section>
-</section>
+    </form>
+    <a class="btn btn-default" ng-hide="vm.addingNew" ng-click="vm.addingNew = true;">Add New Pass Option</a>
+</div>
 
 <script type="text/ng-template" id="passOption.html">
     <div class="form-group col-xs-12" ng-class="{'has-error':(form.description.$invalid && form.description.$touched) || form.description.serverError}">
