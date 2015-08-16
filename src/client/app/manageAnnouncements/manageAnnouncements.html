@@ -1,44 +1,38 @@
-<section class="mainbar">
-    <section class="matter">
-        <div class="container">
-            <div class="row">
-                <h1>Manage Announcements</h1>
-                <table class="table table-hover">
-                    <thead>
-                        <th>Type</th>
-                        <th>Period</th>
-                        <th>Receivers</th>
-                        <th>Message</th>
-                        <th></th>
-                    </thead>
-                    <tbody ng-repeat="announcement in vm.announcements">
-                        <tr>
-                            <td>{{vm.showType(announcement.type)}}</td>
-                            <td>
-                                <div ng-show="announcement.show_from">
-                                    <display-date ng-show="announcement.show_from" format="short date" ng-model="announcement.show_from"></display-date> -
-                                    <display-date ng-show="announcement.show_until" format="short date" ng-model="announcement.show_until"></display-date>
-                                </div>
-                            </td>
-                            <td>{{vm.showReceivers(announcement)}}</td>
-                            <td>{{announcement.message}}</td>
-                            <td ng-hide="vm.updating">
-                                <!--                                <a ng-click="vm.startUpdating(announcement)" class="btn btn-link">Manage</a>-->
-                                <a ng-click="vm.delete(announcement)" class="btn link">Delete</a>
-                            </td>
-                        </tr>
-                        <tr ng-if="announcement.updating">
-                            <td colspan="6">
-                                <manage-announcement ng-model="announcement" options="vm.existingOptions"></manage-announcement>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <a ng-click="vm.addNew()" class="btn btn-primary">Add a new announcement</a>
-            <div ng-if="vm.newAnnouncement">
-                <manage-announcement ng-model="vm.newAnnouncement" options="vm.newOptions"></manage-announcement>
-            </div>
-        </div>
-    </section>
-</section>
+<div class="row">
+    <h1>Manage Announcements</h1>
+    <table class="table table-hover">
+        <thead>
+            <th>Type</th>
+            <th>Period</th>
+            <th>Receivers</th>
+            <th>Message</th>
+            <th></th>
+        </thead>
+        <tbody ng-repeat="announcement in vm.announcements">
+            <tr>
+                <td>{{vm.showType(announcement.type)}}</td>
+                <td>
+                    <div ng-show="announcement.show_from">
+                        <display-date ng-show="announcement.show_from" format="short date" ng-model="announcement.show_from"></display-date> -
+                        <display-date ng-show="announcement.show_until" format="short date" ng-model="announcement.show_until"></display-date>
+                    </div>
+                </td>
+                <td>{{vm.showReceivers(announcement)}}</td>
+                <td>{{announcement.message}}</td>
+                <td ng-hide="vm.updating">
+                    <!--                                <a ng-click="vm.startUpdating(announcement)" class="btn btn-link">Manage</a>-->
+                    <a ng-click="vm.delete(announcement)" class="btn link">Delete</a>
+                </td>
+            </tr>
+            <tr ng-if="announcement.updating">
+                <td colspan="6">
+                    <manage-announcement ng-model="announcement" options="vm.existingOptions"></manage-announcement>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<a ng-click="vm.addNew()" class="btn btn-primary">Add a new announcement</a>
+<div ng-if="vm.newAnnouncement">
+    <manage-announcement ng-model="vm.newAnnouncement" options="vm.newOptions"></manage-announcement>
+</div>

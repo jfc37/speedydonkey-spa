@@ -9,7 +9,7 @@
     routehelper.$inject = ['$location', '$rootScope', '$route', 'logger', 'routehelperConfig', 'authService'];
 
     // Must configure via the routehelperConfigProvider
-    function routehelperConfig () {
+    function routehelperConfig() {
         /* jshint validthis:true */
         this.config = {
             // These are the properties we need to set
@@ -48,13 +48,15 @@
         return service;
         ///////////////
 
-        function configureRoutes(routes){
+        function configureRoutes(routes) {
             routes.forEach(function (route) {
                 route.config.resolve =
                     angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
                 $routeProvider.when(route.url, route.config);
             });
-            $routeProvider.otherwise({ redirectTo: '/login' });
+            $routeProvider.otherwise({
+                redirectTo: '/login'
+            });
         }
 
         function handleRoutingErrors() {
@@ -126,7 +128,7 @@
             );
         }
 
-        function redirectToRoute(routeName, routeParameters){
+        function redirectToRoute(routeName, routeParameters) {
             var routePath = getRouteFromName(routeName, routeParameters);
             if (window.location.pathname.indexOf('#') < 0) {
                 window.location = '/#' + routePath;
@@ -135,12 +137,12 @@
             }
         }
 
-        function getRouteFromName(routeName, routeParameters){
-            var routes = getRoutes().filter(function(route){
+        function getRouteFromName(routeName, routeParameters) {
+            var routes = getRoutes().filter(function (route) {
                 return route.title === routeName;
             });
 
-            if (routes.length < 1){
+            if (routes.length < 1) {
                 logger.error("Failed to find matching route", routeName, "No matching route");
                 return "";
             } else {
@@ -161,13 +163,13 @@
         /*private*/
         function isAuthorisedForRoute(route) {
             if (route) {
-                if (!route.allowAnonymous && !getUserIdentity().isLoggedIn){
+                if (!route.allowAnonymous && !getUserIdentity().isLoggedIn) {
                     return false;
                 }
                 if (route.denyAuthorised && getUserIdentity().isLoggedIn) {
                     return false;
                 }
-                if (route.claim && !authService.hasClaim(route.claim)){
+                if (route.claim && !authService.hasClaim(route.claim)) {
                     return false;
                 }
             }

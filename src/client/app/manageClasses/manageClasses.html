@@ -1,61 +1,55 @@
-<section class="mainbar">
-    <section class="matter">
-        <div class="container">
-            <div class="row">
-                <h1>Manage Classes</h1>
+<div class="row">
+    <h1>Manage Classes</h1>
 
 
-                <div ng-form="filterForm">
-                    <h3>Filter</h3>
-                    <div>
-                        <common-input ng-model="vm.filter.name.value" name="filter_name" display-name="Name" type="text"></common-input>
-                        <common-input ng-model="vm.filter.startTimeAfter.value" name="filter_after" display-name="After" type="date"></common-input>
-                        <common-input ng-model="vm.filter.startTimeBefore.value" name="filter_before" display-name="Before" type="date"></common-input>
-                    </div>
-                    <div>
-                        Showing: {{vm.classes.length}} classes
-                    </div>
-                    <div>
-                        <a class="btn btn-primary" ng-click="vm.filterClasses()">Filter</a>
-                    </div>
-                </div>
-
-                <table class="table table-hover">
-                    <thead>
-                        <th>Name</th>
-                        <th>Starting</th>
-                        <th></th>
-                    </thead>
-                    <tbody ng-repeat="class in vm.classes" ng-controller="ManageClass as vm" ng-init="vm.class = class">
-                        <tr>
-                            <td>{{vm.class.name}}</td>
-                            <td>
-                                <display-date format="short date" ng-model="vm.class.start_time"></display-date>
-                            </td>
-                            <td>
-                                <div ng-hide="vm.updating">
-                                    <a ng-show="vm.isAdmin" ng-click="vm.startUpdating()" class="btn btn-default">Manage</a>
-                                    <a ng-show="vm.isAdmin" ng-click="vm.delete()" class="btn btn-link">Delete</a>
-                                    <a ng-href="{{vm.classCheckInUrl(vm.class)}}" class="btn btn-link">Class Check In</a>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr ng-if="vm.updating">
-                            <td colspan="3">
-                                <form novalidate name="form">
-                                    <div ng-include src="'class.html'">
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
+    <div ng-form="filterForm">
+        <h3>Filter</h3>
+        <div>
+            <common-input ng-model="vm.filter.name.value" name="filter_name" display-name="Name" type="text"></common-input>
+            <common-input ng-model="vm.filter.startTimeAfter.value" name="filter_after" display-name="After" type="date"></common-input>
+            <common-input ng-model="vm.filter.startTimeBefore.value" name="filter_before" display-name="Before" type="date"></common-input>
         </div>
-    </section>
-</section>
+        <div>
+            Showing: {{vm.classes.length}} classes
+        </div>
+        <div>
+            <a class="btn btn-primary" ng-click="vm.filterClasses()">Filter</a>
+        </div>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <th>Name</th>
+            <th>Starting</th>
+            <th></th>
+        </thead>
+        <tbody ng-repeat="class in vm.classes" ng-controller="ManageClass as vm" ng-init="vm.class = class">
+            <tr>
+                <td>{{vm.class.name}}</td>
+                <td>
+                    <display-date format="short date" ng-model="vm.class.start_time"></display-date>
+                </td>
+                <td>
+                    <div ng-hide="vm.updating">
+                        <a ng-show="vm.isAdmin" ng-click="vm.startUpdating()" class="btn btn-default">Manage</a>
+                        <a ng-show="vm.isAdmin" ng-click="vm.delete()" class="btn btn-link">Delete</a>
+                        <a ng-href="{{vm.classCheckInUrl(vm.class)}}" class="btn btn-link">Class Check In</a>
+                    </div>
+                </td>
+            </tr>
+
+            <tr ng-if="vm.updating">
+                <td colspan="3">
+                    <form novalidate name="form">
+                        <div ng-include src="'class.html'">
+                        </div>
+                    </form>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
 
 <script type="text/ng-template" id="class.html">
 

@@ -19,10 +19,14 @@
         vm.loginUrl = '#/login';
         vm.registerUrl = '#/register/user';
         vm.manageUserUrl = '#/manageUser';
-        vm.logout = function() {
+        vm.logout = function () {
             authService.logout();
             routehelper.redirectToRoute('login');
         };
+        vm.showSideBar = function () {
+            return vm.getUserIdentity().isLoggedIn;
+        };
+
 
         activate();
 

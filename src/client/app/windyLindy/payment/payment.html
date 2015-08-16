@@ -1,0 +1,11 @@
+<div class="row" ng-form="registrationForm">
+
+    <div class="jumbotron">
+        <h1>Windy Lindy Payment!</h1>
+    </div>
+
+    <item-summary description="vm.registration.type" amount="vm.registration.amount"></item-summary>
+
+    <payment-options ng-model="vm.paymentOption" payment-config="vm.paymentConfig"></payment-options>
+
+</div>

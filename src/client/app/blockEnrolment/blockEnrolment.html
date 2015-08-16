@@ -1,52 +1,18 @@
-<section class="mainbar">
-    <section class="matter">
-        <div class="container">
-            <div class="row">
-              <h1>Block Selection</h1>
-              <p ng-show="vm.areBlocksLoading">Loading blocks...</p>
-              <div ng-hide="vm.areBlocksLoading">
-                <p class="lead" ng-show="vm.blocks.length > 0">Select the blocks you want to enrol in</p>
+<div class="row">
+    <h1>Block Selection</h1>
+    <div>
+        <p class="lead" ng-show="vm.blocks.length > 0">Select the blocks you want to enrol in</p>
 
-                <div class="row">
+        <button class="btn btn-primary" ng-disabled="!vm.isAnythingToSubmit()" ng-click="vm.submit()">Enrol</button>
+        <div class="row">
 
-                  <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | viewableBlocks">
-                    <div ng-include src="'app/blockEnrolment/setOfBlocks.html'"></div>
-                  </div>
+            <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | viewableBlocks">
+                <div ng-include src="'app/blockEnrolment/setOfBlocks.html'"></div>
+            </div>
 
-                </div>
-                <p ng-show="vm.blocks.length === 0">
-                    There are no blocks available to be enrolled in
-                </p>
-              </div>
-            </div>
-            <hr/>
-            <div class="row">
-              <h1>Pass Selection</h1>
-              <p ng-show="vm.arePassesLoading">Loading passes...</p>
-              <div ng-hide="vm.arePassesLoading">
-                <div ng-show="vm.passOptions.length > 0">
-                    <p  class="lead">Select the pass that works for you</p>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="passOptions" data-ng-model="vm.selectedPass" value="">
-                            Sort out in class / Use existing pass
-                      </label>
-                    </div>
-                    <div class="radio" data-ng-repeat="pass in vm.passOptions">
-                      <label>
-                        <input type="radio" name="passOptions" data-ng-model="$parent.vm.selectedPass" ng-value="pass">
-                            {{pass.description}} - ${{pass.cost}}
-                      </label>
-                    </div>
-                </div>
-                <p ng-show="vm.passOptions.length === 0">
-                    There are no pass options available
-                </p>
-              </div>
-            </div>
-            <div class="row">
-                <button class="btn btn-primary" ng-disabled="!vm.isAnythingToSubmit()" ng-click="vm.submit()">Enrol</button>
-            </div>
         </div>
-    </section>
-</section>
+        <p ng-show="vm.blocks.length === 0">
+            There are no blocks available to be enrolled in
+        </p>
+    </div>
+</div>

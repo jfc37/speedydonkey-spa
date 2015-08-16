@@ -17,6 +17,8 @@
         'app.core',
         'app.widgets',
         'app.apiCaller',
+        'app.paypalExpressCheckout',
+        'app.poliPayment',
 
         /*
          * Feature areas
@@ -42,6 +44,8 @@
         'app.adminReports',
         'app.reportTeacherHours',
         'app.reportProfit',
+        'app.purchasePass',
+        'app.windyLindy'
     ]);
 
 })();
