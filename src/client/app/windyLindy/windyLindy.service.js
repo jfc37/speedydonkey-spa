@@ -12,7 +12,8 @@
 
         var service = {
             submitRegistration: submitRegistration,
-            getRegistration: getRegistration
+            getRegistration: getRegistration,
+            getAllRegistrations: getAllRegistrations
         };
 
         function submitRegistration(registration) {
@@ -38,6 +39,28 @@
                     block: true
                 };
                 simpleApiCaller.get(options).then(function (response) {
+                    resolve(response.data);
+                });
+
+            });
+
+        }
+
+        function getAllRegistrations() {
+
+            return $q(function (resolve, revoke) {
+
+                var options = {
+                    resource: 'windy-lindy/registrations',
+                    block: true
+                };
+                simpleApiCaller.get(options).then(function (response) {
+
+                    response.data.forEach(function (reg) {
+                        reg.full_name = reg.first_name + ' ' + reg.surname;
+                        reg.pass_type = reg.full_pass ? 'Full Pass' : 'Partial Pass';
+                    });
+
                     resolve(response.data);
                 });
 

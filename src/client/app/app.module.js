@@ -14,6 +14,8 @@
          * We could place these under every feature area,
          * but this is easier to maintain.
          */
+        'tableSort',
+
         'app.core',
         'app.widgets',
         'app.apiCaller',

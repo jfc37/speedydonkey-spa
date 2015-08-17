@@ -24,8 +24,7 @@
                     settings: {
                         nav: 3,
                         content: '<i class="fa fa-area-chart"></i> Admin Reports'
-                    },
-                    claim: 'Admin'
+                    },claim: 'Admin'
                 }
             }
         ];
