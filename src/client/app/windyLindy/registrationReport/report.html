@@ -1,0 +1,38 @@
+<div>
+
+    <h3>Summary</h3>
+    <div>Total Registrations - {{vm.registrations.length}}</div>
+    <div>{{vm.getTotalPaid()}} Paid / {{vm.getTotalPending()}} Pending</div>
+    <div>{{vm.getTotalFullPasses()}} Full Passes / {{vm.getTotalPartialPasses()}} Partial Passes</div>
+</div>
+
+
+<form>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i>
+            </div>
+            <input type="text" class="form-control" placeholder="Search" ng-model="vm.filter">
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped" ts-wrapper>
+    <thead>
+        <tr>
+            <th ts-criteria="full_name">Name</th>
+            <th ts-criteria="email">Email</th>
+            <th ts-criteria="pass_type">Pass Type</th>
+            <th ts-criteria="payment_status">Payment Status</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr ng-repeat="reg in vm.registrations | filter:vm.filter" ts-repeat>
+            <td>{{reg.full_name}}</td>
+            <td>{{reg.email}}</td>
+            <td>{{reg.pass_type}}</td>
+            <td>{{reg.payment_status}}</td>
+        </tr>
+    </tbody>
+</table>

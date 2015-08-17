@@ -2,14 +2,14 @@
     <h1>Manage Students</h1>
 
     <div ng-form="filterForm">
-        <h3>Filter</h3>
-        <div>
-            <common-input ng-model="vm.filter.search" name="filter_search" display-name="Name or Email" type="text"></common-input>
-        </div>
-        <div>
-            Showing: {{vm.filteredStudents.length}} students
-        </div>
+    <h3>Filter</h3>
+    <div>
+        <common-input ng-model="vm.filter.search" name="filter_search" display-name="Name or Email" type="text"></common-input>
     </div>
+    <div>
+        Showing: {{vm.filteredStudents.length}} students
+    </div>
+</div>
 
     <table class="table table-hover">
         <thead>
