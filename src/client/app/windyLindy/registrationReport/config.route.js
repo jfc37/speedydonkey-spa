@@ -20,7 +20,7 @@
                     title: 'Windy Lindy Registrations',
                     controller: 'Report',
                     controllerAs: 'vm',
-                    templateUrl: 'app/windyLindy/report/report.html',
+                    templateUrl: 'app/windyLindy/registrationReport/report.html',
                     claim: 'Admin'
                 }
             }
