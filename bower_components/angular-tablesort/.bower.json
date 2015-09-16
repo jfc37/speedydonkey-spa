@@ -1,0 +1,22 @@
+{
+  "name": "angular-tablesort",
+  "description": "Sort AngularJS tables easily",
+  "version": "1.1.0",
+  "main": [
+    "./js/angular-tablesort.js"
+  ],
+  "dependencies": {
+    "angular": "*"
+  },
+  "homepage": "https://github.com/mattiash/angular-tablesort",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.0",
+    "commit": "4a9e2dad28c29265b3b662e96eb4bd3eca8bf819"
+  },
+  "_source": "git://github.com/mattiash/angular-tablesort.git",
+  "_target": "~1.1.0",
+  "_originalSource": "angular-tablesort",
+  "_direct": true
+}

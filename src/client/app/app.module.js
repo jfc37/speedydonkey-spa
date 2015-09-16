@@ -14,10 +14,13 @@
          * We could place these under every feature area,
          * but this is easier to maintain.
          */
+        'tableSort',
+
         'app.core',
         'app.widgets',
         'app.apiCaller',
         'app.paypalExpressCheckout',
+        'app.poliPayment',
 
         /*
          * Feature areas
@@ -43,7 +46,8 @@
         'app.adminReports',
         'app.reportTeacherHours',
         'app.reportProfit',
-        'app.purchasePass'
+        'app.purchasePass',
+        'app.windyLindy'
     ]);
 
 })();

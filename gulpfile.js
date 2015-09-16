@@ -134,11 +134,15 @@ gulp.task('environment-setup', function () {
     process.env.Company = process.env.Company || 'Speedy Donkey LOCAL';
     process.env.ApiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
     process.env.SpaUrl = process.env.SpaUrl || 'localhost:3000';
+    process.env.PayPalDomain = process.env.PayPalDomain || 'sandbox.paypal.com';
+    process.env.RaygunKey = process.env.RaygunKey || 'QjEhJ+hmGUEuvW7qQpYKGQ==';
 
     return gulp.src('config.js')
         .pipe($.replace(/<company>/g, process.env.Company))
         .pipe($.replace(/<apiUrl>/g, process.env.ApiUrl))
         .pipe($.replace(/<spaUrl>/g, process.env.SpaUrl))
+        .pipe($.replace(/<paypalDomain>/g, process.env.PayPalDomain))
+        .pipe($.replace(/<raygunKey>/g, process.env.RaygunKey))
         .pipe(gulp.dest(config.appConfigFolder));
 });
 
@@ -290,6 +294,7 @@ function includeGoogleAnalytics() {
 }
 
 function shouldUglify() {
+    return false;
     return process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'test';
 }
 
