@@ -39,7 +39,10 @@
         var appErrorPrefix = exceptionConfig.config.appErrorPrefix || '';
         return function (exception, cause) {
             $delegate(exception, cause);
-            var errorData = { exception: exception, cause: cause };
+            var errorData = {
+                exception: exception,
+                cause: cause
+            };
             var msg = appErrorPrefix + exception.message;
             /**
              * Could add the error to a service's collection,
@@ -52,6 +55,7 @@
              *
              */
             logger.error(msg, errorData);
+            Raygun.send(exception);
         };
     }
 
