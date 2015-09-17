@@ -166,12 +166,12 @@
         }
 
         function postPassAssignment(userId, passOptionId, pass) {
-            var url = baseUrl + 'users/' + userId + '/passtemplates/' + passOptionId;
+            var url = baseUrl + 'users/' + userId + '/pass-templates/' + passOptionId;
             return $http.post(url, pass);
         }
 
         function postCurrentUserPassAssignment(passOptionId, pass) {
-            var url = baseUrl + 'users/current/passtemplates/' + passOptionId;
+            var url = baseUrl + 'users/current/pass-templates/' + passOptionId;
             return $http.post(url, pass);
         }
 
@@ -245,22 +245,22 @@
         }
 
         function postPassOption(passOption) {
-            var url = baseUrl + 'passtemplate';
+            var url = baseUrl + 'pass-templates';
             return $http.post(url, passOption);
         }
 
         function getPassOption() {
-            var url = baseUrl + 'passtemplate';
+            var url = baseUrl + 'pass-templates';
             return $http.get(url);
         }
 
         function deletePassOption(id) {
-            var url = baseUrl + 'passtemplate/' + id;
+            var url = baseUrl + 'pass-templates/' + id;
             return $http.delete(url);
         }
 
         function putPassOption(passOption) {
-            var url = baseUrl + 'passtemplate/' + passOption.id;
+            var url = baseUrl + 'pass-templates/' + passOption.id;
             return $http.put(url, passOption);
         }
 
