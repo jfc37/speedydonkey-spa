@@ -41,7 +41,7 @@
 
                 var options = {
                     block: true,
-                    resource: 'passtemplate',
+                    resource: 'pass-templates',
                     id: id
                 };
 

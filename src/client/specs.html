@@ -1,86 +1,71 @@
 <!DOCTYPE html>
-<html data-ng-app="app">
+<html>
 
-<head>
-    <style>
-        /* This helps the ng-show/ng-hide animations start at the right place. */
-        /* Since Angular has this but needs to load, this gives us the class early. */
-
-        .ng-hide {
-            display: none!important;
-        }
-    </style>
-    <title data-ng-bind="title"></title>
-    <meta charset="utf-8" />
+<head lang="en">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>gulp</title>
 
-    <!-- build:css styles/vendor.css -->
+    <style>
+        body {
+            font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+            padding-left: 20px;
+        }
+    </style>
 
-    <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
-    <link rel="stylesheet" href="/bower_components/angular-block-ui/dist/angular-block-ui.css" />
-    <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.css" />
-    <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.min.css" />
-    <link rel="stylesheet" href="/bower_components/angular-tablesort/tablesort.css" />
-    <!-- endbower -->
+    <!--BEWARE of using any app styles as @media can screw up tests -->
 
-    <!-- endbuild -->
-
-    <!-- build:css styles/app.css -->
-
-    <!-- inject:css -->
-    <link rel="stylesheet" href="/.temp/styles.css">
-    <!-- endinject -->
-
-    <!-- endbuild -->
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
 
 </head>
 
 <body>
-    <div>
-        <div data-ng-include="'app/layout/shell.html'"></div>
-        <div id="splash-page" data-ng-show="false">
-            <div class="page-splash">
-                <div class="page-splash-message">
-                    Loading
-                </div>
-                <div class="progress progress-striped active page-progress-bar">
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <span data-cc-scroll-to-top></span>
+    <h1><a href="specs.html">Spec Runner</a></h1>
+    <p><strong>Make sure the REMOTE server is running</strong>
+        <br/> Click on a <em>description title</em> to narrow the scope to just its specs (see "<a href="http://mochajs.github.io/mocha/#grep-option" target="_blank" title="MochaJS grep option">
+            ?grep</a>" in address bar).
+        <br/> Click on a <em>spec title</em> to see the test implementation.
+        <br/> Click on <em>page title</em> to start over.
+    </p>
 
-    <!-- build:js js/vendor.js -->
+    <div id="mocha"></div>
+
+    <!-- inject:testlibraries:js -->
+    <script src="/node_modules/mocha/mocha.js"></script>
+    <script src="/node_modules/chai/chai.js"></script>
+    <script src="/node_modules/mocha-clean/index.js"></script>
+    <script src="/node_modules/sinon-chai/lib/sinon-chai.js"></script>
+    <!-- endinject -->
+
+    <script>
+        expect = chai.expect;
+        AssertionError = chai.AssertionError;
+        mocha.setup('bdd');
+        mocha.traceIgnores = ['mocha.js', 'chai.js', 'angular.js'];
+    </script>
 
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/toastr/toastr.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/bower_components/moment/moment.js"></script>
-    <script src="/bower_components/angular-route/angular-route.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
-    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
-    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="/bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
-    <script src="/bower_components/underscore/underscore.js"></script>
-    <script src="/bower_components/angular-tablesort/js/angular-tablesort.js"></script>
-    <script src="/bower_components/raygun4js/dist/raygun.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular-tablesort/js/angular-tablesort.js"></script>
+    <script src="bower_components/raygun4js/dist/raygun.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <!-- endbower -->
 
-    <!-- endbuild -->
-
-    <!-- build:js js/app.js -->
     <!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
     <script src="/src/client/app/adminDashboard/adminDashboard.module.js"></script>
@@ -95,9 +80,9 @@
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.module.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlocks.module.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.module.js"></script>
+    <script src="/src/client/app/manageLevels/manageLevels.module.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.module.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.module.js"></script>
-    <script src="/src/client/app/manageLevels/manageLevels.module.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.module.js"></script>
     <script src="/src/client/app/manageUser/manageUser.module.js"></script>
     <script src="/src/client/app/purchasePass/purchasePass.module.js"></script>
@@ -112,8 +97,8 @@
     <script src="/src/client/app/blocks/exception/exception.module.js"></script>
     <script src="/src/client/app/blocks/logger/logger.module.js"></script>
     <script src="/src/client/app/blocks/router/router.module.js"></script>
-    <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.module.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.module.js"></script>
+    <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.module.js"></script>
     <script src="/src/client/app/adminDashboard/adminDashboard.controller.js"></script>
     <script src="/src/client/app/adminDashboard/config.route.js"></script>
     <script src="/src/client/app/adminReports/adminReports.controller.js"></script>
@@ -158,6 +143,11 @@
     <script src="/src/client/app/manageClasses/manageClass.controller.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.controller.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.service.js"></script>
+    <script src="/src/client/app/manageLevels/config.route.js"></script>
+    <script src="/src/client/app/manageLevels/manageLevel.controller.js"></script>
+    <script src="/src/client/app/manageLevels/manageLevels.controller.js"></script>
+    <script src="/src/client/app/manageLevels/manageLevelsService.js"></script>
+    <script src="/src/client/app/manageLevels/newLevel.controller.js"></script>
     <script src="/src/client/app/managePassOptions/config.route.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.controller.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.service.js"></script>
@@ -166,11 +156,6 @@
     <script src="/src/client/app/manageStudents/manageStudent.controller.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.controller.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.service.js"></script>
-    <script src="/src/client/app/manageLevels/config.route.js"></script>
-    <script src="/src/client/app/manageLevels/manageLevel.controller.js"></script>
-    <script src="/src/client/app/manageLevels/manageLevels.controller.js"></script>
-    <script src="/src/client/app/manageLevels/manageLevelsService.js"></script>
-    <script src="/src/client/app/manageLevels/newLevel.controller.js"></script>
     <script src="/src/client/app/manageTeachers/config.route.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.controller.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.service.js"></script>
@@ -220,18 +205,31 @@
     <script src="/src/client/app/windyLindy/registration/registration.controller.js"></script>
     <script src="/src/client/app/windyLindy/registrationReport/config.route.js"></script>
     <script src="/src/client/app/windyLindy/registrationReport/report.controller.js"></script>
-    <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.js"></script>
+    <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/itemSummary.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/paymentOptions.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/paypalConfirm.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/poliConfirm.directive.js"></script>
     <!-- endinject -->
 
-    <!-- inject:templates:js -->
+    <!-- inject:spechelpers:js -->
+    <script src="/src/client/test-helpers/bind-polyfill.js"></script>
+    <script src="/src/client/test-helpers/mock-data.js"></script>
     <!-- endinject -->
 
-    <!-- endbuild -->
+    <!-- inject:specs:js -->
+    <script src="/src/client/app/login/login.controller.spec.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:templates:js -->
+    <script src="/.temp/templates.js"></script>
+    <!-- endinject -->
+
+    <script>
+        mocha.run();
+    </script>
+
 </body>
 
 </html>

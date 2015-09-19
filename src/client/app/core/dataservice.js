@@ -229,7 +229,7 @@
             return $q(function (resolve, reject) {
                 var options = {
                     block: true,
-                    resource: 'passtemplate'
+                    resource: 'pass-templates'
                 };
 
                 simpleApiCaller.get(options).then(function (response) {
