@@ -50,6 +50,8 @@
 
         // Configure the common exception handler
         exceptionConfigProvider.config.appErrorPrefix = config.appErrorPrefix;
+
+        Raygun.init('<raygunKey>').attach();
     }
 
 })();

@@ -80,7 +80,7 @@ module.exports = function () {
         /**
          * specs.html, our HTML spec runner
          **/
-        specRunner: client + specRunnerFile,
+        specRunner: specRunnerFile,
         specRunnerFile: specRunnerFile,
 
         /**

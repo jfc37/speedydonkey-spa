@@ -8,7 +8,7 @@
     authService.$inject = ['$q', '$http', '$cookieStore', 'base64Service', 'dataservice'];
 
     /* @ngInject */
-    function authService($q, $http, $cookieStore, base64Service, dataservice){
+    function authService($q, $http, $cookieStore, base64Service, dataservice) {
 
         var userIdentity = {
             isLoggedIn: false
@@ -26,11 +26,11 @@
 
         function init() {
             var userCookie = $cookieStore.get('authuser');
-            if (userCookie !== undefined){
+            if (userCookie !== undefined) {
                 userIdentity = userCookie;
             }
             var authDataCookie = $cookieStore.get('authdata');
-            if (authDataCookie !== undefined){
+            if (authDataCookie !== undefined) {
                 addBasicAuthorisation(authDataCookie);
             }
 
@@ -82,11 +82,16 @@
                         userIdentity.name = user.full_name;
                         userIdentity.claims = [];
                         resolve();
+                    }).finally(function () {
+                        Raygun.setUser(email);
                     });
-                }, function(response){
+                }, function (response) {
                     logout();
-                    if (response.status === 401){
-                        revoke([{property_name: "global", error_message: "Invalid email or password"}]);
+                    if (response.status === 401) {
+                        revoke([{
+                            property_name: "global",
+                            error_message: "Invalid email or password"
+                        }]);
                     }
                 });
             });

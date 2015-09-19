@@ -36,12 +36,17 @@ app.get('/ping', function (req, res, next) {
 });
 
 console.log('** ' + environment + ' **');
-app.use(express.static('./build/'));
-app.use('/*', express.static('./build/index.html'));
+
+if (environment === 'test') {
+    app.use('/', express.static(__dirname));
+} else {
+    app.use(express.static('./build/'));
+}
+
 
 app.listen(port, function () {
     console.log('Express server listening on port ' + port);
     console.log('env = ' + app.get('env') +
-                '\n__dirname = ' + __dirname +
-                '\nprocess.cwd = ' + process.cwd());
+        '\n__dirname = ' + __dirname +
+        '\nprocess.cwd = ' + process.cwd());
 });
