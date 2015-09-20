@@ -159,7 +159,7 @@ gulp.task('less-watcher', function () {
 gulp.task('vet', function () {
     log('Analyzing source with JSHint and JSCS');
     return gulp
-        .src(config.alljs)
+        .src(config.js)
         .pipe($.if(args.verbose, $.print()))
         .pipe($.jscs())
         .pipe($.jshint())
