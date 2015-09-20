@@ -1,10 +1,21 @@
-/* globals describe, it, expect */
-describe('add', function () {
-    it('adds two numbers', function () {
-        function add(a, b) {
-            return a + b;
-        }
+/* globals describe, it, expect, beforeEach, bard, $controller */
+describe('login.controller', function () {
+    var controller;
 
-        expect(add(1, 4)).to.equal(5);
+    beforeEach(function () {
+        bard.appModule('app.logon');
+        bard.appModule('blocks.logger');
+        bard.appModule('app.core');
+        bard.appModule('blocks.router');
+        bard.inject('$controller', 'logger', 'authService', 'routehelper', 'validationService', 'config');
+        controller = $controller('Login');
+    });
+
+    it('has correct register url', function () {
+
+    });
+
+    it('has correct forgotten password url', function () {
+
     });
 });
