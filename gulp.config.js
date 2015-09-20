@@ -93,8 +93,8 @@ module.exports = function () {
             'node_modules/chai/chai.js',
             'node_modules/mocha-clean/index.js',
             'node_modules/sinon-chai/lib/sinon-chai.js',
-            'node_modules/sinon/pkg/sinon.js',
-            'node_modules/bardjs/bard.js',
+            'node_modules/sinon/lib/sinon.js',
+            'node_modules/bardjs/dist/bard.js',
         ],
         specs: [clientApp + '**/*.spec.js'],
 
