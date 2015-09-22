@@ -5,8 +5,6 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = ['$q', 'dashboardService', 'logger', 'authService', 'config'];
-
     /* @ngInject */
     function Dashboard($q, dashboardService, logger, authService, config) {
         /*jshint validthis: true */
@@ -23,7 +21,7 @@
         activate();
 
         function activate() {
-            var promises = [getSchedule(), getCurrentPasses(), getClassesForCheckIn(), getAnnouncements()];
+            var promises = [getSchedule(), getCurrentPasses(), getClassesForCheckIn()];
             return $q.all(promises)
                 .then(function () {
                     logger.info('Activated Dashboard View');
@@ -70,12 +68,6 @@
                 }
                 logger.error(error.displayMessage);
                 vm.areClassesLoading = false;
-            });
-        }
-
-        function getAnnouncements() {
-            return dashboardService.getAnnouncements().then(function (announcements) {
-                vm.announcements = announcements;
             });
         }
     }
