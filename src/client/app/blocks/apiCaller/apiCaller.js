@@ -5,8 +5,6 @@
         .module('app.apiCaller')
         .factory('apiCaller', apiCaller);
 
-    apiCaller.$inject = ['$http', 'config'];
-
     /* @ngInject */
     function apiCaller($http, config) {
         var service = {

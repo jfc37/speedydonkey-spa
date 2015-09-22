@@ -5,8 +5,6 @@
         .module('app.adminReports')
         .controller('AdminReports', AdminReports);
 
-    AdminReports.$inject = [];
-
     /* @ngInject */
     function AdminReports() {
         /*jshint validthis: true */

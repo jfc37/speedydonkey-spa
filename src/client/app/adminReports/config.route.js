@@ -5,8 +5,6 @@
         .module('app.adminReports')
         .run(appRun);
 
-    appRun.$inject = ['routehelper'];
-
     /* @ngInject */
     function appRun(routehelper) {
         routehelper.configureRoutes(getRoutes());
@@ -24,7 +22,8 @@
                     settings: {
                         nav: 3,
                         content: '<i class="fa fa-area-chart"></i> Admin Reports'
-                    },claim: 'Admin'
+                    },
+                    claim: 'Admin'
                 }
             }
         ];

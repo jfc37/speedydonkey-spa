@@ -5,9 +5,7 @@
         .module('app.manageStudents')
         .controller('ManageStudent', ManageStudent);
 
-    ManageStudent.$inject = ['$scope', '$q', 'logger', 'manageStudentsService'];
-
-    function ManageStudent($scope, $q, logger, manageStudentsService) {
+    function ManageStudent($scope, $q, logger, manageStudentsService, validationService) {
         var vm = {};
         $scope.vm.submitText = 'Update';
         $scope.vm.cancelText = 'Close';
@@ -41,7 +39,7 @@
                 logger.success('Student deleted');
                 $scope.$parent.vm.students.remove($scope.student);
             }, function (errors) {
-                logger.error("Failed to delete student");
+                logger.error('Failed to delete student');
             });
         };
 

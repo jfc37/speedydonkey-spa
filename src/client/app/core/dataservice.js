@@ -5,8 +5,6 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$q', 'apiCaller', 'dateService', 'simpleApiCaller'];
-
     /* @ngInject */
     function dataservice($q, apiCaller, dateService, simpleApiCaller) {
         var service = {
@@ -93,11 +91,7 @@
 
                 simpleApiCaller.get(options).then(function (response) {
                     resolve(response.data);
-                }, revoke)
-
-                //                apiCaller.getCurrentUser().then(function (response) {
-                //                    resolve(response.data);
-                //                }, revoke);
+                }, revoke);
             });
         }
 

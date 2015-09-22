@@ -5,8 +5,6 @@
         .module('app.poliPayment')
         .factory('poliPayment', poliPayment);
 
-    poliPayment.$inject = ['$q', 'config', 'simpleApiCaller'];
-
     /* @ngInject */
     function poliPayment($q, config, simpleApiCaller) {
         var service = {

@@ -5,8 +5,6 @@
         .module('app.logon')
         .controller('Login', Login);
 
-    Login.$inject = ['logger', 'authService', 'routehelper', 'validationService', 'config'];
-
     /* @ngInject */
     function Login(logger, authService, routehelper, validationService, config) {
         /*jshint validthis: true */

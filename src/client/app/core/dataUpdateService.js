@@ -5,8 +5,6 @@
         .module('app.core')
         .factory('dataUpdateService', dataUpdateService);
 
-    dataUpdateService.$inject = ['$q', 'apiCaller'];
-
     /* @ngInject */
     function dataUpdateService($q, apiCaller) {
         var service = {
@@ -76,8 +74,6 @@
                 });
             });
         }
-
-
 
         function enrolInBlock(enrolment) {
             return $q(function (resolve, revoke) {

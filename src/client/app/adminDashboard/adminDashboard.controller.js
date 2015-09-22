@@ -1,11 +1,8 @@
 (function () {
     'use strict';
 
-    angular
-        .module('app.adminDashboard')
+    angular.module('app.adminDashboard')
         .controller('AdminDashboard', AdminDashboard);
-
-    AdminDashboard.$inject = ['authService'];
 
     /* @ngInject */
     function AdminDashboard(authService) {

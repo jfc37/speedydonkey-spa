@@ -4,12 +4,11 @@
     angular
         .module('app.layout')
         .controller('Sidebar', Sidebar)
-        .filter('authorisedLink', function(authService) {
-            
+        .filter('authorisedLink', function (authService) {
+
         });
 
-    Sidebar.$inject = ['$route', 'routehelper'];
-
+    /* @ngInject */
     function Sidebar($route, routehelper) {
         /*jshint validthis: true */
         var vm = this;
@@ -19,7 +18,9 @@
 
         activate();
 
-        function activate() { getNavRoutes(); }
+        function activate() {
+            getNavRoutes();
+        }
 
         function getNavRoutes() {
             vm.navRoutes = routes.filter(function (r) {

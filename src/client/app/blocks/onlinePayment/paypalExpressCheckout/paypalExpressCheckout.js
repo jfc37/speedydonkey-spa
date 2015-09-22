@@ -5,8 +5,6 @@
         .module('app.paypalExpressCheckout')
         .factory('paypalExpressCheckout', paypalExpressCheckout);
 
-    paypalExpressCheckout.$inject = ['$q', 'apiCaller', 'config', 'simpleApiCaller'];
-
     /* @ngInject */
     function paypalExpressCheckout($q, apiCaller, config, simpleApiCaller) {
         var service = {

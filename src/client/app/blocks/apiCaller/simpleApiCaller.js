@@ -5,8 +5,6 @@
         .module('app.apiCaller')
         .factory('simpleApiCaller', simpleApiCaller);
 
-    simpleApiCaller.$inject = ['$http', 'config', 'blockUI', 'logger'];
-
     /* @ngInject */
     function simpleApiCaller($http, config, blockUI, logger) {
         var service = {
@@ -19,7 +17,7 @@
             var url = baseUrl + options.resource;
 
             if (options.id) {
-                url = url + '/' + options.id
+                url = url + '/' + options.id;
             }
 
             var request = $http.get(url);

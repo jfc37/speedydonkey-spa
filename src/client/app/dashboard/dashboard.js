@@ -25,18 +25,18 @@
         function activate() {
             var promises = [getSchedule(), getCurrentPasses(), getClassesForCheckIn(), getAnnouncements()];
             return $q.all(promises)
-            .then(function(){
-                logger.info('Activated Dashboard View');
-            });
+                .then(function () {
+                    logger.info('Activated Dashboard View');
+                });
         }
 
         function getSchedule() {
             return dashboardService.getSchedule().then(function (schedule) {
                 vm.upcomingSchedule = schedule;
                 vm.isScheduleLoading = false;
-            }, function (error){
+            }, function (error) {
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting schedule...";
+                    error.displayMessage = 'Issue getting schedule...';
                 }
                 logger.error(error.displayMessage);
                 vm.isScheduleLoading = false;
@@ -47,9 +47,9 @@
             return dashboardService.getCurrentPasses().then(function (passes) {
                 vm.currentPasses = passes;
                 vm.arePassesLoading = false;
-            }, function (error){
+            }, function (error) {
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting passes...";
+                    error.displayMessage = 'Issue getting passes...';
                 }
                 logger.error(error.displayMessage);
                 vm.arePassesLoading = false;
@@ -64,9 +64,9 @@
             return dashboardService.getClassesForCheckIn().then(function (classes) {
                 vm.todaysClasses = classes;
                 vm.areClassesLoading = false;
-            }, function (error){
+            }, function (error) {
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting classes for check in...";
+                    error.displayMessage = 'Issue getting classes for check in...';
                 }
                 logger.error(error.displayMessage);
                 vm.areClassesLoading = false;
@@ -76,7 +76,7 @@
         function getAnnouncements() {
             return dashboardService.getAnnouncements().then(function (announcements) {
                 vm.announcements = announcements;
-            })
+            });
         }
     }
 })();

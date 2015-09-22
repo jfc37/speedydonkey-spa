@@ -5,8 +5,6 @@
         .module('app.classCheckIn')
         .run(appRun);
 
-    appRun.$inject = ['routehelper'];
-
     /* @ngInject */
     function appRun(routehelper) {
         routehelper.configureRoutes(getRoutes());

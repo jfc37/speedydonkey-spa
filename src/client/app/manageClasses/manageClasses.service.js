@@ -5,8 +5,6 @@
         .module('app.manageClasses')
         .factory('manageClassesService', manageClassesService);
 
-    manageClassesService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService'];
-
     /* @ngInject */
     function manageClassesService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService) {
 
@@ -41,7 +39,7 @@
                 dataservice.searchForClasses(filter).then(function (response) {
                     response.data.forEach(function (theClass) {
                         theClass.block = undefined;
-                    })
+                    });
                     resolve(response.data);
                 }, function (response) {
                     if (response.status === 404) {

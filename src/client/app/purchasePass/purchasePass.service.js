@@ -38,7 +38,6 @@
         function getPassOption(id) {
             return $q(function (resolve, revoke) {
 
-
                 var options = {
                     block: true,
                     resource: 'pass-templates',

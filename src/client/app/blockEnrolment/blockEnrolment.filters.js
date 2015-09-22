@@ -7,13 +7,12 @@
         .filter('viewableBlocks', viewableBlocksFilter);
 
     function getGroupDateDisplay(date) {
-        return moment(date).format("dddd D/M");
+        return moment(date).format('dddd D/M');
     }
 
     function getGroupDate(display) {
-        return moment(display, "dddd D/M");
+        return moment(display, 'dddd D/M');
     }
-
 
     function matchingBlockGroupingFilter() {
         return function (blocks, group) {

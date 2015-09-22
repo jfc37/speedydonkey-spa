@@ -1,3 +1,5 @@
+/*global Raygun*/
+
 (function () {
     'use strict';
 
@@ -89,8 +91,8 @@
                     logout();
                     if (response.status === 401) {
                         revoke([{
-                            property_name: "global",
-                            error_message: "Invalid email or password"
+                            property_name: 'global',
+                            error_message: 'Invalid email or password'
                         }]);
                     }
                 });
@@ -102,7 +104,7 @@
         }
 
         function logout() {
-            document.execCommand("ClearAuthenticationCache");
+            document.execCommand('ClearAuthenticationCache');
             $cookieStore.remove('authdata');
             $cookieStore.remove('authuser');
             $http.defaults.headers.common.Authorization = 'Basic ';
