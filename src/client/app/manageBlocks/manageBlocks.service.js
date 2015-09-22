@@ -5,10 +5,8 @@
         .module('app.manageBlocks')
         .factory('manageBlocksService', manageBlocksService);
 
-    manageBlocksService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService'];
-
     /* @ngInject */
-    function manageBlocksService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService){
+    function manageBlocksService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService) {
 
         var service = {
             update: update,
@@ -20,8 +18,8 @@
             return $q(function (resolve, revoke) {
                 dataUpdateService.updateBlock(block).then(function (updatedBlock) {
                     resolve(updatedBlock);
-                }, function(response) {
-                    if (response.validation_result !== undefined){
+                }, function (response) {
+                    if (response.validation_result !== undefined) {
                         revoke(response.validation_result.validation_errors);
                     } else {
                         revoke();

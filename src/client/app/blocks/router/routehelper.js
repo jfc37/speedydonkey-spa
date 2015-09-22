@@ -6,8 +6,6 @@
         .provider('routehelperConfig', routehelperConfig)
         .factory('routehelper', routehelper);
 
-    routehelper.$inject = ['$location', '$rootScope', '$route', 'logger', 'routehelperConfig', 'authService'];
-
     // Must configure via the routehelperConfigProvider
     function routehelperConfig() {
         /* jshint validthis:true */
@@ -143,15 +141,15 @@
             });
 
             if (routes.length < 1) {
-                logger.error("Failed to find matching route", routeName, "No matching route");
-                return "";
+                logger.error('Failed to find matching route', routeName, 'No matching route');
+                return '';
             } else {
                 var route = routes[0];
                 var routePath = route.originalPath;
                 if (routeParameters !== undefined && routeParameters !== null) {
                     for (var prop in routeParameters) {
                         if (routeParameters.hasOwnProperty(prop)) {
-                            routePath = routePath.replace(":" + prop, routeParameters[prop]);
+                            routePath = routePath.replace(':' + prop, routeParameters[prop]);
                         }
                     }
                 }

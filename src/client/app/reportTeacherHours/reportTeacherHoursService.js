@@ -5,10 +5,8 @@
         .module('app.reportTeacherHours')
         .factory('reportTeacherHoursService', reportTeacherHoursService);
 
-    reportTeacherHoursService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'authService'];
-
     /* @ngInject */
-    function reportTeacherHoursService($q, logger, dataservice, dataUpdateService, authService){
+    function reportTeacherHoursService($q, logger, dataservice, dataUpdateService, authService) {
 
         var service = {
             getTeacherHours: getTeacherHours
@@ -31,8 +29,8 @@
                 dataservice.searchForClasses(search).then(function (response) {
                     var teacherHours = [];
 
-                    response.data.forEach(function(theClass) {
-                        theClass.teachers.forEach(function(teacher) {
+                    response.data.forEach(function (theClass) {
+                        theClass.teachers.forEach(function (teacher) {
                             var matchingTeacher = teacherHours.getFirstOrDefault('id', teacher.id);
                             if (!matchingTeacher) {
                                 matchingTeacher = {

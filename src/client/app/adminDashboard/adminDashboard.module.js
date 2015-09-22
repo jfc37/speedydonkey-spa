@@ -1,7 +1,5 @@
 (function () {
     'use strict';
 
-    angular.module('app.adminDashboard', []
-
-    );
+    angular.module('app.adminDashboard', []);
 })();

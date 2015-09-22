@@ -5,16 +5,13 @@
         .module('app.blockEnrolment')
         .controller('BlockEnrolment', BlockEnrolment);
 
-
     function getGroupDateDisplay(date) {
-        return moment(date).format("dddd D/M");
+        return moment(date).format('dddd D/M');
     }
 
     function getGroupDate(display) {
-        return moment(display, "dddd D/M");
+        return moment(display, 'dddd D/M');
     }
-
-    BlockEnrolment.$inject = ['blockEnrolmentService', '$q', 'logger', 'routehelper', 'blockUI', 'config'];
 
     /* @ngInject */
     function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, blockUI, config) {
@@ -67,10 +64,10 @@
             blockEnrolmentService.enrol(getSelectedBlocks()).then(function () {
                 blockUI.stop();
                 routehelper.redirectToRoute('dashboard');
-                logger.success("Enrolled in selected blocks");
+                logger.success('Enrolled in selected blocks');
             }, function () {
                 blockUI.stop();
-                logger.error("Problem with enrolment");
+                logger.error('Problem with enrolment');
             });
         };
 
@@ -103,7 +100,7 @@
                 vm.areBlocksLoading = false;
             }, function (error) {
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting blocks...";
+                    error.displayMessage = 'Issue getting blocks...';
                 }
                 logger.error(error.displayMessage);
                 vm.areBlocksLoading = false;

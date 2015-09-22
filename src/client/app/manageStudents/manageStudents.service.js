@@ -6,10 +6,8 @@
         .factory('manageStudentsService', manageStudentsService)
         .factory('managePassesService', managePassesService);
 
-    manageStudentsService.$inject = ['$q', 'logger', 'dataservice', 'dataCreateService', 'dataDeleteService'];
-
     /* @ngInject */
-    function manageStudentsService($q, logger, dataservice, dataCreateService, dataDeleteService){
+    function manageStudentsService($q, logger, dataservice, dataCreateService, dataDeleteService) {
 
         var service = {
             deleteStudent: deleteStudent,
@@ -35,9 +33,13 @@
         function getStudentInfo(id) {
             return $q(function (resolve, revoke) {
                 dataservice.getUserCurrentPasses(id).then(function (passes) {
-                    resolve({passes: passes});
+                    resolve({
+                        passes: passes
+                    });
                 }, function () {
-                    resolve({passes: []});
+                    resolve({
+                        passes: []
+                    });
                 });
             });
         }
@@ -55,7 +57,7 @@
     managePassesService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataDeleteService'];
 
     /* @ngInject */
-    function managePassesService($q, logger, dataservice, dataUpdateService, dataDeleteService){
+    function managePassesService($q, logger, dataservice, dataUpdateService, dataDeleteService) {
 
         var service = {
             deletePass: deletePass,

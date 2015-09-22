@@ -1,3 +1,4 @@
+/*global Raygun*/
 (function () {
     'use strict';
 

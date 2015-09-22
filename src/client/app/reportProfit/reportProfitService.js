@@ -5,10 +5,8 @@
         .module('app.reportProfit')
         .factory('reportProfitService', reportProfitService);
 
-    reportProfitService.$inject = ['$q', 'dataservice'];
-
     /* @ngInject */
-    function reportProfitService($q, dataservice){
+    function reportProfitService($q, dataservice) {
 
         var service = {
             getProfitReport: getProfitReport

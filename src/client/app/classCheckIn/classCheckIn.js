@@ -5,8 +5,6 @@
         .module('app.classCheckIn')
         .controller('ClassCheckIn', ClassCheckIn);
 
-    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger', 'validationService', 'manageClassesService', 'blockUI'];
-
     /* @ngInject */
     function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger, validationService, manageClassesService, blockUI) {
         /*jshint validthis: true */
@@ -93,7 +91,7 @@
                 vm.walkInStudentSelected = user;
             }, function (validation_errors) {
                 validationService.applyServerSideErrors(form, validation_errors);
-                logger.warning("Register failed");
+                logger.warning('Register failed');
 
             });
         };
@@ -143,7 +141,7 @@
                 vm.isClassLoading = false;
             }, function (error) {
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting class...";
+                    error.displayMessage = 'Issue getting class...';
                 }
                 logger.error(error.displayMessage);
                 vm.isClassLoading = false;
@@ -156,7 +154,7 @@
                 vm.areRegisteredStudentsLoading = false;
             }, function (error) {
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting registered students...";
+                    error.displayMessage = 'Issue getting registered students...';
                 }
                 logger.error(error.displayMessage);
                 vm.areRegisteredStudentsLoading = false;
@@ -169,7 +167,7 @@
                 vm.arePassesLoading = false;
             }, function (error) {
                 if (!error.displayMessage) {
-                    error.arePassesLoading = "Issue getting pass options...";
+                    error.arePassesLoading = 'Issue getting pass options...';
                 }
                 logger.error(error.displayMessage);
                 vm.arePassesLoading = false;
