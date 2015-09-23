@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="app">
+<html data-ng-app="app" ng-strict-di>
 
 <head>
     <style>
@@ -95,8 +95,8 @@
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.module.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlocks.module.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.module.js"></script>
-    <script src="/src/client/app/managePassOptions/managePassOptions.module.js"></script>
     <script src="/src/client/app/manageLevels/manageLevels.module.js"></script>
+    <script src="/src/client/app/managePassOptions/managePassOptions.module.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.module.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.module.js"></script>
     <script src="/src/client/app/manageUser/manageUser.module.js"></script>
@@ -138,8 +138,7 @@
     <script src="/src/client/app/core/dateService.js"></script>
     <script src="/src/client/app/core/selectOptionService.js"></script>
     <script src="/src/client/app/dashboard/config.route.js"></script>
-    <script src="/src/client/app/dashboard/dashboard.js"></script>
-    <script src="/src/client/app/dashboard/dashboardService.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
     <script src="/src/client/app/forgottenPassword/config.route.js"></script>
     <script src="/src/client/app/forgottenPassword/forgottenPassword.js"></script>
     <script src="/src/client/app/layout/shell.js"></script>
@@ -158,14 +157,14 @@
     <script src="/src/client/app/manageClasses/manageClass.controller.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.controller.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.service.js"></script>
-    <script src="/src/client/app/managePassOptions/config.route.js"></script>
-    <script src="/src/client/app/managePassOptions/managePassOptions.controller.js"></script>
-    <script src="/src/client/app/managePassOptions/managePassOptions.service.js"></script>
     <script src="/src/client/app/manageLevels/config.route.js"></script>
     <script src="/src/client/app/manageLevels/manageLevel.controller.js"></script>
     <script src="/src/client/app/manageLevels/manageLevels.controller.js"></script>
     <script src="/src/client/app/manageLevels/manageLevelsService.js"></script>
     <script src="/src/client/app/manageLevels/newLevel.controller.js"></script>
+    <script src="/src/client/app/managePassOptions/config.route.js"></script>
+    <script src="/src/client/app/managePassOptions/managePassOptions.controller.js"></script>
+    <script src="/src/client/app/managePassOptions/managePassOptions.service.js"></script>
     <script src="/src/client/app/manageStudents/config.route.js"></script>
     <script src="/src/client/app/manageStudents/managePass.controller.js"></script>
     <script src="/src/client/app/manageStudents/manageStudent.controller.js"></script>
@@ -209,7 +208,16 @@
     <script src="/src/client/app/core/directives/filterDirective.js"></script>
     <script src="/src/client/app/core/directives/input.directive.js"></script>
     <script src="/src/client/app/core/directives/note.directive.js"></script>
+    <script src="/src/client/app/core/services/sectionBlock.service.js"></script>
     <script src="/src/client/app/core/services/validationService.js"></script>
+    <script src="/src/client/app/dashboard/currentPasses/currentPasses.directive.js"></script>
+    <script src="/src/client/app/dashboard/currentPasses/pass.service.js"></script>
+    <script src="/src/client/app/dashboard/displayAnnouncements/announcements.service.js"></script>
+    <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.js"></script>
+    <script src="/src/client/app/dashboard/todaysClasses/class.service.js"></script>
+    <script src="/src/client/app/dashboard/todaysClasses/todaysClasses.directive.js"></script>
+    <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.directive.js"></script>
+    <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.service.js"></script>
     <script src="/src/client/app/windyLindy/complete/complete.controller.js"></script>
     <script src="/src/client/app/windyLindy/complete/config.route.js"></script>
     <script src="/src/client/app/windyLindy/payment/config.route.js"></script>

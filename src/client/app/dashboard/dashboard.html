@@ -1,86 +1,18 @@
 <div class="row">
-    <h1>Welcome to {{vm.companyName}}!</h1>
-</div>
-<div class="row">
 
-    <div class="col-md-12" ng-show="vm.announcements">
-        <div class="panel panel-info ">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{vm.companyName}} Announcements</h3>
-            </div>
-            <div class="panel-body">
-                <div ng-repeat="announcement in vm.announcements">
-                    {{announcement.message}}
-                </div>
-            </div>
-        </div>
-    </div>
+    <display-announcements></display-announcements>
 
     <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Upcoming Schedule</h3>
-            </div>
-            <div class="panel-body" ng-show="vm.isScheduleLoading">
-                <p>Loading schedule...</p>
-            </div>
-            <div class="panel-body" ng-hide="vm.isScheduleLoading">
-                <div ng-show="vm.upcomingSchedule.length === 0">
-                    Nothing scheduled for this week.
-                </div>
-                <div ng-show="vm.upcomingSchedule.length > 0" ng-repeat="event in vm.upcomingSchedule">
-                    {{event.name}} |
-                    <display-date format='time and day' ng-model='event.start_time'></display-date>
-                </div>
-            </div>
-        </div>
+        <upcoming-schedule></upcoming-schedule>
     </div>
     <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Current Passes</h3>
-            </div>
-            <div class="panel-body" ng-show="vm.arePassesLoading">
-                <p>Loading passes...</p>
-            </div>
-            <div class="panel-body" ng-hide="vm.arePassesLoading">
-                <div ng-show="vm.currentPasses.length === 0">
-                    You currently have no valid passes
-                </div>
-                <div ng-show="vm.currentPasses.length > 0" ng-repeat="pass in vm.currentPasses">
-                    <span ng-if="pass.pass_type === 'Clip'">
-                            You have a clip pass with {{pass.clips_remaining}} clips remaining, which must be used by <display-date format='short date' ng-model='pass.end_date'></display-date>
-                          </span>
-                    <span ng-if="pass.pass_type === 'Unlimited'">
-                            You have unlimited pass which expires <display-date format='short date' ng-model='pass.end_date'></display-date>
-                          </span>
-                </div>
-            </div>
-        </div>
+        <current-passes></current-passes>
     </div>
 
 </div>
 
 <div class="row">
-
     <div class="col-md-6">
-        <div class="panel panel-default" ng-show="vm.canPerformClassCheckIn">
-            <div class="panel-heading">
-                <h3 class="panel-title">Class Check In</h3>
-            </div>
-            <div class="panel-body" ng-show="vm.areClassesLoading">
-                <p>Loading today's classes...</p>
-            </div>
-            <div class="panel-body" ng-hide="vm.areClassesLoading">
-                <div ng-show="vm.todaysClasses.length === 0">
-                    No classes today.
-                </div>
-                <div ng-show="vm.todaysClasses.length > 0" ng-repeat="class in vm.todaysClasses">
-                    <a data-ng-href="#/class/{{class.id}}/check-in">
-                          {{class.name}} - <display-date format='time' ng-model='class.start_time'></display-date>
-                        </a>
-                </div>
-            </div>
-        </div>
+        <todays-classes ng-if="vm.canPerformClassCheckIn"></todays-classes>
     </div>
 </div>

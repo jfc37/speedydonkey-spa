@@ -1,0 +1,15 @@
+<div class="panel panel-default" block-ui="todaysClasses">
+    <div class="panel-heading">
+        <h3 class="panel-title">Class Check In</h3>
+    </div>
+    <div class="panel-body">
+        <div ng-if="vm.todaysClasses.length === 0">
+            No classes today.
+        </div>
+        <div ng-repeat="class in vm.todaysClasses">
+            <a data-ng-href="#/class/{{class.id}}/check-in">
+                {{class.name}} - <display-date format='time' ng-model='class.start_time'></display-date>
+            </a>
+        </div>
+    </div>
+</div>

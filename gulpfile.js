@@ -383,7 +383,6 @@ function includeGoogleAnalytics() {
 }
 
 function shouldUglify() {
-    return true;
     return process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'test';
 }
 
