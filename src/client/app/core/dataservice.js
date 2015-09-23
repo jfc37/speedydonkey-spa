@@ -15,7 +15,6 @@
             getCurrentUser: getCurrentUser,
             getAllUsers: getAllUsers,
 
-            getCurrentUserSchedule: getCurrentUserSchedule,
             getCurrentUserCurrentPasses: getCurrentUserCurrentPasses,
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
@@ -100,16 +99,6 @@
                 apiCaller.getUsers().then(function (response) {
                     resolve(response.data);
                 }, revoke);
-            });
-        }
-
-        function getCurrentUserSchedule() {
-            return $q(function (resolve, reject) {
-                apiCaller.getCurrentUserSchedule().then(function (response) {
-                    resolve(response.data);
-                }, function (response) {
-                    reject(response);
-                });
             });
         }
 

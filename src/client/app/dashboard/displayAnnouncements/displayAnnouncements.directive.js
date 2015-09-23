@@ -6,12 +6,13 @@
         .directive('displayAnnouncements', displayAnnouncements);
 
     /* @ngInject */
-    function displayAnnouncements(dashboardService, config) {
+    function displayAnnouncements(announcementsService, config) {
 
         return {
             restrict: 'E',
             templateUrl: 'app/dashboard/displayAnnouncements/displayAnnouncements.html',
             controllerAs: 'vm',
+            scope: true,
             controller: function () {
                 var vm = this;
                 vm.companyName = config.appTitle;
@@ -19,7 +20,7 @@
                 getAnnouncements();
 
                 function getAnnouncements() {
-                    return dashboardService.getAnnouncements().then(function (announcements) {
+                    return announcementsService.getAnnouncements().then(function (announcements) {
                         vm.announcements = announcements;
                     });
                 }

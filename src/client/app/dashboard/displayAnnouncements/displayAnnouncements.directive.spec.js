@@ -2,18 +2,18 @@
 describe('displayAnnouncements.directive', function () {
     var element;
     var scope;
-    var dashboardServiceSpy;
+    var announcementsServiceSpy;
 
     beforeEach(function () {
         bard.appModule('app.dashboard', 'app.core', 'app.apiCaller');
-        bard.inject('$rootScope', '$compile', '$q', 'dashboardService', 'config');
+        bard.inject('$rootScope', '$compile', '$q', 'announcementsService', 'config');
 
-        dashboardServiceSpy = {
+        announcementsServiceSpy = {
             getAnnouncements: sinon.spy(function () {
                 return $q.when(['a'])
             })
         };
-        bard.mockService(dashboardService, dashboardServiceSpy);
+        bard.mockService(announcementsService, announcementsServiceSpy);
 
         scope = $rootScope.$new();
         element = '<display-announcements></display-announcements>';
@@ -22,7 +22,7 @@ describe('displayAnnouncements.directive', function () {
     });
 
     it('gets announcements on activation', function () {
-        expect(dashboardServiceSpy.getAnnouncements).to.have.been.called;
+        expect(announcementsServiceSpy.getAnnouncements).to.have.been.called;
     });
 
     describe('when announcements are retrieved', function () {

@@ -20,6 +20,17 @@
                 url = url + '/' + options.id;
             }
 
+            if (options.search) {
+                var q = 'q=';
+                options.search.forEach(function (search, index) {
+                    if (index > 0) {
+                        q = q + ',';
+                    }
+                    q = q + search.field + '_' + search.condition + '_' + search.value;
+                });
+                url = url + '?' + q;
+            }
+
             var request = $http.get(url);
 
             handleError(request);

@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Current Passes</h3>
+    </div>
+    <div class="panel-body">
+        <div ng-if="vm.currentPasses.length === 0">
+            You currently have no valid passes
+        </div>
+        <div ng-if="vm.currentPasses.length > 0" ng-repeat="pass in vm.currentPasses">
+            <span ng-if="pass.pass_type === 'Clip'">
+                You have a clip pass with {{pass.clips_remaining}} clips remaining, which must be used by <display-date format='short date' ng-model='pass.end_date'></display-date>
+            </span>
+            <span ng-if="pass.pass_type === 'Unlimited'">
+                You have unlimited pass which expires <display-date format='short date' ng-model='pass.end_date'></display-date>
+            </span>
+        </div>
+
+        <div ng-if="vm.errorMessage">
+            {{vm.errorMessage}}
+        </div>
+    </div>
+</div>

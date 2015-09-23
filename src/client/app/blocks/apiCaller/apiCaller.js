@@ -21,7 +21,6 @@
             getCurrentUser: getCurrentUser,
             deleteUser: deleteUser,
 
-            getCurrentUserSchedule: getCurrentUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
             getCurrentUserClaims: getCurrentUserClaims,
@@ -136,11 +135,6 @@
         function deleteUser(userId) {
             var url = baseUrl + 'users/' + userId;
             return $http.delete(url);
-        }
-
-        function getCurrentUserSchedule() {
-            var url = baseUrl + 'users/current/schedules';
-            return $http.get(url);
         }
 
         function getUserCurrentPasses(userId) {

@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Upcoming Schedule</h3>
+    </div>
+    <div class="panel-body">
+        <div ng-if="vm.upcomingSchedule.length === 0">
+            Nothing scheduled for this week.
+        </div>
+        <div ng-repeat="event in vm.upcomingSchedule">
+            {{event.name}} |
+            <display-date format='time and day' ng-model='event.start_time'></display-date>
+        </div>
+        <div ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
+    </div>
+</div>
