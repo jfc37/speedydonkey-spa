@@ -6,7 +6,7 @@
         .directive('upcomingSchedule', upcomingSchedule);
 
     /* @ngInject */
-    function upcomingSchedule(upcomingScheduleService) {
+    function upcomingSchedule(upcomingScheduleService, sectionBlockService) {
 
         return {
             restrict: 'E',
@@ -16,7 +16,10 @@
             controller: function () {
                 var vm = this;
 
-                activate();
+                sectionBlockService.block({
+                    block: 'upcomingSchedule',
+                    promise: activate()
+                });
 
                 function activate() {
                     return upcomingScheduleService.getSchedule().then(function (schedule) {

@@ -6,7 +6,7 @@
         .directive('displayAnnouncements', displayAnnouncements);
 
     /* @ngInject */
-    function displayAnnouncements(announcementsService, config) {
+    function displayAnnouncements(announcementsService, config, sectionBlockService) {
 
         return {
             restrict: 'E',
@@ -17,7 +17,10 @@
                 var vm = this;
                 vm.companyName = config.appTitle;
 
-                getAnnouncements();
+                sectionBlockService.block({
+                    block: 'displayAnnouncements',
+                    promise: getAnnouncements()
+                });
 
                 function getAnnouncements() {
                     return announcementsService.getAnnouncements().then(function (announcements) {

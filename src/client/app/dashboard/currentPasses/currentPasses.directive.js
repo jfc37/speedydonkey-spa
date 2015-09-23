@@ -6,7 +6,7 @@
         .directive('currentPasses', currentPasses);
 
     /* @ngInject */
-    function currentPasses(passService, config) {
+    function currentPasses(passService, sectionBlockService) {
 
         return {
             restrict: 'E',
@@ -16,7 +16,10 @@
             controller: function () {
                 var vm = this;
 
-                activate();
+                sectionBlockService.block({
+                    block: 'currentPasses',
+                    promise: activate()
+                });
 
                 function activate() {
                     return passService.getCurrentUsersPasses().then(function (passes) {
