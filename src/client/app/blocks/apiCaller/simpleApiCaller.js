@@ -9,7 +9,8 @@
     function simpleApiCaller($http, config, blockUI, logger) {
         var service = {
             get: get,
-            post: post
+            post: post,
+            put: put
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -46,6 +47,17 @@
             var url = baseUrl + options.resource;
 
             var request = $http.post(url, data);
+
+            handleError(request);
+            handleBlocking(request);
+
+            return request;
+        }
+
+        function put(data, options) {
+            var url = baseUrl + options.resource;
+
+            var request = $http.put(url, data);
 
             handleError(request);
             handleBlocking(request);

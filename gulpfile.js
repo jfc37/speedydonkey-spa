@@ -256,7 +256,7 @@ gulp.task('optimize', ['inject'], function () {
 /**
  * Build
  **/
-gulp.task('build', ['optimize', 'images', 'fonts'], function () {
+gulp.task('build', ['optimize', 'images', 'fonts'], function (done) {
     log('Building everything');
 
     var msg = {
@@ -267,14 +267,17 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function () {
     del(config.temp);
     log(msg);
     notify(msg);
+    done();
 });
 
-gulp.task('serve-dev', ['inject'], function () {
+gulp.task('serve-dev', ['inject'], function (done) {
     serve(true);
+    done();
 });
 
-gulp.task('serve-build', ['build'], function () {
+gulp.task('serve-build', ['build'], function (done) {
     serve(false);
+    done();
 });
 
 
@@ -417,7 +420,7 @@ function serve(isDev, specRunner) {
             'PORT': port,
             'NODE_ENV': specRunner ? 'test' : 'build'
         },
-        watch: [config.server]
+        //watch: [config.server]
     };
 
     return $.nodemon(nodeOptions)
@@ -457,9 +460,10 @@ function startBrowserSync(isDev, specRunner) {
                 changeEvent(event);
             });
     } else {
-        gulp.watch([config.less, config.js, config.html], ['optimize', browserSync.reload])
+        gulp.watch([config.less, config.js, config.html], ['optimize'])
             .on('change', function (event) {
                 changeEvent(event);
+                browserSync.reload();
             });
     }
 

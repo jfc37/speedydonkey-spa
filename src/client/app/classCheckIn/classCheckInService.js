@@ -9,7 +9,6 @@
 
     /* @ngInject */
     function classCheckInService($q, $routeParams, dataservice, dataUpdateService, dataDeleteService, logger, commonFunctions) {
-        /*jshint validthis: true */
 
         var service = {
             getClass: getClass,
