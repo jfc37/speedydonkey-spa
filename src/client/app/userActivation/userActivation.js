@@ -21,7 +21,7 @@
             userActivationService.activate().then(function () {
                 vm.activationSuccessful = true;
                 vm.loaded = true;
-            }, function (validation_errors) {
+            }, function (validationErrors) {
                 logger.warning('Activation Failed');
                 vm.activationSuccessful = false;
                 vm.loaded = true;

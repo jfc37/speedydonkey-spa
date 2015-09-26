@@ -19,8 +19,8 @@
         vm.submit = function (form) {
             dataUpdateService.resetPassword($routeParams.id, vm.password).then(function () {
                 vm.isSubmitted = true;
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
                 logger.warning('Password Reset failed');
             });
         };

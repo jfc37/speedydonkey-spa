@@ -13,7 +13,7 @@
     function getRoutes() {
         return [
             {
-                url: '/admin/reports/teacher_hours',
+                url: '/admin/reports/teacher-hours',
                 config: {
                     title: 'reportTeacherHours',
                     controller: 'ReportTeacherHours',

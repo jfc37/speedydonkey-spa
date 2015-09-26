@@ -23,16 +23,16 @@
                 };
 
                 var poliRequest = {
-                    success_url: 'http://' + config.spaUrl + payment.poli.returnUrl,
-                    failure_url: 'http://' + config.spaUrl + payment.poli.cancelUrl,
-                    cancellation_url: 'http://' + config.spaUrl + payment.poli.cancelUrl,
-                    item_type: payment.type,
-                    item_id: payment.type_id
+                    successUrl: 'http://' + config.spaUrl + payment.poli.returnUrl,
+                    failureUrl: 'http://' + config.spaUrl + payment.poli.cancelUrl,
+                    cancellationUrl: 'http://' + config.spaUrl + payment.poli.cancelUrl,
+                    itemType: payment.type,
+                    itemId: payment.typeId
                 };
 
                 simpleApiCaller.post(poliRequest, options).then(function (response) {
-                    if (response.data.is_valid) {
-                        resolve(response.data.redirect_url);
+                    if (response.data.isValid) {
+                        resolve(response.data.redirectUrl);
                     }
                     revoke();
                 }, revoke);
@@ -53,7 +53,7 @@
                 };
 
                 simpleApiCaller.post(poliRequest, options).then(function (response) {
-                    if (response.data.is_valid) {
+                    if (response.data.isValid) {
                         resolve();
                     }
                     revoke();

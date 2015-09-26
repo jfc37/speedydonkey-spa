@@ -1,38 +1,38 @@
-            <div class="row">
-                <h1>Manage Blocks</h1>
-                <table class="table table-hover">
-                    <thead>
-                        <th>Name</th>
-                        <th>Starting</th>
-                        <th></th>
-                    </thead>
-                    <tbody ng-repeat="block in vm.blocks" ng-controller="ManageBlock as vm" ng-init="vm.block = block">
-                        <tr>
-                            <td>{{vm.block.name}}</td>
-                            <td>
-                                <display-date format="short date" ng-model="vm.block.start_date"></display-date>
-                            </td>
-                            <td ng-hide="vm.updating">
-                                <a ng-click="vm.startUpdating()" class="btn btn-link">Manage</a>
-                                <a ng-click="vm.delete()" class="btn link">Delete</a>
-                            </td>
-                        </tr>
-                        <tr ng-if="vm.updating">
-                            <td colspan="3">
-                                <form novalidate name="form">
-                                    <div ng-include src="'block.html'">
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<div class="row">
+    <h1>Manage Blocks</h1>
+    <table class="table table-hover">
+        <thead>
+            <th>Name</th>
+            <th>Starting</th>
+            <th></th>
+        </thead>
+        <tbody ng-repeat="block in vm.blocks" ng-controller="ManageBlock as vm" ng-init="vm.block = block">
+            <tr>
+                <td>{{vm.block.name}}</td>
+                <td>
+                    <display-date format="short date" ng-model="vm.block.startDate"></display-date>
+                </td>
+                <td ng-hide="vm.updating">
+                    <a ng-click="vm.startUpdating()" class="btn btn-link">Manage</a>
+                    <a ng-click="vm.delete()" class="btn link">Delete</a>
+                </td>
+            </tr>
+            <tr ng-if="vm.updating">
+                <td colspan="3">
+                    <form novalidate name="form">
+                        <div ng-include src="'block.html'">
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <script type="text/ng-template" id="block.html">
     <common-input ng-model="vm.block.name" name="name" display-name="Name" type="text" required="true"></common-input>
-    <common-date-time-input ng-model="vm.block.start_date" name="start_date" display-name="Start Date" required="true"></common-date-time-input>
-    <common-date-time-input ng-model="vm.block.end_date" name="end_date" display-name="End Date" required="true"></common-date-time-input>
+    <common-date-time-input ng-model="vm.block.startDate" name="startDate" display-name="Start Date" required="true"></common-date-time-input>
+    <common-date-time-input ng-model="vm.block.endDate" name="endDate" display-name="End Date" required="true"></common-date-time-input>
     <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
     <a class="btn btn-default" ng-click="vm.cancel(form)">{{vm.cancelText}}</a>
     <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="vm.submit(form)">{{vm.submitText}}</a>

@@ -21,7 +21,7 @@
                 dataservice.getAllPassOptions().then(function (passOptions) {
                     if (!showAllPasses) {
                         passOptions = passOptions.filter(function (pass) {
-                            return pass.available_for_purchase;
+                            return pass.availableForPurchase;
                         });
                     }
 
@@ -55,7 +55,7 @@
         function beginPurchase(passOption) {
             return $q(function (resolve, revoke) {
                 paypalExpressCheckout.begin(passOption).then(function (response) {
-                    window.location = config.paypal.paymentUrl + response.data.action_result.token;
+                    window.location = config.paypal.paymentUrl + response.data.actionResult.token;
                 });
             });
         }

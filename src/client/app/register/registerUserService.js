@@ -17,8 +17,8 @@
                 dataCreateService.createUser(user).then(function (createdUser) {
                     resolve(createdUser);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }

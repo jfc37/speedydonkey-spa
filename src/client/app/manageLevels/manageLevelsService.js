@@ -22,8 +22,8 @@
                 dataCreateService.createLevel(level).then(function (createdLevel) {
                     resolve(createdLevel);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }
@@ -36,8 +36,8 @@
                 dataUpdateService.updateLevel(level).then(function (updatedLevel) {
                     resolve(updatedLevel);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }

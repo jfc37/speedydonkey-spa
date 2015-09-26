@@ -14,15 +14,15 @@
                 <th>Revenue</th>
             </thead>
             <tbody>
-                <tr ng-repeat="pass in vm.profitReport.pass_profit_reports">
-                    <td>{{pass.pass_description}}</td>
-                    <td>{{pass.total_sold}}</td>
-                    <td>{{pass.total_revenue | currency}}</td>
+                <tr ng-repeat="pass in vm.profitReport.passProfitReports">
+                    <td>{{pass.passDescription}}</td>
+                    <td>{{pass.totalSold}}</td>
+                    <td>{{pass.totalRevenue | currency}}</td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td>{{vm.profitReport.total_passes_sold}}</td>
-                    <td>{{vm.profitReport.total_pass_revenue | currency}}</td>
+                    <td>{{vm.profitReport.totalPassesSold}}</td>
+                    <td>{{vm.profitReport.totalPassRevenue | currency}}</td>
                 </tr>
             </tbody>
         </table>
@@ -37,20 +37,20 @@
                 <th>Revenue</th>
             </thead>
             <tbody>
-                <tr ng-repeat-start="block in vm.profitReport.block_profit_reports" ng-click="block.open = !block.open">
+                <tr ng-repeat-start="block in vm.profitReport.blockProfitReports" ng-click="block.open = !block.open">
                     <td>{{block.name}}</td>
-                    <td>{{block.total_attendance}}</td>
-                    <td>{{block.total_revenue | currency}}</td>
+                    <td>{{block.totalAttendance}}</td>
+                    <td>{{block.totalRevenue | currency}}</td>
                 </tr>
-                <tr ng-repeat-end ng-repeat="class in block.class_profit_reports" ng-show="block.open">
+                <tr ng-repeat-end ng-repeat="class in block.classProfitReports" ng-show="block.open">
                     <td>{{class.name}}</td>
-                    <td>{{class.total_attendance}}</td>
+                    <td>{{class.totalAttendance}}</td>
                     <td>{{class.revenue | currency}}</td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td>{{vm.profitReport.total_block_attendance}}</td>
-                    <td>{{vm.profitReport.total_block_revenue | currency}}</td>
+                    <td>{{vm.profitReport.totalBlockAttendance}}</td>
+                    <td>{{vm.profitReport.totalBlockRevenue | currency}}</td>
                 </tr>
             </tbody>
         </table>

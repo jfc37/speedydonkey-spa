@@ -17,7 +17,7 @@
     function matchingBlockGroupingFilter() {
         return function (blocks, group) {
             return blocks.filter(function (block) {
-                return getGroupDateDisplay(block.start_date) === group;
+                return getGroupDateDisplay(block.startDate) === group;
             });
         };
     }

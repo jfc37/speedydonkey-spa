@@ -17,8 +17,8 @@
         vm.updateUser = function (form) {
             manageUserService.updateUser(vm.user).then(function () {
                 logger.success('Your details have been updated');
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
                 logger.warning('Your details have not been updated');
 
             });

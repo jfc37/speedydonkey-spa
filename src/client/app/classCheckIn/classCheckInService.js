@@ -98,12 +98,12 @@
                 var message;
                 if (student.attendedClass) {
                     if (!student.passes.some(commonFunctions.isValidPass)) {
-                        reject(student.full_name + ' needs to buy a pass before attending class');
+                        reject(student.fullName + ' needs to buy a pass before attending class');
                         student.attendedClass = false;
                         return;
                     }
                     if (!student.passes.some(commonFunctions.isPaidPass)) {
-                        reject(student.full_name + ' needs to pay for a pass before attending class');
+                        reject(student.fullName + ' needs to pay for a pass before attending class');
                         student.attendedClass = false;
                         return;
                     }
@@ -135,8 +135,8 @@
         function enrolStudent(studentId, blockId) {
             return $q(function (resolve, revoke) {
                 var enrolment = {
-                    user_id: studentId,
-                    block_ids: [blockId]
+                    userId: studentId,
+                    blockIds: [blockId]
                 };
                 dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);
             });
@@ -157,7 +157,7 @@
         function purchaseNewPass(student, passOption) {
             return $q(function (resolve, revoke) {
                 var pass = {
-                    payment_status: 'paid'
+                    paymentStatus: 'paid'
                 };
                 dataUpdateService.assignPassToStudent(student.id, passOption.id, pass).then(function () {
                     getPassesForStudent(student).then(resolve, resolve);
@@ -167,9 +167,9 @@
 
         function passPaidFor(pass) {
             return $q(function (resolve, revoke) {
-                pass.payment_status = 'paid';
+                pass.paymentStatus = 'paid';
                 dataUpdateService.updatePass(pass).then(resolve, function () {
-                    pass.payment_status = 'pending';
+                    pass.paymentStatus = 'pending';
                     revoke();
                 });
             });

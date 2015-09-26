@@ -2,10 +2,10 @@
     <div class="row">
 
         <!--first name-->
-        <div class="form-group col-xs-12" ng-class="{'has-error':(registerForm.first_name.$invalid && registerForm.first_name.$touched) || registerForm.first_name.serverError}">
-            <input class="form-control" id="first_name" name="first_name" type="text" placeholder="First Name (required)" ng-model="vm.newUser.first_name" required/>
-            <validation-error ng-model="registerForm.first_name" error="required" message="First name is required."></validation-error>
-            <server-error ng-model="registerForm.first_name"></server-error>
+        <div class="form-group col-xs-12" ng-class="{'has-error':(registerForm.firstName.$invalid && registerForm.firstName.$touched) || registerForm.firstName.serverError}">
+            <input class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name (required)" ng-model="vm.newUser.firstName" required/>
+            <validation-error ng-model="registerForm.firstName" error="required" message="First name is required."></validation-error>
+            <server-error ng-model="registerForm.firstName"></server-error>
         </div>
 
         <!--surname-->

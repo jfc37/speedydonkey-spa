@@ -185,7 +185,7 @@
         }
 
         function postBlockEnrolment(enrolment) {
-            var url = baseUrl + 'users/' + enrolment.user_id + '/enrolment';
+            var url = baseUrl + 'users/' + enrolment.userId + '/enrolment';
             return $http.post(url, enrolment);
         }
 

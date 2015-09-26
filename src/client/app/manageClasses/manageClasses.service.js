@@ -19,8 +19,8 @@
                 dataUpdateService.updateClass(theClass).then(function (updatedClass) {
                     resolve(updatedClass);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }

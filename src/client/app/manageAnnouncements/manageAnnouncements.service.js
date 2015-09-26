@@ -22,8 +22,8 @@
                 dataCreateService.createAnnouncement(announcement).then(function (createdAnnouncement) {
                     resolve(createdAnnouncement);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }
@@ -36,8 +36,8 @@
                 dataUpdateService.updateAnnouncement(announcement).then(function (updatedAnnouncement) {
                     resolve(updatedAnnouncement);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }

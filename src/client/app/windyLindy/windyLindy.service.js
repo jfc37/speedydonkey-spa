@@ -23,7 +23,7 @@
                     resource: 'windy-lindy/registration'
                 };
                 simpleApiCaller.post(registration, options).then(function (response) {
-                    resolve(response.data.action_result.registation_id);
+                    resolve(response.data.actionResult.registationId);
                 });
             });
 
@@ -57,8 +57,8 @@
                 simpleApiCaller.get(options).then(function (response) {
 
                     response.data.forEach(function (reg) {
-                        reg.full_name = reg.first_name + ' ' + reg.surname;
-                        reg.pass_type = reg.full_pass ? 'Full Pass' : 'Partial Pass';
+                        reg.fullName = reg.firstName + ' ' + reg.surname;
+                        reg.passType = reg.fullPass ? 'Full Pass' : 'Partial Pass';
                     });
 
                     resolve(response.data);

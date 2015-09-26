@@ -7,11 +7,11 @@
             You currently have no valid passes
         </div>
         <div ng-if="vm.currentPasses.length > 0" ng-repeat="pass in vm.currentPasses">
-            <span ng-if="pass.pass_type === 'Clip'">
-                You have a clip pass with {{pass.clips_remaining}} clips remaining, which must be used by <display-date format='short date' ng-model='pass.end_date'></display-date>
+            <span ng-if="pass.passType === 'Clip'">
+                You have a clip pass with {{pass.clipsRemaining}} clips remaining, which must be used by <display-date format='short date' ng-model='pass.endDate'></display-date>
             </span>
-            <span ng-if="pass.pass_type === 'Unlimited'">
-                You have unlimited pass which expires <display-date format='short date' ng-model='pass.end_date'></display-date>
+            <span ng-if="pass.passType === 'Unlimited'">
+                You have unlimited pass which expires <display-date format='short date' ng-model='pass.endDate'></display-date>
             </span>
         </div>
 

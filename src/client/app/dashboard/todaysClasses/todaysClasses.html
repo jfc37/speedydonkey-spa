@@ -8,7 +8,7 @@
         </div>
         <div ng-repeat="class in vm.todaysClasses">
             <a data-ng-href="#/class/{{class.id}}/check-in">
-                {{class.name}} - <display-date format='time' ng-model='class.start_time'></display-date>
+                {{class.name}} - <display-date format='time' ng-model='class.startTime'></display-date>
             </a>
         </div>
     </div>

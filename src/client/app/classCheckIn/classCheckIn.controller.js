@@ -41,9 +41,9 @@
 
         vm.enrolWalkIn = function () {
             classCheckInService.enrolStudent(vm.walkInStudentSelected.id, vm.class.block.id).then(function () {
-                logger.success('Enrolled ' + vm.walkInStudentSelected.full_name + ' in the block');
+                logger.success('Enrolled ' + vm.walkInStudentSelected.fullName + ' in the block');
             }, function (message) {
-                logger.error('Problem enrolling ' + vm.walkInStudentSelected.full_name + ' in the block...');
+                logger.error('Problem enrolling ' + vm.walkInStudentSelected.fullName + ' in the block...');
             }).then(vm.addWalkIn);
         };
 
@@ -56,7 +56,7 @@
             if (vm.walkInStudentSelected) {
                 var splitName = vm.walkInStudentSelected.split(' ');
                 if (splitName.length > 0) {
-                    vm.newUser.first_name = splitName[0];
+                    vm.newUser.firstName = splitName[0];
                 }
                 if (splitName.length > 1) {
                     vm.newUser.surname = splitName[1];
@@ -70,8 +70,8 @@
             registerUserService.register(vm.newUser, true).then(function (user) {
                 vm.creatingNewAccount = false;
                 vm.walkInStudentSelected = user;
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
                 logger.warning('Register failed');
 
             });
@@ -87,7 +87,7 @@
             vm.disablePassPurchase = true;
             classCheckInService.purchaseNewPass(student, passOption).then(function () {
                 blockUI.stop();
-                logger.success(student.full_name + ' purchased a new pass!');
+                logger.success(student.fullName + ' purchased a new pass!');
                 vm.disablePassPurchase = false;
             }, function () {
                 blockUI.stop();
