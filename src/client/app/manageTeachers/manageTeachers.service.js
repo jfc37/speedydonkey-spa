@@ -19,8 +19,8 @@
                 dataCreateService.createTeacher(id).then(function (createdTeacher) {
                     resolve(createdTeacher);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }

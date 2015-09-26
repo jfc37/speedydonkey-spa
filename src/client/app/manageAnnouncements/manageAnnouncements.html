@@ -12,9 +12,9 @@
             <tr>
                 <td>{{vm.showType(announcement.type)}}</td>
                 <td>
-                    <div ng-show="announcement.show_from">
-                        <display-date ng-show="announcement.show_from" format="short date" ng-model="announcement.show_from"></display-date> -
-                        <display-date ng-show="announcement.show_until" format="short date" ng-model="announcement.show_until"></display-date>
+                    <div ng-show="announcement.showFrom">
+                        <display-date ng-show="announcement.showFrom" format="short date" ng-model="announcement.showFrom"></display-date> -
+                        <display-date ng-show="announcement.showUntil" format="short date" ng-model="announcement.showUntil"></display-date>
                     </div>
                 </td>
                 <td>{{vm.showReceivers(announcement)}}</td>

@@ -17,8 +17,8 @@
         vm.registerNewUser = function (form) {
             registerUserService.register(vm.newUser).then(function () {
                 vm.registrationSuccessful = true;
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
                 logger.warning('Register failed');
 
             });

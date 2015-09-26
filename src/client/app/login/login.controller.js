@@ -18,8 +18,8 @@
         vm.submit = function (form) {
             authService.login(vm.email, vm.password).then(function () {
                 routehelper.redirectToRoute('dashboard');
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
             });
         };
     }

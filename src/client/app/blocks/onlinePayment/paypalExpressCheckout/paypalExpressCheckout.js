@@ -27,10 +27,10 @@
                 };
 
                 var paypalRequest = {
-                    return_url: 'http://' + config.spaUrl + payment.paypal.returnUrl,
-                    cancel_url: 'http://' + config.spaUrl + payment.paypal.cancelUrl,
-                    item_type: payment.type,
-                    item_id: payment.type_id
+                    returnUrl: 'http://' + config.spaUrl + payment.paypal.returnUrl,
+                    cancelUrl: 'http://' + config.spaUrl + payment.paypal.cancelUrl,
+                    itemType: payment.type,
+                    itemId: payment.typeId
                 };
 
                 simpleApiCaller.post(paypalRequest, options).then(function (response) {
@@ -43,9 +43,9 @@
 
         function begin(pass) {
             var options = {
-                return_url: 'http://' + config.spaUrl + '/' + config.paypal.returnUrl,
-                cancel_url: 'http://' + config.spaUrl + '/' + config.paypal.cancelUrl,
-                template_id: pass.id
+                returnUrl: 'http://' + config.spaUrl + '/' + config.paypal.returnUrl,
+                cancelUrl: 'http://' + config.spaUrl + '/' + config.paypal.cancelUrl,
+                templateId: pass.id
             };
             return apiCaller.beginExpressCheckout(options);
         }
@@ -74,11 +74,11 @@
                 apiCaller.confirmExpressCheckout({
                     token: token
                 }).then(function (response) {
-                    if (response.data && response.data.validation_result) {
-                        if (response.data.validation_result.is_valid) {
-                            resolve(response.data.action_result);
+                    if (response.data && response.data.validationResult) {
+                        if (response.data.validationResult.isValid) {
+                            resolve(response.data.actionResult);
                         } else {
-                            revoke(response.data.validation_result);
+                            revoke(response.data.validationResult);
                         }
                     } else {
                         revoke();

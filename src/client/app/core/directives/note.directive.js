@@ -75,11 +75,11 @@
     function getTitle(type, model) {
         var title = 'Notes for ';
         if (type === 'user') {
-            title = title + model.full_name;
+            title = title + model.fullName;
         }
 
         if (type === 'pass') {
-            title = title + 'pass ' + model.pass_number;
+            title = title + 'pass ' + model.passNumber;
         }
 
         return title;

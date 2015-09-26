@@ -35,7 +35,7 @@
                             if (!matchingTeacher) {
                                 matchingTeacher = {
                                     id: teacher.id,
-                                    full_name: teacher.full_name,
+                                    fullName: teacher.fullName,
                                     soloClasses: [],
                                     partnerClasses: []
                                 };

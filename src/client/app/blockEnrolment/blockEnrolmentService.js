@@ -58,7 +58,7 @@
                 dataservice.getAllPassOptions().then(function (passOptions) {
                     if (!showAllPasses) {
                         passOptions = passOptions.filter(function (pass) {
-                            return pass.available_for_purchase;
+                            return pass.availableForPurchase;
                         });
                     }
 
@@ -78,8 +78,8 @@
                     resolve();
                 } else {
                     var enrolment = {
-                        user_id: authService.getUserIdentity().userId,
-                        block_ids: blocks.map(function (block) {
+                        userId: authService.getUserIdentity().userId,
+                        blockIds: blocks.map(function (block) {
                             return block.id;
                         })
                     };
@@ -94,7 +94,7 @@
                     resolve();
                 } else {
                     var pass = {
-                        payment_status: 'pending'
+                        paymentStatus: 'pending'
                     };
                     dataUpdateService.assignPassToCurrentUser(passOption.id, pass).then(resolve, revoke);
                 }

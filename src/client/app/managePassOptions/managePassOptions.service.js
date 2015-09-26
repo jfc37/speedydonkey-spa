@@ -20,8 +20,8 @@
                 dataCreateService.createPassOption(passOption).then(function (createdPassOption) {
                     resolve(createdPassOption);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }
@@ -34,8 +34,8 @@
                 dataUpdateService.updatePassOption(passOption).then(function (updatedPassOption) {
                     resolve(updatedPassOption);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }

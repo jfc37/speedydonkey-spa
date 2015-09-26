@@ -60,7 +60,7 @@
                 apiCaller.putUserPasswordReset(key, password).then(function (response) {
                     resolve();
                 }, function (response) {
-                    revoke(response.data.validation_errors);
+                    revoke(response.data.validationErrors);
                 });
             });
         }
@@ -70,7 +70,7 @@
                 apiCaller.putCurrentUser(user).then(function (response) {
                     resolve();
                 }, function (response) {
-                    revoke(response.data.validation_errors);
+                    revoke(response.data.validationErrors);
                 });
             });
         }

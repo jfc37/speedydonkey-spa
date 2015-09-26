@@ -69,7 +69,7 @@
                         userIdentity.username = email;
 
                         userIdentity.userId = user.id;
-                        userIdentity.name = user.full_name;
+                        userIdentity.name = user.fullName;
                         userIdentity.claims = claims;
 
                         $cookieStore.put('authdata', encoded);
@@ -81,7 +81,7 @@
                         userIdentity.username = email;
 
                         userIdentity.userId = user.id;
-                        userIdentity.name = user.full_name;
+                        userIdentity.name = user.fullName;
                         userIdentity.claims = [];
                         resolve();
                     }).finally(function () {
@@ -91,8 +91,8 @@
                     logout();
                     if (response.status === 401) {
                         revoke([{
-                            property_name: 'global',
-                            error_message: 'Invalid email or password'
+                            propertyName: 'global',
+                            errorMessage: 'Invalid email or password'
                         }]);
                     }
                 });

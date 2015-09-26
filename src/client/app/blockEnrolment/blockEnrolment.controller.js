@@ -89,7 +89,7 @@
                     l = blocks.length,
                     i;
                 for (i = 0; i < l; i++) {
-                    var displayDate = getGroupDateDisplay(blocks[i].start_date);
+                    var displayDate = getGroupDateDisplay(blocks[i].startDate);
                     if (flags[displayDate]) {
                         continue;
                     }

@@ -13,7 +13,7 @@
 
         vm.addTeacher = function () {
             manageTeachersService.addTeacher(vm.selectedUser.id).then(function (newTeacher) {
-                logger.success(newTeacher.full_name + ' is now a teacher!');
+                logger.success(newTeacher.fullName + ' is now a teacher!');
                 vm.teachers.push(newTeacher);
                 vm.selectedUser = '';
             }, function () {
@@ -26,7 +26,7 @@
                 var teacherRemoved = vm.teachers.filter(function (teacher) {
                     return teacher.id === id;
                 })[0];
-                logger.success(teacherRemoved.full_name + ' has been removed as a teacher');
+                logger.success(teacherRemoved.fullName + ' has been removed as a teacher');
                 vm.teachers.remove(teacherRemoved);
             }, function () {
                 logger.error('Failed removing the teacher');
