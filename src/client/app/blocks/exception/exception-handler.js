@@ -34,10 +34,10 @@
         $provide.decorator('$exceptionHandler', extendExceptionHandler);
     }
 
-    extendExceptionHandler.$inject = ['$delegate', 'exceptionConfig', 'logger'];
+    extendExceptionHandler.$inject = ['$delegate', 'exceptionConfig'];
 
     // Extend the $exceptionHandler service to also display a toast.
-    function extendExceptionHandler($delegate, exceptionConfig, logger) {
+    function extendExceptionHandler($delegate, exceptionConfig) {
         var appErrorPrefix = exceptionConfig.config.appErrorPrefix || '';
         return function (exception, cause) {
             $delegate(exception, cause);
@@ -56,7 +56,6 @@
              *     throw { message: 'error message we added' };
              *
              */
-            logger.error(msg, errorData);
             Raygun.send(exception);
         };
     }

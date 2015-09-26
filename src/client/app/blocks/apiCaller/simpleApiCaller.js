@@ -74,9 +74,7 @@
         }
 
         function handleError(request) {
-            request.catch(function (response) {
-                logger.error('Issue with ' + response.config.method + ' : ' + response);
-            });
+            request.catch(function (response) {});
         }
 
         return service;
