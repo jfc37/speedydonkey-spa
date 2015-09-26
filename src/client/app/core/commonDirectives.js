@@ -121,7 +121,7 @@
 
     function serverError() {
         var directive = {
-            template: '<span class="help-block has-error"  ng-show="ngModel.serverError && ngModel.$touched"><div>{{ngModel.serverError}}</div></span>',
+            template: '<span class="help-block has-error"  ng-if="ngModel.serverError && ngModel.$touched"><div>{{ngModel.serverError}}</div></span>',
             require: 'ngModel',
             scope: {
                 ngModel: '='
@@ -136,7 +136,7 @@
     function commonInput() {
         var directive = {
             template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">' +
-                '<label ng-show="displayName">{{displayName}}</label>' +
+                '<label ng-if="displayName">{{displayName}}</label>' +
                 '<input class="form-control"' +
                 'id="{{name}}"' +
                 'name="{{name}}"' +

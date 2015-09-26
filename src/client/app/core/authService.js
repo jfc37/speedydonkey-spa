@@ -8,8 +8,7 @@
         .factory('authService', authService);
 
     authService.$inject = ['$q', '$http', '$cookieStore', 'base64Service', 'dataservice'];
-
-    /* @ngInject */
+/* @ngInject */
     function authService($q, $http, $cookieStore, base64Service, dataservice) {
 
         var userIdentity = {
