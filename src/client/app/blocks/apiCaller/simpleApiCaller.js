@@ -9,7 +9,8 @@
     function simpleApiCaller($http, config, blockUI, logger) {
         var service = {
             get: get,
-            post: post
+            post: post,
+            put: put
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -53,6 +54,17 @@
             return request;
         }
 
+        function put(data, options) {
+            var url = baseUrl + options.resource;
+
+            var request = $http.put(url, data);
+
+            handleError(request);
+            handleBlocking(request);
+
+            return request;
+        }
+
         function handleBlocking(request) {
             blockUI.start();
 
@@ -62,9 +74,7 @@
         }
 
         function handleError(request) {
-            request.catch(function (response) {
-                logger.error('Issue with ' + response.config.method + ' : ' + response);
-            });
+            request.catch(function (response) {});
         }
 
         return service;

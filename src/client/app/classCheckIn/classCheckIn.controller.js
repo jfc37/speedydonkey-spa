@@ -16,31 +16,12 @@
         vm.creatingNewAccount = false;
         vm.newUser = {};
 
-        vm.updateTeachers = function () {
-            var sanitisedClass = {
-                id: vm.class.id,
-                teachers: vm.class.teachers,
-                start_time: vm.class.start_time,
-                end_time: vm.class.end_time,
-                name: vm.class.name,
-            };
-            manageClassesService.update(sanitisedClass).then(function () {
-                logger.success('Teachers updated');
-            }, function (errors) {
-                logger.error('Problem updating teachers');
-            });
-        };
-
         vm.attendenceStatusChanged = function (student) {
             classCheckInService.attendenceStatusChanged(student).then(function (message) {
                 logger.success(message);
             }, function (message) {
                 logger.error(message);
             });
-        };
-
-        vm.searchUsers = function (name) {
-            return classCheckInService.searchUsers(name);
         };
 
         vm.addWalkIn = function () {
