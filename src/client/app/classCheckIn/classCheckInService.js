@@ -9,8 +9,7 @@
 
     /* @ngInject */
     function classCheckInService($q, $routeParams, dataservice, dataUpdateService, dataDeleteService, logger, commonFunctions) {
-        /*jshint validthis: true */
-        
+
         var service = {
             getClass: getClass,
             getStudents: getStudents,
@@ -45,7 +44,7 @@
                 var registeredStudentsPromise = dataservice.getClassRegisteredStudents($routeParams.id).then(function (students) {
                     registeredStudents = students;
                 });
-                var attendingStudentsPromise = dataservice.getClassAttendance($routeParams.id).then(function(students) {
+                var attendingStudentsPromise = dataservice.getClassAttendance($routeParams.id).then(function (students) {
                     attendingStudents = students;
                 });
 
@@ -56,8 +55,8 @@
 
                     registeredStudents.forEach(function (registeredStudent) {
                         if (attendingStudents.filter(function (attendingStudent) {
-                            return attendingStudent.id === registeredStudent.id;
-                        }).length === 0){
+                                return attendingStudent.id === registeredStudent.id;
+                            }).length === 0) {
                             attendingStudents.push(registeredStudent);
                         }
                     });
@@ -94,38 +93,38 @@
         }
 
         function attendenceStatusChanged(student) {
-            return $q(function(resolve, reject) {
+            return $q(function (resolve, reject) {
                 var promise;
                 var message;
                 if (student.attendedClass) {
                     if (!student.passes.some(commonFunctions.isValidPass)) {
-                        reject(student.full_name + ' needs to buy a pass before attending class');
+                        reject(student.fullName + ' needs to buy a pass before attending class');
                         student.attendedClass = false;
                         return;
                     }
                     if (!student.passes.some(commonFunctions.isPaidPass)) {
-                        reject(student.full_name + ' needs to pay for a pass before attending class');
+                        reject(student.fullName + ' needs to pay for a pass before attending class');
                         student.attendedClass = false;
                         return;
                     }
                     message = {
-                        success: "Recorded student's attendance",
-                        error: "Issue recording student's attendance..."
+                        success: 'Recorded student\'s attendance ',
+                        error: 'Issue recording student\'s attendance...'
                     };
                     promise = dataUpdateService.studentAttendedClass($routeParams.id, student.id);
                 } else {
                     message = {
-                        success: "Removed student's attendance",
-                        error: "Issue removing student's attendance..."
+                        success: 'Removed student\'s attendance ',
+                        error: 'Issue removing student\'s attendance...'
                     };
                     promise = dataDeleteService.studentUnattendedClass($routeParams.id, student.id);
                 }
 
                 promise.then(function () {
                     getPassesForStudent(student);
-                }).then(function(){
+                }).then(function () {
                     resolve(message.success);
-                }, function() {
+                }, function () {
                     student.attendedClass = false;
                     reject(message.error);
                 });
@@ -136,8 +135,8 @@
         function enrolStudent(studentId, blockId) {
             return $q(function (resolve, revoke) {
                 var enrolment = {
-                    user_id: studentId,
-                    block_ids: [blockId]
+                    userId: studentId,
+                    blockIds: [blockId]
                 };
                 dataUpdateService.enrolInBlock(enrolment).then(resolve, revoke);
             });
@@ -158,9 +157,9 @@
         function purchaseNewPass(student, passOption) {
             return $q(function (resolve, revoke) {
                 var pass = {
-                    payment_status: 'paid'
+                    paymentStatus: 'paid'
                 };
-                dataUpdateService.assignPassToStudent(student.id, passOption.id, pass).then(function (){
+                dataUpdateService.assignPassToStudent(student.id, passOption.id, pass).then(function () {
                     getPassesForStudent(student).then(resolve, resolve);
                 }, revoke);
             });
@@ -168,9 +167,9 @@
 
         function passPaidFor(pass) {
             return $q(function (resolve, revoke) {
-                pass.payment_status = 'paid';
+                pass.paymentStatus = 'paid';
                 dataUpdateService.updatePass(pass).then(resolve, function () {
-                    pass.payment_status = 'pending';
+                    pass.paymentStatus = 'pending';
                     revoke();
                 });
             });

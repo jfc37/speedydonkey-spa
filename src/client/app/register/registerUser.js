@@ -5,8 +5,6 @@
         .module('app.register')
         .controller('RegisterUser', RegisterUser);
 
-    RegisterUser.$inject = ['registerUserService', 'logger', 'validationService'];
-
     /* @ngInject */
     function RegisterUser(registerUserService, logger, validationService) {
         /*jshint validthis: true */
@@ -16,12 +14,12 @@
         vm.newUser = {};
         vm.registrationSuccessful = false;
 
-        vm.registerNewUser = function(form) {
+        vm.registerNewUser = function (form) {
             registerUserService.register(vm.newUser).then(function () {
                 vm.registrationSuccessful = true;
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
-                logger.warning("Register failed");
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
+                logger.warning('Register failed');
 
             });
         };

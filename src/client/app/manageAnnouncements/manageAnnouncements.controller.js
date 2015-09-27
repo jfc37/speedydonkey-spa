@@ -14,7 +14,7 @@
         vm.announcements = [];
 
         vm.showReceivers = function (announcement) {
-            if (announcement.notify_all) {
+            if (announcement.notifyAll) {
                 return 'Everyone';
             }
             return announcement.receivers.select('name').join(', ');

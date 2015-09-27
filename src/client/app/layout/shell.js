@@ -5,8 +5,7 @@
         .module('app.layout')
         .controller('Shell', Shell);
 
-    Shell.$inject = ['$timeout', 'config', 'logger', 'authService', 'routehelper'];
-
+    /* @ngInject */
     function Shell($timeout, config, logger, authService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
@@ -26,7 +25,6 @@
         vm.showSideBar = function () {
             return vm.getUserIdentity().isLoggedIn;
         };
-
 
         activate();
 

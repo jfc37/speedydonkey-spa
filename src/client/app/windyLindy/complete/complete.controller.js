@@ -28,7 +28,7 @@
             windyLindyService.getRegistration(id).then(function (registration) {
                 vm.registration = registration;
 
-                vm.paymentConfig.type_id = registration.id;
+                vm.paymentConfig.typeId = registration.id;
             });
         }
     }

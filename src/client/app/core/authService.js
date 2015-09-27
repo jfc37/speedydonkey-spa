@@ -1,3 +1,5 @@
+/*global Raygun*/
+
 (function () {
     'use strict';
 
@@ -6,8 +8,7 @@
         .factory('authService', authService);
 
     authService.$inject = ['$q', '$http', '$cookieStore', 'base64Service', 'dataservice'];
-
-    /* @ngInject */
+/* @ngInject */
     function authService($q, $http, $cookieStore, base64Service, dataservice) {
 
         var userIdentity = {
@@ -67,7 +68,7 @@
                         userIdentity.username = email;
 
                         userIdentity.userId = user.id;
-                        userIdentity.name = user.full_name;
+                        userIdentity.name = user.fullName;
                         userIdentity.claims = claims;
 
                         $cookieStore.put('authdata', encoded);
@@ -79,7 +80,7 @@
                         userIdentity.username = email;
 
                         userIdentity.userId = user.id;
-                        userIdentity.name = user.full_name;
+                        userIdentity.name = user.fullName;
                         userIdentity.claims = [];
                         resolve();
                     }).finally(function () {
@@ -89,8 +90,8 @@
                     logout();
                     if (response.status === 401) {
                         revoke([{
-                            property_name: "global",
-                            error_message: "Invalid email or password"
+                            propertyName: 'global',
+                            errorMessage: 'Invalid email or password'
                         }]);
                     }
                 });
@@ -102,7 +103,7 @@
         }
 
         function logout() {
-            document.execCommand("ClearAuthenticationCache");
+            document.execCommand('ClearAuthenticationCache');
             $cookieStore.remove('authdata');
             $cookieStore.remove('authuser');
             $http.defaults.headers.common.Authorization = 'Basic ';

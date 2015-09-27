@@ -37,6 +37,7 @@
     <script src="/node_modules/chai/chai.js"></script>
     <script src="/node_modules/mocha-clean/index.js"></script>
     <script src="/node_modules/sinon-chai/lib/sinon-chai.js"></script>
+    <script src="/node_modules/sinon/pkg/sinon.js"></script>
     <!-- endinject -->
 
     <script>
@@ -47,24 +48,28 @@
     </script>
 
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/toastr/toastr.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/bower_components/moment/moment.js"></script>
-    <script src="/bower_components/angular-route/angular-route.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
-    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
-    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="/bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
-    <script src="/bower_components/underscore/underscore.js"></script>
-    <script src="/bower_components/angular-tablesort/js/angular-tablesort.js"></script>
-    <script src="/bower_components/raygun4js/dist/raygun.js"></script>
-    <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular-tablesort/js/angular-tablesort.js"></script>
+    <script src="bower_components/raygun4js/dist/raygun.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="bower_components/bardjs/dist/bard.js"></script>
+    <script src="bower_components/bardjs/dist/bard-ngRouteTester.js"></script>
     <!-- endbower -->
+
+
 
     <!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
@@ -123,7 +128,7 @@
     <script src="/src/client/app/core/dateService.js"></script>
     <script src="/src/client/app/core/selectOptionService.js"></script>
     <script src="/src/client/app/dashboard/config.route.js"></script>
-    <script src="/src/client/app/dashboard/dashboard.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
     <script src="/src/client/app/dashboard/dashboardService.js"></script>
     <script src="/src/client/app/forgottenPassword/config.route.js"></script>
     <script src="/src/client/app/forgottenPassword/forgottenPassword.js"></script>
@@ -195,6 +200,8 @@
     <script src="/src/client/app/core/directives/input.directive.js"></script>
     <script src="/src/client/app/core/directives/note.directive.js"></script>
     <script src="/src/client/app/core/services/validationService.js"></script>
+    <script src="/src/client/app/dashboard/displayAnnouncements/announcements.service.js"></script>
+    <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.js"></script>
     <script src="/src/client/app/windyLindy/complete/complete.controller.js"></script>
     <script src="/src/client/app/windyLindy/complete/config.route.js"></script>
     <script src="/src/client/app/windyLindy/payment/config.route.js"></script>
@@ -220,6 +227,8 @@
 
     <!-- inject:specs:js -->
     <script src="/src/client/app/login/login.controller.spec.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/simpleApiCaller.spec.js"></script>
+    <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.spec.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->

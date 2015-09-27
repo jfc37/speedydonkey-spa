@@ -30,9 +30,9 @@
             var id = $routeParams.id;
             windyLindyService.getRegistration(id).then(function (registration) {
                 vm.registration = registration;
-                vm.registration.type = vm.registration.full_pass ? 'Full Pass' : 'Individual Event Pass';
+                vm.registration.type = vm.registration.fullPass ? 'Full Pass' : 'Individual Event Pass';
 
-                vm.paymentConfig.type_id = registration.registation_id;
+                vm.paymentConfig.typeId = registration.registationId;
             });
         }
     }

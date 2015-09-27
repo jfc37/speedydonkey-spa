@@ -5,13 +5,11 @@
         .module('app.adminReports')
         .controller('AdminReports', AdminReports);
 
-    AdminReports.$inject = [];
-
     /* @ngInject */
     function AdminReports() {
         /*jshint validthis: true */
         var vm = this;
-        vm.teacherClassHoursUrl = '#/admin/reports/teacher_hours';
+        vm.teacherClassHoursUrl = '#/admin/reports/teacher-hours';
         vm.profitReportUrl = '#/admin/reports/profit';
         vm.windyLindyUrl = '#/admin/reports/windy-lindy/registrations';
     }

@@ -5,10 +5,8 @@
         .module('app.manageLevels')
         .factory('manageLevelsService', manageLevelsService);
 
-    manageLevelsService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService'];
-
     /* @ngInject */
-    function manageLevelsService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService){
+    function manageLevelsService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService) {
 
         var service = {
             create: create,
@@ -23,9 +21,9 @@
             return $q(function (resolve, revoke) {
                 dataCreateService.createLevel(level).then(function (createdLevel) {
                     resolve(createdLevel);
-                }, function(response) {
-                    if (response.validation_result !== undefined){
-                        revoke(response.validation_result.validation_errors);
+                }, function (response) {
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }
@@ -37,9 +35,9 @@
             return $q(function (resolve, revoke) {
                 dataUpdateService.updateLevel(level).then(function (updatedLevel) {
                     resolve(updatedLevel);
-                }, function(response) {
-                    if (response.validation_result !== undefined){
-                        revoke(response.validation_result.validation_errors);
+                }, function (response) {
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }

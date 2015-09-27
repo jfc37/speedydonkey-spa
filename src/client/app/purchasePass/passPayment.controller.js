@@ -14,7 +14,7 @@
 
         vm.paymentConfig = {
             type: 'Pass',
-            type_id: $routeParams.id,
+            typeId: $routeParams.id,
             paypal: {
                 cancelUrl: '/#/purchase-pass',
                 returnUrl: '/#/purchase-pass/payment/{referenceNumber}/paypal/confirm'

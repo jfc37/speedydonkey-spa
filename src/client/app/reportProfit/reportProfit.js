@@ -5,8 +5,6 @@
         .module('app.reportProfit')
         .controller('ReportProfit', ReportProfit);
 
-    ReportProfit.$inject = ['$q', 'reportProfitService', 'logger', 'validationService'];
-
     /* @ngInject */
     function ReportProfit($q, reportProfitService, logger, validationService) {
         /*jshint validthis: true */
@@ -14,7 +12,7 @@
         vm.starting = moment().subtract(1, 'month').startOf('day').format('YYYY-MM-DD');
         vm.ending = moment().endOf('day').add(2, 'month').format('YYYY-MM-DD');
 
-        vm.updateDateRanage = function() {
+        vm.updateDateRanage = function () {
             reportProfitService.getProfitReport(vm.starting, vm.ending).then(function (profitReport) {
                 vm.profitReport = profitReport;
             }, function () {
@@ -27,9 +25,9 @@
         function activate() {
             var promises = [vm.updateDateRanage()];
             return $q.all(promises)
-            .then(function(){
-                logger.info('Activated Profit Report');
-            });
+                .then(function () {
+                    logger.info('Activated Profit Report');
+                });
         }
     }
 })();

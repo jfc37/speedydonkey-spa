@@ -16,12 +16,12 @@
         vm.isSubmitted = false;
         vm.loginUrl = '#/login';
 
-        vm.submit = function(form){
-            dataUpdateService.resetPassword($routeParams.id, vm.password).then(function() {
+        vm.submit = function (form) {
+            dataUpdateService.resetPassword($routeParams.id, vm.password).then(function () {
                 vm.isSubmitted = true;
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
-                logger.warning("Password Reset failed");
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
+                logger.warning('Password Reset failed');
             });
         };
 

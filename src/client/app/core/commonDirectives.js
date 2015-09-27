@@ -64,7 +64,7 @@
                             scope.labelClass = 'danger';
                         } else {
                             var anyPaymentPendingPasses = student.passes.filter(function (pass) {
-                                return pass.payment_status.toLowerCase() === 'pending';
+                                return pass.paymentStatus.toLowerCase() === 'pending';
                             }).length > 0;
                             if (anyPaymentPendingPasses) {
                                 scope.message = 'pass needs payment';
@@ -90,12 +90,12 @@
                 ngModel: '='
             },
             link: function (scope, element, attrs) {
-                scope.passType = scope.ngModel.pass_type;
-                scope.paymentStatus = scope.ngModel.payment_status;
+                scope.passType = scope.ngModel.passType;
+                scope.paymentStatus = scope.ngModel.paymentStatus;
                 scope.validness = scope.ngModel.valid;
-                scope.passNumber = scope.ngModel.pass_number;
+                scope.passNumber = scope.ngModel.passNumber;
 
-                scope.passTypeText = getPassTypeText(scope.ngModel.pass_type);
+                scope.passTypeText = getPassTypeText(scope.ngModel.passType);
                 scope.validnessText = getValidnessText(scope.ngModel);
 
             }
@@ -121,7 +121,7 @@
 
     function serverError() {
         var directive = {
-            template: '<span class="help-block has-error"  ng-show="ngModel.serverError && ngModel.$touched"><div>{{ngModel.serverError}}</div></span>',
+            template: '<span class="help-block has-error"  ng-if="ngModel.serverError && ngModel.$touched"><div>{{ngModel.serverError}}</div></span>',
             require: 'ngModel',
             scope: {
                 ngModel: '='
@@ -136,7 +136,7 @@
     function commonInput() {
         var directive = {
             template: '<div class="form-group col-xs-12" ng-class="{&apos;has-error&apos;:(getFormElement().$invalid && getFormElement().$touched) || getFormElement().serverError}">' +
-                '<label ng-show="displayName">{{displayName}}</label>' +
+                '<label ng-if="displayName">{{displayName}}</label>' +
                 '<input class="form-control"' +
                 'id="{{name}}"' +
                 'name="{{name}}"' +
@@ -212,7 +212,7 @@
 
     function userSearch(dataservice, $q) {
         var directive = {
-            template: '<input type="text" placeholder="{{placeholder}}" ng-model="ngModel" typeahead="student as student.full_name for student in searchUsers($viewValue)">',
+            template: '<input type="text" placeholder="{{placeholder}}" ng-model="ngModel" typeahead="student as student.fullName for student in searchUsers($viewValue)">',
             require: ['ngModel'],
             scope: {
                 ngModel: '='
@@ -252,12 +252,12 @@
     function teacherDropdown(dataservice) {
         var directive = {
             template: '<div class="form-group col-xs-12">' +
-                '<select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[0]">' +
+                '<select ng-options="teacher as teacher.fullName for teacher in teachers track by teacher.id" ng-model="ngModel[0]">' +
                 '    <option value="">Please select the primary teacher</option>' +
                 '</select>' +
                 '</div>' +
                 '<div class="form-group col-xs-12">' +
-                '<select ng-options="teacher as teacher.full_name for teacher in teachers track by teacher.id" ng-model="ngModel[1]">' +
+                '<select ng-options="teacher as teacher.fullName for teacher in teachers track by teacher.id" ng-model="ngModel[1]">' +
                 '    <option value="">Please select the secondary teacher (optional)</option>' +
                 '</select>' +
                 '</div>',
@@ -293,15 +293,15 @@
 
     function getValidnessText(pass) {
         var text = '';
-        if (pass.pass_type.toLowerCase() !== 'unlimited') {
-            text = pass.clips_remaining + ' clip';
-            if (pass.clips_remaining > 1) {
+        if (pass.passType.toLowerCase() !== 'unlimited') {
+            text = pass.clipsRemaining + ' clip';
+            if (pass.clipsRemaining > 1) {
                 text = text + 's';
             }
             text = text + ' remaining, and ';
         }
 
-        text = text + 'expires on the ' + moment(pass.end_date).format('dddd MMMM D');
+        text = text + 'expires on the ' + moment(pass.endDate).format('dddd MMMM D');
         return text;
     }
 

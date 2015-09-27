@@ -5,8 +5,7 @@
         .module('app.manageBlocks')
         .controller('ManageBlock', ManageBlock);
 
-    ManageBlock.$inject = ['$scope', 'manageBlocksService', 'validationService', 'logger', 'blockUI'];
-
+    /* @ngInject */
     function ManageBlock($scope, manageBlocksService, validationService, logger, blockUI) {
         var vm = {};
         $scope.vm.submitText = 'Update';
@@ -35,7 +34,7 @@
                 logger.success('Block deleted');
                 $scope.$parent.vm.blocks.remove($scope.vm.block);
             }, function (errors) {
-                logger.error("Failed to delete block");
+                logger.error('Failed to delete block');
             });
         };
 

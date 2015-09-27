@@ -1,10 +1,9 @@
 (function () {
     'use strict';
 
-    angular
-        .module('app.core')
+    angular.module('app.core')
         .directive('paymentOptions', paymentOptions);
-paymentOptions.$inject = ['paypalExpressCheckout', 'poliPayment', 'logger', 'blockUI'];
+    paymentOptions.$inject = ['paypalExpressCheckout', 'poliPayment', 'logger', 'blockUI'];
 
     function paymentOptions(paypalExpressCheckout, poliPayment, logger, blockUI) {
         var directive = {

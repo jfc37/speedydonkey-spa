@@ -5,8 +5,6 @@
         .module('app.manageAnnouncements')
         .directive('manageAnnouncement', manageAnnouncement);
 
-    manageAnnouncement.$inject = ['$q', 'logger', 'manageAnnouncementsService', 'blockUI', 'selectOptionService', 'dataservice'];
-
     /* @ngInject */
     function manageAnnouncement($q, logger, manageAnnouncementsService, blockUI, selectOptionService, dataservice) {
         var directive = {
@@ -27,7 +25,7 @@
                         $scope.ngModel.receivers.push(block);
                     }
                 };
-                $scope.vm.toggleAllReceivers = function () {
+                $scope.vm.toggleAllReceivers = function (block) {
                     if ($scope.ngModel.notifyAll.contains(block)) {
                         $scope.ngModel.receivers.remove(block);
                     } else {

@@ -12,7 +12,7 @@
 
             <!--First Name-->
             <input-block name="firstName" label="First Name">
-                <input name="firstName" type="text" class="form-control" ng-model="vm.registration.first_name" required/>
+                <input name="firstName" type="text" class="form-control" ng-model="vm.registration.firstName" required/>
                 <validation error="required" name="firstName">Please enter a first name</validation>
             </input-block>
 
@@ -26,7 +26,7 @@
 
             <!--Dance Role-->
             <input-block name="danceRole" label="Lead or Follow">
-                <select name="danceRole" class="form-control" ng-model="vm.registration.dance_role" ng-options="type.value as type.display for type in vm.danceRoles" required>
+                <select name="danceRole" class="form-control" ng-model="vm.registration.danceRole" ng-options="type.value as type.display for type in vm.danceRoles" required>
                     <option value="">Please select a type</option>
                 </select>
                 <validation error="required" name="danceRole">Please select a dance role</validation>
@@ -35,7 +35,7 @@
 
             <!--Lindy Level-->
             <input-block name="lindyLevel" label="Dance Level: Lindy">
-                <select name="lindyLevel" class="form-control" ng-model="vm.registration.lindy_level" ng-options="type.value as type.display for type in vm.danceLevels" required>
+                <select name="lindyLevel" class="form-control" ng-model="vm.registration.lindyLevel" ng-options="type.value as type.display for type in vm.danceLevels" required>
                     <option value="">Please select a dance level</option>
                 </select>
                 <validation error="required" name="lindyLevel">Please select a dance level</validation>
@@ -44,7 +44,7 @@
 
             <!--Blues Level-->
             <input-block name="bluesLevel" label="Dance Level: Blues">
-                <select name="bluesLevel" class="form-control" ng-model="vm.registration.blues_level" ng-options="type.value as type.display for type in vm.danceLevels" required>
+                <select name="bluesLevel" class="form-control" ng-model="vm.registration.bluesLevel" ng-options="type.value as type.display for type in vm.danceLevels" required>
                     <option value="">Please select a dance level</option>
                 </select>
                 <validation error="required" name="bluesLevel">Please select a dance level</validation>
@@ -53,7 +53,7 @@
 
             <!--Balboa Level-->
             <input-block name="balboaLevel" label="Dance Level: Balboa">
-                <select name="balboaLevel" class="form-control" ng-model="vm.registration.balboa_level" ng-options="type.value as type.display for type in vm.danceLevels" required>
+                <select name="balboaLevel" class="form-control" ng-model="vm.registration.balboaLevel" ng-options="type.value as type.display for type in vm.danceLevels" required>
                     <option value="">Please select a dance level</option>
                 </select>
                 <validation error="required" name="balboaLevel">Please select a dance level</validation>
@@ -70,14 +70,14 @@
 
             <!--Contact Number-->
             <input-block name="phoneNumber" label="Phone Number">
-                <input name="phoneNumber" type="tel" class="form-control" ng-model="vm.registration.phone_number" required/>
+                <input name="phoneNumber" type="tel" class="form-control" ng-model="vm.registration.phoneNumber" required/>
                 <validation error="required" name="phoneNumber">Please enter a contact number</validation>
             </input-block>
 
 
             <!--Country of Residence-->
             <input-block name="country" label="Country of Residence">
-                <input name="country" type="text" class="form-control" ng-model="vm.registration.country_of_residence" required/>
+                <input name="country" type="text" class="form-control" ng-model="vm.registration.countryOfResidence" required/>
                 <validation error="required" name="country">Please enter a country of residence</validation>
             </input-block>
 
@@ -91,14 +91,14 @@
 
             <!--Emergency Contact Name-->
             <input-block name="emergencyContactPerson" label="Emergency Contact Person">
-                <input name="emergencyContactPerson" type="text" class="form-control" ng-model="vm.registration.emergency_contact_person" required/>
+                <input name="emergencyContactPerson" type="text" class="form-control" ng-model="vm.registration.emergencyContactPerson" required/>
                 <validation error="required" name="emergencyContactPerson">Please enter an emergency contact</validation>
             </input-block>
 
 
             <!--Emergency Contact Number-->
             <input-block name="emergencyContactNumber" label="Emergency Contact Number">
-                <input name="emergencyContactNumber" type="text" class="form-control" ng-model="vm.registration.emergency_contact_number" required/>
+                <input name="emergencyContactNumber" type="text" class="form-control" ng-model="vm.registration.emergencyContactNumber" required/>
                 <validation error="required" name="emergencyContactNumber">Please enter an emergency number</validation>
             </input-block>
 
@@ -129,16 +129,16 @@
             <input-block name="fullPass" label="Pass Type">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="fullPass" ng-value="true" required ng-model="vm.registration.full_pass"> Full Pass - {{390 | currency}}
+                        <input type="radio" name="fullPass" ng-value="true" required ng-model="vm.registration.fullPass"> Full Pass - {{390 | currency}}
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="fullPass" ng-value="false" required ng-model="vm.registration.full_pass"> Individual Events
+                        <input type="radio" name="fullPass" ng-value="false" required ng-model="vm.registration.fullPass"> Individual Events
                     </label>
                 </div>
             </input-block>
-            <div ng-if="vm.registration.full_pass !== undefined && !!!vm.registration.full_pass">
+            <div ng-if="vm.registration.fullPass !== undefined && !!!vm.registration.fullPass">
                 <h3>Classes <small>$40 each</small></h3>
                 <div ng-repeat="class in vm.classes">
                     <input type="checkbox" name="vm.registration.classes[]" value="{{class}}" ng-checked="vm.registration.classes.indexOf(class) > -1" ng-click="vm.toggleSelection(vm.registration.classes, class)"> {{class}}
@@ -170,7 +170,7 @@
 
             <!--Novice Partner-->
             <input-block name="novicePartner" label="Novice Partner" ng-if="vm.registration.novice">
-                <input name="novicePartner" type="text" class="form-control" ng-model="vm.registration.novice_partner" ng-required="vm.registration.novice" />
+                <input name="novicePartner" type="text" class="form-control" ng-model="vm.registration.novicePartner" ng-required="vm.registration.novice" />
                 <validation error="required" name="novicePartner">Please enter a your partner's name</validation>
             </input-block>
 
@@ -178,7 +178,7 @@
 
             <!--Solo Jazz-->
             <input-block name="soloJazz" label="Solo Jazz" checkbox>
-                <input name="soloJazz" type="checkbox" ng-model="vm.registration.solo_jazz" />
+                <input name="soloJazz" type="checkbox" ng-model="vm.registration.soloJazz" />
             </input-block>
 
 
@@ -189,13 +189,13 @@
 
             <!--Balboa Partner-->
             <input-block name="balboaPartner" label="Balboa Partner" ng-if="vm.registration.balboa">
-                <input name="balboaPartner" type="text" class="form-control" ng-model="vm.registration.balboa_partner" ng-required="vm.registration.balboa" />
+                <input name="balboaPartner" type="text" class="form-control" ng-model="vm.registration.balboaPartner" ng-required="vm.registration.balboa" />
                 <validation error="required" name="balboaPartner">Please enter a your partner's name</validation>
             </input-block>
 
             <!--Jake and Jill-->
             <input-block name="jackAndJill" label="Jack and Jill" checkbox>
-                <input name="jackAndJill" type="checkbox" ng-model="vm.registration.jack_and_jill" />
+                <input name="jackAndJill" type="checkbox" ng-model="vm.registration.jackAndJill" />
             </input-block>
 
             <!--Hellzapoppin-->
@@ -205,42 +205,42 @@
 
             <!--Strictly Lindy Partner-->
             <input-block name="hellzapoppinPartner" label="Hellzapoppin Partner" ng-if="vm.registration.hellzapoppin">
-                <input name="hellzapoppinPartner" type="text" class="form-control" ng-model="vm.registration.hellzapoppin_partner" ng-required="vm.registration.hellzapoppin" />
+                <input name="hellzapoppinPartner" type="text" class="form-control" ng-model="vm.registration.hellzapoppinPartner" ng-required="vm.registration.hellzapoppin" />
                 <validation error="required" name="hellzapoppinPartner">Please enter a your partner's name</validation>
             </input-block>
 
             <!--Strictly Lindy-->
             <input-block name="strictlyLindy" label="Strictly Lindy" checkbox>
-                <input name="strictlyLindy" type="checkbox" ng-model="vm.registration.strictly_lindy" />
+                <input name="strictlyLindy" type="checkbox" ng-model="vm.registration.strictlyLindy" />
             </input-block>
 
             <!--Strictly Lindy Partner-->
-            <input-block name="strictlyLindyPartner" label="Strictly Lindy Partner" ng-if="vm.registration.strictly_lindy">
-                <input name="strictlyLindyPartner" type="text" class="form-control" ng-model="vm.registration.strictly_lindy_partner" ng-required="vm.registration.strictly_lindy" />
+            <input-block name="strictlyLindyPartner" label="Strictly Lindy Partner" ng-if="vm.registration.strictlyLindy">
+                <input name="strictlyLindyPartner" type="text" class="form-control" ng-model="vm.registration.strictlyLindyPartner" ng-required="vm.registration.strictlyLindy" />
                 <validation error="required" name="strictlyLindyPartner">Please enter a your partner's name</validation>
             </input-block>
 
 
             <!--Showcase Team-->
             <input-block name="showcaseTeam" label="Showcase Team" checkbox>
-                <input name="showcaseTeam" type="checkbox" ng-model="vm.registration.showcase_team" />
+                <input name="showcaseTeam" type="checkbox" ng-model="vm.registration.showcaseTeam" />
             </input-block>
 
             <!--Showcase Team Name-->
-            <input-block name="showcaseTeamName" label="Showcase Group Name" ng-if="vm.registration.showcase_team">
-                <input name="showcaseTeamName" type="text" class="form-control" ng-model="vm.registration.showcase_team_partner" ng-required="vm.registration.showcase_team" />
+            <input-block name="showcaseTeamName" label="Showcase Group Name" ng-if="vm.registration.showcaseTeam">
+                <input name="showcaseTeamName" type="text" class="form-control" ng-model="vm.registration.showcaseTeamPartner" ng-required="vm.registration.showcaseTeam" />
                 <validation error="required" name="showcaseTeamName">Please enter a your group's name</validation>
             </input-block>
 
 
             <!--Showcase-->
             <input-block name="showcaseCouple" label="Showcase Couple" checkbox>
-                <input name="showcaseCouple" type="checkbox" ng-model="vm.registration.showcase_couple" />
+                <input name="showcaseCouple" type="checkbox" ng-model="vm.registration.showcaseCouple" />
             </input-block>
 
             <!--Showcase Couple Partner-->
-            <input-block name="showcaseCouplePartner" label="Showcase Couple Partner" ng-if="vm.registration.showcase_couple">
-                <input name="showcaseCouplePartner" type="text" class="form-control" ng-model="vm.registration.showcase_couple_partner" ng-required="vm.registration.showcase_couple" />
+            <input-block name="showcaseCouplePartner" label="Showcase Couple Partner" ng-if="vm.registration.showcaseCouple">
+                <input name="showcaseCouplePartner" type="text" class="form-control" ng-model="vm.registration.showcaseCouplePartner" ng-required="vm.registration.showcaseCouple" />
                 <validation error="required" name="showcaseCouplePartner">Please enter a your partner's name</validation>
             </input-block>
 
@@ -256,9 +256,9 @@
 
             <!--Grammy Awards-->
             <input-block name="grammy" label="I'd like to perform at the Grammy Awards" checkbox>
-                <input name="grammy" type="checkbox" ng-model="vm.registration.perform_at_grammy" />
+                <input name="grammy" type="checkbox" ng-model="vm.registration.performAtGrammy" />
             </input-block>
-            <p ng-if="vm.registration.perform_at_grammy">
+            <p ng-if="vm.registration.performAtGrammy">
                 We will contact you by email with further details.
             </p>
 
@@ -269,13 +269,13 @@
 
             <!--Aerials Partner-->
             <input-block name="aerialsPartner" label="Aerials Partner" ng-if="vm.registration.aerials">
-                <input name="aerialsPartner" type="text" class="form-control" ng-model="vm.registration.aerials_partner" ng-required="vm.registration.aerials" />
+                <input name="aerialsPartner" type="text" class="form-control" ng-model="vm.registration.aerialsPartner" ng-required="vm.registration.aerials" />
                 <validation error="required" name="aerialsPartner">Please enter a your partner's name</validation>
             </input-block>
 
             <!--Aerials Teachers-->
             <input-block name="aerialsTeachers" label="What studio do you most regularly attend?" ng-if="vm.registration.aerials">
-                <input name="aerialsTeachers" type="text" class="form-control" ng-model="vm.registration.aerials_teachers" ng-required="vm.registration.aerials" />
+                <input name="aerialsTeachers" type="text" class="form-control" ng-model="vm.registration.aerialsTeachers" ng-required="vm.registration.aerials" />
                 <validation error="required" name="aerialsTeachers">Please enter the name of your regular studio</validation>
             </input-block>
 
@@ -313,7 +313,7 @@
             </p>
 
             <input-block name="termsAndConditions" label="I agree to the terms & conditions" checkbox>
-                <input name="termsAndConditions" type="checkbox" ng-model="vm.registration.terms_and_conditions" required/>
+                <input name="termsAndConditions" type="checkbox" ng-model="vm.registration.termsAndConditions" required/>
             </input-block>
         </div>
     </div>

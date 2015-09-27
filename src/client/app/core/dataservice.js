@@ -5,8 +5,6 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$q', 'apiCaller', 'dateService', 'simpleApiCaller'];
-
     /* @ngInject */
     function dataservice($q, apiCaller, dateService, simpleApiCaller) {
         var service = {
@@ -17,7 +15,6 @@
             getCurrentUser: getCurrentUser,
             getAllUsers: getAllUsers,
 
-            getCurrentUserSchedule: getCurrentUserSchedule,
             getCurrentUserCurrentPasses: getCurrentUserCurrentPasses,
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
@@ -93,11 +90,7 @@
 
                 simpleApiCaller.get(options).then(function (response) {
                     resolve(response.data);
-                }, revoke)
-
-                //                apiCaller.getCurrentUser().then(function (response) {
-                //                    resolve(response.data);
-                //                }, revoke);
+                }, revoke);
             });
         }
 
@@ -106,16 +99,6 @@
                 apiCaller.getUsers().then(function (response) {
                     resolve(response.data);
                 }, revoke);
-            });
-        }
-
-        function getCurrentUserSchedule() {
-            return $q(function (resolve, reject) {
-                apiCaller.getCurrentUserSchedule().then(function (response) {
-                    resolve(response.data);
-                }, function (response) {
-                    reject(response);
-                });
             });
         }
 

@@ -40,13 +40,13 @@
 
         function getByStatus(status) {
             return vm.registrations.filter(function (reg) {
-                return reg.payment_status === status;
+                return reg.paymentStatus === status;
             });
         }
 
         function getByType(fullPass) {
             return vm.registrations.filter(function (reg) {
-                return reg.full_pass === fullPass;
+                return reg.fullPass === fullPass;
             });
         }
     }

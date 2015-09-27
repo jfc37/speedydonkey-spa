@@ -5,10 +5,8 @@
         .module('app.userActivation')
         .factory('userActivationService', userActivationService);
 
-    userActivationService.$inject = ['$q', '$routeParams', 'dataUpdateService', 'authService'];
-
     /* @ngInject */
-    function userActivationService($q, $routeParams, dataUpdateService){
+    function userActivationService($q, $routeParams, dataUpdateService) {
 
         var service = {
             activate: activate

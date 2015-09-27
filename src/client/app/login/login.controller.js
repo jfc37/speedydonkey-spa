@@ -5,8 +5,6 @@
         .module('app.logon')
         .controller('Login', Login);
 
-    Login.$inject = ['logger', 'authService', 'routehelper', 'validationService', 'config'];
-
     /* @ngInject */
     function Login(logger, authService, routehelper, validationService, config) {
         /*jshint validthis: true */
@@ -20,8 +18,8 @@
         vm.submit = function (form) {
             authService.login(vm.email, vm.password).then(function () {
                 routehelper.redirectToRoute('dashboard');
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
             });
         };
     }

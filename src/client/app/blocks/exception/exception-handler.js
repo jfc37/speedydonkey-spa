@@ -1,3 +1,5 @@
+/*global Raygun*/
+
 // Include in index.html so that app level exceptions are handled.
 // Exclude from testRunner.html which should run exactly what it wants to run
 (function () {
@@ -24,18 +26,17 @@
         };
     }
 
-    exceptionConfig.$inject = ['$provide'];
-
     // Configure by setting an optional string value for appErrorPrefix.
     // Accessible via config.appErrorPrefix (via config value).
+    /* @ngInject */
     function exceptionConfig($provide) {
         $provide.decorator('$exceptionHandler', extendExceptionHandler);
     }
 
-    extendExceptionHandler.$inject = ['$delegate', 'exceptionConfig', 'logger'];
+    extendExceptionHandler.$inject = ['$delegate', 'exceptionConfig'];
 
     // Extend the $exceptionHandler service to also display a toast.
-    function extendExceptionHandler($delegate, exceptionConfig, logger) {
+    function extendExceptionHandler($delegate, exceptionConfig) {
         var appErrorPrefix = exceptionConfig.config.appErrorPrefix || '';
         return function (exception, cause) {
             $delegate(exception, cause);
@@ -54,7 +55,6 @@
              *     throw { message: 'error message we added' };
              *
              */
-            logger.error(msg, errorData);
             Raygun.send(exception);
         };
     }

@@ -5,8 +5,6 @@
         .module('app.classCheckIn')
         .controller('ClassCheckIn', ClassCheckIn);
 
-    ClassCheckIn.$inject = ['$q', 'classCheckInService', 'registerUserService', 'blockEnrolmentService', 'logger', 'validationService', 'manageClassesService', 'blockUI'];
-
     /* @ngInject */
     function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger, validationService, manageClassesService, blockUI) {
         /*jshint validthis: true */
@@ -18,31 +16,12 @@
         vm.creatingNewAccount = false;
         vm.newUser = {};
 
-        vm.updateTeachers = function () {
-            var sanitisedClass = {
-                id: vm.class.id,
-                teachers: vm.class.teachers,
-                start_time: vm.class.start_time,
-                end_time: vm.class.end_time,
-                name: vm.class.name,
-            };
-            manageClassesService.update(sanitisedClass).then(function () {
-                logger.success('Teachers updated');
-            }, function (errors) {
-                logger.error('Problem updating teachers');
-            });
-        };
-
         vm.attendenceStatusChanged = function (student) {
             classCheckInService.attendenceStatusChanged(student).then(function (message) {
                 logger.success(message);
             }, function (message) {
                 logger.error(message);
             });
-        };
-
-        vm.searchUsers = function (name) {
-            return classCheckInService.searchUsers(name);
         };
 
         vm.addWalkIn = function () {
@@ -62,9 +41,9 @@
 
         vm.enrolWalkIn = function () {
             classCheckInService.enrolStudent(vm.walkInStudentSelected.id, vm.class.block.id).then(function () {
-                logger.success('Enrolled ' + vm.walkInStudentSelected.full_name + ' in the block');
+                logger.success('Enrolled ' + vm.walkInStudentSelected.fullName + ' in the block');
             }, function (message) {
-                logger.error('Problem enrolling ' + vm.walkInStudentSelected.full_name + ' in the block...');
+                logger.error('Problem enrolling ' + vm.walkInStudentSelected.fullName + ' in the block...');
             }).then(vm.addWalkIn);
         };
 
@@ -77,7 +56,7 @@
             if (vm.walkInStudentSelected) {
                 var splitName = vm.walkInStudentSelected.split(' ');
                 if (splitName.length > 0) {
-                    vm.newUser.first_name = splitName[0];
+                    vm.newUser.firstName = splitName[0];
                 }
                 if (splitName.length > 1) {
                     vm.newUser.surname = splitName[1];
@@ -91,9 +70,9 @@
             registerUserService.register(vm.newUser, true).then(function (user) {
                 vm.creatingNewAccount = false;
                 vm.walkInStudentSelected = user;
-            }, function (validation_errors) {
-                validationService.applyServerSideErrors(form, validation_errors);
-                logger.warning("Register failed");
+            }, function (validationErrors) {
+                validationService.applyServerSideErrors(form, validationErrors);
+                logger.warning('Register failed');
 
             });
         };
@@ -108,7 +87,7 @@
             vm.disablePassPurchase = true;
             classCheckInService.purchaseNewPass(student, passOption).then(function () {
                 blockUI.stop();
-                logger.success(student.full_name + ' purchased a new pass!');
+                logger.success(student.fullName + ' purchased a new pass!');
                 vm.disablePassPurchase = false;
             }, function () {
                 blockUI.stop();
@@ -143,7 +122,7 @@
                 vm.isClassLoading = false;
             }, function (error) {
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting class...";
+                    error.displayMessage = 'Issue getting class...';
                 }
                 logger.error(error.displayMessage);
                 vm.isClassLoading = false;
@@ -156,7 +135,7 @@
                 vm.areRegisteredStudentsLoading = false;
             }, function (error) {
                 if (!error.displayMessage) {
-                    error.displayMessage = "Issue getting registered students...";
+                    error.displayMessage = 'Issue getting registered students...';
                 }
                 logger.error(error.displayMessage);
                 vm.areRegisteredStudentsLoading = false;
@@ -169,7 +148,7 @@
                 vm.arePassesLoading = false;
             }, function (error) {
                 if (!error.displayMessage) {
-                    error.arePassesLoading = "Issue getting pass options...";
+                    error.arePassesLoading = 'Issue getting pass options...';
                 }
                 logger.error(error.displayMessage);
                 vm.arePassesLoading = false;

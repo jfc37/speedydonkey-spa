@@ -5,10 +5,8 @@
         .module('app.managePassOptions')
         .factory('managePassOptionsService', managePassOptionsService);
 
-    managePassOptionsService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService'];
-
     /* @ngInject */
-    function managePassOptionsService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService){
+    function managePassOptionsService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService) {
 
         var service = {
             create: create,
@@ -21,9 +19,9 @@
             return $q(function (resolve, revoke) {
                 dataCreateService.createPassOption(passOption).then(function (createdPassOption) {
                     resolve(createdPassOption);
-                }, function(response) {
-                    if (response.validation_result !== undefined){
-                        revoke(response.validation_result.validation_errors);
+                }, function (response) {
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }
@@ -35,9 +33,9 @@
             return $q(function (resolve, revoke) {
                 dataUpdateService.updatePassOption(passOption).then(function (updatedPassOption) {
                     resolve(updatedPassOption);
-                }, function(response) {
-                    if (response.validation_result !== undefined){
-                        revoke(response.validation_result.validation_errors);
+                }, function (response) {
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }

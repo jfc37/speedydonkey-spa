@@ -5,8 +5,6 @@
         .module('app.apiCaller')
         .factory('apiCaller', apiCaller);
 
-    apiCaller.$inject = ['$http', 'config'];
-
     /* @ngInject */
     function apiCaller($http, config) {
         var service = {
@@ -23,7 +21,6 @@
             getCurrentUser: getCurrentUser,
             deleteUser: deleteUser,
 
-            getCurrentUserSchedule: getCurrentUserSchedule,
             getUserCurrentPasses: getUserCurrentPasses,
             getUserEnroledBlocks: getUserEnroledBlocks,
             getCurrentUserClaims: getCurrentUserClaims,
@@ -140,11 +137,6 @@
             return $http.delete(url);
         }
 
-        function getCurrentUserSchedule() {
-            var url = baseUrl + 'users/current/schedules';
-            return $http.get(url);
-        }
-
         function getUserCurrentPasses(userId) {
             var url = baseUrl + 'users/' + userId + '/passes';
             return $http.get(url);
@@ -193,7 +185,7 @@
         }
 
         function postBlockEnrolment(enrolment) {
-            var url = baseUrl + 'users/' + enrolment.user_id + '/enrolment';
+            var url = baseUrl + 'users/' + enrolment.userId + '/enrolment';
             return $http.post(url, enrolment);
         }
 

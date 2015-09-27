@@ -5,13 +5,12 @@
         .module('app.apiCaller')
         .factory('simpleApiCaller', simpleApiCaller);
 
-    simpleApiCaller.$inject = ['$http', 'config', 'blockUI', 'logger'];
-
     /* @ngInject */
     function simpleApiCaller($http, config, blockUI, logger) {
         var service = {
             get: get,
-            post: post
+            post: post,
+            put: put
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -19,7 +18,18 @@
             var url = baseUrl + options.resource;
 
             if (options.id) {
-                url = url + '/' + options.id
+                url = url + '/' + options.id;
+            }
+
+            if (options.search) {
+                var q = 'q=';
+                options.search.forEach(function (search, index) {
+                    if (index > 0) {
+                        q = q + ',';
+                    }
+                    q = q + search.field + '_' + search.condition + '_' + search.value;
+                });
+                url = url + '?' + q;
             }
 
             var request = $http.get(url);
@@ -44,6 +54,17 @@
             return request;
         }
 
+        function put(data, options) {
+            var url = baseUrl + options.resource;
+
+            var request = $http.put(url, data);
+
+            handleError(request);
+            handleBlocking(request);
+
+            return request;
+        }
+
         function handleBlocking(request) {
             blockUI.start();
 
@@ -53,9 +74,7 @@
         }
 
         function handleError(request) {
-            request.catch(function (response) {
-                logger.error('Issue with ' + response.config.method + ' : ' + response);
-            });
+            request.catch(function (response) {});
         }
 
         return service;

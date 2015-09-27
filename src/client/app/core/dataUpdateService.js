@@ -5,8 +5,6 @@
         .module('app.core')
         .factory('dataUpdateService', dataUpdateService);
 
-    dataUpdateService.$inject = ['$q', 'apiCaller'];
-
     /* @ngInject */
     function dataUpdateService($q, apiCaller) {
         var service = {
@@ -62,7 +60,7 @@
                 apiCaller.putUserPasswordReset(key, password).then(function (response) {
                     resolve();
                 }, function (response) {
-                    revoke(response.data.validation_errors);
+                    revoke(response.data.validationErrors);
                 });
             });
         }
@@ -72,12 +70,10 @@
                 apiCaller.putCurrentUser(user).then(function (response) {
                     resolve();
                 }, function (response) {
-                    revoke(response.data.validation_errors);
+                    revoke(response.data.validationErrors);
                 });
             });
         }
-
-
 
         function enrolInBlock(enrolment) {
             return $q(function (resolve, revoke) {

@@ -5,8 +5,6 @@
         .module('app.forgottenPassword')
         .controller('ForgottenPassword', ForgottenPassword);
 
-    ForgottenPassword.$inject = ['logger', 'dataUpdateService', 'validationService'];
-
     /* @ngInject */
     function ForgottenPassword(logger, dataUpdateService, validationService) {
         /*jshint validthis: true */
@@ -15,8 +13,8 @@
         vm.title = 'Forgotten Password';
         vm.isSubmitted = false;
 
-        vm.submit = function(form){
-            dataUpdateService.forgottenPassword(vm.email).then(function() {
+        vm.submit = function (form) {
+            dataUpdateService.forgottenPassword(vm.email).then(function () {
                 vm.isSubmitted = true;
             });
         };

@@ -5,8 +5,6 @@
         .module('app.manageClasses')
         .factory('manageClassesService', manageClassesService);
 
-    manageClassesService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService'];
-
     /* @ngInject */
     function manageClassesService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService) {
 
@@ -21,8 +19,8 @@
                 dataUpdateService.updateClass(theClass).then(function (updatedClass) {
                     resolve(updatedClass);
                 }, function (response) {
-                    if (response.validation_result !== undefined) {
-                        revoke(response.validation_result.validation_errors);
+                    if (response.validationResult !== undefined) {
+                        revoke(response.validationResult.validationErrors);
                     } else {
                         revoke();
                     }
@@ -41,7 +39,7 @@
                 dataservice.searchForClasses(filter).then(function (response) {
                     response.data.forEach(function (theClass) {
                         theClass.block = undefined;
-                    })
+                    });
                     resolve(response.data);
                 }, function (response) {
                     if (response.status === 404) {

@@ -159,7 +159,7 @@ gulp.task('less-watcher', function () {
 gulp.task('vet', function () {
     log('Analyzing source with JSHint and JSCS');
     return gulp
-        .src(config.alljs)
+        .src(config.js)
         .pipe($.if(args.verbose, $.print()))
         .pipe($.jscs())
         .pipe($.jshint())
@@ -256,7 +256,7 @@ gulp.task('optimize', ['inject'], function () {
 /**
  * Build
  **/
-gulp.task('build', ['optimize', 'images', 'fonts'], function () {
+gulp.task('build', ['optimize', 'images', 'fonts'], function (done) {
     log('Building everything');
 
     var msg = {
@@ -267,14 +267,17 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function () {
     del(config.temp);
     log(msg);
     notify(msg);
+    done();
 });
 
-gulp.task('serve-dev', ['inject'], function () {
+gulp.task('serve-dev', ['inject'], function (done) {
     serve(true);
+    done();
 });
 
-gulp.task('serve-build', ['build'], function () {
+gulp.task('serve-build', ['build'], function (done) {
     serve(false);
+    done();
 });
 
 
@@ -335,7 +338,7 @@ gulp.task('build-specs', ['templatecache'], function () {
         read: false
     }))
 
-    .pipe(gulp.dest(config.client));
+    .pipe(gulp.dest('./'));
 });
 
 
@@ -383,7 +386,6 @@ function includeGoogleAnalytics() {
 }
 
 function shouldUglify() {
-    return false;
     return process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'test';
 }
 
@@ -418,7 +420,7 @@ function serve(isDev, specRunner) {
             'PORT': port,
             'NODE_ENV': specRunner ? 'test' : 'build'
         },
-        watch: [config.server]
+        //watch: [config.server]
     };
 
     return $.nodemon(nodeOptions)
@@ -458,9 +460,10 @@ function startBrowserSync(isDev, specRunner) {
                 changeEvent(event);
             });
     } else {
-        gulp.watch([config.less, config.js, config.html], ['optimize', browserSync.reload])
+        gulp.watch([config.less, config.js, config.html], ['optimize'])
             .on('change', function (event) {
                 changeEvent(event);
+                browserSync.reload();
             });
     }
 

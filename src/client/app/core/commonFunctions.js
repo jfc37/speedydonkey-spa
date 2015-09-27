@@ -68,7 +68,7 @@
         }
 
         function isPaidPass(pass) {
-            return pass.payment_status && pass.payment_status.toLowerCase() === 'paid';
+            return pass.paymentStatus && pass.paymentStatus.toLowerCase() === 'paid';
         }
     }
 })();

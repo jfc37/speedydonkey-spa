@@ -5,8 +5,6 @@
         .module('app.userActivation')
         .controller('UserActivation', UserActivation);
 
-    UserActivation.$inject = ['userActivationService', 'logger', 'routehelper', 'validationService'];
-
     /* @ngInject */
     function UserActivation(userActivationService, logger, routehelper, validationService) {
         /*jshint validthis: true */
@@ -23,8 +21,8 @@
             userActivationService.activate().then(function () {
                 vm.activationSuccessful = true;
                 vm.loaded = true;
-            }, function (validation_errors) {
-                logger.warning("Activation Failed");
+            }, function (validationErrors) {
+                logger.warning('Activation Failed');
                 vm.activationSuccessful = false;
                 vm.loaded = true;
             });

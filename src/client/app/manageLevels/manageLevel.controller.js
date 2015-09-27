@@ -5,8 +5,7 @@
         .module('app.manageLevels')
         .controller('ManageLevel', ManageLevel);
 
-    ManageLevel.$inject = ['$scope', 'manageLevelsService', 'validationService', 'logger'];
-
+    /* @ngInject */
     function ManageLevel($scope, manageLevelsService, validationService, logger) {
         //$scope.vm.levels = $scope.$parent.vm.levels;
         var vm = {};
@@ -41,7 +40,7 @@
                 logger.success('Level deleted');
                 $scope.$parent.vm.levels.remove($scope.vm.level);
             }, function (errors) {
-                logger.error("Failed to delete level");
+                logger.error('Failed to delete level');
             });
         };
 

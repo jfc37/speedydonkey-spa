@@ -1,11 +1,11 @@
+/* global _*/
+
 (function () {
     'use strict';
 
     angular
         .module('app.core')
         .factory('validationService', validationService);
-
-    validationService.$inject = [];
 
     /* @ngInject */
     function validationService() {
@@ -23,11 +23,11 @@
 
             form.serverErrors = [];
             errors.forEach(function (error) {
-                var relatedFormElement = form[error.property_name.toLowerCase()];
+                var relatedFormElement = form[error.propertyName.toLowerCase()];
                 if (relatedFormElement) {
-                    form[error.property_name.toLowerCase()].serverError = error.error_message;
+                    form[error.propertyName.toLowerCase()].serverError = error.errorMessage;
                 } else {
-                    form.serverErrors.push(error.error_message);
+                    form.serverErrors.push(error.errorMessage);
                 }
             });
         }

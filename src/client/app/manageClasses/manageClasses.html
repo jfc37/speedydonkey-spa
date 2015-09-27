@@ -5,9 +5,9 @@
     <div ng-form="filterForm">
         <h3>Filter</h3>
         <div>
-            <common-input ng-model="vm.filter.name.value" name="filter_name" display-name="Name" type="text"></common-input>
-            <common-input ng-model="vm.filter.startTimeAfter.value" name="filter_after" display-name="After" type="date"></common-input>
-            <common-input ng-model="vm.filter.startTimeBefore.value" name="filter_before" display-name="Before" type="date"></common-input>
+            <common-input ng-model="vm.filter.name.value" name="filterName" display-name="Name" type="text"></common-input>
+            <common-input ng-model="vm.filter.startTimeAfter.value" name="filterAfter" display-name="After" type="date"></common-input>
+            <common-input ng-model="vm.filter.startTimeBefore.value" name="filterBefore" display-name="Before" type="date"></common-input>
         </div>
         <div>
             Showing: {{vm.classes.length}} classes
@@ -27,7 +27,7 @@
             <tr>
                 <td>{{vm.class.name}}</td>
                 <td>
-                    <display-date format="short date" ng-model="vm.class.start_time"></display-date>
+                    <display-date format="short date" ng-model="vm.class.startTime"></display-date>
                 </td>
                 <td>
                     <div ng-hide="vm.updating">
@@ -54,8 +54,8 @@
 <script type="text/ng-template" id="class.html">
 
     <common-input ng-model="vm.class.name" name="name" display-name="Name" type="text" required="true"></common-input>
-    <common-date-time-input ng-model="vm.class.start_time" name="start_time" display-name="Start Time" required="true"></common-date-time-input>
-    <common-date-time-input ng-model="vm.class.end_time" name="end_time" display-name="End Time" required="true"></common-date-time-input>
+    <common-date-time-input ng-model="vm.class.startTime" name="startTime" display-name="Start Time" required="true"></common-date-time-input>
+    <common-date-time-input ng-model="vm.class.endTime" name="endTime" display-name="End Time" required="true"></common-date-time-input>
     <teacher-dropdown ng-model="vm.class.teachers"></teacher-dropdown>
     <a class="btn btn-default" ng-click="vm.cancel(form)">{{vm.cancelText}}</a>
     <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="vm.submit(form)">{{vm.submitText}}</a>

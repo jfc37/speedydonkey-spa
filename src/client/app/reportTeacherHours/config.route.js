@@ -5,17 +5,15 @@
         .module('app.reportTeacherHours')
         .run(appRun);
 
-    appRun.$inject = ['routehelper'];
-
     /* @ngInject */
-    function appRun (routehelper){
+    function appRun(routehelper) {
         routehelper.configureRoutes(getRoutes());
     }
 
     function getRoutes() {
         return [
             {
-                url: '/admin/reports/teacher_hours',
+                url: '/admin/reports/teacher-hours',
                 config: {
                     title: 'reportTeacherHours',
                     controller: 'ReportTeacherHours',
