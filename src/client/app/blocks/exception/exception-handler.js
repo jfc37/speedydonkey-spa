@@ -55,7 +55,7 @@
              *     throw { message: 'error message we added' };
              *
              */
-            Raygun.send(exception);
+            //Raygun.send(exception);
         };
     }
 

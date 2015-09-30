@@ -6,7 +6,7 @@
         .controller('ClassCheckIn', ClassCheckIn);
 
     /* @ngInject */
-    function ClassCheckIn($q, classCheckInService, registerUserService, blockEnrolmentService, logger, validationService, manageClassesService, blockUI) {
+    function ClassCheckIn($q, classCheckInService, registerUserService, purchasePassService, logger, validationService, manageClassesService, blockUI) {
         /*jshint validthis: true */
         var vm = this;
         vm.class = null;
@@ -143,7 +143,7 @@
         }
 
         function getPassOptions() {
-            return blockEnrolmentService.getPassOptions(true).then(function (passOptions) {
+            return purchasePassService.getPassOptions(true).then(function (passOptions) {
                 vm.passOptions = passOptions;
                 vm.arePassesLoading = false;
             }, function (error) {

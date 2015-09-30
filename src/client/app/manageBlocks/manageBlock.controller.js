@@ -6,7 +6,7 @@
         .controller('ManageBlock', ManageBlock);
 
     /* @ngInject */
-    function ManageBlock($scope, manageBlocksService, validationService, logger, blockUI) {
+    function ManageBlock($scope, blockService, validationService, logger, blockUI) {
         var vm = {};
         $scope.vm.submitText = 'Update';
         $scope.vm.cancelText = 'Close';
@@ -19,7 +19,7 @@
 
         $scope.vm.submit = function (form) {
             blockUI.start();
-            manageBlocksService.update($scope.vm.block).then(function () {
+            blockService.update($scope.vm.block).then(function () {
                 blockUI.stop();
                 logger.success('Block updated');
                 $scope.vm.updating = false;
@@ -30,7 +30,7 @@
         };
 
         $scope.vm.delete = function () {
-            manageBlocksService.deleteBlock($scope.vm.block.id).then(function () {
+            blockService.deleteBlock($scope.vm.block.id).then(function () {
                 logger.success('Block deleted');
                 $scope.$parent.vm.blocks.remove($scope.vm.block);
             }, function (errors) {

@@ -10,7 +10,8 @@
         var service = {
             get: get,
             post: post,
-            put: put
+            put: put,
+            delete: remove
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
@@ -57,10 +58,32 @@
         function put(data, options) {
             var url = baseUrl + options.resource;
 
+            if (options.id) {
+                url = url + '/' + options.id;
+            }
+
             var request = $http.put(url, data);
 
             handleError(request);
             handleBlocking(request);
+
+            return request;
+        }
+
+        function remove(options) {
+            var url = baseUrl + options.resource;
+
+            if (options.id) {
+                url = url + '/' + options.id;
+            }
+
+            var request = $http.delete(url);
+
+            handleError(request);
+
+            if (options.block) {
+                handleBlocking(request);
+            }
 
             return request;
         }

@@ -1,0 +1,7 @@
+<h3>Update Block</h3>
+
+<div ng-form="updateForm">
+    <block-form block="vm.block"></block-form>
+    <a class="btn btn-default" href="#/admin/manage/blocks">Cancel</a>
+    <a class="btn btn-default pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
+</div>

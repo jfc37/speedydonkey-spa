@@ -1,0 +1,7 @@
+<h3>Create Block</h3>
+
+<div ng-form="createForm">
+    <block-form block="vm.block"></block-form>
+    <a class="btn btn-default" href="#/admin/manage/blocks">Cancel</a>
+    <a class="btn btn-default pull-right" ng-disabled="createForm.$invalid" ng-click="vm.submit(createForm)">Create</a>
+</div>
