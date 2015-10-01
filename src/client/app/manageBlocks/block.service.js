@@ -14,7 +14,8 @@
             getBlocks: getBlocks,
             getBlock: getBlock,
             deleteBlocks: deleteBlocks,
-            generateFromBlocks: generateFromBlocks
+            generateFromBlocks: generateFromBlocks,
+            getBlockClasses: getBlockClasses
         };
 
         function update(block) {
@@ -67,6 +68,16 @@
         function getBlock(id) {
             var options = getOptions();
             options.id = id;
+
+            return simpleApiCaller.get(options).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function getBlockClasses(block) {
+            var options = {
+                resource: 'blocks/' + block.id + '/classes'
+            };
 
             return simpleApiCaller.get(options).then(function (response) {
                 return response.data;

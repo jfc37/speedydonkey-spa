@@ -2,7 +2,7 @@
 
     <h2>{{vm.block.name}}</h2>
 
-    <tabset justified="true">
+    <tabset justified="true" ng-if="vm.block">
         <tab>
             <tab-heading>
                 Summary
@@ -13,13 +13,13 @@
             <tab-heading>
                 Classes
             </tab-heading>
-            <!--            <block-group blocks="vm.block"></block-group>-->
+            <block-classes block="vm.block"></block-classes>
         </tab>
         <tab>
             <tab-heading>
                 Change
             </tab-heading>
-            <!--            <block-change blocks="vm.block"></block-change>-->
+            <!--            <block-change block="vm.block"></block-change>-->
         </tab>
     </tabset>
 
