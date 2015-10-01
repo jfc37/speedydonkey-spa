@@ -23,6 +23,16 @@
                 }
             },
             {
+                url: '/admin/manage/blocks/:id',
+                config: {
+                    title: 'block',
+                    controller: 'Block',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/manageBlocks/manageBlock/block.html',
+                    claim: 'Admin'
+                }
+            },
+            {
                 url: '/admin/manage/blocks/:id/update',
                 config: {
                     title: 'updateBlock',

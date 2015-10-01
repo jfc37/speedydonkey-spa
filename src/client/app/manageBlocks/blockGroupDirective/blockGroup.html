@@ -5,6 +5,7 @@
                 <input type="checkbox" ng-model="vm.selectAll" ng-click="vm.selectAllClicked()">
             </th>
             <th ng-if="!vm.anySelected()" ts-criteria="name" ts-default>Name</th>
+            <th ng-if="!vm.anySelected()" ts-criteria="date">Between</th>
             <th ng-if="!vm.anySelected()" ts-criteria="day">Day</th>
             <th ng-if="!vm.anySelected()" ts-criteria="time">Time</th>
             <th ng-if="vm.anySelected()">
@@ -19,8 +20,9 @@
                 <input type="checkbox" ng-model="block.selected">
             </td>
             <td>
-                <a ng-href="#/admin/manage/blocks/{{block.id}}/update" class="btn btn-link">{{block.name}}</a>
+                <a ng-href="#/admin/manage/blocks/{{block.id}}" class="btn btn-link">{{block.name}}</a>
             </td>
+            <td>{{block.startDate | date: 'dd MMM'}} - {{block.endDate | date: 'dd MMM'}}</td>
             <td>{{block.startDate | date: 'EEEE'}}</td>
             <td>{{block.startDate | date: 'HH:mm'}}</td>
         </tr>

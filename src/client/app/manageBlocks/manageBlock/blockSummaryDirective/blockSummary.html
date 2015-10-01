@@ -1,0 +1,18 @@
+<div>
+    <dl>
+        <dt>Name</dt>
+        <dd>{{vm.block.name}}</dd>
+
+        <dt>Start Date</dt>
+        <dd>{{vm.block.startDate | date : 'dd MMM'}}</dd>
+
+        <dt>End Date</dt>
+        <dd>{{vm.block.endDate | date : 'dd MMM'}}</dd>
+
+        <dt>Teachers</dt>
+        <dd><span ng-repeat="teacher in vm.block.teachers">{{teacher.fullName}}{{$last ? '' : ', '}}</span></dd>
+
+        <dt>Students Registered</dt>
+        <dd>{{vm.block.enroledStudents.length}}</dd>
+    </dl>
+</div>
