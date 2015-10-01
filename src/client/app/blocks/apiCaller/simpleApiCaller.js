@@ -16,23 +16,7 @@
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
         function get(options) {
-            var url = baseUrl + options.resource;
-
-            if (options.id) {
-                url = url + '/' + options.id;
-            }
-
-            if (options.search) {
-                var q = 'q=';
-                options.search.forEach(function (search, index) {
-                    if (index > 0) {
-                        q = q + ',';
-                    }
-                    q = q + search.field + '_' + search.condition + '_' + search.value;
-                });
-                url = url + '?' + q;
-            }
-
+            var url = generateUrl(options);
             var request = $http.get(url);
 
             handleError(request);
@@ -45,8 +29,7 @@
         }
 
         function post(data, options) {
-            var url = baseUrl + options.resource;
-
+            var url = generateUrl(options);
             var request = $http.post(url, data);
 
             handleError(request);
@@ -56,11 +39,7 @@
         }
 
         function put(data, options) {
-            var url = baseUrl + options.resource;
-
-            if (options.id) {
-                url = url + '/' + options.id;
-            }
+            var url = generateUrl(options);
 
             var request = $http.put(url, data);
 
@@ -86,6 +65,27 @@
             }
 
             return request;
+        }
+
+        function generateUrl(options) {
+            var url = baseUrl + options.resource;
+
+            if (options.id) {
+                url = url + '/' + options.id;
+            }
+
+            if (options.search) {
+                var q = 'q=';
+                options.search.forEach(function (search, index) {
+                    if (index > 0) {
+                        q = q + ',';
+                    }
+                    q = q + search.field + '_' + search.condition + '_' + search.value;
+                });
+                url = url + '?' + q;
+            }
+
+            return url;
         }
 
         function handleBlocking(request) {

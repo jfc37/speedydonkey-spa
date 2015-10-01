@@ -6,14 +6,15 @@
         .factory('blockService', blockService);
 
     /* @ngInject */
-    function blockService(simpleApiCaller) {
+    function blockService($q, simpleApiCaller) {
 
         var service = {
             update: update,
             create: create,
             getBlocks: getBlocks,
             getBlock: getBlock,
-            deleteBlock: deleteBlock
+            deleteBlocks: deleteBlocks,
+            generateFromBlocks: generateFromBlocks
         };
 
         function update(block) {
@@ -22,11 +23,8 @@
             sanitisedBlock.classes = undefined;
             sanitisedBlock.enroledStudents = undefined;
 
-            var options = {
-                resource: 'blocks',
-                id: block.id,
-                block: true
-            };
+            var options = getOptions();
+            options.id = block.id;
 
             return simpleApiCaller.put(sanitisedBlock, options).then(function (response) {
                 return response.data;
@@ -38,12 +36,7 @@
         }
 
         function create(block) {
-            var options = {
-                resource: 'blocks',
-                block: true
-            };
-
-            return simpleApiCaller.post(block, options).then(function (response) {
+            return simpleApiCaller.post(block, getOptions()).then(function (response) {
                 return response.data;
             }, function (response) {
                 if (response.validationResult) {
@@ -53,24 +46,14 @@
         }
 
         function getBlocks() {
-            var options = {
-                resource: 'blocks',
-                search: [
-                    {
-                        field: 'endDate',
-                        condition: 'gt',
-                        value: moment().format('YYYY-MM-DD')
-                    }
-                ],
-                block: true
-            };
-
-            return simpleApiCaller.get(options).then(function (response) {
+            return simpleApiCaller.get(getOptions()).then(function (response) {
                 var blocks = response.data;
 
                 var today = new Date();
                 blocks.forEach(function (block) {
-                    if (moment(block.startDate).isAfter(today)) {
+                    if (moment(block.endDate).isBefore(today)) {
+                        block.status = 'Past';
+                    } else if (moment(block.startDate).isAfter(today)) {
                         block.status = 'Future';
                     } else {
                         block.status = 'Current';
@@ -82,11 +65,8 @@
         }
 
         function getBlock(id) {
-            var options = {
-                resource: 'blocks',
-                id: id,
-                block: true
-            };
+            var options = getOptions();
+            options.id = id;
 
             return simpleApiCaller.get(options).then(function (response) {
                 return response.data;
@@ -94,12 +74,44 @@
         }
 
         function deleteBlock(block) {
-            var options = {
-                resource: 'blocks',
-                id: block.id
-            };
+            var options = getOptions();
+            options.id = block.id;
 
             return simpleApiCaller.delete(options);
+        }
+
+        function deleteBlocks(blocks) {
+            var deletePromises = [];
+
+            blocks.forEach(function (block) {
+                deletePromises.push(deleteBlock(block));
+            });
+
+            return $q.all(deletePromises);
+        }
+
+        function generateFromBlock(block) {
+            var options = getOptions();
+            options.id = block.id;
+
+            return simpleApiCaller.post(null, options);
+        }
+
+        function generateFromBlocks(blocks) {
+            var promises = [];
+
+            blocks.forEach(function (block) {
+                promises.push(generateFromBlock(block));
+            });
+
+            return $q.all(promises);
+        }
+
+        function getOptions() {
+            return {
+                resource: 'blocks',
+                block: true
+            };
         }
 
         return service;

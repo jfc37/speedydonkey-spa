@@ -9,10 +9,10 @@
     function ManageBlocks(blockService) {
         var vm = this;
         vm.blocks = [];
-        vm.delete = function (block) {
-            blockService.deleteBlock(block).then(function () {
-                vm.blocks.remove(block);
-            });
+        vm.statusCount = function (status) {
+            return vm.blocks.filter(function (block) {
+                return block.status === status;
+            }).length;
         };
 
         activate();
