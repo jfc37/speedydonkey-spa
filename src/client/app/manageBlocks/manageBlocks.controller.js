@@ -5,31 +5,25 @@
         .module('app.manageBlocks')
         .controller('ManageBlocks', ManageBlocks);
 
-    ManageBlocks.$inject = ['$q', 'logger', 'manageBlocksService', 'blockUI'];
-
     /* @ngInject */
-    function ManageBlocks($q, logger, manageBlocksService, blockUI) {
-        /*jshint validthis: true */
+    function ManageBlocks(blockService) {
         var vm = this;
         vm.blocks = [];
+        vm.statusCount = function (status) {
+            return vm.blocks.filter(function (block) {
+                return block.status === status;
+            }).length;
+        };
 
         activate();
 
         function activate() {
-            blockUI.start();
-            var promises = [getBlocks()];
-            return $q.all(promises)
-                .then(function () {
-                    blockUI.stop();
-                    logger.info('Activated Manage Blocks');
-                });
+            getBlocks();
         }
 
         function getBlocks() {
-            manageBlocksService.getBlocks().then(function (blocks) {
+            blockService.getBlocks().then(function (blocks) {
                 vm.blocks = blocks;
-            }, function () {
-                logger.error('Failed to get blocks');
             });
         }
     }

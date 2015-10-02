@@ -27,6 +27,10 @@
 
                 scope.hasError = function () {
                     var formElement = form[name];
+                    if (!formElement) {
+                        return false;
+                    }
+
                     return formElement.$invalid && formElement.$touched;
                 };
             }

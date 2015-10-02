@@ -1,6 +1,6 @@
 (function () {
     'use strict';
 
-    angular.module('app.manageBlocks', []);
+    angular.module('app.manageBlocks', ['tableSort']);
 
 })();
