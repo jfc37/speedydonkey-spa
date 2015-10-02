@@ -39,9 +39,7 @@
                     block.isEnroled = isUserEnrolledInBlock;
                 });
 
-                return allBlocks.filter(function (block) {
-                    return block.isPublic;
-                });
+                return allBlocks;
             });
         }
 
