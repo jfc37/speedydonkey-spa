@@ -25,7 +25,9 @@
 
         function getBlock() {
             vm.block = {
-                startDate: new Date()
+                startDate: moment().startOf('day').hour(18).minute(0).toDate(),
+                minutesPerClass: 60,
+                numberOfClasses: 6
             };
         }
     }

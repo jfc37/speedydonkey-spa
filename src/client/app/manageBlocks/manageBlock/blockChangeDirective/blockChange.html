@@ -1,6 +1,5 @@
-<h3>Create Block</h3>
+<div ng-form="updateForm">
 
-<div ng-form="createForm">
     <input-block name="name" label="Name">
         <input name="name" type="text" class="form-control" ng-model="vm.block.name" required/>
         <validation error="required" name="name">Please enter a name</validation>
@@ -27,6 +26,7 @@
     <input-block name="teachers" label="Teachers">
         <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
     </input-block>
+
     <a class="btn btn-default" href="#/admin/manage/blocks">Cancel</a>
-    <a class="btn btn-default pull-right" ng-disabled="createForm.$invalid" ng-click="vm.submit(createForm)">Create</a>
+    <a class="btn btn-default pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
 </div>
