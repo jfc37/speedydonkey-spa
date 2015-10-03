@@ -15,8 +15,21 @@
                 return '';
             }
             var menuName = route.title;
-            return $route.current.title.substr(0, menuName.length) === menuName ? 'active' : '';
+
+            if (isActive(route) || vm.getChildItems(route).filter(isActive).length > 0) {
+                return 'active';
+            }
+
+            return '';
         };
+
+        function isActive(route) {
+            if (!route.title || !$route.current || !$route.current.title) {
+                return false;
+            }
+            var menuName = route.title;
+            return $route.current.title.substr(0, menuName.length) === menuName;
+        }
 
         vm.getChildItems = function (parentRoute) {
             return routes.filter(function (route) {
