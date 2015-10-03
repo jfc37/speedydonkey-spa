@@ -21,7 +21,8 @@
                     title: 'admin reports',
                     settings: {
                         nav: 3,
-                        content: '<i class="fa fa-area-chart"></i> Admin Reports'
+                        displayName: 'Reports',
+                        displayIcon: 'fa-area-chart'
                     },
                     claim: 'Admin'
                 }

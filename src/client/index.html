@@ -26,36 +26,26 @@
     <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.min.css" />
     <link rel="stylesheet" href="/bower_components/angular-tablesort/tablesort.css" />
+    <link rel="stylesheet" href="/bower_components/metisMenu/dist/metisMenu.css" />
     <!-- endbower -->
-
     <!-- endbuild -->
 
     <!-- build:css styles/app.css -->
 
     <!-- inject:css -->
-    <link rel="stylesheet" href="/.temp/styles.css">
+    <link rel="stylesheet" href="/.temp/style.css">
     <!-- endinject -->
 
     <!-- endbuild -->
+
 
 </head>
 
 <body>
     <div>
         <div data-ng-include="'app/layout/shell.html'"></div>
-        <div id="splash-page" data-ng-show="false">
-            <div class="page-splash">
-                <div class="page-splash-message">
-                    Loading
-                </div>
-                <div class="progress progress-striped active page-progress-bar">
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <span data-cc-scroll-to-top></span>
 
     <!-- build:js js/vendor.js -->
 
@@ -76,6 +66,8 @@
     <script src="/bower_components/underscore/underscore.js"></script>
     <script src="/bower_components/angular-tablesort/js/angular-tablesort.js"></script>
     <script src="/bower_components/raygun4js/dist/raygun.js"></script>
+    <script src="/bower_components/metisMenu/dist/metisMenu.js"></script>
+    <script src="/bower_components/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- endbower -->
 
     <!-- endbuild -->
@@ -113,6 +105,7 @@
     <script src="/src/client/app/blocks/router/router.module.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.module.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.module.js"></script>
+    <script src="/src/client/app/inspinia.js"></script>
     <script src="/src/client/app/adminDashboard/adminDashboard.controller.js"></script>
     <script src="/src/client/app/adminDashboard/config.route.js"></script>
     <script src="/src/client/app/adminReports/adminReports.controller.js"></script>

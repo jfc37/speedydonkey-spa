@@ -1,36 +1,28 @@
-﻿<nav class="navbar navbar-fixed-top navbar-inverse">
-    <div class="navbar-header">
-        <a href="/#/" class="navbar-brand"><span class="brand-title">{{vm.title}}</span></a>
-        <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
+<nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header hidden-lg">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary"><i class="fa fa-bars"></i> </a>
     </div>
-    <div class="navbar-collapse collapse">
-        <div class="pull-right navbar-logo">
-            <ul class="nav navbar-nav pull-right" ng-hide="vm.getUserIdentity().isLoggedIn">
-                <li>
-                    <a data-ng-href="{{vm.loginUrl}}">
-                        Login
-                    </a>
-                </li>
-                <li>
-                    <a data-ng-href="{{vm.registerUrl}}">
-                        Create Account
-                    </a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav pull-right" ng-show="vm.getUserIdentity().isLoggedIn">
-                <li>
-                    <a data-ng-href="{{vm.manageUserUrl}}">Hello, {{vm.getUserIdentity().name}}</a>
-                </li>
-                <li>
-                    <a data-ng-click="vm.logout()">
-                        Logout
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+
+    <ul class="nav navbar-top-links navbar-right" ng-if="vm.getUserIdentity().isLoggedIn">
+        <li>
+            <span class="m-r-sm text-muted welcome-message">Hello, {{vm.getUserIdentity().name}}</span>
+        </li>
+        <li>
+            <a data-ng-click="vm.logout()">
+                <i class="fa fa-sign-out"></i> Log out
+            </a>
+        </li>
+    </ul>
+    <ul class="nav navbar-top-links navbar-right" ng-if="!vm.getUserIdentity().isLoggedIn">
+        <li>
+            <a data-ng-href="{{vm.loginUrl}}">
+                Login
+            </a>
+        </li>
+        <li>
+            <a data-ng-href="{{vm.registerUrl}}">
+                Create Account
+            </a>
+        </li>
+    </ul>
 </nav>

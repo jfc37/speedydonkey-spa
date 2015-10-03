@@ -280,12 +280,6 @@ gulp.task('serve-build', ['build'], function (done) {
     done();
 });
 
-
-
-
-
-
-
 gulp.task('test', ['templatecache'], function (done) {
     startTests(true /*singleRun*/ , done);
 });
@@ -340,7 +334,6 @@ gulp.task('build-specs', ['templatecache'], function () {
 
     .pipe(gulp.dest('./'));
 });
-
 
 function startTests(singleRun, done) {
     var child;

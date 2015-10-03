@@ -35,7 +35,7 @@
                 return '';
             }
             var menuName = route.title;
-            return $route.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
+            return $route.current.title.substr(0, menuName.length) === menuName ? 'active' : '';
         }
     }
 })();
