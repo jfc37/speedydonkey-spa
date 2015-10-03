@@ -21,6 +21,12 @@
                     controller: 'ManageClasses',
                     controllerAs: 'vm',
                     templateUrl: 'app/manageClasses/manageClasses.html',
+                    displayName: 'Classes',
+                    settings: {
+                        nav: 30,
+                        level: 2,
+                        parent: 'admin dashboard'
+                    },
                     claim: 'Teacher'
                 }
             }

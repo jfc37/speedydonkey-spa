@@ -15,7 +15,16 @@
                 <a href="#{{r.originalPath}}">
                     <i ng-class="r.settings.displayIcon" class="fa"></i>
                     <span class="nav-label">{{r.settings.displayName}}</span>
+                    <span class="fa arrow" ng-if="vm.hasChildItems(r)"></span>
                 </a>
+
+                <ul class="nav nav-second-level collapse" ng-repeat="childItem in vm.getChildItems(r)">
+                    <li data-ng-class="vm.isCurrent(childItem)">
+                        <a href="#{{childItem.originalPath}}">
+                            {{childItem.displayName}}
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
 

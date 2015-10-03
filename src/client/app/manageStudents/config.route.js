@@ -19,6 +19,12 @@
                     controller: 'ManageStudents',
                     controllerAs: 'vm',
                     templateUrl: 'app/manageStudents/manageStudents.html',
+                    displayName: 'Students',
+                    settings: {
+                        nav: 50,
+                        level: 2,
+                        parent: 'admin dashboard'
+                    },
                     claim: 'Teacher'
                 }
             }

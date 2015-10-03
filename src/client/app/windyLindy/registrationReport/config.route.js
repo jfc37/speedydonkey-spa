@@ -21,6 +21,12 @@
                     controller: 'Report',
                     controllerAs: 'vm',
                     templateUrl: 'app/windyLindy/registrationReport/report.html',
+                    displayName: 'Windy Lindy Registrations',
+                    settings: {
+                        nav: 30,
+                        level: 2,
+                        parent: 'admin reports'
+                    },
                     claim: 'Admin'
                 }
             }

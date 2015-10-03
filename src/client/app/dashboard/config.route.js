@@ -22,7 +22,8 @@
                     settings: {
                         nav: 1,
                         displayName: 'Dashboard',
-                        displayIcon: 'fa-dashboard'
+                        displayIcon: 'fa-dashboard',
+                        level: 1
                     }
                 }
             }

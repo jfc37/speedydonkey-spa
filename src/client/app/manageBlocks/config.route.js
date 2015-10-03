@@ -19,6 +19,12 @@
                     controller: 'ManageBlocks',
                     controllerAs: 'vm',
                     templateUrl: 'app/manageBlocks/manageBlocks.html',
+                    displayName: 'Blocks',
+                    settings: {
+                        nav: 10,
+                        level: 2,
+                        parent: 'admin dashboard'
+                    },
                     claim: 'Admin'
                 }
             },

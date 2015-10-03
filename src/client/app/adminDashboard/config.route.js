@@ -22,7 +22,8 @@
                     settings: {
                         nav: 3,
                         displayName: 'Admin Dashboard',
-                        displayIcon: 'fa-cogs'
+                        displayIcon: 'fa-cogs',
+                        level: 1
                     },
                     claim: 'Teacher'
                 }

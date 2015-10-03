@@ -22,7 +22,8 @@
                     settings: {
                         nav: 3,
                         displayName: 'Reports',
-                        displayIcon: 'fa-area-chart'
+                        displayIcon: 'fa-area-chart',
+                        level: 1
                     },
                     claim: 'Admin'
                 }

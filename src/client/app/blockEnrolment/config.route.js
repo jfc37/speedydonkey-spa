@@ -24,7 +24,8 @@
                     settings: {
                         nav: 2,
                         displayName: 'Block Enrolment',
-                        displayIcon: 'fa-toggle-on'
+                        displayIcon: 'fa-toggle-on',
+                        level: 1
                     }
                 }
             }
