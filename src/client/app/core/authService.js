@@ -62,6 +62,8 @@
             return $q(function (resolve, revoke) {
                 dataservice.getCurrentUser().then(function (user) {
 
+                    angular.element('body').removeClass('canvas-menu');
+
                     dataservice.getCurrentUserClaims().then(function (claims) {
                         userIdentity.isLoggedIn = true;
                         userIdentity.username = email;
@@ -106,7 +108,7 @@
             $cookieStore.remove('authdata');
             $cookieStore.remove('authuser');
             $http.defaults.headers.common.Authorization = 'Basic ';
-
+            angular.element('body').addClass('canvas-menu');
             userIdentity = {
                 isLoggedIn: false
             };
