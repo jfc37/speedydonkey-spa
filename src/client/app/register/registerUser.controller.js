@@ -6,7 +6,7 @@
         .controller('RegisterUser', RegisterUser);
 
     /* @ngInject */
-    function RegisterUser(registerUserService, logger, validationService) {
+    function RegisterUser(registerUserService, validationService) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -19,15 +19,7 @@
                 vm.registrationSuccessful = true;
             }, function (validationErrors) {
                 validationService.applyServerSideErrors(form, validationErrors);
-                logger.warning('Register failed');
-
             });
         };
-
-        activate();
-
-        function activate() {
-            logger.info('Activated Register User View');
-        }
     }
 })();
