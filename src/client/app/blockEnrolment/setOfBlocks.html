@@ -1,5 +1,32 @@
 <h4 class="text-center">{{group}}</h4>
 <div class="col-sm-4 col-lg-12" ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'startDate'">
+    <div class="ibox">
+        <div class="ibox-content product-box">
+
+
+            <div class="product-desc">
+                <a href="#" class="product-name"> {{block.name}}</a>
+
+
+
+                <div class="small m-t-xs">
+                    <display-date format='time' ng-model='block.startDate'></display-date> -
+                    <display-date format='time' ng-model='block.endDate'></display-date>
+                </div>
+                <div class="m-t text-right">
+                    <label for="" ng-if="!block.isEnroled">
+                        <input type="checkbox" icheck data-ng-model="block.enrolIn"> Enrol
+                    </label>
+                    <label for="" ng-if="block.isEnroled">
+                        Already enrolled
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--
     <div class="block-item" ng-class="vm.getClassType(block)">
         <strong>{{block.name}}</strong>
         <p>
@@ -13,4 +40,5 @@
         <div class="form-group" ng-show="block.isEnroled"><b>Already enrolled</b>
         </div>
     </div>
+-->
 </div>
