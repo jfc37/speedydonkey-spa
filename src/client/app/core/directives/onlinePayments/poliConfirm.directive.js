@@ -5,8 +5,7 @@
         .module('app.core')
         .directive('poliConfirm', poliConfirm);
 
-    poliConfirm.$inject = ['poliPayment', 'routehelper'];
-
+    /* @ngInject */
     function poliConfirm(poliPayment, routehelper) {
         var directive = {
             templateUrl: 'app/core/directives/onlinePayments/poliConfirm.html',
@@ -14,6 +13,7 @@
                 config: '='
             },
             controllerAs: 'vm',
+            /* @ngInject */
             controller: function ($scope, routehelper) {
                 var vm = $scope;
 
