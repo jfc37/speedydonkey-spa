@@ -5,8 +5,7 @@
         .module('app.core')
         .directive('paypalConfirm', paypalConfirm);
 
-    paypalConfirm.$inject = ['paypalExpressCheckout', 'routehelper'];
-
+    /* @ngInject */
     function paypalConfirm(paypalExpressCheckout, routehelper) {
         var directive = {
             templateUrl: 'app/core/directives/onlinePayments/paypalConfirm.html',
@@ -14,6 +13,7 @@
                 config: '='
             },
             controllerAs: 'vm',
+            /* @ngInject */
             controller: function ($scope, routehelper) {
                 var vm = $scope;
 
