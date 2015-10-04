@@ -5,11 +5,8 @@
         .module('app.purchasePass')
         .controller('PassPaymentPaypalConfirm', PassPaymentPaypalConfirm);
 
-    PassPaymentPaypalConfirm.$inject = ['$routeParams'];
-
     /* @ngInject */
     function PassPaymentPaypalConfirm($routeParams) {
-        /*jshint validthis: true */
         var vm = this;
 
         vm.paypalConfig = {

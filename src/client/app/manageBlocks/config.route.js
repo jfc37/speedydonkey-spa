@@ -21,6 +21,36 @@
                     templateUrl: 'app/manageBlocks/manageBlocks.html',
                     claim: 'Admin'
                 }
+            },
+            {
+                url: '/admin/manage/blocks/create',
+                config: {
+                    title: 'createBlock',
+                    controller: 'CreateBlock',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/manageBlocks/createBlock/createBlock.html',
+                    claim: 'Admin'
+                }
+            },
+            {
+                url: '/admin/manage/blocks/:id',
+                config: {
+                    title: 'block',
+                    controller: 'Block',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/manageBlocks/manageBlock/block.html',
+                    claim: 'Admin'
+                }
+            },
+            {
+                url: '/admin/manage/blocks/:id/update',
+                config: {
+                    title: 'updateBlock',
+                    controller: 'UpdateBlock',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/manageBlocks/updateBlock/updateBlock.html',
+                    claim: 'Admin'
+                }
             }
         ];
     }

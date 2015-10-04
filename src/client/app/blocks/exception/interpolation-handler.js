@@ -23,7 +23,7 @@
 
                     if (!result && statement && doesStatementRequireLogging(statement)) {
                         var error = new Error('Interpolation issue. Couldn\'t bind to: ' + statement);
-                        Raygun.send(error);
+                        //Raygun.send(error);
                     }
                     return result;
                 };

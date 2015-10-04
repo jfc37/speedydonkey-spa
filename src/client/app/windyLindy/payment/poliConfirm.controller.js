@@ -9,8 +9,6 @@
 
     /* @ngInject */
     function PoliConfirm($routeParams) {
-        /*jshint validthis: true */
-
         var vm = this;
 
         vm.poliConfig = {

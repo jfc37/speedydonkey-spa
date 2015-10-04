@@ -10,11 +10,64 @@
         var service = {
             get: get,
             post: post,
-            put: put
+            put: put,
+            delete: remove
         };
         var baseUrl = 'https://' + config.apiUrl + '/api/';
 
         function get(options) {
+            var url = generateUrl(options);
+            var request = $http.get(url);
+
+            handleError(request);
+
+            if (options.block) {
+                handleBlocking(request);
+            }
+
+            return request;
+        }
+
+        function post(data, options) {
+            var url = generateUrl(options);
+            var request = $http.post(url, data);
+
+            handleError(request);
+            handleBlocking(request);
+
+            return request;
+        }
+
+        function put(data, options) {
+            var url = generateUrl(options);
+
+            var request = $http.put(url, data);
+
+            handleError(request);
+            handleBlocking(request);
+
+            return request;
+        }
+
+        function remove(options) {
+            var url = baseUrl + options.resource;
+
+            if (options.id) {
+                url = url + '/' + options.id;
+            }
+
+            var request = $http.delete(url);
+
+            handleError(request);
+
+            if (options.block) {
+                handleBlocking(request);
+            }
+
+            return request;
+        }
+
+        function generateUrl(options) {
             var url = baseUrl + options.resource;
 
             if (options.id) {
@@ -32,37 +85,7 @@
                 url = url + '?' + q;
             }
 
-            var request = $http.get(url);
-
-            handleError(request);
-
-            if (options.block) {
-                handleBlocking(request);
-            }
-
-            return request;
-        }
-
-        function post(data, options) {
-            var url = baseUrl + options.resource;
-
-            var request = $http.post(url, data);
-
-            handleError(request);
-            handleBlocking(request);
-
-            return request;
-        }
-
-        function put(data, options) {
-            var url = baseUrl + options.resource;
-
-            var request = $http.put(url, data);
-
-            handleError(request);
-            handleBlocking(request);
-
-            return request;
+            return url;
         }
 
         function handleBlocking(request) {
