@@ -2,12 +2,8 @@
 <div class="col-sm-4 col-lg-12" ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'startDate'">
     <div class="ibox">
         <div class="ibox-content product-box">
-
-
             <div class="product-desc">
-                <a href="#" class="product-name"> {{block.name}}</a>
-
-
+                <span class="product-name"> {{block.name}}</span>
 
                 <div class="small m-t-xs">
                     <display-date format='time' ng-model='block.startDate'></display-date> -
@@ -24,21 +20,4 @@
             </div>
         </div>
     </div>
-
-
-    <!--
-    <div class="block-item" ng-class="vm.getClassType(block)">
-        <strong>{{block.name}}</strong>
-        <p>
-            <display-date format='time' ng-model='block.startDate'></display-date> -
-            <display-date format='time' ng-model='block.endDate'></display-date>
-        </p>
-        <div class="form-group" ng-hide="block.isEnroled">
-            <b>Enrol</b>
-            <input ng-hide="block.isEnroled" type="checkbox" data-ng-model="block.enrolIn">
-        </div>
-        <div class="form-group" ng-show="block.isEnroled"><b>Already enrolled</b>
-        </div>
-    </div>
--->
 </div>
