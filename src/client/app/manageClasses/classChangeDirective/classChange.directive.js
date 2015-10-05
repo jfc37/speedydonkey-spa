@@ -2,21 +2,21 @@
     'use strict';
 
     angular
-        .module('app.manageBlocks')
-        .directive('blockChange', blockChange);
+        .module('app.manageClasses')
+        .directive('classChange', classChange);
 
     /* @ngInject */
-    function blockChange() {
+    function classChange() {
         return {
             restrict: 'E',
             scope: {
-                block: '='
+                class: '='
             },
-            templateUrl: 'app/manageBlocks/manageBlock/blockChangeDirective/blockChange.html',
+            templateUrl: 'app/manageClasses/classChangeDirective/classChange.html',
             controllerAs: 'vm',
             bindToController: true,
             /* @ngInject */
-            controller: function ($route, blockService, validationService) {
+            controller: function ($route, classService, validationService) {
                 var vm = this;
 
                 vm.cancel = function () {
@@ -24,7 +24,7 @@
                 };
 
                 vm.submit = function (form) {
-                    blockService.update(vm.block).then(function () {
+                    classService.update(vm.class).then(function () {
                         $route.reload();
                     }, function (errors) {
                         validationService.applyServerSideErrors(form, errors);

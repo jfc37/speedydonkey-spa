@@ -3,16 +3,27 @@
 
     angular
         .module('app.manageClasses')
-        .factory('manageClassesService', manageClassesService);
+        .factory('classService', classService);
 
     /* @ngInject */
-    function manageClassesService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService) {
+    function classService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService, simpleApiCaller) {
 
         var service = {
+            getClass: getClass,
             update: update,
             deleteClass: deleteClass,
             filterClasses: filterClasses
         };
+
+        function getClass(id) {
+
+            var options = getOptions();
+            options.id = id;
+
+            return simpleApiCaller.get(options).then(function (response) {
+                return response.data;
+            });
+        }
 
         function update(theClass) {
             return $q(function (resolve, revoke) {
@@ -48,6 +59,13 @@
                     revoke(response);
                 });
             });
+        }
+
+        function getOptions() {
+            return {
+                resource: 'classes',
+                block: true
+            };
         }
 
         return service;
