@@ -11,7 +11,7 @@
                     Full Swing
                 </div>
             </li>
-            <li data-ng-class="vm.isCurrent(r)" data-ng-repeat="r in vm.navRoutes">
+            <li data-ng-class="vm.isCurrent(r, vm.getCurrentRoute())" data-ng-repeat="r in vm.navRoutes">
                 <a href="#{{r.originalPath}}">
                     <i ng-class="r.settings.displayIcon" class="fa"></i>
                     <span class="nav-label">{{r.settings.displayName}}</span>
@@ -19,7 +19,7 @@
                 </a>
 
                 <ul class="nav nav-second-level collapse" ng-repeat="childItem in vm.getChildItems(r)">
-                    <li data-ng-class="vm.isCurrent(childItem)">
+                    <li data-ng-class="vm.isCurrent(childItem, vm.getCurrentRoute())">
                         <a href="#{{childItem.originalPath}}">
                             {{childItem.displayName}}
                         </a>

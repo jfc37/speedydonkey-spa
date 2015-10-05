@@ -10,25 +10,29 @@
         var vm = this;
         var routes = routehelper.getRoutes();
 
-        vm.isCurrent = function (route) {
-            if (!route.title || !$route.current || !$route.current.title) {
+        vm.getCurrentRoute = function () {
+            return $route;
+        };
+
+        vm.isCurrent = function (route, currentRoute) {
+            if (!route.title || !currentRoute.current || !currentRoute.current.title) {
                 return '';
             }
             var menuName = route.title;
 
-            if (isActive(route) || vm.getChildItems(route).filter(isActive).length > 0) {
+            if (isActive(route, currentRoute) || vm.getChildItems(route, currentRoute).filter(isActive).length > 0) {
                 return 'active';
             }
 
             return '';
         };
 
-        function isActive(route) {
-            if (!route.title || !$route.current || !$route.current.title) {
+        function isActive(route, currentRoute) {
+            if (!route.title || !currentRoute.current || !currentRoute.current.title) {
                 return false;
             }
             var menuName = route.title;
-            return $route.current.title.substr(0, menuName.length) === menuName;
+            return currentRoute.current.title.substr(0, menuName.length) === menuName;
         }
 
         vm.getChildItems = function (parentRoute) {
