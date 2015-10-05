@@ -6,7 +6,7 @@
         .directive('todaysClasses', todaysClasses);
 
     /* @ngInject */
-    function todaysClasses(classService, sectionBlockService) {
+    function todaysClasses(todaysClassesService, sectionBlockService) {
 
         return {
             restrict: 'E',
@@ -22,7 +22,7 @@
                 });
 
                 function activate() {
-                    return classService.getClassesForCheckIn().then(function (classes) {
+                    return todaysClassesService.getClassesForCheckIn().then(function (classes) {
                         vm.todaysClasses = classes;
                     }, function () {
                         vm.errorMessage = 'Oops, we couldn\'t get today\'s classes';

@@ -3,14 +3,13 @@
 
     angular
         .module('app.dashboard')
-        .factory('classService', classService);
+        .factory('todaysClassesService', todaysClassesService);
 
     /* @ngInject */
-    function classService($q, simpleApiCaller) {
+    function todaysClassesService($q, simpleApiCaller) {
 
         var service = {
-            getClassesForCheckIn: getClassesForCheckIn,
-            updateTeachers: updateTeachers
+            getClassesForCheckIn: getClassesForCheckIn
         };
 
         function getClassesForCheckIn() {
@@ -41,18 +40,6 @@
                     return $q.reject();
                 }
             });
-        }
-
-        function updateTeachers(theClass) {
-            var options = {
-                resource: 'classes/' + theClass.id + '/teachers'
-            };
-
-            var updatedTeacherIds = theClass.teachers.map(function (teacher) {
-                return teacher.id;
-            });
-
-            return simpleApiCaller.put(updatedTeacherIds, options);
         }
 
         return service;

@@ -6,13 +6,14 @@
         .factory('classService', classService);
 
     /* @ngInject */
-    function classService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService, simpleApiCaller) {
+    function classService($q, dataservice, dataUpdateService, dataCreateService, dataDeleteService, simpleApiCaller) {
 
         var service = {
             getClass: getClass,
             update: update,
             deleteClass: deleteClass,
-            filterClasses: filterClasses
+            filterClasses: filterClasses,
+            updateTeachers: updateTeachers
         };
 
         function getClass(id) {
@@ -59,6 +60,18 @@
                     revoke(response);
                 });
             });
+        }
+
+        function updateTeachers(theClass) {
+            var options = {
+                resource: 'classes/' + theClass.id + '/teachers'
+            };
+
+            var updatedTeacherIds = theClass.teachers.map(function (teacher) {
+                return teacher.id;
+            });
+
+            return simpleApiCaller.put(updatedTeacherIds, options);
         }
 
         function getOptions() {

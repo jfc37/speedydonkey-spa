@@ -6,7 +6,7 @@
         .controller('ClassCheckIn', ClassCheckIn);
 
     /* @ngInject */
-    function ClassCheckIn($q, classCheckInService, registerUserService, purchasePassService, logger, validationService, manageClassesService, blockUI) {
+    function ClassCheckIn($q, classCheckInService, registerUserService, purchasePassService, logger, validationService, blockUI) {
         /*jshint validthis: true */
         var vm = this;
         vm.class = null;
