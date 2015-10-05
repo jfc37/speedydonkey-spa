@@ -11,8 +11,6 @@
         var vm = this;
         vm.class = null;
         vm.students = [];
-        vm.isClassLoading = true;
-        vm.areRegisteredStudentsLoading = true;
         vm.creatingNewAccount = false;
         vm.newUser = {};
 
@@ -72,8 +70,6 @@
                 vm.walkInStudentSelected = user;
             }, function (validationErrors) {
                 validationService.applyServerSideErrors(form, validationErrors);
-                logger.warning('Register failed');
-
             });
         };
 
@@ -112,46 +108,24 @@
             return $q.all(promises)
                 .then(function () {
                     blockUI.stop();
-                    logger.info('Activated Class Check In View');
                 });
         }
 
         function getClass() {
             return classCheckInService.getClass().then(function (theClass) {
                 vm.class = theClass;
-                vm.isClassLoading = false;
-            }, function (error) {
-                if (!error.displayMessage) {
-                    error.displayMessage = 'Issue getting class...';
-                }
-                logger.error(error.displayMessage);
-                vm.isClassLoading = false;
             });
         }
 
         function getStudents() {
             return classCheckInService.getStudents().then(function (students) {
                 vm.students = students;
-                vm.areRegisteredStudentsLoading = false;
-            }, function (error) {
-                if (!error.displayMessage) {
-                    error.displayMessage = 'Issue getting registered students...';
-                }
-                logger.error(error.displayMessage);
-                vm.areRegisteredStudentsLoading = false;
             });
         }
 
         function getPassOptions() {
             return purchasePassService.getPassOptions(true).then(function (passOptions) {
                 vm.passOptions = passOptions;
-                vm.arePassesLoading = false;
-            }, function (error) {
-                if (!error.displayMessage) {
-                    error.arePassesLoading = 'Issue getting pass options...';
-                }
-                logger.error(error.displayMessage);
-                vm.arePassesLoading = false;
             });
         }
     }
