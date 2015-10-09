@@ -76,6 +76,7 @@ gulp.task('clean-code', function (done) {
     var files = [].concat(
         config.temp + '**/*.js',
         config.build + '**/*.html',
+        config.build + 'maps/**/*.map',
         config.build + 'js/**/*.js');
     clean(files, done);
 });
@@ -196,6 +197,17 @@ gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function () {
         .pipe(gulp.dest(config.client));
 });
 
+
+
+gulp.task('sm', function () {
+    log('source map');
+    return gulp.src('build/js/app-9a1ce080cf.js')
+        .pipe($.sourcemaps.init())
+        .pipe($.sourcemaps.write('buildblah'))
+        .pipe(gulp.dest('buildblah'));
+});
+
+
 /**
  * Optimization
  **/
@@ -239,10 +251,19 @@ gulp.task('optimize', ['inject'], function () {
     //app js
     .pipe(jsAppFilter)
         .pipe($.ngAnnotate())
+        .pipe($.sourcemaps.init())
         .pipe($.if(shouldUglify(), $.uglify()))
         .pipe(jsAppFilter.restore())
 
+    //app js
+    .pipe(jsAppFilter)
+        .pipe($.ngAnnotate())
+        //.pipe($.sourcemaps.init())
+        //.pipe($.if(shouldUglify(), $.uglify()))
+        .pipe(jsAppFilter.restore())
+
     .pipe($.rev())
+        .pipe($.sourcemaps.write('maps'))
 
     .pipe(assets.restore())
         .pipe($.useref())
@@ -379,6 +400,7 @@ function includeGoogleAnalytics() {
 }
 
 function shouldUglify() {
+    return true;
     return process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'test';
 }
 
