@@ -28,12 +28,17 @@
             var userCookie = $cookieStore.get('authuser');
             if (userCookie !== undefined) {
                 userIdentity = userCookie;
+                setRaygunUser(userCookie.name, userCookie.username);
             }
             var authDataCookie = $cookieStore.get('authdata');
             if (authDataCookie !== undefined) {
                 addBasicAuthorisation(authDataCookie);
             }
 
+        }
+
+        function setRaygunUser(name, email) {
+            Raygun.setUser(name, false, email, name);
         }
 
         function hasClaim(claim) {
@@ -85,7 +90,7 @@
                         userIdentity.claims = [];
                         resolve();
                     }).finally(function () {
-                        Raygun.setUser(email);
+                        setRaygunUser(user.fullName, user.username);
                     });
                 }, function (response) {
                     logout();
