@@ -255,13 +255,6 @@ gulp.task('optimize', ['inject'], function () {
         .pipe($.if(shouldUglify(), $.uglify()))
         .pipe(jsAppFilter.restore())
 
-    //app js
-    .pipe(jsAppFilter)
-        .pipe($.ngAnnotate())
-        //.pipe($.sourcemaps.init())
-        //.pipe($.if(shouldUglify(), $.uglify()))
-        .pipe(jsAppFilter.restore())
-
     .pipe($.rev())
         .pipe($.sourcemaps.write('maps'))
 
