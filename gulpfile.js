@@ -199,20 +199,74 @@ gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function () {
 
 
 
-gulp.task('sm', function () {
-    log('source map');
-    return gulp.src('build/js/app-9a1ce080cf.js')
-        .pipe($.sourcemaps.init())
-        .pipe($.sourcemaps.write('buildblah'))
-        .pipe(gulp.dest('buildblah'));
+
+
+
+
+
+gulp.task('bundle', ['inject'], function () {
+    log('Creating unminified app js');
+
+    var assets = $.useref.assets({
+        searchPath: './'
+    });
+    var templateCache = config.temp + config.templateCache.file;
+    var cssFilter = $.filter('**/*.css');
+    var jsLibFilter = $.filter('**/' + config.optimized.vendor);
+    var jsAppFilter = $.filter('**/' + config.optimized.app);
+
+    return gulp
+        .src(config.index)
+        .pipe($.plumber())
+
+    .pipe($.if(includeGoogleAnalytics(), $.ga({
+            url: 'fullswing.azurewebsites.net',
+            uid: 'UA-36895453-2',
+            tag: 'body'
+        })))
+        .pipe($.inject(gulp.src(templateCache, {
+            read: false
+        }), {
+            starttag: '<!-- inject:templates:js -->'
+        }))
+        .pipe(assets)
+
+    //css
+    .pipe(cssFilter)
+        .pipe($.csso())
+        .pipe(cssFilter.restore())
+
+    //3rd party js
+    .pipe(jsLibFilter)
+        .pipe(jsLibFilter.restore())
+
+    //app js
+    .pipe(jsAppFilter)
+        .pipe($.ngAnnotate())
+        .pipe(jsAppFilter.restore())
+
+    .pipe(assets.restore())
+        .pipe($.useref())
+        .pipe(gulp.dest(config.build))
+
+    .pipe(gulp.dest(config.build));
 });
+
+
+
+
+
+
+
 
 
 /**
  * Optimization
  **/
-gulp.task('optimize', ['inject'], function () {
+//gulp.task('optimize', ['minify'], function () {
+gulp.task('optimize', ['bundle'], function () {
     log('Optimizing the javascript, css, html');
+
 
     var assets = $.useref.assets({
         searchPath: './'
