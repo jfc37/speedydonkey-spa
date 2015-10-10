@@ -15,12 +15,17 @@
             templateUrl: 'app/manageBlocks/manageBlock/blockChangeDirective/blockChange.html',
             controllerAs: 'vm',
             bindToController: true,
-            controller: function (blockService, routehelper, validationService) {
+            /* @ngInject */
+            controller: function ($route, blockService, validationService) {
                 var vm = this;
+
+                vm.cancel = function () {
+                    $route.reload();
+                };
 
                 vm.submit = function (form) {
                     blockService.update(vm.block).then(function () {
-                        routehelper.redirectToRoute('manageBlocks');
+                        $route.reload();
                     }, function (errors) {
                         validationService.applyServerSideErrors(form, errors);
                     });

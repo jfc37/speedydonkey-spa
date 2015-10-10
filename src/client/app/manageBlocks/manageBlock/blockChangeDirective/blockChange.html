@@ -1,4 +1,4 @@
-<div ng-form="updateForm">
+<div ng-form="updateForm" class="panel-body">
 
     <input-block name="name" label="Name">
         <input name="name" type="text" class="form-control" ng-model="vm.block.name" required/>
@@ -27,6 +27,6 @@
         <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
     </input-block>
 
-    <a class="btn btn-default" href="#/admin/manage/blocks">Cancel</a>
-    <a class="btn btn-default pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
+    <a class="btn btn-default" ng-click="vm.cancel()">Cancel</a>
+    <a class="btn btn-primary pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
 </div>

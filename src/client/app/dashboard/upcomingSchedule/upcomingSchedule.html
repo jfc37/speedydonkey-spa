@@ -1,15 +1,13 @@
-<div class="panel panel-default" block-ui="upcomingSchedule">
-    <div class="panel-heading">
-        <h3 class="panel-title">Upcoming Schedule</h3>
-    </div>
-    <div class="panel-body">
-        <div ng-if="vm.upcomingSchedule.length === 0">
+<div class="ibox float-e-margins" block-ui="upcomingSchedule">
+    <div class="ibox-content">
+        <h2>Upcoming Schedule</h2>
+        <p ng-if="vm.upcomingSchedule.length === 0">
             Nothing scheduled for this week.
-        </div>
-        <div ng-repeat="event in vm.upcomingSchedule">
+        </p>
+        <p ng-repeat="event in vm.upcomingSchedule">
             {{event.name}} |
             <display-date format='time and day' ng-model='event.startTime'></display-date>
-        </div>
-        <div ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
+        </p>
+        <p ng-if="vm.errorMessage">{{vm.errorMessage}}</p>
     </div>
 </div>

@@ -76,6 +76,7 @@ gulp.task('clean-code', function (done) {
     var files = [].concat(
         config.temp + '**/*.js',
         config.build + '**/*.html',
+        config.build + 'maps/**/*.map',
         config.build + 'js/**/*.js');
     clean(files, done);
 });
@@ -196,11 +197,76 @@ gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function () {
         .pipe(gulp.dest(config.client));
 });
 
+
+
+
+
+
+
+
+gulp.task('bundle', ['inject'], function () {
+    log('Creating unminified app js');
+
+    var assets = $.useref.assets({
+        searchPath: './'
+    });
+    var templateCache = config.temp + config.templateCache.file;
+    var cssFilter = $.filter('**/*.css');
+    var jsLibFilter = $.filter('**/' + config.optimized.vendor);
+    var jsAppFilter = $.filter('**/' + config.optimized.app);
+
+    return gulp
+        .src(config.index)
+        .pipe($.plumber())
+
+    .pipe($.if(includeGoogleAnalytics(), $.ga({
+            url: 'fullswing.azurewebsites.net',
+            uid: 'UA-36895453-2',
+            tag: 'body'
+        })))
+        .pipe($.inject(gulp.src(templateCache, {
+            read: false
+        }), {
+            starttag: '<!-- inject:templates:js -->'
+        }))
+        .pipe(assets)
+
+    //css
+    .pipe(cssFilter)
+        .pipe($.csso())
+        .pipe(cssFilter.restore())
+
+    //3rd party js
+    .pipe(jsLibFilter)
+        .pipe(jsLibFilter.restore())
+
+    //app js
+    .pipe(jsAppFilter)
+        .pipe($.ngAnnotate())
+        .pipe(jsAppFilter.restore())
+
+    .pipe(assets.restore())
+        .pipe($.useref())
+        .pipe(gulp.dest(config.build))
+
+    .pipe(gulp.dest(config.build));
+});
+
+
+
+
+
+
+
+
+
 /**
  * Optimization
  **/
-gulp.task('optimize', ['inject'], function () {
+//gulp.task('optimize', ['minify'], function () {
+gulp.task('optimize', ['bundle'], function () {
     log('Optimizing the javascript, css, html');
+
 
     var assets = $.useref.assets({
         searchPath: './'
@@ -239,10 +305,12 @@ gulp.task('optimize', ['inject'], function () {
     //app js
     .pipe(jsAppFilter)
         .pipe($.ngAnnotate())
+        .pipe($.sourcemaps.init())
         .pipe($.if(shouldUglify(), $.uglify()))
         .pipe(jsAppFilter.restore())
 
     .pipe($.rev())
+        .pipe($.sourcemaps.write('maps'))
 
     .pipe(assets.restore())
         .pipe($.useref())
@@ -279,12 +347,6 @@ gulp.task('serve-build', ['build'], function (done) {
     serve(false);
     done();
 });
-
-
-
-
-
-
 
 gulp.task('test', ['templatecache'], function (done) {
     startTests(true /*singleRun*/ , done);
@@ -341,7 +403,6 @@ gulp.task('build-specs', ['templatecache'], function () {
     .pipe(gulp.dest('./'));
 });
 
-
 function startTests(singleRun, done) {
     var child;
     var fork = require('child_process').fork;
@@ -386,6 +447,7 @@ function includeGoogleAnalytics() {
 }
 
 function shouldUglify() {
+    return true;
     return process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'test';
 }
 

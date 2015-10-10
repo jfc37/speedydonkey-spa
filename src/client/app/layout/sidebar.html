@@ -1,15 +1,32 @@
-﻿<div data-cc-sidebar data-ng-controller="Sidebar as vm">
-    <div class="sidebar-filler"></div>
-    <div class="sidebar-dropdown"><a href="#">Menu</a></div>
-    <div class="sidebar-inner">
-        <div class="sidebar-widget">
-        </div>
-        <ul class="navi">
-            <li class="nlightblue fade-selection-animation" data-ng-class="vm.isCurrent(r)"
-                data-ng-repeat="r in vm.navRoutes">
-                <a href="#{{r.originalPath}}"
-                   data-ng-bind-html="r.settings.content"></a>
+<nav class="navbar-default navbar-static-side" role="navigation" data-ng-controller="Sidebar as vm">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a href="#/">
+                        <img alt="image" class="img-responsive" src="images/fs-logo.png">
+                    </a>
+                </div>
+                <div class="logo-element">
+                    Full Swing
+                </div>
+            </li>
+            <li data-ng-class="vm.isCurrent(r, vm.getCurrentRoute())" data-ng-repeat="r in vm.navRoutes">
+                <a href="#{{r.originalPath}}">
+                    <i ng-class="r.settings.displayIcon" class="fa"></i>
+                    <span class="nav-label">{{r.settings.displayName}}</span>
+                    <span class="fa arrow" ng-if="vm.hasChildItems(r)"></span>
+                </a>
+
+                <ul class="nav nav-second-level collapse" ng-repeat="childItem in vm.getChildItems(r)">
+                    <li data-ng-class="vm.isCurrent(childItem, vm.getCurrentRoute())">
+                        <a href="#{{childItem.originalPath}}">
+                            {{childItem.displayName}}
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
+
     </div>
-</div>
+</nav>

@@ -21,7 +21,9 @@
                     title: 'admin dashboard',
                     settings: {
                         nav: 3,
-                        content: '<i class="fa fa-cogs"></i> Admin Dashboard'
+                        displayName: 'Admin Dashboard',
+                        displayIcon: 'fa-cogs',
+                        level: 1
                     },
                     claim: 'Teacher'
                 }
