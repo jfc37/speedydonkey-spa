@@ -1,0 +1,21 @@
+<div class="panel-body">
+    <dl class="dl-horizontal m-t-m">
+        <dt>Name</dt>
+        <dd>{{vm.block.name}}</dd>
+
+        <dt>Time</dt>
+        <dd>{{vm.block.startDate | date : 'HH:mm'}}</dd>
+
+        <dt>Start Date</dt>
+        <dd>{{vm.block.startDate | date : 'dd MMM'}}</dd>
+
+        <dt>End Date</dt>
+        <dd>{{vm.block.endDate | date : 'dd MMM'}}</dd>
+
+        <dt>Teachers</dt>
+        <dd><span ng-repeat="teacher in vm.block.teachers">{{teacher.fullName}}{{$last ? '' : ', '}}</span></dd>
+
+        <dt>Students Registered</dt>
+        <dd>{{vm.block.enroledStudents.length}}</dd>
+    </dl>
+</div>

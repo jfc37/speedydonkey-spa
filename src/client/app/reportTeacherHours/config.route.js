@@ -19,6 +19,12 @@
                     controller: 'ReportTeacherHours',
                     controllerAs: 'vm',
                     templateUrl: 'app/reportTeacherHours/reportTeacherHours.html',
+                    displayName: 'Teacher Hours',
+                    settings: {
+                        nav: 20,
+                        level: 2,
+                        parent: 'admin reports'
+                    },
                     claim: 'Admin'
                 }
             }

@@ -1,0 +1,23 @@
+<div class="panel-body">
+    <table class="table table-hover" ts-wrapper>
+        <thead>
+            <tr>
+                <th>Week</th>
+                <th>Attendance</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="class in vm.classes">
+                <td>
+                    <a ng-href="#/admin/manage/classes/{{class.id}}" class="btn btn-link">{{class.name}}</a>
+                </td>
+                <td>{{class.actualStudents.length}}</td>
+                <td>{{class.startTime | date:'dd MMM'}}</td>
+                <td><a ng-href="#/class/{{class.id}}/check-in">Check In</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div

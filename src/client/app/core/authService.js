@@ -7,8 +7,7 @@
         .module('app.core')
         .factory('authService', authService);
 
-    authService.$inject = ['$q', '$http', '$cookieStore', 'base64Service', 'dataservice'];
-/* @ngInject */
+    /* @ngInject */
     function authService($q, $http, $cookieStore, base64Service, dataservice) {
 
         var userIdentity = {
@@ -29,12 +28,17 @@
             var userCookie = $cookieStore.get('authuser');
             if (userCookie !== undefined) {
                 userIdentity = userCookie;
+                setRaygunUser(userCookie.name, userCookie.username);
             }
             var authDataCookie = $cookieStore.get('authdata');
             if (authDataCookie !== undefined) {
                 addBasicAuthorisation(authDataCookie);
             }
 
+        }
+
+        function setRaygunUser(name, email) {
+            Raygun.setUser(name, false, email, name);
         }
 
         function hasClaim(claim) {
@@ -63,6 +67,8 @@
             return $q(function (resolve, revoke) {
                 dataservice.getCurrentUser().then(function (user) {
 
+                    angular.element('body').removeClass('canvas-menu');
+
                     dataservice.getCurrentUserClaims().then(function (claims) {
                         userIdentity.isLoggedIn = true;
                         userIdentity.username = email;
@@ -84,7 +90,7 @@
                         userIdentity.claims = [];
                         resolve();
                     }).finally(function () {
-                        Raygun.setUser(email);
+                        setRaygunUser(user.fullName, user.username);
                     });
                 }, function (response) {
                     logout();
@@ -107,7 +113,7 @@
             $cookieStore.remove('authdata');
             $cookieStore.remove('authuser');
             $http.defaults.headers.common.Authorization = 'Basic ';
-
+            angular.element('body').addClass('canvas-menu');
             userIdentity = {
                 isLoggedIn: false
             };

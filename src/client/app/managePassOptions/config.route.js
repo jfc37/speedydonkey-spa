@@ -19,6 +19,12 @@
                     controller: 'ManagePassOptions',
                     controllerAs: 'vm',
                     templateUrl: 'app/managePassOptions/managePassOptions.html',
+                    displayName: 'Pass Options',
+                    settings: {
+                        nav: 40,
+                        level: 2,
+                        parent: 'admin dashboard'
+                    },
                     claim: 'Admin'
                 }
             }

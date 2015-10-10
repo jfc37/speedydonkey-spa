@@ -26,36 +26,26 @@
     <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.min.css" />
     <link rel="stylesheet" href="/bower_components/angular-tablesort/tablesort.css" />
+    <link rel="stylesheet" href="/bower_components/metisMenu/dist/metisMenu.css" />
     <!-- endbower -->
-
     <!-- endbuild -->
 
     <!-- build:css styles/app.css -->
 
     <!-- inject:css -->
-    <link rel="stylesheet" href="/.temp/styles.css">
+    <link rel="stylesheet" href="/.temp/style.css">
     <!-- endinject -->
 
     <!-- endbuild -->
+
 
 </head>
 
 <body>
     <div>
         <div data-ng-include="'app/layout/shell.html'"></div>
-        <div id="splash-page" data-ng-show="false">
-            <div class="page-splash">
-                <div class="page-splash-message">
-                    Loading
-                </div>
-                <div class="progress progress-striped active page-progress-bar">
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <span data-cc-scroll-to-top></span>
 
     <!-- build:js js/vendor.js -->
 
@@ -76,6 +66,9 @@
     <script src="/bower_components/underscore/underscore.js"></script>
     <script src="/bower_components/angular-tablesort/js/angular-tablesort.js"></script>
     <script src="/bower_components/raygun4js/dist/raygun.js"></script>
+    <script src="/bower_components/metisMenu/dist/metisMenu.js"></script>
+    <script src="/bower_components/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="/bower_components/icheck/icheck.min.js"></script>
     <!-- endbower -->
 
     <!-- endbuild -->
@@ -95,7 +88,6 @@
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.module.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlocks.module.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.module.js"></script>
-    <script src="/src/client/app/manageLevels/manageLevels.module.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.module.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.module.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.module.js"></script>
@@ -114,13 +106,14 @@
     <script src="/src/client/app/blocks/router/router.module.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.module.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.module.js"></script>
+    <script src="/src/client/app/inspinia.js"></script>
     <script src="/src/client/app/adminDashboard/adminDashboard.controller.js"></script>
     <script src="/src/client/app/adminDashboard/config.route.js"></script>
     <script src="/src/client/app/adminReports/adminReports.controller.js"></script>
     <script src="/src/client/app/adminReports/config.route.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.controller.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.filters.js"></script>
-    <script src="/src/client/app/blockEnrolment/blockEnrolmentService.js"></script>
+    <script src="/src/client/app/blockEnrolment/blockEnrolment.service.js"></script>
     <script src="/src/client/app/blockEnrolment/config.route.js"></script>
     <script src="/src/client/app/classCheckIn/classCheckIn.controller.js"></script>
     <script src="/src/client/app/classCheckIn/classCheckInService.js"></script>
@@ -140,7 +133,7 @@
     <script src="/src/client/app/dashboard/config.route.js"></script>
     <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
     <script src="/src/client/app/forgottenPassword/config.route.js"></script>
-    <script src="/src/client/app/forgottenPassword/forgottenPassword.js"></script>
+    <script src="/src/client/app/forgottenPassword/forgottenPassword.controller.js"></script>
     <script src="/src/client/app/layout/shell.js"></script>
     <script src="/src/client/app/layout/sidebar.js"></script>
     <script src="/src/client/app/login/config.route.js"></script>
@@ -149,19 +142,12 @@
     <script src="/src/client/app/manageAnnouncements/manageAnnouncement.directive.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.controller.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.service.js"></script>
+    <script src="/src/client/app/manageBlocks/block.service.js"></script>
     <script src="/src/client/app/manageBlocks/config.route.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlock.controller.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlocks.controller.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlocks.service.js"></script>
+    <script src="/src/client/app/manageClasses/class.controller.js"></script>
+    <script src="/src/client/app/manageClasses/class.service.js"></script>
     <script src="/src/client/app/manageClasses/config.route.js"></script>
-    <script src="/src/client/app/manageClasses/manageClass.controller.js"></script>
-    <script src="/src/client/app/manageClasses/manageClasses.controller.js"></script>
-    <script src="/src/client/app/manageClasses/manageClasses.service.js"></script>
-    <script src="/src/client/app/manageLevels/config.route.js"></script>
-    <script src="/src/client/app/manageLevels/manageLevel.controller.js"></script>
-    <script src="/src/client/app/manageLevels/manageLevels.controller.js"></script>
-    <script src="/src/client/app/manageLevels/manageLevelsService.js"></script>
-    <script src="/src/client/app/manageLevels/newLevel.controller.js"></script>
     <script src="/src/client/app/managePassOptions/config.route.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.controller.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.service.js"></script>
@@ -184,8 +170,8 @@
     <script src="/src/client/app/purchasePass/purchasePass.controller.js"></script>
     <script src="/src/client/app/purchasePass/purchasePass.service.js"></script>
     <script src="/src/client/app/register/config.route.js"></script>
-    <script src="/src/client/app/register/registerUser.js"></script>
-    <script src="/src/client/app/register/registerUserService.js"></script>
+    <script src="/src/client/app/register/registerUser.controller.js"></script>
+    <script src="/src/client/app/register/registerUser.service.js"></script>
     <script src="/src/client/app/reportProfit/config.route.js"></script>
     <script src="/src/client/app/reportProfit/reportProfit.js"></script>
     <script src="/src/client/app/reportProfit/reportProfitService.js"></script>
@@ -220,6 +206,12 @@
     <script src="/src/client/app/dashboard/todaysClasses/todaysClasses.directive.js"></script>
     <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.directive.js"></script>
     <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.service.js"></script>
+    <script src="/src/client/app/manageBlocks/blockGroupDirective/blockGroup.directive.js"></script>
+    <script src="/src/client/app/manageBlocks/createBlock/createBlock.controller.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock/block.controller.js"></script>
+    <script src="/src/client/app/manageBlocks/updateBlock/updateBlock.controller.js"></script>
+    <script src="/src/client/app/manageClasses/classChangeDirective/classChange.directive.js"></script>
+    <script src="/src/client/app/manageClasses/classSummaryDirective/classSummary.directive.js"></script>
     <script src="/src/client/app/windyLindy/complete/complete.controller.js"></script>
     <script src="/src/client/app/windyLindy/complete/config.route.js"></script>
     <script src="/src/client/app/windyLindy/payment/config.route.js"></script>
@@ -232,10 +224,14 @@
     <script src="/src/client/app/windyLindy/registrationReport/report.controller.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.js"></script>
+    <script src="/src/client/app/core/directives/iCheckDirective/icheck.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/itemSummary.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/paymentOptions.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/paypalConfirm.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/poliConfirm.directive.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock/blockChangeDirective/blockChange.directive.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock/blockClassesDirective/blockClasses.directive.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock/blockSummaryDirective/blockSummary.directive.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->

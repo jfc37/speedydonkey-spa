@@ -15,13 +15,13 @@
     function getRoutes() {
         return [
             {
-                url: '/admin/manage/classes',
+                url: '/admin/manage/classes/:id',
                 config: {
-                    title: 'manageClasses',
-                    controller: 'ManageClasses',
+                    title: 'class',
+                    controller: 'Class',
                     controllerAs: 'vm',
-                    templateUrl: 'app/manageClasses/manageClasses.html',
-                    claim: 'Teacher'
+                    templateUrl: 'app/manageClasses/class.html',
+                    claim: 'Admin'
                 }
             }
         ];
