@@ -176,7 +176,7 @@
     // Local Storage functions
     // Set proper body class and plugins based on user configuration
     $(document).ready(function () {
-        if (localStorageSupport) {
+        if (localStorageSupport()) {
 
             var collapse = localStorage.getItem('collapse_menu');
             var fixedsidebar = localStorage.getItem('fixedsidebar');
