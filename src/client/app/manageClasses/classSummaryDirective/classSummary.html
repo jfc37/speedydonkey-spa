@@ -1,0 +1,24 @@
+<div class="panel-body">
+    <dl class="dl-horizontal m-t-m">
+        <dt>Name</dt>
+        <dd>{{vm.class.name}}</dd>
+
+        <dt>Time</dt>
+        <dd>{{vm.class.startTime | date : 'HH:mm'}}</dd>
+
+        <dt>Start Date</dt>
+        <dd>{{vm.class.startTime | date : 'dd MMM'}}</dd>
+
+        <dt>End Date</dt>
+        <dd>{{vm.class.endTime | date : 'dd MMM'}}</dd>
+
+        <dt>Teachers</dt>
+        <dd><span ng-repeat="teacher in vm.class.teachers">{{teacher.fullName}}{{$last ? '' : ', '}}</span></dd>
+
+        <dt>Students Registered</dt>
+        <dd>{{vm.class.registeredStudents.length}}</dd>
+
+        <dt>Number in attendance</dt>
+        <dd>{{vm.class.actualStudents.length}}</dd>
+    </dl>
+</div>

@@ -1,0 +1,22 @@
+<div ng-form="updateForm" class="panel-body">
+
+    <input-block name="name" label="Name">
+        <input name="name" type="text" class="form-control" ng-model="vm.class.name" required/>
+        <validation error="required" name="name">Please enter a name</validation>
+    </input-block>
+
+    <input-block name="startTime" label="Start Date" ng-if="vm.class.startTime">
+        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.class.startTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+    </input-block>
+
+    <input-block name="startEnd" label="End Date" ng-if="vm.class.endTime">
+        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.class.endTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+    </input-block>
+
+    <input-block name="teachers" label="Teachers">
+        <teacher-dropdown ng-model="vm.class.teachers"></teacher-dropdown>
+    </input-block>
+
+    <a class="btn btn-default" ng-click="vm.cancel()">Cancel</a>
+    <a class="btn btn-primary pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
+</div>

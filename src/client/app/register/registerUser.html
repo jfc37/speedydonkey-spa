@@ -1,11 +1,42 @@
-<div class="row">
-
-    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 well">
-        <h3 class="text-center">New User</h3>
-        <div ng-include src="'app/register/newUser.html'"></div>
-
-        <div ng-show=vm.registrationSuccessful>
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <img alt="image" src="images/fs-logo.png">
+        <h3>Register to Full Swing</h3>
+        <p>Create account to see it in action.</p>
+        <p ng-show="vm.registrationSuccessful">
             Thank you, you'll receive an email to activate your account shortly.
-        </div>
+        </p>
+        <form class="m-t" role="form" ng-hide="vm.registrationSuccessful" name="registerForm" novalidate>
+            <input-block name="firstName">
+                <input class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name (required)" ng-model="vm.newUser.firstName" required/>
+                <server-error ng-model="registerForm.firstName"></server-error>
+                <validation error="required" name="firstName">Please enter your first name</validation>
+            </input-block>
+
+            <input-block name="surname">
+                <input class="form-control" id="surname" name="surname" type="text" placeholder="Surname (required)" ng-model="vm.newUser.surname" required/>
+                <server-error ng-model="registerForm.surname"></server-error>
+                <validation error="required" name="surname">Please enter your surname</validation>
+            </input-block>
+
+            <input-block name="email">
+                <input class="form-control" id="email" name="email" type="text" placeholder="Email (required)" ng-model="vm.newUser.email" required/>
+                <server-error ng-model="registerForm.email"></server-error>
+                <validation error="required" name="email">Please enter an email</validation>
+                <validation error="email" name="email">Please enter a valid email</validation>
+            </input-block>
+
+            <input-block name="email">
+                <input class="form-control" id="password" name="password" type="password" placeholder="Password (required)" ng-model="vm.newUser.password" required/>
+                <server-error ng-model="registerForm.password"></server-error>
+                <validation error="required" name="password">Please enter a password</validation>
+            </input-block>
+
+            <a href="javascript:void(0);" class="btn btn-primary block full-width m-b" ng-click="vm.registerNewUser(registerForm)" ng-disabled="registerForm.$invalid">Register</a>
+
+            <p class="text-muted text-center"><small>Already have an account?</small></p>
+            <a class="btn btn-sm btn-white btn-block" href="#/login">Login</a>
+        </form>
+        <p class="m-t"> <small>Full Swing © 2015</small> </p>
     </div>
 </div>

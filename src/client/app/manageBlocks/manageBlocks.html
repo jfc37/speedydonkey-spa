@@ -1,27 +1,24 @@
-<div class="row">
-    <h1>Manage Blocks</h1>
+<a href="#/admin/manage/blocks/create" class="btn btn-primary">Create New Block</a>
 
-    <a href="#/admin/manage/blocks/create" class="btn btn-primary">Create New Block</a>
+<div class="space-15"></div>
 
-    <tabset justified="true">
-        <tab>
-            <tab-heading>
-                Current <span class='badge pull-right'>{{vm.statusCount('Current')}}</span>
-            </tab-heading>
-            <block-group blocks="vm.blocks" status="Current"></block-group>
-        </tab>
-        <tab>
-            <tab-heading>
-                Future <span class='badge pull-right'>{{vm.statusCount('Future')}}</span>
-            </tab-heading>
-            <block-group blocks="vm.blocks" status="Future"></block-group>
-        </tab>
-        <tab>
-            <tab-heading>
-                Past <span class='badge pull-right'>{{vm.statusCount('Past')}}</span>
-            </tab-heading>
-            <block-group blocks="vm.blocks" status="Past"></block-group>
-        </tab>
-    </tabset>
-
-</div>
+<tabset class="tabs-container">
+    <tab>
+        <tab-heading>
+            Current <span class='badge pull-right'>{{vm.statusCount('Current')}}</span>
+        </tab-heading>
+        <block-group blocks="vm.blocks" status="Current"></block-group>
+    </tab>
+    <tab>
+        <tab-heading>
+            Future <span class='badge pull-right'>{{vm.statusCount('Future')}}</span>
+        </tab-heading>
+        <block-group blocks="vm.blocks" status="Future"></block-group>
+    </tab>
+    <tab>
+        <tab-heading>
+            Past <span class='badge pull-right'>{{vm.statusCount('Past')}}</span>
+        </tab-heading>
+        <block-group blocks="vm.blocks" status="Past"></block-group>
+    </tab>
+</tabset>

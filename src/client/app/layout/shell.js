@@ -11,9 +11,6 @@
         var vm = this;
 
         vm.title = config.appTitle;
-        vm.busyMessage = 'Please wait ...';
-        vm.isBusy = true;
-        vm.showSplash = true;
         vm.getUserIdentity = authService.getUserIdentity;
         vm.loginUrl = '#/login';
         vm.registerUrl = '#/register/user';
@@ -29,15 +26,9 @@
         activate();
 
         function activate() {
-            logger.success(config.appTitle + ' loaded!', null);
-            hideSplash();
-        }
-
-        function hideSplash() {
-            //TODO: Force a 1 second delay so we can see the splash.
-            $timeout(function () {
-                vm.showSplash = false;
-            }, 1000);
+            if (!vm.showSideBar()) {
+                angular.element('body').addClass('canvas-menu');
+            }
         }
     }
 })();

@@ -1,0 +1,16 @@
+<h2>{{vm.class.name}}</h2>
+
+<tabset class="tabs-container" ng-if="vm.class">
+    <tab>
+        <tab-heading>
+            Summary
+        </tab-heading>
+        <class-summary class="vm.class"></class-summary>
+    </tab>
+    <tab>
+        <tab-heading>
+            Change
+        </tab-heading>
+        <class-change class="vm.class"></class-change>
+    </tab>
+</tabset>

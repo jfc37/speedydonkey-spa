@@ -1,26 +1,22 @@
-<div class="row">
+<h2>{{vm.block.name}}</h2>
 
-    <h2>{{vm.block.name}}</h2>
-
-    <tabset justified="true" ng-if="vm.block">
-        <tab>
-            <tab-heading>
-                Summary
-            </tab-heading>
-            <block-summary block="vm.block"></block-summary>
-        </tab>
-        <tab>
-            <tab-heading>
-                Classes
-            </tab-heading>
-            <block-classes block="vm.block"></block-classes>
-        </tab>
-        <tab>
-            <tab-heading>
-                Change
-            </tab-heading>
-            <block-change block="vm.block"></block-change>
-        </tab>
-    </tabset>
-
-</div>
+<tabset class="tabs-container" ng-if="vm.block">
+    <tab>
+        <tab-heading>
+            Summary
+        </tab-heading>
+        <block-summary block="vm.block"></block-summary>
+    </tab>
+    <tab>
+        <tab-heading>
+            Classes
+        </tab-heading>
+        <block-classes block="vm.block"></block-classes>
+    </tab>
+    <tab>
+        <tab-heading>
+            Change
+        </tab-heading>
+        <block-change block="vm.block"></block-change>
+    </tab>
+</tabset>
