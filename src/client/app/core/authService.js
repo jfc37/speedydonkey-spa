@@ -29,7 +29,6 @@
             if (userCookie !== undefined) {
                 userIdentity = userCookie;
                 setRaygunUser(userCookie.name, userCookie.username);
-                throw new Error('xxx');
             }
             var authDataCookie = $cookieStore.get('authdata');
             if (authDataCookie !== undefined) {
