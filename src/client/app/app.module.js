@@ -15,6 +15,7 @@
          * but this is easier to maintain.
          */
         'tableSort',
+        'summernote',
 
         'app.core',
         'app.widgets',
