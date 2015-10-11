@@ -16,7 +16,7 @@
         };
 
         vm.send = function () {
-            alert(vm.mail.message);
-        }
+            manageAnnouncementsService.send(vm.mail);
+        };
     }
 })();

@@ -5,17 +5,25 @@
         .module('app.manageAnnouncements')
         .factory('manageAnnouncementsService', manageAnnouncementsService);
 
-    manageAnnouncementsService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService'];
-
     /* @ngInject */
-    function manageAnnouncementsService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService) {
+    function manageAnnouncementsService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService, simpleApiCaller) {
 
         var service = {
+            send: send,
             create: create,
             update: update,
             getAnnouncements: getAnnouncements,
             deleteAnnouncement: deleteAnnouncement
         };
+
+        function send(mail) {
+            mail.type = 'email';
+            var options = {
+                resource: 'announcements',
+                block: true
+            };
+            return simpleApiCaller.post(mail, options);
+        }
 
         function create(announcement) {
             return $q(function (resolve, revoke) {
@@ -45,11 +53,12 @@
             });
         }
 
-        function getAnnouncements() {return $q(function (resolve, revoke) {
-    dataservice.getAnnouncements().then(function (announcements) {
-        resolve(announcements);
-    }, revoke);
-});
+        function getAnnouncements() {
+            return $q(function (resolve, revoke) {
+                dataservice.getAnnouncements().then(function (announcements) {
+                    resolve(announcements);
+                }, revoke);
+            });
         }
 
         function deleteAnnouncement(id) {
