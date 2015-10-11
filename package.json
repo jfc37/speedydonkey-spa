@@ -16,6 +16,7 @@
     "start": "gulp serve-dev"
   },
   "dependencies": {
+    "angular-cookies": "^1.4.7",
     "body-parser": "^1.0.2",
     "compression": "^1.0.1",
     "cors": "2.2.0",
