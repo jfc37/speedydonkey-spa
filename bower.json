@@ -40,7 +40,9 @@
     "icheck": "~1.0.2",
     "angular-summernote": "~0.5.1",
     "angular-cookies": "1.4.7",
-    "components-font-awesome": "~4.4.0"
+    "components-font-awesome": "~4.4.0",
+    "ui-select": "angular-ui-select#~0.13.2",
+    "select2": "~4.0.0"
   },
   "resolutions": {
     "angular": "~1.4.7"

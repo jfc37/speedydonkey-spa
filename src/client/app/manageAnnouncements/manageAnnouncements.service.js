@@ -17,6 +17,12 @@
         };
 
         function send(mail) {
+            mail.receivers = mail.receivers.map(function (block) {
+                return {
+                    id: block.id
+                };
+            });
+
             mail.type = 'email';
             var options = {
                 resource: 'announcements',

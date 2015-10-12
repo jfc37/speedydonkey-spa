@@ -6,17 +6,30 @@
         .controller('ManageAnnouncements', ManageAnnouncements);
 
     /* @ngInject */
-    function ManageAnnouncements($q, logger, manageAnnouncementsService, blockUI, selectOptionService) {
+    function ManageAnnouncements(manageAnnouncementsService, blockService) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.mail = {
-            subject: 'Subject',
             recipients: []
         };
 
         vm.send = function () {
             manageAnnouncementsService.send(vm.mail);
         };
+
+        vm.blockGroupingFunction = function (block) {
+            return block.status;
+        };
+
+        activate();
+
+        function activate() {
+            blockService.getBlocks().then(function (blocks) {
+                vm.blocks = blocks.filter(function (block) {
+                    return block.status !== 'Past';
+                });
+            });
+        }
     }
 })();

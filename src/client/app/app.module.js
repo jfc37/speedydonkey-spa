@@ -16,6 +16,8 @@
          */
         'tableSort',
         'summernote',
+        'ngSanitize',
+        'ui.select',
 
         'app.core',
         'app.widgets',
