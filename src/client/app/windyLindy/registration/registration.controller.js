@@ -33,11 +33,11 @@
                 price: 10.00,
                 id: 'Heats',
                 day: 'Friday',
-                where: 'Mac\'s Function Centre',
-                when: '6pm - 8pm'
+                where: 'Full Swing Studios (Cuba Mall)',
+                when: '6pm - 7.30pm'
             },
             {
-                name: 'The Grammy Awards',
+                name: 'The Grammy Awards - Contest Finals',
                 price: 20.00,
                 id: 'GrammyAwards',
                 day: 'Friday',
@@ -45,7 +45,7 @@
                 when: '8pm - 12.30am'
             },
             {
-                name: 'Rock Stars Ball',
+                name: 'Rock Stars\' Ball - with Hetty Kate and the Wellington City Shake \'Em on Downers',
                 price: 60.00,
                 id: 'RockStarsBall',
                 day: 'Saturday',
@@ -61,15 +61,7 @@
                 when: 'Midnight - 3am'
             },
             {
-                name: 'The Hard Rock Bus Tour',
-                price: 30.00,
-                id: 'HardRockBusTour',
-                day: 'Sunday',
-                where: 'TBA',
-                when: '3.45pm - 6pm'
-            },
-            {
-                name: 'The Back Stage Party',
+                name: 'Back Stage Party - with Pugsley Buzzard and Devilish Mary and the Holy Rollers',
                 price: 60.00,
                 id: 'BackStageParty',
                 day: 'Sunday',
@@ -77,8 +69,8 @@
                 when: '8pm - Midnight'
             },
             {
-                name: 'Sunday Night After Party',
-                price: 10.00,
+                name: 'Sunday Night After Party - with Hetty Kate',
+                price: 25.00,
                 id: 'SundayNightAfterParty',
                 day: 'Sunday',
                 where: 'Full Swing Studios  (Cuba Mall)',
