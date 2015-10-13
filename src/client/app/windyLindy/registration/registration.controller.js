@@ -69,7 +69,7 @@
                 when: '8pm - Midnight'
             },
             {
-                name: 'Sunday Night After Party - with Pugsley Buzzard and Devilish Mary and the Holy Rollers',
+                name: 'Sunday Night After Party - with Devilish Mary and the Holy Rollers',
                 price: 25.00,
                 id: 'SundayNightAfterParty',
                 day: 'Sunday',
