@@ -68,7 +68,8 @@
                                             <dt>When</dt>
                                             <dd>{{event.when}}</dd>
                                         </dl>
-                                        <input type="checkbox" name="vm.registration.events[]" value="{{event.id}}" ng-checked="vm.registration.events.indexOf(event.id) > -1" ng-click="vm.toggleSelection(vm.registration.events, event.id)"> Attend!
+                                        <input id="{{event.id}}" type="checkbox" name="vm.registration.events[]" value="{{event.id}}" ng-checked="vm.registration.events.indexOf(event.id) > -1" ng-click="vm.toggleSelection(vm.registration.events, event.id)">
+                                        <label for="{{event.id}}">Attend</label>
                                     </div>
                                 </div>
                             </div>
