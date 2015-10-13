@@ -6,7 +6,7 @@
         .controller('ManageAnnouncements', ManageAnnouncements);
 
     /* @ngInject */
-    function ManageAnnouncements(manageAnnouncementsService, blockService) {
+    function ManageAnnouncements(manageAnnouncementsService, blockService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -15,7 +15,9 @@
         };
 
         vm.send = function () {
-            manageAnnouncementsService.send(vm.mail);
+            manageAnnouncementsService.send(vm.mail).then(function () {
+                routehelper.redirectToRoute('dashboard');
+            });
         };
 
         vm.blockGroupingFunction = function (block) {
