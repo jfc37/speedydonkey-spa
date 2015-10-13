@@ -31,48 +31,65 @@
             {
                 name: 'The Heats',
                 price: 10.00,
-                id: 'Heats'
+                id: 'Heats',
+                day: 'Friday',
+                where: 'Full Swing Studios (Cuba Mall)',
+                when: '6pm - 7.30pm'
             },
             {
-                name: 'The Grammy Awards',
+                name: 'The Grammy Awards - Contest Finals',
                 price: 20.00,
-                id: 'GrammyAwards'
+                id: 'GrammyAwards',
+                day: 'Friday',
+                where: 'Mac\'s Function Centre',
+                when: '8pm - 12.30am'
             },
             {
-                name: 'Rock Stars Ball',
+                name: 'Rock Stars\' Ball - with Hetty Kate and the Wellington City Shake \'Em on Downers',
                 price: 60.00,
-                id: 'RockStarsBall'
+                id: 'RockStarsBall',
+                day: 'Saturday',
+                where: 'Mac\'s Function Centre',
+                when: '8pm - Midnight'
             },
             {
-                name: 'Groupies Private Party',
+                name: 'Groupies Private Party - with Hetty Kate and the Wellington City Shake \'Em on Downers',
                 price: 25.00,
-                id: 'GroupiesPrivateParty'
+                id: 'GroupiesPrivateParty',
+                day: 'Saturday',
+                where: 'Full Swing Studios (Cuba Mall)',
+                when: 'Midnight - 3am'
             },
             {
-                name: 'The Hard Rock Bus Tour',
-                price: 30.00,
-                id: 'HardRockBusTour'
-            },
-            {
-                name: 'The Back Stage Party',
+                name: 'Back Stage Party - with Pugsley Buzzard and Devilish Mary and the Holy Rollers',
                 price: 60.00,
-                id: 'BackStageParty'
+                id: 'BackStageParty',
+                day: 'Sunday',
+                where: 'Mac\'s Function Centre',
+                when: '8pm - Midnight'
             },
             {
-                name: 'Sunday Night After Party',
-                price: 10.00,
-                id: 'SundayNightAfterParty'
+                name: 'Sunday Night After Party - with Devilish Mary and the Holy Rollers',
+                price: 25.00,
+                id: 'SundayNightAfterParty',
+                day: 'Sunday',
+                where: 'Full Swing Studios  (Cuba Mall)',
+                when: 'Midnight - 4am'
             },
             {
                 name: 'Groupies Goodbye Jam',
                 price: 25.00,
-                id: 'GroupiesGoodbyeJam'
+                id: 'GroupiesGoodbyeJam',
+                day: 'Monday',
+                where: 'Rogue and Vagabond',
+                when: '6pm - Late'
             }
         ];
         vm.registration = {
             classes: [],
             events: [],
-            competitions: []
+            competitions: [],
+            fullPass: false
         };
 
         vm.submit = function (form) {
