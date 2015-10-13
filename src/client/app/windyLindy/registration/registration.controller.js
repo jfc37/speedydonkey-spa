@@ -31,48 +31,73 @@
             {
                 name: 'The Heats',
                 price: 10.00,
-                id: 'Heats'
+                id: 'Heats',
+                day: 'Friday',
+                where: 'Mac\'s Function Centre',
+                when: '6pm - 8pm'
             },
             {
                 name: 'The Grammy Awards',
                 price: 20.00,
-                id: 'GrammyAwards'
+                id: 'GrammyAwards',
+                day: 'Friday',
+                where: 'Mac\'s Function Centre',
+                when: '8pm - 12.30am'
             },
             {
                 name: 'Rock Stars Ball',
                 price: 60.00,
-                id: 'RockStarsBall'
+                id: 'RockStarsBall',
+                day: 'Saturday',
+                where: 'Mac\'s Function Centre',
+                when: '8pm - Midnight'
             },
             {
                 name: 'Groupies Private Party',
                 price: 25.00,
-                id: 'GroupiesPrivateParty'
+                id: 'GroupiesPrivateParty',
+                day: 'Saturday',
+                where: 'Full Swing Studios (Cuba Mall)',
+                when: 'Midnight - 3am'
             },
             {
                 name: 'The Hard Rock Bus Tour',
                 price: 30.00,
-                id: 'HardRockBusTour'
+                id: 'HardRockBusTour',
+                day: 'Sunday',
+                where: 'TBA',
+                when: '3.45pm - 6pm'
             },
             {
                 name: 'The Back Stage Party',
                 price: 60.00,
-                id: 'BackStageParty'
+                id: 'BackStageParty',
+                day: 'Sunday',
+                where: 'Mac\'s Function Centre',
+                when: '8pm - Midnight'
             },
             {
                 name: 'Sunday Night After Party',
                 price: 10.00,
-                id: 'SundayNightAfterParty'
+                id: 'SundayNightAfterParty',
+                day: 'Sunday',
+                where: 'Full Swing Studios  (Cuba Mall)',
+                when: 'Midnight - 4am'
             },
             {
                 name: 'Groupies Goodbye Jam',
                 price: 25.00,
-                id: 'GroupiesGoodbyeJam'
+                id: 'GroupiesGoodbyeJam',
+                day: 'Monday',
+                where: 'Rogue and Vagabond',
+                when: '6pm - Late'
             }
         ];
         vm.registration = {
             classes: [],
             events: [],
-            competitions: []
+            competitions: [],
+            fullPass: false
         };
 
         vm.submit = function (form) {
