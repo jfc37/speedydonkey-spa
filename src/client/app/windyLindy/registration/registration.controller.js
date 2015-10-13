@@ -53,7 +53,7 @@
                 when: '8pm - Midnight'
             },
             {
-                name: 'Groupies Private Party',
+                name: 'Groupies Private Party - with Hetty Kate and the Wellington City Shake \'Em on Downers',
                 price: 25.00,
                 id: 'GroupiesPrivateParty',
                 day: 'Saturday',
@@ -69,7 +69,7 @@
                 when: '8pm - Midnight'
             },
             {
-                name: 'Sunday Night After Party - with Hetty Kate',
+                name: 'Sunday Night After Party - with Pugsley Buzzard and Devilish Mary and the Holy Rollers',
                 price: 25.00,
                 id: 'SundayNightAfterParty',
                 day: 'Sunday',
