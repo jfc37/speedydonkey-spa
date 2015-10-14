@@ -211,7 +211,7 @@
 
     <div class="well well-sm">
         <a class="btn btn-link">Back</a>
-        <a class="btn btn-primary pull-right" ng-click="vm.submit(registrationForm)">Next</a>
+        <a class="btn btn-primary pull-right" ng-disabled="vm.registration.events.length < 1" ng-click="vm.submit(registrationForm)">Next</a>
     </div>
 
 </div>
