@@ -11,7 +11,7 @@
         var vm = this;
 
         vm.mail = {
-            recipients: []
+            receivers: []
         };
 
         vm.send = function () {

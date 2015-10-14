@@ -13,17 +13,22 @@
         };
 
         function send(mail) {
-            mail.receivers = mail.receivers.map(function (block) {
+
+            var mailToSend = {
+                notifyAll: mail.notifyAll,
+                message: mail.message,
+                subject: mail.subject
+            };
+            mailToSend.receivers = mail.receivers.map(function (block) {
                 return {
                     id: block.id
                 };
             });
 
-            mail.type = 'email';
             var options = {
-                resource: 'announcements',
-                block: true
+                resource: 'announcements'
             };
+
             return simpleApiCaller.post(mail, options);
         }
 
