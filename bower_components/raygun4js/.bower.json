@@ -1,6 +1,6 @@
 {
   "name": "raygun4js",
-  "version": "1.18.4",
+  "version": "1.18.6",
   "homepage": "http://raygun.io",
   "authors": [
     "Mindscape <hello@raygun.io>"
@@ -35,14 +35,13 @@
     "grunt": "~0.4.5",
     "grunt-contrib-jasmine": "~0.8.2"
   },
-  "_release": "1.18.4",
+  "_release": "1.18.6",
   "_resolution": {
     "type": "version",
-    "tag": "v1.18.4",
-    "commit": "25367e003611e75ae87fc627d5de78508a92ba77"
+    "tag": "v1.18.6",
+    "commit": "c9e54ca80425782c6a0e247476d7e9c002238b61"
   },
   "_source": "git://github.com/MindscapeHQ/raygun4js.git",
   "_target": "~1.18.4",
-  "_originalSource": "raygun4js",
-  "_direct": true
+  "_originalSource": "raygun4js"
 }
