@@ -19,17 +19,20 @@
                 message: mail.message,
                 subject: mail.subject
             };
-            mailToSend.receivers = mail.receivers.map(function (block) {
-                return {
-                    id: block.id
-                };
-            });
+
+            if (!mailToSend.notifyAll) {
+                mailToSend.receivers = mail.receivers.map(function (block) {
+                    return {
+                        id: block.id
+                    };
+                });
+            }
 
             var options = {
                 resource: 'announcements'
             };
 
-            return simpleApiCaller.post(mail, options);
+            return simpleApiCaller.post(mailToSend, options);
         }
 
         return service;
