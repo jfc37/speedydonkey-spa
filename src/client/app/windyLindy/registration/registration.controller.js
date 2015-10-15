@@ -38,7 +38,7 @@
             },
             {
                 name: 'The Grammy Awards - Contest Finals',
-                price: 20.00,
+                price: 30.00,
                 id: 'GrammyAwards',
                 day: 'Friday',
                 where: 'Mac\'s Function Centre',
@@ -70,7 +70,7 @@
             },
             {
                 name: 'Sunday Night After Party - with Devilish Mary and the Holy Rollers',
-                price: 25.00,
+                price: 30.00,
                 id: 'SundayNightAfterParty',
                 day: 'Sunday',
                 where: 'Full Swing Studios  (Cuba Mall)',
