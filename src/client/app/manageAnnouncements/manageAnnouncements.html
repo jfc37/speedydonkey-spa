@@ -45,7 +45,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="mail-body text-right tooltip-demo">
-                    <a href="javascript:void(0);" class="btn btn-primary" ng-click="vm.send()">Send</a>
+                    <button class="btn btn-primary" ng-click="vm.send()" ng-disabled="!vm.mail.isValid()">Send</button>
                 </div>
                 <div class="clearfix"></div>
             </div>

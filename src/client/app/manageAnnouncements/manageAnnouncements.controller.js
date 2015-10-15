@@ -24,6 +24,11 @@
             return block.status;
         };
 
+        vm.mail.isValid = function () {
+            var isBeingSentToSomeone = vm.mail.notifyAll || vm.mail.receivers.length > 0;
+            return vm.mail.subject && vm.mail.message && isBeingSentToSomeone;
+        };
+
         activate();
 
         function activate() {
