@@ -1,38 +1,54 @@
-<div class="row">
-    <h1>Manage Announcements</h1>
-    <table class="table table-hover">
-        <thead>
-            <th>Type</th>
-            <th>Period</th>
-            <th>Receivers</th>
-            <th>Message</th>
-            <th></th>
-        </thead>
-        <tbody ng-repeat="announcement in vm.announcements">
-            <tr>
-                <td>{{vm.showType(announcement.type)}}</td>
-                <td>
-                    <div ng-show="announcement.showFrom">
-                        <display-date ng-show="announcement.showFrom" format="short date" ng-model="announcement.showFrom"></display-date> -
-                        <display-date ng-show="announcement.showUntil" format="short date" ng-model="announcement.showUntil"></display-date>
-                    </div>
-                </td>
-                <td>{{vm.showReceivers(announcement)}}</td>
-                <td>{{announcement.message}}</td>
-                <td ng-hide="vm.updating">
-                    <!--                                <a ng-click="vm.startUpdating(announcement)" class="btn btn-link">Manage</a>-->
-                    <a ng-click="vm.delete(announcement)" class="btn link">Delete</a>
-                </td>
-            </tr>
-            <tr ng-if="announcement.updating">
-                <td colspan="6">
-                    <manage-announcement ng-model="announcement" options="vm.existingOptions"></manage-announcement>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<a ng-click="vm.addNew()" class="btn btn-primary">Add a new announcement</a>
-<div ng-if="vm.newAnnouncement">
-    <manage-announcement ng-model="vm.newAnnouncement" options="vm.newOptions"></manage-announcement>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div>
+            <div class="mail-box-header">
+                <h2>
+                    Compose mail
+                </h2>
+            </div>
+            <div class="mail-box">
+                <div class="mail-body">
+
+                    <form class="form-horizontal">
+                        <div class="form-group" ng-if="!vm.mail.notifyAll">
+                            <label class="col-sm-2 control-label">To:</label>
+
+                            <div class="col-sm-10">
+                                <ui-select multiple ng-model="vm.mail.receivers" theme="bootstrap">
+                                    <ui-select-match placeholder="Select block...">{{$item.name}} {{$item.startDate | date: 'EEEE HH:mm'}}</ui-select-match>
+                                    <ui-select-choices group-by="vm.blockGroupingFunction" repeat="block in vm.blocks | filter: {name: $select.search}">
+                                        {{block.name}} {{block.startDate | date: 'EEEE HH:mm'}}
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">To all students:</label>
+
+                            <div class="col-sm-10">
+                                <input type="checkbox" class="form-control" ng-model="vm.mail.notifyAll">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subject:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="vm.mail.subject">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="mail-text h-200">
+                    <summernote ng-model="vm.mail.message" height="300"></summernote>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <a href="javascript:void(0);" class="btn btn-primary" ng-click="vm.send()">Send</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
 </div>

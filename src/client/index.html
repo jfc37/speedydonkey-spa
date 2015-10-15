@@ -20,13 +20,17 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
     <link rel="stylesheet" href="/bower_components/angular-block-ui/dist/angular-block-ui.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.min.css" />
     <link rel="stylesheet" href="/bower_components/angular-tablesort/tablesort.css" />
     <link rel="stylesheet" href="/bower_components/metisMenu/dist/metisMenu.css" />
+    <link rel="stylesheet" href="/bower_components/summernote/dist/summernote.css" />
+    <link rel="stylesheet" href="/bower_components/summernote/dist/summernote-bs3.css" />
+    <link rel="stylesheet" href="/bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/bower_components/ui-select/dist/select.css" />
+    <link rel="stylesheet" href="/bower_components/select2/dist/css/select2.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -51,17 +55,16 @@
 
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/toastr/toastr.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
-    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="/bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
     <script src="/bower_components/underscore/underscore.js"></script>
     <script src="/bower_components/angular-tablesort/js/angular-tablesort.js"></script>
@@ -69,6 +72,11 @@
     <script src="/bower_components/metisMenu/dist/metisMenu.js"></script>
     <script src="/bower_components/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="/bower_components/icheck/icheck.min.js"></script>
+    <script src="/bower_components/summernote/dist/summernote.js"></script>
+    <script src="/bower_components/angular-summernote/dist/angular-summernote.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/ui-select/dist/select.js"></script>
+    <script src="/bower_components/select2/dist/js/select2.js"></script>
     <!-- endbower -->
 
     <!-- endbuild -->
@@ -91,8 +99,8 @@
     <script src="/src/client/app/managePassOptions/managePassOptions.module.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.module.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.module.js"></script>
-    <script src="/src/client/app/manageUser/manageUser.module.js"></script>
     <script src="/src/client/app/purchasePass/purchasePass.module.js"></script>
+    <script src="/src/client/app/manageUser/manageUser.module.js"></script>
     <script src="/src/client/app/register/register.module.js"></script>
     <script src="/src/client/app/reportProfit/reportProfit.module.js"></script>
     <script src="/src/client/app/reportTeacherHours/reportTeacherHours.module.js"></script>
@@ -139,7 +147,6 @@
     <script src="/src/client/app/login/config.route.js"></script>
     <script src="/src/client/app/login/login.controller.js"></script>
     <script src="/src/client/app/manageAnnouncements/config.route.js"></script>
-    <script src="/src/client/app/manageAnnouncements/manageAnnouncement.directive.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.controller.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.service.js"></script>
     <script src="/src/client/app/manageBlocks/block.service.js"></script>
@@ -159,9 +166,6 @@
     <script src="/src/client/app/manageTeachers/config.route.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.controller.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.service.js"></script>
-    <script src="/src/client/app/manageUser/config.route.js"></script>
-    <script src="/src/client/app/manageUser/manageUser.js"></script>
-    <script src="/src/client/app/manageUser/manageUserService.js"></script>
     <script src="/src/client/app/purchasePass/config.route.js"></script>
     <script src="/src/client/app/purchasePass/passPayment.controller.js"></script>
     <script src="/src/client/app/purchasePass/passPaymentPaypalConfirm.controller.js"></script>
@@ -169,6 +173,9 @@
     <script src="/src/client/app/purchasePass/passPurchaseComplete.controller.js"></script>
     <script src="/src/client/app/purchasePass/purchasePass.controller.js"></script>
     <script src="/src/client/app/purchasePass/purchasePass.service.js"></script>
+    <script src="/src/client/app/manageUser/config.route.js"></script>
+    <script src="/src/client/app/manageUser/manageUser.js"></script>
+    <script src="/src/client/app/manageUser/manageUserService.js"></script>
     <script src="/src/client/app/register/config.route.js"></script>
     <script src="/src/client/app/register/registerUser.controller.js"></script>
     <script src="/src/client/app/register/registerUser.service.js"></script>

@@ -5,60 +5,33 @@
         .module('app.manageAnnouncements')
         .factory('manageAnnouncementsService', manageAnnouncementsService);
 
-    manageAnnouncementsService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataCreateService', 'dataDeleteService'];
-
     /* @ngInject */
-    function manageAnnouncementsService($q, logger, dataservice, dataUpdateService, dataCreateService, dataDeleteService) {
+    function manageAnnouncementsService(simpleApiCaller) {
 
         var service = {
-            create: create,
-            update: update,
-            getAnnouncements: getAnnouncements,
-            deleteAnnouncement: deleteAnnouncement
+            send: send
         };
 
-        function create(announcement) {
-            return $q(function (resolve, revoke) {
-                dataCreateService.createAnnouncement(announcement).then(function (createdAnnouncement) {
-                    resolve(createdAnnouncement);
-                }, function (response) {
-                    if (response.validationResult !== undefined) {
-                        revoke(response.validationResult.validationErrors);
-                    } else {
-                        revoke();
-                    }
-                });
-            });
-        }
+        function send(mail) {
 
-        function update(announcement) {
-            return $q(function (resolve, revoke) {
-                dataUpdateService.updateAnnouncement(announcement).then(function (updatedAnnouncement) {
-                    resolve(updatedAnnouncement);
-                }, function (response) {
-                    if (response.validationResult !== undefined) {
-                        revoke(response.validationResult.validationErrors);
-                    } else {
-                        revoke();
-                    }
-                });
+            var mailToSend = {
+                notifyAll: mail.notifyAll,
+                message: mail.message,
+                subject: mail.subject
+            };
+            mailToSend.receivers = mail.receivers.map(function (block) {
+                return {
+                    id: block.id
+                };
             });
-        }
 
-        function getAnnouncements() {return $q(function (resolve, revoke) {
-    dataservice.getAnnouncements().then(function (announcements) {
-        resolve(announcements);
-    }, revoke);
-});
-        }
+            var options = {
+                resource: 'announcements'
+            };
 
-        function deleteAnnouncement(id) {
-            return $q(function (resolve, revoke) {
-                dataDeleteService.deleteAnnouncement(id).then(resolve, revoke);
-            });
+            return simpleApiCaller.post(mail, options);
         }
 
         return service;
-
     }
 })();

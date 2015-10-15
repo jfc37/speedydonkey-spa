@@ -15,7 +15,7 @@
         vm.blocksUrl = '#/admin/manage/blocks';
         vm.classesUrl = '#/admin/manage/classes';
         vm.teachersUrl = '#/admin/manage/teachers';
-        vm.announcementsUrl = '#/admin/manage/announcements';
+        vm.announcementsUrl = '#/admin/email-center';
         vm.studentsUrl = '#/admin/manage/students';
     }
 })();

@@ -15,6 +15,9 @@
          * but this is easier to maintain.
          */
         'tableSort',
+        'summernote',
+        'ngSanitize',
+        'ui.select',
 
         'app.core',
         'app.widgets',

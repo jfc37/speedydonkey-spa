@@ -5,8 +5,6 @@
         .module('app.manageAnnouncements')
         .run(appRun);
 
-    appRun.$inject = ['routehelper'];
-
     /* @ngInject */
     function appRun(routehelper) {
         routehelper.configureRoutes(getRoutes());
@@ -15,13 +13,13 @@
     function getRoutes() {
         return [
             {
-                url: '/admin/manage/announcements',
+                url: '/admin/email-center',
                 config: {
                     title: 'manageAnnouncements',
                     controller: 'ManageAnnouncements',
                     controllerAs: 'vm',
                     templateUrl: 'app/manageAnnouncements/manageAnnouncements.html',
-                    displayName: 'Announcements',
+                    displayName: 'Email Center',
                     settings: {
                         nav: 5,
                         level: 2,
