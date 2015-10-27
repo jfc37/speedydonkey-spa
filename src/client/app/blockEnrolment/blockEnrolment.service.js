@@ -18,7 +18,7 @@
             var userEnroledBlocksIds = [];
 
             var blocksRequest = simpleApiCaller.get({
-                resource: 'blocks',
+                resource: 'blocks/for-enrolment',
                 block: true
             }).then(function (response) {
                 allBlocks = response.data;
