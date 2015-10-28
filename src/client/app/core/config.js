@@ -61,8 +61,8 @@
                         e: c
                     });
                 };
-        }(window, document, "script",
-            "//cdn.raygun.io/raygun4js/raygun.js", "rg4js");
+        }(window, document, 'script',
+            '//cdn.raygun.io/raygun4js/raygun.min.js', 'rg4js');
 
         rg4js('apiKey', 'QjEhJ+hmGUEuvW7qQpYKGQ==');
         rg4js('attach', true);
