@@ -1,0 +1,25 @@
+<a href="#/admin/manage/rooms/create" class="btn btn-primary">Create New Room</a>
+
+<div class="space-15"></div>
+
+
+<div class="panel-body">
+    <table class="table table-hover" ts-wrapper>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="room in vm.rooms">
+                <td>
+                    <a ng-href="#/admin/manage/rooms/{{room.id}}" class="btn btn-link">{{room.name}}</a>
+                </td>
+                <td>
+                    {{room.location}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

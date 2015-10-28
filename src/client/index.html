@@ -88,13 +88,13 @@
     <script src="/src/client/app/classCheckIn/classCheckIn.module.js"></script>
     <script src="/src/client/app/core/core.module.js"></script>
     <script src="/src/client/app/dashboard/dashboard.module.js"></script>
-    <script src="/src/client/app/forgottenPassword/forgottenPassword.module.js"></script>
     <script src="/src/client/app/layout/layout.module.js"></script>
     <script src="/src/client/app/login/logon.module.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.module.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlocks.module.js"></script>
     <script src="/src/client/app/manageClasses/manageClasses.module.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.module.js"></script>
+    <script src="/src/client/app/forgottenPassword/forgottenPassword.module.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.module.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.module.js"></script>
     <script src="/src/client/app/manageUser/manageUser.module.js"></script>
@@ -103,11 +103,12 @@
     <script src="/src/client/app/reportProfit/reportProfit.module.js"></script>
     <script src="/src/client/app/reportTeacherHours/reportTeacherHours.module.js"></script>
     <script src="/src/client/app/resetPassword/resetPassword.module.js"></script>
+    <script src="/src/client/app/rooms/rooms.module.js"></script>
     <script src="/src/client/app/userActivation/userActivation.module.js"></script>
     <script src="/src/client/app/widgets/widgets.module.js"></script>
     <script src="/src/client/app/windyLindy/windyLindy.module.js"></script>
-    <script src="/src/client/app/blocks/apiCaller/apiCaller.module.js"></script>
     <script src="/src/client/app/blocks/exception/exception.module.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/apiCaller.module.js"></script>
     <script src="/src/client/app/blocks/logger/logger.module.js"></script>
     <script src="/src/client/app/blocks/router/router.module.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.module.js"></script>
@@ -138,8 +139,6 @@
     <script src="/src/client/app/core/selectOptionService.js"></script>
     <script src="/src/client/app/dashboard/config.route.js"></script>
     <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
-    <script src="/src/client/app/forgottenPassword/config.route.js"></script>
-    <script src="/src/client/app/forgottenPassword/forgottenPassword.controller.js"></script>
     <script src="/src/client/app/layout/shell.js"></script>
     <script src="/src/client/app/layout/sidebar.js"></script>
     <script src="/src/client/app/login/config.route.js"></script>
@@ -156,6 +155,8 @@
     <script src="/src/client/app/managePassOptions/config.route.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.controller.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.service.js"></script>
+    <script src="/src/client/app/forgottenPassword/config.route.js"></script>
+    <script src="/src/client/app/forgottenPassword/forgottenPassword.controller.js"></script>
     <script src="/src/client/app/manageStudents/config.route.js"></script>
     <script src="/src/client/app/manageStudents/managePass.controller.js"></script>
     <script src="/src/client/app/manageStudents/manageStudent.controller.js"></script>
@@ -185,16 +186,18 @@
     <script src="/src/client/app/reportTeacherHours/reportTeacherHoursService.js"></script>
     <script src="/src/client/app/resetPassword/config.route.js"></script>
     <script src="/src/client/app/resetPassword/resetPassword.js"></script>
+    <script src="/src/client/app/rooms/config.route.js"></script>
+    <script src="/src/client/app/rooms/room.service.js"></script>
     <script src="/src/client/app/userActivation/config.route.js"></script>
     <script src="/src/client/app/userActivation/userActivation.js"></script>
     <script src="/src/client/app/userActivation/userActivationService.js"></script>
     <script src="/src/client/app/widgets/ccSidebar.js"></script>
     <script src="/src/client/app/windyLindy/windyLindy.service.js"></script>
-    <script src="/src/client/app/blocks/apiCaller/apiCaller.js"></script>
-    <script src="/src/client/app/blocks/apiCaller/simpleApiCaller.js"></script>
     <script src="/src/client/app/blocks/exception/exception-handler.js"></script>
     <script src="/src/client/app/blocks/exception/exception.js"></script>
     <script src="/src/client/app/blocks/exception/interpolation-handler.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/apiCaller.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/simpleApiCaller.js"></script>
     <script src="/src/client/app/blocks/logger/logger.js"></script>
     <script src="/src/client/app/blocks/router/routehelper.js"></script>
     <script src="/src/client/app/classCheckIn/changeTeachers/changeTeachers.directive.js"></script>
@@ -217,6 +220,9 @@
     <script src="/src/client/app/manageBlocks/updateBlock/updateBlock.controller.js"></script>
     <script src="/src/client/app/manageClasses/classChangeDirective/classChange.directive.js"></script>
     <script src="/src/client/app/manageClasses/classSummaryDirective/classSummary.directive.js"></script>
+    <script src="/src/client/app/rooms/createRoom/createRoom.controller.js"></script>
+    <script src="/src/client/app/rooms/manageRoom/room.controller.js"></script>
+    <script src="/src/client/app/rooms/manageRooms/manageRooms.controller.js"></script>
     <script src="/src/client/app/windyLindy/complete/complete.controller.js"></script>
     <script src="/src/client/app/windyLindy/complete/config.route.js"></script>
     <script src="/src/client/app/windyLindy/payment/config.route.js"></script>
@@ -237,6 +243,9 @@
     <script src="/src/client/app/manageBlocks/manageBlock/blockChangeDirective/blockChange.directive.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlock/blockClassesDirective/blockClasses.directive.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlock/blockSummaryDirective/blockSummary.directive.js"></script>
+    <script src="/src/client/app/rooms/manageRoom/roomChangeDirective/roomChange.directive.js"></script>
+    <script src="/src/client/app/rooms/manageRoom/roomScheduleDirective/roomSchedule.directive.js"></script>
+    <script src="/src/client/app/rooms/manageRoom/roomSummaryDirective/roomSummary.directive.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->
