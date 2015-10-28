@@ -1,4 +1,4 @@
-/*global Raygun*/
+/*global rg4js*/
 (function () {
     'use strict';
 
@@ -52,7 +52,10 @@
         // Configure the common exception handler
         exceptionConfigProvider.config.appErrorPrefix = config.appErrorPrefix;
 
-        Raygun.init('<raygunKey>').attach();
+        rg4js('apiKey', '<raygunKey>');
+        rg4js('attach', true);
+        rg4js('enableCrashReporting', true);
+        rg4js('enablePulse', true);
     }
 
 })();
