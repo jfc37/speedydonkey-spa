@@ -1,4 +1,4 @@
-/*global Raygun*/
+/*global rg4js*/
 
 (function () {
     'use strict';
@@ -38,7 +38,13 @@
         }
 
         function setRaygunUser(name, email) {
-            Raygun.setUser(name, false, email, name);
+            rg4js('setUser', {
+                identifier: email,
+                isAnonymous: false,
+                email: email,
+                firstName: name,
+                fullName: name
+            });
         }
 
         function hasClaim(claim) {
