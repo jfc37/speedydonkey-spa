@@ -10,7 +10,6 @@
 
         var service = {
             getRooms: getRooms,
-
             update: update,
             create: create,
             getRoom: getRoom,
