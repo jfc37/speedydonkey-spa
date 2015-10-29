@@ -443,10 +443,12 @@ function clean(path, done) {
 }
 
 function includeGoogleAnalytics() {
+    return true;
     return process.env.NODE_ENV === 'prod';
 }
 
 function shouldUglify() {
+    return true;
     return process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'test';
 }
 

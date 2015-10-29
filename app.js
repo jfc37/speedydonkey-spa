@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var compress = require('compression');
 var cors = require('cors');
 var hsts = require('hsts');
+var csp = require('helmet-csp');
 //var errorHandler = require('./routes/utils/errorHandler')();
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -30,6 +31,39 @@ app.use(hsts({
     includeSubDomains: true,
     force: true,
     preload: true
+}));
+
+var apiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
+apiUrl = 'https://' + apiUrl;
+
+//Add CSP header to only allow trusted scripts and content
+app.use(csp({
+    // Specify directives as normal
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'https://cdn.raygun.io', 'http://cdn.raygun.io', 'https://www.google-analytics.com', 'http://www.google-analytics.com'],
+    fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+    imgSrc: ["'self", 'https://www.google-analytics.com', 'http://www.google-analytics.com', 'data:'],
+    styleSrc: ["'self'", "'unsafe-inline", 'https://fonts.googleapis.com'],
+    connectSrc: ["'self'", 'https://api.raygun.io', apiUrl, 'ws://localhost:3000'],
+
+    //sandbox: ['allow-forms', 'allow-scripts'],
+    //reportUri: '/report-violation',
+
+    // Set to an empty array to allow nothing through
+    objectSrc: [],
+
+    // Set to true if you only want browsers to report errors, not block them
+    reportOnly: false,
+
+    // Set to true if you want to blindly set all headers: Content-Security-Policy,
+    // X-WebKit-CSP, and X-Content-Security-Policy.
+    setAllHeaders: false,
+
+    // Set to true if you want to disable CSP on Android.
+    disableAndroid: false,
+
+    // Set to true if you want to force buggy CSP in Safari 5.1 and below.
+    safari5: false
 }));
 
 //app.use(errorHandler.init);
