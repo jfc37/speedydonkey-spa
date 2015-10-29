@@ -6,8 +6,10 @@ var app = express();
 var bodyParser = require('body-parser');
 var compress = require('compression');
 var cors = require('cors');
+
 var hsts = require('hsts');
 var csp = require('helmet-csp');
+
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 7300;
@@ -22,6 +24,9 @@ app.use(bodyParser.json());
 app.use(compress());
 app.use(logger('dev'));
 app.use(cors());
+
+//Remove X-Powered-By header
+app.disable('x-powered-by');
 
 //Add Strict-Transport-Security header to force https
 app.use(hsts({
