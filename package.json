@@ -21,8 +21,10 @@
     "compression": "^1.0.1",
     "cors": "2.2.0",
     "express": "^4.6.1",
+    "hsts": "^0.2.0",
     "morgan": "^1.1.1",
-    "serve-favicon": "^2.0.1"
+    "serve-favicon": "^2.0.1",
+    "strict-transport-security": "^0.2.0"
   },
   "devDependencies": {
     "angular": "^1.4.0",

@@ -6,6 +6,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var compress = require('compression');
 var cors = require('cors');
+var hsts = require('hsts');
 //var errorHandler = require('./routes/utils/errorHandler')();
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -22,6 +23,15 @@ app.use(bodyParser.json());
 app.use(compress());
 app.use(logger('dev'));
 app.use(cors());
+
+//Add Strict-Transport-Security header to force https
+app.use(hsts({
+    maxAge: 60000,
+    includeSubDomains: true,
+    force: true,
+    preload: true
+}));
+
 //app.use(errorHandler.init);
 
 //routes = require('./routes/index')(app);
@@ -42,7 +52,6 @@ if (environment === 'test') {
 } else {
     app.use(express.static('./build/'));
 }
-
 
 app.listen(port, function () {
     console.log('Express server listening on port ' + port);
