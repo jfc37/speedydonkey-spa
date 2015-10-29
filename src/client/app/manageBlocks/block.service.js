@@ -15,8 +15,30 @@
             getBlock: getBlock,
             deleteBlocks: deleteBlocks,
             generateFromBlocks: generateFromBlocks,
-            getBlockClasses: getBlockClasses
+            getBlockClasses: getBlockClasses,
+            changeRoom: changeRoom
         };
+
+        function changeRoom(block, room) {
+            var options = getOptions();
+            var request;
+
+            if (!room) {
+                options.resource = options.resource + '/' + block.id + '/rooms';
+                request = simpleApiCaller.delete(options);
+            } else {
+                options.resource = options.resource + '/' + block.id + '/rooms/' + room.id;
+                request = simpleApiCaller.put({}, options);
+            }
+
+            return request.then(function (response) {
+                return response.data;
+            }, function (response) {
+                if (response.validationResult) {
+                    return response.validationResult.validationErrors;
+                }
+            });
+        }
 
         function update(block) {
             var sanitisedBlock = block;

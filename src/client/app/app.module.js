@@ -42,6 +42,7 @@
         'app.managePassOptions',
         'app.manageAnnouncements',
         'app.manageBlocks',
+        'app.rooms',
         'app.manageClasses',
         'app.manageTeachers',
         'app.manageStudents',

@@ -20,5 +20,10 @@
 
         <dt>Number in attendance</dt>
         <dd>{{vm.class.actualStudents.length}}</dd>
+
+        <dt>Room</dt>
+        <dd>
+            <room-dropdown ng-model="vm.class.room" entity="vm.class" entity-type="class"></room-dropdown>
+        </dd>
     </dl>
 </div>
