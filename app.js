@@ -43,7 +43,8 @@ app.use(csp({
     fontSrc: ["'self'", 'https://fonts.gstatic.com'],
     imgSrc: ["'self", 'https://www.google-analytics.com', 'data:'],
     styleSrc: ["'self'", "'unsafe-inline", 'https://fonts.googleapis.com'],
-    connectSrc: ["'self'", apiUrl]
+    connectSrc: ["'self'", apiUrl],
+    reportUri: 'https://report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e'
 }));
 
 app.get('/ping', function (req, res, next) {
