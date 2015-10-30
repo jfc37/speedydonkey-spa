@@ -54,7 +54,6 @@ app.use(hsts({
 
 var apiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
 apiUrl = 'https://' + apiUrl;
-var reportUrl = apiUrl + '/report-violation';
 
 //Add CSP header to only allow trusted scripts and content
 app.use(csp({
@@ -63,7 +62,7 @@ app.use(csp({
     scriptSrc: ["'self'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'https://cdn.raygun.io', 'https://www.google-analytics.com'],
     fontSrc: ["'self'", 'https://fonts.gstatic.com'],
     imgSrc: ["'self", 'https://www.google-analytics.com', 'data:'],
-    styleSrc: ["'self'", "'unsafe-inline", 'https://fonts.googleapis.com'],
+    styleSrc: ["'self'", "'unsafe-inline", 'https://fonts.googleapis.com', 'https://api.raygun.io'],
     connectSrc: ["'self'", apiUrl, 'https://cdn.raygun.io'],
     reportUri: 'https://report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e'
 }));
