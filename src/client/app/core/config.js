@@ -70,7 +70,7 @@
                     });
                 };
         }(window, document, 'script',
-            'https//cdn.raygun.io/raygun4js/raygun.min.js', 'rg4js');
+            'https://cdn.raygun.io/raygun4js/raygun.min.js', 'rg4js');
 
         rg4js('apiKey', 'QjEhJ+hmGUEuvW7qQpYKGQ==');
         rg4js('attach', true);
