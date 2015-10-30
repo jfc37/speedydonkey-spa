@@ -10,6 +10,13 @@
         var userKey = 'authuser';
         var userAuthenticationKey = 'authdata';
 
+        var expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 1);
+        var cookieOptions = {
+            secure: true,
+            expiry: expiryDate
+        };
+
         var service = {
             getUser: getUser,
             getUserAuthentication: getUserAuthentication,
@@ -41,7 +48,7 @@
             if (localStorageService.isSupported) {
                 localStorageService.set(userKey, user);
             } else {
-                $cookies.putObject(userKey, user);
+                $cookies.putObject(userKey, user, cookieOptions);
             }
         }
 
@@ -49,7 +56,7 @@
             if (localStorageService.isSupported) {
                 localStorageService.set(userAuthenticationKey, userAuthentication);
             } else {
-                return $cookies.put(userAuthenticationKey, userAuthentication);
+                return $cookies.put(userAuthenticationKey, userAuthentication, cookieOptions);
             }
         }
 
