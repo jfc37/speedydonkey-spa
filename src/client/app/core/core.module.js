@@ -14,7 +14,7 @@
         /*
          * 3rd Party modules
          */
-        'ngplus', 'ui.bootstrap.datetimepicker', 'blockUI'
+        'ngplus', 'ui.bootstrap.datetimepicker', 'blockUI', 'LocalStorageModule'
     ]);
 
     $(document).on('click', '.navbar-collapse.in', function (e) {

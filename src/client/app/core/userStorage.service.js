@@ -6,8 +6,9 @@
         .factory('userStorageService', userStorageService);
 
     /* @ngInject */
-    function userStorageService($cookies) {
-        var useCookies = true;
+    function userStorageService($cookies, localStorageService) {
+        var userKey = 'authuser';
+        var userAuthenticationKey = 'authdata';
 
         var service = {
             getUser: getUser,
@@ -21,38 +22,50 @@
         };
 
         function getUser() {
-            if (useCookies) {
-                return $cookies.getObject('authuser');
+            if (localStorageService.isSupported) {
+                return localStorageService.get(userKey);
+            } else {
+                return $cookies.getObject(userKey);
             }
         }
 
         function getUserAuthentication() {
-            if (useCookies) {
-                return $cookies.get('authdata');
+            if (localStorageService.isSupported) {
+                return localStorageService.get(userAuthenticationKey);
+            } else {
+                return $cookies.get(userAuthenticationKey);
             }
         }
 
         function saveUser(user) {
-            if (useCookies) {
-                return $cookies.putObject('authuser', user);
+            if (localStorageService.isSupported) {
+                localStorageService.set(userKey, user);
+            } else {
+                $cookies.putObject(userKey, user);
             }
         }
 
         function saveUserAuthentication(userAuthentication) {
-            if (useCookies) {
-                return $cookies.put('authdata', userAuthentication);
+            if (localStorageService.isSupported) {
+                localStorageService.set(userAuthenticationKey, userAuthentication);
+            } else {
+                return $cookies.put(userAuthenticationKey, userAuthentication);
             }
         }
 
-        function removeUserAuthentication(userAuthentication) {
-            if (useCookies) {
-                return $cookies.remove('authdata', userAuthentication);
+        function removeUserAuthentication() {
+            if (localStorageService.isSupported) {
+                return localStorageService.remove(userAuthenticationKey);
+            } else {
+                return $cookies.remove(userAuthenticationKey);
             }
         }
 
-        function removeUser(user) {
-            if (useCookies) {
-                return $cookies.remove('authuser', user);
+        function removeUser() {
+            if (localStorageService.isSupported) {
+                return localStorageService.remove(userKey);
+            } else {
+                return $cookies.remove(userKey);
             }
         }
 

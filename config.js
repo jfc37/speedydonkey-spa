@@ -5,6 +5,14 @@
     var core = angular.module('app.core');
     core.config(toastrConfig);
     core.config(blockUiConfig);
+    core.config(localStorageConfig);
+
+    /* @ngInject */
+    function localStorageConfig(localStorageServiceProvider) {
+        localStorageServiceProvider
+            .setStorageCookieDomain('<localStorageDomain>')
+            .setPrefix('<localStoragePrefix>');
+    }
 
     /* @ngInject */
     function toastrConfig(toastr) {
@@ -62,7 +70,7 @@
                     });
                 };
         }(window, document, 'script',
-            '//cdn.raygun.io/raygun4js/raygun.min.js', 'rg4js');
+            'https//cdn.raygun.io/raygun4js/raygun.min.js', 'rg4js');
 
         rg4js('apiKey', '<raygunKey>');
         rg4js('attach', true);

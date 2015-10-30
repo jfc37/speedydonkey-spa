@@ -24,12 +24,12 @@
 
         function init() {
             var userCookie = userStorageService.getUser();
-            if (userCookie !== undefined) {
+            if (userCookie) {
                 userIdentity = userCookie;
                 setRaygunUser(userCookie.name, userCookie.username);
             }
             var authDataCookie = userStorageService.getUserAuthentication();
-            if (authDataCookie !== undefined) {
+            if (authDataCookie) {
                 addBasicAuthorisation(authDataCookie);
             }
 
