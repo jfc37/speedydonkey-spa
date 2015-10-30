@@ -1,5 +1,4 @@
 /*global rg4js*/
-
 (function () {
     'use strict';
 
@@ -8,7 +7,7 @@
         .factory('authService', authService);
 
     /* @ngInject */
-    function authService($q, $http, $cookieStore, base64Service, dataservice) {
+    function authService($q, $http, userStorageService, base64Service, dataservice) {
 
         var userIdentity = {
             isLoggedIn: false
@@ -18,19 +17,18 @@
             login: login,
             logout: logout,
             getUserIdentity: getUserIdentity,
-            setUserIdentityProperty: setUserIdentityProperty,
             hasClaim: hasClaim
         };
         init();
         return service;
 
         function init() {
-            var userCookie = $cookieStore.get('authuser');
+            var userCookie = userStorageService.getUser();
             if (userCookie !== undefined) {
                 userIdentity = userCookie;
                 setRaygunUser(userCookie.name, userCookie.username);
             }
-            var authDataCookie = $cookieStore.get('authdata');
+            var authDataCookie = userStorageService.getUserAuthentication();
             if (authDataCookie !== undefined) {
                 addBasicAuthorisation(authDataCookie);
             }
@@ -61,11 +59,6 @@
             return userIdentity;
         }
 
-        function setUserIdentityProperty(propertyName, propertyValue) {
-            userIdentity[propertyName] = propertyValue;
-            $cookieStore.put('authuser', userIdentity);
-        }
-
         function login(email, password) {
             var encoded = base64Service.encode(email + ':' + password);
             addBasicAuthorisation(encoded);
@@ -83,8 +76,8 @@
                         userIdentity.name = user.fullName;
                         userIdentity.claims = claims;
 
-                        $cookieStore.put('authdata', encoded);
-                        $cookieStore.put('authuser', userIdentity);
+                        userStorageService.saveUserAuthentication(encoded);
+                        userStorageService.saveUser(userIdentity);
 
                         resolve();
                     }, function () {
@@ -116,8 +109,8 @@
 
         function logout() {
             document.execCommand('ClearAuthenticationCache');
-            $cookieStore.remove('authdata');
-            $cookieStore.remove('authuser');
+            userStorageService.removeUserAuthentication();
+            userStorageService.removeUser();
             $http.defaults.headers.common.Authorization = 'Basic ';
             angular.element('body').addClass('canvas-menu');
             userIdentity = {
