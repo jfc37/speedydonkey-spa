@@ -148,7 +148,7 @@ gulp.task('environment-setup', function () {
         .pipe($.replace(/<raygunKey>/g, process.env.RaygunKey))
         .pipe($.replace(/<localStorageDomain>/g, process.env.LocalStorageDomain))
         .pipe($.replace(/<localStoragePrefix>/g, 'fullswing'))
-        .pipe($.replace(/<googleAnalystics>/g, process.env.RaygunKey))
+        .pipe($.replace(/<googleAnalystics>/g, process.env.GoogleAnalytics))
         .pipe(gulp.dest(config.appConfigFolder));
 });
 

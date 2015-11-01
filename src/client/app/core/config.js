@@ -23,7 +23,7 @@
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'QjEhJ+hmGUEuvW7qQpYKGQ==', 'auto');
+        ga('create', 'UA-36895453-2', 'auto');
 
     }
 
