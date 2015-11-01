@@ -9,6 +9,7 @@
     function classService($q, dataservice, dataUpdateService, dataCreateService, dataDeleteService, simpleApiCaller) {
 
         var service = {
+            changeRoom: changeRoom,
             getClass: getClass,
             update: update,
             deleteClass: deleteClass,
@@ -16,8 +17,28 @@
             updateTeachers: updateTeachers
         };
 
-        function getClass(id) {
+        function changeRoom(theClass, room) {
+            var options = getOptions();
+            var request;
 
+            if (!room) {
+                options.resource = options.resource + '/' + theClass.id + '/rooms';
+                request = simpleApiCaller.delete(options);
+            } else {
+                options.resource = options.resource + '/' + theClass.id + '/rooms/' + room.id;
+                request = simpleApiCaller.put({}, options);
+            }
+
+            return request.then(function (response) {
+                return response.data;
+            }, function (response) {
+                if (response.validationResult) {
+                    return response.validationResult.validationErrors;
+                }
+            });
+        }
+
+        function getClass(id) {
             var options = getOptions();
             options.id = id;
 

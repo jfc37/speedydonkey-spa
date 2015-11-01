@@ -1,0 +1,5 @@
+<div class="form-group col-xs-12">
+    <select ng-options="room as room.name for room in vm.rooms track by room.id" ng-model="vm.ngModel" ng-change="vm.update()">
+        <option value="">Please select a room</option>
+    </select>
+</div>

@@ -135,8 +135,10 @@ gulp.task('environment-setup', function () {
     process.env.Company = process.env.Company || 'Speedy Donkey LOCAL';
     process.env.ApiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
     process.env.SpaUrl = process.env.SpaUrl || 'localhost:3000';
+    process.env.LocalStorageDomain = process.env.SpaUrl || '';
     process.env.PayPalDomain = process.env.PayPalDomain || 'sandbox.paypal.com';
     process.env.RaygunKey = process.env.RaygunKey || 'QjEhJ+hmGUEuvW7qQpYKGQ==';
+    process.env.GoogleAnalytics = process.env.GoogleAnalytics || 'UA-36895453-2';
 
     return gulp.src('config.js')
         .pipe($.replace(/<company>/g, process.env.Company))
@@ -144,6 +146,9 @@ gulp.task('environment-setup', function () {
         .pipe($.replace(/<spaUrl>/g, process.env.SpaUrl))
         .pipe($.replace(/<paypalDomain>/g, process.env.PayPalDomain))
         .pipe($.replace(/<raygunKey>/g, process.env.RaygunKey))
+        .pipe($.replace(/<localStorageDomain>/g, process.env.LocalStorageDomain))
+        .pipe($.replace(/<localStoragePrefix>/g, 'fullswing'))
+        .pipe($.replace(/<googleAnalystics>/g, process.env.RaygunKey))
         .pipe(gulp.dest(config.appConfigFolder));
 });
 
@@ -197,13 +202,6 @@ gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function () {
         .pipe(gulp.dest(config.client));
 });
 
-
-
-
-
-
-
-
 gulp.task('bundle', ['inject'], function () {
     log('Creating unminified app js');
 
@@ -219,12 +217,7 @@ gulp.task('bundle', ['inject'], function () {
         .src(config.index)
         .pipe($.plumber())
 
-    .pipe($.if(includeGoogleAnalytics(), $.ga({
-            url: 'fullswing.azurewebsites.net',
-            uid: 'UA-36895453-2',
-            tag: 'body'
-        })))
-        .pipe($.inject(gulp.src(templateCache, {
+    .pipe($.inject(gulp.src(templateCache, {
             read: false
         }), {
             starttag: '<!-- inject:templates:js -->'
@@ -251,22 +244,11 @@ gulp.task('bundle', ['inject'], function () {
 
     .pipe(gulp.dest(config.build));
 });
-
-
-
-
-
-
-
-
-
 /**
  * Optimization
  **/
-//gulp.task('optimize', ['minify'], function () {
 gulp.task('optimize', ['bundle'], function () {
     log('Optimizing the javascript, css, html');
-
 
     var assets = $.useref.assets({
         searchPath: './'
@@ -280,12 +262,7 @@ gulp.task('optimize', ['bundle'], function () {
         .src(config.index)
         .pipe($.plumber())
 
-    .pipe($.if(includeGoogleAnalytics(), $.ga({
-            url: 'fullswing.azurewebsites.net',
-            uid: 'UA-36895453-2',
-            tag: 'body'
-        })))
-        .pipe($.inject(gulp.src(templateCache, {
+    .pipe($.inject(gulp.src(templateCache, {
             read: false
         }), {
             starttag: '<!-- inject:templates:js -->'
@@ -440,10 +417,6 @@ function changeEvent(event) {
 function clean(path, done) {
     log('Cleaning: ' + $.util.colors.blue(path));
     del(path, done);
-}
-
-function includeGoogleAnalytics() {
-    return process.env.NODE_ENV === 'prod';
 }
 
 function shouldUglify() {
