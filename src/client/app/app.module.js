@@ -18,6 +18,8 @@
         'summernote',
         'ngSanitize',
         'ui.select',
+        'angulartics',
+        'angulartics.google.analytics',
 
         'app.core',
         'app.widgets',
