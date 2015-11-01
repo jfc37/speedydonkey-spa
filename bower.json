@@ -42,7 +42,8 @@
     "components-font-awesome": "~4.4.0",
     "ui-select": "angular-ui-select#~0.13.2",
     "select2": "~4.0.0",
-    "angular-local-storage": "~0.2.3"
+    "angular-local-storage": "~0.2.3",
+    "angulartics-google-analytics": "~0.1.1"
   },
   "resolutions": {
     "angular": "~1.4.7"
