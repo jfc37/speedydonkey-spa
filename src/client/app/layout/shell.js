@@ -6,7 +6,7 @@
         .controller('Shell', Shell);
 
     /* @ngInject */
-    function Shell($timeout, config, logger, authService, routehelper, auth) {
+    function Shell($timeout, config, logger, authService, routehelper, auth, store) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -18,6 +18,9 @@
         vm.manageUserUrl = '#/manageUser';
         vm.logout = function () {
             auth.signout();
+            store.remove('profile');
+            store.remove('token');
+            store.remove('refreshToken');
             routehelper.redirectToRoute('login');
         };
         vm.showSideBar = function () {

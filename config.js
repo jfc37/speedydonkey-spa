@@ -10,6 +10,39 @@
     var loginModule = angular.module('app.logon');
     loginModule.config(authZeroConfig);
 
+    var apiCallerModule = angular.module('app.apiCaller');
+    apiCallerModule.config(jwtInterceptorConfig);
+
+    /* @ngInject */
+    function jwtInterceptorConfig($httpProvider, jwtInterceptorProvider) {
+        var refreshingToken = null;
+
+        /* @ngInject */
+        function tokenGetter(store, jwtHelper, auth) {
+            var token = store.get('token');
+            var refreshToken = store.get('refreshToken');
+
+            if (token) {
+                if (!jwtHelper.isTokenExpired(token)) {
+                    return store.get('token');
+                } else {
+                    if (refreshingToken === null) {
+                        refreshingToken = auth.refreshIdToken(refreshToken).then(function (idToken) {
+                            store.set('token', idToken);
+                            return idToken;
+                        }).finally(function () {
+                            refreshingToken = null;
+                        });
+                    }
+                }
+            }
+        }
+
+        jwtInterceptorProvider.tokenGetter = tokenGetter;
+
+        $httpProvider.interceptors.push('jwtInterceptor');
+    }
+
     /* @ngInject */
     function authZeroConfig(authProvider) {
         authProvider.init({

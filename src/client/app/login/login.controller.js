@@ -24,9 +24,14 @@
         };
 
         vm.login = function () {
-            auth.signin({}, function (profile, token) {
+            auth.signin({
+                authParams: {
+                    scope: 'openid offline_access'
+                }
+            }, function (profile, token, access_token, state, refresh_token) {
                 store.set('profile', profile);
                 store.set('token', token);
+                store.set('refreshToken', refresh_token)
                 routehelper.redirectToRoute('dashboard');
             }, function (error) {
                 logger.error('There was an error: ' + error);
