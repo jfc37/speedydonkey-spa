@@ -16,7 +16,6 @@
         var service = {
             login: login,
             logout: logout,
-            getUserIdentity: getUserIdentity,
 
             hasClaim: hasClaim,
             profile: profile,
@@ -69,10 +68,6 @@
             return userIdentity.claims.filter(function (userClaim) {
                 return userClaim === claim;
             }).length > 0;
-        }
-
-        function getUserIdentity() {
-            return userIdentity;
         }
 
         function login(email, password) {

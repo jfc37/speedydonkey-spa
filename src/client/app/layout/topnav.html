@@ -3,9 +3,9 @@
         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary"><i class="fa fa-bars"></i> </a>
     </div>
 
-    <ul class="nav navbar-top-links navbar-right" ng-if="vm.getUserIdentity().isLoggedIn">
+    <ul class="nav navbar-top-links navbar-right" ng-if="vm.isAuthenticated()">
         <li>
-            <span class="m-r-sm text-muted welcome-message">Hello, {{vm.getUserIdentity().name}}</span>
+            <span class="m-r-sm text-muted welcome-message">Hello, {{vm.profile().nickname}}</span>
         </li>
         <li>
             <a data-ng-click="vm.logout()">
@@ -13,7 +13,7 @@
             </a>
         </li>
     </ul>
-    <ul class="nav navbar-top-links navbar-right" ng-if="!vm.getUserIdentity().isLoggedIn">
+    <ul class="nav navbar-top-links navbar-right" ng-if="!vm.isAuthenticated()">
         <li>
             <a data-ng-href="{{vm.loginUrl}}">
                 Login

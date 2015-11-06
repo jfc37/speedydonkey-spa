@@ -31,7 +31,6 @@
         };
         var routes = [];
         var $routeProvider = routehelperConfig.config.$routeProvider;
-        var getUserIdentity = authService.getUserIdentity;
 
         var service = {
             configureRoutes: configureRoutes,
@@ -41,7 +40,7 @@
             getRouteFromName: getRouteFromName
         };
 
-        init(authService.getUserIdentity);
+        init();
 
         return service;
         ///////////////
@@ -79,7 +78,7 @@
             );
         }
 
-        function handleRoutingAuthorisation(getUserIdentity) {
+        function handleRoutingAuthorisation() {
             $rootScope.$on('$routeChangeStart',
                 function (event, current, previous, rejection) {
                     if (current.$$route === undefined) {
@@ -96,9 +95,9 @@
             );
         }
 
-        function init(getUserIdentity) {
+        function init() {
             handleRoutingErrors();
-            handleRoutingAuthorisation(getUserIdentity);
+            handleRoutingAuthorisation();
             updateDocTitle();
         }
 
@@ -177,10 +176,8 @@
         }
 
         function getDefaultRoute() {
-            var userIdentity = getUserIdentity();
-
             var defaultRoute = 'dashboard';
-            if (!userIdentity.isLoggedIn) {
+            if (!authService.isAuthenticated) {
                 defaultRoute = 'login';
             }
 

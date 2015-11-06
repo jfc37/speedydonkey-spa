@@ -6,21 +6,22 @@
         .controller('Shell', Shell);
 
     /* @ngInject */
-    function Shell($timeout, config, logger, authService, routehelper) {
+    function Shell($timeout, config, logger, authService, routehelper, auth) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.title = config.appTitle;
-        vm.getUserIdentity = authService.getUserIdentity;
+        vm.isAuthenticated = authService.isAuthenticated;
+        vm.profile = authService.profile;
         vm.loginUrl = '#/login';
         vm.registerUrl = '#/register/user';
         vm.manageUserUrl = '#/manageUser';
         vm.logout = function () {
-            authService.logout();
+            auth.signout();
             routehelper.redirectToRoute('login');
         };
         vm.showSideBar = function () {
-            return vm.getUserIdentity().isLoggedIn;
+            return authService.isAuthenticated();
         };
 
         activate();
