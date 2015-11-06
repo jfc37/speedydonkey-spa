@@ -48,6 +48,8 @@
 
         function configureRoutes(routes) {
             routes.forEach(function (route) {
+                route.config.requiresLogin = !route.config.allowAnonymous;
+
                 route.config.resolve =
                     angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
                 $routeProvider.when(route.url, route.config);
@@ -161,10 +163,10 @@
         /*private*/
         function isAuthorisedForRoute(route) {
             if (route) {
-                if (!route.allowAnonymous && !getUserIdentity().isLoggedIn) {
+                if (!route.allowAnonymous && !authService.isAuthenticated()) {
                     return false;
                 }
-                if (route.denyAuthorised && getUserIdentity().isLoggedIn) {
+                if (route.denyAuthorised && authService.isAuthenticated()) {
                     return false;
                 }
                 if (route.claim && !authService.hasClaim(route.claim)) {

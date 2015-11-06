@@ -1,4 +1,4 @@
-/*global rg4js*/
+/*global rg4js ga*/
 (function () {
     'use strict';
 
@@ -7,6 +7,17 @@
     core.config(blockUiConfig);
     core.config(localStorageConfig);
 
+    var loginModule = angular.module('app.logon');
+    loginModule.config(authZeroConfig);
+
+    /* @ngInject */
+    function authZeroConfig(authProvider) {
+        authProvider.init({
+            domain: 'jfc.au.auth0.com',
+            clientID: 'tsPjABlzKswuJc98NxwcftQnHVYv7iTh',
+            loginUrl: '/login',
+        });
+    }
 
     setupGoogleAnalytics();
 
@@ -20,7 +31,7 @@
                 m = s.getElementsByTagName(o)[0];
             a.async = 1;
             a.src = g;
-            m.parentNode.insertBefore(a, m)
+            m.parentNode.insertBefore(a, m);
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-36895453-2', 'auto');

@@ -6,7 +6,7 @@
         .controller('Login', Login);
 
     /* @ngInject */
-    function Login(logger, authService, routehelper, validationService, config) {
+    function Login(logger, authService, routehelper, validationService, config, auth) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -20,6 +20,14 @@
                 routehelper.redirectToRoute('dashboard');
             }, function (validationErrors) {
                 validationService.applyServerSideErrors(form, validationErrors);
+            });
+        };
+
+        vm.login = function () {
+            auth.signin({}, function (profile, token) {
+                routehelper.redirectToRoute('dashboard');
+            }, function (error) {
+                logger.error('There was an error: ' + error);
             });
         };
     }

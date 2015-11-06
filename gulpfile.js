@@ -139,6 +139,8 @@ gulp.task('environment-setup', function () {
     process.env.PayPalDomain = process.env.PayPalDomain || 'sandbox.paypal.com';
     process.env.RaygunKey = process.env.RaygunKey || 'QjEhJ+hmGUEuvW7qQpYKGQ==';
     process.env.GoogleAnalytics = process.env.GoogleAnalytics || 'UA-36895453-2';
+    process.env.auth0Domain = process.env.auth0Domain || 'jfc.au.auth0.com';
+    process.env.auth0ClientId = process.env.auth0ClientId || 'tsPjABlzKswuJc98NxwcftQnHVYv7iTh';
 
     return gulp.src('config.js')
         .pipe($.replace(/<company>/g, process.env.Company))
@@ -149,6 +151,8 @@ gulp.task('environment-setup', function () {
         .pipe($.replace(/<localStorageDomain>/g, process.env.LocalStorageDomain))
         .pipe($.replace(/<localStoragePrefix>/g, 'fullswing'))
         .pipe($.replace(/<googleAnalystics>/g, process.env.GoogleAnalytics))
+        .pipe($.replace(/<auth0Domain>/g, process.env.auth0Domain))
+        .pipe($.replace(/<auth0ClientId>/g, process.env.auth0ClientId))
         .pipe(gulp.dest(config.appConfigFolder));
 });
 

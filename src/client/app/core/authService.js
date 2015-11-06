@@ -7,7 +7,7 @@
         .factory('authService', authService);
 
     /* @ngInject */
-    function authService($q, $http, userStorageService, base64Service, dataservice) {
+    function authService($q, $http, userStorageService, base64Service, dataservice, auth) {
 
         var userIdentity = {
             isLoggedIn: false
@@ -17,10 +17,26 @@
             login: login,
             logout: logout,
             getUserIdentity: getUserIdentity,
-            hasClaim: hasClaim
+
+            hasClaim: hasClaim,
+            profile: profile,
+            isAuthenticated: isAuthenticated,
+            userId: userId
         };
         init();
         return service;
+
+        function isAuthenticated() {
+            return auth.isAuthenticated;
+        }
+
+        function profile() {
+            return auth.profile;
+        }
+
+        function userId() {
+            return auth.profile.identities[0].user_id;
+        }
 
         function init() {
             var userCookie = userStorageService.getUser();
