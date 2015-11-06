@@ -6,7 +6,7 @@
         .controller('Login', Login);
 
     /* @ngInject */
-    function Login(logger, authService, routehelper, validationService, config, auth) {
+    function Login(logger, authService, routehelper, validationService, config, auth, store) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -25,6 +25,8 @@
 
         vm.login = function () {
             auth.signin({}, function (profile, token) {
+                store.set('profile', profile);
+                store.set('token', token);
                 routehelper.redirectToRoute('dashboard');
             }, function (error) {
                 logger.error('There was an error: ' + error);
