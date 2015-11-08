@@ -123,16 +123,16 @@ fi
 
 echo Installing bower packages
 # 4. Install bower packages
-#if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
-#cd "$DEPLOYMENT_TARGET"
-#eval $NPM_CMD install bower -g
-#eval $NPM_CMD install bower
-#exitWithMessageOnError "installing bower failed"
-#./node_modules/.bin/bower cache clean
-#./node_modules/.bin/bower install
-#exitWithMessageOnError "bower failed"
-#cd - > /dev/null
-#fi
+if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
+cd "$DEPLOYMENT_TARGET"
+eval $NPM_CMD install bower -g
+eval $NPM_CMD install bower
+exitWithMessageOnError "installing bower failed"
+./node_modules/.bin/bower cache clean
+./node_modules/.bin/bower install
+exitWithMessageOnError "bower failed"
+cd - > /dev/null
+fi
 
 #5. Run gulp
 echo About to run gulp stuff
