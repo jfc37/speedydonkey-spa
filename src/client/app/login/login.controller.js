@@ -6,7 +6,7 @@
         .controller('Login', Login);
 
     /* @ngInject */
-    function Login(logger, authService, routehelper, validationService, config, auth, store) {
+    function Login(config, authService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -15,26 +15,9 @@
         vm.registerUrl = '#/register/user';
         vm.company = config.appTitle;
 
-        vm.submit = function (form) {
-            authService.login(vm.email, vm.password).then(function () {
-                routehelper.redirectToRoute('dashboard');
-            }, function (validationErrors) {
-                validationService.applyServerSideErrors(form, validationErrors);
-            });
-        };
-
         vm.login = function () {
-            auth.signin({
-                authParams: {
-                    scope: 'openid offline_access'
-                }
-            }, function (profile, token, access_token, state, refresh_token) {
-                store.set('profile', profile);
-                store.set('token', token);
-                store.set('refreshToken', refresh_token)
+            authService.login().then(function () {
                 routehelper.redirectToRoute('dashboard');
-            }, function (error) {
-                logger.error('There was an error: ' + error);
             });
         };
     }

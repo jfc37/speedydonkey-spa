@@ -177,7 +177,7 @@
 
         function getDefaultRoute() {
             var defaultRoute = 'dashboard';
-            if (!authService.isAuthenticated) {
+            if (!authService.isAuthenticated()) {
                 defaultRoute = 'login';
             }
 

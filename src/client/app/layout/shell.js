@@ -6,7 +6,7 @@
         .controller('Shell', Shell);
 
     /* @ngInject */
-    function Shell($timeout, config, logger, authService, routehelper, auth, store) {
+    function Shell($timeout, config, logger, authService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -17,20 +17,14 @@
         vm.registerUrl = '#/register/user';
         vm.manageUserUrl = '#/manageUser';
         vm.logout = function () {
-            auth.signout();
-            store.remove('profile');
-            store.remove('token');
-            store.remove('refreshToken');
+            authService.logout();
             routehelper.redirectToRoute('login');
-        };
-        vm.showSideBar = function () {
-            return authService.isAuthenticated();
         };
 
         activate();
 
         function activate() {
-            if (!vm.showSideBar()) {
+            if (!vm.isAuthenticated()) {
                 angular.element('body').addClass('canvas-menu');
             }
         }

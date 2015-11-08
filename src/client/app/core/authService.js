@@ -7,14 +7,11 @@
         .factory('authService', authService);
 
     /* @ngInject */
-    function authService($q, $http, userStorageService, base64Service, dataservice, auth) {
-
-        var userIdentity = {
-            isLoggedIn: false
-        };
+    function authService($q, $http, userStorageService, base64Service, dataservice, auth, store, logger) {
 
         var service = {
             login: login,
+
             logout: logout,
 
             hasClaim: hasClaim,
@@ -22,8 +19,41 @@
             isAuthenticated: isAuthenticated,
             userId: userId
         };
-        init();
         return service;
+
+        function login() {
+            var deferred = $q.defer();
+
+            auth.signin({
+                authParams: {
+                    scope: 'openid offline_access'
+                }
+            }, function (profile, token, access_token, state, refresh_token) {
+
+                store.set('profile', profile);
+                store.set('token', token);
+                store.set('refreshToken', refresh_token);
+                setRaygunUser(profile.nickname, profile.email);
+                angular.element('body').removeClass('canvas-menu');
+                dataservice.getCurrentUserClaims().then(function (claims) {
+                    profile.claims = claims;
+                }, function () {
+                    profile.claims = [];
+                }).finally(function () {
+                    store.set('profile', profile);
+                    store.set('token', token);
+                    store.set('refreshToken', refresh_token);
+                    setRaygunUser(profile.nickname, profile.email);
+                    angular.element('body').removeClass('canvas-menu');
+                    deferred.resolve();
+                });
+            }, function (error) {
+                logger.error('There was an error: ' + error);
+                deferred.revoke();
+            });
+
+            return deferred.promise;
+        }
 
         function isAuthenticated() {
             return auth.isAuthenticated;
@@ -37,19 +67,6 @@
             return auth.profile.identities[0].user_id;
         }
 
-        function init() {
-            var userCookie = userStorageService.getUser();
-            if (userCookie) {
-                userIdentity = userCookie;
-                setRaygunUser(userCookie.name, userCookie.username);
-            }
-            var authDataCookie = userStorageService.getUserAuthentication();
-            if (authDataCookie) {
-                addBasicAuthorisation(authDataCookie);
-            }
-
-        }
-
         function setRaygunUser(name, email) {
             rg4js('setUser', {
                 identifier: email,
@@ -61,72 +78,21 @@
         }
 
         function hasClaim(claim) {
-            if (!userIdentity.claims) {
+            if (!profile().claims) {
                 return false;
             }
 
-            return userIdentity.claims.filter(function (userClaim) {
+            return profile().claims.filter(function (userClaim) {
                 return userClaim === claim;
             }).length > 0;
         }
 
-        function login(email, password) {
-            var encoded = base64Service.encode(email + ':' + password);
-            addBasicAuthorisation(encoded);
-
-            return $q(function (resolve, revoke) {
-                dataservice.getCurrentUser().then(function (user) {
-
-                    angular.element('body').removeClass('canvas-menu');
-
-                    dataservice.getCurrentUserClaims().then(function (claims) {
-                        userIdentity.isLoggedIn = true;
-                        userIdentity.username = email;
-
-                        userIdentity.userId = user.id;
-                        userIdentity.name = user.fullName;
-                        userIdentity.claims = claims;
-
-                        userStorageService.saveUserAuthentication(encoded);
-                        userStorageService.saveUser(userIdentity);
-
-                        resolve();
-                    }, function () {
-                        userIdentity.isLoggedIn = true;
-                        userIdentity.username = email;
-
-                        userIdentity.userId = user.id;
-                        userIdentity.name = user.fullName;
-                        userIdentity.claims = [];
-                        resolve();
-                    }).finally(function () {
-                        setRaygunUser(user.fullName, user.username);
-                    });
-                }, function (response) {
-                    logout();
-                    if (response.status === 401) {
-                        revoke([{
-                            propertyName: 'global',
-                            errorMessage: 'Invalid email or password'
-                        }]);
-                    }
-                });
-            });
-        }
-
-        function addBasicAuthorisation(encoded) {
-            $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
-        }
-
         function logout() {
-            document.execCommand('ClearAuthenticationCache');
-            userStorageService.removeUserAuthentication();
-            userStorageService.removeUser();
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            auth.signout();
+            store.remove('profile');
+            store.remove('token');
+            store.remove('refreshToken');
             angular.element('body').addClass('canvas-menu');
-            userIdentity = {
-                isLoggedIn: false
-            };
         }
 
     }
