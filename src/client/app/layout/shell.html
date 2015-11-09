@@ -1,5 +1,5 @@
 <div id="wrapper" data-ng-controller="Shell as vm">
-    <div data-ng-if="vm.isAuthenticated()" data-ng-include="'app/layout/sidebar.html'"></div>
+    <sidebar ng-if="vm.isAuthenticated()"></sidebar>
     <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
             <div data-ng-include="'app/layout/topnav.html'"></div>

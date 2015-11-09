@@ -1,9 +1,26 @@
+/*global $*/
 (function () {
     'use strict';
 
     angular
         .module('app.layout')
-        .controller('Sidebar', Sidebar);
+        .directive('sidebar', sidebarDirective);
+
+    /* @ngInject */
+    function sidebarDirective($timeout) {
+        return {
+            controllerAs: 'vm',
+            controller: Sidebar,
+            templateUrl: 'app/layout/sidebar.html',
+            link: function () {
+                var menuElement = $('#side-menu');
+                menuElement.addClass('metismenu');
+                $timeout(function () {
+                    menuElement.metisMenu();
+                });
+            }
+        };
+    }
 
     /* @ngInject */
     function Sidebar($route, routehelper) {
@@ -50,15 +67,17 @@
         activate();
 
         function activate() {
-            getNavRoutes();
+            vm.navRoutes = getNavRoutes();
         }
 
         function getNavRoutes() {
-            vm.navRoutes = routes.filter(function (r) {
+            return routes.filter(function (r) {
                 return r.settings && r.settings.nav && r.settings.level === 1;
             }).sort(function (r1, r2) {
                 return r1.settings.nav - r2.settings.nav;
             });
         }
+
+        vm.getNavRoutes = getNavRoutes;
     }
 })();
