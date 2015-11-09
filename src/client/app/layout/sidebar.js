@@ -12,20 +12,26 @@
             controllerAs: 'vm',
             controller: Sidebar,
             templateUrl: 'app/layout/sidebar.html',
-            link: function () {
-                var menuElement = $('#side-menu');
-                menuElement.addClass('metismenu');
-                $timeout(function () {
-                    menuElement.metisMenu();
-                });
+            link: function (scope) {
+
+                scope.vm.menuChange = function () {
+                    var menuElement = $('#side-menu');
+                    menuElement.addClass('metismenu');
+                    $timeout(function () {
+                        menuElement.metisMenu();
+                    }, 500);
+                };
+
+                scope.vm.menuChange();
             }
         };
     }
 
     /* @ngInject */
-    function Sidebar($route, routehelper) {
+    function Sidebar($route, $scope, routehelper) {
         var vm = this;
-        var routes = routehelper.getRoutes();
+
+        vm.routehelper = routehelper;
 
         vm.getCurrentRoute = function () {
             return $route;
@@ -53,7 +59,7 @@
         }
 
         vm.getChildItems = function (parentRoute) {
-            return routes.filter(function (route) {
+            return routehelper.getRoutes().filter(function (route) {
                 return route.settings && route.settings.level > 1 && route.settings.parent === parentRoute.title;
             }).sort(function (r1, r2) {
                 return r1.settings.nav - r2.settings.nav;
@@ -71,12 +77,18 @@
         }
 
         function getNavRoutes() {
-            return routes.filter(function (r) {
+            return routehelper.getRoutes().filter(function (r) {
                 return r.settings && r.settings.nav && r.settings.level === 1;
             }).sort(function (r1, r2) {
                 return r1.settings.nav - r2.settings.nav;
             });
         }
+
+        $scope.$watch(function () {
+            return getNavRoutes().length;
+        }, function () {
+            vm.menuChange();
+        });
 
         vm.getNavRoutes = getNavRoutes;
     }
