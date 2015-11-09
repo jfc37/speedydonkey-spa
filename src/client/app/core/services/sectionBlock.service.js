@@ -17,7 +17,7 @@
             promise: the promise that, when is resolved, will unblock
         */
         function block(options) {
-            var blockedSection = blockUI.instances.get(options.block);
+            var blockedSection = options.block ? blockUI.instances.get(options.block) : blockUI;
 
             blockedSection.start();
 

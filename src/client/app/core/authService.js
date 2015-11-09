@@ -7,7 +7,7 @@
         .factory('authService', authService);
 
     /* @ngInject */
-    function authService($q, $http, userStorageService, base64Service, dataservice, auth, store, logger) {
+    function authService($q, $http, userStorageService, base64Service, dataservice, auth, store, logger, sectionBlockService) {
 
         var userClaims = [];
 
@@ -35,6 +35,10 @@
                 }
             }, function (profile, token, access_token, state, refresh_token) {
 
+                sectionBlockService.block({
+                    promise: deferred.promise
+                });
+
                 store.set('profile', profile);
                 store.set('token', token);
                 store.set('refreshToken', refresh_token);
@@ -54,7 +58,6 @@
                     deferred.resolve();
                 });
             }, function (error) {
-                logger.error('There was an error: ' + error);
                 deferred.revoke();
             });
 

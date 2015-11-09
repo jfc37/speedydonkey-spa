@@ -15,10 +15,14 @@
         vm.registerUrl = '#/register/user';
         vm.company = config.appTitle;
 
-        //vm.login = function () {
-        authService.login().then(function () {
-            routehelper.redirectToRoute('dashboard');
-        });
-        //};
+        vm.login = openLoginBox();
+
+        function openLoginBox() {
+            authService.login().then(function () {
+                routehelper.redirectToRoute('dashboard');
+            });
+        }
+
+        openLoginBox();
     }
 })();

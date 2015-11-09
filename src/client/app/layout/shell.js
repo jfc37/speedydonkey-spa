@@ -14,7 +14,6 @@
         vm.isAuthenticated = authService.isAuthenticated;
         vm.profile = authService.profile;
         vm.loginUrl = '#/login';
-        vm.registerUrl = '#/register/user';
         vm.manageUserUrl = '#/manageUser';
         vm.logout = function () {
             authService.logout();
