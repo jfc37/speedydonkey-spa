@@ -9,6 +9,8 @@
     /* @ngInject */
     function authService($q, $http, userStorageService, base64Service, dataservice, auth, store, logger) {
 
+        var userClaims = [];
+
         var service = {
             login: login,
 
@@ -19,6 +21,9 @@
             isAuthenticated: isAuthenticated,
             userId: userId
         };
+
+        init();
+
         return service;
 
         function login() {
@@ -36,13 +41,14 @@
                 setRaygunUser(profile.nickname, profile.email);
                 angular.element('body').removeClass('canvas-menu');
                 dataservice.getCurrentUserClaims().then(function (claims) {
-                    profile.claims = claims;
+                    userClaims = claims;
                 }, function () {
-                    profile.claims = [];
+                    userClaims = [];
                 }).finally(function () {
                     store.set('profile', profile);
                     store.set('token', token);
                     store.set('refreshToken', refresh_token);
+                    store.set('userClaims', userClaims);
                     setRaygunUser(profile.nickname, profile.email);
                     angular.element('body').removeClass('canvas-menu');
                     deferred.resolve();
@@ -78,11 +84,7 @@
         }
 
         function hasClaim(claim) {
-            if (!profile().claims) {
-                return false;
-            }
-
-            return profile().claims.filter(function (userClaim) {
+            return userClaims.filter(function (userClaim) {
                 return userClaim === claim;
             }).length > 0;
         }
@@ -92,7 +94,16 @@
             store.remove('profile');
             store.remove('token');
             store.remove('refreshToken');
+            store.remove('userClaims');
             angular.element('body').addClass('canvas-menu');
+        }
+
+        function init() {
+            var savedClaims = store.get('userClaims');
+
+            if (savedClaims) {
+                userClaims = savedClaims;
+            }
         }
 
     }
