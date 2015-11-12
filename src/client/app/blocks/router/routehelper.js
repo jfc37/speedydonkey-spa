@@ -31,7 +31,6 @@
         };
         var routes = [];
         var $routeProvider = routehelperConfig.config.$routeProvider;
-        var getUserIdentity = authService.getUserIdentity;
 
         var service = {
             configureRoutes: configureRoutes,
@@ -41,13 +40,15 @@
             getRouteFromName: getRouteFromName
         };
 
-        init(authService.getUserIdentity);
+        init();
 
         return service;
         ///////////////
 
         function configureRoutes(routes) {
             routes.forEach(function (route) {
+                route.config.requiresLogin = !route.config.allowAnonymous;
+
                 route.config.resolve =
                     angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
                 $routeProvider.when(route.url, route.config);
@@ -77,7 +78,7 @@
             );
         }
 
-        function handleRoutingAuthorisation(getUserIdentity) {
+        function handleRoutingAuthorisation() {
             $rootScope.$on('$routeChangeStart',
                 function (event, current, previous, rejection) {
                     if (current.$$route === undefined) {
@@ -94,9 +95,9 @@
             );
         }
 
-        function init(getUserIdentity) {
+        function init() {
             handleRoutingErrors();
-            handleRoutingAuthorisation(getUserIdentity);
+            handleRoutingAuthorisation();
             updateDocTitle();
         }
 
@@ -161,10 +162,10 @@
         /*private*/
         function isAuthorisedForRoute(route) {
             if (route) {
-                if (!route.allowAnonymous && !getUserIdentity().isLoggedIn) {
+                if (!route.allowAnonymous && !authService.isAuthenticated()) {
                     return false;
                 }
-                if (route.denyAuthorised && getUserIdentity().isLoggedIn) {
+                if (route.denyAuthorised && authService.isAuthenticated()) {
                     return false;
                 }
                 if (route.claim && !authService.hasClaim(route.claim)) {
@@ -175,10 +176,8 @@
         }
 
         function getDefaultRoute() {
-            var userIdentity = getUserIdentity();
-
             var defaultRoute = 'dashboard';
-            if (!userIdentity.isLoggedIn) {
+            if (!authService.isAuthenticated()) {
                 defaultRoute = 'login';
             }
 

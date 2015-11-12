@@ -6,7 +6,7 @@
         .controller('Login', Login);
 
     /* @ngInject */
-    function Login(logger, authService, routehelper, validationService, config) {
+    function Login(config, authService, routehelper) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -15,12 +15,14 @@
         vm.registerUrl = '#/register/user';
         vm.company = config.appTitle;
 
-        vm.submit = function (form) {
-            authService.login(vm.email, vm.password).then(function () {
+        vm.login = openLoginBox();
+
+        function openLoginBox() {
+            authService.login().then(function () {
                 routehelper.redirectToRoute('dashboard');
-            }, function (validationErrors) {
-                validationService.applyServerSideErrors(form, validationErrors);
             });
-        };
+        }
+
+        openLoginBox();
     }
 })();

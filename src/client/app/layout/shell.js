@@ -11,22 +11,19 @@
         var vm = this;
 
         vm.title = config.appTitle;
-        vm.getUserIdentity = authService.getUserIdentity;
+        vm.isAuthenticated = authService.isAuthenticated;
+        vm.profile = authService.profile;
         vm.loginUrl = '#/login';
-        vm.registerUrl = '#/register/user';
         vm.manageUserUrl = '#/manageUser';
         vm.logout = function () {
             authService.logout();
             routehelper.redirectToRoute('login');
         };
-        vm.showSideBar = function () {
-            return vm.getUserIdentity().isLoggedIn;
-        };
 
         activate();
 
         function activate() {
-            if (!vm.showSideBar()) {
+            if (!vm.isAuthenticated()) {
                 angular.element('body').addClass('canvas-menu');
             }
         }
