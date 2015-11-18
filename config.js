@@ -1,4 +1,4 @@
-/*global rg4js*/
+/*global rg4js ga*/
 (function () {
     'use strict';
 
@@ -7,6 +7,50 @@
     core.config(blockUiConfig);
     core.config(localStorageConfig);
 
+    var loginModule = angular.module('app.logon');
+    loginModule.config(authZeroConfig);
+
+    var apiCallerModule = angular.module('app.apiCaller');
+    apiCallerModule.config(jwtInterceptorConfig);
+
+    /* @ngInject */
+    function jwtInterceptorConfig($httpProvider, jwtInterceptorProvider) {
+        var refreshingToken = null;
+
+        /* @ngInject */
+        function tokenGetter(store, jwtHelper, auth) {
+            var token = store.get('token');
+            var refreshToken = store.get('refreshToken');
+
+            if (token) {
+                if (!jwtHelper.isTokenExpired(token)) {
+                    return store.get('token');
+                } else {
+                    if (refreshingToken === null) {
+                        refreshingToken = auth.refreshIdToken(refreshToken).then(function (idToken) {
+                            store.set('token', idToken);
+                            return idToken;
+                        }).finally(function () {
+                            refreshingToken = null;
+                        });
+                    }
+                }
+            }
+        }
+
+        jwtInterceptorProvider.tokenGetter = tokenGetter;
+
+        $httpProvider.interceptors.push('jwtInterceptor');
+    }
+
+    /* @ngInject */
+    function authZeroConfig(authProvider) {
+        authProvider.init({
+            domain: '<auth0Domain>',
+            clientID: '<auth0ClientId>',
+            loginUrl: '/login',
+        });
+    }
 
     setupGoogleAnalytics();
 
@@ -20,7 +64,7 @@
                 m = s.getElementsByTagName(o)[0];
             a.async = 1;
             a.src = g;
-            m.parentNode.insertBefore(a, m)
+            m.parentNode.insertBefore(a, m);
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', '<googleAnalystics>', 'auto');

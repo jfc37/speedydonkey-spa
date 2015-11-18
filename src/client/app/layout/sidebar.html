@@ -1,6 +1,6 @@
-<nav class="navbar-default navbar-static-side" role="navigation" data-ng-controller="Sidebar as vm">
+<nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
-        <ul class="nav metismenu" id="side-menu">
+        <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <a href="#/">
@@ -11,7 +11,7 @@
                     Full Swing
                 </div>
             </li>
-            <li data-ng-class="vm.isCurrent(r, vm.getCurrentRoute())" data-ng-repeat="r in vm.navRoutes">
+            <li data-ng-class="vm.isCurrent(r, vm.getCurrentRoute())" data-ng-repeat="r in vm.getNavRoutes()">
                 <a href="#{{r.originalPath}}">
                     <i ng-class="r.settings.displayIcon" class="fa"></i>
                     <span class="nav-label">{{r.settings.displayName}}</span>

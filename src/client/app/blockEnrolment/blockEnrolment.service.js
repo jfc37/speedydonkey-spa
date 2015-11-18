@@ -45,7 +45,7 @@
 
         function enrol(blocks) {
             var enrolment = {
-                userId: authService.getUserIdentity().userId,
+                userId: authService.userId(),
                 blockIds: blocks.map(function (block) {
                     return block.id;
                 })
