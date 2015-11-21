@@ -22,6 +22,11 @@
         <validation error="required" name="numberOfClasses">Please enter the number of classes</validation>
     </input-block>
 
+    <!--Is Invite Only -->
+    <input-block name="isInviteOnly" label="Is Invite Only">
+        <input name="isInviteOnly" type="checkbox" class="form-control" ng-model="vm.block.isInviteOnly" required/>
+    </input-block>
+
     <!--Teachers -->
     <input-block name="teachers" label="Teachers">
         <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
