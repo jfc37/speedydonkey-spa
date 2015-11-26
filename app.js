@@ -57,18 +57,7 @@ var apiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
 apiUrl = '' + apiUrl;
 
 //Add CSP header to only allow trusted scripts and content
-//app.use(csp({
-//    // Specify directives as normal
-//    defaultSrc: ["'self'"],
-//    scriptSrc: ["'self'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com'],
-//    fontSrc: ["'self'", 'fonts.gstatic.com'],
-//    imgSrc: ["'self", 'www.google-analytics.com', 'data:'],
-//    styleSrc: ["'self'", "'unsafe-inline", 'fonts.googleapis.com'],
-//    connectSrc: ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io'],
-//    reportUri: 'report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e'
-//}));
 app.use(csp({
-    // Specify directives as normal
     defaultSrc: ["'self'"],
     scriptSrc: ["'self'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com', 'cdn.au.auth0.com', 'jfc.au.auth0.com'],
     fontSrc: ["'self'", 'fonts.gstatic.com'],
