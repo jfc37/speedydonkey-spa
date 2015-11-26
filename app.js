@@ -44,28 +44,39 @@ app.use(ienoopen());
 //Set X-XSS-Protection header
 app.use(xssFilter());
 
+var ninetyDaysInMilliseconds = 7776000000;
 //Add Strict-Transport-Security header to force https
 app.use(hsts({
-    maxAge: 60000,
+    maxAge: ninetyDaysInMilliseconds,
     includeSubDomains: true,
     force: true,
     preload: true
 }));
 
 var apiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
-apiUrl = 'https://' + apiUrl;
+apiUrl = '' + apiUrl;
 
 //Add CSP header to only allow trusted scripts and content
 //app.use(csp({
 //    // Specify directives as normal
 //    defaultSrc: ["'self'"],
-//    scriptSrc: ["'self'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'https://cdn.raygun.io', 'https://www.google-analytics.com'],
-//    fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-//    imgSrc: ["'self", 'https://www.google-analytics.com', 'data:'],
-//    styleSrc: ["'self'", "'unsafe-inline", 'https://fonts.googleapis.com'],
-//    connectSrc: ["'self'", apiUrl, 'https://cdn.raygun.io', 'https://api.raygun.io'],
-//    reportUri: 'https://report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e'
+//    scriptSrc: ["'self'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com'],
+//    fontSrc: ["'self'", 'fonts.gstatic.com'],
+//    imgSrc: ["'self", 'www.google-analytics.com', 'data:'],
+//    styleSrc: ["'self'", "'unsafe-inline", 'fonts.googleapis.com'],
+//    connectSrc: ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io'],
+//    reportUri: 'report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e'
 //}));
+app.use(csp({
+    // Specify directives as normal
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com', 'cdn.au.auth0.com', 'jfc.au.auth0.com'],
+    fontSrc: ["'self'", 'fonts.gstatic.com'],
+    imgSrc: ["'self", 'www.google-analytics.com', 'data:', 'www.gravatar.com'],
+    styleSrc: ["'self'", "'unsafe-inline", 'fonts.googleapis.com'],
+    connectSrc: ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io', 'jfc.au.auth0.com'],
+    reportUri: 'report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e'
+}));
 app.get('/ping', function (req, res, next) {
     console.log(req.body);
     res.send('pong');
