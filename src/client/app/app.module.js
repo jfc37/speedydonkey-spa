@@ -45,6 +45,7 @@
         'app.manageAnnouncements',
         'app.manageBlocks',
         'app.rooms',
+        'app.standAloneEvents',
         'app.manageClasses',
         'app.manageTeachers',
         'app.manageStudents',

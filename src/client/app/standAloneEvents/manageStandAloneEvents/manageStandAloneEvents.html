@@ -1,0 +1,24 @@
+<a href="#/admin/manage/events/create" class="btn btn-primary">Create New Event</a>
+
+<div class="space-15"></div>
+
+<tabset class="tabs-container">
+    <tab>
+        <tab-heading>
+            Current <span class='badge pull-right'>{{vm.statusCount('Current')}}</span>
+        </tab-heading>
+        <event-group events="vm.events" status="Current"></event-group>
+    </tab>
+    <tab>
+        <tab-heading>
+            Future <span class='badge pull-right'>{{vm.statusCount('Future')}}</span>
+        </tab-heading>
+        <event-group events="vm.events" status="Future"></event-group>
+    </tab>
+    <tab>
+        <tab-heading>
+            Past <span class='badge pull-right'>{{vm.statusCount('Past')}}</span>
+        </tab-heading>
+        <event-group events="vm.events" status="Past"></event-group>
+    </tab>
+</tabset>

@@ -1,0 +1,38 @@
+<h3>Create Event</h3>
+
+<div ng-form="createForm">
+    <!-- Name -->
+    <input-block name="name" label="Name">
+        <input name="name" type="text" class="form-control" ng-model="vm.standAloneEvent.name" required/>
+        <validation error="required" name="name">Please enter a name</validation>
+    </input-block>
+
+    <!-- Price -->
+    <input-block name="price" label="Price">
+        <input name="price" type="text" class="form-control" ng-model="vm.standAloneEvent.price" required/>
+        <validation error="required" name="price">Please enter a price</validation>
+    </input-block>
+
+    <!-- Start Time -->
+    <input-block name="startTime" label="Start Time" ng-if="vm.standAloneEvent.startTime">
+        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.standAloneEvent.startTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+    </input-block>
+
+    <!-- End Time -->
+    <input-block name="endTime" label="End Time" ng-if="vm.standAloneEvent.endTime">
+        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.standAloneEvent.endTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+    </input-block>
+
+    <!-- Teachers -->
+    <input-block name="teachers" label="Teachers">
+        <teacher-dropdown ng-model="vm.standAloneEvent.teachers"></teacher-dropdown>
+    </input-block>
+
+    <!--Is Private -->
+    <input-block name="isPrivate" label="Is Private">
+        <input name="isPrivate" type="checkbox" class="form-control" ng-model="vm.standAloneEvent.isPrivate" />
+    </input-block>
+
+    <a class="btn btn-default" href="#/admin/manage/blocks">Cancel</a>
+    <a class="btn btn-default pull-right" ng-disabled="createForm.$invalid" ng-click="vm.submit(createForm)">Create</a>
+</div>
