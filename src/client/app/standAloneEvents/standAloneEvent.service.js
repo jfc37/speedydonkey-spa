@@ -10,7 +10,8 @@
 
         var service = {
             create: create,
-            getEvents: getEvents
+            getEvents: getEvents,
+            getEvent: getEvent
         };
 
         function create(standAloneEvent) {
@@ -39,6 +40,15 @@
                 });
 
                 return events;
+            });
+        }
+
+        function getEvent(id) {
+            var options = getOptions();
+            options.id = id;
+
+            return simpleApiCaller.get(options).then(function (response) {
+                return response.data;
             });
         }
 

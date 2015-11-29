@@ -35,6 +35,15 @@
                 templateUrl: 'app/standAloneEvents/createStandAloneEvents/createStandAloneEvent.html',
                 claim: 'Admin'
             }
+        }, {
+            url: '/admin/manage/events/:id',
+            config: {
+                title: 'event',
+                controller: 'StandAloneEvent',
+                controllerAs: 'vm',
+                templateUrl: 'app/standAloneEvents/manageStandAloneEvent/standAloneEvent.html',
+                claim: 'Admin'
+            }
         }];
     }
 })();

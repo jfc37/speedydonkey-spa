@@ -10,7 +10,8 @@
 
         var service = {
             update: update,
-            create: create,getBlocks: getBlocks,
+            create: create,
+            getBlocks: getBlocks,
             getBlock: getBlock,
             deleteBlocks: deleteBlocks,
             generateFromBlocks: generateFromBlocks,
