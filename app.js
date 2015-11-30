@@ -60,7 +60,7 @@ apiUrl = '' + apiUrl;
 app.use(csp({
     defaultSrc: ["'self'"],
     scriptSrc: ["'self'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com', 'cdn.au.auth0.com', 'jfc.au.auth0.com'],
-    fontSrc: ["'self'", 'fonts.gstatic.com'],
+    fontSrc: ["'self'", 'fonts.gstatic.com', 'data:application/font-woff', 'data:application/x-font-woff', 'cdn.auth0.com'],
     imgSrc: ["'self", 'www.google-analytics.com', 'data:', 'www.gravatar.com'],
     styleSrc: ["'self'", "'unsafe-inline", 'fonts.googleapis.com'],
     connectSrc: ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io', 'jfc.au.auth0.com'],

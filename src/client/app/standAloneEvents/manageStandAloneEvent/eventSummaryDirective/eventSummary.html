@@ -6,11 +6,8 @@
         <dt>Time</dt>
         <dd>{{vm.event.startTime | date : 'HH:mm'}}</dd>
 
-        <dt>Start Date</dt>
-        <dd>{{vm.event.startTime | date : 'dd MMM'}}</dd>
-
-        <dt>End Date</dt>
-        <dd>{{vm.event.endTime | date : 'dd MMM'}}</dd>
+        <dt>Date</dt>
+        <dd>{{vm.event.startTime | date : 'dd MMMM'}}</dd>
 
         <dt>Teachers</dt>
         <dd><span ng-repeat="teacher in vm.event.teachers">{{teacher.fullName}}{{$last ? '' : ', '}}</span></dd>

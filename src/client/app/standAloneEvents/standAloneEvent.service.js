@@ -10,12 +10,26 @@
 
         var service = {
             create: create,
+            update: update,
             getEvents: getEvents,
             getEvent: getEvent
         };
 
         function create(standAloneEvent) {
             return simpleApiCaller.post(standAloneEvent, getOptions()).then(function (response) {
+                return response.data;
+            }, function (response) {
+                if (response.validationResult) {
+                    return response.validationResult.validationErrors;
+                }
+            });
+        }
+
+        function update(standAloneEvent) {
+            var options = getOptions();
+            options.id = standAloneEvent.id;
+
+            return simpleApiCaller.put(standAloneEvent, options).then(function (response) {
                 return response.data;
             }, function (response) {
                 if (response.validationResult) {
