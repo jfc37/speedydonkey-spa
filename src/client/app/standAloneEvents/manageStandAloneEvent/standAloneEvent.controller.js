@@ -11,7 +11,7 @@
 
         vm.submit = function (form) {
             standAloneEventService.update(vm.event).then(function () {
-                routehelper.redirectToRoute('manageStandAloneEvents');
+                routehelper.redirectToRoute('manageEvents');
             }, function (errors) {
                 validationService.applyServerSideErrors(form, errors);
             });

@@ -1,0 +1,29 @@
+<div class="panel-body">
+    <dl class="dl-horizontal m-t-m">
+        <dt>Name</dt>
+        <dd>{{vm.event.name}}</dd>
+
+        <dt>Time</dt>
+        <dd>{{vm.event.startTime | date : 'HH:mm'}}</dd>
+
+        <dt>Start Date</dt>
+        <dd>{{vm.event.startTime | date : 'dd MMM'}}</dd>
+
+        <dt>End Date</dt>
+        <dd>{{vm.event.endTime | date : 'dd MMM'}}</dd>
+
+        <dt>Teachers</dt>
+        <dd><span ng-repeat="teacher in vm.event.teachers">{{teacher.fullName}}{{$last ? '' : ', '}}</span></dd>
+
+        <dt>Students Registered</dt>
+        <dd>{{vm.event.registeredStudents.length}}</dd>
+
+        <dt>Is Private</dt>
+        <dd>{{vm.event.isPrivate | yesNo }}</dd>
+
+        <dt>Room</dt>
+        <dd>
+            <room-dropdown ng-model="vm.event.room" entity="vm.event" entity-type="event"></room-dropdown>
+        </dd>
+    </dl>
+</div>
