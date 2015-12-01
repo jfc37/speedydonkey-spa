@@ -44,6 +44,20 @@
                 templateUrl: 'app/standAloneEvents/manageStandAloneEvent/standAloneEvent.html',
                 claim: 'Admin'
             }
+        }, {
+            url: '/event/register',
+            config: {
+                title: 'eventRegistration',
+                controller: 'EventRegistration',
+                controllerAs: 'vm',
+                templateUrl: 'app/standAloneEvents/eventRegistrations/eventRegistration.html',
+                settings: {
+                    nav: 30,
+                    displayName: 'Event Registration',
+                    displayIcon: 'fa-ticket',
+                    level: 1
+                }
+            }
         }];
     }
 })();

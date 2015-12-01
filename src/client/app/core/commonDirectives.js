@@ -37,6 +37,8 @@
                     format = 'DD/MM';
                 } else if (attrs.format === 'time and day') {
                     format = 'dddd h:mmA';
+                } else if (attrs.format === 'date and time') {
+                    format = 'dddd MMMM DD, h:mm a';
                 }
                 var local = moment.utc(scope.ngModel).toDate();
                 scope.display = moment(local).format(format);
