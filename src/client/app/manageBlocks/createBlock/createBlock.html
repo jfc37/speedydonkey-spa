@@ -27,6 +27,12 @@
     <input-block name="teachers" label="Teachers">
         <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
     </input-block>
+
+    <!--Is Invite Only -->
+    <input-block name="isInviteOnly" label="Is Invite Only">
+        <input name="isInviteOnly" type="checkbox" class="form-control" ng-model="vm.block.isInviteOnly" />
+    </input-block>
+
     <a class="btn btn-default" href="#/admin/manage/blocks">Cancel</a>
     <a class="btn btn-default pull-right" ng-disabled="createForm.$invalid" ng-click="vm.submit(createForm)">Create</a>
 </div>

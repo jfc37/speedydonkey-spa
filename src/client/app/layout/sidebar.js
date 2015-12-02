@@ -1,14 +1,37 @@
+/*global $*/
 (function () {
     'use strict';
 
     angular
         .module('app.layout')
-        .controller('Sidebar', Sidebar);
+        .directive('sidebar', sidebarDirective);
 
     /* @ngInject */
-    function Sidebar($route, routehelper) {
+    function sidebarDirective($timeout) {
+        return {
+            controllerAs: 'vm',
+            controller: Sidebar,
+            templateUrl: 'app/layout/sidebar.html',
+            link: function (scope) {
+
+                scope.vm.menuChange = function () {
+                    var menuElement = $('#side-menu');
+                    menuElement.addClass('metismenu');
+                    $timeout(function () {
+                        menuElement.metisMenu();
+                    }, 500);
+                };
+
+                scope.vm.menuChange();
+            }
+        };
+    }
+
+    /* @ngInject */
+    function Sidebar($route, $scope, routehelper) {
         var vm = this;
-        var routes = routehelper.getRoutes();
+
+        vm.routehelper = routehelper;
 
         vm.getCurrentRoute = function () {
             return $route;
@@ -36,7 +59,7 @@
         }
 
         vm.getChildItems = function (parentRoute) {
-            return routes.filter(function (route) {
+            return routehelper.getRoutes().filter(function (route) {
                 return route.settings && route.settings.level > 1 && route.settings.parent === parentRoute.title;
             }).sort(function (r1, r2) {
                 return r1.settings.nav - r2.settings.nav;
@@ -50,15 +73,23 @@
         activate();
 
         function activate() {
-            getNavRoutes();
+            vm.navRoutes = getNavRoutes();
         }
 
         function getNavRoutes() {
-            vm.navRoutes = routes.filter(function (r) {
+            return routehelper.getRoutes().filter(function (r) {
                 return r.settings && r.settings.nav && r.settings.level === 1;
             }).sort(function (r1, r2) {
                 return r1.settings.nav - r2.settings.nav;
             });
         }
+
+        $scope.$watch(function () {
+            return getNavRoutes().length;
+        }, function () {
+            vm.menuChange();
+        });
+
+        vm.getNavRoutes = getNavRoutes;
     }
 })();

@@ -1,0 +1,22 @@
+<h2>{{vm.block.name}}</h2>
+
+<tabset class="tabs-container" ng-if="vm.room">
+    <tab>
+        <tab-heading>
+            Summary
+        </tab-heading>
+        <room-summary room="vm.room"></room-summary>
+    </tab>
+    <tab>
+        <tab-heading>
+            Schedule
+        </tab-heading>
+        <room-schedule room="vm.room"></room-schedule>
+    </tab>
+    <tab>
+        <tab-heading>
+            Change
+        </tab-heading>
+        <room-change room="vm.room"></room-change>
+    </tab>
+</tabset>

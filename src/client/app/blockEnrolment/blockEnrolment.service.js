@@ -18,7 +18,7 @@
             var userEnroledBlocksIds = [];
 
             var blocksRequest = simpleApiCaller.get({
-                resource: 'blocks',
+                resource: 'blocks/for-enrolment',
                 block: true
             }).then(function (response) {
                 allBlocks = response.data;
@@ -45,7 +45,7 @@
 
         function enrol(blocks) {
             var enrolment = {
-                userId: authService.getUserIdentity().userId,
+                userId: authService.userId(),
                 blockIds: blocks.map(function (block) {
                     return block.id;
                 })

@@ -6,7 +6,7 @@
         .factory('manageUserService', manageUserService);
 
     /* @ngInject */
-    function manageUserService($q, logger, dataservice, dataUpdateService, authService) {
+    function manageUserService($q, logger, dataservice, dataUpdateService) {
 
         var service = {
             getUser: getUser,
@@ -17,22 +17,6 @@
             return $q(function (resolve, revoke) {
                 dataservice.getCurrentUser().then(function (user) {
                     resolve(user);
-                }, function (response) {
-                    if (response.validationResult !== undefined) {
-                        revoke(response.validationResult.validationErrors);
-                    } else {
-                        revoke();
-                    }
-                });
-            });
-        }
-
-        function updateUser(user) {
-            return $q(function (resolve, revoke) {
-                dataUpdateService.updateUser(user).then(function () {
-                    authService.login(user.email, user.password).then(function () {
-                        resolve(user);
-                    });
                 }, function (response) {
                     if (response.validationResult !== undefined) {
                         revoke(response.validationResult.validationErrors);

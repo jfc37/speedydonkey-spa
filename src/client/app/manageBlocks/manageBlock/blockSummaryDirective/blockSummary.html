@@ -12,10 +12,17 @@
         <dt>End Date</dt>
         <dd>{{vm.block.endDate | date : 'dd MMM'}}</dd>
 
+        <dt>Invite Only</dt>
+        <dd>{{vm.block.isInviteOnly | yesNo}}</dd>
+
         <dt>Teachers</dt>
         <dd><span ng-repeat="teacher in vm.block.teachers">{{teacher.fullName}}{{$last ? '' : ', '}}</span></dd>
 
         <dt>Students Registered</dt>
-        <dd>{{vm.block.enroledStudents.length}}</dd>
+        <dd>{{vm.block.enroledStudents.length}}</dd><dt>Room</dt>
+
+        <dd>
+            <room-dropdown ng-model="vm.block.room" entity="vm.block" entity-type="block"></room-dropdown>
+        </dd>
     </dl>
 </div>
