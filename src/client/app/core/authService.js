@@ -18,8 +18,7 @@
 
             hasClaim: hasClaim,
             profile: profile,
-            isAuthenticated: isAuthenticated,
-            userId: userId
+            isAuthenticated: isAuthenticated
         };
 
         init();
@@ -70,10 +69,6 @@
 
         function profile() {
             return auth.profile;
-        }
-
-        function userId() {
-            return auth.profile.identities[0].user_id;
         }
 
         function setRaygunUser(name, email) {
