@@ -43,17 +43,13 @@
                 store.set('refreshToken', refresh_token);
                 setRaygunUser(profile.nickname, profile.email);
                 angular.element('body').removeClass('canvas-menu');
+
                 dataservice.getCurrentUserClaims().then(function (claims) {
                     userClaims = claims;
                 }, function () {
                     userClaims = [];
                 }).finally(function () {
-                    store.set('profile', profile);
-                    store.set('token', token);
-                    store.set('refreshToken', refresh_token);
                     store.set('userClaims', userClaims);
-                    setRaygunUser(profile.nickname, profile.email);
-                    angular.element('body').removeClass('canvas-menu');
                     deferred.resolve();
                 });
             }, function (error) {
