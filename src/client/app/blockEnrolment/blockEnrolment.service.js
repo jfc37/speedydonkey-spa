@@ -45,14 +45,13 @@
 
         function enrol(blocks) {
             var enrolment = {
-                userId: authService.userId(),
                 blockIds: blocks.map(function (block) {
                     return block.id;
                 })
             };
 
             return simpleApiCaller.post(enrolment, {
-                resource: 'users/' + enrolment.userId + '/enrolment',
+                resource: 'users/current/enrolment',
                 block: true
             });
         }

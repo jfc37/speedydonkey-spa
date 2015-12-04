@@ -9,12 +9,7 @@
     // Must configure via the routehelperConfigProvider
     function routehelperConfig() {
         /* jshint validthis:true */
-        this.config = {
-            // These are the properties we need to set
-            // $routeProvider: undefined
-            // docTitle: ''
-            // resolveAlways: {ready: function(){ } }
-        };
+        this.config = {};
 
         this.$get = function () {
             return {
@@ -23,7 +18,7 @@
         };
     }
 
-    function routehelper($location, $rootScope, $route, logger, routehelperConfig, authService) {
+    function routehelper($location, $rootScope, $route, routehelperConfig, authService) {
         var handlingRouteChangeError = false;
         var routeCounts = {
             errors: 0,
@@ -69,10 +64,6 @@
                     }
                     routeCounts.errors++;
                     handlingRouteChangeError = true;
-                    var destination = (current && (current.title || current.name || current.loadedTemplateUrl)) ||
-                        'unknown target';
-                    var msg = 'Error routing to ' + destination + '. ' + (rejection.msg || '');
-                    logger.warning(msg, [current]);
                     $location.path('/');
                 }
             );
@@ -82,13 +73,11 @@
             $rootScope.$on('$routeChangeStart',
                 function (event, current, previous, rejection) {
                     if (current.$$route === undefined) {
-                        logger.warning('Page not found');
                         redirectToRoute(getDefaultRoute());
                     }
 
                     if (!isAuthorisedForRoute(current.$$route)) {
                         event.preventDefault();
-                        logger.warning('Unauthorised to visit page');
                         redirectToRoute(getDefaultRoute());
                     }
                 }
@@ -142,7 +131,6 @@
             });
 
             if (routes.length < 1) {
-                logger.error('Failed to find matching route', routeName, 'No matching route');
                 return '';
             } else {
                 var route = routes[0];
@@ -183,7 +171,5 @@
 
             return defaultRoute;
         }
-
-        /*/private*/
     }
 })();

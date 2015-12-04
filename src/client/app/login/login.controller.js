@@ -6,7 +6,7 @@
         .controller('Login', Login);
 
     /* @ngInject */
-    function Login(config, authService, routehelper) {
+    function Login(config, authService, routehelper, missingUserDetailsService) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -18,11 +18,17 @@
         vm.login = openLoginBox();
 
         function openLoginBox() {
-            authService.login().then(function () {
-                routehelper.redirectToRoute('dashboard');
-            });
+            authService.login().then(checkMissingUserDetails).then(redirectToDashboard);
         }
 
         openLoginBox();
+
+        function redirectToDashboard() {
+            routehelper.redirectToRoute('dashboard');
+        }
+
+        function checkMissingUserDetails() {
+            return missingUserDetailsService.performCheck();
+        }
     }
 })();
