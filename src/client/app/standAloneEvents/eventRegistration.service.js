@@ -24,14 +24,13 @@
 
         function register(events) {
             var enrolment = {
-                userId: authService.userId(),
                 eventIds: events.map(function (theEvent) {
                     return theEvent.id;
                 })
             };
 
             return simpleApiCaller.post(enrolment, {
-                resource: 'users/' + enrolment.userId + '/registration/event',
+                resource: 'users/current/registration/event',
                 block: true
             });
         }
