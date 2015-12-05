@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h3 class="modal-title">Missing Details</h3>
+</div>
+<div class="modal-body">
+    <p>
+        Looks like we need a bit more information about you:
+    </p>
+
+    <div ng-form="updateForm">
+        <input-block name="firstName" label="First Name">
+            <input name="firstName" type="text" class="form-control" ng-model="vm.user.firstName" required/>
+            <validation error="required" name="firstName">Please enter your first name</validation>
+        </input-block>
+
+        <input-block name="surname" label="Surname">
+            <input name="surname" type="text" class="form-control" ng-model="vm.user.surname" required/>
+            <validation error="required" name="surname">Please enter your surname</validation>
+        </input-block>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="vm.save()">OK</button>
+</div>
