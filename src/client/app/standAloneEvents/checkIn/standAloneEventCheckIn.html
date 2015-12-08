@@ -1,0 +1,11 @@
+<h1>{{vm.event.name}} Check In</h1>
+
+<div>
+    <ul>
+        <li ng-repeat="student in vm.students">{{student}}</li>
+    </ul>
+</div>
+
+<walk-in-student ng-if="vm.students" students="vm.students"></walk-in-student>
+
+<change-teachers ng-model="vm.event"></change-teachers>

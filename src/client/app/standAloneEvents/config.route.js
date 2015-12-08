@@ -58,6 +58,15 @@
                     level: 1
                 }
             }
+        }, {
+            url: '/admin/events/:id/check-in',
+            config: {
+                title: 'eventCheckIn',
+                controller: 'StandAloneEventCheckIn',
+                controllerAs: 'vm',
+                templateUrl: 'app/standAloneEvents/checkIn/standAloneEventCheckIn.html',
+                claim: 'Admin'
+            }
         }];
     }
 })();
