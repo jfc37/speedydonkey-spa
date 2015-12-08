@@ -5,7 +5,7 @@
 
         <button class="btn btn-lg btn-primary" ng-disabled="!vm.isAnyBlocksSelected()" ng-click="vm.submit()">Enrol</button>
         <div class="row">
-            <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping | viewableBlocks">
+            <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping">
                 <div ng-include src="'app/blockEnrolment/setOfBlocks.html'"></div>
             </div>
         </div>
