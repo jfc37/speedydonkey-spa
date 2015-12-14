@@ -72,7 +72,7 @@
                     if (theEvent.actualStudents.filter(function (attendingStudent) {
                             return attendingStudent.id === registeredStudent.id;
                         }).length === 0) {
-                        theEvent.acutalStudents.push(registeredStudent);
+                        theEvent.actualStudents.push(registeredStudent);
                     }
                 });
 

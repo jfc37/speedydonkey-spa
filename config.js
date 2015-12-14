@@ -139,7 +139,7 @@
         rg4js('apiKey', '<raygunKey>');
         rg4js('attach', true);
         rg4js('enableCrashReporting', true);
-        rg4js('enablePulse', true);
+        rg4js('enablePulse', false);
 
     }
 
