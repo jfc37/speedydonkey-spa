@@ -21,13 +21,13 @@
                     success: 'Recorded student\'s attendance ',
                     error: 'Issue recording student\'s attendance...'
                 };
-                promise = simpleApiCaller.delete(options);
+                promise = simpleApiCaller.post(null, options);
             } else {
                 message = {
                     success: 'Removed student\'s attendance ',
                     error: 'Issue removing student\'s attendance...'
                 };
-                promise = simpleApiCaller.post(null, options);
+                promise = simpleApiCaller.delete(options);
             }
 
             return promise.then(function () {

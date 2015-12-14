@@ -18,7 +18,7 @@
         function getEvent() {
             standAloneEventService.getEvent($routeParams.id).then(function (theEvent) {
                 vm.event = theEvent;
-                vm.students = theEvent.registeredStudents;
+                vm.students = theEvent.actualStudents;
             });
         }
     }
