@@ -1,0 +1,13 @@
+<div class="ibox float-e-margins" block-ui="todaysEvents">
+    <div class="ibox-content">
+        <h2>Event Check In</h2>
+        <p ng-if="vm.todaysEvents.length === 0">
+            No events today.
+        </p>
+        <p ng-repeat="event in vm.todaysEvents">
+            <a data-ng-href="#/admin/events/{{event.id}}/check-in">
+                {{event.name}} - <display-date format='time' ng-model='event.startTime'></display-date>
+            </a>
+        </p>
+    </div>
+</div>

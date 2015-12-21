@@ -1,0 +1,34 @@
+<div class="row">
+    <h1>Event Registration</h1>
+    <div>
+        <p class="lead" ng-show="vm.event.length > 0">Select the events you want to register for</p>
+
+        <button class="btn btn-lg btn-primary" ng-disabled="!vm.isAnySelected()" ng-click="vm.submit()">Register</button>
+        <div class="row">
+            <div class="col-lg-3" ng-repeat="event in vm.events">
+                <div class="ibox">
+                    <div class="ibox-content product-box">
+                        <div class="product-desc">
+                            <span class="product-name"> {{event.name}}</span>
+
+                            <div class="small m-t-xs">
+                                <display-date format='date and time' ng-model='event.startTime'></display-date>
+                            </div>
+                            <div class="m-t text-right">
+                                <label for="" ng-if="!event.isRegistered">
+                                    <input type="checkbox" icheck data-ng-model="event.registerIn"> Register
+                                </label>
+                                <label for="" ng-if="event.isRegistered">
+                                    Already registered
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p ng-show="vm.events.length === 0">
+            There are no events available
+        </p>
+    </div>
+</div>

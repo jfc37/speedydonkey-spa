@@ -22,7 +22,7 @@
                     controllerAs: 'vm',
                     templateUrl: 'app/blockEnrolment/blockEnrolment.html',
                     settings: {
-                        nav: 2,
+                        nav: 20,
                         displayName: 'Block Enrolment',
                         displayIcon: 'fa-toggle-on',
                         level: 1

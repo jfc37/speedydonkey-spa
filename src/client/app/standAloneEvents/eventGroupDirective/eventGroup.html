@@ -1,0 +1,31 @@
+<div class="panel-body">
+    <table class="table table-hover" ts-wrapper>
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" ng-model="vm.selectAll" ng-click="vm.selectAllClicked()">
+                </th>
+                <th ng-if="!vm.anySelected()" ts-criteria="name" ts-default>Name</th>
+                <th ng-if="!vm.anySelected()" ts-criteria="date">Date</th>
+                <th ng-if="!vm.anySelected()" ts-criteria="day">Day</th>
+                <th ng-if="!vm.anySelected()" ts-criteria="time">Time</th>
+                <th ng-if="vm.anySelected()">
+                    <a class="btn btn-danger" ng-click="vm.deleteSelected()">Delete</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="event in vm.events | filter:{'status': vm.status}">
+                <td>
+                    <input type="checkbox" ng-model="event.selected">
+                </td>
+                <td>
+                    <a ng-href="#/admin/manage/events/{{event.id}}" class="btn btn-link">{{event.name}}</a>
+                </td>
+                <td>{{event.startTime | date: 'dd MMMM'}}</td>
+                <td>{{event.startTime | date: 'EEEE'}}</td>
+                <td>{{event.startTime | date: 'HH:mm'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

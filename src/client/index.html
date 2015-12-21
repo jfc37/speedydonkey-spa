@@ -127,6 +127,7 @@
     <script src="/src/client/app/reportTeacherHours/reportTeacherHours.module.js"></script>
     <script src="/src/client/app/resetPassword/resetPassword.module.js"></script>
     <script src="/src/client/app/rooms/rooms.module.js"></script>
+    <script src="/src/client/app/standAloneEvents/standAloneEvents.module.js"></script>
     <script src="/src/client/app/userActivation/userActivation.module.js"></script>
     <script src="/src/client/app/users/users.module.js"></script>
     <script src="/src/client/app/widgets/widgets.module.js"></script>
@@ -213,6 +214,9 @@
     <script src="/src/client/app/resetPassword/resetPassword.js"></script>
     <script src="/src/client/app/rooms/config.route.js"></script>
     <script src="/src/client/app/rooms/room.service.js"></script>
+    <script src="/src/client/app/standAloneEvents/config.route.js"></script>
+    <script src="/src/client/app/standAloneEvents/eventRegistration.service.js"></script>
+    <script src="/src/client/app/standAloneEvents/standAloneEvent.service.js"></script>
     <script src="/src/client/app/userActivation/config.route.js"></script>
     <script src="/src/client/app/userActivation/userActivation.js"></script>
     <script src="/src/client/app/userActivation/userActivationService.js"></script>
@@ -238,10 +242,12 @@
     <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.js"></script>
     <script src="/src/client/app/dashboard/todaysClasses/class.service.js"></script>
     <script src="/src/client/app/dashboard/todaysClasses/todaysClasses.directive.js"></script>
+    <script src="/src/client/app/dashboard/todaysEvents/todaysEvents.directive.js"></script>
+    <script src="/src/client/app/dashboard/todaysEvents/todaysEvents.service.js"></script>
     <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.directive.js"></script>
     <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.service.js"></script>
-    <script src="/src/client/app/manageBlocks/blockGroupDirective/blockGroup.directive.js"></script>
     <script src="/src/client/app/manageBlocks/createBlock/createBlock.controller.js"></script>
+    <script src="/src/client/app/manageBlocks/blockGroupDirective/blockGroup.directive.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlock/block.controller.js"></script>
     <script src="/src/client/app/manageBlocks/updateBlock/updateBlock.controller.js"></script>
     <script src="/src/client/app/manageClasses/classChangeDirective/classChange.directive.js"></script>
@@ -249,6 +255,13 @@
     <script src="/src/client/app/rooms/createRoom/createRoom.controller.js"></script>
     <script src="/src/client/app/rooms/manageRoom/room.controller.js"></script>
     <script src="/src/client/app/rooms/manageRooms/manageRooms.controller.js"></script>
+    <script src="/src/client/app/rooms/roomDropdown/roomDropdown.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/standAloneEventCheckIn.controller.js"></script>
+    <script src="/src/client/app/standAloneEvents/eventGroupDirective/eventGroup.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/eventRegistrations/eventRegistration.controller.js"></script>
+    <script src="/src/client/app/standAloneEvents/createStandAloneEvents/createStandAloneEvent.controller.js"></script>
+    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/standAloneEvent.controller.js"></script>
+    <script src="/src/client/app/standAloneEvents/manageStandAloneEvents/manageStandAloneEvents.controller.js"></script>
     <script src="/src/client/app/users/missingDetails/missingUserDetails.modal.js"></script>
     <script src="/src/client/app/users/missingDetails/missingUserDetails.service.js"></script>
     <script src="/src/client/app/windyLindy/complete/complete.controller.js"></script>
@@ -261,7 +274,6 @@
     <script src="/src/client/app/windyLindy/registration/registration.controller.js"></script>
     <script src="/src/client/app/windyLindy/registrationReport/config.route.js"></script>
     <script src="/src/client/app/windyLindy/registrationReport/report.controller.js"></script>
-    <script src="/src/client/app/rooms/roomDropdown/roomDropdown.directive.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.js"></script>
     <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.js"></script>
     <script src="/src/client/app/core/directives/iCheckDirective/icheck.directive.js"></script>
@@ -275,6 +287,11 @@
     <script src="/src/client/app/rooms/manageRoom/roomChangeDirective/roomChange.directive.js"></script>
     <script src="/src/client/app/rooms/manageRoom/roomScheduleDirective/roomSchedule.directive.js"></script>
     <script src="/src/client/app/rooms/manageRoom/roomSummaryDirective/roomSummary.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/studentCheckIn/eventCheckIn.service.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/studentCheckIn/studentCheckIn.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/walkInStudent/walkInStudent.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/eventChangeDirective/eventChange.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/eventSummaryDirective/eventSummary.directive.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->

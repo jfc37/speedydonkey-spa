@@ -20,7 +20,7 @@
                     controllerAs: 'vm',
                     title: 'admin dashboard',
                     settings: {
-                        nav: 3,
+                        nav: 50,
                         displayName: 'Admin Dashboard',
                         displayIcon: 'fa-cogs',
                         level: 1

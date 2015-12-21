@@ -1,0 +1,31 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <h2>Student</h2>
+        <div ng-show="vm.students.length === 0">
+            No students registered for this event.
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="student in vm.students track by $index">
+                <tr>
+                    <td>
+                        <input type="checkbox" data-ng-model="student.isPresent" data-ng-change="vm.attendenceStatusChanged(student)">
+                    </td>
+                    <td>
+                        {{student.fullName}}
+                    </td>
+                    <td>
+                        <note ng-model="student" type="user"></note>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
