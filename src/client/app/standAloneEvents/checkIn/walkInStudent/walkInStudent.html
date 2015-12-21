@@ -6,3 +6,10 @@
         <button class="btn btn-primary" ng-click="vm.createAccount()">Create New Account</button>
     </div>
 </div>
+
+<div class="ibox float-e-margins" ng-show="vm.creatingNewAccount">
+    <div class="ibox-content">
+        <h2>New Student</h2>
+        <div ng-include src="'app/register/newUser.html'"></div>
+    </div>
+</div>
