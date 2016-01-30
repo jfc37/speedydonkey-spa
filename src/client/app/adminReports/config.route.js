@@ -20,7 +20,7 @@
                     controllerAs: 'vm',
                     title: 'admin reports',
                     settings: {
-                        nav: 3,
+                        nav: 60,
                         displayName: 'Reports',
                         displayIcon: 'fa-area-chart',
                         level: 1
