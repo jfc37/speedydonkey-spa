@@ -7,13 +7,14 @@
         .factory('managePassesService', managePassesService);
 
     /* @ngInject */
-    function manageStudentsService($q, logger, dataservice, dataCreateService, dataDeleteService) {
+    function manageStudentsService($q, logger, dataservice, dataCreateService, dataDeleteService, simpleApiCaller) {
 
         var service = {
             deleteStudent: deleteStudent,
             getStudents: getStudents,
             getStudentInfo: getStudentInfo,
-            deletePass: deletePass
+            deletePass: deletePass,
+            changeDoNotEmail: changeDoNotEmail
         };
 
         function deleteStudent(id) {
@@ -50,11 +51,29 @@
             });
         }
 
+        function changeDoNotEmail(student) {
+            var request;
+
+            if (student.doNotEmail) {
+                request = simpleApiCaller.delete(getDoNotEmailOptions(student));
+            } else {
+                request = simpleApiCaller.post({}, getDoNotEmailOptions(student));
+            }
+
+            request.then(function () {
+                student.doNotEmail = !student.doNotEmail;
+            });
+        }
+
+        function getDoNotEmailOptions(student) {
+            return {
+                resource: 'users/' + student.id + '/do-not-email'
+            };
+        }
+
         return service;
 
     }
-
-    managePassesService.$inject = ['$q', 'logger', 'dataservice', 'dataUpdateService', 'dataDeleteService'];
 
     /* @ngInject */
     function managePassesService($q, logger, dataservice, dataUpdateService, dataDeleteService) {

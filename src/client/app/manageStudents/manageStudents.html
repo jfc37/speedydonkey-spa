@@ -27,6 +27,7 @@
             <tr ng-show="showStudent">
                 <td colspan="3">
                     <div>
+                        <a ng-click="vm.changeStudentDoNotEmail()" class="btn btn-primary">{{vm.doNotEmailText()}}</a>
                         <h3>Passes</h3>
                         <p ng-show="!student.studentInfo.passes || !student.studentInfo.passes.any()">No passes</p>
                         <table class="table table-hover" ng-hide="!student.studentInfo.passes || !student.studentInfo.passes.any()">
