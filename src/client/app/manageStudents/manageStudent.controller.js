@@ -11,6 +11,18 @@
         $scope.vm.cancelText = 'Close';
         var copy = {};
 
+        $scope.vm.doNotEmailText = function () {
+            if ($scope.student.doNotEmail) {
+                return 'Include in email list';
+            } else {
+                return 'Remove from email list';
+            }
+        };
+
+        $scope.vm.changeStudentDoNotEmail = function () {
+            manageStudentsService.changeDoNotEmail($scope.student);
+        };
+
         $scope.vm.startUpdating = function () {
             copy = angular.copy($scope.vm.student);
             $scope.vm.updating = true;
