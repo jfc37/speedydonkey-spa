@@ -16,7 +16,7 @@
     function run($rootScope, auth, store, jwtHelper, routehelper) {
         var refreshingToken = null;
 
-        $rootScope.$on('$locationChangeStart', function () {
+        function authenticateToken() {
             var token = store.get('token');
             var refreshToken = store.get('refreshToken');
 
@@ -41,6 +41,12 @@
                     }
                 }
             }
+        }
+
+        authenticateToken();
+
+        $rootScope.$on('$locationChangeStart', function () {
+            authenticateToken();
         });
 
         auth.hookEvents();
