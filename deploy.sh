@@ -129,9 +129,9 @@ cd "$DEPLOYMENT_TARGET"
 #echo Install npm...
 #eval $NPM_CMD install
 
-#echo Install gulp...
-#eval $NPM_CMD install gulp
-#exitWithMessageOnError "installing gulp failed"
+echo Install gulp...
+eval $NPM_CMD install gulp
+exitWithMessageOnError "installing gulp failed"
 
 echo gulp version is
 ./node_modules/.bin/gulp -v
