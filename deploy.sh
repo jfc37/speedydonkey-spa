@@ -101,61 +101,61 @@ selectNodeVersion () {
 echo Handling node.js deployment.
 
 # 1. KuduSync
-if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
-  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
-  exitWithMessageOnError "Kudu Sync failed"
-fi
-
-echo Selecting node version
-# 2. Select node version
-selectNodeVersion
-
-
-# 3. Install npm packages
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
-
-eval $NPM_CMD -v
-
-  exitWithMessageOnError "npm failed"
-  cd - > /dev/null
-fi
-
-
-#5. Run gulp
-if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-cd "$DEPLOYMENT_TARGET"
-
-echo Install npm...
-eval $NPM_CMD update
-
-echo Install gulp...
-eval $NPM_CMD update gulp
-exitWithMessageOnError "installing gulp failed"
-
-echo gulp version is
-./node_modules/.bin/gulp -v
-
-echo gonna run build
-./node_modules/.bin/gulp build
-exitWithMessageOnError "gulp failed"
-cd - > /dev/null
-fi
-echo Finished running gulp stuff
-
-
-
-
-
-
-##################################################################################################################################
-
-# Post deployment stub
-if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
-  POST_DEPLOYMENT_ACTION=${POST_DEPLOYMENT_ACTION//\"}
-  cd "${POST_DEPLOYMENT_ACTION_DIR%\\*}"
-  "$POST_DEPLOYMENT_ACTION"
-  exitWithMessageOnError "post deployment action failed"
-fi
+#if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
+#  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
+#  exitWithMessageOnError "Kudu Sync failed"
+#fi
+#
+#echo Selecting node version
+## 2. Select node version
+#selectNodeVersion
+#
+#
+## 3. Install npm packages
+#if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+#  cd "$DEPLOYMENT_TARGET"
+#
+#eval $NPM_CMD -v
+#
+#  exitWithMessageOnError "npm failed"
+#  cd - > /dev/null
+#fi
+#
+#
+##5. Run gulp
+#if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+#cd "$DEPLOYMENT_TARGET"
+#
+#echo Install npm...
+#eval $NPM_CMD install
+#
+#echo Install gulp...
+#eval $NPM_CMD install gulp
+#exitWithMessageOnError "installing gulp failed"
+#
+#echo gulp version is
+#./node_modules/.bin/gulp -v
+#
+#echo gonna run build
+#./node_modules/.bin/gulp build
+#exitWithMessageOnError "gulp failed"
+#cd - > /dev/null
+#fi
+#echo Finished running gulp stuff
+#
+#
+#
+#
+#
+#
+###################################################################################################################################
+#
+## Post deployment stub
+#if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
+#  POST_DEPLOYMENT_ACTION=${POST_DEPLOYMENT_ACTION//\"}
+#  cd "${POST_DEPLOYMENT_ACTION_DIR%\\*}"
+#  "$POST_DEPLOYMENT_ACTION"
+#  exitWithMessageOnError "post deployment action failed"
+#fi
 
 echo "Finished successfully."
