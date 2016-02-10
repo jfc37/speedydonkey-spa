@@ -101,10 +101,10 @@ selectNodeVersion () {
 echo Handling node.js deployment.
 
 # 1. KuduSync
-#if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
-#  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
-#  exitWithMessageOnError "Kudu Sync failed"
-#fi
+if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
+  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
+  exitWithMessageOnError "Kudu Sync failed"
+fi
 #
 #echo Selecting node version
 ## 2. Select node version
