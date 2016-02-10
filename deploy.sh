@@ -113,7 +113,7 @@ selectNodeVersion
 
 echo npm version:
 eval $NPM_CMD -v
-#
+
 ## 3. Install npm packages
 #if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #  cd "$DEPLOYMENT_TARGET"
@@ -128,9 +128,9 @@ eval $NPM_CMD -v
 #echo About to run gulp stuff
 #if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
 cd "$DEPLOYMENT_TARGET"
-#
+
 #eval $NPM_CMD install
-eval $NPM_CMD install gulp -g
+eval $NPM_CMD install gulp
 exitWithMessageOnError "installing gulp failed"
 #
 echo gulp version is
