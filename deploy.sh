@@ -119,7 +119,7 @@ echo npm version:
 npm -v
 
 echo change npm version...
-call :ExecuteCmd "D:\Program Files (x86)\npm\2.11.2\npm" install --production
+eval "D:\Program Files (x86)\npm\2.11.2\npm" install --production
 
 echo npm new version:
 npm -v
