@@ -118,31 +118,37 @@ fi
 echo npm version:
 npm -v
 
+echo change npm version...
+call :ExecuteCmd "D:\Program Files (x86)\npm\2.11.2\npm" install --production
+
+echo npm new version:
+npm -v
+
 #  exitWithMessageOnError "npm failed"
 #  cd - > /dev/null
 #fi
 
 
 #5. Run gulp
-if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-cd "$DEPLOYMENT_TARGET"
-
-#echo Install npm...
-#eval $NPM_CMD install
-
-echo Install gulp...
-npm install gulp
-#eval $NPM_CMD install gulp
-#exitWithMessageOnError "installing gulp failed"
-
-echo gulp version is
-gulp -v
-
-echo gonna run build
-gulp build
-exitWithMessageOnError "gulp failed"
-cd - > /dev/null
-fi
+#if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+#cd "$DEPLOYMENT_TARGET"
+#
+##echo Install npm...
+##eval $NPM_CMD install
+#
+#echo Install gulp...
+#npm install gulp
+##eval $NPM_CMD install gulp
+##exitWithMessageOnError "installing gulp failed"
+#
+#echo gulp version is
+#gulp -v
+#
+#echo gonna run build
+#gulp build
+#exitWithMessageOnError "gulp failed"
+#cd - > /dev/null
+#fi
 #echo Finished running gulp stuff
 #
 #
