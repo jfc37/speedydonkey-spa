@@ -119,7 +119,14 @@ echo npm version:
 npm -v
 
 echo change npm version...
-"D:\Program Files (x86)\npm\2.11.2\npm" install --production
+cd "D:\Program Files (x86)\npm\2.11.2"
+npm install
+
+
+echo npm new version:
+npm -v
+
+cd "$DEPLOYMENT_TARGET"
 
 echo npm new version:
 npm -v
