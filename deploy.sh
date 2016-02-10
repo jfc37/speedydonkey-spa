@@ -116,6 +116,8 @@ echo Selecting node version
 # 2. Select node version
 selectNodeVersion
 
+echo npm version:
+npm -v
 #
 ## 3. Install npm packages
 #if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
