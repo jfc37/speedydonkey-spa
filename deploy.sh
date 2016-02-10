@@ -115,6 +115,7 @@ fi
 #if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 #  cd "$DEPLOYMENT_TARGET"
 
+echo npm version:
 npm -v
 
 #  exitWithMessageOnError "npm failed"
