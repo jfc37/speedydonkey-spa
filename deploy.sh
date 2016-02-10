@@ -111,24 +111,24 @@ echo Selecting node version
 selectNodeVersion
 
 
-## 3. Install npm packages
-#if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-#  cd "$DEPLOYMENT_TARGET"
-#
-#eval $NPM_CMD -v
-#
-#  exitWithMessageOnError "npm failed"
-#  cd - > /dev/null
-#fi
-#
-#
-##5. Run gulp
-#if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-#cd "$DEPLOYMENT_TARGET"
-#
+# 3. Install npm packages
+if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
+
+eval $NPM_CMD -v
+
+  exitWithMessageOnError "npm failed"
+  cd - > /dev/null
+fi
+
+
+#5. Run gulp
+if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+cd "$DEPLOYMENT_TARGET"
+
 #echo Install npm...
 #eval $NPM_CMD install
-#
+
 #echo Install gulp...
 #eval $NPM_CMD install gulp
 #exitWithMessageOnError "installing gulp failed"
@@ -136,11 +136,11 @@ selectNodeVersion
 #echo gulp version is
 #./node_modules/.bin/gulp -v
 #
-#echo gonna run build
-#./node_modules/.bin/gulp build
-#exitWithMessageOnError "gulp failed"
-#cd - > /dev/null
-#fi
+echo gonna run build
+./node_modules/.bin/gulp build
+exitWithMessageOnError "gulp failed"
+cd - > /dev/null
+fi
 #echo Finished running gulp stuff
 #
 #
