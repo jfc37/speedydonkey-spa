@@ -93,11 +93,6 @@ selectNodeVersion () {
     NODE_EXE=node
   fi
 
-  echo "NPM_CMD"
-  echo NPM_CMD
-
-  echo "NODE_EXE"
-  echo NODE_EXE
 }
 
 ##################################################################################################################################
@@ -117,7 +112,7 @@ echo Selecting node version
 selectNodeVersion
 
 echo npm version:
-npm -v
+$NPM_CMD -v
 #
 ## 3. Install npm packages
 #if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
