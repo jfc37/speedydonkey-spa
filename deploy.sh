@@ -127,13 +127,14 @@ eval $NPM_CMD -v
 ##5. Run gulp
 #echo About to run gulp stuff
 #if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
-#cd "$DEPLOYMENT_TARGET"
+cd "$DEPLOYMENT_TARGET"
 #
 #eval $NPM_CMD install
-#eval $NPM_CMD install gulp
-#exitWithMessageOnError "installing gulp failed"
+eval $NPM_CMD install gulp -g
+exitWithMessageOnError "installing gulp failed"
 #
-#echo gulp version is
+echo gulp version is
+gulp -v
 #./node_modules/.bin/gulp -v
 #echo gonna run build
 #./node_modules/.bin/gulp build
