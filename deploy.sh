@@ -112,7 +112,7 @@ selectNodeVersion
 
 
 # 3. Install npm packages
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+#if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
 
 echo npm version:
@@ -120,10 +120,10 @@ eval $NPM_CMD -v
 
 echo directory:
 echo $DEPLOYMENT_TARGET
-
-  exitWithMessageOnError "npm failed"
-  cd - > /dev/null
-fi
+#
+#  exitWithMessageOnError "npm failed"
+#  cd - > /dev/null
+#fi
 
 #echo Installing bower packages
 ## 4. Install bower packages
