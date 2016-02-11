@@ -92,7 +92,6 @@ selectNodeVersion () {
     NPM_CMD=npm
     NODE_EXE=node
   fi
-
 }
 
 ##################################################################################################################################
@@ -101,61 +100,74 @@ selectNodeVersion () {
 
 echo Handling node.js deployment.
 
-## 1. KuduSync
-#if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
-#  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
-#  exitWithMessageOnError "Kudu Sync failed"
-#fi
-#
+# 1. KuduSync
+if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
+  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
+  exitWithMessageOnError "Kudu Sync failed"
+fi
+
 echo Selecting node version
 # 2. Select node version
 selectNodeVersion
 
+
+# 3. Install npm packages
+if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
+
 echo npm version:
 eval $NPM_CMD -v
 
-## 3. Install npm packages
-#if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-#  cd "$DEPLOYMENT_TARGET"
-#
-#eval $NPM_CMD -v
-#
-#  exitWithMessageOnError "npm failed"
-#  cd - > /dev/null
+  exitWithMessageOnError "npm failed"
+  cd - > /dev/null
+fi
+
+echo Installing bower packages
+# 4. Install bower packages
+#if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
+#cd "$DEPLOYMENT_TARGET"
+#eval $NPM_CMD install bower -g
+#eval $NPM_CMD install bower
+#exitWithMessageOnError "installing bower failed"
+#./node_modules/.bin/bower cache clean
+#./node_modules/.bin/bower install
+#exitWithMessageOnError "bower failed"
+#cd - > /dev/null
 #fi
-#
-##5. Run gulp
-#echo About to run gulp stuff
-#if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
+
+#5. Run gulp
+echo About to run gulp stuff
+if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
 cd "$DEPLOYMENT_TARGET"
 
-#eval $NPM_CMD install
-eval $NPM_CMD install gulp
+eval $NPM_CMD update
+#eval $NPM_CMD install gulp
 exitWithMessageOnError "installing gulp failed"
-#
+
 echo gulp version is
 gulp -v
 #./node_modules/.bin/gulp -v
-#echo gonna run build
+echo gonna run build
 #./node_modules/.bin/gulp build
-#exitWithMessageOnError "gulp failed"
-#cd - > /dev/null
-#fi
-#echo Finished running gulp stuff
-#
-#
-#
-#
-#
-#
-###################################################################################################################################
-#
-## Post deployment stub
-#if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
-#  POST_DEPLOYMENT_ACTION=${POST_DEPLOYMENT_ACTION//\"}
-#  cd "${POST_DEPLOYMENT_ACTION_DIR%\\*}"
-#  "$POST_DEPLOYMENT_ACTION"
-#  exitWithMessageOnError "post deployment action failed"
-#fi
-#
-#echo "Finished successfully."
+gulp build
+exitWithMessageOnError "gulp failed"
+cd - > /dev/null
+fi
+echo Finished running gulp stuff
+
+
+
+
+
+
+##################################################################################################################################
+
+# Post deployment stub
+if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
+  POST_DEPLOYMENT_ACTION=${POST_DEPLOYMENT_ACTION//\"}
+  cd "${POST_DEPLOYMENT_ACTION_DIR%\\*}"
+  "$POST_DEPLOYMENT_ACTION"
+  exitWithMessageOnError "post deployment action failed"
+fi
+
+echo "Finished successfully."
