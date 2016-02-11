@@ -147,12 +147,12 @@ fi
 ##eval $NPM_CMD install gulp
 #exitWithMessageOnError "installing gulp failed"
 #
-#echo gulp version is
+echo gulp version is
 #gulp -v
-##./node_modules/.bin/gulp -v
+./node_modules/.bin/gulp -v
 #echo gonna run build
-#./node_modules/.bin/gulp build
-gulp build
+./node_modules/.bin/gulp build
+#gulp build
 exitWithMessageOnError "gulp failed"
 cd - > /dev/null
 fi
