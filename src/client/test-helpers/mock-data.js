@@ -1,5 +1,7 @@
+
+
 /* jshint -W079 */
-var mockData = (function() {
+var mockData = (function () {
     return {
         getMockCustomers: getMockCustomers,
         getMockStates: getMockStates,

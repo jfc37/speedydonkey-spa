@@ -1,88 +1,139 @@
-/* globals describe, it, expect, beforeEach, bard, $controller */
+/* globals describe, it, expect, assert, beforeEach, bard, $controller */
 describe('Block Enrolment', function () {
+    var $controller;
 
-    //    var httpSpy;
-    //
-    //    beforeEach(function () {
-    //        bard.appModule('app.core', 'app.apiCaller');
-    //        bard.inject('$http', '$httpBackend', '$q', '$rootScope', 'logger', 'config', 'simpleApiCaller');
-    //
-    //
-    //        httpSpy = {
-    //            getAnnouncements: sinon.spy(function () {
-    //                return $q.when(['a'])
-    //            })
-    //        };
-    //        bard.mockService(announcementsService, announcementsServiceSpy);
-    //    });
+    beforeEach(module('app.blockEnrolment', 'blocks.router', 'app.core', 'app.apiCaller'));
 
-    it('gets blocks from server', function () {
-        //expect(announcementsServiceSpy.getAnnouncements).to.have.been.called;
-        expect(true).to.exist;
+    beforeEach(function () {
+        angular.mock.module({
+            'jwtHelper': {
+                isTokenExpired: function () {
+                    return false;
+                }
+            }
+        });
+        angular.mock.module({
+            'auth': {
+                hookEvents: function () {
+                    return false;
+                }
+            }
+        });
+        angular.mock.module({
+            'routehelper': {
+                configureRoutes: function () {}
+            }
+        });
+
+        bard.inject('$http', '$httpBackend');
     });
 
-    //    describe('when get is called', function () {
-    //
-    //        it('then something is returned', function () {
-    //            $httpBackend.when('GET', '').respond(200);
-    //
-    //            simpleApiCaller.get({}).then(function (response) {
-    //                console.log('reponse is:' + response);
-    //                expect(response).to.exist;
-    //            });
-    //
-    //            $httpBackend.flush();
-    //        });
-    //
-    //    });
+    beforeEach(inject(function (_$controller_) {
+        $controller = _$controller_;
+    }));
 
+    describe('display blocks to user', function () {
+        describe('when no blocks are available for enrolment', function () {
+            it('should not display any blocks', function () {
+                $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/blocks/for-enrolment').respond(404);
+                $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/users/current/blocks').respond(200, []);
 
+                var controller = $controller('BlockEnrolment');
+
+                $httpBackend.flush();
+
+                expect(controller.blocks.length).to.equal(0);
+            });
+        });
+
+        describe('when a block is available for enrolment', function () {
+
+            beforeEach(function () {
+                $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/blocks/for-enrolment').respond(200, [{
+                    name: 'name',
+                    id: 1
+                }]);
+            });
+
+            describe('when the user is not enrolled', function () {
+
+                it('should allow the user to enrol', function () {
+                    $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/users/current/blocks').respond(200, []);
+                    var controller = $controller('BlockEnrolment');
+
+                    $httpBackend.flush();
+
+                    expect(controller.blocks.length).to.equal(1);
+                    expect(controller.blocks[0].isEnroled).to.equal(false);
+                });
+            });
+
+            describe('when the user is enrolled', function () {
+
+                it('should not allow the user to enrol', function () {
+                    $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/users/current/blocks').respond(200, [{
+                        name: 'name',
+                        id: 1
+                    }]);
+                    var controller = $controller('BlockEnrolment');
+
+                    $httpBackend.flush();
+
+                    expect(controller.blocks.length).to.equal(1);
+                    expect(controller.blocks[0].isEnroled).to.equal(true);
+                });
+            });
+
+        });
+
+        describe('when two blocks on the same day are available for enrolment', function () {
+            beforeEach(function () {
+                $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/blocks/for-enrolment').respond(200, [{
+                    name: 'block 1',
+                    id: 1,
+                    startDate: new Date(2015, 11, 3, 18, 0)
+                }, {
+                    name: 'block 2',
+                    id: 2,
+                    startDate: new Date(2015, 11, 3, 20, 0)
+                }]);
+
+                $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/users/current/blocks').respond(200, []);
+
+            });
+
+            it('should group the blocks together', function () {
+                var controller = $controller('BlockEnrolment');
+
+                $httpBackend.flush();
+
+                expect(controller.blockGrouping.length).to.equal(1);
+            });
+        });
+
+        describe('when two blocks on different days are available for enrolment', function () {
+            beforeEach(function () {
+                $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/blocks/for-enrolment').respond(200, [{
+                    name: 'block 1',
+                    id: 1,
+                    startDate: new Date(2015, 11, 3, 18, 0)
+                }, {
+                    name: 'block 2',
+                    id: 2,
+                    startDate: new Date(2015, 11, 4, 20, 0)
+                }]);
+
+                $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/users/current/blocks').respond(200, []);
+
+            });
+
+            it('should not group the blocks together', function () {
+                var controller = $controller('BlockEnrolment');
+
+                $httpBackend.flush();
+
+                expect(controller.blockGrouping.length).to.equal(2);
+            });
+        });
+    });
 });
-
-
-//describe("Block Enrolment", function () {
-//
-//    // start at root before every test is run
-//    beforeEach(function () {
-//        browser().navigateTo('/');
-//    });
-//
-//    // test default route
-//    it('should jump to the /home path when / is accessed', function () {
-//        browser().navigateTo('#/');
-//        expect(browser().location().path()).toBe("/login");
-//    });
-//
-//    it('ensures user can log in', function () {
-//        browser().navigateTo('#/login');
-//        expect(browser().location().path()).toBe("/login");
-//
-//        // assuming inputs have ng-model specified, and this conbination will successfully login
-//        input('email').enter('test@test.com');
-//        input('password').enter('password');
-//        element('submit').click();
-//
-//        // logged in route
-//        expect(browser().location().path()).toBe("/dashboard");
-//
-//        // my dashboard page has a label for the email address of the logged in user
-//        expect(element('#email').html()).toContain('test@test.com');
-//    });
-//
-//    it('should keep invalid logins on this page', function () {
-//        browser().navigateTo('#/login');
-//        expect(browser().location().path()).toBe("/login");
-//
-//        // assuming inputs have ng-model specified, and this conbination will successfully login
-//        input('email').enter('invalid@test.com');
-//        input('password').enter('wrong password');
-//        element('submit').click();
-//
-//        expect(element('#message').html().toLowerCase()).toContain('failed');
-//
-//        // logged out route
-//        expect(browser().location().path()).toBe("/login");
-//
-//    });
-//
-//});

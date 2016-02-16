@@ -13,7 +13,7 @@
     "bower_components"
   ],
   "devDependencies": {
-    "angular-mocks": "^1.2.23",
+    "angular-mocks": "~1.5.0",
     "sinon": "~1.16.1",
     "bardjs": "~0.1.8",
     "metisMenu": "~2.2.0"
