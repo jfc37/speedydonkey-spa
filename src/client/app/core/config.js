@@ -52,7 +52,7 @@
         });
     }
 
-    setupGoogleAnalytics();
+    //setupGoogleAnalytics();
 
     function setupGoogleAnalytics() {
         (function (i, s, o, g, r, a, m) {
