@@ -3,16 +3,18 @@ describe('login.controller', function () {
     var controller;
     var routeHelper = {};
     var authService = {};
+    var missingUserDetailsService = {};
 
     beforeEach(function () {
-        bard.appModule('app.logon', 'blocks.logger', 'app.core', 'app.apiCaller', 'blocks.router');
-        bard.inject('$controller', '$q', '$rootScope', 'logger', 'routehelper', 'validationService', 'config');
+        bard.appModule('app.logon', 'blocks.logger', 'app.core', 'app.apiCaller', 'blocks.router', 'app.users');
+        bard.inject('$controller', '$q', '$rootScope', 'logger', 'routehelper', 'validationService', 'config', 'missingUserDetailsService');
 
         authService = {
             login: function () {
                 return $q.when();
             }
         };
+
 
         controller = $controller('Login', {
             authService: authService,
@@ -39,7 +41,6 @@ describe('login.controller', function () {
             controller.email = 'email';
             controller.password = 'password';
 
-            controller.submit();
             $rootScope.$apply();
         });
 

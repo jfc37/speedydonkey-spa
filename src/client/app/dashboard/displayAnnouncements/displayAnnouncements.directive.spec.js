@@ -7,7 +7,6 @@ describe('displayAnnouncements.directive', function () {
     beforeEach(function () {
         bard.appModule('app.dashboard', 'app.core', 'app.apiCaller');
         bard.inject('$rootScope', '$compile', '$q', 'announcementsService', 'config');
-
         announcementsServiceSpy = {
             getAnnouncements: sinon.spy(function () {
                 return $q.when(['a'])

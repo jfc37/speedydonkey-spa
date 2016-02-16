@@ -95,7 +95,8 @@ module.exports = function () {
             'node_modules/sinon-chai/lib/sinon-chai.js',
             'node_modules/sinon/pkg/sinon.js'
         ],
-        specs: [clientApp + '**/*.spec.js'],
+        //specs: [clientApp + '**/*.spec.js', client + 'tests/*.spec.js'],
+        specs: [client + 'tests/*.spec.js'],
 
         /**
          * Node settings
