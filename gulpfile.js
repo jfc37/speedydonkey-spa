@@ -140,7 +140,8 @@ gulp.task('environment-setup', function () {
     process.env.RaygunKey = process.env.RaygunKey || 'QjEhJ+hmGUEuvW7qQpYKGQ==';
     process.env.GoogleAnalytics = process.env.GoogleAnalytics || 'UA-36895453-2';
     process.env.auth0Domain = process.env.auth0Domain || 'jfc.au.auth0.com';
-    process.env.auth0ClientId = process.env.auth0ClientId || 'tsPjABlzKswuJc98NxwcftQnHVYv7iTh';
+    //process.env.auth0ClientId = process.env.auth0ClientId || 'tsPjABlzKswuJc98NxwcftQnHVYv7iTh';
+    process.env.auth0ClientId = process.env.auth0ClientId || 'tebOmgg6VvwhJCoX6tPcmG1VOt5NoHlJ';
 
     return gulp.src('config.js')
         .pipe($.replace(/<company>/g, process.env.Company))
