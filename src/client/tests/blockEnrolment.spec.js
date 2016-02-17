@@ -8,75 +8,9 @@ describe('Block Enrolment', function () {
         $httpBackend.flush();
     }
 
-    function singleBlockAvailable() {
-        $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/blocks/for-enrolment').respond(200, [{
-            name: 'name',
-            id: 1
-        }]);
-    }
-
-    function noBlocksAvailable() {
-        $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/blocks/for-enrolment').respond(404);
-    }
-
-    function twoBlocksAvailableOnSameDay() {
-        $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/blocks/for-enrolment').respond(200, [{
-            name: 'block 1',
-            id: 1,
-            startDate: new Date(2015, 11, 3, 18, 0)
-        }, {
-            name: 'block 2',
-            id: 2,
-            startDate: new Date(2015, 11, 3, 20, 0)
-        }]);
-    }
-
-    function twoBlocksAvailableOnDifferentDays() {
-        $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/blocks/for-enrolment').respond(200, [{
-            name: 'block 1',
-            id: 1,
-            startDate: new Date(2015, 11, 3, 18, 0)
-        }, {
-            name: 'block 2',
-            id: 2,
-            startDate: new Date(2015, 11, 4, 20, 0)
-        }]);
-    }
-
-    function notEnrolledInAny() {
-        $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/users/current/blocks').respond(200, []);
-    }
-
-    function enrolledInOne() {
-        $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/users/current/blocks').respond(200, [{
-            name: 'name',
-            id: 1
-        }]);
-    }
-
     beforeEach(module('app.blockEnrolment', 'blocks.router', 'app.core', 'app.apiCaller'));
     beforeEach(function () {
-        angular.mock.module({
-            'jwtHelper': {
-                isTokenExpired: function () {
-                    return false;
-                }
-            }
-        });
-        angular.mock.module({
-            'auth': {
-                hookEvents: function () {
-                    return false;
-                }
-            }
-        });
-        angular.mock.module({
-            'routehelper': {
-                configureRoutes: function () {}
-            }
-        });
-
-        bard.inject('$http', '$httpBackend');
+        AngularMock.setup();
 
         inject(function (_$controller_) {
             $controller = _$controller_;
@@ -87,8 +21,8 @@ describe('Block Enrolment', function () {
 
         describe('when no blocks are available for enrolment', function () {
             beforeEach(function () {
-                noBlocksAvailable();
-                notEnrolledInAny();
+                MockHttp.BlockEnrolment.noBlocksAvailable();
+                MockHttp.BlockEnrolment.notEnrolledInAny();
                 kickOff();
             });
 
@@ -99,12 +33,12 @@ describe('Block Enrolment', function () {
 
         describe('when a block is available for enrolment', function () {
             beforeEach(function () {
-                singleBlockAvailable();
+                MockHttp.BlockEnrolment.singleBlockAvailable();
             });
 
             describe('when the user is not enrolled', function () {
                 beforeEach(function () {
-                    notEnrolledInAny();
+                    MockHttp.BlockEnrolment.notEnrolledInAny();
                     kickOff();
                 });
 
@@ -120,7 +54,7 @@ describe('Block Enrolment', function () {
 
             describe('when the user is enrolled', function () {
                 beforeEach(function () {
-                    enrolledInOne();
+                    MockHttp.BlockEnrolment.enrolledInOne();
                     kickOff();
                 });
 
@@ -137,8 +71,8 @@ describe('Block Enrolment', function () {
 
         describe('when two blocks on the same day are available for enrolment', function () {
             beforeEach(function () {
-                twoBlocksAvailableOnSameDay();
-                notEnrolledInAny();
+                MockHttp.BlockEnrolment.twoBlocksAvailableOnSameDay();
+                MockHttp.BlockEnrolment.notEnrolledInAny();
                 kickOff();
             });
 
@@ -149,8 +83,8 @@ describe('Block Enrolment', function () {
 
         describe('when two blocks on different days are available for enrolment', function () {
             beforeEach(function () {
-                twoBlocksAvailableOnDifferentDays();
-                notEnrolledInAny();
+                MockHttp.BlockEnrolment.twoBlocksAvailableOnDifferentDays();
+                MockHttp.BlockEnrolment.notEnrolledInAny();
                 kickOff();
 
             });
@@ -165,8 +99,8 @@ describe('Block Enrolment', function () {
 
         describe('when user selects block to enrol in', function () {
             beforeEach(function () {
-                singleBlockAvailable();
-                notEnrolledInAny();
+                MockHttp.BlockEnrolment.singleBlockAvailable();
+                MockHttp.BlockEnrolment.notEnrolledInAny();
                 kickOff();
                 controller.blocks[0].enrolIn = true;
             });
@@ -176,5 +110,25 @@ describe('Block Enrolment', function () {
             });
         });
 
+    });
+
+    describe('when user enrols in block', function () {
+        beforeEach(function () {
+            MockHttp.BlockEnrolment.singleBlockAvailable();
+            MockHttp.BlockEnrolment.notEnrolledInAny();
+            kickOff();
+            controller.blocks[0].enrolIn = true;
+            $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/users/current/enrolment').respond('200');
+            controller.submit();
+            $httpBackend.flush();
+        });
+
+        it('should post enrolment request to server', function () {
+            $httpBackend.verifyNoOutstandingExpectation();
+        });
+
+        it('should redirect user to dashboard', function () {
+            expect(Spies.routehelper.redirectToRoute.calledWith('dashboard')).to.equal(true);
+        });
     });
 });
