@@ -6,8 +6,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var compress = require('compression');
 var cors = require('cors');
-var errorHandler = require('./utils/errorHandler')();
-var four0four = require('./utils/404')();
+var errorHandler = require('src/server/utils/errorHandler')();
+var four0four = require('src/server/utils/404')();
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 7203;
@@ -25,7 +25,7 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(errorHandler.init);
 
-routes = require('./routes/index')(app);
+routes = require('src/server/routes/index')(app);
 
 console.log('About to crank up node');
 console.log('PORT=' + port);

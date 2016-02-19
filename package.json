@@ -16,7 +16,7 @@
   },
   "scripts": {
     "init": "npm install",
-    "start": "gulp serve-dev"
+    "start": "gulp serve-build"
   },
   "dependencies": {
     "angular-cookies": "^1.4.7",
