@@ -25,6 +25,8 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(errorHandler.init);
 
+applySecruity(app);
+
 routes = require('./src/server/routes/index')(app);
 
 console.log('About to crank up node');
@@ -68,3 +70,70 @@ app.listen(port, function () {
         '\n__dirname = ' + __dirname +
         '\nprocess.cwd = ' + process.cwd());
 });
+
+function applySecruity(app) {
+    var hsts = require('hsts');
+    var nosniff = require('dont-sniff-mimetype');
+    var frameguard = require('frameguard');
+    var ienoopen = require('ienoopen');
+    var xssFilter = require('x-xss-protection');
+
+    //Remove X-Powered-By header
+    app.disable('x-powered-by');
+
+    //Set X-Content-Type-Options header to no-sniff
+    app.use(nosniff());
+
+    //Set X-Frame-Options to stop site being put in any frame
+    app.use(frameguard('deny'));
+
+    //Set X-Download-Options header
+    app.use(ienoopen());
+
+    //Set X-XSS-Protection header
+    app.use(xssFilter());
+
+    var ninetyDaysInMilliseconds = 7776000000;
+    //Add Strict-Transport-Security header to force https
+    app.use(hsts({
+        maxAge: ninetyDaysInMilliseconds,
+        includeSubDomains: true,
+        force: true,
+        preload: true
+    }));
+
+    setupCsp(app);
+}
+
+function setupCsp(app) {
+    var csp = require('helmet-csp');
+
+    var apiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
+
+    var defaultSrc = ["'self'", "'unsafe-inline", 'https://fonts.googleapis.com', 'www.google-analytics.com/analytics.js'];
+    var scriptSrc = ["'self'", "''unsafe-inline'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com', 'cdn.au.auth0.com', 'jfc.au.auth0.com'];
+    var fontSrc = ["'self'", 'fonts.gstatic.com', 'cdn.auth0.com', 'data:'];
+    var imgSrc = ["'self", 'www.google-analytics.com', 'data:', 'www.gravatar.com'];
+    var styleSrc = ["'self'", "'unsafe-inline", 'fonts.googleapis.com'];
+    var connectSrc = ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io', 'jfc.au.auth0.com'];
+    var reportUri = 'report - uri.io / report / cb45e022bf5061dd8d8fc15e2abdad4e';
+
+    if (isDev()) {
+        connectSrc = connectSrc.concat(['ws://localhost:3000']);
+    }
+
+    //Add CSP header to only allow trusted scripts and content
+    app.use(csp({
+        defaultSrc: defaultSrc,
+        scriptSrc: scriptSrc,
+        fontSrc: fontSrc,
+        imgSrc: imgSrc,
+        styleSrc: styleSrc,
+        connectSrc: connectSrc,
+        reportUri: reportUri
+    }));
+}
+
+function isDev() {
+    return environment !== 'build';
+}
