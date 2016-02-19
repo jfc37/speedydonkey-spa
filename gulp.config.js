@@ -62,6 +62,7 @@ module.exports = function () {
             client + 'stubs/**/*.js'
         ],
         temp: temp,
+        appConfigFolder: clientApp + 'core/',
 
         /**
          * optimized files

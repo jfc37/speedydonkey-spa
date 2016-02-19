@@ -31,6 +31,33 @@ var port = process.env.PORT || config.defaultPort;
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
 
+gulp.task('environment-setup', function () {
+    log('Setting up environment config');
+
+    process.env.Company = process.env.Company || 'Speedy Donkey LOCAL';
+    process.env.ApiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
+    process.env.SpaUrl = process.env.SpaUrl || 'localhost:3000';
+    process.env.LocalStorageDomain = process.env.SpaUrl || '';
+    process.env.PayPalDomain = process.env.PayPalDomain || 'sandbox.paypal.com';
+    process.env.RaygunKey = process.env.RaygunKey || 'QjEhJ+hmGUEuvW7qQpYKGQ==';
+    process.env.GoogleAnalytics = process.env.GoogleAnalytics || 'UA-36895453-2';
+    process.env.auth0Domain = process.env.auth0Domain || 'jfc.au.auth0.com';
+    process.env.auth0ClientId = process.env.auth0ClientId || 'tsPjABlzKswuJc98NxwcftQnHVYv7iTh';
+
+    return gulp.src('config.js')
+        .pipe($.replace(/<company>/g, process.env.Company))
+        .pipe($.replace(/<apiUrl>/g, process.env.ApiUrl))
+        .pipe($.replace(/<spaUrl>/g, process.env.SpaUrl))
+        .pipe($.replace(/<paypalDomain>/g, process.env.PayPalDomain))
+        .pipe($.replace(/<raygunKey>/g, process.env.RaygunKey))
+        .pipe($.replace(/<localStorageDomain>/g, process.env.LocalStorageDomain))
+        .pipe($.replace(/<localStoragePrefix>/g, 'fullswing'))
+        .pipe($.replace(/<googleAnalystics>/g, process.env.GoogleAnalytics))
+        .pipe($.replace(/<auth0Domain>/g, process.env.auth0Domain))
+        .pipe($.replace(/<auth0ClientId>/g, process.env.auth0ClientId))
+        .pipe(gulp.dest(config.appConfigFolder));
+});
+
 /**
  * vet the code and create coverage report
  * @return {Stream}
@@ -133,7 +160,7 @@ gulp.task('templatecache', ['clean-code'], function () {
  * Wire-up the bower dependencies
  * @return {Stream}
  */
-gulp.task('wiredep', function () {
+gulp.task('wiredep', ['environment-setup'], function () {
     log('Wiring the bower dependencies into the html');
 
     var wiredep = require('wiredep').stream;

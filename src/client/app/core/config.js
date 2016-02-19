@@ -47,7 +47,7 @@
     function authZeroConfig(authProvider) {
         authProvider.init({
             domain: 'jfc.au.auth0.com',
-            clientID: 'tebOmgg6VvwhJCoX6tPcmG1VOt5NoHlJ',
+            clientID: 'tsPjABlzKswuJc98NxwcftQnHVYv7iTh',
             loginUrl: '/login',
         });
     }
