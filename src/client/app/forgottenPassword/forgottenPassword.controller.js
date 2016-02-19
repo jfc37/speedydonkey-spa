@@ -16,7 +16,7 @@
             var options = {
                 resource: 'users/password/reset',
                 block: true
-            }
+            };
 
             simpleApiCaller.post({
                 email: vm.email

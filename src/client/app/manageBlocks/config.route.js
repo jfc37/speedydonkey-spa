@@ -26,7 +26,7 @@
                     },
                     claim: 'Admin'
                 }
-}, {
+        }, {
                 url: '/admin/manage/blocks/create',
                 config: {
                     title: 'createBlock',
@@ -35,7 +35,7 @@
                     templateUrl: 'app/manageBlocks/createBlock/createBlock.html',
                     claim: 'Admin'
                 }
-}, {
+        }, {
                 url: '/admin/manage/blocks/:id',
                 config: {
                     title: 'block',
@@ -44,7 +44,7 @@
                     templateUrl: 'app/manageBlocks/manageBlock/block.html',
                     claim: 'Admin'
                 }
-}, {
+        }, {
                 url: '/admin/manage/blocks/:id/update',
                 config: {
                     title: 'updateBlock',
@@ -53,7 +53,7 @@
                     templateUrl: 'app/manageBlocks/updateBlock/updateBlock.html',
                     claim: 'Admin'
                 }
-}
-        ];
+        }
+                ];
     }
 })();

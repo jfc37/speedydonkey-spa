@@ -1,0 +1,14 @@
+{
+  "name": "glob",
+  "homepage": "https://github.com/jamesdbloom/node-glob",
+  "version": "4.0.6",
+  "_release": "4.0.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.0.6",
+    "commit": "71252735e969934a83d3e366e15bcace29e5b7a7"
+  },
+  "_source": "git://github.com/jamesdbloom/node-glob.git",
+  "_target": "~4.0.6",
+  "_originalSource": "glob"
+}

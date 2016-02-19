@@ -1,56 +1,50 @@
 <!DOCTYPE html>
-<html data-ng-app="app">
+<html>
 
-<head>
-    <style>
-        /* This helps the ng-show/ng-hide animations start at the right place. */
-        /* Since Angular has this but needs to load, this gives us the class early. */
-
-        .ng-hide {
-            display: none!important;
-        }
-    </style>
-    <title data-ng-bind="title"></title>
-    <meta charset="utf-8" />
+<head lang="en">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>gulp</title>
 
-    <!-- build:css styles/lib.css -->
+    <style>
+        body {
+            font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+            padding-left: 20px;
+        }
+    </style>
 
-    <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
-    <link rel="stylesheet" href="/bower_components/angular-block-ui/dist/angular-block-ui.css" />
-    <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.css" />
-    <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.min.css" />
-    <link rel="stylesheet" href="/bower_components/angular-tablesort/tablesort.css" />
-    <link rel="stylesheet" href="/bower_components/metisMenu/dist/metisMenu.css" />
-    <link rel="stylesheet" href="/bower_components/summernote/dist/summernote.css" />
-    <link rel="stylesheet" href="/bower_components/summernote/dist/summernote-bs3.css" />
-    <link rel="stylesheet" href="/bower_components/components-font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="/bower_components/ui-select/dist/select.css" />
-    <link rel="stylesheet" href="/bower_components/select2/dist/css/select2.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
+    <!--BEWARE of using any app styles as @media can screw up tests -->
 
-    <!-- build:css styles/app.css-->
-
-    <!-- inject:css -->
-    <link rel="stylesheet" href="/.tmp/style.css">
-    <!-- endinject -->
-
-    <!-- endbuild -->
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
 
 </head>
 
 <body>
-    <div>
-        <div data-ng-include="'app/layout/shell.html'"></div>
-    </div>
 
+    <h1><a href="specs.html">Spec Runner</a></h1>
+    <p><strong>Make sure the REMOTE server is running</strong>
+        <br/> Click on a <em>description title</em> to narrow the scope to just its specs (see "<a href="http://mochajs.github.io/mocha/#grep-option" target="_blank" title="MochaJS grep option">
+            ?grep</a>" in address bar).
+        <br/> Click on a <em>spec title</em> to see the test implementation.
+        <br/> Click on <em>page title</em> to start over.
+    </p>
 
-    <!-- build:js js/lib.js -->
+    <div id="mocha"></div>
+
+    <!-- inject:testlibraries:js -->
+    <script src="/node_modules/mocha/mocha.js"></script>
+    <script src="/node_modules/chai/chai.js"></script>
+    <script src="/node_modules/sinon/pkg/sinon.js"></script>
+    <script src="/node_modules/sinon-chai/lib/sinon-chai.js"></script>
+    <!-- endinject -->
+
+    <script>
+        expect = chai.expect;
+        AssertionError = chai.AssertionError;
+        mocha.setup('bdd');
+        mocha.traceIgnores = ['mocha.js', 'chai.js', 'angular.js'];
+    </script>
 
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -98,11 +92,14 @@
     <script src="/bower_components/angular-jwt/dist/angular-jwt.js"></script>
     <script src="/bower_components/angular-storage/dist/angular-storage.js"></script>
     <script src="/bower_components/a0-angular-storage/dist/angular-storage.js"></script>
+    <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="/bower_components/bardjs/dist/bard.js"></script>
+    <script src="/bower_components/bardjs/dist/bard-ngRouteTester.js"></script>
+    <script src="/bower_components/glob/glob.js"></script>
     <!-- endbower -->
 
-    <!-- endbuild -->
 
-    <!-- build:js js/app.js -->
+
     <!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
     <script src="/src/client/app/adminDashboard/adminDashboard.module.js"></script>
@@ -294,10 +291,29 @@
     <script src="/src/client/app/windyLindy/windyLindy.service.js"></script>
     <!-- endinject -->
 
-    <!-- inject:templates:js -->
+    <!-- inject:spechelpers:js -->
+    <script src="/src/client/test-helpers/angular-mocks.js"></script>
+    <script src="/src/client/test-helpers/bind-polyfill.js"></script>
+    <script src="/src/client/test-helpers/mock-data.js"></script>
+    <script src="/src/client/test-helpers/mock-http.js"></script>
+    <script src="/src/client/test-helpers/spies.js"></script>
     <!-- endinject -->
 
-    <!-- endbuild -->
+    <!-- inject:specs:js -->
+    <script src="/src/client/tests/blockEnrolment.spec.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/simpleApiCaller.spec.js"></script>
+    <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.spec.js"></script>
+    <script src="/src/client/app/login/login.controller.spec.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:templates:js -->
+    <script src="/.tmp/templates.js"></script>
+    <!-- endinject -->
+
+    <script>
+        mocha.run();
+    </script>
+
 </body>
 
 </html>

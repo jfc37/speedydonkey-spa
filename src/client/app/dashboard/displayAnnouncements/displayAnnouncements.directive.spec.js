@@ -1,4 +1,4 @@
-/* globals describe, it, expect, beforeEach, bard, $controller */
+/* globals sinon, $q, describe, it, expect, beforeEach, bard, $controller */
 describe('displayAnnouncements.directive', function () {
     var element;
     var scope;
@@ -9,7 +9,7 @@ describe('displayAnnouncements.directive', function () {
         bard.inject('$rootScope', '$compile', '$q', 'announcementsService', 'config');
         announcementsServiceSpy = {
             getAnnouncements: sinon.spy(function () {
-                return $q.when(['a'])
+                return $q.when(['a']);
             })
         };
         bard.mockService(announcementsService, announcementsServiceSpy);
@@ -29,5 +29,5 @@ describe('displayAnnouncements.directive', function () {
             expect(scope.vm.announcements).to.exist;
             expect(scope.vm.announcements).to.have.length(1);
         });
-    })
+    });
 });
