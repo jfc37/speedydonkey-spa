@@ -12,6 +12,7 @@
 
     // Must configure the service and set its
     // events via the exceptionConfigProvider
+    /* @ngInject */
     function exceptionConfigProvider() {
         /* jshint validthis:true */
         this.config = {

@@ -1,10 +1,9 @@
 /* globals describe, it, expect, beforeEach, bard, $controller */
 describe('simpleApiCaller', function () {
-
-    beforeEach(function () {
-        bard.appModule('app.core', 'app.apiCaller');
-        bard.inject('$http', '$httpBackend', '$q', '$rootScope', 'logger', 'config', 'simpleApiCaller');
-    });
+beforeEach(function () {
+    bard.appModule('app.core', 'app.apiCaller');
+    bard.inject('$http', '$httpBackend', '$q', '$rootScope', 'logger', 'config', 'simpleApiCaller');
+});
 
     it('exists', function () {
         expect(simpleApiCaller).to.exist;

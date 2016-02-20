@@ -10,7 +10,7 @@
 
     function note(dataUpdateService, logger) {
         var directive = {
-            templateUrl: 'app/core/directives/note.html',
+            templateUrl: 'app / core / directives / note.html',
             require: ['ngModel'],
             scope: {
                 ngModel: '='
