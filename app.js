@@ -116,7 +116,7 @@ function setupCsp(app) {
     var imgSrc = ["'self", 'www.google-analytics.com', 'data:', 'www.gravatar.com'];
     var styleSrc = ["'self'", "'unsafe-inline", 'fonts.googleapis.com'];
     var connectSrc = ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io', 'jfc.au.auth0.com'];
-    var reportUri = 'report - uri.io / report / cb45e022bf5061dd8d8fc15e2abdad4e';
+    var reportUri = 'report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e';
 
     if (isDev()) {
         connectSrc = connectSrc.concat(['ws://localhost:3000']);
