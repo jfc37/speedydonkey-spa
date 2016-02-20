@@ -89,7 +89,7 @@
         blockUIConfig.delay = 0;
         blockUIConfig.resetOnException = true;
         blockUIConfig.autoBlock = false;
-        //blockUIConfig.autoInjectBodyBlock = false;
+        blockUIConfig.templateUrl = 'app/core/directives/blockUiOverlay.html';
     }
 
     var config = {
