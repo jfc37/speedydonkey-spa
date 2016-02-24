@@ -6,27 +6,24 @@
         .controller('Settings', Settings);
 
     /* @ngInject */
-    function Settings($q, settingsService, logger, validationService, simpleApiCaller) {
+    function Settings(settingsRepository) {
         /*jshint validthis: true */
         var vm = this;
 
         vm.title = 'Settings';
 
-        vm.dzAddedFile = function (file) {
-            logger.success(file);
+        vm.submitLogo = function () {
+            settingsRepository.update([{
+                logo: vm.settings.logo
+            }]);
         };
 
-        vm.dzError = function (file, errorMessage) {
-            logger.error(errorMessage);
-        };
+        activate();
 
-        vm.dropzoneConfig = {
-            parallelUploads: 3,
-            maxFileSize: 3,
-            maxFiles: 1,
-            url: simpleApiCaller.baseUrl + 'settings/logos',
-            paramName: 'logo',
-            acceptedFiles: 'image/*'
-        };
+        function activate() {
+            settingsRepository.getAll().then(function (settings) {
+                vm.settings = settings;
+            });
+        }
     }
 })();

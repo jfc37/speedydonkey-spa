@@ -38,22 +38,6 @@ app.get('/ping', function (req, res, next) {
     res.send('pong');
 });
 
-app.post('/upload/logo', function (req, res) {
-    var tempPath = req.files.file.path,
-        targetPath = path.resolve('./uploads/image.png');
-    if (path.extname(req.files.file.name).toLowerCase() === '.png') {
-        fs.rename(tempPath, targetPath, function (err) {
-            if (err) throw err;
-            console.log("Upload completed!");
-        });
-    } else {
-        fs.unlink(tempPath, function () {
-            if (err) throw err;
-            console.error("Only .png files are allowed!");
-        });
-    }
-});
-
 switch (environment) {
 case 'build':
     console.log('** BUILD **');
@@ -129,7 +113,7 @@ function setupCsp(app) {
     var defaultSrc = ["'self'", "'unsafe-inline", 'https://fonts.googleapis.com', 'www.google-analytics.com/analytics.js'];
     var scriptSrc = ["'self'", "''unsafe-inline'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com', 'cdn.au.auth0.com', 'jfc.au.auth0.com'];
     var fontSrc = ["'self'", 'fonts.gstatic.com', 'cdn.auth0.com', 'data:'];
-    var imgSrc = ["'self", 'www.google-analytics.com', 'data:', 'www.gravatar.com'];
+    var imgSrc = ['*', 'data:']; //["'self", 'www.google-analytics.com', 'data:', 'www.gravatar.com'];
     var styleSrc = ["'self'", "'unsafe-inline", 'fonts.googleapis.com'];
     var connectSrc = ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io', 'jfc.au.auth0.com'];
     var reportUri = 'report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e';
