@@ -14,7 +14,7 @@
 
         vm.submitLogo = function () {
             settingsRepository.update([{
-                logo: vm.settings.logo
+                logo: vm.logo
             }]);
         };
 
@@ -22,7 +22,7 @@
 
         function activate() {
             settingsRepository.getAll().then(function (settings) {
-                vm.settings = settings;
+                vm.logo = settings.logo;
             });
         }
     }
