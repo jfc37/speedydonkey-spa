@@ -7,13 +7,15 @@
 
     /* @ngInject */
     function simpleApiCaller($http, config, blockUI, logger) {
+        var baseUrl = 'https://' + config.apiUrl + '/api/';
+
         var service = {
             get: get,
             post: post,
             put: put,
-            delete: remove
+            delete: remove,
+            baseUrl: baseUrl
         };
-        var baseUrl = 'https://' + config.apiUrl + '/api/';
 
         function get(options) {
             var url = generateUrl(options);

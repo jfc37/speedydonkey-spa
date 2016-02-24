@@ -46,6 +46,7 @@
         'app.manageBlocks',
         'app.rooms',
         'app.users',
+        'app.settings',
 
         'app.standAloneEvents',
         'app.manageClasses',

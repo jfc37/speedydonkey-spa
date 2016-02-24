@@ -38,6 +38,22 @@ app.get('/ping', function (req, res, next) {
     res.send('pong');
 });
 
+app.post('/upload/logo', function (req, res) {
+    var tempPath = req.files.file.path,
+        targetPath = path.resolve('./uploads/image.png');
+    if (path.extname(req.files.file.name).toLowerCase() === '.png') {
+        fs.rename(tempPath, targetPath, function (err) {
+            if (err) throw err;
+            console.log("Upload completed!");
+        });
+    } else {
+        fs.unlink(tempPath, function () {
+            if (err) throw err;
+            console.error("Only .png files are allowed!");
+        });
+    }
+});
+
 switch (environment) {
 case 'build':
     console.log('** BUILD **');
