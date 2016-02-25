@@ -492,7 +492,7 @@ function orderSrc(src, order) {
 function serve(isDev, specRunner) {
     var debug = args.debug || args.debugBrk;
     var debugMode = args.debug ? '--debug' : args.debugBrk ? '--debug-brk' : '';
-    var nodeOptions = getNodeOptions(isDev);
+    var nodeOptions = getNodeOptions(isDev, specRunner);
 
     if (debug) {
         runNodeInspector();
@@ -526,13 +526,23 @@ function serve(isDev, specRunner) {
         });
 }
 
-function getNodeOptions(isDev) {
+function getNodeOptions(isDev, isSpecs) {
+    var env;
+
+    if (isSpecs) {
+        env = 'spec'
+    } else if (isDev) {
+        env = 'dev'
+    } else {
+        env = 'build'
+    }
+
     return {
         script: config.nodeServer,
         delayTime: 1,
         env: {
             'PORT': port,
-            'NODE_ENV': isDev ? 'dev' : 'build'
+            'NODE_ENV': env
         },
         watch: [config.server]
     };

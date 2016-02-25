@@ -92,6 +92,8 @@
     <script src="/bower_components/angular-jwt/dist/angular-jwt.js"></script>
     <script src="/bower_components/angular-storage/dist/angular-storage.js"></script>
     <script src="/bower_components/a0-angular-storage/dist/angular-storage.js"></script>
+    <script src="/bower_components/dropzone/downloads/dropzone.min.js"></script>
+    <script src="/bower_components/angular-dropzone/lib/angular-dropzone.js"></script>
     <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="/bower_components/bardjs/dist/bard.js"></script>
     <script src="/bower_components/bardjs/dist/bard-ngRouteTester.js"></script>
@@ -130,6 +132,7 @@
     <script src="/src/client/app/reportTeacherHours/reportTeacherHours.module.js"></script>
     <script src="/src/client/app/resetPassword/resetPassword.module.js"></script>
     <script src="/src/client/app/rooms/rooms.module.js"></script>
+    <script src="/src/client/app/settings/settings.module.js"></script>
     <script src="/src/client/app/standAloneEvents/standAloneEvents.module.js"></script>
     <script src="/src/client/app/userActivation/userActivation.module.js"></script>
     <script src="/src/client/app/users/users.module.js"></script>
@@ -176,6 +179,18 @@
     <script src="/src/client/app/core/directives/onlinePayments/paymentOptions.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/paypalConfirm.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/poliConfirm.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/cancelButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/helpText.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/pageTitle.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/saveButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/section.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionContent.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionForm.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroup.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupContent.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupLabel.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupSeparator.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionTitle.directive.js"></script>
     <script src="/src/client/app/core/selectOptionService.js"></script>
     <script src="/src/client/app/core/services/sectionBlock.service.js"></script>
     <script src="/src/client/app/core/services/validationService.js"></script>
@@ -258,6 +273,9 @@
     <script src="/src/client/app/rooms/manageRooms/manageRooms.controller.js"></script>
     <script src="/src/client/app/rooms/room.service.js"></script>
     <script src="/src/client/app/rooms/roomDropdown/roomDropdown.directive.js"></script>
+    <script src="/src/client/app/settings/config.route.js"></script>
+    <script src="/src/client/app/settings/settings.controller.js"></script>
+    <script src="/src/client/app/settings/settings.repository.js"></script>
     <script src="/src/client/app/standAloneEvents/checkIn/standAloneEventCheckIn.controller.js"></script>
     <script src="/src/client/app/standAloneEvents/checkIn/studentCheckIn/eventCheckIn.service.js"></script>
     <script src="/src/client/app/standAloneEvents/checkIn/studentCheckIn/studentCheckIn.directive.js"></script>
@@ -304,6 +322,7 @@
     <script src="/src/client/app/blocks/apiCaller/simpleApiCaller.spec.js"></script>
     <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.spec.js"></script>
     <script src="/src/client/app/login/login.controller.spec.js"></script>
+    <script src="/src/client/tests/settings.spec.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->

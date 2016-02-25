@@ -1,32 +1,30 @@
-<div class="ibox float-e-margins">
-    <div class="ibox-title">
-        <h2>Settings</h2>
-    </div>
-</div>
+<page-title>Settings</page-title>
 
+<section>
+    <section-title>
+        Logo
+    </section-title>
 
-<div class="ibox float-e-margins">
-    <div class="ibox-title">
-        <h3>Logo</h3>
-    </div>
-    <div class="ibox-content">
-        <div class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Logo url</label>
-                <div class="col-sm-10">
+    <section-content>
+        <section-form>
+            <section-group>
+                <section-group-label>Logo url</section-group-label>
+
+                <section-group-content>
                     <input name="logo" type="text" class="form-control" ng-model="vm.logo">
-                    <span class="help-block m-b-none">Url to your logo image</span>
-                </div>
-            </div>
+                    <help-text>
+                        Url to your logo image
+                    </help-text>
+                </section-group-content>
+            </section-group>
 
-            <div class="hr-line-dashed"></div>
+            <section-group-separator></section-group-separator>
 
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-2">
-                    <a class="btn btn-white" href="#/">Cancel</a>
-                    <button class="btn btn-primary" ng-click="vm.submitLogo()">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            <section-group>
+                <cancel-button href="#/">Cancel</cancel-button>
+                <save-button class="btn btn-primary pull-right" ng-click="vm.submitLogo()">Save changes</save-button>
+            </section-group>
+
+        </section-form>
+    </section-content>
+</section>

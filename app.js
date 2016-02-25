@@ -25,7 +25,9 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(errorHandler.init);
 
-applySecruity(app);
+if (environment !== 'spec') {
+    applySecruity(app);
+}
 
 routes = require('./src/server/routes/index')(app);
 

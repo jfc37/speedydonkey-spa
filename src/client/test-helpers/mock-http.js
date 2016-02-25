@@ -1,3 +1,17 @@
+var Settings = (function () {
+
+    var service = {};
+
+    service.settingsAvailable = function () {
+        $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/settings').respond(200, [{
+            name: 'logo',
+            value: 'logoUrl'
+        }]);
+    };
+    return service;
+
+}());
+
 var BlockEnrolment = (function () {
 
     var service = {};
@@ -55,7 +69,8 @@ var BlockEnrolment = (function () {
 var MockHttp = (function () {
 
     var service = {
-        BlockEnrolment: BlockEnrolment
+        BlockEnrolment: BlockEnrolment,
+        Settings: Settings
     };
 
     return service;
