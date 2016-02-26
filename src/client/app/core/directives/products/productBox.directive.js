@@ -4,11 +4,11 @@
 
     angular
         .module('app.core')
-        .directive('sectionGroupSeparator', sectionGroupSeparator);
+        .directive('productBox', productBox);
 
-    function sectionGroupSeparator() {
+    function productBox() {
         var directive = {
-            templateUrl: 'app/core/directives/sectionLayout/sectionGroupSeparator.html',
+            templateUrl: 'app/core/directives/products/productBox.html',
             transclude: true
         };
         return directive;

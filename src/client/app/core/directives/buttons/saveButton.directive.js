@@ -4,11 +4,11 @@
 
     angular
         .module('app.core')
-        .directive('cancelButton', cancelButton);
+        .directive('saveButton', saveButton);
 
-    function cancelButton() {
+    function saveButton() {
         var directive = {
-            templateUrl: 'app/core/directives/sectionLayout/cancelButton.html',
+            templateUrl: 'app/core/directives/buttons/saveButton.html',
             transclude: true,
             replace: true
         };

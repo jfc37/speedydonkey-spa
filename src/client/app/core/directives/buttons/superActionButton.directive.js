@@ -4,11 +4,11 @@
 
     angular
         .module('app.core')
-        .directive('saveButton', saveButton);
+        .directive('superActionButton', superActionButton);
 
-    function saveButton() {
+    function superActionButton() {
         var directive = {
-            templateUrl: 'app/core/directives/sectionLayout/saveButton.html',
+            templateUrl: 'app/core/directives/buttons/superActionButton.html',
             transclude: true,
             replace: true
         };

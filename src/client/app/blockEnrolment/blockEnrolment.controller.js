@@ -13,24 +13,8 @@
         vm.blocks = [];
         vm.blockGrouping = [];
 
-        vm.getClassType = function (block) {
-            var blockName = block.name.toLowerCase();
-            if (blockName.indexOf('charleston') > -1) {
-                return 'charleston';
-            }
-            if (blockName.indexOf('lindy') > -1) {
-                return 'lindy';
-            }
-            if (blockName.indexOf('tap') > -1) {
-                return 'tap';
-            }
-            if (blockName.indexOf('blues') > -1) {
-                return 'blues';
-            }
-            if (blockName.indexOf('balboa') > -1) {
-                return 'balboa';
-            }
-            return '';
+        vm.anyBlocks = function () {
+            return vm.blocks.length > 0;
         };
 
         vm.isAnyBlocksSelected = function () {
