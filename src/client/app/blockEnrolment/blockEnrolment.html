@@ -13,8 +13,8 @@
         </section-title>
 
         <section-content>
-            <div class="col-md-4" ng-repeat="block in blocksOnDay.blocks | orderBy:'startDate'">
-                <product-box>
+            <flex-box>
+                <product-box class="col-md-4 col-sm-6 col-xs-12" ng-repeat="block in blocksOnDay.blocks | orderBy:'startDate'">
                     <product-title>{{block.name}}</product-title>
 
                     <product-description>
@@ -31,7 +31,7 @@
                         </label>
                     </product-action>
                 </product-box>
-            </div>
+            </flex-box>
 
         </section-content>
 
