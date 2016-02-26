@@ -120,17 +120,42 @@ describe('Block Enrolment', function () {
             MockHttp.BlockEnrolment.notEnrolledInAny();
             kickOff();
             controller.blocksByDays[0].blocks[0].enrolIn = true;
-            $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/users/current/enrolment').respond('200');
-            controller.submit();
-            $httpBackend.flush();
         });
 
-        it('should post enrolment request to server', function () {
-            $httpBackend.verifyNoOutstandingExpectation();
+        describe('when enrolment request is successful', function () {
+            beforeEach(function () {
+                $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/users/current/enrolment').respond('200');
+                controller.submit();
+                $httpBackend.flush();
+            });
+
+            it('should post enrolment request to server', function () {
+                $httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it('should redirect user to dashboard', function () {
+                expect(Spies.routehelper.redirectToRoute.calledWith('dashboard')).to.equal(true);
+            });
+
+            it('should show nice success alert', function () {
+                expect(Spies.niceAlert.success.calledOnce);
+            })
         });
 
-        it('should redirect user to dashboard', function () {
-            expect(Spies.routehelper.redirectToRoute.calledWith('dashboard')).to.equal(true);
+        describe('when enrolment request errors', function () {
+            beforeEach(function () {
+                $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/users/current/enrolment').respond('500');
+                controller.submit();
+                $httpBackend.flush();
+            });
+
+            it('should post enrolment request to server', function () {
+                $httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it('should show nice error alert', function () {
+                expect(Spies.niceAlert.error.calledOnce);
+            })
         });
     });
 });

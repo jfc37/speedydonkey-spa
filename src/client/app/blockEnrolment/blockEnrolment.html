@@ -36,6 +36,12 @@
         </section-content>
 
     </section>
+
+    <section>
+        <section-content>
+            <super-action-button ng-disabled="!vm.isAnyBlocksSelected()" ng-click="vm.submit()">Enrol</super-action-button>
+        </section-content>
+    </section>
 </div>
 
 <div ng-if="!vm.anyBlocks()">

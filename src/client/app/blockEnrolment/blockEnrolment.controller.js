@@ -6,7 +6,7 @@
         .controller('BlockEnrolment', BlockEnrolment);
 
     /* @ngInject */
-    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, config) {
+    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, config, niceAlert) {
         var vm = this;
 
         vm.title = 'Block Enrolment';
@@ -23,10 +23,14 @@
 
         vm.submit = function () {
             blockEnrolmentService.enrol(getSelectedBlocks()).then(function () {
+                niceAlert.success({
+                    message: 'You\'re now enrolled!'
+                });
                 routehelper.redirectToRoute('dashboard');
-                logger.success('Enrolled in selected blocks');
             }, function () {
-                logger.error('Problem with enrolment');
+                niceAlert.error({
+                    message: 'Something went wrong when we tried to enrol you. Please try again.'
+                });
             });
         };
 

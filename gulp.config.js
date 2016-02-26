@@ -29,8 +29,7 @@ module.exports = function () {
             '!' + client + 'test-helpers/*.js',
             '!' + client + 'app/inspinia.js',
             '!' + client + 'app/blocks/apiCaller/apiCaller.js',
-            '!' + client + 'app/core/commonFunctions.js',
-            '!**/base64Service.js'
+            '!' + client + 'app/core/commonFunctions.js'
         ],
         build: './build/',
         client: client,
