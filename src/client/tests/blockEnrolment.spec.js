@@ -27,7 +27,7 @@ describe('Block Enrolment', function () {
             });
 
             it('should not display any blocks', function () {
-                expect(controller.blocks.length).to.equal(0);
+                expect(controller.blocksByDays.length).to.equal(0);
             });
         });
 
@@ -43,8 +43,9 @@ describe('Block Enrolment', function () {
                 });
 
                 it('should allow the user to enrol', function () {
-                    expect(controller.blocks.length).to.equal(1);
-                    expect(controller.blocks[0].isEnroled).to.equal(false);
+                    expect(controller.blocksByDays.length).to.equal(1);
+                    expect(controller.blocksByDays[0].blocks.length).to.equal(1);
+                    expect(controller.blocksByDays[0].blocks[0].isEnroled).to.equal(false);
                 });
 
                 it('should have enrol button disabled', function () {
@@ -59,8 +60,9 @@ describe('Block Enrolment', function () {
                 });
 
                 it('should not allow the user to enrol', function () {
-                    expect(controller.blocks.length).to.equal(1);
-                    expect(controller.blocks[0].isEnroled).to.equal(true);
+                    expect(controller.blocksByDays.length).to.equal(1);
+                    expect(controller.blocksByDays[0].blocks.length).to.equal(1);
+                    expect(controller.blocksByDays[0].blocks[0].isEnroled).to.equal(true);
                 });
 
                 it('should have enrol button disabled', function () {
@@ -77,7 +79,7 @@ describe('Block Enrolment', function () {
             });
 
             it('should group the blocks together', function () {
-                expect(controller.blockGrouping.length).to.equal(1);
+                expect(controller.blocksByDays.length).to.equal(1);
             });
         });
 
@@ -90,7 +92,7 @@ describe('Block Enrolment', function () {
             });
 
             it('should not group the blocks together', function () {
-                expect(controller.blockGrouping.length).to.equal(2);
+                expect(controller.blocksByDays.length).to.equal(2);
             });
         });
     });
@@ -102,7 +104,7 @@ describe('Block Enrolment', function () {
                 MockHttp.BlockEnrolment.singleBlockAvailable();
                 MockHttp.BlockEnrolment.notEnrolledInAny();
                 kickOff();
-                controller.blocks[0].enrolIn = true;
+                controller.blocksByDays[0].blocks[0].enrolIn = true;
             });
 
             it('should enable enrolment button', function () {
@@ -117,7 +119,7 @@ describe('Block Enrolment', function () {
             MockHttp.BlockEnrolment.singleBlockAvailable();
             MockHttp.BlockEnrolment.notEnrolledInAny();
             kickOff();
-            controller.blocks[0].enrolIn = true;
+            controller.blocksByDays[0].blocks[0].enrolIn = true;
             $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/users/current/enrolment').respond('200');
             controller.submit();
             $httpBackend.flush();
