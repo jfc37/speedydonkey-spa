@@ -7,13 +7,13 @@
         </section-content>
     </section>
 
-    <section ng-repeat="group in vm.blockGrouping">
+    <section ng-repeat="blocksOnDay in vm.blocksByDays">
         <section-title>
-            {{group}}
+            {{blocksOnDay.title}}
         </section-title>
 
         <section-content>
-            <div class="col-md-4" ng-repeat="block in vm.blocks | matchingBlockGrouping:group | orderBy:'startDate'">
+            <div class="col-md-4" ng-repeat="block in blocksOnDay.blocks | orderBy:'startDate'">
                 <product-box>
                     <product-title>{{block.name}}</product-title>
 
@@ -47,23 +47,3 @@
         </section-content>
     </section>
 </div>
-
-
-<!--
-   <div class="row">
-    <h1>Block Selection</h1>
-    <div>
-        <p class="lead" ng-show="vm.blocks.length > 0">Select the blocks you want to enrol in</p>
-
-        <button class="btn btn-lg btn-primary" ng-disabled="!vm.isAnyBlocksSelected()" ng-click="vm.submit()">Enrol</button>
-        <div class="row">
-            <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping">
-                <div ng-include src="'app/blockEnrolment/setOfBlocks.html'"></div>
-            </div>
-        </div>
-        <p ng-show="vm.blocks.length === 0">
-            There are no blocks available to be enrolled in
-        </p>
-    </div>
-</div>
--->
