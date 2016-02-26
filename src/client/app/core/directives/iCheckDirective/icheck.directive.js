@@ -21,8 +21,8 @@
                         })
 
                         return $(element).iCheck({
-                            checkboxClass: 'icheckbox_square-blue',
-                            radioClass: 'iradio_square-blue'
+                            checkboxClass: 'icheckbox_square-green',
+                            radioClass: 'iradio_square-green'
 
                         }).on('ifChanged', function (event) {
                             if ($(element).attr('type') === 'checkbox' && $attrs['ngModel']) {
