@@ -27,6 +27,14 @@
                 <td>{{block.startDate | date: 'EEEE'}}</td>
                 <td>{{block.startDate | date: 'HH:mm'}}</td>
             </tr>
+
+            <tr ng-if="vm.blocks.length === 0">
+                <td colspan="5">
+                    <p class="text-center">
+                        <strong>Nothing to see here.</strong>
+                    </p>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

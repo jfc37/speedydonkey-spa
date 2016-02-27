@@ -36,7 +36,6 @@
                         niceAlert.success({
                             message: 'Selected blocks have been deleted.'
                         });
-                        unselectAll();
                         blocksToDelete.forEach(function (block) {
                             vm.blocks.remove(block);
                         });
@@ -52,7 +51,6 @@
                 function generateSelected() {
                     var blocksToGenerate = getSelectedBlocks();
                     blockService.generateFromBlocks(blocksToGenerate).then(function () {
-
                         niceAlert.success({
                             message: 'Selected blocks have been generated.'
                         });
@@ -69,11 +67,6 @@
                     vm.blocks.forEach(function (block) {
                         block.selected = isSelected;
                     });
-                }
-
-                function unselectAll() {
-                    vm.selectAll = false;
-                    setAllSelected(false);
                 }
 
                 function getSelectedBlocks() {
