@@ -11,7 +11,8 @@
 
         var service = {
             success: success,
-            error: error
+            error: error,
+            confirm: confirm
         };
 
         return service;
@@ -28,6 +29,22 @@
             alert.title = 'Oops!';
 
             showAlert(alert);
+        }
+
+        function confirm(alert, confirmedFunction) {
+            SweetAlert.swal({
+                title: "Are you sure?",
+                text: alert.message,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: 'I\'m sure!',
+                closeOnConfirm: false
+            }, function (isConfirmed) {
+                if (isConfirmed) {
+                    confirmedFunction()
+                }
+            });
         }
 
         function showAlert(alert, type) {

@@ -8,12 +8,10 @@
     /* @ngInject */
     function ManageBlocks(blockService) {
         var vm = this;
-        vm.blocks = [];
-        vm.statusCount = function (status) {
-            return vm.blocks.filter(function (block) {
-                return block.status === status;
-            }).length;
-        };
+
+        vm.futureBlocks = [];
+        vm.pastBlocks = [];
+        vm.currentBlocks = [];
 
         activate();
 
@@ -23,7 +21,15 @@
 
         function getBlocks() {
             blockService.getBlocks().then(function (blocks) {
-                vm.blocks = blocks;
+                vm.futureBlocks = getBlocksOfStatus(blocks, 'Future');
+                vm.pastBlocks = getBlocksOfStatus(blocks, 'Past');
+                vm.currentBlocks = getBlocksOfStatus(blocks, 'Current');
+            });
+        }
+
+        function getBlocksOfStatus(blocks, status) {
+            return blocks.filter(function (block) {
+                return block.status === status;
             });
         }
     }

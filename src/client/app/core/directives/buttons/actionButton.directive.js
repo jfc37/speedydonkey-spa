@@ -3,11 +3,11 @@
 
     angular
         .module('app.core')
-        .directive('superActionButton', superActionButton);
+        .directive('actionButton', actionButton);
 
-    function superActionButton() {
+    function actionButton() {
         var directive = {
-            templateUrl: 'app/core/directives/buttons/superActionButton.html',
+            templateUrl: 'app/core/directives/buttons/actionButton.html',
             transclude: true,
             replace: true
         };

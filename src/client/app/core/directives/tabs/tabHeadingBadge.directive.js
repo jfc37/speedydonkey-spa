@@ -3,11 +3,11 @@
 
     angular
         .module('app.core')
-        .directive('superActionButton', superActionButton);
+        .directive('tabHeadingBadge', tabHeadingBadge);
 
-    function superActionButton() {
+    function tabHeadingBadge() {
         var directive = {
-            templateUrl: 'app/core/directives/buttons/superActionButton.html',
+            templateUrl: 'app/core/directives/tabs/tabHeadingBadge.html',
             transclude: true,
             replace: true
         };
