@@ -9,8 +9,9 @@ var Spies = (function () {
 
     service.niceAlert = {
         success: sinon.spy(),
-        error: sinon.spy()
-    }
+        error: sinon.spy(),
+        confirm: sinon.spy()
+    };
 
     return service;
 
