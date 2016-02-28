@@ -17,6 +17,7 @@
                     });
                     routehelper.redirectToRoute('manageBlocks');
                 } else {
+                    vm.serverValidation = validation;
                     niceAlert.validationWarning();
                 }
 

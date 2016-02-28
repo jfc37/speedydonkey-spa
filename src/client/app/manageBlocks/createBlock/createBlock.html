@@ -10,10 +10,11 @@
                 <section-group-label>Name</section-group-label>
 
                 <section-group-content>
-                    <input name="name" type="text" class="form-control" ng-model="vm.block.name" required/>
+                    <input name="name" type="text" class="form-control" ng-model="vm.block.name" required />
                     <validation-messages input-name="name">
                         <div ng-message="required">Please enter a name</div>
                     </validation-messages>
+                    <server-validation-messages input-name="name" messages="vm.serverValidation"></server-validation-messages>
                 </section-group-content>
             </section-group>
 
