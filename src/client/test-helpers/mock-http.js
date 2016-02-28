@@ -31,6 +31,12 @@ var Settings = (function () {
         $httpBackend.when('GET', 'https://api-speedydonkey.azurewebsites.net/api/settings').respond(200, [{
             name: 'logo',
             value: 'logoUrl'
+        }, {
+            name: 'numberOfClasses',
+            value: '6'
+        }, {
+            name: 'minutesPerClass',
+            value: '60'
         }]);
     };
     return service;

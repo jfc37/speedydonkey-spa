@@ -1,4 +1,4 @@
-/* globals describe, it, expect, assert, beforeEach, bard, $controller */
+/* global describe, it, expect, assert, beforeEach, bard, $controller, $httpBackend, AngularMock, inject, MockHttp, Spies */
 describe('Settings', function () {
     var $controller;
     var controller;
@@ -27,26 +27,35 @@ describe('Settings', function () {
         });
 
         it('should set logo url', function () {
-            controller.logo = 'logoUrl';
+            expect(controller.logo).to.equal('logoUrl');
+        });
+
+        it('should set minutes per class', function () {
+            expect(controller.minutesPerClass).to.equal(60);
+        });
+
+        it('should set number of classes', function () {
+            expect(controller.numberOfClasses).to.equal(6);
         });
     });
 
-    describe('update logo url', function () {
-
+    describe('update site settings', function () {
         beforeEach(function () {
             $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/settings', {
-                "settings": [{
-                    "name": "logo",
-                    "value": "newLogoUrl"
+                'settings': [{
+                    'name': 'logo',
+                    'value': 'newLogoUrl'
                 }]
             }).respond('200');
             controller.logo = 'newLogoUrl';
-            controller.submitLogo();
+            controller.submitSiteSettings();
             $httpBackend.flush();
         });
 
         it('should update logo url', function () {
             $httpBackend.verifyNoOutstandingExpectation();
-        });
+        });it('should show nice success alert', function () {
+    expect(Spies.niceAlert.success.calledOnce);
+});
     });
 });

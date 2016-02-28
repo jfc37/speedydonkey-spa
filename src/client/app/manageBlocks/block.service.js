@@ -59,11 +59,9 @@
         }
 
         function create(block) {
-            return simpleApiCaller.post(block, getOptions()).then(function (response) {
-                return response.data;
-            }, function (response) {
-                if (response.validationResult) {
-                    return response.validationResult.validationErrors;
+            return simpleApiCaller.post(block, getOptions()).then(function () {}, function (response) {
+                if (response.data.validationResult) {
+                    return response.data.validationResult.validationErrors;
                 }
             });
         }

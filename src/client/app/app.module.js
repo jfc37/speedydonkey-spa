@@ -19,8 +19,9 @@
         'ngSanitize',
         'ui.select',
         'angulartics',
-        'angulartics.google.analytics',,
+        'angulartics.google.analytics',
         'oitozero.ngSweetAlert',
+        'ngMessages',
 
         'app.core',
         'app.widgets',

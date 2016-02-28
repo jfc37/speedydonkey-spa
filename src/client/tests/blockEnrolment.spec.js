@@ -1,4 +1,4 @@
-/* globals describe, it, expect, assert, beforeEach, bard, $controller */
+/* global describe, it, expect, assert, beforeEach, bard, $controller, $httpBackend, AngularMock, inject, MockHttp, Spies */
 describe('Block Enrolment', function () {
     var $controller;
     var controller;
@@ -139,7 +139,7 @@ describe('Block Enrolment', function () {
 
             it('should show nice success alert', function () {
                 expect(Spies.niceAlert.success.calledOnce);
-            })
+            });
         });
 
         describe('when enrolment request errors', function () {
@@ -152,10 +152,9 @@ describe('Block Enrolment', function () {
             it('should post enrolment request to server', function () {
                 $httpBackend.verifyNoOutstandingExpectation();
             });
-
             it('should show nice error alert', function () {
                 expect(Spies.niceAlert.error.calledOnce);
-            })
+            });
         });
     });
 });

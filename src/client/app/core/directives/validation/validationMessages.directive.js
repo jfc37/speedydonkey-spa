@@ -3,12 +3,11 @@
 
     angular
         .module('app.core')
-        .directive('sectionGroup', sectionGroup);
+        .directive('validationMessages', validationMessages);
 
-    function sectionGroup() {
+    function validationMessages() {
         var directive = {
-            templateUrl: 'app/core/directives/sectionLayout/sectionGroup.html',
-            transclude: true,
+            templateUrl: 'app/core/directives/validation/validationMessages.html',
             replace: true,
             require: '^form',
             scope: {
@@ -16,7 +15,8 @@
             },
             link: function (scope, elem, attrs, ctrl) {
                 scope.form = ctrl;
-            }
+            },
+            transclude: true
         };
         return directive;
     }

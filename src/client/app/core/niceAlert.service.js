@@ -12,10 +12,21 @@
         var service = {
             success: success,
             error: error,
-            confirm: confirm
+            confirm: confirm,
+            validationWarning: validationWarning
         };
 
         return service;
+
+        function validationWarning() {
+            var alert = {
+                type: 'warning',
+                title: 'Validation',
+                message: 'Looks like there was something wrong with the data you supplied.'
+            };
+
+            showAlert(alert);
+        }
 
         function success(alert) {
             alert.type = 'success';
