@@ -52,8 +52,8 @@
             return simpleApiCaller.put(sanitisedBlock, options).then(function (response) {
                 return response.data;
             }, function (response) {
-                if (response.validationResult) {
-                    return response.validationResult.validationErrors;
+                if (response.data && response.data.validationResult) {
+                    return response.data.validationResult.validationErrors;
                 }
             });
         }

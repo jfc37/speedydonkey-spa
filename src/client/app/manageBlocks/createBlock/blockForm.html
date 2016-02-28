@@ -1,0 +1,72 @@
+<section-group input-name="name">
+    <section-group-label>Name</section-group-label>
+
+    <section-group-content>
+        <input name="name" type="text" class="form-control" ng-model="vm.block.name" required />
+        <validation-messages input-name="name">
+            <div ng-message="required">Please enter a name</div>
+        </validation-messages>
+        <server-validation-messages input-name="name" messages="vm.serverValidation"></server-validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group input-name="startDate">
+    <section-group-label>Start Date</section-group-label>
+
+    <section-group-content ng-if="vm.block.startDate">
+        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.block.startDate" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+        <validation-messages input-name="startDate">
+            <div ng-message="required">Please enter a start date</div>
+        </validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group input-name="minutesPerClass">
+    <section-group-label>Minutes Per Class</section-group-label>
+
+    <section-group-content>
+        <input name="minutesPerClass" type="number" class="form-control" ng-model="vm.block.minutesPerClass" required/>
+        <validation-messages input-name="minutesPerClass">
+            <div ng-message="required">Please enter the number of minutes each class runs for</div>
+        </validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group input-name="numberOfClasses">
+    <section-group-label>Number of Classes</section-group-label>
+
+    <section-group-content>
+        <input name="numberOfClasses" type="number" class="form-control" ng-model="vm.block.numberOfClasses" required/>
+        <validation-messages input-name="numberOfClasses">
+            <div ng-message="required">Please enter the number of classes</div>
+        </validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group>
+    <section-group-label>Teachers</section-group-label>
+
+    <section-group-content>
+        <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group input-name="isInviteOnly">
+    <section-group-label>Invite Only</section-group-label>
+
+    <section-group-content>
+        <input name="isInviteOnly" icheck type="checkbox" ng-model="vm.block.isInviteOnly" />
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>

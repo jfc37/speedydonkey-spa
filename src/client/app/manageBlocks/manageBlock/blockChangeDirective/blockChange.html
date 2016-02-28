@@ -1,37 +1,10 @@
-<div ng-form="updateForm" class="panel-body">
+<div class="panel-body">
+    <section-form ng-form="updateForm">
+        <div ng-include src="'app/manageBlocks/createBlock/blockForm.html'"></div>
 
-    <input-block name="name" label="Name">
-        <input name="name" type="text" class="form-control" ng-model="vm.block.name" required/>
-        <validation error="required" name="name">Please enter a name</validation>
-    </input-block>
-
-    <input-block name="startDate" label="Start Date" ng-if="vm.block.startDate">
-        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.block.startDate" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
-    </input-block>
-
-
-    <!--Minutes Per Class-->
-    <input-block name="minutesPerClass" label="Minutes Per Class">
-        <input name="minutesPerClass" type="number" class="form-control" ng-model="vm.block.minutesPerClass" required/>
-        <validation error="required" name="minutesPerClass">Please enter the number of minutes per class</validation>
-    </input-block>
-
-    <!--Number Of Classes -->
-    <input-block name="numberOfClasses" label="Number Of Classes">
-        <input name="numberOfClasses" type="number" class="form-control" ng-model="vm.block.numberOfClasses" required/>
-        <validation error="required" name="numberOfClasses">Please enter the number of classes</validation>
-    </input-block>
-
-    <!--Is Invite Only -->
-    <input-block name="isInviteOnly" label="Is Invite Only">
-        <input name="isInviteOnly" type="checkbox" class="form-control" ng-model="vm.block.isInviteOnly" required/>
-    </input-block>
-
-    <!--Teachers -->
-    <input-block name="teachers" label="Teachers">
-        <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
-    </input-block>
-
-    <a class="btn btn-default" ng-click="vm.cancel()">Cancel</a>
-    <a class="btn btn-primary pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
+        <section-group>
+            <cancel-button ng-click="vm.cancel()">Cancel</cancel-button>
+            <save-button ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</save-button>
+        </section-group>
+    </section-form>
 </div>
