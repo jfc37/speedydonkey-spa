@@ -18,11 +18,11 @@
 
         return service;
 
-        function validationWarning() {
+        function validationWarning(message) {
             var alert = {
                 type: 'warning',
                 title: 'Validation',
-                message: 'Looks like there was something wrong with the data you supplied.'
+                message: message || 'Looks like there was something wrong with the data you supplied.'
             };
 
             showAlert(alert);

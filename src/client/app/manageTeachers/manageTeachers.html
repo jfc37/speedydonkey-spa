@@ -1,22 +1,67 @@
-<div class="ibox float-e-margins">
-    <div class="ibox-content">
-        <h2>Manage Teachers</h2>
+<page-title>Teachers</page-title>
 
+<section>
+    <section-title>
+        Add
+    </section-title>
+
+    <section-content>
         <user-search ng-model="vm.selectedUser" placeholder="Enter new teacher's name"></user-search>
-        <button class="btn btn-primary" ng-disabled="!vm.selectedUser" ng-click="vm.addTeacher()">Add as teacher</button>
+        <action-button ng-disabled="!vm.selectedUser" ng-click="vm.addTeacher()">Add as teacher</action-button>
+    </section-content>
+</section>
 
-        <table class="table table-hover">
+<section>
+    <section-title>
+        Manage
+    </section-title>
+
+    <section-content>
+
+        <table class="table table-hover" ts-wrapper>
             <thead>
-                <th>Name</th>
-                <th></th>
-            </thead>
-            <tbody ng-repeat="teacher in vm.teachers">
                 <tr>
+                    <th>
+                        <input icheck type="checkbox" ng-model="vm.selectAll" ng-change="vm.selectAllClicked()">
+                    </th>
+                    <th ng-if="!vm.anySelected()" ts-criteria="name" ts-default>Name</th>
+                    <th ng-if="vm.anySelected()">
+                        <a class="btn btn-danger" ng-click="vm.confirmDelete()">Delete</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="teacher in vm.teachers">
+                    <td>
+                        <input icheck type="checkbox" ng-model="teacher.selected">
+                    </td>
                     <td>{{teacher.fullName}}</td>
-                    <td><a class="btn btn-danger" ng-click="vm.remove(teacher.id)" class="btn default">Remove as teacher</a>
+                </tr>
+
+                <tr ng-if="vm.teachers.length === 0">
+                    <td colspan="5">
+                        <p class="text-center">
+                            <strong>Nothing to see here.</strong>
+                        </p>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-</div>
+
+        <!--
+        <table class="table table-hover">
+    <thead>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody ng-repeat="teacher in vm.teachers">
+        <tr>
+            <td>{{teacher.fullName}}</td>
+            <td><a class="btn btn-danger" ng-click="vm.remove(teacher.id)" class="btn default">Remove as teacher</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+-->
+    </section-content>
+</section>

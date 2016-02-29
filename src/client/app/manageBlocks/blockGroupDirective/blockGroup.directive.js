@@ -58,7 +58,6 @@
                         pageReloader.reload();
                     });
                 }
-
                 vm.selectAllClicked = function () {
                     setAllSelected(vm.selectAll);
                 };

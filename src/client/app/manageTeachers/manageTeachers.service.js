@@ -6,40 +6,55 @@
         .factory('manageTeachersService', manageTeachersService);
 
     /* @ngInject */
-    function manageTeachersService($q, logger, dataservice, dataCreateService, dataDeleteService) {
+    function manageTeachersService($q, dataDeleteService, simpleApiCaller) {
 
         var service = {
             addTeacher: addTeacher,
             deleteTeacher: deleteTeacher,
+            deleteTeachers: deleteTeachers,
             getTeachers: getTeachers
         };
 
         function addTeacher(id) {
-            return $q(function (resolve, revoke) {
-                dataCreateService.createTeacher(id).then(function (createdTeacher) {
-                    resolve(createdTeacher);
-                }, function (response) {
-                    if (response.validationResult !== undefined) {
-                        revoke(response.validationResult.validationErrors);
-                    } else {
-                        revoke();
-                    }
-                });
+            var options = getOptions();
+            options.id = id;
+
+            return simpleApiCaller.post({}, options).then(function (response) {
+                return response.data.actionResult;
+            }, function (response) {
+                if (response.data && response.data.validationResult) {
+                    return $q.reject(response.data.validationResult.validationErrors);
+                }
             });
+        }
+
+        function deleteTeachers(teachers) {
+            var allRequests = [];
+
+            teachers.forEach(function (teacher) {
+                allRequests.push(deleteTeacher(teacher.id));
+            });
+
+            return $q.all(allRequests);
         }
 
         function deleteTeacher(id) {
-            return $q(function (resolve, revoke) {
-                dataDeleteService.deleteTeacher(id).then(resolve, revoke);
-            });
+            var options = getOptions();
+            options.id = id;
+            options.block = true;
+            return simpleApiCaller.delete(options);
         }
 
         function getTeachers() {
-            return $q(function (resolve, revoke) {
-                dataservice.getAllTeachers().then(function (teachers) {
-                    resolve(teachers);
-                }, revoke);
+            return simpleApiCaller.get(getOptions()).then(function (response) {
+                return response.data;
             });
+        }
+
+        function getOptions() {
+            return {
+                resource: 'teachers'
+            };
         }
 
         return service;
