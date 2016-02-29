@@ -48,16 +48,17 @@
         }
 
         function update(theClass) {
-            return $q(function (resolve, revoke) {
-                dataUpdateService.updateClass(theClass).then(function (updatedClass) {
-                    resolve(updatedClass);
-                }, function (response) {
-                    if (response.validationResult !== undefined) {
-                        revoke(response.validationResult.validationErrors);
-                    } else {
-                        revoke();
-                    }
-                });
+            var options = getOptions();
+            options.id = theClass.id;
+
+            return simpleApiCaller.put(theClass, options).then(function (response) {
+                return response.data;
+            }, function (response) {
+                if (response.data && response.data.validationResult) {
+                    return $q.reject(response.data.validationResult);
+                } else {
+                    return $q.reject();
+                }
             });
         }
 

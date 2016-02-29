@@ -25,20 +25,21 @@
 
                 vm.submit = function () {
                     blockService.update(vm.block).then(function (validation) {
-                        if (!validation) {
-                            niceAlert.success({
-                                message: 'Block was successfully updated.'
+                            if (!validation) {
+                                niceAlert.success({
+                                    message: 'Block was successfully updated.'
+                                });
+                                pageReloader.reload();
+                            } else {
+                                vm.serverValidation = validation;
+                                niceAlert.validationWarning();
+                            }
+                        },
+                        function (errors) {
+                            niceAlert.error({
+                                message: 'There was a problem updating the block.'
                             });
-                            pageReloader.reload();
-                        } else {
-                            vm.serverValidation = validation;
-                            niceAlert.validationWarning();
-                        }
-                    }, function (errors) {
-                        niceAlert.error({
-                            message: 'There was a problem updating the block.'
                         });
-                    });
                 };
             }
         };

@@ -11,7 +11,7 @@
         <tbody>
             <tr ng-repeat="class in vm.classes">
                 <td>
-                    <a ng-href="#/admin/manage/classes/{{class.id}}" class="btn btn-link">{{class.name}}</a>
+                    <a ng-href="#/admin/manage/classes/{{class.id}}">{{class.name}}</a>
                 </td>
                 <td>{{class.actualStudents.length}}</td>
                 <td>{{class.startTime | date:'dd MMM'}}</td>

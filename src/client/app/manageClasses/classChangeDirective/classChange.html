@@ -1,22 +1,57 @@
-<div ng-form="updateForm" class="panel-body">
+<div class="panel-body">
+    <section-form ng-form="updateForm">
+        <section-group input-name="name">
+            <section-group-label>Name</section-group-label>
 
-    <input-block name="name" label="Name">
-        <input name="name" type="text" class="form-control" ng-model="vm.class.name" required/>
-        <validation error="required" name="name">Please enter a name</validation>
-    </input-block>
+            <section-group-content>
+                <input name="name" type="text" class="form-control" ng-model="vm.class.name" required />
+                <validation-messages input-name="name">
+                    <div ng-message="required">Please enter a name</div>
+                </validation-messages>
+                <server-validation-messages input-name="name" messages="vm.serverValidation"></server-validation-messages>
+            </section-group-content>
+        </section-group>
 
-    <input-block name="startTime" label="Start Date" ng-if="vm.class.startTime">
-        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.class.startTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
-    </input-block>
+        <section-group-separator></section-group-separator>
 
-    <input-block name="startEnd" label="End Date" ng-if="vm.class.endTime">
-        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.class.endTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
-    </input-block>
+        <section-group input-name="startTime">
+            <section-group-label>Start Time</section-group-label>
 
-    <input-block name="teachers" label="Teachers">
-        <teacher-dropdown ng-model="vm.class.teachers"></teacher-dropdown>
-    </input-block>
+            <section-group-content ng-if="vm.class.startTime">
+                <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.class.startTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+                <validation-messages input-name="startTime">
+                    <div ng-message="required">Please enter a start time</div>
+                </validation-messages>
+            </section-group-content>
+        </section-group>
 
-    <a class="btn btn-default" ng-click="vm.cancel()">Cancel</a>
-    <a class="btn btn-primary pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
+        <section-group-separator></section-group-separator>
+
+        <section-group input-name="endTime">
+            <section-group-label>End Time</section-group-label>
+
+            <section-group-content ng-if="vm.class.endTime">
+                <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.class.endTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+                <validation-messages input-name="endTime">
+                    <div ng-message="required">Please enter an end time</div>
+                </validation-messages>
+            </section-group-content>
+        </section-group>
+
+        <section-group-separator></section-group-separator>
+
+        <section-group>
+            <section-group-label>Teachers</section-group-label>
+
+            <section-group-content>
+                <teacher-dropdown ng-model="vm.class.teachers"></teacher-dropdown>
+            </section-group-content>
+        </section-group>
+
+        <section-group>
+            <cancel-button ng-click="vm.cancel()">Cancel</cancel-button>
+            <save-button ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</save-button>
+        </section-group>
+
+    </section-form>
 </div>
