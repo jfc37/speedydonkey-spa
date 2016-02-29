@@ -21,30 +21,22 @@
         <table class="table table-hover" ts-wrapper>
             <thead>
                 <tr>
-                    <th>
-                        <input icheck type="checkbox" ng-model="vm.selectAll" ng-change="vm.selectAllClicked()">
-                    </th>
-                    <th ng-if="!vm.anySelected()" ts-criteria="name" ts-default>Name</th>
-                    <th ng-if="vm.anySelected()">
+                    <th select-all-header collection="vm.teachers"></th>
+
+                    <th hide-if-selected items="vm.teachers" ts-criteria="name" ts-default>Name</th>
+                    <th hide-if-not-selected items="vm.teachers">
                         <a class="btn btn-danger" ng-click="vm.confirmDelete()">Delete</a>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="teacher in vm.teachers">
-                    <td>
-                        <input icheck type="checkbox" ng-model="teacher.selected">
-                    </td>
+                <tr ng-repeat="teacher in vm.teachers"><td select-item item="teacher">
+</td>
                     <td>{{teacher.fullName}}</td>
                 </tr>
 
-                <tr ng-if="vm.teachers.length === 0">
-                    <td colspan="5">
-                        <p class="text-center">
-                            <strong>Nothing to see here.</strong>
-                        </p>
-                    </td>
-                </tr>
+                <tr no-items-row items="vm.teachers"></tr>
+
             </tbody>
         </table>
     </section-content>

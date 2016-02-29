@@ -10,10 +10,6 @@
         var vm = this;
         vm.teachers = [];
 
-        vm.anySelected = function () {
-            return getSelectedTeachers().length > 0;
-        };
-
         vm.confirmDelete = function () {
             niceAlert.confirm({
                 message: 'All selected teachers will be deleted.'
@@ -33,16 +29,6 @@
                 niceAlert.error({
                     message: 'Problem removing this user as a teacher'
                 });
-            });
-        }
-
-        vm.selectAllClicked = function () {
-            setAllSelected(vm.selectAll);
-        };
-
-        function setAllSelected(isSelected) {
-            vm.teachers.forEach(function (teacher) {
-                teacher.selected = isSelected;
             });
         }
 
@@ -96,6 +82,9 @@
 
         function getTeachers() {
             return manageTeachersService.getTeachers().then(function (teachers) {
+                teachers.forEach(function (teacher) {
+                    teacher.selected = false;
+                });
                 vm.teachers = teachers;
             }, function () {
                 niceAlert.error({
