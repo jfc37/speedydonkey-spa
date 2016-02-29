@@ -6,7 +6,7 @@
         .controller('ManageTeachers', ManageTeachers);
 
     /* @ngInject */
-    function ManageTeachers($q, logger, manageTeachersService, niceAlert) {
+    function ManageTeachers(manageTeachersService, niceAlert) {
         var vm = this;
         vm.teachers = [];
 
