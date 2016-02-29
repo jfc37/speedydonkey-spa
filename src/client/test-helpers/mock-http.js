@@ -1,4 +1,5 @@
 /* global $httpBackend */
+
 var Blocks = (function () {
 
     var service = {};
@@ -97,12 +98,45 @@ var BlockEnrolment = (function () {
 
 }());
 
+var Teachers = (function () {
+
+    var service = {};
+
+    service.singleTeacher = function () {
+        $httpBackend.expect('GET', 'https://api-speedydonkey.azurewebsites.net/api/teachers').respond(200, [{
+
+        }]);
+    };
+
+    service.addNewTeacherSuccess = function () {
+        $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/teachers/1').respond(200, {
+            actionResult: {
+                fullName: 'Jo Lo'
+            }
+        });
+    };
+
+    service.addNewTeacherValidation = function () {
+        $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/teachers/1').respond(400, {
+            validationResult: [{}]
+        });
+    };
+
+    service.addNewTeacherError = function () {
+        $httpBackend.expect('POST', 'https://api-speedydonkey.azurewebsites.net/api/teachers/1').respond(500);
+    };
+
+    return service;
+
+}());
+
 var MockHttp = (function () {
 
     var service = {
         BlockEnrolment: BlockEnrolment,
         Blocks: Blocks,
-        Settings: Settings
+        Settings: Settings,
+        Teachers: Teachers
     };
 
     return service;

@@ -57,23 +57,6 @@
             });
         };
 
-        vm.remove = function (id) {
-            manageTeachersService.deleteTeacher(id).then(function () {
-                var teacherRemoved = vm.teachers.filter(function (teacher) {
-                    return teacher.id === id;
-                })[0];
-                vm.teachers.remove(teacherRemoved);
-
-                niceAlert.success({
-                    message: teacherRemoved.fullName + ' has been removed as a teacher.'
-                });
-            }, function () {
-                niceAlert.error({
-                    message: 'Problem removing this user as a teacher'
-                });
-            });
-        };
-
         activate();
 
         function activate() {

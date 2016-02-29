@@ -6,11 +6,10 @@
         .factory('manageTeachersService', manageTeachersService);
 
     /* @ngInject */
-    function manageTeachersService($q, dataDeleteService, simpleApiCaller) {
+    function manageTeachersService($q, simpleApiCaller) {
 
         var service = {
             addTeacher: addTeacher,
-            deleteTeacher: deleteTeacher,
             deleteTeachers: deleteTeachers,
             getTeachers: getTeachers
         };
@@ -24,6 +23,8 @@
             }, function (response) {
                 if (response.data && response.data.validationResult) {
                     return $q.reject(response.data.validationResult.validationErrors);
+                } else {
+                    return $q.reject();
                 }
             });
         }
