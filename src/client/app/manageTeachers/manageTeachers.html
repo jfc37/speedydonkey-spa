@@ -19,25 +19,26 @@
     <section-content>
 
         <table class="table table-hover" ts-wrapper>
-            <thead>
-                <tr>
-                    <th select-all-header collection="vm.teachers"></th>
+    <thead>
+        <tr>
+            <th select-all-header collection="vm.teachers"></th>
 
-                    <th hide-if-selected items="vm.teachers" ts-criteria="name" ts-default>Name</th>
-                    <th hide-if-not-selected items="vm.teachers">
-                        <a class="btn btn-danger" ng-click="vm.confirmDelete()">Delete</a>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="teacher in vm.teachers"><td select-item item="teacher">
-</td>
-                    <td>{{teacher.fullName}}</td>
-                </tr>
+            <th hide-if-selected items="vm.teachers" ts-criteria="name" ts-default>Name</th>
+            <th hide-if-not-selected items="vm.teachers">
+                <a class="btn btn-danger" ng-click="vm.confirmDelete()">Delete</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="teacher in vm.teachers">
+            <td select-item item="teacher">
+            </td>
+            <td>{{teacher.fullName}}</td>
+        </tr>
 
-                <tr no-items-row items="vm.teachers"></tr>
+        <tr no-items-row items="vm.teachers"></tr>
 
-            </tbody>
-        </table>
+    </tbody>
+</table>
     </section-content>
 </section>

@@ -43,7 +43,12 @@
             options.id = id;
 
             return simpleApiCaller.get(options).then(function (response) {
-                return response.data;
+                var theClass = response.data;
+
+                theClass.startTime = new Date(theClass.startTime);
+                theClass.endTime = new Date(theClass.endTime);
+
+                return theClass;
             });
         }
 

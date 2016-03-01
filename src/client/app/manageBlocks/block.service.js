@@ -90,7 +90,11 @@
             options.id = id;
 
             return simpleApiCaller.get(options).then(function (response) {
-                return response.data;
+                var block = response.data;
+
+                block.startDate = new Date(block.startDate);
+
+                return block;
             });
         }
 

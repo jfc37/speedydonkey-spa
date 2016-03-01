@@ -1,90 +1,41 @@
-<div class="row">
-    <h1>Manage Pass Options</h1>
-    <table class="table table-hover">
-        <thead>
-            <th>Name</th>
-            <th>Cost</th>
-            <th></th>
-        </thead>
-        <tbody ng-repeat="pass in vm.passOptions" ng-controller="UpdatePassOptions as vm" ng-init="vm.passOption = pass">
-            <tr>
-                <td>
-                    {{vm.passOption.description}}
-                </td>
-                <td>
-                    {{vm.passOption.cost | currency}}
-                </td>
-                <td>
-                    <div ng-hide="vm.updating">
-                        <a ng-click="vm.startUpdating()" class="btn default">Update</a>
-                        <a ng-click="vm.delete()" class="btn default">Delete</a>
-                    </div>
-                </td>
-            </tr>
-            <tr ng-if="vm.updating">
-                <td colspan="3">
-                    <form novalidate name="form">
-                        <div ng-include src="'passOption.html'">
-                        </div>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<page-title>Pass Options</page-title>
 
-<div ng-controller="NewPassOptions" class="row">
-    <form ng-show="vm.addingNew" novalidate name="form">
-        <div ng-include src="'passOption.html'">
-        </div>
-    </form>
-    <a class="btn btn-default" ng-hide="vm.addingNew" ng-click="vm.addingNew = true;">Add New Pass Option</a>
-</div>
+<section>
+    <section-title>Add</section-title>
 
-<script type="text/ng-template" id="passOption.html">
-    <div class="form-group col-xs-12" ng-class="{'has-error':(form.description.$invalid && form.description.$touched) || form.description.serverError}">
-        <input class="form-control" id="description" name="description" type="text" placeholder="Description (required)" ng-model="vm.passOption.description" required/>
-        <validation-error ng-model="form.description" error="required" message="Description is required."></validation-error>
-        <server-error ng-model="form.description"></server-error>
-    </div>
-    <div class="form-group col-xs-12" ng-class="{'has-error':(form.cost.$invalid && form.cost.$touched) || form.cost.serverError}">
-        <input class="form-control" id="cost" name="cost" type="number" placeholder="Price (required)" ng-model="vm.passOption.cost" required/>
-        <validation-error ng-model="form.cost" error="required" message="Price is required."></validation-error>
-        <validation-error ng-model="form.cost" error="number" message="Price must be a number."></validation-error>
-        <server-error ng-model="form.cost"></server-error>
-    </div>
-    <div class="form-group col-xs-12" ng-class="{'has-error':(form.passType.$invalid && form.passType.$touched) || form.passType.serverError}">
-        <div>
-            <label>Pass Type</label>
-        </div>
-        <div class="radio" data-ng-repeat="passType in vm.passTypes">
-            <label>
-                <input type="radio" name="passType" data-ng-model="$parent.vm.passOption.passType" ng-value="passType.value" required> {{passType.display}}
-            </label>
-        </div>
-        <validation-error ng-model="form.passType" error="required" message="Pass Type is required."></validation-error>
-        <server-error ng-model="form.passType"></server-error>
-    </div>
-    <div class="form-group col-xs-12" ng-class="{'has-error':(form.weeksValidFor.$invalid && form.weeksValidFor.$touched) || form.weeksValidFor.serverError}">
-        <input class="form-control" id="weeksValidFor" name="weeksValidFor" type="number" placeholder="Weeks Valid For (required)" ng-model="vm.passOption.weeksValidFor" required/>
-        <validation-error ng-model="form.weeksValidFor" error="required" message="Weeks valid for is required."></validation-error>
-        <validation-error ng-model="form.weeksValidFor" error="number" message="Weeks valid for must be a number."></validation-error>
-        <server-error ng-model="form.weeksValidFor"></server-error>
-    </div>
-    <div class="form-group col-xs-12" ng-class="{'has-error':(form.classesValidFor.$invalid && form.classesValidFor.$touched) || form.classesValidFor.serverError}">
-        <input class="form-control" id="classesValidFor" name="classesValidFor" type="number" placeholder="Classes Valid For (required)" ng-model="vm.passOption.classesValidFor" required/>
-        <validation-error ng-model="form.classesValidFor" error="required" message="Classes valid for is required."></validation-error>
-        <validation-error ng-model="form.classesValidFor" error="number" message="Classes valid for must be number."></validation-error>
-        <server-error ng-model="form.classesValidFor"></server-error>
-    </div>
-    <div class="form-group col-xs-12" ng-class="{'has-error':(form.availableForPurchase.$invalid && form.availableForPurchase.$touched) || form.availableForPurchase.serverError}">
-        <div>
-            <input id="availableForPurchase" name="availableForPurchase" type="checkbox" ng-model="vm.passOption.availableForPurchase" /> Available for purchase
-        </div>
-        <server-error ng-model="form.availableForPurchase"></server-error>
-    </div>
-    <div>
-        <a class="btn btn-default" ng-click="vm.cancel(form)">{{vm.cancelText}}</a>
-        <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="vm.submit(form)">{{vm.submitText}}</a>
-    </div>
-</script>
+    <section-content>
+        <action-button href="#/admin/manage/pass-options/create">Create New Pass Option</action-button>
+    </section-content>
+</section>
+
+<section>
+    <section-title>Details</section-title>
+
+    <section-content>
+        <table class="table table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th select-all-header collection="vm.passOptions"></th>
+
+                    <th hide-if-selected items="vm.passOptions" ts-criteria="name" ts-default>Name</th>
+                    <th hide-if-selected items="vm.passOptions" ts-criteria="cost">Price</th>
+                    <th hide-if-not-selected items="vm.passOptions">
+                        <a class="btn btn-danger" ng-click="vm.confirmDelete()">Delete</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="passOption in vm.passOptions">
+                    <td select-item item="passOption"></td>
+                    <td>
+                        <a ng-href="/#/admin/manage/pass-options/{{passOption.id}}">{{passOption.description}}</a>
+                    </td>
+                    <td>{{passOption.cost | currency}}</td>
+                </tr>
+
+                <tr no-items-row items="vm.passOptions"></tr>
+
+            </tbody>
+        </table>
+    </section-content>
+</section>
