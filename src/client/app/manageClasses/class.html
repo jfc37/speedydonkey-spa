@@ -1,16 +1,16 @@
 <page-title>{{vm.class.name}}</page-title>
 
-<tabset class="tabs-container" ng-if="vm.class">
-    <tab>
-        <tab-heading>
+<uib-tabset class="tabs-container" ng-if="vm.class">
+    <uib-tab>
+        <uib-tab-heading>
             Summary
-        </tab-heading>
+        </uib-tab-heading>
         <class-summary class="vm.class"></class-summary>
-    </tab>
-    <tab>
-        <tab-heading>
+    </uib-tab>
+    <uib-tab>
+        <uib-tab-heading>
             Change
-        </tab-heading>
+        </uib-tab-heading>
         <class-change class="vm.class"></class-change>
-    </tab>
-</tabset>
+    </uib-tab>
+</uib-tabset>

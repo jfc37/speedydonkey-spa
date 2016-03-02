@@ -29,6 +29,13 @@
         }
 
         function success(alert) {
+            if (isString(alert)) {
+                var message = alert;
+                alert = {
+                    message: message
+                };
+            }
+
             alert.type = 'success';
             alert.title = 'Done!';
 
@@ -36,6 +43,13 @@
         }
 
         function error(alert) {
+            if (isString(alert)) {
+                var message = alert;
+                alert = {
+                    message: message
+                };
+            }
+
             alert.type = 'error';
             alert.title = 'Oops!';
 
@@ -43,6 +57,14 @@
         }
 
         function confirm(alert, confirmedFunction) {
+
+            if (isString(alert)) {
+                var message = alert;
+                alert = {
+                    message: message
+                };
+            }
+
             SweetAlert.swal({
                 title: "Are you sure?",
                 text: alert.message,
@@ -60,6 +82,10 @@
 
         function showAlert(alert, type) {
             SweetAlert.swal(alert.title, alert.message, alert.type);
+        }
+
+        function isString(test) {
+            return typeof test === 'string';
         }
 
     }

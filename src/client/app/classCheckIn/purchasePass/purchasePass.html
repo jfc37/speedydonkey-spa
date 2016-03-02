@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title">Pass Purchase Required</h3>
+</div>
+<div class="modal-body">
+    <p>Looks like <strong>{{viewModel.student.fullName}}</strong> needs to buy a pass to attend this class.</p>
+    <p>Select one of the passes below to continue</p>
+
+
+    <div class="radio" data-ng-repeat="pass in viewModel.passOptions">
+        <label>
+            <input type="radio" name="passOptions" data-ng-model="viewModel.selectedPass" ng-value="pass"> {{pass.description}} - ${{pass.cost}}
+        </label>
+    </div>
+    <button class="btn btn-primary" ng-click="viewModel.purchaseNewPass(viewModel.student, viewModel.selectedPass)">Purchase</button>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

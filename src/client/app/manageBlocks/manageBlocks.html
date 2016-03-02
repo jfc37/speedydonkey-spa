@@ -6,26 +6,26 @@
     </section-content>
 </section>
 
-<tabset class="tabs-container">
-    <tab>
-        <tab-heading>
+<uib-tabset class="tabs-container">
+    <uib-tab>
+        <uib-tab-heading>
             Current
             <tab-heading-badge>{{vm.currentBlocks.length}}</tab-heading-badge>
-        </tab-heading>
+        </uib-tab-heading>
         <block-group blocks="vm.currentBlocks" status="Current"></block-group>
-    </tab>
-    <tab>
-        <tab-heading>
+    </uib-tab>
+    <uib-tab>
+        <uib-tab-heading>
             Future
             <tab-heading-badge>{{vm.futureBlocks.length}}</tab-heading-badge>
-        </tab-heading>
+        </uib-tab-heading>
         <block-group blocks="vm.futureBlocks" status="Future"></block-group>
-    </tab>
-    <tab>
-        <tab-heading>
+    </uib-tab>
+    <uib-tab>
+        <uib-tab-heading>
             Past
             <tab-heading-badge>{{vm.pastBlocks.length}}</tab-heading-badge>
-        </tab-heading>
+        </uib-tab-heading>
         <block-group blocks="vm.pastBlocks" status="Past"></block-group>
-    </tab>
-</tabset>
+    </uib-tab>
+</uib-tabset>

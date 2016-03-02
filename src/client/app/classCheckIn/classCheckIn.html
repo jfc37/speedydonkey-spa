@@ -1,86 +1,99 @@
+<page-title>
+    {{vm.class.name}} Check In
+</page-title>
+
+<class-walk-in-student the-class="vm.class"></class-walk-in-student>
+
+<attending-students students="vm.attendingStudents" the-class="vm.class"></attending-students>
+
+<registered-students students="vm.registeredStudents" the-class="vm.class"></registered-students>
+
+<!--
+
 <div class="row">
-    <h1>{{vm.class.name}} Class Check In</h1>
 
 
-    <div class="ibox float-e-margins">
-        <div class="ibox-content">
-            <h2>Student</h2>
-            <div ng-show="vm.registeredStudents.length === 0">
-                No students registered for this class.
-            </div>
-
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody ng-repeat="student in vm.students track by $index">
-                    <tr>
-                        <td>
-                            <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)">
-                        </td>
-                        <td>
-                            {{student.fullName}}
-                        </td>
-                        <td>
-                            <note ng-model="student" type="user"></note>
-                        </td>
-                        <td>
-                            <pass-status ng-model='student' ng-click="student.openPassSelection = !student.openPassSelection"></pass-status>
-                        </td>
-                    </tr>
-                    <tr ng-show="student.openPassSelection">
-                        <td colspan="100">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Passes for {{student.fullName}}</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div ng-repeat="pass in student.passes | filter:{paymentStatus: 'Pending'}">
-                                    <pass-summary ng-model="pass"></pass-summary>
-                                    <note ng-model="pass" type="pass"></note>
-                                    <button class="btn btn-primary" ng-click="vm.passPaidFor(pass, student)">Paid</button>
-                                </div>
-                                <div ng-repeat="pass in student.passes | filter:{paymentStatus: 'Paid'}">
-                                    <pass-summary ng-model="pass"></pass-summary>
-                                    <note ng-model="pass" type="pass"></note>
-                                </div>
-
-                                <hr ng-show="student.passes.length > 0" />
-                                <h3>Pass Selection</h3>
-                                <div class="radio" data-ng-repeat="pass in vm.passOptions">
-                                    <label>
-                                        <input type="radio" name="passOptions" data-ng-model="$parent.selectedPass" ng-value="pass"> {{pass.description}} - ${{pass.cost}}
-                                    </label>
-                                </div>
-                                <button ng-disabled="vm.disablePassPurchase" class="btn btn-primary" ng-click="vm.purchaseNewPass(student, selectedPass)">Purchase</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
     <div class="ibox float-e-margins">
-        <div class="ibox-content">
-            <h2>Walk In Students</h2>
-            <user-search ng-model="vm.walkInStudentSelected" placeholder="Student's name"></user-search>
-            <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.addWalkIn()">Add Walk In</button>
-            <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.enrolWalkIn()">Enrol In Block</button>
-            <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid()" ng-click="vm.createAccount()">Create New Account</button>
+    <div class="ibox-content">
+        <h2>Student</h2>
+        <div ng-show="vm.registeredStudents.length === 0">
+            No students registered for this class.
         </div>
-    </div>
 
-    <div class="ibox float-e-margins" ng-show="vm.creatingNewAccount">
-        <div class="ibox-content">
-            <h2>New Student</h2>
-            <div ng-include src="'app/register/newUser.html'"></div>
-        </div>
-    </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="student in vm.students track by $index">
+                <tr>
+                    <td>
+                        <input type="checkbox" data-ng-model="student.attendedClass" data-ng-change="vm.attendenceStatusChanged(student)">
+                    </td>
+                    <td>
+                        {{student.fullName}}
+                    </td>
+                    <td>
+                        <note ng-model="student" type="user"></note>
+                    </td>
+                    <td>
+                        <pass-status ng-model='student' ng-click="student.openPassSelection = !student.openPassSelection"></pass-status>
+                    </td>
+                </tr>
+                <tr ng-show="student.openPassSelection">
+                    <td colspan="100">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Passes for {{student.fullName}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div ng-repeat="pass in student.passes | filter:{paymentStatus: 'Pending'}">
+                                <pass-summary ng-model="pass"></pass-summary>
+                                <note ng-model="pass" type="pass"></note>
+                                <button class="btn btn-primary" ng-click="vm.passPaidFor(pass, student)">Paid</button>
+                            </div>
+                            <div ng-repeat="pass in student.passes | filter:{paymentStatus: 'Paid'}">
+                                <pass-summary ng-model="pass"></pass-summary>
+                                <note ng-model="pass" type="pass"></note>
+                            </div>
 
-    <change-teachers ng-model="vm.class"></change-teachers>
+                            <hr ng-show="student.passes.length > 0" />
+                            <h3>Pass Selection</h3>
+                            <div class="radio" data-ng-repeat="pass in vm.passOptions">
+                                <label>
+                                    <input type="radio" name="passOptions" data-ng-model="$parent.selectedPass" ng-value="pass"> {{pass.description}} - ${{pass.cost}}
+                                </label>
+                            </div>
+                            <button ng-disabled="vm.disablePassPurchase" class="btn btn-primary" ng-click="vm.purchaseNewPass(student, selectedPass)">Purchase</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <h2>Walk In Students</h2>
+        <user-search ng-model="vm.walkInStudentSelected" placeholder="Student's name"></user-search>
+        <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.addWalkIn()">Add Walk In</button>
+        <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.enrolWalkIn()">Enrol In Block</button>
+        <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid()" ng-click="vm.createAccount()">Create New Account</button>
+    </div>
+</div>
+
+<div class="ibox float-e-margins" ng-show="vm.creatingNewAccount">
+    <div class="ibox-content">
+        <h2>New Student</h2>
+        <div ng-include src="'app/register/newUser.html'"></div>
+    </div>
+</div>
+
+<change-teachers ng-model="vm.class"></change-teachers>
+</div>
+-->

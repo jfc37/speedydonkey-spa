@@ -22,6 +22,7 @@
         'angulartics.google.analytics',
         'oitozero.ngSweetAlert',
         'ngMessages',
+        'ui.bootstrap',
 
         'app.core',
         'app.widgets',

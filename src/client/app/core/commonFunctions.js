@@ -66,8 +66,6 @@
         .module('app.core')
         .factory('commonFunctions', commonFunctions);
 
-    commonFunctions.$inject = [];
-
     /* @ngInject */
     function commonFunctions() {
 

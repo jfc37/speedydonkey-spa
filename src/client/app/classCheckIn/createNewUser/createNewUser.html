@@ -1,0 +1,86 @@
+<!--
+<div class="modal-header">
+    <h3 class="modal-title">New User</h3>
+</div>
+<div class="modal-body">
+-->
+<section>
+    <section-title>
+        New User
+    </section-title>
+
+    <section-content>
+        <section-form ng-form="registerForm">
+            <section-group input-name="firstName">
+                <section-group-label>First Name</section-group-label>
+
+                <section-group-content>
+                    <input name="firstName" type="text" class="form-control" ng-model="viewModel.newUser.firstName" autocomplete="off" />
+                    <validation-messages input-name="firstName">
+                        <div ng-message="required">Please enter a first name</div>
+                    </validation-messages>
+                    <server-validation-messages input-name="firstName" messages="viewModel.serverValidation"></server-validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group input-name="surname">
+                <section-group-label>Surname</section-group-label>
+
+                <section-group-content>
+                    <input name="surname" type="text" class="form-control" ng-model="viewModel.newUser.surname" required autocomplete="off" />
+                    <validation-messages input-name="surname">
+                        <div ng-message="required">Please enter a surname</div>
+                    </validation-messages>
+                    <server-validation-messages input-name="surname" messages="viewModel.serverValidation"></server-validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group input-name="email">
+                <section-group-label>Email</section-group-label>
+
+                <section-group-content>
+                    <input name="email" type="text" class="form-control" ng-model="viewModel.newUser.email" required autocomplete="off" />
+                    <validation-messages input-name="email">
+                        <div ng-message="required">Please enter an email</div>
+                    </validation-messages>
+                    <server-validation-messages input-name="email" messages="viewModel.serverValidation"></server-validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group input-name="password">
+                <section-group-label>Password</section-group-label>
+
+                <section-group-content>
+                    <input name="password" type="password" class="form-control" ng-model="viewModel.newUser.password" required autocomplete="off" />
+                    <validation-messages input-name="password">
+                        <div ng-message="required">Please enter a password</div>
+                    </validation-messages>
+                    <server-validation-messages input-name="password" messages="viewModel.serverValidation"></server-validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group>
+                <cancel-button ng-click="cancel()">Cancel</cancel-button>
+                <save-button ng-disabled="registerForm.$invalid" ng-click="viewModel.register(viewModel.newUser, viewModel)">Create</save-button>
+            </section-group>
+
+        </section-form>
+    </section-content>
+</section>
+
+<!--
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary pull-right" ng-click="viewModel.registerNewUser(viewModel.newUser)" ng-disabled="registerForm.$invalid">
+        Register
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>-->

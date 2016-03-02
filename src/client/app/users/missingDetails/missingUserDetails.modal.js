@@ -7,13 +7,13 @@
         .controller('MissingUserDetailsModalController', MissingUserDetailsModalController);
 
     /* @ngInject */
-    function missingUserDetailsModal($q, $modal, simpleApiCaller) {
+    function missingUserDetailsModal($q, $uibModal, simpleApiCaller) {
         var service = {
             open: openModal
         };
 
         function openModal(user) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'app/users/missingDetails/missingUserDetails.module.html',
                 controller: 'MissingUserDetailsModalController',
                 resolve: {
@@ -35,13 +35,13 @@
         return service;
     }
 
-    function MissingUserDetailsModalController($scope, $modalInstance, simpleApiCaller, user) {
+    function MissingUserDetailsModalController($scope, $uibModalInstance, simpleApiCaller, user) {
         $scope.vm = {};
 
         $scope.vm.user = user;
 
         $scope.vm.save = function () {
-            simpleApiCaller.put($scope.vm.user, getOptions()).then($modalInstance.close);
+            simpleApiCaller.put($scope.vm.user, getOptions()).then($uibModalInstance.close);
         };
 
         function getOptions() {
