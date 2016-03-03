@@ -47,8 +47,8 @@
         }
 
         function purchaseNewPass(student, passOption) {
-            studentPassRepository.purchase(student, passOption).then(function () {
-                niceAlert.success('New pass has been purchased for ' + student.fullName + '.');
+            studentPassRepository.purchase(student, passOption).then(function (pass) {
+                niceAlert.success('Pass number for ' + student.fullName + ': ' + pass.passNumber);
             }, function () {
                 niceAlert.error('Problem with purchasing the pass.');
             }).finally(function () {

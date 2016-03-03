@@ -28,15 +28,16 @@
                     student.attendedClass = true;
                 });
 
-                theClass.registeredStudents.concat(theClass.actualStudents).forEach(function (student) {
+                theClass.actualStudents.forEach(function (student) {
+                    includedStudentIds.push(student.id);
+                    vm.attendingStudents.push(student);
+
+                });
+
+                theClass.registeredStudents.forEach(function (student) {
                     if (includedStudentIds.indexOf(student.id) < 0) {
                         includedStudentIds.push(student.id);
-
-                        if (student.attendedClass) {
-                            vm.attendingStudents.push(student);
-                        } else {
-                            vm.registeredStudents.push(student);
-                        }
+                        vm.registeredStudents.push(student);
                     }
 
                 });

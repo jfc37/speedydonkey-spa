@@ -40,7 +40,9 @@
             };
 
             return simpleApiCaller.post(pass, options).then(function (response) {
-                return response.data;
+                return response.data.actionResult.passes.sort(function (pass) {
+                    return pass.id;
+                })[0];
             });
         }
     }
