@@ -8,21 +8,37 @@
     /* @ngInject */
     function userRepository(simpleApiCaller, validationPromise) {
         var service = {
+            get: get,
             create: create
         };
 
         return service;
 
-        function create(user) {
-            var options = {
-                resource: 'users'
-            };
+        function get(id) {
+            return simpleApiCaller.get(getOptions(id)).then(function (response) {
+                return response.data;
+            });
+        }
 
-            return simpleApiCaller.post(user, options).then(function (response) {
+        function create(user) {
+            return simpleApiCaller.post(user, getOptions()).then(function (response) {
                 return response.data.actionResult;
             }, function (response) {
                 return validationPromise.reject(response);
             });
+        }
+
+        function getOptions(id) {
+
+            var options = {
+                resource: 'users'
+            };
+
+            if (id) {
+                options.id = id;
+            }
+
+            return options;
         }
     }
 })();

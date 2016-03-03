@@ -58,25 +58,27 @@
 
 <section-group-separator></section-group-separator>
 
-<section-group input-name="classesValidFor">
-    <section-group-label>Classes Valid For</section-group-label>
+<div ng-if="vm.passOption.passType === 'clip'">
+    <section-group input-name="classesValidFor">
+        <section-group-label>Classes Valid For</section-group-label>
 
-    <section-group-content>
-        <input name="classesValidFor" type="number" class="form-control" ng-model="vm.passOption.classesValidFor" required />
-        <validation-messages input-name="classesValidFor">
-            <div ng-message="required">Please enter the number of classes this pass is valid for</div>
-        </validation-messages>
-        <server-validation-messages input-name="classesValidFor" messages="vm.serverValidation"></server-validation-messages>
-    </section-group-content>
-</section-group>
+        <section-group-content>
+            <input name="classesValidFor" type="number" class="form-control" ng-model="vm.passOption.classesValidFor" required />
+            <validation-messages input-name="classesValidFor">
+                <div ng-message="required">Please enter the number of classes this pass is valid for</div>
+            </validation-messages>
+            <server-validation-messages input-name="classesValidFor" messages="vm.serverValidation"></server-validation-messages>
+        </section-group-content>
+    </section-group>
 
-<section-group-separator></section-group-separator>
+    <section-group-separator></section-group-separator>
+</div>
 
 <section-group input-name="availableForPurchase">
     <section-group-label>Available For Purchase</section-group-label>
 
     <section-group-content>
-        <input name="availableForPurchase" icheck type="checkbox" ng-model="vm.passOption.availableForPurchase" required />
+        <input name="availableForPurchase" icheck type="checkbox" ng-model="vm.passOption.availableForPurchase" />
         <server-validation-messages input-name="availableForPurchase" messages="vm.serverValidation"></server-validation-messages>
     </section-group-content>
 </section-group>

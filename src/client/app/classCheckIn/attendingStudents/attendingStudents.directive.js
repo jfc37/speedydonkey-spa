@@ -5,8 +5,7 @@
         .module('app.classCheckIn')
         .directive('attendingStudents', attendingStudents);
 
-    /* @ngInject */
-    function attendingStudents(classAttendence) {
+    function attendingStudents() {
         return {
             restrict: 'E',
             scope: {
@@ -16,7 +15,8 @@
             templateUrl: 'app/classCheckIn/attendingStudents/attendingStudents.html',
             controllerAs: 'vm',
             bindToController: true,
-            controller: function () {
+            /* @ngInject */
+            controller: function (classAttendence, studentPassesModal) {
                 var vm = this;
 
                 vm.attendClass = function (student) {
@@ -25,6 +25,10 @@
                     }, function () {
                         student.attendedClass = false;
                     });
+                };
+
+                vm.launchStudentPasses = function (student) {
+                    studentPassesModal.open(student.id);
                 };
             }
         };

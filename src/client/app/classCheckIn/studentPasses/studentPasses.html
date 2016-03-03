@@ -1,0 +1,26 @@
+<nice-modal>
+    <section>
+        <h2>
+            {{viewModel.student.fullName}}
+        </h2>
+
+        <div ng-if="viewModel.passes.length > 0">
+            <p>{{viewModel.student.firstName}} has the following valid passes:</p>
+
+            <ul>
+                <li ng-repeat="pass in viewModel.passes">
+                    <pass-summary ng-model="pass"></pass-summary>
+                </li>
+            </ul>
+        </div>
+
+        <div ng-if="viewModel.passes.length === 0">
+            <p>{{viewModel.student.firstName}} has no valid passes.</p>
+        </div>
+
+        <div class="form-group">
+            <button class="cancel" ng-click="cancel()">Close</button>
+            <save-button ng-click="viewModel.openPassPurchase(viewModel.student)">Purchase New Pass</save-button>
+        </div>
+    </section>
+</nice-modal>

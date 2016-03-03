@@ -16,13 +16,17 @@
             controllerAs: 'vm',
             bindToController: true,
             /* @ngInject */
-            controller: function (classAttendence) {
+            controller: function (classAttendence, studentPassesModal) {
                 var vm = this;
 
                 vm.attendClass = function (student) {
                     classAttendence.tryAttendClass(student, vm.theClass).then(function () {
                         vm.students.remove(student);
                     });
+                };
+
+                vm.launchStudentPasses = function (student) {
+                    studentPassesModal.open(student.id);
                 };
             }
         };

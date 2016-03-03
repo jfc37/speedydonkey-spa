@@ -85,7 +85,7 @@
 
     function passSummary() {
         var directive = {
-            template: '{{passTypeText}} - {{passNumber}} - {{validnessText}}',
+            template: '<strong>{{passNumber}}</strong> - {{passTypeText}} - {{validnessText}}',
             require: 'ngModel',
             scope: {
                 ngModel: '='
