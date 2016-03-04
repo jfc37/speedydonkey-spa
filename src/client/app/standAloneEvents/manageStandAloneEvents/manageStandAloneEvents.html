@@ -2,23 +2,23 @@
 
 <div class="space-15"></div>
 
-<tabset class="tabs-container">
-    <tab>
-        <tab-heading>
+<uib-tabset class="tabs-container">
+    <uib-tab>
+        <uib-tab-heading>
             Current <span class='badge pull-right'>{{vm.statusCount('Current')}}</span>
-        </tab-heading>
+        </uib-tab-heading>
         <event-group events="vm.events" status="Current"></event-group>
-    </tab>
-    <tab>
-        <tab-heading>
+    </uib-tab>
+    <uib-tab>
+        <uib-tab-heading>
             Future <span class='badge pull-right'>{{vm.statusCount('Future')}}</span>
-        </tab-heading>
+        </uib-tab-heading>
         <event-group events="vm.events" status="Future"></event-group>
-    </tab>
-    <tab>
-        <tab-heading>
+    </uib-tab>
+    <uib-tab>
+        <uib-tab-heading>
             Past <span class='badge pull-right'>{{vm.statusCount('Past')}}</span>
-        </tab-heading>
+        </uib-tab-heading>
         <event-group events="vm.events" status="Past"></event-group>
-    </tab>
-</tabset>
+    </uib-tab>
+</uib-tabset>
