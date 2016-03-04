@@ -1,0 +1,62 @@
+<nice-modal>
+    <section>
+        <h2>
+            Pass - {{viewModel.pass.passNumber}}
+        </h2>
+
+        <section-form ng-form="form">
+
+            <div ng-if="viewModel.pass.passType === 'Clip'">
+                <section-group input-name="clipsRemaining">
+                    <section-group-label>Clips Remaining</section-group-label>
+
+                    <section-group-content>
+                        <input name="clipsRemaining" type="number" class="form-control" ng-model="viewModel.pass.clipsRemaining" required />
+                        <validation-messages input-name="clipsRemaining">
+                            <div ng-message="required">Please enter the number of clips remaining</div>
+                        </validation-messages>
+                        <server-validation-messages input-name="clipsRemaining" messages="viewModel.serverValidation"></server-validation-messages>
+                    </section-group-content>
+                </section-group>
+
+                <section-group-separator></section-group-separator>
+            </div>
+
+            <section-group input-name="startDate">
+                <section-group-label>Start Date</section-group-label>
+
+                <section-group-content ng-if="viewModel.pass.startDate">
+                    <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="viewModel.pass.startDate" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+                    <validation-messages input-name="startDate">
+                        <div ng-message="required">Please enter a start date</div>
+                    </validation-messages>
+                    <server-validation-messages input-name="startDate" messages="viewModel.serverValidation"></server-validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group input-name="endDate">
+                <section-group-label>End Date</section-group-label>
+
+                <section-group-content ng-if="viewModel.pass.endDate">
+                    <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="viewModel.pass.endDate" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+                    <validation-messages input-name="endDate">
+                        <div ng-message="required">Please enter an end date</div>
+                    </validation-messages>
+                    <server-validation-messages input-name="endDate" messages="viewModel.serverValidation"></server-validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+        </section-form>
+
+
+        <div class="form-group">
+            <button class="cancel" ng-click="cancel()">Cancel</button>
+            <save-button ng-click="viewModel.update()">Update</save-button>
+            <!--            <save-button ng-disabled="form.$invalid" ng-click="viewModel.update()">Update</save-button>-->
+        </div>
+    </section>
+</nice-modal>

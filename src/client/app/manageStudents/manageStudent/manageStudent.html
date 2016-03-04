@@ -1,0 +1,45 @@
+<nice-modal>
+    <section>
+        <h2>
+            {{viewModel.student.fullName}}
+        </h2>
+
+        <section-group-separator></section-group-separator>
+
+        <a ng-click="viewModel.changeStudentDoNotEmail()" class="btn btn-primary">{{viewModel.doNotEmailText()}}</a>
+
+        <section-group-separator></section-group-separator>
+
+        <table class="table table-hover" ng-hide="!viewModel.student.passes || !viewModel.student.passes.any()">
+            <thead>
+                <th>Passes</th>
+                <th></th>
+            </thead>
+            <tbody ng-repeat="pass in viewModel.student.passes">
+                <tr>
+                    <td>
+                        <pass-summary ng-model="pass"></pass-summary>
+                    </td>
+                    <td>
+                        <a ng-click="viewModel.openPass(pass)" class="btn">Update</a>
+                    </td>
+                </tr>
+                <tr ng-show="passUpdating">
+                    <td colspan="4">
+                        <form novalidate name="form">
+                            <common-input ng-if="pass.passType === 'Clip'" ng-model="pass.clipsRemaining" name="clipsRemaining" display-name="Clips Remaining" type="number" required="true"></common-input>
+                            <common-input ng-model="pass.startDate" name="startDate" display-name="Start Date" type="date" required="true"></common-input>
+                            <common-input ng-model="pass.endDate" name="endDate" display-name="End Date" type="date" required="true"></common-input>
+                        </form>
+                        <a class="btn btn-link" ng-click="cancel()">Cancel</a>
+                        <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="submit(form)">Update</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <button class="cancel" ng-click="cancel()">Close</button>
+        </div>
+    </section>
+</nice-modal>

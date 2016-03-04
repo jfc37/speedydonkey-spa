@@ -6,9 +6,10 @@
         .factory('studentPassRepository', studentPassRepository);
 
     /* @ngInject */
-    function studentPassRepository(simpleApiCaller) {
+    function studentPassRepository(simpleApiCaller, validationPromise) {
         var service = {
             get: get,
+            update: update,
             purchase: purchase
         };
 
@@ -26,6 +27,17 @@
                 if (response.status === 404) {
                     return [];
                 }
+            });
+        }
+
+        function update(pass) {
+            var options = {
+                resource: 'passes',
+                id: pass.id
+            };
+
+            return simpleApiCaller.put(pass, options).then(function () {}, function (response) {
+                return validationPromise.reject(response);
             });
         }
 

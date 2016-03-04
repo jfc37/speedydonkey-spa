@@ -9,6 +9,7 @@
     function userRepository(simpleApiCaller, validationPromise) {
         var service = {
             get: get,
+            getAll: getAll,
             create: create
         };
 
@@ -16,6 +17,12 @@
 
         function get(id) {
             return simpleApiCaller.get(getOptions(id)).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function getAll() {
+            return simpleApiCaller.get(getOptions()).then(function (response) {
                 return response.data;
             });
         }
