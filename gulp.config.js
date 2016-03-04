@@ -144,7 +144,15 @@ module.exports = function () {
         var options = {
             bowerJson: config.bower.json,
             directory: config.bower.directory,
-            ignorePath: config.bower.ignorePath
+            ignorePath: config.bower.ignorePath,
+            overrides: {
+                "icheck": {
+                    "main": [
+                        "icheck.js",
+                        "skins/square/_all.css"
+                    ]
+                }
+            },
         };
         return options;
     };

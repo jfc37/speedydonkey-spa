@@ -241,12 +241,19 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function () {
     notify(msg);
 });
 
+gulp.task('copyBowerAssets', function () {
+
+    gulp.src('bower_components/**/*.png')
+        .pipe($.flatten())
+        .pipe(gulp.dest(config.build + 'styles'));
+});
+
 /**
  * Optimize all files, move to a build folder,
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('optimize', ['inject'], function () {
+gulp.task('optimize', ['inject', 'copyBowerAssets'], function () {
     log('Optimizing the js, css, and html');
 
     var assets = $.useref.assets({
@@ -268,7 +275,7 @@ gulp.task('optimize', ['inject'], function () {
         .pipe(cssFilter)
         .pipe($.csso())
         .pipe(cssFilter.restore())
-        // Get the custom javascript
+        //Get the custom javascript
         .pipe(jsAppFilter)
         .pipe($.ngAnnotate({
             add: true
