@@ -11,7 +11,7 @@
                 <section-group-label>Filter</section-group-label>
 
                 <section-group-content>
-                    <input name="search" type="text" class="form-control" ng-model="vm.filter.search" placeholder="Name or Email" />
+                    <input name="search" type="text" class="form-control" ng-model="vm.filter.search" placeholder="Name" />
                 </section-group-content>
             </section-group>
 
@@ -32,8 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!--<tr ng-repeat="student in vm.filteredStudents = (vm.students | filter:vm.filter.search | orderBy: 'fullName')">-->
-                <tr ng-repeat="student in vm.students">
+                <tr ng-repeat="student in vm.students | filter:{fullName: vm.filter.search} | orderBy: 'fullName'">
                     <td>{{student.fullName}}</td>
                     <td>{{student.email}}</td>
                     <td>
