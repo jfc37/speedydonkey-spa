@@ -8,24 +8,27 @@
     /* @ngInject */
     function createNewUserModal($uibModal, $q, userRepository, niceAlert) {
         var modalInstance;
+        var viewModel = {
+            register: register
+        };
 
         var service = {
-            open: open
+            open: openModal
         };
 
         return service;
 
-        function open(student) {
+        function openModal(student) {
 
-            var newUser = {};
+            viewModel.newUser = {};
 
             if (student) {
                 var splitName = student.split(' ');
                 if (splitName.length > 0) {
-                    newUser.firstName = splitName[0];
+                    viewModel.newUser.firstName = splitName[0];
                 }
                 if (splitName.length > 1) {
-                    newUser.surname = splitName[1];
+                    viewModel.newUser.surname = splitName[1];
                 }
             }
 
@@ -37,10 +40,7 @@
                 size: 'lg',
                 resolve: {
                     viewModel: function () {
-                        return {
-                            newUser: newUser,
-                            register: register
-                        };
+                        return viewModel;
                     }
                 }
             });
@@ -54,8 +54,8 @@
             return deferred.promise;
         }
 
-        function register(newUser, viewModel) {
-            userRepository.create(newUser).then(function (user) {
+        function register() {
+            userRepository.create(viewModel.newUser).then(function (user) {
                 modalInstance.close(user);
             }, function (validation) {
                 if (validation) {

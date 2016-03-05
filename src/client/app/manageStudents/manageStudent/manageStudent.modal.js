@@ -15,10 +15,10 @@
         };
 
         var service = {
-            open: open
+            open: openModal
         };
 
-        function open(student) {
+        function openModal(student) {
             var deferred = $q.defer();
 
             userRepository.get(student.id).then(function (user) {
@@ -80,7 +80,7 @@
         function openPass(pass) {
             modalInstance.close();
             managePassModal.open(pass).finally(function () {
-                open(viewModel.student);
+                openModal(viewModel.student);
             });
         }
 

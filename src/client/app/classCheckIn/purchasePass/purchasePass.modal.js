@@ -8,18 +8,23 @@
     /* @ngInject */
     function purchasePassModal($uibModal, $q, passOptionRepository, studentPassRepository, niceAlert) {
         var modalInstance;
+        var viewModel = {
+            purchaseNewPass: purchaseNewPass
+        };
 
         var service = {
-            open: open
+            open: openModal
         };
 
         return service;
 
-        function open(student) {
+        function openModal(student) {
 
             var deferred = $q.defer();
 
             passOptionRepository.getAll(true).then(function (passOptions) {
+                viewModel.student = student;
+                viewModel.passOptions = passOptions;
 
                 modalInstance = $uibModal.open({
                     templateUrl: 'app/classCheckIn/purchasePass/purchasePass.html',
@@ -27,11 +32,7 @@
                     size: 'lg',
                     resolve: {
                         viewModel: function () {
-                            return {
-                                student: student,
-                                passOptions: passOptions,
-                                purchaseNewPass: purchaseNewPass
-                            };
+                            return viewModel;
                         }
                     }
                 });
@@ -46,9 +47,9 @@
             return deferred.promise;
         }
 
-        function purchaseNewPass(student, passOption) {
-            studentPassRepository.purchase(student, passOption).then(function (pass) {
-                niceAlert.success('Pass number for ' + student.fullName + ': ' + pass.passNumber);
+        function purchaseNewPass() {
+            studentPassRepository.purchase(viewModel.student, viewModel.selectedPass).then(function (pass) {
+                niceAlert.success('Pass number for ' + viewModel.student.fullName + ': ' + pass.passNumber);
             }, function () {
                 niceAlert.error('Problem with purchasing the pass.');
             }).finally(function () {

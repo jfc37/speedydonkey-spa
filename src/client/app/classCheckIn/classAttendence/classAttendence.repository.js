@@ -6,7 +6,7 @@
         .factory('classAttendenceRepository', classAttendenceRepository);
 
     /* @ngInject */
-    function classAttendenceRepository($q, simpleApiCaller) {
+    function classAttendenceRepository(simpleApiCaller) {
         var studentsAttending = [];
 
         var service = {

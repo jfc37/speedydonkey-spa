@@ -8,7 +8,6 @@
     /* @ngInject */
     function niceAlert(SweetAlert) {
 
-
         var service = {
             success: success,
             error: error,
@@ -66,16 +65,16 @@
             }
 
             SweetAlert.swal({
-                title: "Are you sure?",
+                title: 'Are you sure?',
                 text: alert.message,
-                type: "warning",
+                type: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
+                confirmButtonColor: '#DD6B55',
                 confirmButtonText: 'I\'m sure!',
                 closeOnConfirm: false
             }, function (isConfirmed) {
                 if (isConfirmed) {
-                    confirmedFunction()
+                    confirmedFunction();
                 }
             });
         }

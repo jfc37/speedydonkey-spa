@@ -6,8 +6,7 @@
         .controller('ClassCheckIn', ClassCheckIn);
 
     /* @ngInject */
-    function ClassCheckIn($q, $routeParams, classAttendence, classRepository) {
-        /*jshint validthis: true */
+    function ClassCheckIn($routeParams, classAttendence, classRepository, niceAlert) {
         var vm = this;
         vm.registeredStudents = classAttendence.studentsRegistered;
         vm.attendingStudents = classAttendence.studentsAttending;
@@ -42,6 +41,8 @@
 
                 });
 
+            }, function () {
+                niceAlert.error('Problem loading class details.');
             });
         }
     }

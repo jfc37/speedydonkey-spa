@@ -13,9 +13,9 @@
             scope: {
                 'inputName': '@'
             },
-link: function (scope, elem, attrs, ctrl) {
-    scope.form = ctrl;
-},
+            link: function (scope, elem, attrs, ctrl) {
+                scope.form = ctrl;
+            },
             transclude: true
         };
         return directive;

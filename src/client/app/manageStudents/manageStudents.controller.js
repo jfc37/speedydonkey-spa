@@ -15,15 +15,6 @@
             manageStudentModal.open(student);
         };
 
-        //        vm.deletePass = function (student, pass) {
-        //            manageStudentsService.deletePass(pass.id).then(function () {
-        //                student.studentInfo.passes.remove(pass);
-        //                logger.success('Pass deleted');
-        //            }, function () {
-        //                logger.error('Problem deleting pass');
-        //            });
-        //        };
-
         activate();
 
         function activate() {

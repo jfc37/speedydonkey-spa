@@ -10,12 +10,12 @@
         var modalInstance;
 
         var service = {
-            open: open
+            open: openModal
         };
 
         return service;
 
-        function open(studentId) {
+        function openModal(studentId) {
 
             var deferred = $q.defer();
 
@@ -61,7 +61,7 @@
         function openPassPurchase(student) {
             modalInstance.close();
             purchasePassModal.open(student).finally(function () {
-                open(student.id);
+                openModal(student.id);
             });
         }
     }

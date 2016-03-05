@@ -13,10 +13,10 @@
         };
 
         var service = {
-            open: open
+            open: openModal
         };
 
-        function open(pass) {
+        function openModal(pass) {
             viewModel.pass = pass;
             viewModel.serverValidation = [];
             var deferred = $q.defer();

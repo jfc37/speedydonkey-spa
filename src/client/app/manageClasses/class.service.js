@@ -6,7 +6,7 @@
         .factory('classService', classService);
 
     /* @ngInject */
-    function classService($q, dataservice, dataUpdateService, dataCreateService, dataDeleteService, simpleApiCaller) {
+    function classService($q, dataservice, dataUpdateService, dataDeleteService, simpleApiCaller) {
 
         var service = {
             changeRoom: changeRoom,

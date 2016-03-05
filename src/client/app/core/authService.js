@@ -7,7 +7,7 @@
         .factory('authService', authService);
 
     /* @ngInject */
-    function authService($q, $http, userStorageService, dataservice, auth, store, logger, sectionBlockService) {
+    function authService($q, dataservice, auth, store, sectionBlockService) {
 
         var userClaims = [];
 
