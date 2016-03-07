@@ -26,7 +26,8 @@
 
         function getOptions(student, theClass) {
             return {
-                resource: 'classes/' + theClass.id + '/attendance/' + student.id
+                resource: 'classes/' + theClass.id + '/attendance/' + student.id,
+                block: true
             };
         }
     }

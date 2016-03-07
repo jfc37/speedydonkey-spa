@@ -25,9 +25,11 @@
                     }, function () {
                         student.attendedClass = false;
                     });
-                };vm.launchStudentPasses = function (student) {
-    studentPassesModal.open(student.id);
-};
+                };
+
+                vm.launchStudentPasses = function (student) {
+                    studentPassesModal.open(student.id);
+                };
             }
         };
     }
