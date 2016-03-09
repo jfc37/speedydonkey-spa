@@ -113,11 +113,11 @@ function setupCsp(app) {
     var apiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
 
     var defaultSrc = ["'self'", "'unsafe-inline", 'https://fonts.googleapis.com', 'www.google-analytics.com/analytics.js'];
-    var scriptSrc = ["'self'", "''unsafe-inline'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com', 'cdn.au.auth0.com', 'jfc.au.auth0.com'];
+    var scriptSrc = ["'self'", "''unsafe-inline'", "'sha256-KxtbH1VwpjLMD-dX6JwdnF45uYE_xmwRym1XFjtAifg='", "'sha256-SCss7iChG-zqlqUaonanbpCZUyj_jbf5LKHb5pPDpLU='", 'cdn.raygun.io', 'www.google-analytics.com', 'cdn.au.auth0.com', 'jfc.au.auth0.com', 'jfc-dev.au.auth0.com'];
     var fontSrc = ["'self'", 'fonts.gstatic.com', 'cdn.auth0.com', 'data:'];
     var imgSrc = ['*', 'data:']; //["'self", 'www.google-analytics.com', 'data:', 'www.gravatar.com'];
     var styleSrc = ["'self'", "'unsafe-inline", 'fonts.googleapis.com'];
-    var connectSrc = ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io', 'jfc.au.auth0.com'];
+    var connectSrc = ["'self'", apiUrl, 'cdn.raygun.io', 'api.raygun.io', 'jfc.au.auth0.com', 'jfc-dev.au.auth0.com'];
     var reportUri = 'report-uri.io/report/cb45e022bf5061dd8d8fc15e2abdad4e';
 
     if (isDev()) {
