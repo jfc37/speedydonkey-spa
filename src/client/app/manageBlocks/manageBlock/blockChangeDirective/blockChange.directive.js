@@ -24,21 +24,22 @@
                 };
 
                 vm.submit = function () {
-                    blockService.update(vm.block).then(function (validation) {
-                            if (!validation) {
-                                niceAlert.success({
-                                    message: 'Block was successfully updated.'
-                                });
-                                pageReloader.reload();
-                            } else {
+                    blockService.update(vm.block).then(function () {
+                            niceAlert.success({
+                                message: 'Block was successfully updated.'
+                            });
+                            pageReloader.reload();
+                        },
+                        function (validation) {
+                            if (validation) {
                                 vm.serverValidation = validation;
                                 niceAlert.validationWarning();
+                            } else {
+                                niceAlert.error({
+                                    message: 'There was a problem updating the block.'
+                                });
                             }
-                        },
-                        function (errors) {
-                            niceAlert.error({
-                                message: 'There was a problem updating the block.'
-                            });
+
                         });
                 };
             }

@@ -52,17 +52,13 @@
             return simpleApiCaller.put(sanitisedBlock, options).then(function (response) {
                 return response.data;
             }, function (response) {
-                if (response.data && response.data.validationResult) {
-                    return response.data.validationResult.validationErrors;
-                }
+                validationPromise.reject(response);
             });
         }
 
         function create(block) {
             return simpleApiCaller.post(block, getOptions()).then(function () {}, function (response) {
-                if (response.data.validationResult) {
-                    return response.data.validationResult.validationErrors;
-                }
+                validationPromise.reject(response);
             });
         }
 

@@ -11,20 +11,19 @@
 
         vm.submit = function () {
             blockService.create(vm.block).then(function (validation) {
-                if (!validation) {
-                    niceAlert.success({
-                        message: 'Block was successfully created.'
-                    });
-                    routehelper.redirectToRoute('manageBlocks');
-                } else {
+                niceAlert.success({
+                    message: 'Block was successfully created.'
+                });
+                routehelper.redirectToRoute('manageBlocks');
+            }, function (validation) {
+                if (validation) {
                     vm.serverValidation = validation;
                     niceAlert.validationWarning();
+                } else {
+                    niceAlert.error({
+                        message: 'There was a problem creating the block.'
+                    });
                 }
-
-            }, function (errors) {
-                niceAlert.error({
-                    message: 'There was a problem creating the block.'
-                });
             });
         };
 
@@ -39,7 +38,8 @@
                 vm.block = {
                     startDate: moment().startOf('day').hour(18).minute(0).toDate(),
                     minutesPerClass: parseInt(settings.minutesPerClass),
-                    numberOfClasses: parseInt(settings.numberOfClasses)
+                    numberOfClasses: parseInt(settings.numberOfClasses),
+                    teachers: []
                 };
             });
         }

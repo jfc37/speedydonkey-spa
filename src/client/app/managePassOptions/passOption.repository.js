@@ -49,6 +49,10 @@
         function getAll() {
             return simpleApiCaller.get(getOptions()).then(function (response) {
                 return response.data;
+            }, function (response) {
+                if (response.status === 404) {
+                    return [];
+                }
             });
         }
 

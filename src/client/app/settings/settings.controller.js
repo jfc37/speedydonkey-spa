@@ -6,7 +6,7 @@
         .controller('Settings', Settings);
 
     /* @ngInject */
-    function Settings(settingsRepository, niceAlert) {
+    function Settings(settingsRepository, niceAlert, pageReloader) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -15,7 +15,9 @@
         vm.submitSiteSettings = function () {
             updateSettings([{
                 logo: vm.logo
-            }]);
+            }]).then(function () {
+                pageReloader.reload();
+            });
         };
 
         vm.submitBlockSettings = function () {
@@ -26,7 +28,7 @@
         };
 
         function updateSettings(settings) {
-            settingsRepository.update(settings).then(function () {
+            return settingsRepository.update(settings).then(function () {
                 niceAlert.success({
                     message: 'Settings have been updated.'
                 });

@@ -69,10 +69,12 @@
                     teacher.selected = false;
                 });
                 vm.teachers = teachers;
-            }, function () {
-                niceAlert.error({
-                    message: 'Problem getting teachers.'
-                });
+            }, function (response) {
+                if (response.status !== 404) {
+                    niceAlert.error({
+                        message: 'Problem getting teachers.'
+                    });
+                }
             });
         }
     }

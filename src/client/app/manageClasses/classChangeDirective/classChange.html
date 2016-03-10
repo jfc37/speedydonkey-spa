@@ -17,8 +17,8 @@
         <section-group input-name="startTime">
             <section-group-label>Start Time</section-group-label>
 
-            <section-group-content ng-if="vm.class.startTime">
-                <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.class.startTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+            <section-group-content>
+                <jfc-date-time-picker ng-model="vm.class.startTime" name="startTime"></jfc-date-time-picker>
                 <validation-messages input-name="startTime">
                     <div ng-message="required">Please enter a start time</div>
                 </validation-messages>
@@ -30,8 +30,8 @@
         <section-group input-name="endTime">
             <section-group-label>End Time</section-group-label>
 
-            <section-group-content ng-if="vm.class.endTime">
-                <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.class.endTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+            <section-group-content>
+                <jfc-date-time-picker ng-model="vm.class.endTime" name="endTime"></jfc-date-time-picker>
                 <validation-messages input-name="endTime">
                     <div ng-message="required">Please enter an end time</div>
                 </validation-messages>

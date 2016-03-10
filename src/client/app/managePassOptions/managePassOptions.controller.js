@@ -48,7 +48,7 @@
         function getPassOptions() {
             passOptionRepository.getAll().then(function (passOptions) {
                 vm.passOptions = passOptions;
-            }, function () {
+            }, function (response) {
                 niceAlert.error({
                     message: 'Problem getting pass options'
                 });
