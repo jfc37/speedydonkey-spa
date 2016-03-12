@@ -7,15 +7,20 @@
         .factory('pageReloader', pageReloader);
 
     /* @ngInject */
-    function pageReloader($window) {
+    function pageReloader($route, $window) {
 
         var service = {
-            reload: reload
+            reload: reload,
+            hardReload: hardReload
         };
 
         return service;
 
         function reload() {
+            $route.reload();
+        }
+
+        function hardReload() {
             $window.location.reload();
         }
     }

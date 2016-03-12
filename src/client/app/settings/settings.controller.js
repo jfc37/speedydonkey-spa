@@ -7,7 +7,6 @@
 
     /* @ngInject */
     function Settings(settingsRepository, niceAlert, pageReloader) {
-        /*jshint validthis: true */
         var vm = this;
 
         vm.title = 'Settings';
@@ -16,7 +15,7 @@
             updateSettings([{
                 logo: vm.logo
             }]).then(function () {
-                pageReloader.reload();
+                pageReloader.hardReload();
             });
         };
 
@@ -29,6 +28,7 @@
 
         function updateSettings(settings) {
             return settingsRepository.update(settings).then(function () {
+                pageReloader.reload();
                 niceAlert.success({
                     message: 'Settings have been updated.'
                 });

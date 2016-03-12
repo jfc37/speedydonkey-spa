@@ -1,3 +1,3 @@
 <div class="has-error">
-    <div ng-messages="form[inputName].$error" ng-if="form[inputName].$touched" ng-transclude class="help-block"></div>
+    <div ng-messages="form[inputName].$error" ng-transclude class="help-block" ng-if="form[inputName].$touched && form[inputName].$invalid"></div>
 </div>

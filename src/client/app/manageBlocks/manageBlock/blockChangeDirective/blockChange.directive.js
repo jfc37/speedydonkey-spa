@@ -25,10 +25,10 @@
 
                 vm.submit = function () {
                     blockService.update(vm.block).then(function () {
+                            pageReloader.reload();
                             niceAlert.success({
                                 message: 'Block was successfully updated.'
                             });
-                            pageReloader.reload();
                         },
                         function (validation) {
                             if (validation) {
