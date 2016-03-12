@@ -6,11 +6,12 @@
         .factory('manageStudentModal', manageStudentModal);
 
     /*@ngInject*/
-    function manageStudentModal($q, $uibModal, userRepository, managePassModal, doNotEmailRepository, niceAlert) {
+    function manageStudentModal($q, $uibModal, userRepository, managePassModal, doNotEmailRepository, niceAlert, pageReloader) {
         var modalInstance;
         var viewModel = {
             doNotEmailText: doNotEmailText,
             changeStudentDoNotEmail: changeStudentDoNotEmail,
+            deleteStudent: confirmDeleteStudent,
             openPass: openPass
         };
 
@@ -77,6 +78,21 @@
             });
         }
 
+        function confirmDeleteStudent() {
+            niceAlert.confirm('Are you sure you want to delete ' + viewModel.student.fullName + '? This action can not be undone.', deleteStudent);
+        }
+
+        function deleteStudent() {
+            userRepository.delete(viewModel.student).then(function () {
+                niceAlert.success(viewModel.student.firstName + ' has been deleted.');
+            }, function () {
+                niceAlert.error('Problem deleting ' + viewModel.student.fullName + '.');
+            }).finally(function () {
+                modalInstance.close();
+                pageReloader.reload();
+            });
+        }
+
         function openPass(pass) {
             modalInstance.close();
             managePassModal.open(pass).finally(function () {
@@ -86,4 +102,4 @@
 
         return service;
     }
-})();
+}());

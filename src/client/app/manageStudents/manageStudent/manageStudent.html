@@ -10,6 +10,10 @@
 
         <section-group-separator></section-group-separator>
 
+        <a ng-click="viewModel.deleteStudent()" class="btn btn-danger">Delete Student</a>
+
+        <section-group-separator></section-group-separator>
+
         <table class="table table-hover" ng-hide="!viewModel.student.passes || !viewModel.student.passes.any()">
             <thead>
                 <th>Passes</th>

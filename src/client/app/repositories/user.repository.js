@@ -10,7 +10,8 @@
         var service = {
             get: get,
             getAll: getAll,
-            create: create
+            create: create,
+            delete: remove
         };
 
         return service;
@@ -33,6 +34,10 @@
             }, function (response) {
                 return validationPromise.reject(response);
             });
+        }
+
+        function remove(user) {
+            return simpleApiCaller.delete(getOptions(user.id));
         }
 
         function getOptions(id) {
