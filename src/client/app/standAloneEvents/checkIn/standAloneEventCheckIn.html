@@ -1,7 +1,9 @@
-<h1>{{vm.event.name}} Check In - {{vm.event.price | currency}}</h1>
+<page-title>
+    {{vm.event.name}} Check In - {{vm.event.price | currency}}
+</page-title>
 
-<student-check-in students="vm.students"></student-check-in>
+<event-walk-in-student the-event="vm.event"></event-walk-in-student>
 
-<walk-in-student ng-if="vm.students" students="vm.students"></walk-in-student>
+<event-attending-students students="vm.attendingStudents" the-event="vm.event"></event-attending-students>
 
-<change-teachers ng-model="vm.event"></change-teachers>
+<event-registered-students students="vm.registeredStudents" the-event="vm.event"></event-registered-students>
