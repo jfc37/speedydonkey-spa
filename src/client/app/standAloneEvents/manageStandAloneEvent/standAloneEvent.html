@@ -1,4 +1,4 @@
-<h2>{{vm.event.name}}</h2>
+<page-title>{{vm.event.name}}</page-title>
 
 <uib-tabset class="tabs-container" ng-if="vm.event">
     <uib-tab>
@@ -11,6 +11,6 @@
         <uib-tab-heading>
             Change
         </uib-tab-heading>
-        <event-change event="vm.event"></event-change>
+        <event-change stand-alone-event="vm.event"></event-change>
     </uib-tab>
 </uib-tabset>

@@ -6,7 +6,7 @@
         .factory('blockService', blockService);
 
     /* @ngInject */
-    function blockService($q, simpleApiCaller) {
+    function blockService($q, simpleApiCaller, validationPromise) {
 
         var service = {
             update: update,

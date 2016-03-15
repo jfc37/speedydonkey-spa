@@ -1,24 +1,31 @@
-<a href="#/admin/manage/events/create" class="btn btn-primary">Create New Event</a>
+<page-title>Events</page-title>
 
-<div class="space-15"></div>
+<section>
+    <section-content>
+        <action-button href="#/admin/manage/events/create">Create New Event</action-button>
+    </section-content>
+</section>
 
 <uib-tabset class="tabs-container">
     <uib-tab>
         <uib-tab-heading>
-            Current <span class='badge pull-right'>{{vm.statusCount('Current')}}</span>
+            Current
+            <tab-heading-badge>{{vm.currentEvents.length}}</tab-heading-badge>
         </uib-tab-heading>
-        <event-group events="vm.events" status="Current"></event-group>
+        <event-group events="vm.currentEvents" status="Current"></event-group>
     </uib-tab>
     <uib-tab>
         <uib-tab-heading>
-            Future <span class='badge pull-right'>{{vm.statusCount('Future')}}</span>
+            Future
+            <tab-heading-badge>{{vm.futureEvents.length}}</tab-heading-badge>
         </uib-tab-heading>
-        <event-group events="vm.events" status="Future"></event-group>
+        <event-group events="vm.futureEvents" status="Future"></event-group>
     </uib-tab>
     <uib-tab>
         <uib-tab-heading>
-            Past <span class='badge pull-right'>{{vm.statusCount('Past')}}</span>
+            Past
+            <tab-heading-badge>{{vm.pastEvents.length}}</tab-heading-badge>
         </uib-tab-heading>
-        <event-group events="vm.events" status="Past"></event-group>
+        <event-group events="vm.pastEvents" status="Past"></event-group>
     </uib-tab>
 </uib-tabset>

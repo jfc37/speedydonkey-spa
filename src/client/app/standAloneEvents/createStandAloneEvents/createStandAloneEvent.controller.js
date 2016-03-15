@@ -6,15 +6,25 @@
         .controller('CreateStandAloneEvent', CreateStandAloneEvent);
 
     /* @ngInject */
-    function CreateStandAloneEvent(standAloneEventService, routehelper, validationService) {
+    function CreateStandAloneEvent(standAloneEventService, routehelper, niceAlert) {
         var vm = this;
         vm.standAloneEvent = {};
 
-        vm.submit = function (form) {
+        vm.submit = function () {
             standAloneEventService.create(vm.standAloneEvent).then(function () {
-                routehelper.redirectToRoute('manageStandAloneEvent');
-            }, function (errors) {
-                validationService.applyServerSideErrors(form, errors);
+                niceAlert.success({
+                    message: 'Event was successfully created.'
+                });
+                routehelper.redirectToRoute('manageStandAloneEvents');
+            }, function (validation) {
+                if (validation) {
+                    vm.serverValidation = validation;
+                    niceAlert.validationWarning();
+                } else {
+                    niceAlert.error({
+                        message: 'There was a problem creating the event.'
+                    });
+                }
             });
         };
 
