@@ -26,7 +26,7 @@
                 <section-group-label>Start Date</section-group-label>
 
                 <section-group-content ng-if="viewModel.pass.startDate">
-                    <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="viewModel.pass.startDate" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+                    <jfc-date-picker ng-model="viewModel.pass.startDate" name="startDate"></jfc-date-picker>
                     <validation-messages input-name="startDate">
                         <div ng-message="required">Please enter a start date</div>
                     </validation-messages>
@@ -40,7 +40,7 @@
                 <section-group-label>End Date</section-group-label>
 
                 <section-group-content ng-if="viewModel.pass.endDate">
-                    <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="viewModel.pass.endDate" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
+                    <jfc-date-picker ng-model="viewModel.pass.endDate" name="endDate"></jfc-date-picker>
                     <validation-messages input-name="endDate">
                         <div ng-message="required">Please enter an end date</div>
                     </validation-messages>

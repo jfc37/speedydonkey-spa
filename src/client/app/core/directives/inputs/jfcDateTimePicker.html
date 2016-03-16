@@ -1,5 +1,5 @@
 <p class="input-group">
-    <input name="{{vm.name}}" required type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.ngModel" is-open="vm.isOpen" ng-focus="vm.isOpen = true" />
+    <input name="{{vm.name}}" required type="text" class="form-control" datetime-picker="{{vm.displayFormat}}" ng-model="vm.ngModel" is-open="vm.isOpen" enable-time="vm.enableTime" ng-focus="vm.isOpen = true" />
     <span class="input-group-btn">
         <button type="button" class="btn btn-default" ng-click="vm.isOpen = true"><i class="fa fa-calendar"></i></button>
     </span>
