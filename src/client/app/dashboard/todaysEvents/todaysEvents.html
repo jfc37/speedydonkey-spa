@@ -1,6 +1,9 @@
-<div class="ibox float-e-margins" block-ui="todaysEvents">
-    <div class="ibox-content">
-        <h2>Event Check In</h2>
+<div block-ui="todaysEvents">
+    <widget>
+        <widget-title>
+            Event Check In
+        </widget-title>
+
         <p ng-if="vm.todaysEvents.length === 0">
             No events today.
         </p>
@@ -9,5 +12,5 @@
                 {{event.name}} - <display-date format='time' ng-model='event.startTime'></display-date>
             </a>
         </p>
-    </div>
+    </widget>
 </div>

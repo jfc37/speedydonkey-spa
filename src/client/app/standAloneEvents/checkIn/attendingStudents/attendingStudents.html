@@ -1,0 +1,27 @@
+<section>
+    <section-title>
+        Attending Students
+    </section-title>
+
+    <section-content>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="student in vm.students">
+                    <td>
+                        <input icheck type="checkbox" ng-model="student.attendedEvent" ng-change="vm.attendEvent(student)">
+                    </td>
+                    <td>{{student.fullName}}</td>
+                </tr>
+
+                <tr no-items-row items="vm.students"></tr>
+            </tbody>
+        </table>
+    </section-content>
+</section>

@@ -1,16 +1,55 @@
-<div class="row">
-    <h1>Block Selection</h1>
-    <div>
-        <p class="lead" ng-show="vm.blocks.length > 0">Select the blocks you want to enrol in</p>
+<page-title>Block Selection</page-title>
 
-        <button class="btn btn-lg btn-primary" ng-disabled="!vm.isAnyBlocksSelected()" ng-click="vm.submit()">Enrol</button>
-        <div class="row">
-            <div class="block-grouping clearfix row col-lg-3" ng-repeat="group in vm.blockGrouping">
-                <div ng-include src="'app/blockEnrolment/setOfBlocks.html'"></div>
-            </div>
-        </div>
-        <p ng-show="vm.blocks.length === 0">
-            There are no blocks available to be enrolled in
-        </p>
-    </div>
+<div ng-if="vm.anyBlocks()">
+    <section>
+        <section-content>
+            <super-action-button ng-disabled="!vm.isAnyBlocksSelected()" ng-click="vm.submit()">Enrol</super-action-button>
+        </section-content>
+    </section>
+
+    <section ng-repeat="blocksOnDay in vm.blocksByDays">
+        <section-title>
+            Starting {{blocksOnDay.title}}
+        </section-title>
+
+        <section-content>
+            <flex-box>
+                <product-box class="col-md-4 col-sm-6 col-xs-12" ng-repeat="block in blocksOnDay.blocks | orderBy:'startDate'">
+                    <product-title>{{block.name}}</product-title>
+
+                    <product-description>
+                        <display-date format='time' ng-model='block.startDate'></display-date> -
+                        <display-date format='time' ng-model='block.endDate'></display-date>
+                    </product-description>
+
+                    <product-action>
+                        <label ng-if="!block.isEnroled">
+                            <input type="checkbox" icheck ng-model="block.enrolIn"> Enrol
+                        </label>
+                        <label ng-if="block.isEnroled">
+                            Already enrolled
+                        </label>
+                    </product-action>
+                </product-box>
+            </flex-box>
+
+        </section-content>
+
+    </section>
+
+    <section>
+        <section-content>
+            <super-action-button ng-disabled="!vm.isAnyBlocksSelected()" ng-click="vm.submit()">Enrol</super-action-button>
+        </section-content>
+    </section>
+</div>
+
+<div ng-if="!vm.anyBlocks()">
+    <section>
+        <section-content>
+            <p class="lead">
+                There are no blocks available to enrol in
+            </p>
+        </section-content>
+    </section>
 </div>

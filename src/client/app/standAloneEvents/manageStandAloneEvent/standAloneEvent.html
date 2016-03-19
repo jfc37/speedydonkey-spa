@@ -1,16 +1,16 @@
-<h2>{{vm.event.name}}</h2>
+<page-title>{{vm.event.name}}</page-title>
 
-<tabset class="tabs-container" ng-if="vm.event">
-    <tab>
-        <tab-heading>
+<uib-tabset class="tabs-container" ng-if="vm.event">
+    <uib-tab>
+        <uib-tab-heading>
             Summary
-        </tab-heading>
+        </uib-tab-heading>
         <event-summary event="vm.event"></event-summary>
-    </tab>
-    <tab>
-        <tab-heading>
+    </uib-tab>
+    <uib-tab>
+        <uib-tab-heading>
             Change
-        </tab-heading>
-        <event-change event="vm.event"></event-change>
-    </tab>
-</tabset>
+        </uib-tab-heading>
+        <event-change stand-alone-event="vm.event"></event-change>
+    </uib-tab>
+</uib-tabset>

@@ -1,6 +1,9 @@
-<div class="ibox float-e-margins" block-ui="todaysClasses">
-    <div class="ibox-content">
-        <h2>Class Check In</h2>
+<div block-ui="todaysClasses">
+    <widget>
+        <widget-title>
+            Class Check In
+        </widget-title>
+
         <p ng-if="vm.todaysClasses.length === 0">
             No classes today.
         </p>
@@ -9,5 +12,5 @@
                 {{class.name}} - <display-date format='time' ng-model='class.startTime'></display-date>
             </a>
         </p>
-    </div>
+    </widget>
 </div>

@@ -1,0 +1,81 @@
+<page-title>Settings</page-title>
+
+<section>
+    <section-title>
+        Site Settings
+    </section-title>
+
+    <section-content ng-form="siteForm">
+        <section-form>
+            <section-group input-name="logo">
+                <section-group-label>Logo url</section-group-label>
+
+                <section-group-content>
+                    <input name="logo" type="text" class="form-control" ng-model="vm.logo" required>
+                    <help-text>
+                        Url to your logo image
+                    </help-text>
+                    <validation-messages input-name="logo">
+                        <div ng-message="required">Please enter a url</div>
+                    </validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group>
+                <cancel-button href="#/">Cancel</cancel-button>
+                <save-button class="btn btn-primary pull-right" ng-disabled="siteForm.$invalid" ng-click="vm.submitSiteSettings()">Save</save-button>
+            </section-group>
+
+        </section-form>
+    </section-content>
+</section>
+
+<section>
+    <section-title>
+        Block Default Settings
+    </section-title>
+
+    <section-content ng-form="blockForm">
+        <section-form>
+            <section-group input-name="minutesPerClass">
+                <section-group-label>Minutes Per Class</section-group-label>
+
+                <section-group-content>
+                    <input name="minutesPerClass" type="number" class="form-control" ng-model="vm.minutesPerClass" required>
+                    <help-text>
+                        The default number of minutes a class will run for
+                    </help-text>
+                    <validation-messages input-name="minutesPerClass">
+                        <div ng-message="required">Please enter a value</div>
+                    </validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group input-name="numberOfClasses">
+                <section-group-label>Number of Classes</section-group-label>
+
+                <section-group-content>
+                    <input name="numberOfClasses" type="number" class="form-control" ng-model="vm.numberOfClasses" required>
+                    <help-text>
+                        The default number of classes in a block
+                    </help-text>
+                    <validation-messages input-name="numberOfClasses">
+                        <div ng-message="required">Please enter a value</div>
+                    </validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group>
+                <cancel-button href="#/">Cancel</cancel-button>
+                <save-button class="btn btn-primary pull-right" ng-disabled="blockForm.$invalid" ng-click="vm.submitBlockSettings()">Save</save-button>
+            </section-group>
+
+        </section-form>
+    </section-content>
+</section>

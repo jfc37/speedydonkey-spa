@@ -6,51 +6,75 @@
         .controller('ManageTeachers', ManageTeachers);
 
     /* @ngInject */
-    function ManageTeachers($q, logger, manageTeachersService) {
-        /*jshint validthis: true */
+    function ManageTeachers(manageTeachersService, niceAlert) {
         var vm = this;
         vm.teachers = [];
 
-        vm.addTeacher = function () {
-            manageTeachersService.addTeacher(vm.selectedUser.id).then(function (newTeacher) {
-                logger.success(newTeacher.fullName + ' is now a teacher!');
-                vm.teachers.push(newTeacher);
-                vm.selectedUser = '';
-            }, function () {
-                logger.error('Failed adding the new teacher');
-            });
+        vm.confirmDelete = function () {
+            niceAlert.confirm({
+                message: 'All selected teachers will be deleted.'
+            }, deleteSelected);
         };
 
-        vm.remove = function (id) {
-            manageTeachersService.deleteTeacher(id).then(function () {
-                var teacherRemoved = vm.teachers.filter(function (teacher) {
-                    return teacher.id === id;
-                })[0];
-                logger.success(teacherRemoved.fullName + ' has been removed as a teacher');
-                vm.teachers.remove(teacherRemoved);
+        function deleteSelected() {
+            var teachersToDelete = getSelectedTeachers();
+            manageTeachersService.deleteTeachers(teachersToDelete).then(function () {
+                niceAlert.success({
+                    message: 'Selected teachers have been deleted.'
+                });
+                teachersToDelete.forEach(function (teacher) {
+                    vm.teachers.remove(teacher);
+                });
             }, function () {
-                logger.error('Failed removing the teacher');
+                niceAlert.error({
+                    message: 'Problem removing this user as a teacher'
+                });
+            });
+        }
+
+        function getSelectedTeachers() {
+            return vm.teachers.filter(function (teacher) {
+                return teacher.selected;
+            });
+        }
+
+        vm.addTeacher = function () {
+            manageTeachersService.addTeacher(vm.selectedUser.id).then(function (newTeacher) {
+                niceAlert.success({
+                    message: newTeacher.fullName + ' is now a teacher.'
+                });
+                vm.teachers.push(newTeacher);
+            }, function (validation) {
+                if (validation) {
+                    niceAlert.validationWarning(validation[0].errorMessage);
+                } else {
+                    niceAlert.error({
+                        message: 'Problem making ' + vm.selectedUser.fullName + ' a teacher'
+                    });
+                }
+            }).finally(function () {
+                vm.selectedUser = '';
             });
         };
 
         activate();
 
         function activate() {
-            var promises = [getTeachers()];
-            return $q.all(promises)
-                .then(function () {
-                    logger.info('Activated Manage Teachers');
-                });
+            return getTeachers();
         }
 
         function getTeachers() {
-            $q(function (resolve) {
-                manageTeachersService.getTeachers().then(function (teachers) {
-                    vm.teachers = teachers;
-                    resolve();
-                }, function () {
-                    logger.error('Failed getting teachers');
+            return manageTeachersService.getTeachers().then(function (teachers) {
+                teachers.forEach(function (teacher) {
+                    teacher.selected = false;
                 });
+                vm.teachers = teachers;
+            }, function (response) {
+                if (response.status !== 404) {
+                    niceAlert.error({
+                        message: 'Problem getting teachers.'
+                    });
+                }
             });
         }
     }

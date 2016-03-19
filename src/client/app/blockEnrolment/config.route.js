@@ -5,8 +5,6 @@
         .module('app.blockEnrolment')
         .run(appRun);
 
-    appRun.$inject = ['routehelper'];
-
     /* @ngInject */
     function appRun(routehelper) {
         routehelper.configureRoutes(getRoutes());
@@ -15,7 +13,7 @@
     function getRoutes() {
         return [
             {
-                url: '/blockEnrolment',
+                url: '/block-enrolment',
                 config: {
                     title: 'blockEnrolment',
                     controller: 'BlockEnrolment',

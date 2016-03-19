@@ -1,38 +1,16 @@
-<h3>Create Block</h3>
+<page-title>Create Block</page-title>
 
-<div ng-form="createForm">
-    <input-block name="name" label="Name">
-        <input name="name" type="text" class="form-control" ng-model="vm.block.name" required/>
-        <validation error="required" name="name">Please enter a name</validation>
-    </input-block>
+<section>
+    <section-title>Block Details</section-title>
 
-    <input-block name="startDate" label="Start Date" ng-if="vm.block.startDate">
-        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.block.startDate" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
-    </input-block>
+    <section-content>
+        <section-form ng-form="createForm">
+            <div ng-include src="'app/manageBlocks/createBlock/blockForm.html'"></div>
 
-
-    <!--Minutes Per Class-->
-    <input-block name="minutesPerClass" label="Minutes Per Class">
-        <input name="minutesPerClass" type="number" class="form-control" ng-model="vm.block.minutesPerClass" required/>
-        <validation error="required" name="minutesPerClass">Please enter the number of minutes per class</validation>
-    </input-block>
-
-    <!--Number Of Classes -->
-    <input-block name="numberOfClasses" label="Number Of Classes">
-        <input name="numberOfClasses" type="number" class="form-control" ng-model="vm.block.numberOfClasses" required/>
-        <validation error="required" name="numberOfClasses">Please enter the number of classes</validation>
-    </input-block>
-
-    <!--Number Of Classes -->
-    <input-block name="teachers" label="Teachers">
-        <teacher-dropdown ng-model="vm.block.teachers"></teacher-dropdown>
-    </input-block>
-
-    <!--Is Invite Only -->
-    <input-block name="isInviteOnly" label="Is Invite Only">
-        <input name="isInviteOnly" type="checkbox" class="form-control" ng-model="vm.block.isInviteOnly" />
-    </input-block>
-
-    <a class="btn btn-default" href="#/admin/manage/blocks">Cancel</a>
-    <a class="btn btn-default pull-right" ng-disabled="createForm.$invalid" ng-click="vm.submit(createForm)">Create</a>
-</div>
+            <section-group>
+                <cancel-button href="#/admin/manage/blocks">Cancel</cancel-button>
+                <save-button ng-disabled="createForm.$invalid" ng-click="vm.submit(createForm)">Create</save-button>
+            </section-group>
+        </section-form>
+    </section-content>
+</section>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="app" ng-strict-di>
+<html data-ng-app="app">
 
 <head>
     <style>
@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 
-    <!-- build:css styles/vendor.css -->
+    <!-- build:css styles/lib.css -->
 
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
@@ -26,18 +26,21 @@
     <link rel="stylesheet" href="/bower_components/font-awesome-animation/dist/font-awesome-animation.min.css" />
     <link rel="stylesheet" href="/bower_components/angular-tablesort/tablesort.css" />
     <link rel="stylesheet" href="/bower_components/metisMenu/dist/metisMenu.css" />
+    <link rel="stylesheet" href="/bower_components/icheck/skins/square/_all.css" />
     <link rel="stylesheet" href="/bower_components/summernote/dist/summernote.css" />
     <link rel="stylesheet" href="/bower_components/summernote/dist/summernote-bs3.css" />
     <link rel="stylesheet" href="/bower_components/components-font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/bower_components/ui-select/dist/select.css" />
     <link rel="stylesheet" href="/bower_components/select2/dist/css/select2.css" />
+    <link rel="stylesheet" href="/bower_components/dropzone/downloads/css/dropzone.css" />
+    <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:css styles/app.css -->
+    <!-- build:css styles/app.css-->
 
     <!-- inject:css -->
-    <link rel="stylesheet" href="/.temp/style.css">
+    <link rel="stylesheet" href="/.tmp/style.css">
     <!-- endinject -->
 
     <!-- endbuild -->
@@ -50,7 +53,7 @@
     </div>
 
 
-    <!-- build:js js/vendor.js -->
+    <!-- build:js js/lib.js -->
 
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -69,7 +72,7 @@
     <script src="/bower_components/angular-tablesort/js/angular-tablesort.js"></script>
     <script src="/bower_components/metisMenu/dist/metisMenu.js"></script>
     <script src="/bower_components/slimScroll/jquery.slimscroll.min.js"></script>
-    <script src="/bower_components/icheck/icheck.min.js"></script>
+    <script src="/bower_components/icheck/icheck.js"></script>
     <script src="/bower_components/summernote/dist/summernote.js"></script>
     <script src="/bower_components/angular-summernote/dist/angular-summernote.js"></script>
     <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
@@ -98,6 +101,12 @@
     <script src="/bower_components/angular-jwt/dist/angular-jwt.js"></script>
     <script src="/bower_components/angular-storage/dist/angular-storage.js"></script>
     <script src="/bower_components/a0-angular-storage/dist/angular-storage.js"></script>
+    <script src="/bower_components/dropzone/downloads/dropzone.min.js"></script>
+    <script src="/bower_components/angular-dropzone/lib/angular-dropzone.js"></script>
+    <script src="/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/bower_components/ngSweetAlert/SweetAlert.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="/bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
     <!-- endbower -->
 
     <!-- endbuild -->
@@ -108,6 +117,12 @@
     <script src="/src/client/app/adminDashboard/adminDashboard.module.js"></script>
     <script src="/src/client/app/adminReports/adminReports.module.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.module.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/apiCaller.module.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
+    <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.module.js"></script>
+    <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.module.js"></script>
+    <script src="/src/client/app/blocks/router/router.module.js"></script>
     <script src="/src/client/app/classCheckIn/classCheckIn.module.js"></script>
     <script src="/src/client/app/core/core.module.js"></script>
     <script src="/src/client/app/dashboard/dashboard.module.js"></script>
@@ -127,46 +142,111 @@
     <script src="/src/client/app/reportTeacherHours/reportTeacherHours.module.js"></script>
     <script src="/src/client/app/resetPassword/resetPassword.module.js"></script>
     <script src="/src/client/app/rooms/rooms.module.js"></script>
+    <script src="/src/client/app/settings/settings.module.js"></script>
     <script src="/src/client/app/standAloneEvents/standAloneEvents.module.js"></script>
     <script src="/src/client/app/userActivation/userActivation.module.js"></script>
     <script src="/src/client/app/users/users.module.js"></script>
     <script src="/src/client/app/widgets/widgets.module.js"></script>
     <script src="/src/client/app/windyLindy/windyLindy.module.js"></script>
-    <script src="/src/client/app/blocks/apiCaller/apiCaller.module.js"></script>
-    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
-    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
-    <script src="/src/client/app/blocks/router/router.module.js"></script>
-    <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.module.js"></script>
-    <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.module.js"></script>
-    <script src="/src/client/app/inspinia.js"></script>
     <script src="/src/client/app/adminDashboard/adminDashboard.controller.js"></script>
     <script src="/src/client/app/adminDashboard/config.route.js"></script>
     <script src="/src/client/app/adminReports/adminReports.controller.js"></script>
     <script src="/src/client/app/adminReports/config.route.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.controller.js"></script>
-    <script src="/src/client/app/blockEnrolment/blockEnrolment.filters.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.service.js"></script>
     <script src="/src/client/app/blockEnrolment/config.route.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/apiCaller.js"></script>
+    <script src="/src/client/app/blocks/apiCaller/simpleApiCaller.js"></script>
+    <script src="/src/client/app/blocks/exception/exception-handler.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.js"></script>
+    <script src="/src/client/app/blocks/exception/interpolation-handler.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.js"></script>
+    <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.js"></script>
+    <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.js"></script>
+    <script src="/src/client/app/blocks/router/routehelper.js"></script>
+    <script src="/src/client/app/classCheckIn/attendingStudents/attendingStudents.directive.js"></script>
+    <script src="/src/client/app/classCheckIn/changeTeachers/changeTeachers.directive.js"></script>
+    <script src="/src/client/app/classCheckIn/classAttendence/classAttendence.repository.js"></script>
+    <script src="/src/client/app/classCheckIn/classAttendence/classAttendence.service.js"></script>
     <script src="/src/client/app/classCheckIn/classCheckIn.controller.js"></script>
-    <script src="/src/client/app/classCheckIn/classCheckInService.js"></script>
     <script src="/src/client/app/classCheckIn/config.route.js"></script>
+    <script src="/src/client/app/classCheckIn/createNewUser/createNewUser.modal.js"></script>
+    <script src="/src/client/app/classCheckIn/purchasePass/purchasePass.modal.js"></script>
+    <script src="/src/client/app/classCheckIn/registeredStudents/registeredStudents.directive.js"></script>
+    <script src="/src/client/app/classCheckIn/studentPasses/studentPasses.modal.js"></script>
+    <script src="/src/client/app/classCheckIn/walkInStudent/walkInStudent.directive.js"></script>
     <script src="/src/client/app/core/authService.js"></script>
-    <script src="/src/client/app/core/base64Service.js"></script>
     <script src="/src/client/app/core/commonDirectives.js"></script>
+    <script src="/src/client/app/core/commonFilters/yesNo.filter.js"></script>
     <script src="/src/client/app/core/commonFunctions.js"></script>
     <script src="/src/client/app/core/config.js"></script>
     <script src="/src/client/app/core/constants.js"></script>
     <script src="/src/client/app/core/dataCreateService.js"></script>
     <script src="/src/client/app/core/dataDeleteService.js"></script>
-    <script src="/src/client/app/core/dataUpdateService.js"></script>
     <script src="/src/client/app/core/dataservice.js"></script>
+    <script src="/src/client/app/core/dataUpdateService.js"></script>
     <script src="/src/client/app/core/dateService.js"></script>
+    <script src="/src/client/app/core/directives/buttons/actionButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/buttons/cancelButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/buttons/saveButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/buttons/superActionButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/filterDirective.js"></script>
+    <script src="/src/client/app/core/directives/iCheckDirective/icheck.directive.js"></script>
+    <script src="/src/client/app/core/directives/input.directive.js"></script>
+    <script src="/src/client/app/core/directives/inputs/jfcDateTimePicker.directive.js"></script>
+    <script src="/src/client/app/core/directives/modals/niceModal.directive.js"></script>
+    <script src="/src/client/app/core/directives/note.directive.js"></script>
+    <script src="/src/client/app/core/directives/onlinePayments/itemSummary.directive.js"></script>
+    <script src="/src/client/app/core/directives/onlinePayments/paymentOptions.directive.js"></script>
+    <script src="/src/client/app/core/directives/onlinePayments/paypalConfirm.directive.js"></script>
+    <script src="/src/client/app/core/directives/onlinePayments/poliConfirm.directive.js"></script>
+    <script src="/src/client/app/core/directives/products/productAction.directive.js"></script>
+    <script src="/src/client/app/core/directives/products/productBox.directive.js"></script>
+    <script src="/src/client/app/core/directives/products/productDescription.directive.js"></script>
+    <script src="/src/client/app/core/directives/products/productTitle.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/flexBox.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/helpText.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/pageTitle.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/section.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionContent.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionForm.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroup.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupContent.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupLabel.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupSeparator.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionTitle.directive.js"></script>
+    <script src="/src/client/app/core/directives/tables/hideIfSelected.directive.js"></script>
+    <script src="/src/client/app/core/directives/tables/noItemsRow.directive.js"></script>
+    <script src="/src/client/app/core/directives/tables/selectAllHeader.directive.js"></script>
+    <script src="/src/client/app/core/directives/tables/selectItem.directive.js"></script>
+    <script src="/src/client/app/core/directives/tabs/tabHeadingBadge.directive.js"></script>
+    <script src="/src/client/app/core/directives/users/userSearch.directive.js"></script>
+    <script src="/src/client/app/core/directives/validation/serverValidationMessages.directive.js"></script>
+    <script src="/src/client/app/core/directives/validation/validationMessages.directive.js"></script>
+    <script src="/src/client/app/core/directives/widgetLayout/widget.directive.js"></script>
+    <script src="/src/client/app/core/directives/widgetLayout/widgetTitle.directive.js"></script>
+    <script src="/src/client/app/core/niceAlert.service.js"></script>
+    <script src="/src/client/app/core/pageReloader.service.js"></script>
     <script src="/src/client/app/core/selectOptionService.js"></script>
+    <script src="/src/client/app/core/services/sectionBlock.service.js"></script>
+    <script src="/src/client/app/core/services/validationPromise.service.js"></script>
+    <script src="/src/client/app/core/services/validationService.js"></script>
     <script src="/src/client/app/core/userStorage.service.js"></script>
     <script src="/src/client/app/dashboard/config.route.js"></script>
+    <script src="/src/client/app/dashboard/currentPasses/currentPasses.directive.js"></script>
+    <script src="/src/client/app/dashboard/currentPasses/pass.service.js"></script>
     <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
+    <script src="/src/client/app/dashboard/displayAnnouncements/announcements.service.js"></script>
+    <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.js"></script>
+    <script src="/src/client/app/dashboard/todaysClasses/class.service.js"></script>
+    <script src="/src/client/app/dashboard/todaysClasses/todaysClasses.directive.js"></script>
+    <script src="/src/client/app/dashboard/todaysEvents/todaysEvents.directive.js"></script>
+    <script src="/src/client/app/dashboard/todaysEvents/todaysEvents.service.js"></script>
+    <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.directive.js"></script>
+    <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.service.js"></script>
     <script src="/src/client/app/forgottenPassword/config.route.js"></script>
     <script src="/src/client/app/forgottenPassword/forgottenPassword.controller.js"></script>
+    <script src="/src/client/app/inspinia.js"></script>
     <script src="/src/client/app/layout/shell.js"></script>
     <script src="/src/client/app/layout/sidebar.js"></script>
     <script src="/src/client/app/login/config.route.js"></script>
@@ -175,19 +255,29 @@
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.controller.js"></script>
     <script src="/src/client/app/manageAnnouncements/manageAnnouncements.service.js"></script>
     <script src="/src/client/app/manageBlocks/block.service.js"></script>
+    <script src="/src/client/app/manageBlocks/blockGroupDirective/blockGroup.directive.js"></script>
     <script src="/src/client/app/manageBlocks/config.route.js"></script>
+    <script src="/src/client/app/manageBlocks/createBlock/createBlock.controller.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock/block.controller.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock/blockChangeDirective/blockChange.directive.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock/blockClassesDirective/blockClasses.directive.js"></script>
+    <script src="/src/client/app/manageBlocks/manageBlock/blockSummaryDirective/blockSummary.directive.js"></script>
     <script src="/src/client/app/manageBlocks/manageBlocks.controller.js"></script>
+    <script src="/src/client/app/manageBlocks/updateBlock/updateBlock.controller.js"></script>
     <script src="/src/client/app/manageClasses/class.controller.js"></script>
     <script src="/src/client/app/manageClasses/class.service.js"></script>
+    <script src="/src/client/app/manageClasses/classChangeDirective/classChange.directive.js"></script>
+    <script src="/src/client/app/manageClasses/classSummaryDirective/classSummary.directive.js"></script>
     <script src="/src/client/app/manageClasses/config.route.js"></script>
     <script src="/src/client/app/managePassOptions/config.route.js"></script>
+    <script src="/src/client/app/managePassOptions/create/createPassOption.controller.js"></script>
     <script src="/src/client/app/managePassOptions/managePassOptions.controller.js"></script>
-    <script src="/src/client/app/managePassOptions/managePassOptions.service.js"></script>
+    <script src="/src/client/app/managePassOptions/passOption.repository.js"></script>
+    <script src="/src/client/app/managePassOptions/update/updatePassOption.controller.js"></script>
     <script src="/src/client/app/manageStudents/config.route.js"></script>
-    <script src="/src/client/app/manageStudents/managePass.controller.js"></script>
-    <script src="/src/client/app/manageStudents/manageStudent.controller.js"></script>
+    <script src="/src/client/app/manageStudents/managePass/managePass.modal.js"></script>
+    <script src="/src/client/app/manageStudents/manageStudent/manageStudent.modal.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.controller.js"></script>
-    <script src="/src/client/app/manageStudents/manageStudents.service.js"></script>
     <script src="/src/client/app/manageTeachers/config.route.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.controller.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.service.js"></script>
@@ -210,60 +300,47 @@
     <script src="/src/client/app/reportTeacherHours/config.route.js"></script>
     <script src="/src/client/app/reportTeacherHours/reportTeacherHours.js"></script>
     <script src="/src/client/app/reportTeacherHours/reportTeacherHoursService.js"></script>
+    <script src="/src/client/app/repositories/blockEnrolment.repository.js"></script>
+    <script src="/src/client/app/repositories/class.repository.js"></script>
+    <script src="/src/client/app/repositories/doNotEmail.repository.js"></script>
+    <script src="/src/client/app/repositories/studentPass.repository.js"></script>
+    <script src="/src/client/app/repositories/user.repository.js"></script>
     <script src="/src/client/app/resetPassword/config.route.js"></script>
     <script src="/src/client/app/resetPassword/resetPassword.js"></script>
     <script src="/src/client/app/rooms/config.route.js"></script>
+    <script src="/src/client/app/rooms/createRoom/createRoom.controller.js"></script>
+    <script src="/src/client/app/rooms/manageRoom/room.controller.js"></script>
+    <script src="/src/client/app/rooms/manageRoom/roomChangeDirective/roomChange.directive.js"></script>
+    <script src="/src/client/app/rooms/manageRoom/roomScheduleDirective/roomSchedule.directive.js"></script>
+    <script src="/src/client/app/rooms/manageRoom/roomSummaryDirective/roomSummary.directive.js"></script>
+    <script src="/src/client/app/rooms/manageRooms/manageRooms.controller.js"></script>
     <script src="/src/client/app/rooms/room.service.js"></script>
+    <script src="/src/client/app/rooms/roomDropdown/roomDropdown.directive.js"></script>
+    <script src="/src/client/app/settings/config.route.js"></script>
+    <script src="/src/client/app/settings/settings.controller.js"></script>
+    <script src="/src/client/app/settings/settings.repository.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/attendingStudents/attendingStudents.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/eventAttendence.repository.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/eventAttendence.service.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/registeredStudents/registeredStudents.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/standAloneEventCheckIn.controller.js"></script>
+    <script src="/src/client/app/standAloneEvents/checkIn/walkInStudent/walkInStudent.directive.js"></script>
     <script src="/src/client/app/standAloneEvents/config.route.js"></script>
+    <script src="/src/client/app/standAloneEvents/createStandAloneEvents/createStandAloneEvent.controller.js"></script>
+    <script src="/src/client/app/standAloneEvents/eventGroupDirective/eventGroup.directive.js"></script>
     <script src="/src/client/app/standAloneEvents/eventRegistration.service.js"></script>
+    <script src="/src/client/app/standAloneEvents/eventRegistrations/eventRegistration.controller.js"></script>
+    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/eventChangeDirective/eventChange.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/eventSummaryDirective/eventSummary.directive.js"></script>
+    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/standAloneEvent.controller.js"></script>
+    <script src="/src/client/app/standAloneEvents/manageStandAloneEvents/manageStandAloneEvents.controller.js"></script>
     <script src="/src/client/app/standAloneEvents/standAloneEvent.service.js"></script>
     <script src="/src/client/app/userActivation/config.route.js"></script>
     <script src="/src/client/app/userActivation/userActivation.js"></script>
     <script src="/src/client/app/userActivation/userActivationService.js"></script>
-    <script src="/src/client/app/widgets/ccSidebar.js"></script>
-    <script src="/src/client/app/windyLindy/windyLindy.service.js"></script>
-    <script src="/src/client/app/blocks/apiCaller/apiCaller.js"></script>
-    <script src="/src/client/app/blocks/apiCaller/simpleApiCaller.js"></script>
-    <script src="/src/client/app/blocks/exception/exception-handler.js"></script>
-    <script src="/src/client/app/blocks/exception/exception.js"></script>
-    <script src="/src/client/app/blocks/exception/interpolation-handler.js"></script>
-    <script src="/src/client/app/blocks/logger/logger.js"></script>
-    <script src="/src/client/app/blocks/router/routehelper.js"></script>
-    <script src="/src/client/app/classCheckIn/changeTeachers/changeTeachers.directive.js"></script>
-    <script src="/src/client/app/core/commonFilters/yesNo.filter.js"></script>
-    <script src="/src/client/app/core/directives/filterDirective.js"></script>
-    <script src="/src/client/app/core/directives/input.directive.js"></script>
-    <script src="/src/client/app/core/directives/note.directive.js"></script>
-    <script src="/src/client/app/core/services/sectionBlock.service.js"></script>
-    <script src="/src/client/app/core/services/validationService.js"></script>
-    <script src="/src/client/app/dashboard/currentPasses/currentPasses.directive.js"></script>
-    <script src="/src/client/app/dashboard/currentPasses/pass.service.js"></script>
-    <script src="/src/client/app/dashboard/displayAnnouncements/announcements.service.js"></script>
-    <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.js"></script>
-    <script src="/src/client/app/dashboard/todaysClasses/class.service.js"></script>
-    <script src="/src/client/app/dashboard/todaysClasses/todaysClasses.directive.js"></script>
-    <script src="/src/client/app/dashboard/todaysEvents/todaysEvents.directive.js"></script>
-    <script src="/src/client/app/dashboard/todaysEvents/todaysEvents.service.js"></script>
-    <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.directive.js"></script>
-    <script src="/src/client/app/dashboard/upcomingSchedule/upcomingSchedule.service.js"></script>
-    <script src="/src/client/app/manageBlocks/blockGroupDirective/blockGroup.directive.js"></script>
-    <script src="/src/client/app/manageBlocks/createBlock/createBlock.controller.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlock/block.controller.js"></script>
-    <script src="/src/client/app/manageBlocks/updateBlock/updateBlock.controller.js"></script>
-    <script src="/src/client/app/manageClasses/classChangeDirective/classChange.directive.js"></script>
-    <script src="/src/client/app/manageClasses/classSummaryDirective/classSummary.directive.js"></script>
-    <script src="/src/client/app/rooms/createRoom/createRoom.controller.js"></script>
-    <script src="/src/client/app/rooms/manageRoom/room.controller.js"></script>
-    <script src="/src/client/app/rooms/manageRooms/manageRooms.controller.js"></script>
-    <script src="/src/client/app/rooms/roomDropdown/roomDropdown.directive.js"></script>
-    <script src="/src/client/app/standAloneEvents/checkIn/standAloneEventCheckIn.controller.js"></script>
-    <script src="/src/client/app/standAloneEvents/createStandAloneEvents/createStandAloneEvent.controller.js"></script>
-    <script src="/src/client/app/standAloneEvents/eventGroupDirective/eventGroup.directive.js"></script>
-    <script src="/src/client/app/standAloneEvents/eventRegistrations/eventRegistration.controller.js"></script>
-    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/standAloneEvent.controller.js"></script>
-    <script src="/src/client/app/standAloneEvents/manageStandAloneEvents/manageStandAloneEvents.controller.js"></script>
     <script src="/src/client/app/users/missingDetails/missingUserDetails.modal.js"></script>
     <script src="/src/client/app/users/missingDetails/missingUserDetails.service.js"></script>
+    <script src="/src/client/app/widgets/ccSidebar.js"></script>
     <script src="/src/client/app/windyLindy/complete/complete.controller.js"></script>
     <script src="/src/client/app/windyLindy/complete/config.route.js"></script>
     <script src="/src/client/app/windyLindy/payment/config.route.js"></script>
@@ -274,24 +351,7 @@
     <script src="/src/client/app/windyLindy/registration/registration.controller.js"></script>
     <script src="/src/client/app/windyLindy/registrationReport/config.route.js"></script>
     <script src="/src/client/app/windyLindy/registrationReport/report.controller.js"></script>
-    <script src="/src/client/app/blocks/onlinePayment/paypalExpressCheckout/paypalExpressCheckout.js"></script>
-    <script src="/src/client/app/blocks/onlinePayment/poliPayment/poliPayment.js"></script>
-    <script src="/src/client/app/core/directives/iCheckDirective/icheck.directive.js"></script>
-    <script src="/src/client/app/core/directives/onlinePayments/itemSummary.directive.js"></script>
-    <script src="/src/client/app/core/directives/onlinePayments/paymentOptions.directive.js"></script>
-    <script src="/src/client/app/core/directives/onlinePayments/paypalConfirm.directive.js"></script>
-    <script src="/src/client/app/core/directives/onlinePayments/poliConfirm.directive.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlock/blockChangeDirective/blockChange.directive.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlock/blockClassesDirective/blockClasses.directive.js"></script>
-    <script src="/src/client/app/manageBlocks/manageBlock/blockSummaryDirective/blockSummary.directive.js"></script>
-    <script src="/src/client/app/rooms/manageRoom/roomChangeDirective/roomChange.directive.js"></script>
-    <script src="/src/client/app/rooms/manageRoom/roomScheduleDirective/roomSchedule.directive.js"></script>
-    <script src="/src/client/app/rooms/manageRoom/roomSummaryDirective/roomSummary.directive.js"></script>
-    <script src="/src/client/app/standAloneEvents/checkIn/studentCheckIn/eventCheckIn.service.js"></script>
-    <script src="/src/client/app/standAloneEvents/checkIn/studentCheckIn/studentCheckIn.directive.js"></script>
-    <script src="/src/client/app/standAloneEvents/checkIn/walkInStudent/walkInStudent.directive.js"></script>
-    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/eventChangeDirective/eventChange.directive.js"></script>
-    <script src="/src/client/app/standAloneEvents/manageStandAloneEvent/eventSummaryDirective/eventSummary.directive.js"></script>
+    <script src="/src/client/app/windyLindy/windyLindy.service.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->

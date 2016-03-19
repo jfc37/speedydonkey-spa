@@ -16,7 +16,7 @@
             controllerAs: 'vm',
             bindToController: true,
             /* @ngInject */
-            controller: function ($route, classService, validationService) {
+            controller: function ($route, classService, pageReloader, niceAlert) {
                 var vm = this;
 
                 vm.cancel = function () {
@@ -25,9 +25,19 @@
 
                 vm.submit = function (form) {
                     classService.update(vm.class).then(function () {
-                        $route.reload();
-                    }, function (errors) {
-                        validationService.applyServerSideErrors(form, errors);
+                        niceAlert.success({
+                            message: 'Block was successfully updated.'
+                        });
+                        pageReloader.reload();
+                    }, function (validation) {
+                        if (validation) {
+                            vm.serverValidation = validation;
+                            niceAlert.validationWarning();
+                        } else {
+                            niceAlert.error({
+                                message: 'There was a problem updating the block.'
+                            });
+                        }
                     });
                 };
             }

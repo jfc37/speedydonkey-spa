@@ -17,30 +17,47 @@
             templateUrl: 'app/manageBlocks/blockGroupDirective/blockGroup.html',
             controllerAs: 'vm',
             bindToController: true,
-            controller: function (blockService) {
+            controller: function (blockService, niceAlert, pageReloader) {
                 var vm = this;
 
                 vm.anySelected = function () {
                     return getSelectedBlocks().length > 0;
                 };
 
-                vm.deleteSelected = function () {
+                vm.confirmDelete = function () {
+                    niceAlert.confirm({
+                        message: 'All selected blocks will be deleted.'
+                    }, deleteSelected);
+                };
+
+                function deleteSelected() {
                     var blocksToDelete = getSelectedBlocks();
                     blockService.deleteBlocks(blocksToDelete).then(function () {
-                        unselectAll();
+                        niceAlert.success({
+                            message: 'Selected blocks have been deleted.'
+                        });
                         blocksToDelete.forEach(function (block) {
                             vm.blocks.remove(block);
                         });
                     });
+                }
+
+                vm.confirmGenerate = function () {
+                    niceAlert.confirm({
+                        message: 'Next set of selected blocks will be generated.'
+                    }, generateSelected);
                 };
 
-                vm.generateSelected = function () {
+                function generateSelected() {
                     var blocksToGenerate = getSelectedBlocks();
                     blockService.generateFromBlocks(blocksToGenerate).then(function () {
-                        unselectAll();
-                    });
-                };
+                        niceAlert.success({
+                            message: 'Selected blocks have been generated.'
+                        });
 
+                        pageReloader.reload();
+                    });
+                }
                 vm.selectAllClicked = function () {
                     setAllSelected(vm.selectAll);
                 };
@@ -49,11 +66,6 @@
                     vm.blocks.forEach(function (block) {
                         block.selected = isSelected;
                     });
-                }
-
-                function unselectAll() {
-                    vm.selectAll = false;
-                    setAllSelected(false);
                 }
 
                 function getSelectedBlocks() {

@@ -6,7 +6,7 @@
         .factory('blockEnrolmentService', blockEnrolmentService);
 
     /* @ngInject */
-    function blockEnrolmentService($q, logger, dataservice, dataUpdateService, authService, simpleApiCaller) {
+    function blockEnrolmentService($q, authService, simpleApiCaller) {
 
         var service = {
             getBlocksForEnrolment: getBlocksForEnrolment,

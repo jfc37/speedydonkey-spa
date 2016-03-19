@@ -9,8 +9,7 @@
     function manageUserService($q, logger, dataservice, dataUpdateService) {
 
         var service = {
-            getUser: getUser,
-            updateUser: updateUser
+            getUser: getUser
         };
 
         function getUser() {

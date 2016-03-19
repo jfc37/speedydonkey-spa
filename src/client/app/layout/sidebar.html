@@ -3,8 +3,8 @@
         <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <a href="#/">
-                        <img alt="image" class="img-responsive" src="images/fs-logo.png">
+                    <a href="#/" ng-if="vm.logoUrl">
+                        <img alt="image" class="img-responsive" ng-src="{{vm.logoUrl}}">
                     </a>
                 </div>
                 <div class="logo-element">

@@ -1,27 +1,10 @@
-<div ng-form="updateForm" class="panel-body">
+<div class="panel-body">
+    <section-form ng-form="updateForm">
+        <div ng-include src="'app/standAloneEvents/eventForm.html'"></div>
 
-    <input-block name="name" label="Name">
-        <input name="name" type="text" class="form-control" ng-model="vm.event.name" required/>
-        <validation error="required" name="name">Please enter a name</validation>
-    </input-block>
-
-    <input-block name="startTime" label="Start Date" ng-if="vm.event.startTime">
-        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.event.startTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
-    </input-block>
-
-    <input-block name="startEnd" label="End Date" ng-if="vm.event.endTime">
-        <datetimepicker show-weeks="false" hour-step="1" minute-step="15" ng-model="vm.event.endTime" show-meridian="false" date-format="dd-MMM-yyyy" readonly-time="false"></datetimepicker>
-    </input-block>
-
-    <input-block name="teachers" label="Teachers">
-        <teacher-dropdown ng-model="vm.event.teachers"></teacher-dropdown>
-    </input-block>
-
-    <!--Is Private -->
-    <input-block name="isPrivate" label="Is Private">
-        <input name="isPrivate" type="checkbox" class="form-control" ng-model="vm.event.isPrivate" />
-    </input-block>
-
-    <a class="btn btn-default" ng-click="vm.cancel()">Cancel</a>
-    <a class="btn btn-primary pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
+        <section-group>
+            <cancel-button ng-click="vm.cancel()">Cancel</cancel-button>
+            <save-button ng-disabled="updateForm.$invalid" ng-click="vm.submit()">Update</save-button>
+        </section-group>
+    </section-form>
 </div>

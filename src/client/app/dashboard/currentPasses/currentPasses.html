@@ -1,6 +1,9 @@
-<div class="ibox float-e-margins" block-ui="currentPasses">
-    <div class="ibox-content">
-        <h2>Current Passes</h2>
+<div block-ui="currentPasses">
+    <widget>
+        <widget-title>
+            Current Passes
+        </widget-title>
+
         <p ng-if="vm.currentPasses.length === 0">
             You currently have no valid passes
         </p>
@@ -16,5 +19,5 @@
         <p ng-if="vm.errorMessage">
             {{vm.errorMessage}}
         </p>
-    </div>
+    </widget>
 </div>

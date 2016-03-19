@@ -6,31 +6,15 @@
         .controller('BlockEnrolment', BlockEnrolment);
 
     /* @ngInject */
-    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, config) {
+    function BlockEnrolment(blockEnrolmentService, $q, logger, routehelper, config, niceAlert) {
         var vm = this;
 
         vm.title = 'Block Enrolment';
-        vm.blocks = [];
-        vm.blockGrouping = [];
 
-        vm.getClassType = function (block) {
-            var blockName = block.name.toLowerCase();
-            if (blockName.indexOf('charleston') > -1) {
-                return 'charleston';
-            }
-            if (blockName.indexOf('lindy') > -1) {
-                return 'lindy';
-            }
-            if (blockName.indexOf('tap') > -1) {
-                return 'tap';
-            }
-            if (blockName.indexOf('blues') > -1) {
-                return 'blues';
-            }
-            if (blockName.indexOf('balboa') > -1) {
-                return 'balboa';
-            }
-            return '';
+        vm.blocksByDays = [];
+
+        vm.anyBlocks = function () {
+            return vm.blocksByDays.length > 0;
         };
 
         vm.isAnyBlocksSelected = function () {
@@ -39,10 +23,14 @@
 
         vm.submit = function () {
             blockEnrolmentService.enrol(getSelectedBlocks()).then(function () {
+                niceAlert.success({
+                    message: 'You\'re now enrolled!'
+                });
                 routehelper.redirectToRoute('dashboard');
-                logger.success('Enrolled in selected blocks');
             }, function () {
-                logger.error('Problem with enrolment');
+                niceAlert.error({
+                    message: 'Something went wrong when we tried to enrol you. Please try again.'
+                });
             });
         };
 
@@ -54,33 +42,41 @@
 
         function getAllBlocks() {
             return blockEnrolmentService.getBlocksForEnrolment().then(function (blocks) {
-                vm.blocks = blocks;
-                var flags = [],
-                    l = blocks.length,
-                    i;
-                for (i = 0; i < l; i++) {
-                    var displayDate = getGroupDateDisplay(blocks[i].startDate);
-                    if (flags[displayDate]) {
-                        continue;
-                    }
-                    flags[displayDate] = true;
-                    vm.blockGrouping.push(displayDate);
-                }
+                var days = getDaysBlocksRunOver(blocks);
+                days.forEach(function (day) {
+                    var blocksOnDay = blocks.filter(function (block) {
+                        return isBlockOnDay(block, day);
+                    });
+
+                    vm.blocksByDays.push({
+                        day: day,
+                        blocks: blocksOnDay,
+                        title: day.format('dddd, Do of MMMM')
+                    });
+                });
             });
+        }
+
+        function getDaysBlocksRunOver(blocks) {
+            return blocks.map(function (block) {
+                return moment(block.startDate).startOf('day');
+            }).distinct();
+        }
+
+        function isBlockOnDay(block, day) {
+            return moment(block.startDate).isSame(day, 'day');
         }
 
         function getSelectedBlocks() {
-            return vm.blocks.filter(function (block) {
-                return block.enrolIn;
+            var selectedBlocks = [];
+
+            vm.blocksByDays.forEach(function (blocksByDay) {
+                selectedBlocks = selectedBlocks.concat(blocksByDay.blocks.filter(function (block) {
+                    return block.enrolIn;
+                }));
             });
-        }
 
-        function getGroupDateDisplay(date) {
-            return moment(date).format('dddd D/M');
-        }
-
-        function getGroupDate(display) {
-            return moment(display, 'dddd D/M');
+            return selectedBlocks;
         }
     }
 })();

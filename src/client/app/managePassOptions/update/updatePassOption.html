@@ -1,0 +1,16 @@
+<page-title>Update {{::vm.passOption.description}}</page-title>
+
+<section>
+    <section-title>Details</section-title>
+
+    <section-content>
+        <section-form ng-form="updateForm">
+            <div ng-include src="'app/managePassOptions/create/passOptionForm.html'"></div>
+
+            <section-group>
+                <cancel-button href="#/admin/manage/pass-options">Cancel</cancel-button>
+                <save-button ng-disabled="updateForm.$invalid" ng-click="vm.submit()">Update</save-button>
+            </section-group>
+        </section-form>
+    </section-content>
+</section>

@@ -1,0 +1,12 @@
+<section>
+    <section-title>
+        Add Student
+    </section-title>
+
+    <section-content>
+        <user-search ng-model="vm.student" placeholder="Student's name"></user-search>
+        <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.addWalkIn()">Add Walk In</button>
+        <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.enrolWalkIn()">Enrol In Block</button>
+        <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid()" ng-click="vm.createAccount()">Create New Account</button>
+    </section-content>
+</section>

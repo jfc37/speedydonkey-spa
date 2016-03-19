@@ -13,10 +13,11 @@
     "bower_components"
   ],
   "devDependencies": {
-    "angular-mocks": "^1.2.23",
+    "angular-mocks": "~1.5.0",
     "sinon": "~1.16.1",
     "bardjs": "~0.1.8",
-    "metisMenu": "~2.2.0"
+    "metisMenu": "~2.2.0",
+    "glob": "~4.0.6"
   },
   "dependencies": {
     "toastr": "^2.0.1",
@@ -30,7 +31,7 @@
     "extras.angular.plus": "^0.9.0",
     "angular-ui-bootstrap-datetimepicker": "~0.11.2",
     "angular-block-ui": "~0.2.0",
-    "angular-bootstrap": "~0.13.0",
+    "angular-bootstrap": "~1.2.1",
     "font-awesome-animation": "~0.0.6",
     "underscore": "~1.8.3",
     "angular-tablesort": "~1.1.0",
@@ -48,9 +49,21 @@
     "auth0-angular": "~4.0.5",
     "angular-jwt": "~0.0.9",
     "angular-storage": "~0.5.0",
-    "a0-angular-storage": "~0.0.12"
+    "a0-angular-storage": "~0.0.12",
+    "angular-dropzone": "~0.1.2",
+    "ngSweetAlert": "angular-sweetalert#~1.1.0",
+    "angular-messages": "~1.5.0",
+    "bootstrap-ui-datetime-picker": "~2.2.2"
   },
   "resolutions": {
     "angular": "~1.4.7"
+  },
+  "overrides": {
+    "icheck": {
+      "main": [
+        "./icheck.js",
+        "./skins/all.css"
+      ]
+    }
   }
 }

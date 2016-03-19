@@ -28,8 +28,12 @@
     }
 
     /* @ngInject */
-    function Sidebar($route, $scope, routehelper) {
+    function Sidebar($route, $scope, routehelper, settingsRepository) {
         var vm = this;
+
+        settingsRepository.get('logo').then(function (logoUrl) {
+            vm.logoUrl = logoUrl;
+        });
 
         vm.routehelper = routehelper;
 

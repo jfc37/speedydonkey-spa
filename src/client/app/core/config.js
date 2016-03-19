@@ -46,8 +46,8 @@
     /* @ngInject */
     function authZeroConfig(authProvider) {
         authProvider.init({
-            domain: 'jfc.au.auth0.com',
-            clientID: 'tsPjABlzKswuJc98NxwcftQnHVYv7iTh',
+            domain: 'jfc-dev.au.auth0.com',
+            clientID: 'jaLVtw90tXt8tCCBIHIUJLIcP2p2MMdE',
             loginUrl: '/login',
         });
     }
@@ -89,7 +89,7 @@
         blockUIConfig.delay = 0;
         blockUIConfig.resetOnException = true;
         blockUIConfig.autoBlock = false;
-        //blockUIConfig.autoInjectBodyBlock = false;
+        blockUIConfig.templateUrl = 'app/core/directives/blockUiOverlay.html';
     }
 
     var config = {

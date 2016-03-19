@@ -11,7 +11,6 @@
         .directive('serverError', serverError)
         .directive('commonInput', commonInput)
         .directive('commonDateTimeInput', commonDateTimeInput)
-        .directive('userSearch', userSearch)
         .directive('teacherDropdown', teacherDropdown);
 
     /* @ngInject */
@@ -86,7 +85,7 @@
 
     function passSummary() {
         var directive = {
-            template: '{{passTypeText}} - {{passNumber}} - {{validnessText}}',
+            template: '<strong>{{passNumber}}</strong> - {{passTypeText}} - {{validnessText}}',
             require: 'ngModel',
             scope: {
                 ngModel: '='
@@ -206,45 +205,6 @@
 
                 scope.hasError = function (error) {
                     return scope.getFormElement().$error[error];
-                };
-            }
-        };
-        return directive;
-    }
-
-    function userSearch(dataservice, $q) {
-        var directive = {
-            template: '<input type="text" placeholder="{{placeholder}}" ng-model="ngModel" typeahead="student as student.fullName for student in searchUsers($viewValue)">',
-            require: ['ngModel'],
-            scope: {
-                ngModel: '='
-            },
-            link: function (scope, element, attrs) {
-                scope.placeholder = attrs.placeholder;
-
-                scope.searchUsers = function (name) {
-                    return $q(function (resolve, reject) {
-                        var search = [
-                            {
-                                field: 'fullname',
-                                condition: 'cont',
-                                value: name
-                            },
-                            {
-                                field: 'orderby',
-                                condition: 'fullname'
-                            }
-                        ];
-
-                        dataservice.searchForUserNew(search).then(function (response) {
-                            resolve(response.data);
-                        }, function (response) {
-                            if (response.status === 404) {
-                                response.displayMessage = 'No users found...';
-                            }
-                            reject(response);
-                        });
-                    });
                 };
             }
         };
