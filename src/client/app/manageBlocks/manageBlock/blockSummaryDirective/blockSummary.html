@@ -4,13 +4,15 @@
         <dd>{{vm.block.name}}</dd>
 
         <dt>Time</dt>
-        <dd>{{vm.block.startDate | date : 'HH:mm'}}</dd>
+        <dd>
+            <display-date format='time' ng-model='vm.block.startDate'></display-date>
+        </dd>
 
         <dt>Start Date</dt>
-        <dd>{{vm.block.startDate | date : 'dd MMM'}}</dd>
+        <dd>{{vm.block.startDate | date : 'dd MMMM'}}</dd>
 
         <dt>End Date</dt>
-        <dd>{{vm.block.endDate | date : 'dd MMM'}}</dd>
+        <dd>{{vm.block.endDate | date : 'dd MMMM'}}</dd>
 
         <dt>Invite Only</dt>
         <dd>{{vm.block.isInviteOnly | yesNo}}</dd>

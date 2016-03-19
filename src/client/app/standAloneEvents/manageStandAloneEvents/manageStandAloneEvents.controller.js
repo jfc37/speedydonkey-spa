@@ -8,13 +8,10 @@
     /* @ngInject */
     function ManageStandAloneEvents(standAloneEventService) {
         var vm = this;
-        vm.events = [];
 
-        vm.statusCount = function (status) {
-            return vm.events.filter(function (theEvent) {
-                return theEvent.status === status;
-            }).length;
-        };
+        vm.futureEvents = [];
+        vm.pastEvents = [];
+        vm.currentEvents = [];
 
         activate();
 
@@ -24,7 +21,15 @@
 
         function getEvents() {
             standAloneEventService.getEvents().then(function (events) {
-                vm.events = events;
+                vm.futureEvents = getEventsOfStatus(events, 'Future');
+                vm.pastEvents = getEventsOfStatus(events, 'Past');
+                vm.currentEvents = getEventsOfStatus(events, 'Current');
+            });
+        }
+
+        function getEventsOfStatus(events, status) {
+            return events.filter(function (theEvent) {
+                return theEvent.status === status;
             });
         }
     }

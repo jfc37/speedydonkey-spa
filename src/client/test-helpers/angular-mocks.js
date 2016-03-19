@@ -7,6 +7,13 @@ var Spies = (function () {
         redirectToRoute: sinon.spy()
     };
 
+    service.niceAlert = {
+        success: sinon.spy(),
+        error: sinon.spy(),
+        confirm: sinon.spy(),
+        validationWarning: sinon.spy()
+    };
+
     return service;
 
 }());
@@ -32,6 +39,9 @@ var AngularMock = (function () {
         });
         angular.mock.module({
             'routehelper': Spies.routehelper
+        });
+        angular.mock.module({
+            'niceAlert': Spies.niceAlert
         });
 
         bard.inject('$http', '$httpBackend');

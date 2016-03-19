@@ -5,8 +5,7 @@
         .module('app.classCheckIn')
         .directive('changeTeachers', changeTeachers);
 
-    /* @ngInject */
-    function changeTeachers(classService, logger) {
+    function changeTeachers() {
         return {
             restrict: 'E',
             scope: {
@@ -14,14 +13,15 @@
             },
             templateUrl: 'app/classCheckIn/changeTeachers/changeTeachers.html',
             controllerAs: 'vm',
-            controller: function () {
+            /* @ngInject */
+            controller: function (classService, niceAlert) {
                 var vm = this;
 
                 vm.updateTeachers = function (theClass) {
                     classService.updateTeachers(theClass).then(function () {
 
-                    }, function (errors) {
-                        logger.error('Problem updating teachers');
+                    }, function () {
+                        niceAlert.error('Problem updating teachers.');
                     });
                 };
             }

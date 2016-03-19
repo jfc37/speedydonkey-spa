@@ -13,7 +13,7 @@
     function getRoutes() {
         return [
             {
-                url: '/admin/manage/PassOptions',
+                url: '/admin/manage/pass-options',
                 config: {
                     title: 'managePassOptions',
                     controller: 'ManagePassOptions',
@@ -25,6 +25,26 @@
                         level: 2,
                         parent: 'admin dashboard'
                     },
+                    claim: 'Admin'
+                }
+            },
+            {
+                url: '/admin/manage/pass-options/create',
+                config: {
+                    title: 'createPassOption',
+                    controller: 'CreatePassOption',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/managePassOptions/create/createPassOption.html',
+                    claim: 'Admin'
+                }
+            },
+            {
+                url: '/admin/manage/pass-options/:id',
+                config: {
+                    title: 'updatePassOption',
+                    controller: 'UpdatePassOption',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/managePassOptions/update/updatePassOption.html',
                     claim: 'Admin'
                 }
             }

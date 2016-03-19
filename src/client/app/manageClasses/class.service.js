@@ -6,7 +6,7 @@
         .factory('classService', classService);
 
     /* @ngInject */
-    function classService($q, dataservice, dataUpdateService, dataCreateService, dataDeleteService, simpleApiCaller) {
+    function classService($q, dataservice, dataUpdateService, dataDeleteService, simpleApiCaller) {
 
         var service = {
             changeRoom: changeRoom,
@@ -43,21 +43,27 @@
             options.id = id;
 
             return simpleApiCaller.get(options).then(function (response) {
-                return response.data;
+                var theClass = response.data;
+
+                theClass.startTime = new Date(theClass.startTime);
+                theClass.endTime = new Date(theClass.endTime);
+
+                return theClass;
             });
         }
 
         function update(theClass) {
-            return $q(function (resolve, revoke) {
-                dataUpdateService.updateClass(theClass).then(function (updatedClass) {
-                    resolve(updatedClass);
-                }, function (response) {
-                    if (response.validationResult !== undefined) {
-                        revoke(response.validationResult.validationErrors);
-                    } else {
-                        revoke();
-                    }
-                });
+            var options = getOptions();
+            options.id = theClass.id;
+
+            return simpleApiCaller.put(theClass, options).then(function (response) {
+                return response.data;
+            }, function (response) {
+                if (response.data && response.data.validationResult) {
+                    return $q.reject(response.data.validationResult);
+                } else {
+                    return $q.reject();
+                }
             });
         }
 

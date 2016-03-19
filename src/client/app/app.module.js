@@ -20,6 +20,10 @@
         'ui.select',
         'angulartics',
         'angulartics.google.analytics',
+        'oitozero.ngSweetAlert',
+        'ngMessages',
+        'ui.bootstrap',
+        'ui.bootstrap.datetimepicker',
 
         'app.core',
         'app.widgets',
@@ -46,6 +50,7 @@
         'app.manageBlocks',
         'app.rooms',
         'app.users',
+        'app.settings',
 
         'app.standAloneEvents',
         'app.manageClasses',

@@ -1,0 +1,40 @@
+<nice-modal>
+    <section>
+        <h2>
+            Pass Purchase Required
+        </h2>
+
+        <p>Looks like <strong>{{viewModel.student.fullName}}</strong> needs to buy a pass to attend this class.</p>
+        <p>Select one of the passes below to continue</p>
+
+        <section-content>
+            <section-form ng-form="purchaseForm">
+
+                <section-group-separator></section-group-separator>
+
+                <section-group input-name="password">
+                    <section-group-label>Pass Options</section-group-label>
+
+                    <section-group-content>
+                        <div class="radio" data-ng-repeat="pass in viewModel.passOptions">
+                            <label>
+                                <input icheck type="radio" name="passOptions" data-ng-model="viewModel.selectedPass" ng-value="pass" required> {{pass.description}} - ${{pass.cost}}
+                            </label>
+                        </div>
+                        <validation-messages input-name="passOptions">
+                            <div ng-message="required">Please select a pass option</div>
+                        </validation-messages>
+                    </section-group-content>
+                </section-group>
+
+                <section-group-separator></section-group-separator>
+
+                <section-group>
+                    <button class="cancel" ng-click="cancel()">Cancel</button>
+                    <save-button ng-disabled="purchaseForm.$invalid" ng-click="viewModel.purchaseNewPass()">Purchase</save-button>
+                </section-group>
+
+            </section-form>
+        </section-content>
+    </section>
+</nice-modal>

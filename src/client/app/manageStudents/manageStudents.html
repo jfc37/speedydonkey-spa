@@ -1,69 +1,47 @@
-<div class="row">
-    <h1>Manage Students</h1>
+<page-title>Students</page-title>
 
-    <div ng-form="filterForm">
-        <h3>Filter</h3>
-        <div>
-            <common-input ng-model="vm.filter.search" name="filterSearch" display-name="Name or Email" type="text"></common-input>
-        </div>
-        <div>
-            Showing: {{vm.filteredStudents.length}} students
-        </div>
-    </div>
+<section>
+    <section-title>
+        Search
+    </section-title>
 
-    <table class="table table-hover">
-        <thead>
-            <th>Name</th>
-            <th>Email</th>
-            <th></th>
-        </thead>
-        <tbody ng-controller="ManageStudent" ng-init="student = outerStudent" ng-repeat="outerStudent in vm.filteredStudents = (vm.students | filter:vm.filter.search | orderBy: 'fullName')">
-            <tr ng-click="getStudentInfo()">
-                <td>{{student.fullName}}</td>
-                <td>{{student.email}}</td>
-                <td><a ng-click="delete()" class="btn btn-link">Delete</a>
-                </td>
-            </tr>
-            <tr ng-show="showStudent">
-                <td colspan="3">
-                    <div>
-                        <a ng-click="vm.changeStudentDoNotEmail()" class="btn btn-primary">{{vm.doNotEmailText()}}</a>
-                        <h3>Passes</h3>
-                        <p ng-show="!student.studentInfo.passes || !student.studentInfo.passes.any()">No passes</p>
-                        <table class="table table-hover" ng-hide="!student.studentInfo.passes || !student.studentInfo.passes.any()">
-                            <thead>
-                                <th>Pass Number</th>
-                                <th>Name</th>
-                                <th>Payment Status</th>
-                                <th></th>
-                            </thead>
-                            <tbody ng-controller="ManagePass" ng-init="pass = outerpass" ng-repeat="outerpass in student.studentInfo.passes">
-                                <tr>
-                                    <td>{{pass.passNumber}}</td>
-                                    <td>{{pass.description}}</td>
-                                    <td>{{pass.paymentStatus}}</td>
-                                    <td>
-                                        <a ng-click="startUpdating()" class="btn btn-link">Update</a>
-                                        <a ng-click="delete()" class="btn btn-link">Delete</a>
-                                    </td>
-                                </tr>
-                                <tr ng-show="passUpdating">
-                                    <td colspan="4">
-                                        <form novalidate name="form">
-                                            <common-input ng-if="pass.passType === 'Clip'" ng-model="pass.clipsRemaining" name="clipsRemaining" display-name="Clips Remaining" type="number" required="true"></common-input>
-                                            <common-input ng-model="pass.startDate" name="startDate" display-name="Start Date" type="date" required="true"></common-input>
-                                            <common-input ng-model="pass.endDate" name="endDate" display-name="End Date" type="date" required="true"></common-input>
-                                        </form>
-                                        <a class="btn btn-link" ng-click="cancel()">Cancel</a>
-                                        <a class="btn btn-default pull-right" ng-disabled="form.$invalid" ng-click="submit(form)">Update</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <a ng-click="getStudentInfo()" class="btn btn-link">Close</a>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <section-content>
+        <section-form ng-form="filterForm">
+            <section-group input-name="search">
+                <section-group-label>Filter</section-group-label>
+
+                <section-group-content>
+                    <input name="search" type="text" class="form-control" ng-model="vm.filter.search" placeholder="Name" />
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+        </section-form>
+
+        <p>
+            Showing: {{(vm.students | filter:{fullName: vm.filter.search}).length}} students
+        </p>
+
+
+        <table class="table table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in vm.students | filter:{fullName: vm.filter.search} | orderBy: 'fullName'">
+                    <td>{{student.fullName}}</td>
+                    <td>{{student.email}}</td>
+                    <td>
+                        <a ng-click="vm.launchStudent(student)" class="btn">Manage</a>
+                    </td>
+                </tr>
+                <tr no-items-row items="vm.filteredStudents"></tr>
+
+            </tbody>
+        </table>
+    </section-content>
+</section>

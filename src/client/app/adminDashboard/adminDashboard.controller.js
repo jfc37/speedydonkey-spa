@@ -6,7 +6,6 @@
 
     /* @ngInject */
     function AdminDashboard(authService) {
-        /*jshint validthis: true */
         var vm = this;
 
         vm.isAdmin = authService.hasClaim('Admin');

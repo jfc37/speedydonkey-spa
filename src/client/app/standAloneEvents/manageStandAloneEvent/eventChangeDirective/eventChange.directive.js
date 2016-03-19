@@ -10,25 +10,36 @@
         return {
             restrict: 'E',
             scope: {
-                event: '='
+                standAloneEvent: '='
             },
             templateUrl: 'app/standAloneEvents/manageStandAloneEvent/eventChangeDirective/eventChange.html',
             controllerAs: 'vm',
             bindToController: true,
             /* @ngInject */
-            controller: function ($route, standAloneEventService, validationService) {
+            controller: function (standAloneEventService, pageReloader, niceAlert) {
                 var vm = this;
 
                 vm.cancel = function () {
-                    $route.reload();
+                    pageReloader.reload();
                 };
 
-                vm.submit = function (form) {
-                    standAloneEventService.update(vm.event).then(function () {
-                        $route.reload();
-                    }, function (errors) {
-                        validationService.applyServerSideErrors(form, errors);
-                    });
+                vm.submit = function () {
+                    standAloneEventService.update(vm.standAloneEvent).then(function () {
+                            pageReloader.reload();
+                            niceAlert.success({
+                                message: 'Event was successfully updated.'
+                            });
+                        },
+                        function (validation) {
+                            if (validation) {
+                                vm.serverValidation = validation;
+                                niceAlert.validationWarning();
+                            } else {
+                                niceAlert.error({
+                                    message: 'There was a problem updating the event.'
+                                });
+                            }
+                        });
                 };
             }
         };

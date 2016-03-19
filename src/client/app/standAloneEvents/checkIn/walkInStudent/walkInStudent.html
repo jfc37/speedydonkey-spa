@@ -1,15 +1,11 @@
-<div class="ibox float-e-margins">
-    <div class="ibox-content">
-        <h2>Walk In Students</h2>
-        <user-search ng-model="vm.selectedStudent" placeholder="Student's name"></user-search>
-        <button class="btn btn-primary" ng-click="vm.addWalkIn()">Add Walk In</button>
-        <button class="btn btn-primary" ng-click="vm.createAccount()">Create New Account</button>
-    </div>
-</div>
+<section>
+    <section-title>
+        Add Student
+    </section-title>
 
-<div class="ibox float-e-margins" ng-show="vm.creatingNewAccount">
-    <div class="ibox-content">
-        <h2>New Student</h2>
-        <div ng-include src="'app/register/newUser.html'"></div>
-    </div>
-</div>
+    <section-content>
+        <user-search ng-model="vm.student" placeholder="Student's name"></user-search>
+        <button class="btn btn-primary" ng-disabled="!vm.isSelectedStudentValid()" ng-click="vm.addWalkIn()">Add Walk In</button>
+        <button class="btn btn-primary" ng-disabled="vm.isSelectedStudentValid()" ng-click="vm.createAccount()">Create New Account</button>
+    </section-content>
+</section>

@@ -63,7 +63,7 @@
     <script src="/bower_components/angular-tablesort/js/angular-tablesort.js"></script>
     <script src="/bower_components/metisMenu/dist/metisMenu.js"></script>
     <script src="/bower_components/slimScroll/jquery.slimscroll.min.js"></script>
-    <script src="/bower_components/icheck/icheck.min.js"></script>
+    <script src="/bower_components/icheck/icheck.js"></script>
     <script src="/bower_components/summernote/dist/summernote.js"></script>
     <script src="/bower_components/angular-summernote/dist/angular-summernote.js"></script>
     <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
@@ -92,6 +92,11 @@
     <script src="/bower_components/angular-jwt/dist/angular-jwt.js"></script>
     <script src="/bower_components/angular-storage/dist/angular-storage.js"></script>
     <script src="/bower_components/a0-angular-storage/dist/angular-storage.js"></script>
+    <script src="/bower_components/dropzone/downloads/dropzone.min.js"></script>
+    <script src="/bower_components/angular-dropzone/lib/angular-dropzone.js"></script>
+    <script src="/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/bower_components/ngSweetAlert/SweetAlert.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
     <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="/bower_components/bardjs/dist/bard.js"></script>
     <script src="/bower_components/bardjs/dist/bard-ngRouteTester.js"></script>
@@ -130,6 +135,7 @@
     <script src="/src/client/app/reportTeacherHours/reportTeacherHours.module.js"></script>
     <script src="/src/client/app/resetPassword/resetPassword.module.js"></script>
     <script src="/src/client/app/rooms/rooms.module.js"></script>
+    <script src="/src/client/app/settings/settings.module.js"></script>
     <script src="/src/client/app/standAloneEvents/standAloneEvents.module.js"></script>
     <script src="/src/client/app/userActivation/userActivation.module.js"></script>
     <script src="/src/client/app/users/users.module.js"></script>
@@ -140,7 +146,6 @@
     <script src="/src/client/app/adminReports/adminReports.controller.js"></script>
     <script src="/src/client/app/adminReports/config.route.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.controller.js"></script>
-    <script src="/src/client/app/blockEnrolment/blockEnrolment.filters.js"></script>
     <script src="/src/client/app/blockEnrolment/blockEnrolment.service.js"></script>
     <script src="/src/client/app/blockEnrolment/config.route.js"></script>
     <script src="/src/client/app/blocks/apiCaller/apiCaller.js"></script>
@@ -157,7 +162,6 @@
     <script src="/src/client/app/classCheckIn/classCheckInService.js"></script>
     <script src="/src/client/app/classCheckIn/config.route.js"></script>
     <script src="/src/client/app/core/authService.js"></script>
-    <script src="/src/client/app/core/base64Service.js"></script>
     <script src="/src/client/app/core/commonDirectives.js"></script>
     <script src="/src/client/app/core/commonFilters/yesNo.filter.js"></script>
     <script src="/src/client/app/core/commonFunctions.js"></script>
@@ -168,6 +172,10 @@
     <script src="/src/client/app/core/dataservice.js"></script>
     <script src="/src/client/app/core/dataUpdateService.js"></script>
     <script src="/src/client/app/core/dateService.js"></script>
+    <script src="/src/client/app/core/directives/buttons/actionButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/buttons/cancelButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/buttons/saveButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/buttons/superActionButton.directive.js"></script>
     <script src="/src/client/app/core/directives/filterDirective.js"></script>
     <script src="/src/client/app/core/directives/iCheckDirective/icheck.directive.js"></script>
     <script src="/src/client/app/core/directives/input.directive.js"></script>
@@ -176,6 +184,32 @@
     <script src="/src/client/app/core/directives/onlinePayments/paymentOptions.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/paypalConfirm.directive.js"></script>
     <script src="/src/client/app/core/directives/onlinePayments/poliConfirm.directive.js"></script>
+    <script src="/src/client/app/core/directives/products/productAction.directive.js"></script>
+    <script src="/src/client/app/core/directives/products/productBox.directive.js"></script>
+    <script src="/src/client/app/core/directives/products/productDescription.directive.js"></script>
+    <script src="/src/client/app/core/directives/products/productTitle.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/flexBox.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/helpText.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/pageTitle.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/section.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionContent.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionForm.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroup.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupContent.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupLabel.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionGroupSeparator.directive.js"></script>
+    <script src="/src/client/app/core/directives/sectionLayout/sectionTitle.directive.js"></script>
+    <script src="/src/client/app/core/directives/tables/hideIfSelected.directive.js"></script>
+    <script src="/src/client/app/core/directives/tables/noItemsRow.directive.js"></script>
+    <script src="/src/client/app/core/directives/tables/selectAllHeader.directive.js"></script>
+    <script src="/src/client/app/core/directives/tables/selectItem.directive.js"></script>
+    <script src="/src/client/app/core/directives/tabs/tabHeadingBadge.directive.js"></script>
+    <script src="/src/client/app/core/directives/validation/serverValidationMessages.directive.js"></script>
+    <script src="/src/client/app/core/directives/validation/validationMessages.directive.js"></script>
+    <script src="/src/client/app/core/directives/widgetLayout/widget.directive.js"></script>
+    <script src="/src/client/app/core/directives/widgetLayout/widgetTitle.directive.js"></script>
+    <script src="/src/client/app/core/niceAlert.service.js"></script>
+    <script src="/src/client/app/core/pageReloader.service.js"></script>
     <script src="/src/client/app/core/selectOptionService.js"></script>
     <script src="/src/client/app/core/services/sectionBlock.service.js"></script>
     <script src="/src/client/app/core/services/validationService.js"></script>
@@ -258,6 +292,9 @@
     <script src="/src/client/app/rooms/manageRooms/manageRooms.controller.js"></script>
     <script src="/src/client/app/rooms/room.service.js"></script>
     <script src="/src/client/app/rooms/roomDropdown/roomDropdown.directive.js"></script>
+    <script src="/src/client/app/settings/config.route.js"></script>
+    <script src="/src/client/app/settings/settings.controller.js"></script>
+    <script src="/src/client/app/settings/settings.repository.js"></script>
     <script src="/src/client/app/standAloneEvents/checkIn/standAloneEventCheckIn.controller.js"></script>
     <script src="/src/client/app/standAloneEvents/checkIn/studentCheckIn/eventCheckIn.service.js"></script>
     <script src="/src/client/app/standAloneEvents/checkIn/studentCheckIn/studentCheckIn.directive.js"></script>
@@ -294,7 +331,6 @@
     <!-- inject:spechelpers:js -->
     <script src="/src/client/test-helpers/angular-mocks.js"></script>
     <script src="/src/client/test-helpers/bind-polyfill.js"></script>
-    <script src="/src/client/test-helpers/mock-data.js"></script>
     <script src="/src/client/test-helpers/mock-http.js"></script>
     <script src="/src/client/test-helpers/spies.js"></script>
     <!-- endinject -->
@@ -302,8 +338,12 @@
     <!-- inject:specs:js -->
     <script src="/src/client/tests/blockEnrolment.spec.js"></script>
     <script src="/src/client/app/blocks/apiCaller/simpleApiCaller.spec.js"></script>
+    <script src="/src/client/tests/blocks/createBlock.spec.js"></script>
+    <script src="/src/client/tests/blocks/manageBlocks.spec.js"></script>
     <script src="/src/client/app/dashboard/displayAnnouncements/displayAnnouncements.directive.spec.js"></script>
     <script src="/src/client/app/login/login.controller.spec.js"></script>
+    <script src="/src/client/tests/manageTeachers.spec.js"></script>
+    <script src="/src/client/tests/settings.spec.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->

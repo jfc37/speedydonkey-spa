@@ -6,7 +6,7 @@
         .factory('blockService', blockService);
 
     /* @ngInject */
-    function blockService($q, simpleApiCaller) {
+    function blockService($q, simpleApiCaller, validationPromise) {
 
         var service = {
             update: update,
@@ -52,19 +52,13 @@
             return simpleApiCaller.put(sanitisedBlock, options).then(function (response) {
                 return response.data;
             }, function (response) {
-                if (response.validationResult) {
-                    return response.validationResult.validationErrors;
-                }
+                validationPromise.reject(response);
             });
         }
 
         function create(block) {
-            return simpleApiCaller.post(block, getOptions()).then(function (response) {
-                return response.data;
-            }, function (response) {
-                if (response.validationResult) {
-                    return response.validationResult.validationErrors;
-                }
+            return simpleApiCaller.post(block, getOptions()).then(function () {}, function (response) {
+                validationPromise.reject(response);
             });
         }
 
@@ -92,7 +86,11 @@
             options.id = id;
 
             return simpleApiCaller.get(options).then(function (response) {
-                return response.data;
+                var block = response.data;
+
+                block.startDate = new Date(block.startDate);
+
+                return block;
             });
         }
 

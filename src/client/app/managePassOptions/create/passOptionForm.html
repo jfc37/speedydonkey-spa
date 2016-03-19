@@ -1,0 +1,84 @@
+<section-group input-name="description">
+    <section-group-label>Description</section-group-label>
+
+    <section-group-content>
+        <input name="description" type="text" class="form-control" ng-model="vm.passOption.description" required />
+        <validation-messages input-name="description">
+            <div ng-message="required">Please enter a description</div>
+        </validation-messages>
+        <server-validation-messages input-name="description" messages="vm.serverValidation"></server-validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group input-name="cost">
+    <section-group-label>Price</section-group-label>
+
+    <section-group-content>
+        <input name="cost" type="number" class="form-control" ng-model="vm.passOption.cost" required />
+        <validation-messages input-name="cost">
+            <div ng-message="required">Please enter a price</div>
+        </validation-messages>
+        <server-validation-messages input-name="cost" messages="vm.serverValidation"></server-validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group input-name="passType">
+    <section-group-label>Pass Type</section-group-label>
+
+    <section-group-content>
+        <div class="radio" data-ng-repeat="passType in vm.passTypes">
+            <label>
+                <input icheck type="radio" name="passType" data-ng-model="$parent.vm.passOption.passType" ng-value="passType.value" required> {{passType.display}}
+            </label>
+        </div>
+        <validation-messages input-name="passType">
+            <div ng-message="required">Please enter a pass type</div>
+        </validation-messages>
+        <server-validation-messages input-name="passType" messages="vm.serverValidation"></server-validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group input-name="weeksValidatFor">
+    <section-group-label>Weeks Valid For</section-group-label>
+
+    <section-group-content>
+        <input name="weeksValidFor" type="number" class="form-control" ng-model="vm.passOption.weeksValidFor" required />
+        <validation-messages input-name="weeksValidFor">
+            <div ng-message="required">Please enter the number of weeks this pass is valid for</div>
+        </validation-messages>
+        <server-validation-messages input-name="weeksValidFor" messages="vm.serverValidation"></server-validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<div ng-if="vm.passOption.passType === 'clip'">
+    <section-group input-name="classesValidFor">
+        <section-group-label>Classes Valid For</section-group-label>
+
+        <section-group-content>
+            <input name="classesValidFor" type="number" class="form-control" ng-model="vm.passOption.classesValidFor" required />
+            <validation-messages input-name="classesValidFor">
+                <div ng-message="required">Please enter the number of classes this pass is valid for</div>
+            </validation-messages>
+            <server-validation-messages input-name="classesValidFor" messages="vm.serverValidation"></server-validation-messages>
+        </section-group-content>
+    </section-group>
+
+    <section-group-separator></section-group-separator>
+</div>
+
+<section-group input-name="availableForPurchase">
+    <section-group-label>Available For Purchase</section-group-label>
+
+    <section-group-content>
+        <input name="availableForPurchase" icheck type="checkbox" ng-model="vm.passOption.availableForPurchase" />
+        <server-validation-messages input-name="availableForPurchase" messages="vm.serverValidation"></server-validation-messages>
+    </section-group-content>
+</section-group>

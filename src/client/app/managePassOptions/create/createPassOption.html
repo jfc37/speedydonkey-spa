@@ -1,0 +1,16 @@
+<page-title>Create Pass Option</page-title>
+
+<section>
+    <section-title>Details</section-title>
+
+    <section-content>
+        <section-form ng-form="createForm">
+            <div ng-include src="'app/managePassOptions/create/passOptionForm.html'"></div>
+
+            <section-group>
+                <cancel-button href="#/admin/manage/pass-options">Cancel</cancel-button>
+                <save-button ng-disabled="createForm.$invalid" ng-click="vm.submit()">Create</save-button>
+            </section-group>
+        </section-form>
+    </section-content>
+</section>

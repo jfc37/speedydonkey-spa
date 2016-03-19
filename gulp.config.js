@@ -29,8 +29,7 @@ module.exports = function () {
             '!' + client + 'test-helpers/*.js',
             '!' + client + 'app/inspinia.js',
             '!' + client + 'app/blocks/apiCaller/apiCaller.js',
-            '!' + client + 'app/core/commonFunctions.js',
-            '!**/base64Service.js'
+            '!' + client + 'app/core/commonFunctions.js'
         ],
         build: './build/',
         client: client,
@@ -145,7 +144,15 @@ module.exports = function () {
         var options = {
             bowerJson: config.bower.json,
             directory: config.bower.directory,
-            ignorePath: config.bower.ignorePath
+            ignorePath: config.bower.ignorePath,
+            overrides: {
+                "icheck": {
+                    "main": [
+                        "icheck.js",
+                        "skins/square/_all.css"
+                    ]
+                }
+            },
         };
         return options;
     };

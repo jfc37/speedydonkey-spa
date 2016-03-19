@@ -1,6 +1,9 @@
-<div class="ibox float-e-margins" block-ui="upcomingSchedule">
-    <div class="ibox-content">
-        <h2>Upcoming Schedule</h2>
+<div block-ui="upcomingSchedule">
+    <widget>
+        <widget-title>
+            Upcoming Schedule
+        </widget-title>
+
         <p ng-if="vm.upcomingSchedule.length === 0">
             Nothing scheduled for this week.
         </p>
@@ -9,5 +12,5 @@
             <display-date format='time and day' ng-model='event.startTime'></display-date>
         </p>
         <p ng-if="vm.errorMessage">{{vm.errorMessage}}</p>
-    </div>
+    </widget>
 </div>

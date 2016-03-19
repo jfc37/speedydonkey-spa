@@ -17,7 +17,7 @@ var port = process.env.PORT || config.defaultPort;
 /**
  * yargs variables can be passed in to alter the behavior, when present.
  * Example: gulp serve-dev
- *
+ * 
  * --verbose  : Various tasks will produce more output to the console.
  * --nosync   : Don't launch the browser with browser-sync when serving code.
  * --debug    : Launch debugger with node-inspector.
@@ -41,8 +41,8 @@ gulp.task('environment-setup', function () {
     process.env.PayPalDomain = process.env.PayPalDomain || 'sandbox.paypal.com';
     process.env.RaygunKey = process.env.RaygunKey || 'QjEhJ+hmGUEuvW7qQpYKGQ==';
     process.env.GoogleAnalytics = process.env.GoogleAnalytics || 'UA-36895453-2';
-    process.env.auth0Domain = process.env.auth0Domain || 'jfc.au.auth0.com';
-    process.env.auth0ClientId = process.env.auth0ClientId || 'tebOmgg6VvwhJCoX6tPcmG1VOt5NoHlJ';
+    process.env.auth0Domain = process.env.auth0Domain || 'jfc-dev.au.auth0.com';
+    process.env.auth0ClientId = process.env.auth0ClientId || 'jaLVtw90tXt8tCCBIHIUJLIcP2p2MMdE';
 
     return gulp.src('config.js')
         .pipe($.replace(/<company>/g, process.env.Company))
@@ -241,12 +241,19 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function () {
     notify(msg);
 });
 
+gulp.task('copyBowerAssets', function () {
+
+    gulp.src('bower_components/**/*.png')
+        .pipe($.flatten())
+        .pipe(gulp.dest(config.build + 'styles'));
+});
+
 /**
  * Optimize all files, move to a build folder,
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('optimize', ['inject'], function () {
+gulp.task('optimize', ['inject', 'copyBowerAssets'], function () {
     log('Optimizing the js, css, and html');
 
     var assets = $.useref.assets({
@@ -268,7 +275,7 @@ gulp.task('optimize', ['inject'], function () {
         .pipe(cssFilter)
         .pipe($.csso())
         .pipe(cssFilter.restore())
-        // Get the custom javascript
+        //Get the custom javascript
         .pipe(jsAppFilter)
         .pipe($.ngAnnotate({
             add: true
@@ -492,7 +499,7 @@ function orderSrc(src, order) {
 function serve(isDev, specRunner) {
     var debug = args.debug || args.debugBrk;
     var debugMode = args.debug ? '--debug' : args.debugBrk ? '--debug-brk' : '';
-    var nodeOptions = getNodeOptions(isDev);
+    var nodeOptions = getNodeOptions(isDev, specRunner);
 
     if (debug) {
         runNodeInspector();
@@ -526,13 +533,23 @@ function serve(isDev, specRunner) {
         });
 }
 
-function getNodeOptions(isDev) {
+function getNodeOptions(isDev, isSpecs) {
+    var env;
+
+    if (isSpecs) {
+        env = 'spec'
+    } else if (isDev) {
+        env = 'dev'
+    } else {
+        env = 'build'
+    }
+
     return {
         script: config.nodeServer,
         delayTime: 1,
         env: {
             'PORT': port,
-            'NODE_ENV': isDev ? 'dev' : 'build'
+            'NODE_ENV': env
         },
         watch: [config.server]
     };
