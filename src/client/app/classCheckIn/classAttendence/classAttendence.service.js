@@ -11,6 +11,8 @@
         var studentsRegistered = [];
 
         var service = {
+            reset: reset,
+
             tryAttendClass: tryAttendClass,
             tryUnattendClass: tryUnattendClass,
 
@@ -19,6 +21,11 @@
         };
 
         return service;
+
+        function reset(){
+            studentsAttending.length = 0;
+            studentsRegistered.length = 0;
+        }
 
         function tryUnattendClass(student, theClass) {
             return classAttendenceRepository.unattend(student, theClass).then(function () {
