@@ -27,7 +27,7 @@
 
             });
 
-            return deferred;
+            return deferred.promise;
         }
 
         function getOptions() {

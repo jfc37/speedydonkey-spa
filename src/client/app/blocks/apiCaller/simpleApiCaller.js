@@ -31,6 +31,11 @@
         }
 
         function post(data, options) {
+            if (!options) {
+                options = data;
+                data = {};
+            }
+
             var url = generateUrl(options);
             var request = $http.post(url, data);
 

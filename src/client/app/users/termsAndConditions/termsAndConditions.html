@@ -1,0 +1,32 @@
+<nice-modal>
+    <section>
+        <h2>
+            Terms & Conditions
+        </h2>
+
+        <section-content>
+            <section-form ng-form="form">
+                <p>
+                    Before you can use this website, please read and agree to the following terms and conditions:
+                </p>
+                <div ng-bind-html="viewModel.termsAndConditions"></div>
+
+                <section-group input-name="agreeToTerms">
+                    <p>
+                        <input name="agreesToTerms" type="checkbox" icheck ng-model="viewModel.agreesToTerms" required />
+                        <label class="normal-text">
+                            I agree to the terms & condititons
+                        </label>
+                        <server-validation-messages input-name="agreesToTerms" messages="viewModel.serverValidation"></server-validation-messages>
+                    </p>
+                </section-group>
+
+                <section-group-separator></section-group-separator>
+
+                <section-group>
+                    <save-button ng-click="viewModel.agree()" ng-disabled="form.$invalid">I agree</save-button>
+                </section-group>
+            </section-form>
+        </section-content>
+    </section>
+</nice-modal>
