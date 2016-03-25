@@ -7,6 +7,8 @@
 
     /* @ngInject */
     function ClassCheckIn($routeParams, classAttendence, classRepository, niceAlert) {
+        classAttendence.reset();
+
         var vm = this;
         vm.registeredStudents = classAttendence.studentsRegistered;
         vm.attendingStudents = classAttendence.studentsAttending;
