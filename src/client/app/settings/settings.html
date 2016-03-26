@@ -34,6 +34,34 @@
 
 <section>
     <section-title>
+        Terms & Conditions
+    </section-title>
+
+    <section-content ng-form="termsForm">
+        <section-form>
+            <section-group input-name="terms">
+                    <summernote ng-model="vm.termsAndConditions" height="300"></summernote>
+                    <help-text>
+                        Any terms and conditions you want your students to agree to in order to use this site.
+                    </help-text>
+                    <validation-messages input-name="logo">
+                        <div ng-message="required">Please some terms & conditions</div>
+                    </validation-messages>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group>
+                <cancel-button href="#/">Cancel</cancel-button>
+                <save-button class="btn btn-primary pull-right" ng-disabled="termsForm.$invalid" ng-click="vm.submitTerms()">Save</save-button>
+            </section-group>
+
+        </section-form>
+    </section-content>
+</section>
+
+<section>
+    <section-title>
         Block Default Settings
     </section-title>
 

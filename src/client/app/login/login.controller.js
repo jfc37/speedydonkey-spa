@@ -6,7 +6,7 @@
         .controller('Login', Login);
 
     /* @ngInject */
-    function Login(config, authService, routehelper, missingUserDetailsService) {
+    function Login(config, authService, routehelper, missingUserDetailsService, termsAndConditionsService) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -28,7 +28,7 @@
         }
 
         function checkMissingUserDetails() {
-            return missingUserDetailsService.performCheck();
+            return missingUserDetailsService.performCheck().then(termsAndConditionsService.performCheck, termsAndConditionsService.performCheck);
         }
     }
 })();

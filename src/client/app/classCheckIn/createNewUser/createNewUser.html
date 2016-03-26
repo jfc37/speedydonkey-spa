@@ -62,6 +62,23 @@
 
                 <section-group-separator></section-group-separator>
 
+                <p>
+                    Before you can use this website, please read and agree to the following terms and conditions:
+                </p>
+                <div ng-bind-html="viewModel.termsAndConditions"></div>
+
+                <section-group input-name="agreeToTerms">
+                    <p>
+                        <input name="agreesToTerms" type="checkbox" icheck ng-model="viewModel.newUser.agreesToTerms" />
+                        <label class="normal-text">
+                            I agree to the terms & condititons
+                        </label>
+                        <server-validation-messages input-name="agreesToTerms" messages="viewModel.serverValidation"></server-validation-messages>
+                    </p>
+                </section-group>
+
+                <section-group-separator></section-group-separator>
+
                 <section-group>
                     <button class="cancel" ng-click="cancel()">Cancel</button>
                     <save-button ng-disabled="registerForm.$invalid" ng-click="viewModel.register()">Create</save-button>

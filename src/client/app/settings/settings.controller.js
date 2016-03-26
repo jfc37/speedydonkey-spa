@@ -26,6 +26,12 @@
             }]);
         };
 
+        vm.submitTerms = function () {
+            updateSettings([{
+                termsAndConditions: vm.termsAndConditions
+            }]);
+        };
+
         function updateSettings(settings) {
             return settingsRepository.update(settings).then(function () {
                 pageReloader.reload();
@@ -46,6 +52,7 @@
                 vm.logo = settings.logo;
                 vm.minutesPerClass = parseInt(settings.minutesPerClass);
                 vm.numberOfClasses = parseInt(settings.numberOfClasses);
+                vm.termsAndConditions = settings.termsAndConditions;
             });
         }
     }
