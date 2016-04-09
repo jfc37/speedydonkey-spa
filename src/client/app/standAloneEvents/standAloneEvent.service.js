@@ -76,21 +76,7 @@
             options.id = id;
 
             return simpleApiCaller.get(options).then(function (response) {
-                var theEvent = response.data;
-
-                theEvent.actualStudents.forEach(function (student) {
-                    student.isPresent = true;
-                });
-
-                theEvent.registeredStudents.forEach(function (registeredStudent) {
-                    if (theEvent.actualStudents.filter(function (attendingStudent) {
-                            return attendingStudent.id === registeredStudent.id;
-                        }).length === 0) {
-                        theEvent.actualStudents.push(registeredStudent);
-                    }
-                });
-
-                return theEvent;
+                return response.data;
             });
         }
 

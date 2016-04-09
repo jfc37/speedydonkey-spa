@@ -7,6 +7,8 @@
 
     /* @ngInject */
     function StandAloneEventCheckIn($routeParams, standAloneEventService, eventAttendence, niceAlert) {
+        eventAttendence.reset();
+
         var vm = this;
         vm.registeredStudents = eventAttendence.studentsRegistered;
         vm.attendingStudents = eventAttendence.studentsAttending;
@@ -25,9 +27,6 @@
 
                 theEvent.actualStudents.forEach(function (student) {
                     student.attendedEvent = true;
-                });
-
-                theEvent.actualStudents.forEach(function (student) {
                     includedStudentIds.push(student.id);
                     vm.attendingStudents.push(student);
                 });
@@ -37,7 +36,6 @@
                         includedStudentIds.push(student.id);
                         vm.registeredStudents.push(student);
                     }
-
                 });
 
             }, function () {

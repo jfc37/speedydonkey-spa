@@ -17,7 +17,7 @@ var port = process.env.PORT || config.defaultPort;
 /**
  * yargs variables can be passed in to alter the behavior, when present.
  * Example: gulp serve-dev
- * 
+ *
  * --verbose  : Various tasks will produce more output to the console.
  * --nosync   : Don't launch the browser with browser-sync when serving code.
  * --debug    : Launch debugger with node-inspector.
@@ -537,11 +537,11 @@ function getNodeOptions(isDev, isSpecs) {
     var env;
 
     if (isSpecs) {
-        env = 'spec'
+        env = 'spec';
     } else if (isDev) {
-        env = 'dev'
+        env = 'dev';
     } else {
-        env = 'build'
+        env = 'build';
     }
 
     return {
