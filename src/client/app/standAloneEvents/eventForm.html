@@ -49,6 +49,19 @@
 
 <section-group-separator></section-group-separator>
 
+<section-group input-name="classCapacity">
+    <section-group-label>Class Capacity</section-group-label>
+
+    <section-group-content>
+        <input name="classCapacity" type="number" class="form-control" ng-model="vm.standAloneEvent.classCapacity" required/>
+        <validation-messages input-name="classCapacity">
+            <div ng-message="required">Please enter the maximum number of students</div>
+        </validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
 <section-group>
     <section-group-label>Teachers</section-group-label>
 

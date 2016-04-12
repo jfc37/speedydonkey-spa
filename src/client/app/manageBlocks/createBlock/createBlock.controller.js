@@ -39,6 +39,7 @@
                     startDate: moment().startOf('day').hour(18).minute(0).toDate(),
                     minutesPerClass: parseInt(settings.minutesPerClass),
                     numberOfClasses: parseInt(settings.numberOfClasses),
+                    classCapacity: parseInt(settings.classCapacity),
                     teachers: []
                 };
             });

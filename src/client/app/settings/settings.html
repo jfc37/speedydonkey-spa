@@ -99,6 +99,22 @@
 
             <section-group-separator></section-group-separator>
 
+            <section-group input-name="classCapacity">
+                <section-group-label>Class Capacity</section-group-label>
+
+                <section-group-content>
+                    <input name="classCapacity" type="number" class="form-control" ng-model="vm.classCapacity" required>
+                    <help-text>
+                        The default maximum number of students in a class
+                    </help-text>
+                    <validation-messages input-name="classCapacity">
+                        <div ng-message="required">Please enter a value</div>
+                    </validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
             <section-group>
                 <cancel-button href="#/">Cancel</cancel-button>
                 <save-button class="btn btn-primary pull-right" ng-disabled="blockForm.$invalid" ng-click="vm.submitBlockSettings()">Save</save-button>
