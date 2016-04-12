@@ -23,10 +23,10 @@
                     </product-description>
 
                     <product-action>
-                        <label ng-if="!theEvent.isRegistered">
+                        <label ng-if="!theEvent.isAlreadyRegistered ">
                             <input type="checkbox" icheck ng-model="theEvent.registerIn"> Register
                         </label>
-                        <label ng-if="theEvent.isRegistered">
+                        <label ng-if="theEvent.isAlreadyRegistered ">
                             Already registered
                         </label>
                     </product-action>
