@@ -6,19 +6,51 @@
         .controller('ManageRooms', ManageRooms);
 
     /* @ngInject */
-    function ManageRooms(roomService) {
+    function ManageRooms(roomRepository, niceAlert) {
         var vm = this;
         vm.rooms = [];
+
+        vm.confirmDelete = function () {
+            niceAlert.confirm({
+                message: 'All selected rooms will be deleted.'
+            }, deleteSelected);
+        };
+
+        function deleteSelected() {
+            var toDelete = getSelected();
+            roomRepository.delete(toDelete).then(function () {
+                niceAlert.success({
+                    message: 'Selected rooms have been deleted.'
+                });
+                toDelete.forEach(function (room) {
+                    vm.rooms.remove(room);
+                });
+            }, function () {
+                niceAlert.error({
+                    message: 'Problem deleting rooms.'
+                });
+            });
+        }
+
+        function getSelected() {
+            return vm.rooms.filter(function (room) {
+                return room.selected;
+            });
+        }
 
         activate();
 
         function activate() {
-            getRooms();
+            return getRooms();
         }
 
         function getRooms() {
-            roomService.getRooms().then(function (rooms) {
+            roomRepository.getAll().then(function (rooms) {
                 vm.rooms = rooms;
+            }, function () {
+                niceAlert.error({
+                    message: 'Problem getting rooms.'
+                });
             });
         }
     }

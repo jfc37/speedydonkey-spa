@@ -1,15 +1,16 @@
-<h3>Create Block</h3>
-<div ng-form="createForm">
-    <input-block name="name" label="Name">
-        <input name="name" type="text" class="form-control" ng-model="vm.room.name" required/>
-        <validation error="required" name="name">Please enter a name</validation>
-    </input-block>
+<page-title>Create Room</page-title>
 
-    <input-block name="location" label="Location">
-        <input name="location" type="text" class="form-control" ng-model="vm.room.location" required/>
-        <validation error="required" name="location">Please enter a location</validation>
-    </input-block>
+<section>
+    <section-title>Details</section-title>
 
-    <a class="btn btn-default" href="#/admin/manage/rooms">Cancel</a>
-    <a class="btn btn-default pull-right" ng-disabled="createForm.$invalid" ng-click="vm.submit(createForm)">Create</a>
-</div>
+    <section-content>
+        <section-form ng-form="createForm">
+            <div ng-include src="'app/rooms/createRoom/roomForm.html'"></div>
+
+            <section-group>
+                <cancel-button href="#/admin/manage/rooms">Cancel</cancel-button>
+                <save-button ng-disabled="createForm.$invalid" ng-click="vm.submit()">Create</save-button>
+            </section-group>
+        </section-form>
+    </section-content>
+</section>

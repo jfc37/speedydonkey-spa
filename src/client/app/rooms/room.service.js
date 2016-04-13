@@ -9,20 +9,11 @@
     function roomService($q, simpleApiCaller) {
 
         var service = {
-            getRooms: getRooms,
             update: update,
-            create: create,
             getRoom: getRoom,
             getSchedule: getSchedule,
             deleteRoom: deleteRoom
         };
-
-        function getRooms() {
-            return simpleApiCaller.get(getOptions()).then(function (response) {
-                var rooms = response.data;
-                return rooms;
-            });
-        }
 
         function getSchedule(room) {
             var options = getOptions();
@@ -39,16 +30,6 @@
             options.id = room.id;
 
             return simpleApiCaller.put(room, options).then(function (response) {
-                return response.data;
-            }, function (response) {
-                if (response.validationResult) {
-                    return response.validationResult.validationErrors;
-                }
-            });
-        }
-
-        function create(room) {
-            return simpleApiCaller.post(room, getOptions()).then(function (response) {
                 return response.data;
             }, function (response) {
                 if (response.validationResult) {
