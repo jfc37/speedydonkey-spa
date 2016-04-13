@@ -6,7 +6,7 @@
         .controller('CreateStandAloneEvent', CreateStandAloneEvent);
 
     /* @ngInject */
-    function CreateStandAloneEvent(standAloneEventService, routehelper, niceAlert) {
+    function CreateStandAloneEvent(standAloneEventService, settingsRepository, routehelper, niceAlert) {
         var vm = this;
         vm.standAloneEvent = {};
 
@@ -39,6 +39,10 @@
                 startTime: moment().startOf('day').hour(18).minute(0).toDate(),
                 endTime: moment().startOf('day').hour(19).minute(0).toDate()
             };
+
+            settingsRepository.get('classCapacity').then(function (value) {
+                vm.standAloneEvent.classCapacity = parseInt(value);
+            });
         }
     }
 })();

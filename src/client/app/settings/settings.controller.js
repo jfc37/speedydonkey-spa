@@ -22,7 +22,8 @@
         vm.submitBlockSettings = function () {
             updateSettings([{
                 minutesPerClass: vm.minutesPerClass,
-                numberOfClasses: vm.numberOfClasses
+                numberOfClasses: vm.numberOfClasses,
+                classCapacity: vm.classCapacity
             }]);
         };
 
@@ -52,6 +53,7 @@
                 vm.logo = settings.logo;
                 vm.minutesPerClass = parseInt(settings.minutesPerClass);
                 vm.numberOfClasses = parseInt(settings.numberOfClasses);
+                vm.classCapacity = parseInt(settings.classCapacity);
                 vm.termsAndConditions = settings.termsAndConditions;
             });
         }
