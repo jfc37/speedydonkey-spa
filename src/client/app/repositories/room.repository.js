@@ -10,10 +10,11 @@
 
         var service = {
             create: create,
-//            update: update,
+            update: update,
             delete: deleteRooms,
             getAll: getAll,
-//            get: get
+            get: get,
+            getSchedule: getSchedule
         };
 
         function create(room) {
@@ -24,14 +25,14 @@
             });
         }
 
-//        function update(passOption) {
-//            return simpleApiCaller.put(passOption, getOptions(passOption.id)).then(function () {
-//
-//            }, function (response) {
-//                return validationPromise.reject(response);
-//            });
-//        }
-//
+        function update(room) {
+            return simpleApiCaller.put(room, getOptions(room.id)).then(function () {
+
+            }, function (response) {
+                return validationPromise.reject(response);
+            });
+        }
+
         function deleteRooms(rooms) {
             var allRequests = [];
 
@@ -55,12 +56,22 @@
                 }
             });
         }
-//
-//        function get(id) {
-//            return simpleApiCaller.get(getOptions(id)).then(function (response) {
-//                return response.data;
-//            });
-//        }
+
+        function get(id) {
+            return simpleApiCaller.get(getOptions(id)).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function getSchedule(room) {
+            var options = getOptions();
+            options.resource = options.resource + '/' + room.id + '/upcoming-schedule';
+
+            return simpleApiCaller.get(options).then(function (response) {
+                var rooms = response.data;
+                return rooms;
+            });
+        }
 
         function getOptions(id) {
             var options = {

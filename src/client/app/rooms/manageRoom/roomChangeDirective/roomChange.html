@@ -1,15 +1,10 @@
-<div ng-form="updateForm" class="panel-body">
+<div class="panel-body">
+    <section-form ng-form="updateForm">
+        <div ng-include src="'app/rooms/createRoom/roomForm.html'"></div>
 
-    <input-block name="name" label="Name">
-        <input name="name" type="text" class="form-control" ng-model="vm.room.name" required/>
-        <validation error="required" name="name">Please enter a name</validation>
-    </input-block>
-
-    <input-block name="location" label="Location">
-        <input name="location" type="text" class="form-control" ng-model="vm.room.location" required/>
-        <validation error="required" name="name">Please enter a location</validation>
-    </input-block>
-
-    <a class="btn btn-default" ng-click="vm.cancel()">Cancel</a>
-    <a class="btn btn-primary pull-right" ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</a>
+        <section-group>
+            <cancel-button ng-click="vm.cancel()">Cancel</cancel-button>
+            <save-button ng-disabled="updateForm.$invalid" ng-click="vm.submit(updateForm)">Update</save-button>
+        </section-group>
+    </section-form>
 </div>

@@ -15,10 +15,10 @@
             templateUrl: 'app/rooms/manageRoom/roomScheduleDirective/roomSchedule.html',
             bindToController: true,
             controllerAs: 'vm',
-            controller: function ($scope, roomService) {
+            controller: function (roomRepository) {
                 var vm = this;
 
-                roomService.getSchedule(vm.room).then(function (classes) {
+                roomRepository.getSchedule(vm.room).then(function (classes) {
                     vm.classes = classes;
                 });
             }
