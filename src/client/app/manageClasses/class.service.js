@@ -12,7 +12,6 @@
             changeRoom: changeRoom,
             getClass: getClass,
             update: update,
-            deleteClass: deleteClass,
             filterClasses: filterClasses,
             updateTeachers: updateTeachers
         };
@@ -64,12 +63,6 @@
                 } else {
                     return $q.reject();
                 }
-            });
-        }
-
-        function deleteClass(id) {
-            return $q(function (resolve, revoke) {
-                dataDeleteService.deleteClass(id).then(resolve, revoke);
             });
         }
 

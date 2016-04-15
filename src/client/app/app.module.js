@@ -26,7 +26,6 @@
         'ui.bootstrap.datetimepicker',
 
         'app.core',
-        'app.widgets',
         'app.apiCaller',
         'app.paypalExpressCheckout',
         'app.poliPayment',
@@ -38,11 +37,7 @@
         'app.blockEnrolment',
         'app.layout',
         'app.logon',
-        'app.register',
         'app.classCheckIn',
-        'app.userActivation',
-        'app.forgottenPassword',
-        'app.resetPassword',
         'app.manageUser',
         'app.adminDashboard',
         'app.managePassOptions',
@@ -59,8 +54,7 @@
         'app.adminReports',
         'app.reportTeacherHours',
         'app.reportProfit',
-        'app.purchasePass',
-        'app.windyLindy'
+        'app.purchasePass'
     ]);
 
 })();
