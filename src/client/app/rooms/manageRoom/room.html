@@ -1,22 +1,22 @@
-<h2>{{vm.block.name}}</h2>
+<page-title>{{vm.room.name}}</page-title>
 
-<tabset class="tabs-container" ng-if="vm.room">
-    <tab>
-        <tab-heading>
+<uib-tabset class="tabs-container" ng-if="vm.room">
+    <uib-tab>
+        <uib-tab-heading>
             Summary
-        </tab-heading>
+        </uib-tab-heading>
         <room-summary room="vm.room"></room-summary>
-    </tab>
-    <tab>
-        <tab-heading>
+    </uib-tab>
+    <uib-tab>
+        <uib-tab-heading>
             Schedule
-        </tab-heading>
+        </uib-tab-heading>
         <room-schedule room="vm.room"></room-schedule>
-    </tab>
-    <tab>
-        <tab-heading>
+    </uib-tab>
+    <uib-tab>
+        <uib-tab-heading>
             Change
-        </tab-heading>
+        </uib-tab-heading>
         <room-change room="vm.room"></room-change>
-    </tab>
-</tabset>
+    </uib-tab>
+</uib-tabset>
