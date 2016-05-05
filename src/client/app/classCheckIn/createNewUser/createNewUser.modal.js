@@ -6,15 +6,23 @@
         .factory('createNewUserModal', createNewUserModal);
 
     /* @ngInject */
-    function createNewUserModal($uibModal, $q, userRepository, niceAlert) {
+    function createNewUserModal($sce, $uibModal, $q, userRepository, niceAlert, termsAndConditionsRepository) {
         var modalInstance;
         var viewModel = {
             register: register
         };
 
+        function activate() {
+            return termsAndConditionsRepository.get().then(function (terms) {
+                viewModel.termsAndConditions = $sce.trustAsHtml(terms);
+            });
+        }
+
         var service = {
             open: openModal
         };
+
+        activate();
 
         return service;
 

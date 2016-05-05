@@ -25,7 +25,7 @@
             <section-group input-name="startDate">
                 <section-group-label>Start Date</section-group-label>
 
-                <section-group-content ng-if="viewModel.pass.startDate">
+                <section-group-content>
                     <jfc-date-picker ng-model="viewModel.pass.startDate" name="startDate"></jfc-date-picker>
                     <validation-messages input-name="startDate">
                         <div ng-message="required">Please enter a start date</div>
@@ -39,7 +39,7 @@
             <section-group input-name="endDate">
                 <section-group-label>End Date</section-group-label>
 
-                <section-group-content ng-if="viewModel.pass.endDate">
+                <section-group-content>
                     <jfc-date-picker ng-model="viewModel.pass.endDate" name="endDate"></jfc-date-picker>
                     <validation-messages input-name="endDate">
                         <div ng-message="required">Please enter an end date</div>

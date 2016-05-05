@@ -34,8 +34,8 @@ gulp.task('default', ['help']);
 gulp.task('environment-setup', function () {
     log('Setting up environment config');
 
-    process.env.Company = process.env.Company || 'Speedy Donkey LOCAL';
     process.env.ApiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
+    process.env.Company = process.env.Company || 'Speedy Donkey LOCAL';
     process.env.SpaUrl = process.env.SpaUrl || 'localhost:3000';
     process.env.LocalStorageDomain = process.env.SpaUrl || '';
     process.env.PayPalDomain = process.env.PayPalDomain || 'sandbox.paypal.com';
@@ -537,11 +537,11 @@ function getNodeOptions(isDev, isSpecs) {
     var env;
 
     if (isSpecs) {
-        env = 'spec'
+        env = 'spec';
     } else if (isDev) {
-        env = 'dev'
+        env = 'dev';
     } else {
-        env = 'build'
+        env = 'build';
     }
 
     return {

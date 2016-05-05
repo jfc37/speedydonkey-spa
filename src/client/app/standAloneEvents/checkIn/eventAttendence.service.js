@@ -11,6 +11,8 @@
         var studentsRegistered = [];
 
         var service = {
+            reset: reset,
+
             tryAttendEvent: tryAttendEvent,
             tryUnattendEvent: tryUnattendEvent,
 
@@ -19,6 +21,11 @@
         };
 
         return service;
+
+        function reset(){
+            studentsAttending.length = 0;
+            studentsRegistered.length = 0;
+        }
 
         function tryUnattendEvent(student, theEvent) {
             return eventAttendenceRepository.unattend(student, theEvent).then(function () {
