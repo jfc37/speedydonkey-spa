@@ -16,18 +16,29 @@
             controllerAs: 'vm',
             bindToController: true,
             /* @ngInject */
-            controller: function ($route, roomService, validationService) {
+            controller: function (pageReloader, roomRepository, niceAlert) {
                 var vm = this;
 
                 vm.cancel = function () {
-                    $route.reload();
+                    pageReloader.reload();
                 };
 
-                vm.submit = function (form) {
-                    roomService.update(vm.room).then(function () {
-                        $route.reload();
-                    }, function (errors) {
-                        validationService.applyServerSideErrors(form, errors);
+                vm.submit = function () {
+                    roomRepository.update(vm.room).then(function () {
+                        pageReloader.reload();
+                        niceAlert.success({
+                            message: 'Room was successfully updated.'
+                        });
+                    }, function (validation) {
+                        if (validation) {
+                            vm.serverValidation = validation;
+                            niceAlert.validationWarning();
+                        } else {
+                            niceAlert.error({
+                                message: 'There was a problem updating the room.'
+                            });
+                        }
+
                     });
                 };
             }

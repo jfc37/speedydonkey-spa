@@ -14,32 +14,11 @@
         };
 
         function getBlocksForEnrolment() {
-            var allBlocks = [];
-            var userEnroledBlocksIds = [];
-
-            var blocksRequest = simpleApiCaller.get({
+            return simpleApiCaller.get({
                 resource: 'blocks/for-enrolment',
                 block: true
             }).then(function (response) {
-                allBlocks = response.data;
-            });
-
-            var userEnrolmentRequest = simpleApiCaller.get({
-                resource: 'users/current/blocks',
-                block: true
-            }).then(function (response) {
-                userEnroledBlocksIds = response.data.map(function (block) {
-                    return block.id;
-                });
-            });
-
-            return $q.all([blocksRequest, userEnrolmentRequest]).then(function () {
-                allBlocks.forEach(function (block) {
-                    var isUserEnrolledInBlock = userEnroledBlocksIds.indexOf(block.id) > -1;
-                    block.isEnroled = isUserEnrolledInBlock;
-                });
-
-                return allBlocks;
+                return response.data;
             });
         }
 

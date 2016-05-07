@@ -18,12 +18,12 @@
                 entityType: '@'
             },
             /* @ngInject */
-            controller: function (roomService, blockService, classService) {
+            controller: function (roomRepository, blockService, classService) {
                 var vm = this;
 
                 vm.rooms = [];
 
-                roomService.getRooms().then(function (rooms) {
+                roomRepository.getAll().then(function (rooms) {
                     vm.rooms = rooms;
                 });
 

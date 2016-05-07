@@ -1,0 +1,27 @@
+<section-group input-name="name">
+    <section-group-label>Name</section-group-label>
+
+    <section-group-content>
+        <input name="name" type="text" class="form-control" ng-model="vm.room.name" required />
+        <validation-messages input-name="name">
+            <div ng-message="required">Please enter a name</div>
+        </validation-messages>
+        <server-validation-messages input-name="name" messages="vm.serverValidation"></server-validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
+<section-group input-name="location">
+    <section-group-label>Location</section-group-label>
+
+    <section-group-content>
+        <input name="location" type="text" class="form-control" ng-model="vm.room.location" required />
+        <validation-messages input-name="location">
+            <div ng-message="required">Please enter a location</div>
+        </validation-messages>
+        <server-validation-messages input-name="location" messages="vm.serverValidation"></server-validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>

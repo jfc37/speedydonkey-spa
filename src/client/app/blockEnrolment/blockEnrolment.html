@@ -7,7 +7,7 @@
         </section-content>
     </section>
 
-    <section ng-repeat="blocksOnDay in vm.blocksByDays">
+    <section ng-repeat="blocksOnDay in vm.blocksByDays | orderBy:'day'">
         <section-title>
             Starting {{blocksOnDay.title}}
         </section-title>
@@ -23,12 +23,13 @@
                     </product-description>
 
                     <product-action>
-                        <label ng-if="!block.isEnroled">
+                        <label ng-if="!block.isAlreadyRegistered && block.spacesAvailable > 0">
                             <input type="checkbox" icheck ng-model="block.enrolIn"> Enrol
                         </label>
-                        <label ng-if="block.isEnroled">
+                        <label ng-if="block.isAlreadyRegistered ">
                             Already enrolled
                         </label>
+                        <spaces-available number="block.spacesAvailable"></spaces-available>
                     </product-action>
                 </product-box>
             </flex-box>
