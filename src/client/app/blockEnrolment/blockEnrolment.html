@@ -7,7 +7,7 @@
         </section-content>
     </section>
 
-    <section ng-repeat="blocksOnDay in vm.blocksByDays">
+    <section ng-repeat="blocksOnDay in vm.blocksByDays | orderBy:'day'">
         <section-title>
             Starting {{blocksOnDay.title}}
         </section-title>
