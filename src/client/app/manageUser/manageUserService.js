@@ -6,7 +6,7 @@
         .factory('manageUserService', manageUserService);
 
     /* @ngInject */
-    function manageUserService($q, logger, dataservice, dataUpdateService) {
+    function manageUserService($q, logger, dataservice) {
 
         var service = {
             getUser: getUser
