@@ -6,7 +6,7 @@
         .factory('passOptionRepository', passOptionRepository);
 
     /* @ngInject */
-    function passOptionRepository($q, simpleApiCaller, dataUpdateService, validationPromise) {
+    function passOptionRepository($q, simpleApiCaller, validationPromise) {
 
         var service = {
             create: create,
