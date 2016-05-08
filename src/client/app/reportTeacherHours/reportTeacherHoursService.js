@@ -6,7 +6,7 @@
         .factory('reportTeacherHoursService', reportTeacherHoursService);
 
     /* @ngInject */
-    function reportTeacherHoursService($q, logger, dataservice, dataUpdateService, authService) {
+    function reportTeacherHoursService($q, logger, dataservice, authService) {
 
         var service = {
             getTeacherHours: getTeacherHours
