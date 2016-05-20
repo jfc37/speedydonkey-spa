@@ -84,40 +84,38 @@ function checkIfSet(obj, key) {
 }
 
 function handleRequestError(err, callback) {
-  var er = err;
+  var status = err.status;
+  var responseText = 'string' === typeof err.responseText ? err.responseText : err;
+
   var isAffectedIEVersion = isInternetExplorer() === 10 || isInternetExplorer() === 11;
-  var zeroStatus = (!er.status || er.status === 0);
+  var zeroStatus = (!status || status === 0);
 
   var onLine = !!window.navigator.onLine;
 
   // Request failed because we are offline.
   if (zeroStatus && !onLine ) {
-    er = {};
-    er.status = 0;
-    er.responseText = {
+    status = 0;
+    responseText = {
       code: 'offline'
     };
   // http://stackoverflow.com/questions/23229723/ie-10-11-cors-status-0
   // XXX IE10 when a request fails in CORS returns status code 0
   // See: http://caniuse.com/#search=navigator.onLine
   } else if (zeroStatus && isAffectedIEVersion) {
-    er = {};
-    er.status = 401;
-    er.responseText = {
+    status = 401;
+    responseText = {
       code: 'invalid_user_password'
     };
   // If not IE10/11 and not offline it means that Auth0 host is unreachable:
   // Connection Timeout or Connection Refused.
   } else if (zeroStatus) {
-    er = {};
-    er.status = 0;
-    er.responseText = {
+    status = 0;
+    responseText = {
       code: 'connection_refused_timeout'
     };
-  } else {
-    er.responseText = err;
   }
-  var error = new LoginError(er.status, er.responseText);
+
+  var error = new LoginError(status, responseText);
   callback(error);
 }
 
@@ -166,7 +164,7 @@ function Auth0 (options) {
  * @property {String} version
  */
 
-Auth0.version = require('./version.json').version;
+Auth0.version = require('./version').str;
 
 /**
  * Export client info object
@@ -177,6 +175,17 @@ Auth0.version = require('./version.json').version;
 
 Auth0.clientInfo = { name: 'auth0.js', version: Auth0.version };
 
+
+/**
+ * Wraps calls to window.open so it can be overriden in Electron.
+ *
+ * In Electron, window.open returns an object which provides limited control
+ * over the opened window (see
+ * http://electron.atom.io/docs/v0.36.0/api/window-open/).
+ */
+Auth0.prototype.openWindow = function(url, name, options) {
+  return window.open(url, name, stringifyPopupSettings(options));
+}
 
 /**
  * Redirect current location to `url`
@@ -453,11 +462,11 @@ Auth0.prototype.parseHash = function (hash) {
   }
 
   return {
-    profile: prof,
-    id_token: id_token,
-    access_token: parsed_qs.access_token,
-    state: parsed_qs.state,
-    refresh_token: refresh_token
+    accessToken: parsed_qs.access_token,
+    idToken: id_token,
+    idTokenPayload: prof,
+    refreshToken: refresh_token,
+    state: parsed_qs.state
   };
 };
 
@@ -478,10 +487,13 @@ Auth0.prototype.signup = function (options, callback) {
   var opts = {
     client_id: this._clientID,
     redirect_uri: this._getCallbackURL(options),
-    username: trim(options.username || ''),
     email: trim(options.email || options.username || ''),
     tenant: this._domain.split('.')[0]
   };
+
+  if (typeof options.username === 'string') {
+     opts.username = trim(options.username);
+   }
 
   var query = xtend(this._getMode(options), options, opts);
 
@@ -573,11 +585,12 @@ Auth0.prototype.changePassword = function (options, callback) {
     tenant:         this._domain.split('.')[0],
     client_id:      this._clientID,
     connection:     options.connection,
-    username:       trim(options.username || ''),
-    email:          trim(options.email || options.username || ''),
-    password:       options.password
+    email:          trim(options.email || '')
   };
 
+  if (typeof options.password === "string") {
+    query.password = options.password;
+  }
 
   function fail (status, resp) {
     var error = new LoginError(status, resp);
@@ -688,7 +701,7 @@ Auth0.prototype.login = Auth0.prototype.signin = function (options, callback) {
     return this.loginWithUsernamePassword(options, callback);
   }
 
-  if (!!window.cordova) {
+  if (!!window.cordova || !!window.electron) {
     return this.loginPhonegap(options, callback);
   }
 
@@ -803,9 +816,7 @@ Auth0.prototype.loginPhonegap = function (options, callback) {
   delete popupOptions.width;
   delete popupOptions.height;
 
-
-
-  var ref = window.open(popupUrl, '_blank', stringifyPopupSettings(popupOptions));
+  var ref = this.openWindow(popupUrl, '_blank', popupOptions);
   var answered = false;
 
   function errorHandler(event) {
@@ -830,9 +841,7 @@ Auth0.prototype.loginPhonegap = function (options, callback) {
     }
 
     if (result.id_token) {
-      _this.getProfile(result.id_token, function (err, profile) {
-        callback(err, profile, result.id_token, result.access_token, result.state, result.refresh_token);
-      });
+      setTimeout(function() { callback(null, _this._prepareResult(result)) }, 0);
       answered = true;
       return ref.close();
     }
@@ -930,9 +939,7 @@ Auth0.prototype.loginWithPopup = function(options, callback) {
 
     // Handle profile retrieval from id_token and respond
     if (result.id_token) {
-      return _this.getProfile(result.id_token, function (err, profile) {
-        callback(err, profile, result.id_token, result.access_token, result.state, result.refresh_token);
-      });
+      return callback(null, _this._prepareResult(result));
     }
 
     // Case where the error is returned at an `err` property from the result
@@ -1041,7 +1048,7 @@ Auth0.prototype.loginWithUsernamePasswordAndSSO = function (options, callback) {
       clientID:               this._clientID,
       options: {
         // TODO What happens with i18n?
-        username:   options.username,
+        username:   trim(options.username || options.email || ''),
         password:   options.password,
         connection: options.connection,
         state:      options.state,
@@ -1066,9 +1073,7 @@ Auth0.prototype.loginWithUsernamePasswordAndSSO = function (options, callback) {
 
     // Handle profile retrieval from id_token and respond
     if (result.id_token) {
-      return _this.getProfile(result.id_token, function (err, profile) {
-        callback(err, profile, result.id_token, result.access_token, result.state, result.refresh_token);
-      });
+      return callback(null, _this._prepareResult(result));
     }
 
     // Case where the error is returned at an `err` property from the result
@@ -1118,12 +1123,6 @@ Auth0.prototype.loginWithResourceOwner = function (options, callback) {
     query['auth0Client'] = this._getClientInfoString();
   }
 
-  function enrichGetProfile(resp, callback) {
-    _this.getProfile(resp.id_token, function (err, profile) {
-      callback(err, profile, resp.id_token, resp.access_token, resp.state, resp.refresh_token);
-    });
-  }
-
   if (this._useJSONP) {
     return jsonp(url + '?' + qs.stringify(query), jsonpOpts, function (err, resp) {
       if (err) {
@@ -1133,7 +1132,7 @@ Auth0.prototype.loginWithResourceOwner = function (options, callback) {
         var error = new LoginError(resp.status, resp.error);
         return callback(error);
       }
-      enrichGetProfile(resp, callback);
+      callback(null, _this._prepareResult(resp));
     });
   }
 
@@ -1145,7 +1144,7 @@ Auth0.prototype.loginWithResourceOwner = function (options, callback) {
     headers: this._getClientInfoHeader(),
     crossOrigin: !same_origin(protocol, domain),
     success: function (resp) {
-      enrichGetProfile(resp, callback);
+      callback(null, _this._prepareResult(resp));
     },
     error: function (err) {
       handleRequestError(err, callback);
@@ -1174,12 +1173,6 @@ Auth0.prototype.loginWithSocialAccessToken = function (options, callback) {
   var endpoint = '/oauth/access_token';
   var url = joinUrl(protocol, domain, endpoint);
 
-  function enrichGetProfile(resp, callback) {
-    _this.getProfile(resp.id_token, function (err, profile) {
-      callback(err, profile, resp.id_token, resp.access_token, resp.state, resp.refresh_token);
-    });
-  }
-
   if (this._useJSONP) {
     return jsonp(url + '?' + qs.stringify(query), jsonpOpts, function (err, resp) {
       if (err) {
@@ -1189,7 +1182,7 @@ Auth0.prototype.loginWithSocialAccessToken = function (options, callback) {
         var error = new LoginError(resp.status, resp.error);
         return callback(error);
       }
-      enrichGetProfile(resp, callback);
+      callback(null, _this._prepareResult(resp));
     });
   }
 
@@ -1201,7 +1194,7 @@ Auth0.prototype.loginWithSocialAccessToken = function (options, callback) {
     headers: this._getClientInfoHeader(),
     crossOrigin: !same_origin(protocol, domain),
     success: function (resp) {
-      enrichGetProfile(resp, callback);
+      callback(null, _this._prepareResult(resp));
     },
     error: function (err) {
       handleRequestError(err, callback);
@@ -1646,26 +1639,48 @@ Auth0.prototype.logout = function (query) {
  *
  * @method getSSOData
  * @param {Boolean} withActiveDirectories
- * @param {Function} callback
+ * @param {Function} cb
  */
 
-Auth0.prototype.getSSOData = function (withActiveDirectories, callback) {
+Auth0.prototype.getSSOData = function (withActiveDirectories, cb) {
   if (typeof withActiveDirectories === 'function') {
-    callback = withActiveDirectories;
+    cb = withActiveDirectories;
     withActiveDirectories = false;
   }
 
-  var url = joinUrl('https:', this._domain, '/user/ssodata');
+  var noResult = {sso: false};
 
-  if (withActiveDirectories) {
-    url += '?' + qs.stringify({ldaps: 1, client_id: this._clientID});
+  if (this._useJSONP) {
+    var error = new Error("The SSO data can't be obtained using JSONP");
+    setTimeout(function() { cb(error, noResult) }, 0);
+    return;
   }
 
-  // override timeout
-  var jsonpOptions = xtend({}, jsonpOpts, { timeout: 3000 });
+  var protocol = 'https:';
+  var domain = this._domain;
+  var endpoint = '/user/ssodata';
+  var url = joinUrl(protocol, domain, endpoint);
+  var sameOrigin = same_origin(protocol, domain);
+  var data = {};
 
-  return jsonp(url, jsonpOptions, function (err, resp) {
-    callback(null, err ? {sso:false} : resp); // Always return OK, regardless of any errors
+  if (withActiveDirectories) {
+    data = {ldaps: 1, client_id: this._clientID};
+  }
+
+  return reqwest({
+    url:             sameOrigin ? endpoint : url,
+    method:          'get',
+    type:            'json',
+    data:            data,
+    crossOrigin:     !sameOrigin,
+    withCredentials: !sameOrigin,
+    timeout:         3000
+  }).fail(function(err) {
+    var error = new Error("There was an error in the request that obtains the user's country");
+    error.cause = err;
+    cb(error, noResult);
+  }).then(function(resp) {
+    cb(null, resp);
   });
 };
 
@@ -1818,6 +1833,61 @@ Auth0.prototype.verifySMSCode = function(attrs, cb) {
   delete attrs.code;
   return this.login(attrs, cb);
 };
+
+/**
+ * Returns the ISO 3166-1 code for the country where the request is
+ * originating.
+ *
+ * Fails if the request has to be made using JSONP.
+ *
+ * @private
+ */
+Auth0.prototype.getUserCountry = function(cb) {
+  var protocol = 'https:';
+  var domain = this._domain;
+  var endpoint = "/user/geoloc/country";
+  var url = joinUrl(protocol, domain, endpoint);
+
+  if (this._useJSONP) {
+    var error = new Error("The user's country can't be obtained using JSONP");
+    setTimeout(function() { cb(error) }, 0);
+    return;
+  }
+
+  reqwest({
+    url: same_origin(protocol, domain) ? endpoint : url,
+    method: "get",
+    type: "json",
+    headers: this._getClientInfoHeader(),
+    crossOrigin: !same_origin(protocol, domain),
+    success: function(resp) {
+      cb(null, resp.country_code)
+    },
+    error: function(err) {
+      var error = new Error("There was an error in the request that obtains the user's country");
+      error.cause = err;
+      cb(error);
+    }
+  });
+}
+
+Auth0.prototype._prepareResult = function(result) {
+  if (!result || typeof result !== "object") {
+    return;
+  }
+
+  var idTokenPayload = result.profile
+    ? result.profile
+    : this.decodeJwt(result.id_token);
+
+  return {
+    accessToken: result.access_token,
+    idToken: result.id_token,
+    idTokenPayload: idTokenPayload,
+    refreshToken: result.refresh_token,
+    state: result.state
+  };
+}
 
 /**
  * Expose `Auth0` constructor

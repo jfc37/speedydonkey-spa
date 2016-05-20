@@ -1,3 +1,115 @@
+## [7.0.1] - 2016-05-12
+
+### Fixed
+
+- Provide the error object to the callback instead of `null` when the
+  request made by `getSSOData` fails (#162)
+
+## [7.0.0] - 2016-05-09
+
+### Changed
+
+- The user profile is no longer fetched automatically after a
+  successul login in popup mode and the authentication result object
+  has been normalized for both modes (#150)
+  - Most of the properties of the `parseHash` return value have been
+    renamed:
+    - `access_token` to `accessToken`
+    - `id_token` to `idToken`
+    - `profile` to `idTokenPayload`
+    - `refresh_token` to `refreshToken`
+    - `error` and `state` remain the same
+  - The callbacks passed to `login*` methods now take just two
+    arguments: `error` and `result`. The `result` object will have the
+    same structure as the return value of `parseHash`.
+  - To fetch the profile after a successul login in popup mode you can
+    `getProfile` in the authentication callback.
+- The `getSSOData` method now uses XHR instead of JSONP. An error will
+  be provided to the callback if you call this method on a client that
+  it is configured to use JSONP (#152)
+
+### Fixed
+
+- Fixes a bug that prevented logging in with an email using a database
+  connection with SSO enabled and avoid sending uneeded params to the
+  API (#153)
+
+
+## [6.8.1] - 2016-04-26
+
+### Fixed
+
+- [] Merge pull request #145 from auth0/remove-debug (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/ec22f2fa0f004a7fe5a272f5ba3faa07c7820446
+- [] Merge pull request #144 from auth0/upgrade-zuul (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/320541cae28c9f6fc8f4d13f877f117a00fb3498
+- [] Merge pull request #143 from auth0/introduce-travis-ci (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/ea2356df5ba32023132c3468b55d8242d2c6595c
+- [] Upgrade zuul (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/076e398c523931ccab44466575bf322af099c453
+- [] Fix slack notification (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/9badf6f8006a82a5ce02a99fe5a279fc8bb9ea94
+- [] Remove unused debug dep (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/02083a808afe83dbf0f24cc22eb84833a1f9a1c8
+- [] Introduce travis ci (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/41df1cf1efa8125a40560aca13e6c3be71deb755
+- [] Merge pull request #142 from rolodato/patch-1 (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/799dd5ba7e01d00f19a73c465d95f3c262914c16
+- [] Update readme to v2 password reset flow (`Rodrigo López Dato`)
+  https://github.com/auth0/auth0.js/commit/bb4e815acaf9369f74a7a0c1b9477d0a0c0036fa
+- [] Specify full and minified version in script src (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/3cb596fa972e0e54428e1b65c5734800b502ffb4
+- [] Merge pull request #133 from auth0/test-ignore-bower (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/b4213c0c70a2284791aab023fba3c92e7b18c47b
+- [] Ignore test dir in bower.json (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/65a2f2c7bb3f40a849aa104a82754a54c5318382
+- [] Merge pull request #132 from auth0/add/npm-run-deploy (`Cristian Douce`)
+  https://github.com/auth0/auth0.js/commit/205021810f461efaaa26e9bc0b39974666277d92
+- [] Update package.json (`Cristian Douce`)
+  https://github.com/auth0/auth0.js/commit/0b89e460e45df1ca6ea42ebda6904c7bd98dc8e2
+- [] Merge pull request #130 from aguerere/patch-1 (`José F. Romaniello`)
+  https://github.com/auth0/auth0.js/commit/ef07a4f0066645efdc03f3e1ce0146239f8e7261
+- [] Update and rename LICENSE.txt to LICENSE (`Alberto Güerere`)
+  https://github.com/auth0/auth0.js/commit/0b0096fd2dc65de1dd09af6be726128bef1dd1c9
+
+## [6.8.0] - 2016-01-05
+
+### Fixed
+
+- [] Merge pull request #124 from auth0/support-auth0-libs (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/842c8b8d7fdb1aae41a2c62cc6564114d0e81f64
+- [] bump zuul@3.6.0 (`Cristian Douce`)
+  https://github.com/auth0/auth0.js/commit/2a0c38f4899455b639a4a1cef4b8409567e50d2f
+- [] Codestyle tests (`Cristian Douce`)
+  https://github.com/auth0/auth0.js/commit/64073b0747b3453c58af8a924782e8370946035a
+- [] Update zuul on package.json (`Cristian Douce`)
+  https://github.com/auth0/auth0.js/commit/3a601315f845797bb980403b35f3e65b18a5ef0a
+- [] Refactor handleRequestError (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/362f74a30af32e2a2218d4edfe1ada5c9e972d81
+- [] Avoid rate limit in tests (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/302ba23a721d5f93a1175b21e6cf0a715031dbb7
+- [] Temporarily skip delegation tests (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/fd3d41a0c1abb6a19108c105bc8bc32781455836
+- [] Enable sso user/pass login in popup for Electron (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/7c998cddf16694badb0ad0e96276aae77957fd57
+- [] Extract openWindow fn so it can be monkey-patched (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/4a68ef69e1781ec448db067081bcf2eff5d529f0
+- [] Store version in a js file (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/3dcfa406e3c9a5ad244da3b0c9e8f64bed658a34
+- [] Check for electron like we check for cordova (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/70b8cca1d61d19bbdc8bc05a6c2e79d20941c4e5
+
+## [6.7.7] - 2015-11-30
+
+### Fixed
+
+- [] Merge pull request #123 from auth0/password-strength-error (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/4ce134121257ddfecd5822eb6d2c986683a12dc8
+- [] Disable password strength error test for JSONP (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/20aae0a953c948f013afd7842f97d1b897bc8fb4
+- [] Fix password strength error message, closes #122 (`Gabriel Andretta`)
+  https://github.com/auth0/auth0.js/commit/2a3d60814fec559de969fe87754828500e593f38
+
 ## [6.7.6] - 2016-10-26
 
 ### Fixed
@@ -793,4 +905,3 @@
 ## [0.0.3] - 2013-09-26
 - [c05c4f7] add support for db connections user&pass (`José F. Romaniello`)
 - [c11a97c] base64 url decode id_token (`José F. Romaniello`)
-

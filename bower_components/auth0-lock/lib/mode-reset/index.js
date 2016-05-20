@@ -128,7 +128,7 @@ ResetPanel.prototype.bindAll = function() {
     .a0_off('submit')
     .a0_on('submit', bind(this.onsubmit, this));
 
-  this.query('.a0-options .a0-cancel')
+  this.query('.a0-options .a0-back')
     .a0_on('click', bind(this.oncancel, this));
 
   this.query('input[name=email]')
@@ -303,10 +303,10 @@ ResetPanel.prototype.submit = function () {
 
     if (!err) {
       email_input.val('');
-      widget._signinPanel(panel.options);
+      widget._signinPanel();
       widget._showSuccess(widget.options.i18n.t('reset:successText'));
-      widget.emit('reset success');
-      return 'function' === typeof callback ? callback.apply(widget, args) : null;
+      widget.emit.apply(widget, ['reset success'].concat(args.slice(1)));
+      return;
     }
 
     widget.emit('reset error', err);
@@ -321,11 +321,11 @@ ResetPanel.prototype.submit = function () {
       }
       widget._focusError(email_input);
       widget._showError(widget.options.i18n.t('reset:userDoesNotExistErrorText'));
+    } else if (429 === err.status) {
+      widget._showError(widget.options.i18n.t('reset:tooManyRequestsErrorText'));
     } else {
       widget._showError(widget.options.i18n.t('reset:serverErrorText'));
     }
-
-    return 'function' === typeof callback ? callback.apply(widget, args) : null;
 
   });
 

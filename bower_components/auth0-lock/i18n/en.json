@@ -7,16 +7,18 @@
   "loginSocialButton":             "Login with {connection:title}",
   "signupSocialButton":            "Signup with {connection:title}",
   "networkError":                  "We could not reach the server.<br/>Please try again.",
+  "noConnectionError":             "No valid connection could be found.",
   "signin": {
     "title":                            "Log in",
     "action":                           "Access",
     "actionDomain":                     "Log in to {domain}",
-    "all":                              "Show all",
+    "all":                              "Not your account?",
     "strategyEmailEmpty":               "The email is empty.",
     "strategyEmailInvalid":             "The email is invalid.",
     "strategyDomainInvalid":            "The domain {domain} has not been set up.",
+    "signinText":                       "Log In",
     "signupText":                       "Sign Up",
-    "forgotText":                       "Reset password",
+    "forgotText":                       "Don't remember your password?",
     "cancelAction":                     "Cancel",
     "footerText":                       "",
     "emailPlaceholder":                 "Email",
@@ -28,7 +30,9 @@
     "domainUserLabel":                  "You are connected from your corporate network...",
     "wrongEmailPasswordErrorText":      "Wrong email or password.",
     "passwordChangeRequiredErrorText":  "You need to update your password because this is the first time you are signing in, or because your password has expired.",
+    "passwordLeakedErrorText":          "This login attempt has been blocked because your password has been leaked in a third party website. We've sent you an email with instructions on how to unblock it.",
     "unauthorizedErrorText":            "Access denied.",
+    "userBlockedErrorText":             "",
     "or":                               "... or log in using",
     "loadingMessage":                   "Logging In with {connection}...",
     "popupCredentials":                 "Enter your credentials in the pop-up window",
@@ -39,6 +43,8 @@
     "description":                 "",
     "title":                       "Sign Up",
     "action":                      "Sign Up",
+    "signinText":                  "Log In",
+    "signupText":                  "Sign Up",
     "emailPlaceholder":            "Email",
     "usernamePlaceholder":         "Username",
     "passwordPlaceholder":         "Create a Password",
@@ -64,8 +70,20 @@
     }
 
   },
+  "newReset": {
+    "title":                       "Password Reset",
+    "action":                      "Send",
+    "emailPlaceholder":            "Email",
+    "cancelAction":                "Cancel",
+    "footerText":                  "",
+    "successText":                 "We've just sent you an email to reset your password.",
+    "headerText":                  "Please enter your email address. We will send you an email to reset your password.",
+    "serverErrorText":             "There was an error processing the password reset.",
+    "userDoesNotExistErrorText":   "User does not exist.",
+    "tooManyRequestsErrorText":    "You have reached the limit on password reset attempts.  Please wait before trying again."
+  },
   "reset": {
-    "title":                       "Reset Password",
+    "title":                       "Password Change",
     "action":                      "Send",
     "emailPlaceholder":            "Email",
     "passwordPlaceholder":         "New Password",
@@ -77,6 +95,7 @@
     "headerText":                  "Please enter your email and the new password. We will send you an email to confirm the password change.",
     "serverErrorText":             "There was an error processing the password reset.",
     "userDoesNotExistErrorText":   "User does not exist.",
+    "tooManyRequestsErrorText":    "You have reached the limit on password reset attempts.  Please wait before trying again.",
     "invalidPassword":             "Password is too weak."
   }
 }
