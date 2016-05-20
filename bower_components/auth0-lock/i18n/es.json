@@ -3,8 +3,9 @@
   "close":                         "Cerrar",
   "invalid":                       "Inválido",
   "mustMatch":                     "Debe coincidir",
-  "loginSocialButton":             "Ingresar con {connection:title}",
+  "loginSocialButton":             "Iniciar con {connection:title}",
   "signupSocialButton":            "Registrarse con {connection:title}",
+  "noConnectionError":             "No se pudo encontrar una conexión válida.",
   "signin": {
     "title":                       "Iniciar sesión",
     "action":                      "Ingresar",
@@ -12,8 +13,9 @@
     "strategyEmailEmpty":          "El email está vacío.",
     "strategyEmailInvalid":        "El email no es válido.",
     "strategyDomainInvalid":       "El dominio {domain} no está configurado.",
+    "signinText":                  "Iniciar sesión",
     "signupText":                  "Registrarse",
-    "forgotText":                  "Resetear contraseña",
+    "forgotText":                  "Olvidaste tu contraseña?",
     "emailPlaceholder":            "Email",
     "usernamePlaceholder":         "Nombre de usuario",
     "passwordPlaceholder":         "Contraseña",
@@ -22,6 +24,7 @@
     "returnUserLabel":             "La última vez inició sesión con...",
     "domainUserLabel":             "Usted se encuentra conectado desde su red corporativa...",
     "wrongEmailPasswordErrorText": "Email o clave incorrecta.",
+    "passwordLeakedErrorText":     "Este intento ha sido bloqueado ya que usted utilizó la misma contraseña para registrarse en otra aplicación que tuvo una filtración reciente. Hemos enviado un email con las instrucciones.",
     "or":                          "... o inicie sesión usando",
     "loadingMessage":              "Iniciando sesión con {connection}...",
     "popupCredentials":            "Ingrese sus credenciales en la ventana emergente"
@@ -30,6 +33,8 @@
     "description":                 "",
     "title":                       "Registrarse",
     "action":                      "Registrar",
+    "signinText":                  "Iniciar sesión",
+    "signupText":                  "Registrarse",
     "emailPlaceholder":            "Email",
     "passwordPlaceholder":         "Contraseña",
     "cancelAction":                "Cancelar",
@@ -39,17 +44,32 @@
     "serverErrorText":             "Hubo un error al procesar su registro.",
     "userExistsErrorText":         "El usuario ya existe."
   },
+  "newReset": {
+    "title":                       "Restablecer Contraseña",
+    "action":                      "Enviar",
+    "emailPlaceholder":            "Email",
+    "cancelAction":                "Cancelar",
+    "footerText":                  "",
+    "successText":                 "Hemos enviado un email para completar el restablecimiento de su contraseña.",
+    "headerText":                  "Por favor ingrese su email. Enviaremos un email para realizar el cambio.",
+    "serverErrorText":             "Hubo un error al restablecer su contraseña.",
+    "userDoesNotExistErrorText":   "Usuario inválido.",
+    "tooManyRequestsErrorText":    "Se ha alcanzado el límite de intentos para restablecer su contraseña. Por favor, inténtelo de nuevo en unos minutos."
+  },
   "reset": {
-    "title":                       "Resetear Contraseña",
+    "title":                       "Restablecer Contraseña",
     "action":                      "Enviar",
     "emailPlaceholder":            "Email",
     "passwordPlaceholder":         "Nueva Contraseña",
     "repeatPasswordPlaceholder":   "Confirme nueva contraseña",
     "cancelAction":                "Cancelar",
-    "successText":                 "Hemos enviado un email para completar el reseteo de su contraseña.",
+    "footerText":                  "",
+    "successText":                 "Hemos enviado un email para completar el restablecimiento de su contraseña.",
     "enterSamePasswordText":       "Por favor ingrese la misma contraseña.",
     "headerText":                  "Por favor ingrese su email y la nueva contraseña. Enviaremos un email para confirmar el cambio.",
-    "serverErrorText":             "Hubo un error al resetear su contraseña.",
-    "userDoesNotExistErrorText":   "Usuario inválido."
+    "serverErrorText":             "Hubo un error al restablecer su contraseña.",
+    "userDoesNotExistErrorText":   "Usuario inválido.",
+    "tooManyRequestsErrorText":    "Se ha alcanzado el límite de intentos para restablecer su contraseña. Por favor, inténtelo de nuevo en unos minutos.",
+    "invalidPassword":             "La contraseña ingresada es muy débil."
   }
 }

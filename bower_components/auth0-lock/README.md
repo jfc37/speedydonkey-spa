@@ -1,8 +1,8 @@
-[![Auth0](https://cldup.com/yYelLVuXby.jpg)](http://auth0.com)
+[![Auth0](https://cloudup.com/c2evgl2cz3j+)](http://auth0.com)
 
 # Lock
 [![NPM version][npm-image]][npm-url]
-[![Build status][strider-image]][strider-url]
+[![Build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 [![Dependency Status][david-image]][david-url]
 [![License][license-image]][license-url]
@@ -18,7 +18,7 @@ Lock makes it easy to integrate SSO in your app. You won't have to worry about:
 * Solving the home realm discovery challenge with enterprise users (i.e.: asking the enterprise user the email, and redirecting to the right enterprise identity provider).
 * Implementing a standard sign in protocol (OpenID Connect / OAuth2 Login)
 
-[![Auth0](https://i.cloudup.com/6opoEX_Z9z.png)](http://auth0.com)
+[![Auth0](https://cloudup.com/ceeo-qIlCTd+)](http://auth0.com)
 
 > You can try it out yourself online at our [Auth0 Lock playground][playground-url].
 
@@ -39,14 +39,11 @@ bower install auth0-lock
 Or our CDN:
 
 ```html
-<!-- Latest major release -->
-<script src="http://cdn.auth0.com/js/lock-7.min.js"></script>
-
 <!-- Latest minor release -->
-<script src="http://cdn.auth0.com/js/lock-7.x.min.js"></script>
+<script src="http://cdn.auth0.com/js/lock-9.x.min.js"></script>
 
 <!-- Latest patch release (recommended for production) -->
-<script src="http://cdn.auth0.com/js/lock-7.x.y.min.js"></script>
+<script src="http://cdn.auth0.com/js/lock-9.x.y.min.js"></script>
 ```
 
 If you are targeting mobile audiences, it's recommended that you add:
@@ -57,31 +54,26 @@ If you are targeting mobile audiences, it's recommended that you add:
 
 ### Browserify
 
-If you are using Browserify to build your project, you will need to add the following transformations required by Auth0 Lock:
+No special configuration is required if you are using Browserify to build your project.
 
-``` json
-{
-  "devDependencies": {
-    "brfs": "0.0.8",
-    "ejsify": "0.1.0",
-    "packageify": "^0.2.0"
-  }
-}
-```
+### Webpack
 
-### webpack
-
-If you are using webpack, you will need the following loaders:
+If you are using Webpack, besides the _auth0-lock and webpack modules_, you will need to install the _json and transform loaders_ (`$ npm install --save json-loader transform-loader`) and then use them in your `webpack.config.js` file:
 
 ```js
-[
-  {
-    test: /node_modules\/auth0-lock\/.*\.js$/,
-    loaders: 'transform/cacheable?brfs!transform/cacheable?packageify'
-  },
-  {test: /\.ejs$/, loader: 'ejs-compiled'},
-  {test: /\.json$/, loader: 'json'}
-]
+loaders: [{
+  test: /node_modules[\\\/]auth0-lock[\\\/].*\.js$/,
+  loaders: [
+    'transform-loader/cacheable?brfs',
+    'transform-loader/cacheable?packageify'
+  ]
+}, {
+  test: /node_modules[\\\/]auth0-lock[\\\/].*\.ejs$/,
+  loader: 'transform-loader/cacheable?ejsify'
+}, {
+  test: /\.json$/,
+  loader: 'json-loader'
+}]
 ```
 
 ## Documentation
@@ -151,6 +143,14 @@ To publish a new version use:
 
 If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
 
+## Author
+
+[Auth0](auth0.com)
+
+## License
+
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for more info.
+
 <!-- Vaaaaarrsss -->
 
 [download1]: https://raw.github.com/auth0/lock/master/build/auth0-lock.js
@@ -158,8 +158,8 @@ If you have found a bug or if you have a feature request, please report them at 
 
 [npm-image]: https://img.shields.io/npm/v/auth0-lock.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/auth0-lock
-[strider-image]: https://ci.auth0.com/auth0/lock/badge
-[strider-url]: https://ci.auth0.com/auth0/lock
+[travis-image]: https://travis-ci.org/auth0/lock.svg?branch=master
+[travis-url]: https://travis-ci.org/auth0/lock
 [coveralls-image]: https://img.shields.io/coveralls/auth0/lock.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/auth0/lock?branch=master
 [david-image]: http://img.shields.io/david/auth0/lock.svg?style=flat-square
