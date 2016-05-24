@@ -6,7 +6,7 @@
         .controller('ManageTeachers', ManageTeachers);
 
     /* @ngInject */
-    function ManageTeachers(manageTeachersService, niceAlert) {
+    function ManageTeachers(teacherRepository, teacherRateRepository, niceAlert) {
         var vm = this;
         vm.teachers = [];
 
@@ -18,7 +18,7 @@
 
         function deleteSelected() {
             var teachersToDelete = getSelectedTeachers();
-            manageTeachersService.deleteTeachers(teachersToDelete).then(function () {
+            teacherRepository.delete(teachersToDelete).then(function () {
                 niceAlert.success({
                     message: 'Selected teachers have been deleted.'
                 });
@@ -39,11 +39,16 @@
         }
 
         vm.addTeacher = function () {
-            manageTeachersService.addTeacher(vm.selectedUser.id).then(function (newTeacher) {
+            teacherRepository.create(vm.selectedUser.id).then(function (newTeacher) {
+
+                teacherRateRepository.get(newTeacher.id).then(function (newTeacherRate) {
+                    vm.teachers.push(newTeacherRate);
+                });
+
                 niceAlert.success({
                     message: newTeacher.fullName + ' is now a teacher.'
                 });
-                vm.teachers.push(newTeacher);
+
             }, function (validation) {
                 if (validation) {
                     niceAlert.validationWarning(validation[0].errorMessage);
@@ -64,7 +69,7 @@
         }
 
         function getTeachers() {
-            return manageTeachersService.getTeachers().then(function (teachers) {
+            return teacherRateRepository.getAll().then(function (teachers) {
                 teachers.forEach(function (teacher) {
                     teacher.selected = false;
                 });

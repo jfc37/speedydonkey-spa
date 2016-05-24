@@ -123,3 +123,51 @@
         </section-form>
     </section-content>
 </section>
+
+<section>
+    <section-title>
+        Teacher Default Settings
+    </section-title>
+
+    <section-content ng-form="teacherForm">
+        <section-form>
+            <section-group input-name="teacherRateSolo">
+                <section-group-label>Solo Rate</section-group-label>
+
+                <section-group-content>
+                    <input name="teacherRateSolo" type="number" class="form-control" ng-model="vm.teacherRateSolo" required>
+                    <help-text>
+                        The default rate for a teacher teaching a class alone
+                    </help-text>
+                    <validation-messages input-name="teacherRateSolo">
+                        <div ng-message="required">Please enter a value</div>
+                    </validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group input-name="teacherRatePartnered">
+                <section-group-label>Partnered Rate</section-group-label>
+
+                <section-group-content>
+                    <input name="teacherRatePartnered" type="number" class="form-control" ng-model="vm.teacherRatePartnered" required>
+                    <help-text>
+                        The default rate for a teacher teaching a class with another
+                    </help-text>
+                    <validation-messages input-name="teacherRatePartnered">
+                        <div ng-message="required">Please enter a value</div>
+                    </validation-messages>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group>
+                <cancel-button href="#/">Cancel</cancel-button>
+                <save-button class="btn btn-primary pull-right" ng-disabled="teacherForm.$invalid" ng-click="vm.submitTeacherSettings()">Save</save-button>
+            </section-group>
+
+        </section-form>
+    </section-content>
+</section>
