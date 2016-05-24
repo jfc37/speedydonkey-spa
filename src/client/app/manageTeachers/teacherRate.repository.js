@@ -6,11 +6,12 @@
         .factory('teacherRateRepository', teacherRateRepository);
 
     /* @ngInject */
-    function teacherRateRepository($q, simpleApiCaller) {
+    function teacherRateRepository(simpleApiCaller, validationPromise) {
 
         var service = {
             getAll: getAll,
-            get: get
+            get: get,
+            update: update
         };
 
         function getAll() {
@@ -22,6 +23,14 @@
         function get(id) {
             return simpleApiCaller.get(getOptions(id)).then(function (response) {
                 return response.data;
+            });
+        }
+
+        function update(teacher) {
+            return simpleApiCaller.post(teacher, getOptions(teacher.id)).then(function (response) {
+                return response.data;
+            }).catch(function(response) {
+                return validationPromise.reject(response);
             });
         }
 

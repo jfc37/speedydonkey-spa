@@ -6,7 +6,7 @@
         .controller('ManageTeachers', ManageTeachers);
 
     /* @ngInject */
-    function ManageTeachers(teacherRepository, teacherRateRepository, niceAlert) {
+    function ManageTeachers(teacherRepository, teacherRateRepository, editRateModal, niceAlert) {
         var vm = this;
         vm.teachers = [];
 
@@ -60,6 +60,10 @@
             }).finally(function () {
                 vm.selectedUser = '';
             });
+        };
+
+        vm.launchRateChange = function(teacher) {
+            editRateModal.open(teacher);
         };
 
         activate();

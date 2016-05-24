@@ -1,0 +1,48 @@
+<nice-modal>
+    <section>
+        <h2>
+            Pay Rates for {{viewModel.teacher.name}}
+        </h2>
+
+
+        <section-content ng-form="teacherForm">
+            <section-form>
+                <section-group input-name="teacherRateSolo">
+                    <section-group-label>Solo Rate</section-group-label>
+
+                    <section-group-content>
+                        <input name="teacherRateSolo" type="number" class="form-control" ng-model="viewModel.teacher.soloRate" required>
+                        <help-text>
+                            The rate for teaching a class alone
+                        </help-text>
+                        <validation-messages input-name="teacherRateSolo">
+                            <div ng-message="required">Please enter a value</div>
+                        </validation-messages>
+                    </section-group-content>
+                </section-group>
+
+                <section-group-separator></section-group-separator>
+
+                <section-group input-name="teacherRatePartnered">
+                    <section-group-label>Partnered Rate</section-group-label>
+
+                    <section-group-content>
+                        <input name="teacherRatePartnered" type="number" class="form-control" ng-model="viewModel.teacher.partnerRate" required>
+                        <help-text>
+                            The rate for teaching a class with another teacher
+                        </help-text>
+                        <validation-messages input-name="teacherRatePartnered">
+                            <div ng-message="required">Please enter a value</div>
+                        </validation-messages>
+                    </section-group-content>
+                </section-group>
+
+            </section-form>
+        </section-content>
+
+        <div class="form-group">
+            <button class="cancel" ng-click="cancel()">Close</button>
+            <save-button ng-click="viewModel.update(viewModel.teacher)" ng-disabled="teacherForm.$invalid">Update</save-button>
+        </div>
+    </section>
+</nice-modal>
