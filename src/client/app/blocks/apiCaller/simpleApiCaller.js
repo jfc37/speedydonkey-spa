@@ -82,6 +82,7 @@
             }
 
             if (options.search) {
+                formatDates(options.search);
                 var q = 'q=';
                 options.search.forEach(function (search, index) {
                     if (index > 0) {
@@ -93,10 +94,33 @@
             }
 
             if (options.parameters) {
+                formatDates(options.parameters);
                 url = url + '?' + toQueryString(options.parameters);
             }
 
             return url;
+        }
+
+        function formatDates(obj) {
+            for (var i in obj) {
+                if (obj.hasOwnProperty(i)) {
+                    var value = obj[i];
+
+                    if (isDate(value) || moment.isMoment(value)) {
+                        obj[i] = value.toISOString();
+                    } else if (isObject(value)) {
+                        formatDates(obj[i]);
+                    }
+                }
+            }
+        }
+
+        function isDate(value) {
+            return value instanceof Date;
+        }
+
+        function isObject(value) {
+            return value instanceof Object;
         }
 
         function toQueryString(obj) {

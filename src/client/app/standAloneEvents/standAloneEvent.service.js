@@ -58,9 +58,9 @@
 
                 var today = new Date();
                 events.forEach(function (theEvent) {
-                    if (moment(theEvent.endTime).isBefore(today)) {
+                    if (moment(theEvent.startTime).isBefore(today, 'day')) {
                         theEvent.status = 'Past';
-                    } else if (moment(theEvent.startTime).isAfter(today)) {
+                    } else if (moment(theEvent.startTime).isAfter(today, 'day')) {
                         theEvent.status = 'Future';
                     } else {
                         theEvent.status = 'Current';

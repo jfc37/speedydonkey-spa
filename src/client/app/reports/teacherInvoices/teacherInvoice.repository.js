@@ -19,8 +19,8 @@
             }
 
             var formatedFilter = {
-                from: moment(filter.from).format('YYYY-MM-DD'),
-                to: moment(filter.to).format('YYYY-MM-DD'),
+                from: moment(filter.from),
+                to: moment(filter.to).add(1, 'day')
             };
 
             var options = {
