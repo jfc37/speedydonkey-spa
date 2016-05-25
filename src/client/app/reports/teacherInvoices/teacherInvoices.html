@@ -1,0 +1,56 @@
+<page-title>Teachers Invoices</page-title>
+
+<section>
+    <section-title>Filter</section-title>
+
+    <section-content>
+        <section-form ng-form="form">
+
+            <section-group input-name="from">
+                <section-group-label>From</section-group-label>
+
+                <section-group-content>
+                    <jfc-date-picker ng-model="vm.filter.from" name="from"></jfc-date-picker>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group input-name="to">
+                <section-group-label>To</section-group-label>
+
+                <section-group-content>
+                    <jfc-date-picker ng-model="vm.filter.to" name="to"></jfc-date-picker>
+                </section-group-content>
+            </section-group>
+
+            <section-group>
+                <save-button ng-disabled="form.$invalid" ng-click="vm.run()">Run</save-button>
+            </section-group>
+        </section-form>
+    </section-content>
+</section>
+
+
+<section>
+    <section-content>
+
+        <table class="table table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th hide-if-selected items="vm.teachers" ts-criteria="name" ts-default>Name</th>
+                    <th hide-if-selected items="vm.teachers" ts-criteria="amountOwed">Amount Owed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="teacher in vm.teachers">
+                    <td>{{teacher.name}}</td>
+                    <td>{{teacher.amountOwed | currency}}</td>
+                </tr>
+
+                <tr no-items-row items="vm.teachers"></tr>
+
+            </tbody>
+        </table>
+    </section-content>
+</section>
