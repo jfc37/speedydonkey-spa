@@ -1,7 +1,7 @@
 <nice-modal>
     <section>
         <h2>
-            Pay Rates for {{viewModel.teacher.name}}
+            Pay Rates for {{viewModel.workingModel.copy.name}}
         </h2>
 
 
@@ -11,7 +11,7 @@
                     <section-group-label>Solo Rate</section-group-label>
 
                     <section-group-content>
-                        <input name="teacherRateSolo" type="number" class="form-control" ng-model="viewModel.teacher.soloRate" required>
+                        <input name="teacherRateSolo" type="number" class="form-control" ng-model="viewModel.workingModel.copy.soloRate" required>
                         <help-text>
                             The rate for teaching a class alone
                         </help-text>
@@ -27,7 +27,7 @@
                     <section-group-label>Partnered Rate</section-group-label>
 
                     <section-group-content>
-                        <input name="teacherRatePartnered" type="number" class="form-control" ng-model="viewModel.teacher.partnerRate" required>
+                        <input name="teacherRatePartnered" type="number" class="form-control" ng-model="viewModel.workingModel.copy.partnerRate" required>
                         <help-text>
                             The rate for teaching a class with another teacher
                         </help-text>
@@ -42,7 +42,7 @@
 
         <div class="form-group">
             <button class="cancel" ng-click="cancel()">Close</button>
-            <save-button ng-click="viewModel.update(viewModel.teacher)" ng-disabled="teacherForm.$invalid">Update</save-button>
+            <save-button ng-click="viewModel.update(viewModel.workingModel)" ng-disabled="teacherForm.$invalid">Update</save-button>
         </div>
     </section>
 </nice-modal>

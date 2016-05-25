@@ -6,7 +6,7 @@
         .factory('editRateModal', editRateModal);
 
     /* @ngInject */
-    function editRateModal($uibModal, $q, niceAlert, teacherRateRepository) {
+    function editRateModal($uibModal, $q, niceAlert, teacherRateRepository, workingModelService) {
         var modalInstance;
 
         var service = {
@@ -24,7 +24,7 @@
                 resolve: {
                     viewModel: function () {
                         return {
-                            teacher: teacher,
+                            workingModel: workingModelService.create(teacher),
                             update: update
                         };
                     }
@@ -35,11 +35,13 @@
 
         }
 
-        function update(teacher) {
-            teacherRateRepository.update(teacher).then(function () {
-                niceAlert.success('Rates have been updated for ' + teacher.name + '.');
+        function update(workingModel) {
+            teacherRateRepository.update(workingModel.copy).then(function () {
+                workingModel.commitChanges();
+
+                niceAlert.success('Rates have been updated for ' + workingModel.original.name + '.');
             }, function () {
-                niceAlert.error('Problem with updating rates for ' + teacher.name + '.');
+                niceAlert.error('Problem with updating rates for ' + workingModel.original.name + '.');
             }).finally(function () {
                 modalInstance.close();
             });
