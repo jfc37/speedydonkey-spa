@@ -9,7 +9,10 @@
     function TeacherInvoices(teacherInvoiceRepository, niceAlert) {
         var vm = this;
 
-        vm.filter = {};
+        vm.filter = {
+            to: new Date(),
+            from: new Date()
+        };
         vm.teachers = [];
 
         vm.run = function () {
@@ -23,8 +26,12 @@
                     });
                 }
 
-            }).catch(function () {
-                niceAlert.error('Something went wrong running the report.');
+            }).catch(function (validationMessage) {
+                if (validationMessage) {
+                    niceAlert.validationWarning(validationMessage);
+                } else {
+                    niceAlert.error('Something went wrong running the report.');
+                }
             });
         };
     }

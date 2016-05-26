@@ -6,7 +6,7 @@
         .factory('teacherInvoiceRepository', teacherInvoiceRepository);
 
     /* @ngInject */
-    function teacherInvoiceRepository(simpleApiCaller) {
+    function teacherInvoiceRepository(simpleApiCaller, validationPromise) {
         var service = {
             get: get
         };
@@ -31,6 +31,8 @@
 
             return simpleApiCaller.get(options).then(function(response) {
                 return response.data;
+            }).catch(function (response) {
+                return validationPromise.rejectWithFirstMessage(response);
             });
         }
     }
