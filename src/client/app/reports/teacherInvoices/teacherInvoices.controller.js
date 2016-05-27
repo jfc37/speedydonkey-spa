@@ -25,27 +25,19 @@
                         amountOwed: report.totalOwed
                     });
                 }
-
-            }).catch(function (validationMessage) {
-                if (validationMessage) {
-                    niceAlert.validationWarning(validationMessage);
-                } else {
-                    niceAlert.error('Something went wrong running the report.');
-                }
-            });
+            }).catch(onReportError);
         };
 
         vm.downloadCsv = function () {
-            teacherInvoiceRepository.getCsv(vm.filter).then(function (report) {
-                var blah = report;
-
-            }).catch(function (validationMessage) {
-                if (validationMessage) {
-                    niceAlert.validationWarning(validationMessage);
-                } else {
-                    niceAlert.error('Something went wrong running the report.');
-                }
-            });
+            teacherInvoiceRepository.getCsv(vm.filter).catch(onReportError);
         };
+
+        function onReportError(validationMessage) {
+            if (validationMessage) {
+                niceAlert.validationWarning(validationMessage);
+            } else {
+                niceAlert.error('Something went wrong running the report.');
+            }
+        }
     }
 })();

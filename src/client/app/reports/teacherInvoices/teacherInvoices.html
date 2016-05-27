@@ -24,10 +24,10 @@
                 </section-group-content>
             </section-group>
 
-            <section-group>
-                <save-button ng-disabled="form.$invalid" ng-click="vm.run()">Run</save-button>
-                <save-button ng-disabled="form.$invalid" ng-click="vm.downloadCsv()">Download CSV</save-button>
-            </section-group>
+            <div class="pull-right">
+                <run-report-button ng-disabled="form.$invalid" ng-click="vm.run()"></run-report-button>
+                <download-csv-button ng-disabled="form.$invalid" ng-click="vm.downloadCsv()"></download-csv-button>
+            </div>
         </section-form>
     </section-content>
 </section>
