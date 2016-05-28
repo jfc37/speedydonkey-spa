@@ -3,18 +3,18 @@
 
     angular
         .module('app.manageTeachers')
-        .factory('manageTeachersService', manageTeachersService);
+        .factory('teacherRepository', teacherRepository);
 
     /* @ngInject */
-    function manageTeachersService($q, simpleApiCaller) {
+    function teacherRepository($q, simpleApiCaller) {
 
         var service = {
-            addTeacher: addTeacher,
-            deleteTeachers: deleteTeachers,
-            getTeachers: getTeachers
+            create: create,
+            delete: deleteTeachers,
+            getAll: getAll
         };
 
-        function addTeacher(id) {
+        function create(id) {
             var options = getOptions();
             options.id = id;
 
@@ -46,7 +46,7 @@
             return simpleApiCaller.delete(options);
         }
 
-        function getTeachers() {
+        function getAll() {
             return simpleApiCaller.get(getOptions()).then(function (response) {
                 return response.data;
             });

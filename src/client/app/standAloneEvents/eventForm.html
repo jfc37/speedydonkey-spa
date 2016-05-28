@@ -72,6 +72,22 @@
 
 <section-group-separator></section-group-separator>
 
+<section-group input-name="teacherRate">
+    <section-group-label>Teacher Rate</section-group-label>
+
+    <section-group-content>
+        <input name="teacherRate" type="number" class="form-control" ng-model="vm.standAloneEvent.teacherRate" required>
+        <help-text>
+            How much each teacher will be paid for this event
+        </help-text>
+        <validation-messages input-name="teacherRate">
+            <div ng-message="required">Please enter a value</div>
+        </validation-messages>
+    </section-group-content>
+</section-group>
+
+<section-group-separator></section-group-separator>
+
 <section-group input-name="isPrivate">
     <section-group-label>Is Private</section-group-label>
 

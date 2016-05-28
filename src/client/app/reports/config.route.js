@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.reportTeacherHours')
+        .module('app.reports')
         .run(appRun);
 
     /* @ngInject */
@@ -13,13 +13,13 @@
     function getRoutes() {
         return [
             {
-                url: '/admin/reports/teacher-hours',
+                url: '/admin/reports/teacher-invoices',
                 config: {
-                    title: 'reportTeacherHours',
-                    controller: 'ReportTeacherHours',
+                    title: 'teacherInvoices',
+                    controller: 'TeacherInvoices',
                     controllerAs: 'vm',
-                    templateUrl: 'app/reportTeacherHours/reportTeacherHours.html',
-                    displayName: 'Teacher Hours',
+                    templateUrl: 'app/reports/teacherInvoices/teacherInvoices.html',
+                    displayName: 'Teacher Invoices',
                     settings: {
                         nav: 20,
                         level: 2,

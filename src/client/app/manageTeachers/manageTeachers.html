@@ -24,6 +24,9 @@
                     <th select-all-header collection="vm.teachers"></th>
 
                     <th hide-if-selected items="vm.teachers" ts-criteria="name" ts-default>Name</th>
+                    <th hide-if-selected items="vm.teachers" ts-criteria="soloRate">Solo Rate</th>
+                    <th hide-if-selected items="vm.teachers" ts-criteria="partnerRate">Partner Rate</th>
+                    <th hide-if-selected items="vm.teachers"></th>
                     <th hide-if-not-selected items="vm.teachers">
                         <a class="btn btn-danger" ng-click="vm.confirmDelete()">Delete</a>
                     </th>
@@ -31,9 +34,13 @@
             </thead>
             <tbody>
                 <tr ng-repeat="teacher in vm.teachers">
-                    <td select-item item="teacher">
+                    <td select-item item="teacher"></td>
+                    <td>{{teacher.name}}</td>
+                    <td>{{teacher.soloRate | currency}}</td>
+                    <td>{{teacher.partnerRate | currency}}</td>
+                    <td>
+                        <a ng-click="vm.launchRateChange(teacher)" class="btn">Edit rate</a>
                     </td>
-                    <td>{{teacher.fullName}}</td>
                 </tr>
 
                 <tr no-items-row items="vm.teachers"></tr>
