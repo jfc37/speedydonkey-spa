@@ -27,6 +27,13 @@
             }]);
         };
 
+        vm.submitTeacherSettings = function () {
+            updateSettings([{
+                teacherRateSolo: vm.teacherRateSolo,
+                teacherRatePartnered: vm.teacherRatePartnered
+            }]);
+        };
+
         vm.submitTerms = function () {
             updateSettings([{
                 termsAndConditions: vm.termsAndConditions
@@ -51,10 +58,15 @@
         function activate() {
             settingsRepository.getAll().then(function (settings) {
                 vm.logo = settings.logo;
+
                 vm.minutesPerClass = parseInt(settings.minutesPerClass);
                 vm.numberOfClasses = parseInt(settings.numberOfClasses);
                 vm.classCapacity = parseInt(settings.classCapacity);
+
                 vm.termsAndConditions = settings.termsAndConditions;
+
+                vm.teacherRateSolo = parseInt(settings.teacherRateSolo);
+                vm.teacherRatePartnered = parseInt(settings.teacherRatePartnered);
             });
         }
     }

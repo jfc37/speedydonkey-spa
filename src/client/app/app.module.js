@@ -46,13 +46,13 @@
         'app.rooms',
         'app.users',
         'app.settings',
+        'app.reports',
 
         'app.standAloneEvents',
         'app.manageClasses',
         'app.manageTeachers',
         'app.manageStudents',
         'app.adminReports',
-        'app.reportTeacherHours',
         'app.reportProfit',
         'app.purchasePass'
     ]);

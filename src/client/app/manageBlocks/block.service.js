@@ -68,9 +68,9 @@
 
                 var today = new Date();
                 blocks.forEach(function (block) {
-                    if (moment(block.endDate).isBefore(today)) {
+                    if (moment(block.endDate).isBefore(today, 'day')) {
                         block.status = 'Past';
-                    } else if (moment(block.startDate).isAfter(today)) {
+                    } else if (moment(block.startDate).isAfter(today, 'day')) {
                         block.status = 'Future';
                     } else {
                         block.status = 'Current';

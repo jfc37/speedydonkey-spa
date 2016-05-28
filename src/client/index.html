@@ -137,7 +137,7 @@
     <script src="/src/client/app/manageUser/manageUser.module.js"></script>
     <script src="/src/client/app/purchasePass/purchasePass.module.js"></script>
     <script src="/src/client/app/reportProfit/reportProfit.module.js"></script>
-    <script src="/src/client/app/reportTeacherHours/reportTeacherHours.module.js"></script>
+    <script src="/src/client/app/reports/reports.module.js"></script>
     <script src="/src/client/app/rooms/rooms.module.js"></script>
     <script src="/src/client/app/settings/settings.module.js"></script>
     <script src="/src/client/app/standAloneEvents/standAloneEvents.module.js"></script>
@@ -179,6 +179,8 @@
     <script src="/src/client/app/core/dateService.js"></script>
     <script src="/src/client/app/core/directives/buttons/actionButton.directive.js"></script>
     <script src="/src/client/app/core/directives/buttons/cancelButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/buttons/downloadCsvButton.directive.js"></script>
+    <script src="/src/client/app/core/directives/buttons/runReportButton.directive.js"></script>
     <script src="/src/client/app/core/directives/buttons/saveButton.directive.js"></script>
     <script src="/src/client/app/core/directives/buttons/superActionButton.directive.js"></script>
     <script src="/src/client/app/core/directives/filterDirective.js"></script>
@@ -216,12 +218,14 @@
     <script src="/src/client/app/core/directives/validation/validationMessages.directive.js"></script>
     <script src="/src/client/app/core/directives/widgetLayout/widget.directive.js"></script>
     <script src="/src/client/app/core/directives/widgetLayout/widgetTitle.directive.js"></script>
+    <script src="/src/client/app/core/fileDownload.service.js"></script>
     <script src="/src/client/app/core/niceAlert.service.js"></script>
     <script src="/src/client/app/core/pageReloader.service.js"></script>
     <script src="/src/client/app/core/selectOptionService.js"></script>
     <script src="/src/client/app/core/services/sectionBlock.service.js"></script>
     <script src="/src/client/app/core/services/validationPromise.service.js"></script>
     <script src="/src/client/app/core/services/validationService.js"></script>
+    <script src="/src/client/app/core/services/workingModel.service.js"></script>
     <script src="/src/client/app/core/userStorage.service.js"></script>
     <script src="/src/client/app/dashboard/config.route.js"></script>
     <script src="/src/client/app/dashboard/currentPasses/currentPasses.directive.js"></script>
@@ -268,8 +272,10 @@
     <script src="/src/client/app/manageStudents/manageStudent/manageStudent.modal.js"></script>
     <script src="/src/client/app/manageStudents/manageStudents.controller.js"></script>
     <script src="/src/client/app/manageTeachers/config.route.js"></script>
+    <script src="/src/client/app/manageTeachers/editRate/editRate.modal.js"></script>
     <script src="/src/client/app/manageTeachers/manageTeachers.controller.js"></script>
-    <script src="/src/client/app/manageTeachers/manageTeachers.service.js"></script>
+    <script src="/src/client/app/manageTeachers/teacher.repository.js"></script>
+    <script src="/src/client/app/manageTeachers/teacherRate.repository.js"></script>
     <script src="/src/client/app/manageUser/config.route.js"></script>
     <script src="/src/client/app/manageUser/manageUser.js"></script>
     <script src="/src/client/app/manageUser/manageUserService.js"></script>
@@ -283,9 +289,9 @@
     <script src="/src/client/app/reportProfit/config.route.js"></script>
     <script src="/src/client/app/reportProfit/reportProfit.js"></script>
     <script src="/src/client/app/reportProfit/reportProfitService.js"></script>
-    <script src="/src/client/app/reportTeacherHours/config.route.js"></script>
-    <script src="/src/client/app/reportTeacherHours/reportTeacherHours.js"></script>
-    <script src="/src/client/app/reportTeacherHours/reportTeacherHoursService.js"></script>
+    <script src="/src/client/app/reports/config.route.js"></script>
+    <script src="/src/client/app/reports/teacherInvoices/teacherInvoice.repository.js"></script>
+    <script src="/src/client/app/reports/teacherInvoices/teacherInvoices.controller.js"></script>
     <script src="/src/client/app/repositories/blockEnrolment.repository.js"></script>
     <script src="/src/client/app/repositories/class.repository.js"></script>
     <script src="/src/client/app/repositories/currentUser.repository.js"></script>

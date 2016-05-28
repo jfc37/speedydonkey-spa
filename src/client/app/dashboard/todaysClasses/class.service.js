@@ -17,12 +17,12 @@
                 {
                     field: 'starttime',
                     condition: 'gt',
-                    value: moment().format('YYYY-MM-DD')
+                    value: moment().startOf('day')
                 },
                 {
                     field: 'starttime',
                     condition: 'lt',
-                    value: moment().add(1, 'day').format('YYYY-MM-DD')
+                    value: moment().startOf('day').add(1, 'day')
                 }
             ];
 
