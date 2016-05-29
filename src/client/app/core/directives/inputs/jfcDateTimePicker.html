@@ -1,8 +1,35 @@
+
+
+
+
+<div>
+    <!--
 <p class="input-group calendar-group">
-    <input name="{{vm.name}}" required type="text" class="form-control" datetime-picker="{{vm.displayFormat}}" ng-model="vm.ngModel" is-open="vm.isOpen" enable-time="vm.enableTime" ng-focus="vm.isOpen = true" />
-    <span class="input-group-btn">
-        <button type="button" class="btn btn-default" ng-click="vm.isOpen = true">
-            <i class="fa fa-calendar"></i>
-        </button>
-    </span>
+<input name="{{vm.name}}" required type="text" class="form-control" datetime-picker="{{vm.displayFormat}}" ng-model="vm.ngModel" is-open="vm.isOpen" enable-time="vm.enableTime" ng-focus="vm.isOpen = true" />
+<span class="input-group-btn">
+<button type="button" class="btn btn-default" ng-click="vm.isOpen = true">
+<i class="fa fa-calendar"></i>
+</button>
+</span>
 </p>
+
+-->
+
+    <div ng-if="vm.enableTime">
+        <datetimepicker ng-model="vm.ngModel"
+                        date-format="dd/MM/yyyy"
+                        minute-step="5"
+                        hour-step="1"
+                        show-time="true">
+        </datetimepicker>
+    </div>
+
+    <div ng-if="!vm.enableTime">
+        <datetimepicker ng-model="vm.ngModel"
+                        date-format="dd/MM/yyyy"
+                        minute-step="5"
+                        hour-step="1"
+                        show-time="false">
+        </datetimepicker>
+    </div>
+</div>
