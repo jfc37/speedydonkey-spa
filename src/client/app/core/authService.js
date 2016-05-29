@@ -1,4 +1,3 @@
-/*global rg4js*/
 (function () {
     'use strict';
 
@@ -41,7 +40,6 @@
                 store.set('profile', profile);
                 store.set('token', token);
                 store.set('refreshToken', refresh_token);
-                setRaygunUser(profile.nickname, profile.email);
                 angular.element('body').removeClass('canvas-menu');
 
                 dataservice.getCurrentUserClaims().then(function (claims) {
@@ -65,16 +63,6 @@
 
         function profile() {
             return auth.profile;
-        }
-
-        function setRaygunUser(name, email) {
-            rg4js('setUser', {
-                identifier: email,
-                isAnonymous: false,
-                email: email,
-                firstName: name,
-                fullName: name
-            });
         }
 
         function hasClaim(claim) {
