@@ -1,4 +1,3 @@
-/*global rg4js*/
 (function () {
     'use strict';
 
