@@ -17,8 +17,6 @@
             controllerAs: 'vm',
             controller: function () {
                 var vm = this;
-
-                vm.enableTime = true;
             }
         };
         return directive;
@@ -35,7 +33,7 @@
 
     function jfcDatePicker() {
         var directive = {
-            templateUrl: 'app/core/directives/inputs/jfcDateTimePicker.html',
+            templateUrl: 'app/core/directives/inputs/jfcDatePicker.html',
             replace: true,
             scope: {
                 ngModel: '=',
@@ -47,6 +45,7 @@
                 var vm = this;
 
                 vm.enableTime = false;
+                vm.displayFormat = 'dd/MM/yyyy';
             }
         };
         return directive;
