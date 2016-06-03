@@ -43,6 +43,22 @@
                     },
                     claim: 'Admin'
                 }
+            },
+            {
+                url: '/admin/reports/block-summary',
+                config: {
+                    title: 'blockSummary',
+                    controller: 'BlockSummary',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/reports/blockSummary/blockSummary.html',
+                    displayName: 'Block Summary',
+                    settings: {
+                        nav: 40,
+                        level: 2,
+                        parent: 'admin reports'
+                    },
+                    claim: 'Admin'
+                }
             }
         ];
     }
