@@ -6,7 +6,7 @@
         .controller('BlockSummary', BlockSummary);
 
     /* @ngInject */
-    function BlockSummary(blockSummaryRepository, niceAlert) {
+    function BlockSummary(blockSummaryRepository, blockDetailsModal, niceAlert) {
         var vm = this;
 
         vm.filter = {
@@ -31,6 +31,10 @@
 
         vm.downloadCsv = function () {
             blockSummaryRepository.getCsv(vm.filter).catch(onReportError);
+        };
+
+        vm.openBlockDetails = function(block) {
+            blockDetailsModal.open(block);
         };
 
         function onReportError(validationMessage) {

@@ -7,7 +7,7 @@
         <section-form ng-form="form">
 
             <section-group input-name="from">
-                <section-group-label>From</section-group-label>
+                <section-group-label>Starting between</section-group-label>
 
                 <section-group-content>
                     <jfc-date-picker ng-model="vm.filter.from" name="from"></jfc-date-picker>
@@ -17,7 +17,7 @@
             <section-group-separator></section-group-separator>
 
             <section-group input-name="to">
-                <section-group-label>To</section-group-label>
+                <section-group-label>And</section-group-label>
 
                 <section-group-content>
                     <jfc-date-picker ng-model="vm.filter.to" name="to"></jfc-date-picker>
@@ -46,7 +46,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="block in vm.blocks">
-                    <td>{{block.name}}</td>
+                    <td>
+                        <a ng-click="vm.openBlockDetails(block)" class="btn btn-link">{{block.name}}</a>
+                    </td>
                     <td>{{block.attendance}}</td>
                     <td>{{block.revenue | currency}}</td>
                 </tr>

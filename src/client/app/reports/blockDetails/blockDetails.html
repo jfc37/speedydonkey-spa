@@ -1,0 +1,34 @@
+<nice-modal>
+    <section>
+        <h2>
+            {{viewModel.block.name}}
+        </h2>
+
+
+        <table class="table table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th ts-criteria="name" ts-default>Name</th>
+                    <th ts-criteria="attendance">Attendance</th>
+                    <th ts-criteria="revenue">Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="class in viewModel.classes">
+                    <td>{{class.name}}</td>
+                    <td>{{class.attendance}}</td>
+                    <td>{{class.revenue | currency}}</td>
+                </tr>
+
+                <tr no-items-row items="viewModel.classes"></tr>
+
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <button class="cancel" ng-click="cancel()">Close</button>
+            <download-csv-button class="pull-right" ng-disabled="form.$invalid" ng-click="viewModel.downloadCsv()"></download-csv-button>
+        </div>
+
+    </section>
+</nice-modal>
