@@ -23,7 +23,6 @@
         'oitozero.ngSweetAlert',
         'ngMessages',
         'ui.bootstrap',
-        //'ui.bootstrap.datetimepicker',
         'ui.bootstrap.dateparser',
         'ui.bootstrap.datepicker',
         'ui.bootstrap.timepicker',
@@ -56,7 +55,6 @@
         'app.manageTeachers',
         'app.manageStudents',
         'app.adminReports',
-        'app.reportProfit',
         'app.purchasePass'
     ]);
 

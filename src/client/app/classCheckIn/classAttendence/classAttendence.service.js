@@ -22,7 +22,7 @@
 
         return service;
 
-        function reset(){
+        function reset() {
             studentsAttending.length = 0;
             studentsRegistered.length = 0;
         }
