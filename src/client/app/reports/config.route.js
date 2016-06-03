@@ -27,6 +27,22 @@
                     },
                     claim: 'Admin'
                 }
+            },
+            {
+                url: '/admin/reports/pass-sales',
+                config: {
+                    title: 'passSales',
+                    controller: 'PassSales',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/reports/passSales/passSales.html',
+                    displayName: 'Pass Sales',
+                    settings: {
+                        nav: 30,
+                        level: 2,
+                        parent: 'admin reports'
+                    },
+                    claim: 'Admin'
+                }
             }
         ];
     }

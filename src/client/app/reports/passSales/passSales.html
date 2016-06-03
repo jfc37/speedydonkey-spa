@@ -1,0 +1,59 @@
+<page-title>Pass Sales</page-title>
+
+<section>
+    <section-title>Filter</section-title>
+
+    <section-content>
+        <section-form ng-form="form">
+
+            <section-group input-name="from">
+                <section-group-label>From</section-group-label>
+
+                <section-group-content>
+                    <jfc-date-picker ng-model="vm.filter.from" name="from"></jfc-date-picker>
+                </section-group-content>
+            </section-group>
+
+            <section-group-separator></section-group-separator>
+
+            <section-group input-name="to">
+                <section-group-label>To</section-group-label>
+
+                <section-group-content>
+                    <jfc-date-picker ng-model="vm.filter.to" name="to"></jfc-date-picker>
+                </section-group-content>
+            </section-group>
+
+            <div class="pull-right">
+                <run-report-button ng-disabled="form.$invalid" ng-click="vm.run()"></run-report-button>
+                <download-csv-button ng-disabled="form.$invalid" ng-click="vm.downloadCsv()"></download-csv-button>
+            </div>
+        </section-form>
+    </section-content>
+</section>
+
+
+<section>
+    <section-content>
+
+        <table class="table table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th ts-criteria="name" ts-default>Name</th>
+                    <th ts-criteria="numberSold">Number Sold</th>
+                    <th ts-criteria="revenue">Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pass in vm.passSales">
+                    <td>{{pass.name}}</td>
+                    <td>{{pass.numberSold}}</td>
+                    <td>{{pass.revenue | currency}}</td>
+                </tr>
+
+                <tr no-items-row items="vm.passSales"></tr>
+
+            </tbody>
+        </table>
+    </section-content>
+</section>
