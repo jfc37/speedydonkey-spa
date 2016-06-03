@@ -23,7 +23,10 @@
         'oitozero.ngSweetAlert',
         'ngMessages',
         'ui.bootstrap',
-        'ui.bootstrap.datetimepicker',
+        //'ui.bootstrap.datetimepicker',
+        'ui.bootstrap.dateparser',
+        'ui.bootstrap.datepicker',
+        'ui.bootstrap.timepicker',
 
         'app.core',
         'app.apiCaller',
