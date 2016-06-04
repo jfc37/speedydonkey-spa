@@ -45,13 +45,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="pass in vm.passSales">
+                <tr ng-repeat="pass in vm.report.lines">
                     <td>{{pass.name}}</td>
                     <td>{{pass.numberSold}}</td>
                     <td>{{pass.revenue | currency}}</td>
                 </tr>
 
-                <tr no-items-row items="vm.passSales"></tr>
+                <tr ng-if="vm.report.lines">
+                    <td>
+                        <strong>Total</strong>
+                    </td>
+                    <td>
+                        <strong>
+                            {{vm.report.totalSold | number}}
+                        </strong>
+                    </td>
+                    <td>
+                        <strong>
+                            {{vm.report.totalRevenue | currency}}
+                        </strong>
+                    </td>
+                </tr>
+
+                <tr no-items-row items="vm.report.lines"></tr>
 
             </tbody>
         </table>

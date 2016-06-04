@@ -13,19 +13,10 @@
             to: new Date(),
             from: new Date()
         };
-        vm.passSales = [];
 
         vm.run = function () {
             passSalesRepository.get(vm.filter).then(function (report) {
-                vm.passSales = report.lines;
-
-                if (vm.passSales.length) {
-                    vm.passSales.push({
-                        name: 'Total',
-                        numberSold: report.totalSold,
-                        revenue: report.totalRevenue
-                    });
-                }
+                vm.report = report;
             }).catch(onReportError);
         };
 

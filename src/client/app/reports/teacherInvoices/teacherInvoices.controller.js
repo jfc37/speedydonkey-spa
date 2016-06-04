@@ -17,14 +17,7 @@
 
         vm.run = function () {
             teacherInvoiceRepository.get(vm.filter).then(function (report) {
-                vm.teachers = report.lines;
-
-                if (vm.teachers.length) {
-                    vm.teachers.push({
-                        name: 'Total',
-                        amountOwed: report.totalOwed
-                    });
-                }
+                vm.report = report;
             }).catch(onReportError);
         };
 

@@ -39,17 +39,30 @@
         <table class="table table-hover" ts-wrapper>
             <thead>
                 <tr>
-                    <th hide-if-selected items="vm.teachers" ts-criteria="name" ts-default>Name</th>
-                    <th hide-if-selected items="vm.teachers" ts-criteria="amountOwed">Amount Owed</th>
+                    <th ts-criteria="name" ts-default>Name</th>
+                    <th ts-criteria="amountOwed">Amount Owed</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="teacher in vm.teachers">
+                <tr ng-repeat="teacher in vm.report.lines">
                     <td>{{teacher.name}}</td>
                     <td>{{teacher.amountOwed | currency}}</td>
                 </tr>
 
-                <tr no-items-row items="vm.teachers"></tr>
+                <tr ng-if="vm.report.lines">
+                    <td>
+                        <strong>
+                            Total
+                        </strong>
+                    </td>
+                    <td>
+                        <strong>
+                            {{vm.report.totalOwed | currency}}
+                        </strong>
+                    </td>
+                </tr>
+
+                <tr no-items-row items="vm.report.lines"></tr>
 
             </tbody>
         </table>
