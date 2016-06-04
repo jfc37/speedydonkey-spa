@@ -17,17 +17,7 @@
 
         vm.run = function () {
             blockSummaryRepository.get(vm.filter).then(function (report) {
-                vm.blocks = report.lines;
-
-                if (vm.blocks.length) {
-                    vm.blocks.push({
-                        name: 'Total',
-                        attendance: report.totalAttendance,
-                        revenue: report.totalRevenue,
-                        expenses: report.totalExpenses,
-                        profit: report.totalProfit
-                    });
-                }
+                vm.report = report;
             }).catch(onReportError);
         };
 

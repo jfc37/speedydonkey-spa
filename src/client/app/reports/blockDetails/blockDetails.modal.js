@@ -29,18 +29,8 @@
 
             blockDetailsRepository.get(viewModel.reportFilter).then(function (report) {
 
-                if (report.lines.length) {
-                    report.lines.push({
-                        name: 'Total',
-                        attendance: report.totalAttendance,
-                        revenue: report.totalRevenue,
-                        expense: report.totalExpense,
-                        profit: report.totalProfit
-                    });
-                }
-
                 viewModel.block = block;
-                viewModel.classes = report.lines;
+                viewModel.report = report;
 
                 modalInstance = $uibModal.open({
                     templateUrl: 'app/reports/blockDetails/blockDetails.html',

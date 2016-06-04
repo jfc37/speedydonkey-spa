@@ -47,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="block in vm.blocks">
+                <tr ng-repeat="block in vm.report.lines">
                     <td>
                         <a ng-click="vm.openBlockDetails(block)" class="btn btn-link">{{block.name}}</a>
                     </td>
@@ -56,8 +56,25 @@
                     <td>{{block.expenses | currency}}</td>
                     <td>{{block.profit | currency}}</td>
                 </tr>
+                <tr ng-if="vm.report.lines">
+                    <td>
+                        <strong>Total</strong>
+                    </td>
+                    <td>
+                        <strong>{{vm.report.totalAttendance | number}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{vm.report.totalRevenue | currency}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{vm.report.totalExpenses | currency}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{vm.report.totalProfit | currency}}</strong>
+                    </td>
+                </tr>
 
-                <tr no-items-row items="vm.blocks"></tr>
+                <tr no-items-row items="vm.report.lines"></tr>
 
             </tbody>
         </table>
