@@ -33,7 +33,9 @@
                     report.lines.push({
                         name: 'Total',
                         attendance: report.totalAttendance,
-                        revenue: report.totalRevenue
+                        revenue: report.totalRevenue,
+                        expense: report.totalExpense,
+                        profit: report.totalProfit
                     });
                 }
 

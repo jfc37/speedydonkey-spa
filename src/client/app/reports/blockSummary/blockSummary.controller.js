@@ -23,7 +23,9 @@
                     vm.blocks.push({
                         name: 'Total',
                         attendance: report.totalAttendance,
-                        revenue: report.totalRevenue
+                        revenue: report.totalRevenue,
+                        expenses: report.totalExpenses,
+                        profit: report.totalProfit
                     });
                 }
             }).catch(onReportError);

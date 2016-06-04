@@ -42,6 +42,8 @@
                     <th ts-criteria="name" ts-default>Name</th>
                     <th ts-criteria="attendance">Attendance</th>
                     <th ts-criteria="revenue">Revenue</th>
+                    <th ts-criteria="expenses">Expenses</th>
+                    <th ts-criteria="profit">Profit</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,8 +51,10 @@
                     <td>
                         <a ng-click="vm.openBlockDetails(block)" class="btn btn-link">{{block.name}}</a>
                     </td>
-                    <td>{{block.attendance}}</td>
+                    <td>{{block.attendance | number}}</td>
                     <td>{{block.revenue | currency}}</td>
+                    <td>{{block.expenses | currency}}</td>
+                    <td>{{block.profit | currency}}</td>
                 </tr>
 
                 <tr no-items-row items="vm.blocks"></tr>
