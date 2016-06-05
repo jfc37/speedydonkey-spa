@@ -1,4 +1,4 @@
-/*global rg4js ga*/
+/*global ga*/
 (function () {
     'use strict';
 
@@ -123,24 +123,6 @@
 
         // Configure the common exception handler
         exceptionConfigProvider.config.appErrorPrefix = config.appErrorPrefix;
-
-        ! function (e, n, t, r, o, s, c, a) {
-            e.RaygunObject = o, e[o] = e[o] || function () {
-                    (e[o].o = e[o].o || []).push(arguments);
-                }, s = n.createElement(t), c = n.getElementsByTagName(t)[0], s.async = 1,
-                s.src = r, c.parentNode.insertBefore(s, c), a = e.onerror, e.onerror = function (n, t, r, s, c) {
-                    a && a(n, t, r, s, c), e[o].q = e[o].q || [], e[o].q.push({
-                        e: c
-                    });
-                };
-        }(window, document, 'script',
-            'https://cdn.raygun.io/raygun4js/raygun.min.js', 'rg4js');
-
-        rg4js('apiKey', 'QjEhJ+hmGUEuvW7qQpYKGQ==');
-        rg4js('attach', true);
-        rg4js('enableCrashReporting', true);
-        rg4js('enablePulse', false);
-
     }
 
 })();

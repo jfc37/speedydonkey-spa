@@ -3,26 +3,30 @@
 
     angular
         .module('app.reports')
-        .controller('TeacherInvoices', TeacherInvoices);
+        .controller('BlockSummary', BlockSummary);
 
     /* @ngInject */
-    function TeacherInvoices(teacherInvoiceRepository, niceAlert) {
+    function BlockSummary(blockSummaryRepository, blockDetailsModal, niceAlert) {
         var vm = this;
 
         vm.filter = {
             to: new Date(),
             from: new Date()
         };
-        vm.teachers = [];
+        vm.blocks = [];
 
         vm.run = function () {
-            teacherInvoiceRepository.get(vm.filter).then(function (report) {
+            blockSummaryRepository.get(vm.filter).then(function (report) {
                 vm.report = report;
             }).catch(onReportError);
         };
 
         vm.downloadCsv = function () {
-            teacherInvoiceRepository.getCsv(vm.filter).catch(onReportError);
+            blockSummaryRepository.getCsv(vm.filter).catch(onReportError);
+        };
+
+        vm.openBlockDetails = function(block) {
+            blockDetailsModal.open(block);
         };
 
         function onReportError(validationMessage) {

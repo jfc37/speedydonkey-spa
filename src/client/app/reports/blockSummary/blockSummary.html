@@ -1,4 +1,4 @@
-<page-title>Teachers Invoices</page-title>
+<page-title>Block Summary</page-title>
 
 <section>
     <section-title>Filter</section-title>
@@ -7,7 +7,7 @@
         <section-form ng-form="form">
 
             <section-group input-name="from">
-                <section-group-label>From</section-group-label>
+                <section-group-label>Starting between</section-group-label>
 
                 <section-group-content>
                     <jfc-date-picker ng-model="vm.filter.from" name="from"></jfc-date-picker>
@@ -17,7 +17,7 @@
             <section-group-separator></section-group-separator>
 
             <section-group input-name="to">
-                <section-group-label>To</section-group-label>
+                <section-group-label>And</section-group-label>
 
                 <section-group-content>
                     <jfc-date-picker ng-model="vm.filter.to" name="to"></jfc-date-picker>
@@ -40,25 +40,37 @@
             <thead>
                 <tr>
                     <th ts-criteria="name" ts-default>Name</th>
-                    <th ts-criteria="amountOwed">Amount Owed</th>
+                    <th ts-criteria="attendance">Attendance</th>
+                    <th ts-criteria="revenue">Revenue</th>
+                    <th ts-criteria="expenses">Expenses</th>
+                    <th ts-criteria="profit">Profit</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="teacher in vm.report.lines">
-                    <td>{{teacher.name}}</td>
-                    <td>{{teacher.amountOwed | currency}}</td>
+                <tr ng-repeat="block in vm.report.lines">
+                    <td>
+                        <a ng-click="vm.openBlockDetails(block)" class="btn btn-link">{{block.name}}</a>
+                    </td>
+                    <td>{{block.attendance | number}}</td>
+                    <td>{{block.revenue | currency}}</td>
+                    <td>{{block.expenses | currency}}</td>
+                    <td>{{block.profit | currency}}</td>
                 </tr>
-
                 <tr ng-if="vm.report.lines">
                     <td>
-                        <strong>
-                            Total
-                        </strong>
+                        <strong>Total</strong>
                     </td>
                     <td>
-                        <strong>
-                            {{vm.report.totalOwed | currency}}
-                        </strong>
+                        <strong>{{vm.report.totalAttendance | number}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{vm.report.totalRevenue | currency}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{vm.report.totalExpenses | currency}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{vm.report.totalProfit | currency}}</strong>
                     </td>
                 </tr>
 

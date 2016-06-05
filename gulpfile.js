@@ -39,7 +39,6 @@ gulp.task('environment-setup', function () {
     process.env.SpaUrl = process.env.SpaUrl || 'localhost:3000';
     process.env.LocalStorageDomain = process.env.SpaUrl || '';
     process.env.PayPalDomain = process.env.PayPalDomain || 'sandbox.paypal.com';
-    process.env.RaygunKey = process.env.RaygunKey || 'QjEhJ+hmGUEuvW7qQpYKGQ==';
     process.env.GoogleAnalytics = process.env.GoogleAnalytics || 'UA-36895453-2';
     process.env.auth0Domain = process.env.auth0Domain || 'jfc-dev.au.auth0.com';
     process.env.auth0ClientId = process.env.auth0ClientId || 'jaLVtw90tXt8tCCBIHIUJLIcP2p2MMdE';
@@ -49,7 +48,6 @@ gulp.task('environment-setup', function () {
         .pipe($.replace(/<apiUrl>/g, process.env.ApiUrl))
         .pipe($.replace(/<spaUrl>/g, process.env.SpaUrl))
         .pipe($.replace(/<paypalDomain>/g, process.env.PayPalDomain))
-        .pipe($.replace(/<raygunKey>/g, process.env.RaygunKey))
         .pipe($.replace(/<localStorageDomain>/g, process.env.LocalStorageDomain))
         .pipe($.replace(/<localStoragePrefix>/g, 'fullswing'))
         .pipe($.replace(/<googleAnalystics>/g, process.env.GoogleAnalytics))

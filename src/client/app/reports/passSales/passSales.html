@@ -1,4 +1,4 @@
-<page-title>Teachers Invoices</page-title>
+<page-title>Pass Sales</page-title>
 
 <section>
     <section-title>Filter</section-title>
@@ -40,24 +40,29 @@
             <thead>
                 <tr>
                     <th ts-criteria="name" ts-default>Name</th>
-                    <th ts-criteria="amountOwed">Amount Owed</th>
+                    <th ts-criteria="numberSold">Number Sold</th>
+                    <th ts-criteria="revenue">Revenue</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="teacher in vm.report.lines">
-                    <td>{{teacher.name}}</td>
-                    <td>{{teacher.amountOwed | currency}}</td>
+                <tr ng-repeat="pass in vm.report.lines">
+                    <td>{{pass.name}}</td>
+                    <td>{{pass.numberSold}}</td>
+                    <td>{{pass.revenue | currency}}</td>
                 </tr>
 
                 <tr ng-if="vm.report.lines">
                     <td>
+                        <strong>Total</strong>
+                    </td>
+                    <td>
                         <strong>
-                            Total
+                            {{vm.report.totalSold | number}}
                         </strong>
                     </td>
                     <td>
                         <strong>
-                            {{vm.report.totalOwed | currency}}
+                            {{vm.report.totalRevenue | currency}}
                         </strong>
                     </td>
                 </tr>
