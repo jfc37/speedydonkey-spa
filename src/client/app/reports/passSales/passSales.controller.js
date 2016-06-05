@@ -3,26 +3,25 @@
 
     angular
         .module('app.reports')
-        .controller('TeacherInvoices', TeacherInvoices);
+        .controller('PassSales', PassSales);
 
     /* @ngInject */
-    function TeacherInvoices(teacherInvoiceRepository, niceAlert) {
+    function PassSales(passSalesRepository, niceAlert) {
         var vm = this;
 
         vm.filter = {
             to: new Date(),
             from: new Date()
         };
-        vm.teachers = [];
 
         vm.run = function () {
-            teacherInvoiceRepository.get(vm.filter).then(function (report) {
+            passSalesRepository.get(vm.filter).then(function (report) {
                 vm.report = report;
             }).catch(onReportError);
         };
 
         vm.downloadCsv = function () {
-            teacherInvoiceRepository.getCsv(vm.filter).catch(onReportError);
+            passSalesRepository.getCsv(vm.filter).catch(onReportError);
         };
 
         function onReportError(validationMessage) {

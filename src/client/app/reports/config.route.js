@@ -27,6 +27,38 @@
                     },
                     claim: 'Admin'
                 }
+            },
+            {
+                url: '/admin/reports/pass-sales',
+                config: {
+                    title: 'passSales',
+                    controller: 'PassSales',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/reports/passSales/passSales.html',
+                    displayName: 'Pass Sales',
+                    settings: {
+                        nav: 30,
+                        level: 2,
+                        parent: 'admin reports'
+                    },
+                    claim: 'Admin'
+                }
+            },
+            {
+                url: '/admin/reports/block-summary',
+                config: {
+                    title: 'blockSummary',
+                    controller: 'BlockSummary',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/reports/blockSummary/blockSummary.html',
+                    displayName: 'Block Summary',
+                    settings: {
+                        nav: 40,
+                        level: 2,
+                        parent: 'admin reports'
+                    },
+                    claim: 'Admin'
+                }
             }
         ];
     }

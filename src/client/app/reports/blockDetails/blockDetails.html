@@ -1,0 +1,56 @@
+<nice-modal>
+    <section>
+        <h2>
+            {{viewModel.block.name}}
+        </h2>
+
+
+        <table class="table table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th ts-criteria="name" ts-default>Name</th>
+                    <th ts-criteria="attendance">Attendance</th>
+                    <th ts-criteria="revenue">Revenue</th>
+                    <th ts-criteria="expenses">Expenses</th>
+                    <th ts-criteria="profit">Profit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="class in viewModel.report.lines">
+                    <td>{{class.name}}</td>
+                    <td>{{class.attendance | number}}</td>
+                    <td>{{class.revenue | currency}}</td>
+                    <td>{{class.expense | currency}}</td>
+                    <td>{{class.profit | currency}}</td>
+                </tr>
+
+                <tr ng-if="viewModel.report.lines">
+                    <td>
+                        <strong>Total</strong>
+                    </td>
+                    <td>
+                        <strong>{{viewModel.report.totalAttendance | number}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{viewModel.report.totalRevenue | currency}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{viewModel.report.totalExpense | currency}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{viewModel.report.totalProfit | currency}}</strong>
+                    </td>
+               </tr>
+
+                <tr no-items-row items="viewModel.report.lines"></tr>
+
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <button class="cancel" ng-click="cancel()">Close</button>
+            <download-csv-button class="pull-right" ng-disabled="form.$invalid" ng-click="viewModel.downloadCsv()"></download-csv-button>
+        </div>
+
+    </section>
+</nice-modal>
