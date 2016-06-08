@@ -160,7 +160,7 @@
                         createEvalAttr('placeholder', 'placeholder') +
                         '/>\n' +
                         '</div>\n' +
-                        '<div class=\'datetimepicker-wrapper\' ng-model=\'time\' ng-change=\'time_change()\' style=\'display:inline-block\'' + createEvalAttr('ngIf', 'showTime') + '>\n' +
+                        '<div class=\'datetimepicker-wrapper\' ng-model=\'time\' ng-change=\'time_change()\' style=\'display:inline-block\'>\n' +
                         '<uib-timepicker ' + [
                             ['hourStep'],
                             ['minuteStep'],
