@@ -6,6 +6,7 @@ var glob = require('glob');
 var gulp = require('gulp');
 var path = require('path');
 var _ = require('lodash');
+var cp = require('child_process');
 var $ = require('gulp-load-plugins')({
     lazy: true
 });
@@ -31,7 +32,37 @@ var port = process.env.PORT || config.defaultPort;
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
 
-gulp.task('environment-setup', function () {
+/**
+ * Watch TypeScript and recompile
+ */
+gulp.task('ts-watcher', function() {
+    gulp.watch(config.ts.client, ['tsc']);
+});
+
+/**
+ * Compiles *.js files, sourcemaps,
+ */
+gulp.task('tsc', function(done) {
+    runTSC('src/client', done);
+});
+
+function runTSC(directory, done) {
+    var tscjs = path.join(process.cwd(), 'node_modules/typescript/bin/tsc');
+    var childProcess = cp.spawn('node', [tscjs, '-p', directory], { cwd: process.cwd() });
+    childProcess.stdout.on('data', function (data) {
+        // Ticino will read the output
+        console.log(data.toString());
+    });
+    childProcess.stderr.on('data', function (data) {
+        // Ticino will read the output
+        console.log(data.toString());
+    });
+    childProcess.on('close', function () {
+        done();
+    });
+}
+
+gulp.task('environment-setup', ['tsc'], function () {
     log('Setting up environment config');
 
     process.env.ApiUrl = process.env.ApiUrl || 'api-speedydonkey.azurewebsites.net';
