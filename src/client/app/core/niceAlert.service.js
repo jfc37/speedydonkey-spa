@@ -1,83 +1,57 @@
-namespace jfc {
+var jfc;
+(function (jfc) {
     'use strict';
-
-    interface IAlertMessage {
-        type: string;
-        title: string;
-        message: string;
-    }
-
-    export interface INiceAlert {
-        successMessage(message: string): void;
-        errorMessage(message: string): void;
-        confirmMessage(message: string, confirmedFunction: Function): void;
-        validationMessage(message?: string): void;
-    }
-
-    class NiceAlert implements INiceAlert {
-
+    var NiceAlert = (function () {
         /*@ngInject*/
-        constructor(private SweetAlert) { }
-
-        public validationWarning(message?: string): void {
-            let alert: IAlertMessage = {
+        function NiceAlert(SweetAlert) {
+            this.SweetAlert = SweetAlert;
+        }
+        NiceAlert.prototype.validationWarning = function (message) {
+            var alert = {
                 type: 'warning',
                 title: 'Validation',
                 message: message || 'Looks like there was something wrong with the data you supplied.'
             };
-
             this.showAlert(alert);
-        }
-
-        public successMessage(message: string): void {
+        };
+        NiceAlert.prototype.successMessage = function (message) {
             this.success(message);
-        }
-
-        public errorMessage(message: string): void {
+        };
+        NiceAlert.prototype.errorMessage = function (message) {
             this.error(message);
-        }
-
-        public confirmMessage(message: string, confirmedFunction: Function): void {
+        };
+        NiceAlert.prototype.confirmMessage = function (message, confirmedFunction) {
             this.confirm(message, confirmedFunction);
-        }
-
-        public success(alert: any): void {
+        };
+        NiceAlert.prototype.success = function (alert) {
             if (this.isString(alert)) {
-                let message = alert;
+                var message = alert;
                 alert = {
                     message: message
                 };
             }
-
             alert.type = 'success';
             alert.title = 'Done!';
-
             this.showAlert(alert);
-        }
-
-        public error(alert: any): void {
+        };
+        NiceAlert.prototype.error = function (alert) {
             if (this.isString(alert)) {
-                let message = alert;
+                var message = alert;
                 alert = {
                     message: message
                 };
             }
-
             alert.type = 'error';
             alert.title = 'Oops!';
-
             this.showAlert(alert);
-        }
-
-        public confirm(alert: any, confirmedFunction: Function): void {
-
+        };
+        NiceAlert.prototype.confirm = function (alert, confirmedFunction) {
             if (this.isString(alert)) {
-                let message = alert;
+                var message = alert;
                 alert = {
                     message: message
                 };
             }
-
             this.SweetAlert.swal({
                 title: 'Are you sure?',
                 text: alert.message,
@@ -86,23 +60,21 @@ namespace jfc {
                 confirmButtonColor: '#DD6B55',
                 confirmButtonText: 'I\'m sure!',
                 closeOnConfirm: false
-            }, function(isConfirmed) {
+            }, function (isConfirmed) {
                 if (isConfirmed) {
                     confirmedFunction();
                 }
             });
-        }
-
-        private showAlert(alert: IAlertMessage): void {
+        };
+        NiceAlert.prototype.showAlert = function (alert) {
             this.SweetAlert.swal(alert.title, alert.message, alert.type);
-        }
-
-        private isString(test: any): boolean {
+        };
+        NiceAlert.prototype.isString = function (test) {
             return typeof test === 'string';
-        }
-    }
-
+        };
+        return NiceAlert;
+    }());
     angular
         .module('app.core')
         .service('niceAlert', NiceAlert);
-}
+})(jfc || (jfc = {}));
