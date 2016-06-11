@@ -11,7 +11,7 @@ namespace jfc {
         successMessage(message: string): void;
         errorMessage(message: string): void;
         confirmMessage(message: string, confirmedFunction: Function): void;
-        validationMessage(message?: string): void;
+        validationWarning(message?: string): void;
     }
 
     class NiceAlert implements INiceAlert {
