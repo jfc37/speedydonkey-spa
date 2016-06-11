@@ -11,7 +11,6 @@ var jfc;
         HttpService.prototype.get = function (options) {
             var url = this.generateUrl(options);
             var request = this.$http.get(url);
-            this.handleError(request);
             if (options.block) {
                 this.handleBlocking(request);
             }
@@ -20,14 +19,12 @@ var jfc;
         HttpService.prototype.post = function (options, data) {
             var url = this.generateUrl(options);
             var request = this.$http.post(url, data);
-            this.handleError(request);
             this.handleBlocking(request);
             return request;
         };
         HttpService.prototype.put = function (options, data) {
             var url = this.generateUrl(options);
             var request = this.$http.put(url, data);
-            this.handleError(request);
             this.handleBlocking(request);
             return request;
         };
@@ -37,7 +34,6 @@ var jfc;
                 url = url + '/' + options.id;
             }
             var request = this.$http.delete(url);
-            this.handleError(request);
             if (options.block) {
                 this.handleBlocking(request);
             }
@@ -94,13 +90,11 @@ var jfc;
             return parts.join('&');
         };
         HttpService.prototype.handleBlocking = function (request) {
+            var _this = this;
             this.blockUI.start();
             request.finally(function () {
-                this.blockUI.stop();
+                _this.blockUI.stop();
             });
-        };
-        HttpService.prototype.handleError = function (request) {
-            request.catch(function (response) { });
         };
         return HttpService;
     }());

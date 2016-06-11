@@ -4,7 +4,7 @@ namespace jfc {
     declare var moment;
 
     export interface IFileType {
-        type: string;
+        type?: string;
     }
 
     export interface IStandardReportFilter extends IFileType {
@@ -48,8 +48,8 @@ namespace jfc {
         }
 
         private getFileName(filter: IStandardReportFilter): string {
-            var fromDisplay = moment(filter.from).format('DD-MM-YYYY');
-            var toDisplay = moment(filter.to).format('DD-MM-YYYY');
+            let fromDisplay = moment(filter.from).format('DD-MM-YYYY');
+            let toDisplay = moment(filter.to).format('DD-MM-YYYY');
             return `teacher_invoices_${fromDisplay}_${toDisplay}`;
         }
 

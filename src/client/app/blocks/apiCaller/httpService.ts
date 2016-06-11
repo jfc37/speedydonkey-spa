@@ -47,8 +47,6 @@ namespace jfc {
             let url = this.generateUrl(options);
             let request = this.$http.get(url);
 
-            this.handleError(request);
-
             if (options.block) {
                 this.handleBlocking(request);
             }
@@ -60,7 +58,6 @@ namespace jfc {
             let url = this.generateUrl(options);
             let request = this.$http.post(url, data);
 
-            this.handleError(request);
             this.handleBlocking(request);
 
             return request;
@@ -71,7 +68,6 @@ namespace jfc {
 
             let request = this.$http.put(url, data);
 
-            this.handleError(request);
             this.handleBlocking(request);
 
             return request;
@@ -85,8 +81,6 @@ namespace jfc {
             }
 
             let request = this.$http.delete(url);
-
-            this.handleError(request);
 
             if (options.block) {
                 this.handleBlocking(request);
@@ -146,7 +140,7 @@ namespace jfc {
 
         private toQueryString(obj: Object): string {
             let parts = [];
-            for (var i in obj) {
+            for (let i in obj) {
                 if (obj.hasOwnProperty(i)) {
                     parts.push(encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]));
                 }
@@ -157,13 +151,9 @@ namespace jfc {
         private handleBlocking(request: angular.IPromise<any>): void {
             this.blockUI.start();
 
-            request.finally(function() {
+            request.finally(() => {
                 this.blockUI.stop();
             });
-        }
-
-        private handleError(request: angular.IPromise<any>): void {
-            request.catch(function(response) { });
         }
     }
 
