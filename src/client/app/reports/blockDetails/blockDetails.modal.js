@@ -1,68 +1,57 @@
-(function () {
+var jfc;
+(function (jfc) {
     'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('blockDetailsModal', blockDetailsModal);
-
-    /* @ngInject */
-    function blockDetailsModal($uibModal, $q, blockDetailsRepository, niceAlert) {
-        var modalInstance;
-
-        var viewModel = {
-            downloadCsv: downloadCsv
-        };
-
-        var service = {
-            open: openModal
-        };
-
-        return service;
-
-        function openModal(block) {
-
-            var deferred = $q.defer();
-
-            viewModel.reportFilter = {
-                blockId: block.blockId
+    var BlockDetailsModal = (function () {
+        /*@ngInject*/
+        function BlockDetailsModal($uibModal, $q, blockDetailsRepository, niceAlert) {
+            var _this = this;
+            this.$uibModal = $uibModal;
+            this.$q = $q;
+            this.blockDetailsRepository = blockDetailsRepository;
+            this.niceAlert = niceAlert;
+            this.downloadCsv = function () {
+                _this.blockDetailsRepository.getCsv(_this._viewModel.reportFilter).catch(_this.onReportError);
             };
-
-            blockDetailsRepository.get(viewModel.reportFilter).then(function (report) {
-
-                viewModel.block = block;
-                viewModel.report = report;
-
-                modalInstance = $uibModal.open({
+            this.onReportError = function (validationMessage) {
+                if (validationMessage) {
+                    _this.niceAlert.validationWarning(validationMessage);
+                }
+                else {
+                    _this.niceAlert.errorMessage('Something went wrong running the report.');
+                }
+            };
+            this._viewModel = {
+                downloadCsv: this.downloadCsv
+            };
+        }
+        BlockDetailsModal.prototype.open = function (block) {
+            var _this = this;
+            var deferred = this.$q.defer();
+            this._viewModel.reportFilter = block;
+            this.blockDetailsRepository.get(this._viewModel.reportFilter).then(function (report) {
+                _this._viewModel.block = block;
+                _this._viewModel.report = report;
+                _this._modalInstance = _this.$uibModal.open({
                     templateUrl: 'app/reports/blockDetails/blockDetails.html',
                     controller: 'ModalInstanceCtrl',
                     size: 'lg',
                     resolve: {
                         viewModel: function () {
-                            return viewModel;
+                            return _this._viewModel;
                         }
                     }
                 });
-
-                modalInstance.result.then(function () {
+                _this._modalInstance.result.then(function () {
                     deferred.resolve();
                 }, function () {
                     deferred.reject();
                 });
-            }).catch(onReportError);
-
+            }).catch(this.onReportError);
             return deferred.promise;
-        }
-
-        function downloadCsv() {
-            blockDetailsRepository.getCsv(viewModel.reportFilter).catch(onReportError);
-        }
-
-        function onReportError(validationMessage) {
-            if (validationMessage) {
-                niceAlert.validationWarning(validationMessage);
-            } else {
-                niceAlert.error('Something went wrong running the report.');
-            }
-        }
-    }
-})();
+        };
+        return BlockDetailsModal;
+    }());
+    angular
+        .module('app.reports')
+        .service('blockDetailsModal', BlockDetailsModal);
+})(jfc || (jfc = {}));
