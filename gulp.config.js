@@ -21,6 +21,9 @@ module.exports = function () {
         /**
          * File paths
          */
+         ts: {
+          client: 'src/client/**/*.ts'
+        },
         // all javascript that we want to vet
         alljs: [
             client + '**/*.js',

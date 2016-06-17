@@ -1,52 +1,44 @@
-(function () {
+var jfc;
+(function (jfc) {
     'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('blockDetailsRepository', blockDetailsRepository);
-
     /* @ngInject */
-    function blockDetailsRepository(simpleApiCaller, validationPromise, fileDownloadService) {
-        var service = {
-            get: get,
-            getCsv: getCsv
-        };
-
-        return service;
-
-        function get(filter) {
-
-            var options = getOptions(filter);
-
-            return simpleApiCaller.get(options).then(function(response) {
+    var BlockDetailsRepository = (function () {
+        function BlockDetailsRepository(httpService, validationPromise, fileDownloadService) {
+            this.httpService = httpService;
+            this.validationPromise = validationPromise;
+            this.fileDownloadService = fileDownloadService;
+        }
+        BlockDetailsRepository.prototype.get = function (filter) {
+            var _this = this;
+            var options = this.getOptions(filter);
+            return this.httpService.get(options).then(function (response) {
                 return response.data;
             }).catch(function (response) {
-                return validationPromise.rejectWithFirstMessage(response);
+                return _this.validationPromise.rejectWithFirstMessage(response);
             });
-        }
-
-        function getCsv(filter) {
+        };
+        BlockDetailsRepository.prototype.getCsv = function (filter) {
+            var _this = this;
             var csvFilter = angular.copy(filter);
             csvFilter.type = 'csv';
-
-            return get(csvFilter).then(function(data) {
-                var fileName = getFileName(csvFilter);
-                fileDownloadService.downloadAsCsv(data, fileName);
+            return this.get(csvFilter).then(function (data) {
+                var fileName = _this.getFileName(csvFilter);
+                _this.fileDownloadService.downloadAsCsv(data, fileName);
             });
-        }
-
-        function getFileName(filter) {
-            var fromDisplay = moment(filter.from).format('DD-MM-YYYY');
-            var toDisplay = moment(filter.to).format('DD-MM-YYYY');
+        };
+        BlockDetailsRepository.prototype.getFileName = function (filter) {
             return 'block_details_' + filter.blockId;
-        }
-
-        function getOptions(filter) {
+        };
+        BlockDetailsRepository.prototype.getOptions = function (filter) {
             return {
                 resource: 'reports/block-details',
                 parameters: filter,
                 block: true
             };
-        }
-    }
-})();
+        };
+        return BlockDetailsRepository;
+    }());
+    angular
+        .module('app.reports')
+        .service('blockDetailsRepository', BlockDetailsRepository);
+})(jfc || (jfc = {}));
