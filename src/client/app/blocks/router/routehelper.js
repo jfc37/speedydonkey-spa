@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('blocks.router')
+        .module('app.core')
         .provider('routehelperConfig', routehelperConfig)
         .factory('routehelper', routehelper);
 

@@ -49,6 +49,7 @@
         'app.users',
         'app.settings',
         'app.reports',
+        'app.teachers',
 
         'app.standAloneEvents',
         'app.manageClasses',
