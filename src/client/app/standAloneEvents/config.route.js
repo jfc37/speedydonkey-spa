@@ -65,7 +65,7 @@
                 controller: 'StandAloneEventCheckIn',
                 controllerAs: 'vm',
                 templateUrl: 'app/standAloneEvents/checkIn/standAloneEventCheckIn.html',
-                claim: 'Admin'
+                claim: 'Teacher'
             }
         }];
     }
