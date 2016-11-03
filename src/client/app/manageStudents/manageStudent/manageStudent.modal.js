@@ -25,6 +25,13 @@
             userRepository.get(student.id).then(function (user) {
                 viewModel.student = user;
 
+                if (viewModel.student && viewModel.student.passes) {
+                  viewModel.student.passes.forEach(function (pass) {
+                    pass.startDate = new Date(pass.startDate);
+                    pass.endDate = new Date(pass.endDate);
+                  });  
+                }
+
                 modalInstance = $uibModal.open({
                     templateUrl: 'app/manageStudents/manageStudent/manageStudent.html',
                     controller: 'ModalInstanceCtrl',
