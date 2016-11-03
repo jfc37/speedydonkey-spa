@@ -25,9 +25,9 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(errorHandler.init);
 
-if (environment !== 'spec') {
-    applySecruity(app);
-}
+// if (environment !== 'spec') {
+     applySecruity(app);
+// }
 
 routes = require('./src/server/routes/index')(app);
 
@@ -104,7 +104,7 @@ function applySecruity(app) {
         preload: true
     }));
 
-    setupCsp(app);
+    //setupCsp(app);
 }
 
 function setupCsp(app) {
