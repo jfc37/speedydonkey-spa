@@ -29,7 +29,7 @@
                   viewModel.student.passes.forEach(function (pass) {
                     pass.startDate = new Date(pass.startDate);
                     pass.endDate = new Date(pass.endDate);
-                  });  
+                  });
                 }
 
                 modalInstance = $uibModal.open({
