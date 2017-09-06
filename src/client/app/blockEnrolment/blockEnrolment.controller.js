@@ -42,6 +42,11 @@
 
         function getAllBlocks() {
             return blockEnrolmentService.getBlocksForEnrolment().then(function (blocks) {
+                blocks.forEach(function (block) {
+                    block.startTimeDisplay = moment(block.startDate).format('h:mmA');
+                    block.endTimeDisplay = moment(block.startDate).add(block.minutesPerClass, 'minutes').format('h:mmA');
+                });
+
                 var days = getDaysBlocksRunOver(blocks);
                 days.forEach(function (day) {
                     var blocksOnDay = blocks.filter(function (block) {

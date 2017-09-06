@@ -18,8 +18,7 @@
                     <product-title>{{block.name}}</product-title>
 
                     <product-description>
-                        <display-date format='time' ng-model='block.startDate'></display-date> -
-                        <display-date format='time' ng-model='block.endDate'></display-date>
+                        {{block.startTimeDisplay}} - {{block.endTimeDisplay}}
                     </product-description>
 
                     <product-action>
