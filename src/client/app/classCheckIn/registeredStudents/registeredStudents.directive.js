@@ -28,6 +28,12 @@
                 vm.launchStudentPasses = function (student) {
                     studentPassesModal.open(student.id);
                 };
+
+                vm.unenrol = function (student) {
+                    classAttendence.unenrolStudent(student, vm.theClass.block.id).then(function () {
+                        vm.students.remove(student);
+                    });
+                };
             }
         };
     }
