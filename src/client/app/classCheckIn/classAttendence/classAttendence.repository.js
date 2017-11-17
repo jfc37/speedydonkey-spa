@@ -11,7 +11,8 @@
 
         var service = {
             attend: attend,
-            unattend: unattend
+            unattend: unattend,
+            unenrol: unenrol
         };
 
         return service;
@@ -22,6 +23,13 @@
 
         function unattend(student, theClass) {
             return simpleApiCaller.delete(getOptions(student, theClass));
+        }
+
+        function unenrol(student, blockId) {
+            return simpleApiCaller.delete({
+                resource: 'users/' + student.id + '/enrolment/' + blockId,
+                block: true
+            });
         }
 
         function getOptions(student, theClass) {

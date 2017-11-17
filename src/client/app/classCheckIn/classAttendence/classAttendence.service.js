@@ -17,10 +17,21 @@
             tryUnattendClass: tryUnattendClass,
 
             studentsAttending: studentsAttending,
-            studentsRegistered: studentsRegistered
+            studentsRegistered: studentsRegistered,
+
+            unenrolStudent: unenrolStudent
         };
 
         return service;
+
+        function unenrolStudent(student, blockId) {
+            return classAttendenceRepository.unenrol(student, blockId).then(function () {
+                studentsRegistered.remove(student);
+                niceAlert.success({
+                    message: student.firstName + ' has been unenrolled.'
+                });
+            });
+        }
 
         function reset() {
             studentsAttending.length = 0;
